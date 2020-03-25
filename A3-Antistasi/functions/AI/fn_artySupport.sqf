@@ -15,6 +15,8 @@ _hasAmmunition = 0;
 _areReady = false;
 _hasArtillery = false;
 _areAlive = false;
+_shootingTimeout = false;
+_waitTime = "";
 
 {
 _soldierX = _x;
