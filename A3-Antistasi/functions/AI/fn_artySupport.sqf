@@ -2,6 +2,13 @@ if (count hcSelected player == 0) exitWith {hint "You must select an artillery g
 
 private ["_groups","_artyArray","_artyRoundsArr","_hasAmmunition","_areReady","_hasArtillery","_areAlive","_soldierX","_veh","_typeAmmunition","_typeArty","_positionTel","_artyArrayDef1","_artyRoundsArr1","_piece","_isInRange","_positionTel2","_rounds","_roundsMax","_markerX","_size","_forcedX","_textX","_mrkFinal","_mrkFinal2","_timeX","_eta","_countX","_pos","_ang"];
 
+// AGN_MortarUsage zawiera (dany obiekt) [ jednostke, kiedy_moze_strzelic ]
+if (isnil "AGN_MortarUsage") then
+{
+	AGN_MortarUsage = [];
+	publicVariable "AGN_MortarUsage";
+};
+
 _groups = hcSelected player;
 _unitsX = [];
 {_groupX = _x;
@@ -49,9 +56,24 @@ if ((_veh != _soldierX) and (not(_veh in _artyArray))) then
 				{
 				if (unitReady _veh) then
 					{
-					_areReady = true;
-					_artyArray pushBack _veh;
-					_artyRoundsArr pushBack (((magazinesAmmo _veh) select 0)select 1);
+						_hasTimeout = false;
+						{
+							if ((_x select 0) == _veh && ((_x select 1) > time)) then
+							{
+								_hasTimeout = true;
+								_shootingTimeout = true;
+								_test = (_x select 1) - time;
+								_test = round _test;
+								_waittime = Format ["You need to wait %1 s", _test];
+							}
+
+						} foreach AGN_MortarUsage;
+						if(!_hasTimeout) then
+						{
+							_areReady = true;
+							_artyArray pushBack _veh;
+							_artyRoundsArr pushBack (((magazinesAmmo _veh) select 0)select 1);
+						}
 					};
 				};
 			};
@@ -59,11 +81,17 @@ if ((_veh != _soldierX) and (not(_veh in _artyArray))) then
 	};
 } forEach _unitsX;
 
-if (!_hasArtillery) exitWith {hint "You must select an artillery group or it is a Mobile Mortar and it's moving"};
-if (!_areAlive) exitWith {hint "All elements in this Batery cannot fire or are disabled"};
-if ((_hasAmmunition < 2) and (!_areReady)) exitWith {hint "The Battery has no ammo to fire. Reload it on HQ"};
-if (!_areReady) exitWith {hint "Selected Battery is busy right now"};
-if (_typeAmmunition == "not_supported") exitWith {hint "Your current modset doesent support this strike type"};
+if (!_hasArtillery) exitWith {["Artillery Support", "You must select an artillery group or it is a Mobile Mortar and it's moving"] call A3A_fnc_customHint;};
+if (!_areAlive) exitWith {["Artillery Support", "All elements in this Batery cannot fire or are disabled"] call A3A_fnc_customHint;};
+if ((_hasAmmunition < 2) and (!_areReady)) exitWith {["Artillery Support", "The Battery has no ammo to fire. Reload it on HQ"] call A3A_fnc_customHint;};
+if (_shootingTimeout and count _artyArray == 0) exitWith {
+	["Artillery Support", Format[ "All mortars have timeout. %1", _waitTime]] call A3A_fnc_customHint;
+};
+if(_shootingTimeout) then {
+	["Artillery Support", Format[ "At least 1 mortar has timeout. %1", _waitTime]] call A3A_fnc_customHint;
+};
+if (!_areReady) exitWith {["Artillery Support", "Selected Battery is busy right now"] call A3A_fnc_customHint;};
+if (_typeAmmunition == "not_supported") exitWith {["Artillery Support", "Your current modset doesent support this strike type"] call A3A_fnc_customHint;};
 if (isNil "_typeAmmunition") exitWith {};
 
 hcShowBar false;
@@ -213,18 +241,38 @@ for "_i" from 0 to (count _artyArrayDef1) - 1 do
 		{
 		_piece = _artyArrayDef1 select _i;
 		_countX = _artyRoundsArr1 select _i;
+		_distance = _positionTel distance _piece;
 		//hint format ["roundsX que faltan: %1, roundsX que tiene %2",_rounds,_countX];
+
+		// tutaj dodamy pieze (artylerie?) do naszego AGN_MortarUsage
+		//najpierw sprawdzmy czy istnieje i zupdatujemy jesli tak
+		_updated = false;
+		for "_j" from 0 to (count AGN_MortarUsage) - 1 do
+		{
+			_val = AGN_MortarUsage select _j;
+			if((_val select 0) == _piece) then {
+				AGN_MortarUsage set [_j, [_piece, time + _rounds * 120]];
+				_updated = true;
+			};
+		};
+		// If it does not exist we need to add it.
+		if (!_updated) then {
+				AGN_MortarUsage pushBack [_piece, time + _rounds * 120];
+		};
+
 		if (_countX >= _rounds) then
 			{
 			if (_typeArty != "BARRAGE") then
 				{
-				_piece commandArtilleryFire [_pos,_typeAmmunition,_rounds];
+				_firePos =  [_pos,random (35 + _distance / 100),random 360] call BIS_fnc_relPos;
+				_piece commandArtilleryFire [_firepos,_typeAmmunition,_rounds];
 				}
 			else
 				{
 				for "_r" from 1 to _rounds do
 					{
-					_piece commandArtilleryFire [_pos,_typeAmmunition,1];
+					_firePos =  [_pos,random (35 + _distance / 100),random 360] call BIS_fnc_relPos;
+					_piece commandArtilleryFire [_firePos,_typeAmmunition,1];
 					sleep 2;
 					_pos = [_pos,10,_ang + 5 - (random 10)] call BIS_fnc_relPos;
 					};
@@ -235,13 +283,15 @@ for "_i" from 0 to (count _artyArrayDef1) - 1 do
 			{
 			if (_typeArty != "BARRAGE") then
 				{
-				_piece commandArtilleryFire [[_pos,random 10,random 360] call BIS_fnc_relPos,_typeAmmunition,_countX];
+				_firePos =  [_pos,random (35 + _distance / 100),random 360] call BIS_fnc_relPos;
+				_piece commandArtilleryFire [[_firePos,random 10,random 360] call BIS_fnc_relPos,_typeAmmunition,_countX];
 				}
 			else
 				{
 				for "_r" from 1 to _countX do
 					{
-					_piece commandArtilleryFire [_pos,_typeAmmunition,1];
+					_firePos =  [_pos,random (35 + _distance / 100),random 360] call BIS_fnc_relPos;
+					_piece commandArtilleryFire [_firePos,_typeAmmunition,1];
 					sleep 2;
 					_pos = [_pos,10,_ang + 5 - (random 10)] call BIS_fnc_relPos;
 					};
