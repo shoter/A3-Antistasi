@@ -26,21 +26,21 @@ class Params
           title = "Enable Server Membership";
           texts[] = {"Yes","No"};
           values[] = {1,0};
-          default = 1;
+          default = 0;
      };
      class switchComm
      {
           title = "Enable Commander Switch (highest ranked player)";
           values[] = {1,0};
           texts[] = {"Yes","No"};
-          default = 1;
+          default = 0;
      };
      class tkPunish
      {
           title = "Enable Teamkill Punish";
           values[] = {1,0};
           texts[] = {"Yes","No"};
-          default = 1;
+          default = 0;
      };
      class mRadius
      {
@@ -53,27 +53,27 @@ class Params
           title = "Allow PvP Slots";
           values[] = {1,0};
           texts[] = {"Yes","No"};
-          default = 1;
+          default = 0;
      };
      class pMarkers
      {
           title = "Allow Friendly Player Markers";
           values[] = {1,0};
           texts[] = {"Yes","No"};
-          default = 1;
+          default = 0;
      };
      class AISkill
      {
           title = "Mission Difficulty";
           values[] = {1,2,3};
           texts[] = {"Easy","Normal","Hard"};
-          default = 2;
+          default = 1;
      };
      class unlockItem
      {
           title = "Number of the same weapons required to unlock";
-          values[] = {15,25,40};
-          default = 25;
+          values[] = {8,15,25,40};
+          default = 8;
      };
      class memberOnlyMagLimit
      {
@@ -93,14 +93,14 @@ class Params
           title = "Percentage of Reserved Slots for Members";
           values[] = {0,20,40,60,80,100};
           texts[] = {"None","20%","40%","60%","80%","All"};
-          default = 20;
+          default = 0;
      };
      class memberDistance
      {
           title = "Max distance non members can be from the closest member or HQ (they will be teleported to HQ after some timeout)";
           values[] = {4000,5000,6000,7000,8000,16000};
           texts[] = {"4 Kmts","5 Kmts","6 Kmts","7 Kmts","8 Kmts","Unlimited"};
-          default = 5000;
+          default = 4000;
      };
 	 class allowMembersFactionGarageAccess
      {
@@ -121,7 +121,7 @@ class Params
           title = "Enable Napalm Bombing for AI";
           values[] = {0,1};
           texts[] = {"No","Yes"};
-          default = 0;
+          default = 1;
      };
      class teamSwitchDelay
      {
@@ -142,14 +142,14 @@ class Params
           title = "Should Guided Launchers become unlocked?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class allowUnlockedExplosives
      {
           title = "Should Explosives become unlocked?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class startWithLongRangeRadio
      {
@@ -170,49 +170,49 @@ class Params
           title = "Allow Items and Vehicles from Karts DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class Mark
      {
           title = "Allow Items and Vehicles from Marksman DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class Heli
      {
           title = "Allow Items and Vehicles from Heli DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class Expansion
      {
           title = "Allow Items and Vehicles from Apex DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class Jets
      {
           title = "Allow Items and Vehicles from Jets DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class Orange
      {
           title = "Allow Items and Vehicles from Laws of War DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class Tanks
      {
           title = "Allow Items and Vehicles from Tanks DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class GlobMob
      {
@@ -226,7 +226,7 @@ class Params
           title = "Allow Items and Vehicles from Contact DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class OfficialMod
      {
@@ -459,4 +459,19 @@ class Params
           texts[] = {"None","1","3","5","10","15"};
           default = 3;
      };
+     	//Czarny
+	class enableTeleport
+	{
+        title = "Enable teleport in base (only commander can place/remove destination pole)";
+        values[] = {1, 0};
+	   texts[] = {"Yes", "No"};
+        default = 1;
+    };
+	class battleOptionsMenuKey
+	{
+        title = "Default 'Battle Options' menu key";
+        values[] = {1, 0};
+	   texts[] = {"U", "Y"};
+        default = 1;
+    };
 };

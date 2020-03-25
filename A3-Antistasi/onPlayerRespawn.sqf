@@ -249,3 +249,10 @@ else
 	[player] call A3A_fnc_dress;
 	if (hasACE) then {[] call A3A_fnc_ACEpvpReDress};
 	};
+
+//Czarny
+if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
+{
+	removeAllActions (_this select 1);
+	[flagX, teleportDestinationPole, theBoss] execVM "addTeleportToPole.sqf";
+}
