@@ -254,5 +254,5 @@ else
 if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
 {
 	removeAllActions (_this select 1);
-	[flagX, teleportDestinationPole, theBoss] execVM "addTeleportToPole.sqf";
+	[flagX, teleportDestinationPole, theBoss] execVM "functions\czarny\addTeleportToPole.sqf";
 }

@@ -233,7 +233,7 @@ class Params
           title = "Allow ADR-97 DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 0;
+          default = 1;
      };
      class Spacer0
      {
@@ -459,7 +459,14 @@ class Params
           texts[] = {"None","1","3","5","10","15"};
           default = 3;
      };
-     	//Czarny
+     //Czarny
+     class Spacer9
+     {
+          title = "";
+          values[] = {""};
+          texts[] = {""};
+          default = "";
+     };
 	class enableTeleport
 	{
         title = "Enable teleport in base (only commander can place/remove destination pole)";
