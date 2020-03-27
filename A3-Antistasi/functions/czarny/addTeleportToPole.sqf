@@ -28,10 +28,7 @@ fnc_teleport=
 {
 	private _destination = getPosATL (teleportTarget select 0);
 	{
-		if((_x == player) || !(isPlayer _x)) then		//is current player but not other player (can be AI)
-		{
-			_x setpos [(_destination select 0) + random [-20, 0, 20], (_destination select 1) + random [-20, 0, 20], 0.2]; 
-		};
+		_x setpos [(_destination select 0) + random [-20, 0, 20], (_destination select 1) + random [-20, 0, 20], 0.2]
 	} forEach units group player;
 };
 
@@ -47,31 +44,18 @@ fnc_addTeleport=
 		player removeAction (player getVariable "idActionAddTeleport");
 		player setVariable ["idActionRemoveTeleport", player addAction actionRemoveTeleport];
 	};
-	
-	{
-		if((side _x) == (side sideLeader)) then
-		{
-			_x setVariable ["idActionTeleport", _x addAction actionTeleport];
-		};
-	} forEach allPlayers;
-	
+	player setVariable ["idActionTeleport", player addAction actionTeleport];
 };
 
 fnc_removeTeleport= 
 {
 	deleteVehicle (teleportTarget select 0);
-	if(player == sideLeader) then
+	if(player == sideLeader) then 
 	{
 		player setVariable ["idActionAddTeleport", player addAction actionAddTeleport];
 		player removeAction (player getVariable "idActionRemoveTeleport");
 	};
-	
-	{
-		if((side _x) == (side sideLeader)) then
-		{
-			_x removeAction (_x getVariable "idActionTeleport");
-		};
-	} forEach allPlayers;
+	player removeAction (player getVariable "idActionTeleport");
 };
 
 actionAddTeleport = ["add teleport", fnc_addTeleport, [], 0, false, true];
@@ -91,9 +75,5 @@ else
 	{
 		player setVariable ["idActionRemoveTeleport", player addAction actionRemoveTeleport];
 	};
-
-	if((side player) == (side sideLeader)) then
-	{
-		player setVariable ["idActionTeleport", player addAction actionTeleport];
-	};
+	player setVariable ["idActionTeleport", player addAction actionTeleport];
 };
