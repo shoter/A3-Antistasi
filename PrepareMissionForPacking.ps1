@@ -23,3 +23,5 @@ ForEach ($templateFolder in $missionTemplateFolders) {
 	Copy-Item -Path $mainDataPath -Destination $destinationPath -Recurse;
 	Copy-Item -Path $(Join-Path $templateFolder.FullName "*") -Destination $destinationPath -Recurse -Force;
 }
+
+Tools/distributePbo.bat
