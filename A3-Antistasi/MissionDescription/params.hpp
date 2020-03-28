@@ -170,7 +170,7 @@ class Params
           title = "Allow Items and Vehicles from Karts DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 1;
+          default = 0;
      };
      class Mark
      {
@@ -205,7 +205,7 @@ class Params
           title = "Allow Items and Vehicles from Laws of War DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 1;
+          default = 0;
      };
      class Tanks
      {
@@ -226,7 +226,7 @@ class Params
           title = "Allow Items and Vehicles from Contact DLC?";
           values[] = {1,0};
           texts[] =  {"Yes","No"};
-          default = 1;
+          default = 0;
      };
      class OfficialMod
      {
