@@ -15,7 +15,7 @@
  *		none
 **/
 
-teleport = _this select 0;
+teleport = _this select 0;		//TODO check if teleport points to teleportDestinationPole
 teleportTarget = _this select 1;	//this is an array
 sideLeader = _this select 2;
 interactionDistance = 5;			//meters
@@ -42,36 +42,57 @@ fnc_addTeleport=
 	private _playerPos = getPosATL player;
 	
 	teleportTarget set [0, "Flag_Green_F" createVehicle [(_playerPos select 0) + _placeDistance * (sin _playerDir), (_playerPos select 1) + _placeDistance * (cos _playerDir), 0]];
+	
+	if(isMultiplayer) then
+	{
+		teleportDestinationPole = teleportTarget;
+		publicVariable "teleportDestinationPole";
+
+		{if((side player) == (side sideLeader)) then {player setVariable ["idActionTeleport", player addAction actionTeleport];};} remoteExec ["bis_fnc_call", -2];
+	}
+	else
+	{
+		if((side player) == (side sideLeader)) then
+		{
+			player setVariable ["idActionTeleport", player addAction actionTeleport];
+		};
+	};
+
 	if(player == sideLeader) then 
 	{	
 		player removeAction (player getVariable "idActionAddTeleport");
 		player setVariable ["idActionRemoveTeleport", player addAction actionRemoveTeleport];
 	};
-	
-	{
-		if((side _x) == (side sideLeader)) then
-		{
-			_x setVariable ["idActionTeleport", _x addAction actionTeleport];
-		};
-	} forEach allPlayers;
-	
 };
 
 fnc_removeTeleport= 
 {
 	deleteVehicle (teleportTarget select 0);
+
 	if(player == sideLeader) then
 	{
 		player setVariable ["idActionAddTeleport", player addAction actionAddTeleport];
 		player removeAction (player getVariable "idActionRemoveTeleport");
 	};
 	
+	if(isMultiplayer) then
 	{
-		if((side _x) == (side sideLeader)) then
+		teleportDestinationPole = teleportTarget;
+		publicVariable "teleportDestinationPole";
+		publicVariable "teleportTarget";
+
+		if((side player) == (side sideLeader)) then
 		{
-			_x removeAction (_x getVariable "idActionTeleport");
+			{if((side player) == (side sideLeader)) then {player removeAction (player getVariable "idActionTeleport");};} remoteExec ["bis_fnc_call", -2];
 		};
-	} forEach allPlayers;
+	}
+	else
+	{
+		if((side player) == (side sideLeader)) then
+		{
+			player removeAction (player getVariable "idActionTeleport");
+		};
+	};
 };
 
 actionAddTeleport = ["add teleport", fnc_addTeleport, [], 0, false, true];
