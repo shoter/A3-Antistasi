@@ -122,12 +122,12 @@ if (_medicX != _unit) then
 					_unit playMoveNow "";
 					if (_cured) then
 						{
-						if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format ["You are ready %1",name _unit]}};
-						//Czarny
-						if (isPlayer _unit && "enableTeleport" call BIS_fnc_getParamValue == 1) then
-						{
-							[flagX, teleportDestinationPole, theBoss] execVM  "functions\czarny\addTeleportToPole.sqf";
-						};
+							if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format ["You are ready %1",name _unit]}};
+							//Czarny
+							if ((isPlayer _unit) && ("enableTeleport" call BIS_fnc_getParamValue == 1)) then
+							{
+								[flagX, theBoss] execVM "functions\czarny\addTeleportToPole.sqf";
+							};
 						};
 					sleep 5;
 					_medicX stop false;

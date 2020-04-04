@@ -484,7 +484,7 @@ petros disableAI "AUTOTARGET";
 //Czarny
 if ("enableTeleport" call BIS_fnc_getParamValue == 1) then 		//to prevent double actions if respawnOnStart > -1
 {
-	[flagX, teleportDestinationPole, theBoss] execVM  "functions\czarny\addTeleportToPole.sqf";
+	[flagX, theBoss] execVM "functions\czarny\addTeleportToPole.sqf";
 };
 
 disableSerialization;
