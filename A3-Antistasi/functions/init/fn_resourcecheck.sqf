@@ -30,7 +30,7 @@ while {true} do
 	//_roads = _dataX select 2;
 	_prestigeNATO = _dataX select 2;
 	_prestigeSDK = _dataX select 3;
-	_power = [_city] call A3A_fnc_powerCheck;
+	_radioTowerSide = [_city] call A3A_fnc_getSideRadioTowerInfluence;
 	_popTotal = _popTotal + _numCiv;
 	_popFIA = _popFIA + (_numCiv * (_prestigeSDK / 100));
 	_popAAF = _popAAF + (_numCiv * (_prestigeNATO / 100));
