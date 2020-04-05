@@ -4,25 +4,30 @@
  *	@author 
  *		Czarny
  *	@call
- *		[teleport, teleportTarget, sideLeader] execVM "addTeleportToPole.sqf"
+ *		[teleport, sideLeader] execVM "addTeleportToPole.sqf"
   *	@args
- *		teleport: [Object] 			- existing flag which is teleport start
- * 		teleportTarget: [Array] 	- object which should be used as a teleport container (in this case its max size will be 1)
- *		sideLeader: [Object]		- player who can manipulate the system
+ *		teleport: [Object] 				- existing flag which is teleport start
+ *		sideLeader: [Object]			- player who can manipulate the system
  *	@return
  *		none
  *	@dependencies
  *		none
 **/
 
-teleport = _this select 0;		//TODO check if teleport points to teleportDestinationPole
-teleportTarget = _this select 1;	//this is an array
-sideLeader = _this select 2;
+
+// SCRIPT DEFINITIONS
+
+teleport = _this select 0;
+sideLeader = _this select 1;
+
 interactionDistance = 5;			//meters
 
-player removeAction (player getVariable "idActionTeleport");
-player removeAction (player getVariable "idActionAddTeleport");
-player removeAction (player getVariable "idActionRemoveTeleport");
+//check if teleportTarget is already define (for JIP or respawn)
+teleportTarget = missionNamespace getVariable ["teleportTarget", nil];
+if(isNil "teleportTarget") then 
+{
+	teleportTarget = [objNull]; 
+};
 
 fnc_teleport= 
 {
@@ -45,8 +50,7 @@ fnc_addTeleport=
 	
 	if(isMultiplayer) then
 	{
-		teleportDestinationPole = teleportTarget;
-		publicVariable "teleportDestinationPole";
+		publicVariable "teleportTarget";
 
 		{if((side player) == (side sideLeader)) then {player setVariable ["idActionTeleport", player addAction actionTeleport];};} remoteExec ["bis_fnc_call", -2];
 	}
@@ -77,8 +81,6 @@ fnc_removeTeleport=
 	
 	if(isMultiplayer) then
 	{
-		teleportDestinationPole = teleportTarget;
-		publicVariable "teleportDestinationPole";
 		publicVariable "teleportTarget";
 
 		if((side player) == (side sideLeader)) then
@@ -98,6 +100,14 @@ fnc_removeTeleport=
 actionAddTeleport = ["add teleport", fnc_addTeleport, [], 0, false, true];
 actionRemoveTeleport = ["remove teleport", fnc_removeTeleport, [], 0, false, true, "", "player distance (teleportTarget select 0) < interactionDistance"];
 actionTeleport = ["teleport", fnc_teleport, [], 0, false, true, "", "player distance teleport < interactionDistance"];
+
+// SCRIPT EXECUTION
+
+//removal of all actions (for respawn, revive and so on)
+player removeAction (player getVariable "idActionTeleport");
+player removeAction (player getVariable "idActionAddTeleport");
+player removeAction (player getVariable "idActionRemoveTeleport");
+
 
 if(isNull (teleportTarget select 0)) then 
 {
