@@ -20,13 +20,6 @@ if(isNil "serverID") then {
 publicVariable "serverID";
 waitUntil {!isNil "serverID"};
 
-//Czarny
-if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
-{
-	teleportDestinationPole = [objNull]; 
-	publicVariable "teleportDestinationPole";
-};
-
 if (isMultiplayer) then {
 	//Load server parameters
 	loadLastSave = if ("loadSave" call BIS_fnc_getParamValue == 1) then {true} else {false};
