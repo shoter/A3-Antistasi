@@ -98,7 +98,7 @@ fnc_removeTeleport=
 };
 
 actionAddTeleport = ["add teleport", fnc_addTeleport, [], 0, false, true];
-actionRemoveTeleport = ["remove teleport", fnc_removeTeleport, [], 0, false, true, "", "player distance (teleportTarget select 0) < interactionDistance"];
+actionRemoveTeleport = ["remove teleport", fnc_removeTeleport, [], 0, false, true, "", "(player distance (teleportTarget select 0) < interactionDistance) || (player distance (teleport select 0) < interactionDistance)"];
 actionTeleport = ["teleport", fnc_teleport, [], 0, false, true, "", "player distance teleport < interactionDistance"];
 
 // SCRIPT EXECUTION
