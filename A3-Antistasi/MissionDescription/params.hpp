@@ -73,7 +73,7 @@ class Params
      {
           title = "Number of the same weapons required to unlock";
           values[] = {8,15,18,25,40};
-          default = 18;
+          default = 25;
      };
      class memberOnlyMagLimit
      {
