@@ -46,7 +46,7 @@ class Params
      {
           title = "Distance from HQ for Sidemissions";
           values[] = {2000,4000,5000,6000,8000,10000,12000};
-          default = 5000;
+          default = 4000;
      };
      class allowPvP
      {
