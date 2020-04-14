@@ -25,7 +25,7 @@ publicVariable "theBoss";
 theBoss synchronizeObjectsAdd [HC_commanderX];
 HC_commanderX synchronizeObjectsAdd [theBoss];
 //apoyo synchronizeObjectsAdd [theBoss];
-
+	
 [3, format ["Player %1 should now be boss: %2.", name _unit, name theBoss],_filename] call A3A_fnc_log;
 
 if (!isNil "_groups") then
@@ -50,4 +50,10 @@ if (isNull _oldUnit) then
 	{
 	[_oldUnit,[group _oldUnit]] remoteExec ["hcSetGroup",_oldUnit];
 	};
+		
+if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
+{
+	[[flagX, theBoss], "functions\czarny\addTeleportToPole.sqf"] remoteExec ["BIS_fnc_execVM", -2];
+};
+
 [] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];

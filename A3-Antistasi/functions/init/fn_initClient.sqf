@@ -481,7 +481,6 @@ petros disableAI "MOVE";
 petros disableAI "AUTOTARGET";
 [petros,"mission"] call A3A_fnc_flagaction;
 
-//Czarny
 if ("enableTeleport" call BIS_fnc_getParamValue == 1) then 		//to prevent double actions if respawnOnStart > -1
 {
 	[flagX, theBoss] execVM "functions\czarny\addTeleportToPole.sqf";

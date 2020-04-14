@@ -22,6 +22,8 @@ sideLeader = _this select 1;
 
 interactionDistance = 5;			//meters
 
+//diag_log format ["%1: rom | %2| %3", servertime, name player, "addTeleportToPole ENTER"];
+
 //check if teleportTarget is already define (for JIP or respawn)
 teleportTarget = missionNamespace getVariable ["teleportTarget", nil];
 if(isNil "teleportTarget") then 
@@ -98,7 +100,7 @@ fnc_removeTeleport=
 };
 
 actionAddTeleport = ["add teleport", fnc_addTeleport, [], 0, false, true];
-actionRemoveTeleport = ["remove teleport", fnc_removeTeleport, [], 0, false, true, "", "player distance (teleportTarget select 0) < interactionDistance"];
+actionRemoveTeleport = ["remove teleport", fnc_removeTeleport, [], 0, false, true, "", "(player distance (teleportTarget select 0) < interactionDistance) || (player distance teleport < interactionDistance)"];
 actionTeleport = ["teleport", fnc_teleport, [], 0, false, true, "", "player distance teleport < interactionDistance"];
 
 // SCRIPT EXECUTION
@@ -107,7 +109,6 @@ actionTeleport = ["teleport", fnc_teleport, [], 0, false, true, "", "player dist
 player removeAction (player getVariable "idActionTeleport");
 player removeAction (player getVariable "idActionAddTeleport");
 player removeAction (player getVariable "idActionRemoveTeleport");
-
 
 if(isNull (teleportTarget select 0)) then 
 {
