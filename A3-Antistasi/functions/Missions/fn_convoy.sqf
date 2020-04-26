@@ -425,6 +425,7 @@ if (_typeConvoyX == "ammunition") then
 		_taskState = "SUCCEEDED";
 		_taskState1 = "FAILED";
 		[0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
+		[1800*_bonus] remoteExec ["A3A_fnc_timingCA",2];
 		{if (isPlayer _x) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_vehObj,teamPlayer] call A3A_fnc_distanceUnits);
 		[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 		[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
