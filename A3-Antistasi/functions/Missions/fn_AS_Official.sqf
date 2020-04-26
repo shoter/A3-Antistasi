@@ -70,13 +70,11 @@ else
 	["AS",[format ["A %4 officer is inspecting %1. Go there and kill him before %2:%3.",_nameDest,numberToDate [2035,_dateLimitNum] select 3,numberToDate [2035,_dateLimitNum] select 4,_naming],"Kill the Officer",_markerX],_positionX,"FAILED"] call A3A_fnc_taskUpdate;
 	if (_difficultX) then
 		{
-		[-1200] remoteExec ["A3A_fnc_timingCA",2];
 		[-20,theBoss] call A3A_fnc_playerScoreAdd;
 		[_markerX,-60] call A3A_fnc_addTimeForIdle;
 		}
 	else
 		{
-		[-600] remoteExec ["A3A_fnc_timingCA",2];
 		[-10,theBoss] call A3A_fnc_playerScoreAdd;
 		[_markerX,-30] call A3A_fnc_addTimeForIdle;
 		};

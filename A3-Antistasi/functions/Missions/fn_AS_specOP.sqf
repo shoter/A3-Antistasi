@@ -30,13 +30,11 @@ if (dateToNumber date > _dateLimitNum) then
 	if (_difficultX) then
 		{
 		[10,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
-		[-1200] remoteExec ["A3A_fnc_timingCA",2];
 		[-20,theBoss] call A3A_fnc_playerScoreAdd;
 		}
 	else
 		{
 		[5,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
-		[-600] remoteExec ["A3A_fnc_timingCA",2];
 		[-10,theBoss] call A3A_fnc_playerScoreAdd;
 		};
 	}

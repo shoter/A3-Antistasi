@@ -102,7 +102,6 @@ if (dateToNumber date > _dateLimitNum) then
 			getPos _antennaDead, "FAILED", "Destroy"
 		] call A3A_fnc_taskUpdate;
 		//[5,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
-		[-600] remoteExec ["A3A_fnc_timingCA",2];
 		[-10,theBoss] call A3A_fnc_playerScoreAdd;
 		};
 	[_antennaDead] remoteExec ["A3A_fnc_rebuildRadioTower", 2];
