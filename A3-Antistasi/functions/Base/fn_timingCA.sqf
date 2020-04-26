@@ -10,7 +10,9 @@ private _timeDelta = _this select 0;
 if (isNil "_timeDelta") exitWith {};
 if !(_timeDelta isEqualType 0) exitWith {};
 _mayor = if (_timeDelta >= 3600) then {true} else {false};
-_timeDelta = _timeDelta - (((tierWar + difficultyCoef)-1)*300);
+_timeDelta = _timeDelta - (((tierWar + difficultyCoef)-1)*400);
+
+if (_timeDelta < 0) then {_timeDelta = 0};
 
 countCA = countCA + round (random _timeDelta);
 
