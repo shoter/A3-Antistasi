@@ -203,6 +203,7 @@ class A3A
 		class createFIAOutposts2 {};
 		class createSDKGarrisons {};
 		class createSDKgarrisonsTemp {};
+		class createUnit {};
 		class cycleSpawn {};
 		class FIAinitBases {};
 		class findSpawnPosition {};
@@ -352,18 +353,17 @@ class A3A
 		class checkRadiosUnlocked {};
 		class configSort {};
 		class crateLootParams {};
-		class CSATCrate {};
 		class dress {};
 		class empty {};
 		class equipmentClassToCategories {};
 		class equipmentIsValidForCurrentModset {};
 		class equipmentSort {};
+		class fillLootCrate {};
 		class getRadio {};
 		class itemSort {};
 		class itemType {};
 		class launcherInfo {};
 		class loot {};
-		class NATOCrate {};
 		class randomRifle {};
 		class transfer {};
 		class unlockEquipment {};
