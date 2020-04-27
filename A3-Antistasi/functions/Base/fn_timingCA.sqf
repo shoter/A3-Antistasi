@@ -1,16 +1,20 @@
-_timeX = _this select 0;
-if (isNil "_timeX") exitWith {};
-if !(_timeX isEqualType 0) exitWith {};
-_mayor = if (_timeX >= 3600) then {true} else {false};
-_timeX = _timeX - (((tierWar + difficultyCoef)-1)*400);
+/**
+	Changes time of the timer for the next counter attack.
+	Counter attack is automatically synchronized to every player after this method is executed. 
+	
+	Params:
+		_timeDelta - Maximum time change we are doing to counter attack timer [in seconds].
+**/
 
-if (_timeX < 0) then {_timeX = 0};
+private _timeDelta = _this select 0;
+if (isNil "_timeDelta") exitWith {};
+if !(_timeDelta isEqualType 0) exitWith {};
+_mayor = if (_timeDelta >= 3600) then {true} else {false};
+_timeDelta = _timeDelta - (((tierWar + difficultyCoef)-1)*400);
 
-countCA = countCA + round (random _timeX);
+if (_timeDelta < 0) then {_timeDelta = 0};
+
+countCA = countCA + round (random _timeDelta);
 
 if (_mayor and (countCA < 1200)) then {countCA = 1200};
 publicVariable "countCA";
-
-
-
-

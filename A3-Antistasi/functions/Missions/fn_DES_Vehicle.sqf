@@ -47,7 +47,7 @@ if (spawner getVariable _markerX == 0) then
 	_typeX = if (_sideX == Occupants) then {NATOCrew} else {CSATCrew};
 	for "_i" from 1 to 3 do
 		{
-		_unit = _groupX createUnit [_typeX, _pos, [], 0, "NONE"];
+		_unit = [_groupX, _typeX, _pos, [], 0, "NONE"] call A3A_fnc_createUnit;
 		[_unit,""] call A3A_fnc_NATOinit;
 		sleep 2;
 		};
@@ -84,7 +84,6 @@ else
 	["DES",[format ["We know an enemy armor (%3) is stationed in a %1. It is a good chance to steal or destroy it before it causes more damage. Do it before %2.",_nameDest,_displayTime,getText (configFile >> "CfgVehicles" >> (_typeVehX) >> "displayName")],"Steal or Destroy Armor",_markerX],_positionX,"FAILED","Destroy"] call A3A_fnc_taskUpdate;
 	[-5*_bonus,-100*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
 	[5*_bonus,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
-	[-600*_bonus] remoteExec ["A3A_fnc_timingCA",2];
 	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 	};
 

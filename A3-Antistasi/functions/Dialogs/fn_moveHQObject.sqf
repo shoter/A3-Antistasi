@@ -1,24 +1,26 @@
-if (player != theBoss) exitWith {hint "Only Player Commander is allowed to move HQ assets"};
+if (player != theBoss) exitWith {["Move HQ", "Only Player Commander is allowed to move HQ assets"] call A3A_fnc_customHint;};
 private ["_thingX","_playerX","_id","_sites","_markerX","_size","_positionX"];
 
 _thingX = _this select 0;
 _playerX = _this select 1;
 _id = _this select 2;
 
-if (!(isNull attachedTo _thingX)) exitWith {hint "The asset you want to move is being moved by another player"};
-if (vehicle _playerX != _playerX) exitWith {hint "You cannot move HQ assets while in a vehicle"};
+if (!(isNull attachedTo _thingX)) exitWith {["Move HQ", "The asset you want to move is being moved by another player"] call A3A_fnc_customHint;};
+if (vehicle _playerX != _playerX) exitWith {["Move HQ", "You cannot move HQ assets while in a vehicle"] call A3A_fnc_customHint;};
 
-if ({!(isNull _x)} count (attachedObjects _playerX) != 0) exitWith {hint "You have other things attached, you cannot move this"};
+if ({!(isNull _x)} count (attachedObjects _playerX) != 0) exitWith {["Move HQ", "You have other things attached, you cannot move this"] call A3A_fnc_customHint;};
 _sites = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
 _markerX = [_sites,_playerX] call BIS_fnc_nearestPosition;
 _size = [_markerX] call A3A_fnc_sizeMarker;
 _positionX = getMarkerPos _markerX;
-if (_playerX distance2D _positionX > _size) exitWith {hint "This asset needs to be closer to it relative zone center to be able to be moved"};
+if (_playerX distance2D _positionX > _size) exitWith {["Move HQ", "This asset needs to be closer to it relative zone center to be able to be moved"] call A3A_fnc_customHint;};
 
 _thingX setVariable ["objectBeingMoved", true];
-
 _thingX removeAction _id;
-_thingX attachTo [_playerX,[0,2,1]];
+
+private _spacing = 2 max (1 - (boundingBoxReal _thingX select 0 select 1));
+private _height = 0.1 - (boundingBoxReal _thingX select 0 select 2);
+_thingX attachTo [_playerX, [0, _spacing, _height]];
 
 private _fnc_placeObject = {
 	params [["_thingX", objNull], ["_playerX", objNull], ["_dropObjectActionIndex", -1]];
@@ -29,6 +31,8 @@ private _fnc_placeObject = {
 	if (!(_thingX getVariable ["objectBeingMoved", false])) exitWith {};
 
 	if (_playerX == attachedTo _thingX) then {
+		_playerX setVelocity [0,0,0];
+		_thingX setVelocity [0,0,0];
 		detach _thingX;
 	};
 
@@ -36,7 +40,10 @@ private _fnc_placeObject = {
 		_playerX removeAction _dropObjectActionIndex;
 	};
 
-	_thingX setVectorUp surfaceNormal position _thingX;
+	// some objects never lose (and even regain) their velocity when detached, becoming lethal
+	// on a DS, object locality changes when detached, so we have to remoteexec
+	[_thingX, [0,0,0]] remoteExec ["setVelocity", _thingX];
+	[_thingX, surfaceNormal position _thingX] remoteExec ["setVectorUp", _thingX];
 	_thingX setPosATL [getPosATL _thingX select 0,getPosATL _thingX select 1,0.1];
 
 	_thingX setVariable ["objectBeingMoved", false];
@@ -53,6 +60,6 @@ waitUntil {sleep 1; (_playerX != attachedTo _thingX) or (vehicle _playerX != _pl
 
 [_thingX, _playerX, _actionX] call _fnc_placeObject;
 
-if (vehicle _playerX != _playerX) exitWith {hint "You cannot move HQ assets while in a vehicle"};
+if (vehicle _playerX != _playerX) exitWith {["Move HQ", "You cannot move HQ assets while in a vehicle"] call A3A_fnc_customHint;};
 
-if  (_playerX distance2D _positionX > _size) exitWith {hint "This asset cannot be moved more far away for its zone center"};
+if  (_playerX distance2D _positionX > _size) exitWith {["Move HQ", "This asset cannot be moved more far away for its zone center"] call A3A_fnc_customHint;};

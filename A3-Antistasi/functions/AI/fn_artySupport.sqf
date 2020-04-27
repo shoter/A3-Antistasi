@@ -1,4 +1,4 @@
-if (count hcSelected player == 0) exitWith {hint "You must select an artillery group"};
+if (count hcSelected player == 0) exitWith {["Artillery Support", "You must select an artillery group"] call A3A_fnc_customHint;};
 
 private ["_groups","_artyArray","_artyRoundsArr","_hasAmmunition","_areReady","_hasArtillery","_areAlive","_soldierX","_veh","_typeAmmunition","_typeArty","_positionTel","_artyArrayDef1","_artyRoundsArr1","_piece","_isInRange","_positionTel2","_rounds","_roundsMax","_markerX","_size","_forcedX","_textX","_mrkFinal","_mrkFinal2","_timeX","_eta","_countX","_pos","_ang"];
 
@@ -117,7 +117,7 @@ typeArty = nil;
 
 positionTel = [];
 
-hint "Select the position on map where to perform the Artillery strike";
+["Artillery Support", "Select the position on map where to perform the Artillery strike"] call A3A_fnc_customHint;
 
 if (!visibleMap) then {openMap true};
 onMapSingleClick "positionTel = _pos;";
@@ -143,7 +143,7 @@ for "_i" from 0 to (count _artyArray) - 1 do
 		};
 	};
 
-if (count _artyArrayDef1 == 0) exitWith {hint "The position you marked is out of bounds for that Battery"};
+if (count _artyArrayDef1 == 0) exitWith {["Artillery Support", "The position you marked is out of bounds for that Battery"] call A3A_fnc_customHint;};
 
 _mrkFinal = createMarkerLocal [format ["Arty%1", random 100], _positionTel];
 _mrkFinal setMarkerShapeLocal "ICON";
@@ -155,7 +155,7 @@ if (_typeArty == "BARRAGE") then
 	_mrkFinal setMarkerTextLocal "Atry Barrage Begin";
 	positionTel = [];
 
-	hint "Select the position to finish the barrage";
+	["Artillery Support", "Select the position to finish the barrage"] call A3A_fnc_customHint;
 
 	if (!visibleMap) then {openMap true};
 	onMapSingleClick "positionTel = _pos;";

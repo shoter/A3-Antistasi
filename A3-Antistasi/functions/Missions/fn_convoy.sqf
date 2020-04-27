@@ -284,7 +284,7 @@ if (_typeConvoyX == "Prisoners") then
 	_groups pushBack _grpPOW;
 	for "_i" from 1 to (1+ round (random 11)) do
 	{
-		_unit = _grpPOW createUnit [SDKUnarmed, _posbase, [], 0, "NONE"];
+		_unit = [_grpPOW, SDKUnarmed, _posbase, [], 0, "NONE"] call A3A_fnc_createUnit;
 		[_unit,true] remoteExec ["setCaptive",0,_unit];
 		_unit setCaptive true;
 		_unit disableAI "MOVE";
@@ -414,7 +414,6 @@ if (_typeConvoyX == "ammunition") then
 	{
 		_taskState = "FAILED";
 		_taskState1 = "SUCCEEDED";
-		[-1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
 		[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 		clearMagazineCargoGlobal _vehObj;
 		clearWeaponCargoGlobal _vehObj;
@@ -448,7 +447,6 @@ if (_typeConvoyX == "Armor") then
 		_taskState = "FAILED";
 		_taskState1 = "SUCCEEDED";
 		server setVariable [_destinationX,dateToNumber date,true];
-		[-1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
 		[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 	}
 	else
@@ -555,7 +553,6 @@ if (_typeConvoyX == "Money") then
 		_taskState = "FAILED";
 		if ((dateToNumber date > _enddateNum) or (_vehObj distance _posDestination < _distanceFromTargetForArrival)) then
 		{
-			[-1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
 			[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 			_taskState1 = "SUCCEEDED";
 		}
@@ -586,7 +583,6 @@ if (_typeConvoyX == "Money") then
 			[10*_bonus,-20*_bonus,_posDestination] remoteExec ["A3A_fnc_citySupportChange",2];
 			[3,0] remoteExec ["A3A_fnc_prestige",2];
 			[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-			[-120*_bonus] remoteExec ["A3A_fnc_timingCA",2];
 			{if (_x distance _vehObj < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
 			[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 			waitUntil {sleep 1; speed _vehObj < 1};
