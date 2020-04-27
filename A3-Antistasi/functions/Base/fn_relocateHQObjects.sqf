@@ -41,3 +41,8 @@ flagX hideObjectGlobal false;
 
 "Synd_HQ" setMarkerPos _newPosition;
 chopForest = false; publicVariable "chopForest";
+
+if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
+{
+	[[flagX, theBoss], "functions\czarny\addTeleportToPole.sqf"] remoteExec ["BIS_fnc_execVM", -2];
+};

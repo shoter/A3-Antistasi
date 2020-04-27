@@ -45,7 +45,7 @@ class Params
      class mRadius
      {
           title = "Distance from HQ for Sidemissions";
-          values[] = {2000,4000,5000,6000,8000,10000,12000};
+          values[] = {2000,4000,6000,8000,10000,12000};
           default = 4000;
      };
      class allowPvP
@@ -72,7 +72,7 @@ class Params
      class unlockItem
      {
           title = "Number of the same weapons required to unlock";
-          values[] = {8,15,18,25,40};
+          values[] = {5,10,15,20,25,40};
           default = 25;
      };
      class memberOnlyMagLimit

@@ -11,6 +11,7 @@ if (_player getVariable ["eligible",true] && ({(side (group _player) == teamPlay
 	_textX = format ["%1 is the new leader of our forces. Greet them!", name _player];
 	[_player] call A3A_fnc_theBossInit;
 	[petros,"hint",_textX] remoteExec ["A3A_fnc_commsMP", 0];
+
 	true;
 };
 
