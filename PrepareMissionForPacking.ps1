@@ -21,7 +21,5 @@ ForEach ($templateFolder in $missionTemplateFolders) {
 	$missionFolderName = $pair[0] + "-" + $formattedVersionId + "." + $pair[1]; 
 	$destinationPath = $(Join-Path $folderForPreparedMissions.FullName $missionFolderName);
 	Copy-Item -Path $mainDataPath -Destination $destinationPath -Recurse;
-    $exclude = "NavGrid"+ $pair[1] + ".sqf";
-    Get-ChildItem $destinationPath\NavGrids -Exclude $exclude | Remove-Item -Force;
-	Copy-Item -Path $(Join-Path $templateFolder.FullName "*") -Destination $destinationPath -Recurse -Force;
+ 	Copy-Item -Path $(Join-Path $templateFolder.FullName "*") -Destination $destinationPath -Recurse -Force;
 }
