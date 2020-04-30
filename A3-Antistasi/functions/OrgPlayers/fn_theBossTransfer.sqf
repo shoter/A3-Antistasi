@@ -55,3 +55,10 @@ else {
 	[petros,"hint",_textX, "New Commander"] remoteExec ["A3A_fnc_commsMP", 0];
 	[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];
 };
+
+if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
+{
+	[[flagX, theBoss], "functions\czarny\addTeleportToPole.sqf"] remoteExec ["BIS_fnc_execVM", -2];
+};
+
+[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];
