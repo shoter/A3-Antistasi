@@ -5,7 +5,6 @@
       <Key ID="STR_antistasi_dialogs_lps_frame_text">
         <Original>Load previous session?</Original>
         <English>Load previous session?</English>
-        <Czech />
         <French>Charger votre ancienne session ?</French>
         <German>Letzten Spielstand laden?</German>
         <Russian>Загрузить предыдущее сохранение?</Russian>
@@ -419,10 +418,17 @@
     </Container>
     <Container name="credits_generic">
       <Key ID="STR_antistasi_credits_generic_author_text">
+<<<<<<< HEAD
         <Original>The Official Antistasi Community and Barbolani and AGN</Original>
         <English>The Official Antistasi Community and Barbolani and AGN</English>
         <French>La Communauté Officielle d'Antistasi et Barbolani and AGN</French>
         <German>Die offizielle Antistasi Community und Barbolani and AGN</German>
+=======
+        <Original>The Official Antistasi Community and Barbolani</Original>
+        <English>The Official Antistasi Community and Barbolani</English>
+        <French>La Communauté Officielle d'Antistasi et Barbolani</French>
+        <German>Die offizielle Antistasi Community und Barbolani</German>
+>>>>>>> main/unstable
         <Russian>Сообщество Antistasi</Russian>
       </Key>
       <Key ID="STR_antistasi_credits_generic_overview_text">
