@@ -12,8 +12,8 @@ factionMaleOccupants = "rhs_faction_socom";
 if ((gameMode != 4) and (!hasFFAA)) then {factionFIA = "rhsgref_faction_hidf"};
 
 //Flag Images
-NATOFlag = "Flag_NATO_F";
-NATOFlagTexture = "\A3\Data_F\Flags\Flag_NATO_CO.paa";
+NATOFlag = "Flag_US_F";
+NATOFlagTexture = "a3\data_f\flags\flag_us_co.paa";
 flagNATOmrk = "flag_USA";
 if (isServer) then {"NATO_carrier" setMarkerText "USMC Carrier"};
 
@@ -48,7 +48,8 @@ vehNATOPVP = ["rhsusf_m1025_w_s","rhsusf_m998_w_s_2dr","rhsusf_m998_w_s_2dr_full
 //Military Units
 NATOGrunt = "rhsusf_usmc_marpat_wd_rifleman_light";
 NATOOfficer = "rhsusf_usmc_marpat_wd_officer";
-NATOOfficer2 = "rhsusf_army_ucp_rifleman_101st";
+//NATOOfficer2 = "rhsusf_army_ucp_rifleman_101st";
+NATOOfficer2 = "rhsusf_army_ucp_riflemanl";
 NATOBodyG = "rhsusf_army_ucp_rifleman_1stcav";
 NATOCrew = "rhsusf_usmc_marpat_wd_crewman";
 NATOUnarmed = "B_G_Survivor_F";

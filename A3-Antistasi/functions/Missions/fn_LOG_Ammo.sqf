@@ -41,7 +41,7 @@ if ((spawner getVariable _markerX != 2) and !(sidesX getVariable [_markerX,sideU
 	_truckX = _typeVehX createVehicle _pos;
 	_truckX setDir (getDir _road);
 	_truckCreated = true;
-	if (_sideX == Occupants) then {[_truckX] spawn A3A_fnc_NATOcrate} else {[_truckX] spawn A3A_fnc_CSATcrate};
+	[_truckX] spawn A3A_fnc_fillLootCrate;
 
 	_mrk = createMarkerLocal [format ["%1patrolarea", floor random 100], _pos];
 	_mrk setMarkerShapeLocal "RECTANGLE";
@@ -56,7 +56,7 @@ if ((spawner getVariable _markerX != 2) and !(sidesX getVariable [_markerX,sideU
 	sleep 1;
 	if (random 10 < 33) then
 		{
-		_dog = _groupX createUnit ["Fin_random_F",_positionX,[],0,"FORM"];
+		_dog = [_groupX, "Fin_random_F",_positionX,[],0,"FORM"] call A3A_fnc_createUnit;
 		[_dog] spawn A3A_fnc_guardDog;
 		};
 
@@ -111,7 +111,6 @@ if ((spawner getVariable _markerX != 2) and !(sidesX getVariable [_markerX,sideU
 else
 	{
 	["LOG",[format ["We've spotted an Ammotruck in an %1. Go there and destroy or steal it before %2.",_nameDest,_displayTime],"Steal or Destroy Ammotruck",_markerX],_positionX,"FAILED","rearm"] call A3A_fnc_taskUpdate;
-	[-1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
 	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 	};
 
