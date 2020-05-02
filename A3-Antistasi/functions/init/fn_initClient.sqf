@@ -477,7 +477,8 @@ if (petros == leader group petros) then {
 petros setIdentity "friendlyX";
 if (worldName == "Tanoa") then {petros setName "Maru"} else {petros setName "Petros"};
 
-if ("enableTeleport" call BIS_fnc_getParamValue == 1) then 		//to prevent double actions if respawnOnStart > -1
+//to prevent double actions if respawnOnStart > -1
+if ("enableTeleport" call BIS_fnc_getParamValue == 1) then 
 {
 	[flagX, theBoss] execVM "functions\czarny\addTeleportToPole.sqf";
 };
