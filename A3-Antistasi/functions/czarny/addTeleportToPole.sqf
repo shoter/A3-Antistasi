@@ -6,8 +6,8 @@
  *	@call
  *		[teleport, sideLeader] execVM "addTeleportToPole.sqf"
   *	@args
- *		teleport: [Object] 				- existing flag which is teleport start
- *		sideLeader: [Object]			- player who can manipulate the system
+ *		[Object] teleport  		- existing flag which is teleport start
+ *		[Object] sideLeader		- player who can manipulate the system
  *	@return
  *		none
  *	@dependencies
