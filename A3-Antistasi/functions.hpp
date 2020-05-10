@@ -32,6 +32,7 @@ class A3A
 	class Base
 	{
 		class addActionBreachVehicle {};
+		class addTeleportToPole {};
 		class addHC {};
 		class addTimeForIdle {};
         class aggressionUpdateLoop {};
@@ -377,6 +378,7 @@ class A3A
 	class OrgPlayers
 	{
 		class donateMoney {};
+		class evaluateIncomeForPlayer {};
 		class isMember {};
 		class makePlayerBossIfEligible {};
 		class memberAdd {};
