@@ -61,7 +61,7 @@ else {
 
 if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
 {
-	[[flagX, theBoss], "functions\czarny\addTeleportToPole.sqf"] remoteExec ["BIS_fnc_execVM", -2];
+	[flagX, theBoss] remoteExec ["A3A_fnc_addTeleportToPole", -2];
 };
 
 [] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];

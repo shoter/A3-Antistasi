@@ -126,7 +126,7 @@ if (_medicX != _unit) then
 							//Czarny
 							if ((isPlayer _unit) && ("enableTeleport" call BIS_fnc_getParamValue == 1)) then
 							{
-								[flagX, theBoss] execVM "functions\czarny\addTeleportToPole.sqf";
+								[flagX, theBoss] call A3A_fnc_addTeleportToPole;
 							};
 						};
 					sleep 5;

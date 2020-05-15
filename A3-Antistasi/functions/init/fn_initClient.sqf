@@ -481,7 +481,7 @@ if (worldName == "Tanoa") then {petros setName "Maru"} else {petros setName "Pet
 //to prevent double actions if respawnOnStart > -1
 if ("enableTeleport" call BIS_fnc_getParamValue == 1) then 
 {
-	[flagX, theBoss] execVM "functions\czarny\addTeleportToPole.sqf";
+	[flagX, theBoss] call A3A_fnc_addTeleportToPole;
 };
 
 disableSerialization;
