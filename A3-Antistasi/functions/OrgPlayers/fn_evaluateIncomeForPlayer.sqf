@@ -1,7 +1,7 @@
 _playersIncome = _this select 0;
 _playersCurrentMoney = player getVariable "moneyX";
 
-_tresholds = [[1000, 0], [500, 0.1], [250, 0.15], [0, 0.2]];		// [moneyLimit, percentOfIncome], preserve descending order of playersMoney
+_tresholds = [[1000, 0], [500, 0.1], [250, 0.15], [0, 0.2]];		// [currentPlayersMoney, percentOfIncome], preserve descending order of playersMoney
 _maxPlayersIncome = 250;
 
 for [{_i = 0}, {_i < count _tresholds}, {_i = _i + 1}] do 
