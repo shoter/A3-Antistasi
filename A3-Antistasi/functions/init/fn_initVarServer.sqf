@@ -279,6 +279,8 @@ private _templateVariables = [
 	"supportStaticsSDKB3",
 	"ATMineMag",
 	"APERSMineMag",
+	"vehSDKGunship",
+	"vehSDKTank",
 
 	//@Spoffy, is the correct like this?
 	"breachingExplosivesAPC",
@@ -604,7 +606,7 @@ DECLARE_SERVER_VAR(vehAttack, _vehAttack);
 private _vehPlanes = (vehNATOAir + vehCSATAir + [vehSDKPlane]);
 DECLARE_SERVER_VAR(vehPlanes, _vehPlanes);
 
-private _vehAttackHelis = vehCSATAttackHelis + vehNATOAttackHelis;
+private _vehAttackHelis = vehCSATAttackHelis + vehNATOAttackHelis + vehSDKGunship;
 DECLARE_SERVER_VAR(vehAttackHelis, _vehAttackHelis);
 
 private _vehFixedWing = [vehNATOPlane,vehNATOPlaneAA,vehCSATPlane,vehCSATPlaneAA,vehSDKPlane] + vehNATOTransportPlanes + vehCSATTransportPlanes;
@@ -619,7 +621,7 @@ DECLARE_SERVER_VAR(vehAmmoTrucks, _vehAmmoTrucks);
 private _vehAPCs = vehNATOAPC + vehCSATAPC;
 DECLARE_SERVER_VAR(vehAPCs, _vehAPCs);
 
-private _vehTanks = [vehNATOTank,vehCSATTank];
+private _vehTanks = [vehNATOTank,vehCSATTank,vehSDKTank];
 DECLARE_SERVER_VAR(vehTanks, _vehTanks);
 
 private _vehTrucks = vehNATOTrucks + vehCSATTrucks + [vehSDKTruck,vehFIATruck];
@@ -640,7 +642,7 @@ DECLARE_SERVER_VAR(vehFastRope, _vehFastRope);
 private _vehUnlimited = vehNATONormal + vehCSATNormal + [vehNATORBoat,vehNATOPatrolHeli,vehCSATRBoat,vehCSATPatrolHeli,vehNATOUAV,vehNATOUAVSmall,NATOMG,NATOMortar,vehCSATUAV,vehCSATUAVSmall,CSATMG,CSATMortar];
 DECLARE_SERVER_VAR(vehUnlimited, _vehUnlimited);
 
-private _vehFIA = [vehSDKBike,vehSDKLightArmed,SDKMGStatic,vehSDKLightUnarmed,vehSDKTruck,vehSDKBoat,SDKMortar,staticATteamPlayer,staticAAteamPlayer,vehSDKRepair];
+private _vehFIA = [vehSDKBike,vehSDKLightArmed,SDKMGStatic,vehSDKLightUnarmed,vehSDKTruck,vehSDKBoat,SDKMortar,staticATteamPlayer,staticAAteamPlayer,vehSDKRepair,vehSDKGunship,vehSDKTank];
 DECLARE_SERVER_VAR(vehFIA, _vehFIA);
 
 // sanity check the lists to catch some serious problems early
@@ -717,6 +719,8 @@ server setVariable [vehSDKTruck,300,true];											//300
 {server setVariable [_x,700,true]} forEach [vehSDKLightArmed,vehSDKAT];
 {server setVariable [_x,400,true]} forEach [SDKMGStatic,vehSDKBoat,vehSDKRepair];			//400
 {server setVariable [_x,800,true]} forEach [SDKMortar,staticATteamPlayer,staticAAteamPlayer];			//800
+server setVariable [vehSDKGunship,30000,true];											//30000
+server setVariable [vehSDKTank,20000,true];											//20000
 
 ///////////////////////
 //     GARRISONS    ///

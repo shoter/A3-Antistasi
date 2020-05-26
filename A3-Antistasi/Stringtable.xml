@@ -558,6 +558,34 @@
         <Russian>Купить Станковую Установку ПТРК</Russian>
         <German>Kaufe ein statisches Panzerabwehrgeschütz.</German>
       </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_vehicle_purchase_military_tank_text">
+        <Original>Tank</Original>
+        <English>Tank</English>
+        <French>Tank</French>
+        <Russian>Tank</Russian>
+        <German>Tank</German>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_vehicle_purchase_military_tank_tooltip">
+        <Original>Buy tank</Original>
+        <English>Buy tank</English>
+        <French>>Buy tank</French>
+        <Russian>>Buy tank</Russian>
+        <German>>Buy tank</German>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_vehicle_purchase_military_gunship_text">
+        <Original>Gunship</Original>
+        <English>Gunship</English>
+        <French>Gunship</French>
+        <Russian>Gunship</Russian>
+        <German>Gunship</German>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_vehicle_purchase_military_gunship_tooltip">
+        <Original>Buy gunship</Original>
+        <English>Buy gunship</English>
+        <French>>Buy gunship</French>
+        <Russian>>Buy gunship</Russian>
+        <German>>Buy gunship</German>
+      </Key>
       <Key ID="STR_antistasi_dialogs_dialog_vehicle_purchase_military_truck_text">
         <Original>Pickup Truck</Original>
         <English>Pickup Truck</English>

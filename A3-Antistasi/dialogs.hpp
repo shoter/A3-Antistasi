@@ -755,7 +755,6 @@ class buy_vehicle 			{
 			h = 0.0560125 * safezoneH;
 			action = "closeDialog 0;nul = [staticATteamPlayer] spawn A3A_fnc_addFIAveh;";
 		};
-
 		class HQ_button_AA: RscButton
 		{
 			idc = 111;
@@ -766,6 +765,28 @@ class buy_vehicle 			{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			action = "closeDialog 0;nul = [staticAAteamPlayer] spawn A3A_fnc_addFIAveh;";
+		};
+		class HQ_button_gunship: RscButton
+		{
+			idc = 112;
+			text = $STR_antistasi_dialogs_dialog_vehicle_purchase_military_gunshihp_text;
+			tooltip = $STR_antistasi_dialogs_dialog_vehicle_purchase_military_gunship_tooltip;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.808096 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+			h = 0.0560125 * safezoneH;
+			action = "closeDialog 0;nul = [vehSDKGunship] spawn A3A_fnc_addFIAveh;";
+		};
+		class HQ_button_tank: RscButton
+		{
+			idc = 113;
+			text = $STR_antistasi_dialogs_dialog_vehicle_purchase_military_tank_text;
+			tooltip = $STR_antistasi_dialogs_dialog_vehicle_purchase_military_tank_tooltip;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.808096 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+			h = 0.0560125 * safezoneH;
+			action = "closeDialog 0;nul = [vehSDKTank] spawn A3A_fnc_addFIAveh;";
 		};
 	};
 };
