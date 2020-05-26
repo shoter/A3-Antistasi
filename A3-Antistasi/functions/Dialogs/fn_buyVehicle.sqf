@@ -32,4 +32,10 @@ if (str (_display) != "no display") then
 	_ChildControl = _display displayCtrl 111;
 	_ChildControl  ctrlSetTooltip format ["Cost: %1 €",[staticAAteamPlayer] call A3A_fnc_vehiclePrice];
 	_childControl ctrlSetText format ["%1",getText (configFile >> "CfgVehicles" >> staticAAteamPlayer >> "displayName")];
+	_ChildControl = _display displayCtrl 112;
+	_ChildControl  ctrlSetTooltip format ["Cost: %1 €",[vehSDKTank] call A3A_fnc_vehiclePrice];
+	_childControl ctrlSetText format ["%1",getText (configFile >> "CfgVehicles" >> vehSDKTank >> "displayName")];
+	_ChildControl = _display displayCtrl 113;
+	_ChildControl  ctrlSetTooltip format ["Cost: %1 €",[vehSDKGunship] call A3A_fnc_vehiclePrice];
+	_childControl ctrlSetText format ["%1",getText (configFile >> "CfgVehicles" >> vehSDKGunship >> "displayName")];
 };
