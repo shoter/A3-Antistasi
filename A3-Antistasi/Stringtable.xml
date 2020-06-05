@@ -245,8 +245,8 @@
         <German>Grenadier rekrutieren</German>
       </Key>
       <Key ID="STR_antistasi_dialogs_garrison_spawn_marksman_text">
-        <Original>Recruit Marksman</Original>
-        <English>Recruit Marksman</English>
+        <Original>Recruit AA Soldier</Original>
+        <English>Recruit AA Soldier</English>
         <French>Recruter un Tireur d'Elite</French>
         <Russian>Снайпер</Russian>
         <German>Scharfschütze rekrutieren</German>
@@ -361,8 +361,8 @@
         <German>Grenadier rekrutieren</German>
       </Key>
       <Key ID="STR_antistasi_dialogs_unit_recruit_marksman_text">
-        <Original>Recruit Marksman</Original>
-        <English>Recruit Marksman</English>
+        <Original>Recruit AA Soldier</Original>
+        <English>Recruit AA soldier</English>
         <French>Recruter un Tireur d'élite</French>
         <Russian>Снайпер</Russian>
         <German>Scharfschütze rekrutieren</German>
