@@ -35,7 +35,7 @@ else
     //Easy difficulty
     if(skillMult == 1) then
     {
-        _timeToAdd = round (_timeToAdd * 5);
+        _timeToAdd = round (_timeToAdd * 3);
     };
     //Hard difficulty
     if(skillMult == 3) then
