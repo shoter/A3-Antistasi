@@ -721,8 +721,8 @@ server setVariable [vehSDKTruck,300,true];											//300
 {server setVariable [_x,700,true]} forEach [vehSDKLightArmed,vehSDKAT];
 {server setVariable [_x,400,true]} forEach [SDKMGStatic,vehSDKBoat,vehSDKRepair];			//400
 {server setVariable [_x,800,true]} forEach [SDKMortar,staticATteamPlayer,staticAAteamPlayer];			//800
-server setVariable [vehSDKGunship,30000,true];											//30000
-server setVariable [vehSDKTank,20000,true];											//20000
+server setVariable [vehSDKGunship,50000,true];											//50000
+server setVariable [vehSDKTank,25000,true];											//25000
 
 ///////////////////////
 //     GARRISONS    ///
