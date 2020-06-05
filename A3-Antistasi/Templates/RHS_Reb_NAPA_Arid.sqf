@@ -1,7 +1,7 @@
 ////////////////////////////////////
 //       NAMES AND FLAGS         ///
 ////////////////////////////////////
-nameTeamPlayer = "NAPA";
+nameTeamPlayer = "AGN";
 SDKFlag = "Flag_Syndikat_F";
 SDKFlagTexture = "\A3\Data_F\Flags\Flag_Altis_CO.paa";
 typePetros = "rhsgref_nat_warlord";
@@ -26,9 +26,9 @@ SDKEng = ["rhsgref_cdf_ngd_engineer","rhsgref_cdf_reg_engineer"];
 //            GROUPS             ///
 ////////////////////////////////////
 groupsSDKmid = [SDKSL,SDKGL,SDKMG,SDKMil];
-groupsSDKAT = [SDKSL,SDKMG,SDKATman,SDKATman,SDKATman];
-groupsSDKSquad = [SDKSL,SDKGL,SDKMil,SDKMG,SDKMil,SDKATman,SDKMil,SDKMedic];
-groupsSDKSquadEng = [SDKSL,SDKGL,SDKMil,SDKMG,SDKExp,SDKATman,SDKEng,SDKMedic];
+groupsSDKAT = [SDKSL,SDKMG,SDKATman,SDKATman, SDKSniper];
+groupsSDKSquad = [SDKSL,SDKGL,SDKMil, SDKMil, SDKMil, SDKMG,SDKMil,SDKATman,SDKMil,SDKMedic];
+groupsSDKSquadEng = [SDKSL,SDKGL,SDKMil,SDKMG,SDKExp,SDKATman,SDKSniper, SDKEng,SDKMedic];
 groupsSDKSquadSupp = [SDKSL,SDKGL,SDKMil,SDKMG,SDKATman,SDKMedic,[staticCrewTeamPlayer,staticCrewTeamPlayer],[staticCrewTeamPlayer,staticCrewTeamPlayer]];
 groupsSDKSniper = [SDKSniper,SDKSniper];
 groupsSDKSentry = [SDKGL,SDKMil];
