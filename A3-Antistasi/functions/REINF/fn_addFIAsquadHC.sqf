@@ -168,14 +168,10 @@ petros directSay "SentGenReinforcementsArrived";
 if (!_esinf) exitWith {};
 if !(_bypassAI) then {_groupX spawn A3A_fnc_attackDrillAI};
 
-if (count _formatX == 2) then {
-	_typeVehX = vehSDKBike;
+if (count _formatX > 4) then {
+	_typeVehX = vehSDKTruck;
 } else {
-	if (count _formatX > 4) then {
-		_typeVehX = vehSDKTruck;
-	} else {
-		_typeVehX = vehSDKLightUnarmed;
-	};
+	_typeVehX = vehSDKLightUnarmed;
 };
 
 _costs = [_typeVehX] call A3A_fnc_vehiclePrice;
