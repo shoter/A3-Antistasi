@@ -463,6 +463,12 @@ if (petros == leader group petros) then {
 petros setIdentity "friendlyX";
 if (worldName == "Tanoa") then {petros setName "Maru"} else {petros setName "Petros"};
 
+//to prevent double actions if respawnOnStart > -1
+if ("enableTeleport" call BIS_fnc_getParamValue == 1) then 
+{
+	[flagX, theBoss] call A3A_fnc_addTeleportToPole;
+};
+
 disableSerialization;
 //1 cutRsc ["H8erHUD","PLAIN",0,false];
 _layer = ["statisticsX"] call bis_fnc_rscLayer;

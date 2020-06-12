@@ -474,12 +474,12 @@
     </Container>
     <Container name="credits_generic">
       <Key ID="STR_antistasi_credits_generic_author_text">
-        <Original>The Official Antistasi Community and Barbolani</Original>
-        <English>The Official Antistasi Community and Barbolani</English>
-        <French>La Communauté Officielle d'Antistasi et Barbolani</French>
-        <Russian>Сообщество Antistasi</Russian>
-        <German>Die offizielle Antistasi Community und Barbolani</German>
-        <Czech>Oficiální komunita Antistasi a Barbolani</Czech>
+        <Original>The Official Antistasi Community and Barbolani and AGN</Original>
+        <English>The Official Antistasi Community and Barbolani and AGN</English>
+        <French>La Communauté Officielle d'Antistasi et Barbolani and AGN</French>
+        <Russian>Сообщество Antistasi также Barbolani также AGN</Russian>
+        <German>Die offizielle Antistasi Community und Barbolani und AGN</German>
+        <Czech>Oficiální komunita Antistasi a Barbolani a AGN</Czech>
       </Key>
       <Key ID="STR_antistasi_credits_generic_overview_text">
         <Original>Build FIA Army from scratch and defeat the AAF and CSAT forces in a whole map Dynamic Mission.</Original>
@@ -506,7 +506,7 @@
         <Czech>Staňte se vůdcem odboje, buďte hrdinou.</Czech>
       </Key>
       <Key ID="STR_antistasi_credits_generic_version_text">
-        <Original>2.2.2</Original>
+        <Original>2.2.2.AGN</Original>
       </Key>
     </Container>
     <Container name="dialog_vehicle_purchase">
@@ -1390,7 +1390,7 @@
         <Original>Scavenge for items, weapons and magazines and put them in your HQ Ammobox. Once you have a specific amount of an them, they will be unlocked and added to the Arsenal for personal use (and for your Faction squads).&lt;br/&gt;The amount required to unlock depends on how many assets the Faction has unlocked and the number of factories owned. Unlocked weapons, optics and night-vision Googles may also change AI load-out. Basic militiamen are especially affected by this: their load-out will start from small SMGs and progress to having an extra AA / AT launcher. Please note this will not affect their dress, which will depend on the current Faction Skill Level (helmets and uniform). Arsenal is the standard BIS Arsenal, check their documentation for interaction and use.&lt;br/&gt;&lt;br/&gt;To see the amounts required to unlock each group of items, open the HQ Ammobox and you will receive a detailed report on the right.</Original>
         <French>Récupérez des objets, des armes et des magazines et mettez-les dans votre Arsenal au QG. Une fois que vous en avez un nombre spécifique, ils seront déverrouillés et ajoutés à l'arsenal pour un usage personnel (et pour vos escouades de faction).&lt;br/&gt;Le montant requis pour déverrouiller dépend du nombre d'actifs débloqués par la faction et du nombre d'usines possédées. Les armes déverrouillées, les viseurs et les lunettes de vision nocturne peuvent également modifier les équipements de vos IA. Les miliciens de base sont particulièrement touchés par cela: leur équipement commencera par de petites SMG et passera à un lanceur AA / AT supplémentaire. Veuillez noter que cela n'affectera pas leur tenue, qui dépendra du niveau de compétence de faction actuel (casques et uniformes). Arsenal est l'arsenal BIS standard, consultez leur documentation pour l'interaction et l'utilisation.&lt;br/&gt;&lt;br/&gt;Pour voir les montants nécessaires pour déverrouiller chaque groupe d'articles, ouvrez l'Arsenal au QG et vous recevrez un rapport détaillé sur la droite.</French>
         <German>Sammle Gegenstände, Waffen und Magazine, um sie in das Munitionslager deines HQs abzulegen. Sobald du eine bestimmte Anzahl eines Gegenstands vorrätig hast, wird er im Arsenal für den persönlichen Gebrauch durch dich und den Gruppen deiner Fraktion freigeschaltet.&lt;br/&gt;Die benötigte Anzahl zur Freischaltung hängt davon ab, wie viele Gegenstände die Fraktion bereits freigeschaltet hat und wie viele Fabriken im Besitz der Fraktion sind. Freigeschaltete Waffen, Visiere und Nachtsichtgeräte können auch die Ausrüstung deiner KI Einheiten verändern. Einfache Milizen sind davon im speziellen betroffen: Ihre Ausrüstung ist zu Beginn ein einfaches SMG und erweitert sich auf zusätzliche Luft- und Panzerabwehrwaffen. Beachte, dass dies nicht ihre Kleidung (Uniform und Helm) beeinflusst, da dies von dem Fertigkeitslevel der Fraktion abhängt. Das Arsenal ist das standard BI Arsenal, also nutze die darüber verfügbare Dokumentation für Bedienungshinweise.&lt;br/&gt;&lt;br/&gt;Um die notwendige Anzahl zum Freischalten von Gegenständen einzusehen, öffne das Munitionslager im HQ und du erhälst eine Auflistung am rechten Bildschirmrand.</German>
-        <Czech>Hledejte předměty, zbraně a zásobníky a vložte je do svého arzenálu. Jakmile budete mít určité množství z nich, budou odemčeny a přidány do Arzenálu pro osobní potřebu (a pro vaše frakce družstva).&lt;br/&gt;Částka potřebná k odemčení závisí na tom, kolik aktiv frakce odemkla a počet vlastněných továren. Odemčené zbraně, optika a noční vidění může také změnit vybavení AI. Základní milicionáři jsou tímto obzvláště postiženi: jejich vybavení začne od malých SMG až po odpalovací zařízení AA / AT. Vezměte prosím na vědomí, že to nebude mít vliv na jejich oblečení, které bude záviset na aktuální úrovni dovedností frakce (přilby a uniformy). Arzenal je standardní BIS Arsenal, zkontrolujte jejich dokumentaci pro interakci a použití.&lt;br/&gt;&lt;br/&gt; Chcete-li zobrazit částky potřebné k odemknutí každé skupiny položek, otevřete okno hq a obdržíte podrobnou zprávu vpravo.</Czech>
+         <Czech>Hledejte předměty, zbraně a zásobníky a vložte je do svého arzenálu. Jakmile budete mít určité množství z nich, budou odemčeny a přidány do Arzenálu pro osobní potřebu (a pro vaše frakce družstva).&lt;br/&gt;Částka potřebná k odemčení závisí na tom, kolik aktiv frakce odemkla a počet vlastněných továren. Odemčené zbraně, optika a noční vidění může také změnit vybavení AI. Základní milicionáři jsou tímto obzvláště postiženi: jejich vybavení začne od malých SMG až po odpalovací zařízení AA / AT. Vezměte prosím na vědomí, že to nebude mít vliv na jejich oblečení, které bude záviset na aktuální úrovni dovedností frakce (přilby a uniformy). Arzenal je standardní BIS Arsenal, zkontrolujte jejich dokumentaci pro interakci a použití.&lt;br/&gt;&lt;br/&gt; Chcete-li zobrazit částky potřebné k odemknutí každé skupiny položek, otevřete okno hq a obdržíte podrobnou zprávu vpravo.</Czech>
       </Key>
       <Key ID="STR_antistasi_journal_entry_header_Features_5">
         <Original>Politics</Original>

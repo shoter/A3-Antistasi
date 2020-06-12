@@ -53,6 +53,9 @@ private _unitClass = typeOf _unit;
 
 switch (true) do {
 	case (_unitClass in SDKSniper): {
+		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit, "rhs_weap_igla", 3] call _addWeaponAndMags;
+		/*
 		if (count unlockedSniperRifles > 0) then {
 			[_unit, selectRandom unlockedSniperRifles, 8] call _addWeaponAndMags;
 			if (count unlockedOptics > 0) then {
@@ -62,7 +65,7 @@ switch (true) do {
 			};
 		} else {
 			[_unit,unlockedRifles] call A3A_fnc_randomRifle;
-		};
+		};*/
 	};
 	case (_unitClass in SDKMil): {
 		[_unit,unlockedRifles] call A3A_fnc_randomRifle;

@@ -115,6 +115,9 @@ while {true} do
 	_hrAddBLUFOR = (round _hrAddBLUFOR);
 	_recAddSDK = (round _recAddSDK);
 
+	//add percent of income to each player's own pool
+	[_recAddSDK] remoteExec ["A3A_fnc_evaluateIncomeForPlayer", -2];
+
 	_textX = format ["<t size='0.6' color='#C1C0BB'>Taxes Income.<br/> <t size='0.5' color='#C1C0BB'><br/>Manpower: +%1<br/>Money: +%2 €",_hrAddBLUFOR,_recAddSDK];
 	[] call A3A_fnc_FIAradio;
 	//_updated = false;
@@ -125,6 +128,8 @@ while {true} do
 	_recAddSDK = _recAddSDK + (server getVariable "resourcesFIA");
 	server setVariable ["hr",_hrAddBLUFOR,true];
 	server setVariable ["resourcesFIA",_recAddSDK,true];
+
+	
 	bombRuns = bombRuns + (({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX) * 0.25);
 	[petros,"taxRep",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 	[] call A3A_fnc_economicsAI;
