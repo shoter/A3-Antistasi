@@ -33,13 +33,13 @@ prestigeIsChanging = true;
 if(gameMode != 4 && ((_occupantsChanged select 0) != 0)) then
 {
     private _decayRate = _occupantsChanged call _fn_convertMinutesToDecayRate;
-    aggressionStackOccupants pushBack [(_occupantsChanged select 0) / 5, _decayRate];
+    aggressionStackOccupants pushBack [_occupantsChanged select 0, _decayRate];
 };
 
 if(gameMode != 3 && ((_invadersChanged select 0) != 0)) then
 {
     private _decayRate = _invadersChanged call _fn_convertMinutesToDecayRate;
-    aggressionStackInvaders pushBack [(_invadersChanged select 0) / 5, _decayRate];
+    aggressionStackInvaders pushBack [_invadersChanged select 0, _decayRate];
 };
 
 [] call A3A_fnc_calculateAggression;
