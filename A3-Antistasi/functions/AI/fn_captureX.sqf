@@ -78,7 +78,7 @@ if (_unit getVariable ["spawner",false]) then {_unit setVariable ["spawner",nil,
 sleep 100;
 if (alive _unit) then
 {
-	[_modAggroOcc,_modAggroInv] remoteExec ["A3A_fnc_prestige",2];
+	[_modAggroOcc,_modAggroInv] remoteExec ["A3A_fnc_addAggro",2];
 	if (_modHR) then { [1,0] remoteExec ["A3A_fnc_resourcesFIA",2] };
 };
 deleteVehicle _unit;

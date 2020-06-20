@@ -86,7 +86,7 @@ class A3A
 		class playableUnits {};
 		class getSideRadioTowerInfluence {};
 		class powerReorg {};
-		class prestige {};
+		class addAggro {};
 		class radioCheck {};
 		class rebuildAssets {};
 		class rebuildRadioTower {};
