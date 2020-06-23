@@ -687,7 +687,7 @@ if (hasACRE) then {initialRebelEquipment append ["ACRE_PRC343","ACRE_PRC148","AC
 {server setVariable [_x,75,true]} forEach (sdkTier1 - SDKMil);
 {server setVariable [_x,100,true]} forEach  sdkTier2;
 {server setVariable [_x,150,true]} forEach sdkTier3;
-{server setVariable [_x,300,true]} forEach SDKSniper;
+{server setVariable [_x,750,true]} forEach SDKSniper;
 //{timer setVariable [_x,0,true]} forEach (vehAttack + vehNATOAttackHelis + [vehNATOPlane,vehNATOPlaneAA,vehCSATPlane,vehCSATPlaneAA] + vehCSATAttackHelis + vehAA + vehMRLS);
 {timer setVariable [_x,3,true]} forEach [staticATOccupants,staticAAOccupants];
 {timer setVariable [_x,6,true]} forEach [staticATInvaders,staticAAInvaders];
