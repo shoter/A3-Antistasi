@@ -10,17 +10,17 @@ typePetros = "rhsgref_nat_warlord";
 //             UNITS             ///
 ////////////////////////////////////
 //First Entry is Guerilla, Second Entry is Para/Military
-staticCrewTeamPlayer = "rhsgref_nat_crew";
-SDKUnarmed = "I_G_Survivor_F";
-SDKSniper = ["rhsgref_nat_hunter","rhsgref_nat_pmil_hunter"];
-SDKATman = ["rhsgref_nat_grenadier_rpg","rhsgref_nat_pmil_grenadier_rpg"];
-SDKMedic = ["rhsgref_nat_medic","rhsgref_nat_pmil_medic"];
-SDKMG = ["rhsgref_nat_machinegunner_mg42","rhsgref_nat_pmil_machinegunner"];
-SDKExp = ["rhsgref_nat_saboteur","rhsgref_nat_pmil_saboteur"];
-SDKGL = ["rhsgref_nat_grenadier","rhsgref_nat_pmil_grenadier"];
-SDKMil = ["rhsgref_nat_rifleman_mp44","rhsgref_nat_pmil_rifleman"];
-SDKSL = ["rhsgref_nat_commander","rhsgref_nat_pmil_commander"];
-SDKEng = ["rhsgref_cdf_ngd_engineer","rhsgref_cdf_reg_engineer"];
+staticCrewTeamPlayer = "I_E_Support_GMG_F";
+SDKUnarmed = "I_E_Scientist_Unarmed_F";
+SDKSniper = ["I_E_Soldier_AA_F", "I_E_Soldier_AAA_F"];
+SDKATman = ["I_E_Soldier_AAT_F","I_E_Soldier_AT_F", "I_E_Soldier_LAT2_F"];
+SDKMedic = ["I_E_Soldier_lite_F","I_E_Medic_F"];
+SDKMG = ["I_E_Soldier_AR_F","I_E_Support_AMG_F"];
+SDKExp = ["I_E_soldier_Mine_F","I_E_Soldier_Exp_F"];
+SDKGL = ["I_E_Soldier_GL_F","I_E_soldier_UAV_06_F"];
+SDKMil = ["I_E_Soldier_A_F","I_E_Soldier_AAR_F", "I_E_Soldier_F"];
+SDKSL = ["I_E_Officer_F","I_E_Soldier_SL_F"];
+SDKEng = ["I_E_Engineer_F","I_E_Soldier_Repair_F"];;
 
 ////////////////////////////////////
 //            GROUPS             ///
