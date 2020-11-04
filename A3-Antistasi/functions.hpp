@@ -92,6 +92,7 @@ class A3A
 		class rebuildAssets {};
 		class rebuildRadioTower {};
 		class relocateHQObjects {};
+		class remUnitCount {};
 		class repairRuinedBuilding {};
 		class resourceCheckSkipTime {};
 		class resourcesFIA {};
@@ -104,6 +105,7 @@ class A3A
 		class sizeMarker {};
 		class splitVehicleCrewIntoOwnGroups {};
 		class startBreachVehicle {};
+		class startTestingTimer {};
 		class statistics {};
 		class stripGearFromLoadout {};
 		class teleportVehicleToBase {};
@@ -139,6 +141,7 @@ class A3A
 		class entriesLand {};
 		class fastrope {};
 		class findSafeRoadToUnload {};
+		class fleeToSide {};
 		class guardDog {};
 		class hasRadio {};
 		class help {};
@@ -182,7 +185,6 @@ class A3A
 		class findAirportForAirstrike {};
 		class followVehicle {};
 		class onConvoyArrival {};
-		class onSpawnedArrival {};
 		class roadblockFight {};
 		class selectAndCreateVehicle {};
 		class spawnConvoy {};
@@ -325,6 +327,17 @@ class A3A
         class showIntel {};
     };
 
+	class LTC
+	{
+		class canLoot {};
+		class canTransfer {};
+		class carryCrate {};
+		class initLootToCrate {};
+		class lootFromContainer {};
+		class lootToCrate {};
+		class spawnCrate {};
+	};
+
 	class Missions
 	{
 		class AS_Official {};
@@ -342,7 +355,6 @@ class A3A
 		class LOG_Supplies {};
 		class LOG_Salvage {};
 		class missionRequest {};
-		class missionRequestAUTO {};
 		class REP_Antenna {};
 		class RES_Prisoners {};
 		class RES_Refugees {};
@@ -420,6 +432,7 @@ class A3A
 
 	class Punishment
 	{
+		class outOfBounds {};
 		class punishment {};
 		class punishment_addActionForgive {};
 		class punishment_checkStatus {};
@@ -526,6 +539,10 @@ class A3A
 	class UI
 	{
 		class customHint {};
+		class customHintDismiss {};
+		class customHintInit {};
+		class customHintRender {};
+		class shader_ratioToHex {};
 	};
 
 	class Undercover
