@@ -92,7 +92,26 @@ while {true} do
 	} forEach citiesX;
 
 	if (_popKilled > (_popTotal / 3)) then {["destroyedSites",false,true] remoteExec ["BIS_fnc_endMission"]};
-	if ((_popReb > _popGov) and ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == count airportsX)) then {["end1",true,true,true,true] remoteExec ["BIS_fnc_endMission",0]};
+
+	//Czarny
+	private _winParam = "winParameters" call BIS_fnc_getParamValue;
+
+	//standard
+	if ((_winParam == 0) and (_popReb > _popGov) and ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == count airportsX)) then 
+	{
+		["end1",true,true,true,true] remoteExec ["BIS_fnc_endMission",0]
+	};
+	//friend
+	if ((_winParam == 1) and (_popReb > _popGov)) then 
+	{
+		["end1",true,true,true,true] remoteExec ["BIS_fnc_endMission",0]
+	};
+	//conqueror
+	if ((_winParam == 2) and ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == count airportsX)) then 
+	{
+		["end1",true,true,true,true] remoteExec ["BIS_fnc_endMission",0]
+	};
+	//eternal == no end
 
 	{
 		if ((sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)) then

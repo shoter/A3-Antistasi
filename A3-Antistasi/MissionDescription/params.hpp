@@ -516,11 +516,18 @@ class Params
 	   texts[] = {"Yes", "No"};
         default = 1;
     };
-	class battleOptionsMenuKey
+     class battleOptionsMenuKey
 	{
         title = "Default 'Battle Options' menu key";
         values[] = {1, 0};
 	   texts[] = {"U", "Y"};
         default = 1;
+    };
+    class winConditions
+	{
+        title = "Win parameters?";
+        values[] = {0, 1, 2, 3};
+	   texts[] = {"Standard", "Modified: only supporters considered (FRIEND)", "Modified: only airfields considered (CONQUEROR)", "Modified: none (ETERNAL)"};
+        default = 3;
     };
 };
