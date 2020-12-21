@@ -525,7 +525,7 @@ class Params
     };
     class winConditions
 	{
-        title = "Win parameters?";
+        title = "Win conditions";
         values[] = {0, 1, 2, 3};
 	   texts[] = {"Standard", "Modified: only supporters considered (FRIEND)", "Modified: only airfields considered (CONQUEROR)", "Modified: none (ETERNAL)"};
         default = 3;

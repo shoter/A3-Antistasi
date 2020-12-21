@@ -94,7 +94,7 @@ while {true} do
 	if (_popKilled > (_popTotal / 3)) then {["destroyedSites",false,true] remoteExec ["BIS_fnc_endMission"]};
 
 	//Czarny
-	private _winParam = "winParameters" call BIS_fnc_getParamValue;
+	private _winParam = "winConditions" call BIS_fnc_getParamValue;
 
 	//standard
 	if ((_winParam == 0) and (_popReb > _popGov) and ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == count airportsX)) then 
