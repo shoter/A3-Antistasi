@@ -13,9 +13,8 @@
 @echo off
 :: set local variable if you don't want to affect your env (to avoid commits, skip tree index of this file in git)
 set SOURCE_DIR="d:\Users\rom\Documents\Arma 3 - Other Profiles\Czarny\mpmissions\AntistasiGithub\PreparedMissions"
-set SOURCE_PBO=%SOURCE_DIR%\Antistasi-Altis-2-2-2-AGN.Altis
-set DESTINATION_PBO="e:\gry\steam\steamapps\common\Arma 3 Server\mpmissions\AntistasiAGN.Altis.pbo"
-set DESTINATION2_PBO="d:\Downloads\AntistasiAGN.Altis.pbo"
+set SOURCE_PBO=%SOURCE_DIR%\Antistasi-Altis-2-4.Altis
+set DESTINATION_PBO="d:\Downloads\AntistasiAGN.Altis.pbo"
 set MISSION_CACHE="d:\Users\rom\AppData\Local\Arma 3\MPMissionsCache"
 
 :: check if env variables exists
