@@ -21,6 +21,7 @@ if (count _airportsX > 0) then {_hasAir = true};
 {
 	if (_x in vehPlanes) then
 		{
+		if (_x in vehTransportHelis) then { garage_vehiclesAvailable pushBack _x};
 		if (_hasAir) then {garage_vehiclesAvailable pushBack _x};
 		}
 	else

@@ -644,6 +644,9 @@ DECLARE_SERVER_VAR(vehAA, _vehAA);
 private _vehMRLS = [vehCSATMRLS, vehNATOMRLS];
 DECLARE_SERVER_VAR(vehMRLS, _vehMRLS);
 
+private _vehTransportHelis = vehNATOTransportHelis + vehCSATTransportHelis;
+DECLARE_SERVER_VAR(vehTransportHelis, _vehTransportHelis);
+
 private _vehTransportAir = vehNATOTransportHelis + vehCSATTransportHelis + vehNATOTransportPlanes + vehCSATTransportPlanes;
 DECLARE_SERVER_VAR(vehTransportAir, _vehTransportAir);
 
