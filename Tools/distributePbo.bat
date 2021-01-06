@@ -14,18 +14,23 @@
 :: set local variable if you don't want to affect your env (to avoid commits, skip tree index of this file in git)
 set SOURCE_DIR="d:\Users\rom\Documents\Arma 3 - Other Profiles\Czarny\mpmissions\AntistasiGithub\PreparedMissions"
 set SOURCE_PBO=%SOURCE_DIR%\Antistasi-Altis-2-4.Altis
+set SOURCE2_PBO=%SOURCE_DIR%\Antistasi-Virolahti-2-4.vt7
 set DESTINATION_PBO="d:\Downloads\AntistasiAGN.Altis.pbo"
-set MISSION_CACHE="d:\Users\rom\AppData\Local\Arma 3\MPMissionsCache"
+set DESTINATION2_PBO="d:\Downloads\AntistasiAGN.Virolahti.pbo"
+set MISSION="d:\Downloads"
 
 :: check if env variables exists
 if "%SPBO%" NEQ "" set SOURCE_PBO=%SPBO%
+if "%SPBO2%" NEQ "" set SOURCE2_PBO=%SPBO%
 if "%DPBO%" NEQ "" set DESTINATION_PBO=%DPBO%
+if "%DPBO%" NEQ "" set DESTINATION2_PBO=%DPBO%
 if "%MCACHE%" NEQ "" set MISSION_CACHE=%MCACHE%
 @echo on
 
 cd /D "%~dp0"
 pboManager\PBOConsole.exe -pack %SOURCE_PBO% %DESTINATION_PBO%
-echo F | xcopy %DESTINATION_PBO% %MISSION_CACHE% /Y
-echo F | xcopy %DESTINATION_PBO% %DESTINATION2_PBO% /Y
+pboManager\PBOConsole.exe -pack %SOURCE2_PBO% %DESTINATION2_PBO%
+echo F | xcopy %DESTINATION_PBO% %MISSION% /Y
+echo F | xcopy %DESTINATION2_PBO% %MISSION% /Y
 
 rmdir /S /Q %SOURCE_DIR%
