@@ -91,9 +91,9 @@ class Params
      class civTraffic
      {
           title = "Rate of Civ Traffic";
-          values[] = {0,1,2,4,};
-          texts[] = {"None","Low","Medium","High"};
-          default = 2;
+          values[] = {0,1,2,3,4,};
+          texts[] = {"None","Low","Medium","High" "Super High"};
+          default = 3;
      };
      class memberSlots
      {
@@ -121,14 +121,14 @@ class Params
           title = "Max personal garage slots";
           texts[] = {"Unlimited", "2", "5", "10"};
           values[] = {0,2,5,10};
-          default = 2;
+          default = 0;
      };
      class allowFT
      {
           title = "Fast Travel Targets Allowed";
           values[] = {0,1};
           texts[] = {"Any friendly position","Only Airports & HQ"};
-          default = 1;
+          default = 0;
      };
      class napalmEnabled
      {
@@ -331,7 +331,7 @@ class Params
           title = "Maximum Weapon Quantity in Crates";
           values[] = {0,1,3,5,8,10,15};
           texts[] = {"None","1","3","5","8","10","15"};
-          default = 8;
+          default = 10;
      };
      class Spacer1
      {
@@ -394,7 +394,7 @@ class Params
           title = "Maximum Explosive Quantity in Crates";
           values[] = {0,1,3,5,10,15};
           texts[] = {"None","1","3","5","10","15"};
-          default = 5;
+          default = 15;
      };
      class Spacer4
      {
@@ -429,7 +429,7 @@ class Params
           title = "Maximum Backpack Types in Crates";
           values[] = {0,2,4,9};
           texts[] = {"1","3","5","10"};
-          default = 0;
+          default = 2;
      };
      class crateBackpackNumMax
      {
@@ -450,14 +450,14 @@ class Params
           title = "Maximum Vest Types in Crates";
           values[] = {0,2,4,9};
           texts[] = {"1","3","5","10"};
-          default = 0;
+          default = 2;
      };
      class crateVestNumMax
      {
           title = "Maximum Vest Quantity in Crates";
           values[] = {0,1,3,5,10,15};
           texts[] = {"None","1","3","5","10","15"};
-          default = 0;
+          default = 3;
      };
      class Spacer7
      {
@@ -471,14 +471,14 @@ class Params
           title = "Maximum Helmet Types in Crates";
           values[] = {0,2,4,9};
           texts[] = {"1","3","5","10"};
-          default = 0;
+          default = 2;
      };
      class crateHelmetNumMax
      {
           title = "Maximum Helmet Quantity in Crates";
           values[] = {0,1,3,5,10,15};
           texts[] = {"None","1","3","5","10","15"};
-          default = 0;
+          default = 3;
      };
      class Spacer8
      {
