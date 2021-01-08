@@ -71,7 +71,7 @@ else
 };
 
 //Calculates the skill of the given unit
-private _skill = (0.15 + (0.02 * difficultyCoef) + (0.01 * tierWar)) * skillMult;
+private _skill = (0.2 + (0.01 * tierWar)) * skillMult;
 if (faction _unit isEqualTo factionFIA) then
 {
     _skill = _skill min (0.2 * skillMult);

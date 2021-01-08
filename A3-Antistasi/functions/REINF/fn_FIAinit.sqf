@@ -7,7 +7,7 @@ _unit setVariable ["spawner",true,true];
 
 _unit allowFleeing 0;
 private _typeX = typeOf _unit;
-private _skill = (0.6 / skillMult + 0.015 * skillFIA);
+private _skill = (0.5 + 0.015 * skillFIA);
 _unit setSkill _skill;
 
 if (_typeX in squadLeaders) then {
