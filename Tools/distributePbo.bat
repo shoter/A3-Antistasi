@@ -16,7 +16,7 @@ set SOURCE_DIR="d:\Users\rom\Documents\Arma 3 - Other Profiles\Czarny\mpmissions
 set SOURCE_PBO=%SOURCE_DIR%\Antistasi-Altis-2-4.Altis
 set SOURCE2_PBO=%SOURCE_DIR%\Antistasi-Virolahti-2-4.vt7
 set DESTINATION_PBO="d:\Downloads\AntistasiAGN.Altis.pbo"
-set DESTINATION2_PBO="d:\Downloads\AntistasiAGN.Virolahti.pbo"
+set DESTINATION2_PBO="d:\Downloads\AntistasiAGN.vt7.pbo"
 set MISSION="d:\Downloads"
 
 :: check if env variables exists
