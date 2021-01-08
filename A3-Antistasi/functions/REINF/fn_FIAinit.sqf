@@ -22,6 +22,8 @@ if (_typeX in SDKSniper) then {
 _unit setUnitTrait ["camouflageCoef",0.8];
 _unit setUnitTrait ["audibleCoef",0.8];
 
+_unit setSkill  ["spotTime", _skill min 0.6];
+_unit setSkill  ["spotDistance", _skill min 0.6];
 // FIAinit is called for liberated refugees/hostages. Don't equip them.
 if !(_typeX isEqualTo SDKUnarmed) then {
 	[_unit, [0,1] select (leader _unit != player)] call A3A_fnc_equipRebel;

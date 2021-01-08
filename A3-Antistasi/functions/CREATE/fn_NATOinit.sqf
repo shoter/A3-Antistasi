@@ -99,6 +99,8 @@ if (faction _unit isEqualTo factionGEN) then
     };
 };
 _unit setSkill _skill;
+_unit setSkill  ["spotTime", _skill min 0.6];
+_unit setSkill  ["spotDistance", _skill min 0.6];
 
 //Adjusts squadleaders with improved skill and adds intel action
 if (_type in squadLeaders) then
