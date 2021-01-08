@@ -92,7 +92,7 @@ class Params
      {
           title = "Rate of Civ Traffic";
           values[] = {0,1,2,3,4,};
-          texts[] = {"None","Low","Medium","High" "Super High"};
+          texts[] = {"None","Low","Medium","High", "Super High"};
           default = 3;
      };
      class memberSlots
