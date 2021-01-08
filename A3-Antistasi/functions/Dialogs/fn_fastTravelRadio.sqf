@@ -35,6 +35,9 @@ if (_checkX) exitWith {["Fast Travel", "You cannot Fast Travel with enemies near
 
 if (_checkX) exitWith {["Fast Travel", "You cannot Fast Travel if you don't have a driver in all your vehicles or your vehicles are damaged and cannot move or your group is in a boat"] call A3A_fnc_customHint;};
 
+_resourcesPlayer = player getVariable "moneyX";
+if (_resourcesPlayer < 200) exitWith {["Fast Travel", "You need 200 € to fast travel"] call A3A_fnc_customHint;};
+
 positionTel = [];
 
 if (_esHC) then {hcShowBar false};
@@ -131,6 +134,7 @@ if (count _positionTel > 0) then
 			//_unit hideObject false;
 		} forEach units _groupX;
 		//if (!_esHC) then {sleep _distanceX};
+		[-200] call A3A_fnc_resourcesPlayer;
 		if (!_esHC) then {disableUserInput false;cutText ["You arrived to destination","BLACK IN",1]} else {["Fast Travel", format ["Group %1 arrived to destination",groupID _groupX]] call A3A_fnc_customHint;};
 		if (_forcedX) then {forcedSpawn = forcedSpawn - [_base]};
 		sleep 5;
