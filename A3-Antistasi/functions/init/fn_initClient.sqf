@@ -546,8 +546,3 @@ enableEnvironment [false, true];
 
 [2,"initClient completed",_fileName] call A3A_fnc_log;
 A3A_customHintEnable = true; // Was false in initVarCommon to allow hints to flow in and overwrite each other.
-
-if(!isMultiplayer) then
-{
-    [] spawn A3A_fnc_singlePlayerBlackScreenWarning;
-};

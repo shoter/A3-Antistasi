@@ -15,22 +15,28 @@
 set SOURCE_DIR="d:\Users\rom\Documents\Arma 3 - Other Profiles\Czarny\mpmissions\AntistasiGithub\PreparedMissions"
 set SOURCE_PBO=%SOURCE_DIR%\Antistasi-Altis-2-4.Altis
 set SOURCE2_PBO=%SOURCE_DIR%\Antistasi-Virolahti-2-4.vt7
+set SOURCE3_PBO=%SOURCE_DIR%\Antistasi-Livonia-2-4.Enoch
 set DESTINATION_PBO="d:\Downloads\AntistasiAGN.Altis.pbo"
 set DESTINATION2_PBO="d:\Downloads\AntistasiAGN.vt7.pbo"
+set DESTINATION3_PBO="d:\Downloads\AntistasiAGN.Enoch.pbo"
 set MISSION="d:\Downloads"
 
 :: check if env variables exists
 if "%SPBO%" NEQ "" set SOURCE_PBO=%SPBO%
 if "%SPBO2%" NEQ "" set SOURCE2_PBO=%SPBO%
+if "%SPBO3%" NEQ "" set SOURCE3_PBO=%SPBO%
 if "%DPBO%" NEQ "" set DESTINATION_PBO=%DPBO%
-if "%DPBO%" NEQ "" set DESTINATION2_PBO=%DPBO%
+if "%DPBO2%" NEQ "" set DESTINATION2_PBO=%DPBO%
+if "%DPBO3%" NEQ "" set DESTINATION3_PBO=%DPBO%
 if "%MCACHE%" NEQ "" set MISSION_CACHE=%MCACHE%
 @echo on
 
 cd /D "%~dp0"
 pboManager\PBOConsole.exe -pack %SOURCE_PBO% %DESTINATION_PBO%
 pboManager\PBOConsole.exe -pack %SOURCE2_PBO% %DESTINATION2_PBO%
+pboManager\PBOConsole.exe -pack %SOURCE3_PBO% %DESTINATION3_PBO%
 echo F | xcopy %DESTINATION_PBO% %MISSION% /Y
 echo F | xcopy %DESTINATION2_PBO% %MISSION% /Y
+echo F | xcopy %DESTINATION3_PBO% %MISSION% /Y
 
 rmdir /S /Q %SOURCE_DIR%
