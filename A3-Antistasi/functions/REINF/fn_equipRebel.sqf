@@ -107,7 +107,7 @@ switch (true) do {
 		if !(unlockedAT isEqualTo []) then {
 			[_unit, selectRandom unlockedAT, 4] call _addWeaponAndMags;
 		} else {
-			if (hasIFA) then {
+			if (A3A_hasIFA) then {
 				[_unit, "LIB_PTRD", 10] call _addWeaponAndMags;
 			};
 		};
@@ -127,7 +127,7 @@ switch (true) do {
 	};
 };
 
-if (!hasIFA && sunOrMoon < 1) then {
+if (!A3A_hasIFA && sunOrMoon < 1) then {
 	if !(haveNV) then {
 		// horrible, although at least it stops once you unlock NV
 		private _flashlights = allLightAttachments arrayIntersect unlockedItems;
