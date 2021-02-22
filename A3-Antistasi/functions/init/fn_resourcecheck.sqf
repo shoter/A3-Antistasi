@@ -93,7 +93,6 @@ while {true} do
 
 	if (_popKilled > (_popTotal / 3)) then {["destroyedSites",false,true] remoteExec ["BIS_fnc_endMission"]};
 
-	//Czarny
 	private _winCond = "winConditions" call BIS_fnc_getParamValue;
 
 	//standard

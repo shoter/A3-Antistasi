@@ -80,7 +80,7 @@ class Params
      {
           title = "Number of the same weapons required to unlock";
           values[] = {5,10,15,20,25,40};
-          default = 25;
+          default = 15;
      };
      class memberOnlyMagLimit
      {
@@ -522,7 +522,6 @@ class Params
           texts[] = {"None","1","3","5","10","15"};
           default = 3;
      };
-     //Czarny
      class Spacer9
      {
           title = "";

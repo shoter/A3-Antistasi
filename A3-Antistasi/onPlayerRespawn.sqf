@@ -248,7 +248,7 @@ else
 	};
 
 if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
-{
+{   
 	removeAllActions (_this select 1);			//it is necessary to avoid double entrance in players menu
-	[flagX, theBoss] call A3A_fnc_addTeleportToPole;
+	[flagX, commanderX] call A3A_fnc_addTeleportToPole;
 }

@@ -17,9 +17,12 @@ $formattedVersionId = $versionId.Split("\.") -join "-";
 
 ForEach ($templateFolder in $missionTemplateFolders) {
 	$folderName = $templateFolder.Name;
+    if($folderName -Contains "Antistasi-Livonia.Enoch")
+    {
 		$pair = $folderName.Split("\.");
 		$missionFolderName = $pair[0] + "-" + $formattedVersionId + "." + $pair[1]; 
 		$destinationPath = $(Join-Path $folderForPreparedMissions.FullName $missionFolderName);
 		Copy-Item -Path $mainDataPath -Destination $destinationPath -Recurse;
 		Copy-Item -Path $(Join-Path $templateFolder.FullName "*") -Destination $destinationPath -Recurse -Force;
+    }
 }
