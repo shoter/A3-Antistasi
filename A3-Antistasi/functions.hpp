@@ -33,6 +33,7 @@ class A3A
         class addActionBreachVehicle {};
         class addHC {};
         class addTimeForIdle {};
+        class addTeleportToPole {};
         class aggressionUpdateLoop {};
 		class AILoadInfo {};
         class airspaceControl {};
