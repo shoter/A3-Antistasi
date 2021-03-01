@@ -123,7 +123,7 @@ if (_medicX != _unit) then
 					if (_cured) then
 						{
 							if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format ["You are ready %1",name _unit]}};
-							if ((isPlayer _unit) && ("enableTeleport" call BIS_fnc_getParamValue == 1)) then
+							if ((isPlayer _unit) && (enableTeleport == 1)) then
 							{
 								[flagX, commanderX] call A3A_fnc_addTeleportToPole;
 							};

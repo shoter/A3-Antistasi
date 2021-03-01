@@ -126,8 +126,8 @@ class Params
     class civTraffic
     {
         title = "Rate of Civ Traffic";
-        values[] = {9999,0,1,2,4,};
-        texts[] = {"Default (Medium)","None","Low","Medium","High"};
+        values[] = {9999,0,1,2,3,4,};
+        texts[] = {"Default (Medium)","None","Low","Medium","High","Super High"};
         default = 9999;
     };
     class memberSlots
@@ -564,32 +564,32 @@ class Params
         texts[] = {"Default (3)","None","1","3","5","10","15"};
         default = 9999;
     };
-     class Spacer9
-     {
-          title = "";
-          values[] = {""};
-          texts[] = {""};
-          default = "";
-     };
-     class enableTeleport
+    class Spacer9
+    {
+        title = "";
+        values[] = {""};
+        texts[] = {""};
+        default = "";
+    };
+    class enableTeleport
 	{
         title = "Enable teleport in base (only commander can place/remove destination pole)";
-        values[] = {1, 0};
-        texts[] = {"Yes", "No"};
-        default = 1;
-    };
-    class battleOptionsMenuKey
-    {
-        title = "Default 'Battle Options' menu key";
-        values[] = {1, 0};
-        texts[] = {"U", "Y"};
-        default = 1;
+        values[] = {9999, 1, 0};
+        texts[] = {"Default (Yes)", "Yes", "No"};
+        default = 9999;
     };
     class winConditions
     {
         title = "Win conditions";
-        values[] = {0, 1, 2, 3};
-        texts[] = {"Standard", "Modified: only supporters considered (FRIEND)", "Modified: only airfields considered (CONQUEROR)", "Modified: none (ETERNAL)"};
-        default = 3;
+        values[] = {9999, 0, 1, 2, 3};
+        texts[] = {"Default (ETERNAL)", "Standard", "Modified: only supporters considered (FRIEND)", "Modified: only airfields considered (CONQUEROR)", "Modified: none (ETERNAL)"};
+        default = 9999;
+    };
+    class battleKeyInfo
+    {
+        title = "ASSIGN YOUR KEY TO User16 ACTION IN ORDER TO OPEN BATTLE MENU";
+        values[] = {""};
+        texts[] = {""};
+        default = "";
     };
 };

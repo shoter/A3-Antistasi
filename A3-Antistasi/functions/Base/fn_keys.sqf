@@ -3,9 +3,7 @@ if (player getVariable ["incapacitated",false]) exitWith {_handled};
 if (player getVariable ["owner",player] != player) exitWith {_handled};
 _key = _this select 1;
 
-_defaultKey = "battleOptionsMenuKey" call BIS_fnc_getParamValue;
-
-if ((_defaultKey == 0 && _key == 21) || (_defaultKey == 1 && _key == 22)) then
+if (inputAction "User16" > 0) then
 	{
 	if (isNil"garageVeh") then
 		{

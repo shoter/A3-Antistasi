@@ -59,7 +59,7 @@ else {
 	[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];
 };
 
-if ("enableTeleport" call BIS_fnc_getParamValue == 1) then
+if (enableTelepor == 1) then
 {   
 	[flagX, commanderX] remoteExec ["A3A_fnc_addTeleportToPole", -2];
 };
