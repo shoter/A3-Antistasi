@@ -129,13 +129,13 @@ else
 };
 
 // Shift to nearest nav point so that we don't drive backwards
-_posOrig = [[_posOrig] call A3A_fnc_findNearestNavPoint] call A3A_fnc_getNavPos;
+_posOrig = navGrid select ([_posOrig] call A3A_fnc_getNearestNavPoint) select 0;
 
 private _route = [_posOrig, _posDest] call A3A_fnc_findPath;
-if (_route isEqualTo []) then {
-	_route = [_posOrig, _posDest]
-} else {
-	_route deleteAt 0;		// origin will be doubled
+_route = [_route] call A3A_fnc_trimPath;
+if (_route isEqualTo []) then
+{
+	_route = [_posOrig, _posDest];
 };
 
 private _vecdir = (_route select 0) vectorFromTo (_route select 1);
