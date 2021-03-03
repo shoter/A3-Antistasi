@@ -17,7 +17,7 @@ while {true} do
 	private _popKilled = 0;
 	private _popTotal = 0;
 
-	private _suppBoost = 0.25 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
+	private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
 	private _resBoost = 1 + (0.25*({(sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)} count factories));
 
 	{
@@ -44,9 +44,9 @@ while {true} do
 			_hrAddCity = _numciv * (_supportReb / 10000);
 			switch (_radioTowerSide) do
 			{
-				case teamPlayer: {[-0.5,_suppBoost,_city,false,true] spawn A3A_fnc_citySupportChange};
-				case Occupants: {[0.5,-0.5,_city,false,true] spawn A3A_fnc_citySupportChange};
-				case Invaders: {[-0.5,-0.5,_city,false,true] spawn A3A_fnc_citySupportChange};
+				case teamPlayer: {[-1,_suppBoost,_city,false,true] spawn A3A_fnc_citySupportChange};
+				case Occupants: {[1,-1,_city,false,true] spawn A3A_fnc_citySupportChange};
+				case Invaders: {[-1,-1,_city,false,true] spawn A3A_fnc_citySupportChange};
 			};
 			if (sidesX getVariable [_city,sideUnknown] == Occupants) then
 			{
