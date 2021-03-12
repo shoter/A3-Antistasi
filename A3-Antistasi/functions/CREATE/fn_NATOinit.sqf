@@ -18,8 +18,13 @@ if ((isNil "_unit") || (isNull _unit)) exitWith
     [1, format ["Bad init parameter: %1", _this], _fileName] call A3A_fnc_log;
 };
 
-private _type = typeOf _unit;
+private _type = _unit getVariable "unitType";
 private _side = side (group _unit);
+
+if (isNil "_type") then {
+    [1, format ["Unit does not have a type assigned: %1, vehicle: %2", typeOf _unit, typeOf vehicle _unit], _fileName] call A3A_fnc_log;
+    _type = typeOf _unit;
+};
 
 if (_type == "Fin_random_F") exitWith {};
 
@@ -71,36 +76,16 @@ else
 };
 
 //Calculates the skill of the given unit
-private _skill = (0.2 + (0.01 * tierWar)) * skillMult;
-if (faction _unit isEqualTo factionFIA) then
+private _skill = (0.2 + (0.02 * difficultyCoef) + (0.01 * tierWar)) * skillMult;
+if ("militia_" in (_unit getVariable "unitType")) then
 {
     _skill = _skill min (0.2 * skillMult);
 };
-if (faction _unit isEqualTo factionGEN) then
+if ("police" in (_unit getVariable "unitType")) then
 {
     _skill = _skill min (0.12 * skillMult);
-    if (!A3A_hasIFA) then
-    {
-        private _rifleFinal = primaryWeapon _unit;
-        private _magazines = getArray (configFile / "CfgWeapons" / _rifleFinal / "magazines");
-        {
-            _unit removeMagazines _x;			// Broken, doesn't remove mags globally. Pain to fix.
-        } forEach _magazines;
-        _unit removeWeaponGlobal (_rifleFinal);
-        if (tierWar < 5) then
-        {
-            [_unit, (selectRandom allSMGs), 6, 0] call BIS_fnc_addWeapon;
-        }
-        else
-        {
-            [_unit, (selectRandom allRifles), 6, 0] call BIS_fnc_addWeapon;
-        };
-        _unit selectWeapon (primaryWeapon _unit);
-    };
 };
 _unit setSkill _skill;
-_unit setSkill  ["spotTime", _skill min 0.6];
-_unit setSkill  ["spotDistance", _skill min 0.6];
 
 //Adjusts squadleaders with improved skill and adds intel action
 if (_type in squadLeaders) then
@@ -119,9 +104,7 @@ if !(A3A_hasIFA) then
 {
     if (sunOrMoon < 1) then
     {
-        if (!A3A_hasRHS) then
-        {
-            if ((faction _unit != factionMaleOccupants) and (faction _unit != factionMaleInvaders) and (_unit != leader (group _unit))) then
+        if (!("SF_" in (_unit getVariable "unitType")) and (_unit != leader (group _unit))) then
             {
                 if (_hmd != "") then
                 {
@@ -132,8 +115,7 @@ if !(A3A_hasIFA) then
                         _hmd = "";
                     };
                 };
-            };
-        }
+            }
         else
         {
             private _arr = (allNVGs arrayIntersect (items _unit));
@@ -202,17 +184,14 @@ if !(A3A_hasIFA) then
     }
     else
     {
-        if (!A3A_hasRHS) then
-        {
-            if ((faction _unit != factionMaleOccupants) and (faction _unit != factionMaleInvaders)) then
+        if !("SF_" in (_unit getVariable "unitType")) then
             {
                 if (_hmd != "") then
                 {
                     _unit unassignItem _hmd;
                     _unit removeItem _hmd;
                 };
-            };
-        }
+            }
         else
         {
             private _arr = (allNVGs arrayIntersect (items _unit));

@@ -6,8 +6,8 @@ private _unit = _this select 0;
 _unit setVariable ["spawner",true,true];
 
 _unit allowFleeing 0;
-private _typeX = typeOf _unit;
-private _skill = (0.5 + 0.015 * skillFIA);
+private _typeX = _unit getVariable "unitType";
+private _skill = (0.5 / skillMult + 0.015 * skillFIA);
 _unit setSkill _skill;
 
 if (_typeX in squadLeaders) then {
@@ -22,8 +22,6 @@ if (_typeX in SDKSniper) then {
 _unit setUnitTrait ["camouflageCoef",0.8];
 _unit setUnitTrait ["audibleCoef",0.8];
 
-_unit setSkill  ["spotTime", _skill min 0.6];
-_unit setSkill  ["spotDistance", _skill min 0.6];
 // FIAinit is called for liberated refugees/hostages. Don't equip them.
 if !(_typeX isEqualTo SDKUnarmed) then {
 	[_unit, [0,1] select (leader _unit != player)] call A3A_fnc_equipRebel;
@@ -55,7 +53,7 @@ if (player == leader _unit) then {
 		};
 		_victim setVariable ["spawner",nil,true];
 	}];
-	if ((typeOf _unit != SDKUnarmed) and !A3A_hasIFA) then {
+	if (((_unit getVariable "unitType") != SDKUnarmed) and !A3A_hasIFA) then {
 		private _idUnit = selectRandom arrayids;
 		arrayids = arrayids - [_idunit];
 		_unit setIdentity _idUnit;
