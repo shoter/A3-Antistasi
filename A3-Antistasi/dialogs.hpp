@@ -863,7 +863,7 @@ class game_options 		{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_maps_civ_limit_tooltip;
-			action = "if (player == theBoss) then {closeDialog 0; nul = createDialog ""civ_config""} else {[""Civilian Spawn"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "if (player == theBoss || call BIS_fnc_admin > 0 || isServer) then {closeDialog 0; nul = createDialog ""civ_config""} else {[""Civilian Spawn"", ""Only our Commander or admin has access to this function""] call A3A_fnc_customHint;};";
 		};
 		class 8slots_R1: RscButton
 		{
@@ -874,7 +874,7 @@ class game_options 		{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_maps_spawn_distance_tooltip;
-			action = "if (player == theBoss) then {closeDialog 0; nul = createDialog ""spawn_config""} else {[""Spawn Distance"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "if (player == theBoss || call BIS_fnc_admin > 0 || isServer) then {closeDialog 0; nul = createDialog ""spawn_config""} else {[""Spawn Distance"", ""Only our Commander or admin has access to this function""] call A3A_fnc_customHint;};";
 		};
 		class 8slots_L2: RscButton
 		{
@@ -885,7 +885,7 @@ class game_options 		{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_maps_ai_limiter_tooltip;
-			action = "if (player == theBoss) then {closeDialog 0; nul = createDialog ""fps_limiter""} else {[""AI Limiter"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "if (player == theBoss || call BIS_fnc_admin > 0 || isServer) then {closeDialog 0; nul = createDialog ""fps_limiter""} else {[""AI Limiter"", ""Only our Commander or admin has access to this function""] call A3A_fnc_customHint;};";
 		};
 		class 8slots_R2: RscButton
 		{
@@ -1000,7 +1000,7 @@ class fps_limiter 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "if (player == theBoss) then {if (maxUnits < 200) then {maxUnits = maxUnits + 10; publicVariable ""maxUnits""; [""AI Limit"", format [""AI Limit has been set at %1"",maxUnits]] call A3A_fnc_customHint;} else {[""AI Limit"", ""AI Limit cannot be raised from 200""] call A3A_fnc_customHint;}} else {[""AI Limit"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "[player,'maxUnits','increase'] remoteExecCall ['A3A_fnc_HQGameOptions',2];";
 		};
 		class HQ_button_Gstatic: RscButton
 		{
@@ -1010,7 +1010,7 @@ class fps_limiter 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "if (player == theBoss) then {if (maxUnits > 80) then {maxUnits = maxUnits - 10; publicVariable ""maxUnits""; [""AI Limit"", format [""AI Limit has been set at %1"",maxUnits]] call A3A_fnc_customHint;} else {[""AI Limit"", ""AI Limit cannot be less than 80""] call A3A_fnc_customHint;}} else {[""AI Limit"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "[player,'maxUnits','decrease'] remoteExecCall ['A3A_fnc_HQGameOptions',2];";
 		};
 	};
 };
@@ -1055,7 +1055,8 @@ class spawn_config 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "if (player == theBoss) then {if (distanceSPWN < 2000) then {distanceSPWN = distanceSPWN + 100; distanceSPWN1 = distanceSPWN * 1.3; distanceSPWN2 = distanceSPWN /2; publicVariable ""distanceSPWN"";publicVariable ""distanceSPWN1"";publicVariable ""distanceSPWN2""}; [""Spawn Distance"", format [""Spawn Distance Set to %1 meters. Be careful, this may affect game performance"",distanceSPWN]] call A3A_fnc_customHint;} else {[""Spawn Distance"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "[player,'distanceSPWN','increase'] remoteExecCall ['A3A_fnc_HQGameOptions',2];";
+
 		};
 		class HQ_button_Gstatic: RscButton
 		{
@@ -1065,7 +1066,7 @@ class spawn_config 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "if (player == theBoss) then {if (distanceSPWN > 600) then {distanceSPWN = distanceSPWN - 100; distanceSPWN1 = distanceSPWN * 1.3; distanceSPWN2 = distanceSPWN /2; publicVariable ""distanceSPWN"";publicVariable ""distanceSPWN1"";publicVariable ""distanceSPWN2"";}; [""Spawn Distance"", format [""Spawn Distance Set to %1 meters"",distanceSPWN]] call A3A_fnc_customHint;} else {[""Spawn Distance"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "[player,'distanceSPWN','decrease'] remoteExecCall ['A3A_fnc_HQGameOptions',2];";
 		};
 	};
 };
@@ -1110,7 +1111,7 @@ class civ_config 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "if (player == theBoss) then {if (civPerc < 150) then {civPerc = civPerc + 1; if (civPerc > 150) then {civPerc = 150}; publicVariable ""civPerc"";}; [""Civilian Limit"", format [""Maximum Number of Civilians Set to %1"",civPerc]] call A3A_fnc_customHint;} else {[""Civilian Limit"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "[player,'civPerc','increase'] remoteExecCall ['A3A_fnc_HQGameOptions',2];";
 		};
 		class HQ_button_Gstatic: RscButton
 		{
@@ -1120,7 +1121,7 @@ class civ_config 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "if (player == theBoss) then {if (civPerc > 0) then {civPerc = civPerc - 1; if (civPerc < 0) then {civPerc = 0};publicVariable ""civPerc"";}; [""Civilian Limit"", format [""Maximum Number of Civilians Set to %1"",civPerc]] call A3A_fnc_customHint;} else {[""Civilian Limit"", ""Only Player Commander has access to this function""] call A3A_fnc_customHint;};";
+			action = "[player,'civPerc','decrease'] remoteExecCall ['A3A_fnc_HQGameOptions',2];";
 		};
 	};
 };

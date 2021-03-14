@@ -17,7 +17,7 @@ $formattedVersionId = $versionId.Split("\.") -join "-";
 
 ForEach ($templateFolder in $missionTemplateFolders) {
 	$folderName = $templateFolder.Name;
-    if($folderName -Contains "Antistasi-Livonia.Enoch")
+    if($folderName -Contains "Antistasi-Livonia.Enoch" -or $folderName -Contains "Antistasi-Altis.Altis" -or $folderName -Contains "Antistasi-Virolahti.vt7")
     {
 		$pair = $folderName.Split("\.");
 		$missionFolderName = $pair[0] + "-" + $formattedVersionId + "." + $pair[1]; 

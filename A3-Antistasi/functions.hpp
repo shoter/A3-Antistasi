@@ -278,6 +278,7 @@ class A3A
         class createDialog_shouldLoadPersonalSave {};
         class dialogHQ {};
         class fastTravelRadio {};
+        class HQGameOptions {};
         class loadPreviousSession {};
         class mineDialog {};
         class moveHQObject {};
