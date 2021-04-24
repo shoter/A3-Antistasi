@@ -343,30 +343,7 @@ if !(isPlayer leader group player) then {
 
 [] remoteExec ["A3A_fnc_assignBossIfNone", 2];
 
-if (_isJip) then {
-    Info("Joining In Progress (JIP)");
-
-	waitUntil {!(isNil "missionsX")};
-	if (count missionsX > 0) then {
-		{
-			_tsk = _x select 0;
-			if ([_tsk] call BIS_fnc_taskExists) then {
-				_state = _x select 1;
-				if ((_tsk call BIS_fnc_taskState) != _state) then {
-					/*
-					_tskVar = _tsk call BIS_fnc_taskVar;
-					_tskVar setTaskState _state;
-					*/
-					[_tsk,_state] call bis_fnc_taskSetState;
-				};
-			};
-		} forEach missionsX;
-	};
-}
-else
-{
-    Info("Not Joining in Progress (JIP)");
-};
+if (_isJip) then { Info("Joining In Progress (JIP)") } else { Info("Not Joining in Progress (JIP)") };
 
 [] spawn A3A_fnc_modBlacklist;
 
@@ -423,6 +400,7 @@ if (A3A_hasACE) then
 boxX allowDamage false;
 boxX addAction ["Transfer Vehicle cargo to Ammobox", {[] spawn A3A_fnc_empty;}, 4];
 boxX addAction ["Move this asset", A3A_fnc_moveHQObject,nil,0,false,true,"","(_this == theBoss)", 4];
+if (A3A_hasACE) then { [boxX, boxX] call ace_common_fnc_claim;};	//Disables ALL Ace Interactions
 flagX allowDamage false;
 flagX addAction ["Unit Recruitment", {if ([player,300] call A3A_fnc_enemyNearCheck) then {["Recruit Unit", "You cannot recruit units while there are enemies near you"] call A3A_fnc_customHint;} else { [] spawn A3A_fnc_unit_recruit; }},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)"];
 flagX addAction ["Move this asset", A3A_fnc_moveHQObject,nil,0,false,true,"","(_this == theBoss)", 4];
@@ -439,7 +417,7 @@ _flagLight setLightAttenuation [7, 0, 0.5, 0.5];
 vehicleBox allowDamage false;
 vehicleBox addAction ["Heal, Repair and Rearm", A3A_fnc_healAndRepair,nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 vehicleBox addAction ["Vehicle Arsenal", JN_fnc_arsenal_handleAction, [], 0, true, false, "", "alive _target && vehicle _this != _this", 10];
-if (A3A_hasACE) then { [vehicleBox, VehicleBox] call ace_common_fnc_claim;};	//Disables ALL Ace Interactions
+if (A3A_hasACE) then { [vehicleBox, vehicleBox] call ace_common_fnc_claim;};	//Disables ALL Ace Interactions
 if (isMultiplayer) then {
 	vehicleBox addAction ["Personal Garage", { [GARAGE_PERSONAL] spawn A3A_fnc_garage },nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 };

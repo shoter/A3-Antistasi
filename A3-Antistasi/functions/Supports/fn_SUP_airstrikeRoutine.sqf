@@ -12,15 +12,10 @@ while {_sleepTime > 0} do
 private _plane = if (_side == Occupants) then {vehNATOPlane} else {vehCSATPlane};
 private _crewUnits = if(_side == Occupants) then {NATOPilot} else {CSATPilot};
 
-private _spawnPos = (getMarkerPos _airport);
-private _strikePlane = createVehicle [_plane, _spawnPos, [], 0, "FLY"];
-private _dir = _spawnPos getDir _targetPos;
-_strikePlane setDir _dir;
-
-//Put it in the sky
-_strikePlane setPosATL (_spawnPos vectorAdd [0, 0, 500]);
-
-_strikePlane setVelocityModelSpace (velocityModelSpace _strikePlane vectorAdd [0, 150, 0]);
+private _spawnPos = (getMarkerPos _airport) vectorAdd [0, 0, 500];
+private _strikePlane = createVehicle [_plane, _spawnPos, [], 0, "NONE"];
+_strikePlane setDir (_spawnPos getDir _targetPos);
+_strikePlane setVelocityModelSpace [0, 100, 0];
 
 private _strikeGroup = createGroup _side;
 private _pilot = [_strikeGroup, _crewUnits, getPos _strikePlane] call A3A_fnc_createUnit;
@@ -158,7 +153,5 @@ _wp3 setWaypointBehaviour "CARELESS";
 private _wp4 = _strikeGroup addWaypoint [_airportPos, 2];
 _wp4 setWaypointType "MOVE";
 _wp4 setWaypointSpeed "FULL";
-_wp4 setWaypointStatements ["true", "[(objectParent this) getVariable 'supportName', side (group this)] spawn A3A_fnc_endSupport; deleteVehicle (objectParent this); deleteVehicle this"];
+_wp4 setWaypointStatements ["true", "if !(isServer) exitWith {}; [(objectParent this) getVariable 'supportName', side (group this)] spawn A3A_fnc_endSupport; deleteVehicle (objectParent this); deleteVehicle this"];
 
-_strikePlane hideObjectGlobal false;
-_strikePlane enableSimulation true;
