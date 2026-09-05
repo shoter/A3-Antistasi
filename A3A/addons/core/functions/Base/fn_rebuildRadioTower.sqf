@@ -26,3 +26,5 @@ _antenna setDamage 0;
 
 private _mrk = [A3A_mrkAntennas, _antenna] call BIS_fnc_nearestPosition;
 _mrk setMarkerAlpha 1;
+
+["radioTowerRebuilt", getPosATL _antenna, [], getPosATL _antenna] call A3A_fnc_campaignLogAdd;

@@ -3779,6 +3779,74 @@
         <Original>The rebellion has been crushed</Original>
         <Polish>Rebelia została rozbita</Polish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_missions">
+        <Original>Missions</Original>
+        <Polish>Misje</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_arsenal">
+        <Original>Arsenal</Original>
+        <Polish>Arsenał</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_newer_button">
+        <Original>Newer</Original>
+        <Polish>Nowsze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_older_button">
+        <Original>Older</Original>
+        <Polish>Starsze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_page">
+        <Original>Page %1 of %2</Original>
+        <Polish>Strona %1 z %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_missionSucceeded">
+        <Original>Mission succeeded: %3 (%2)</Original>
+        <Polish>Misja zakończona sukcesem: %3 (%2)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_missionFailed">
+        <Original>Mission failed: %3</Original>
+        <Polish>Misja nieudana: %3</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_commanderAssigned">
+        <Original>%2 took command</Original>
+        <Polish>%2 przejmuje dowodzenie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_commanderChanged">
+        <Original>%2 took command from %3</Original>
+        <Polish>%2 przejmuje dowodzenie od %3</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_campaignStarted">
+        <Original>Campaign started on %3: %4 against %5 and %6</Original>
+        <Polish>Kampania rozpoczęta na mapie %3: %4 przeciwko %5 i %6</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_radioTowerDestroyed">
+        <Original>Radio tower at %1 destroyed by %2</Original>
+        <Polish>Wieża radiowa w %1 zniszczona przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_radioTowerRebuilt">
+        <Original>Radio tower at %1 rebuilt by %2</Original>
+        <Polish>Wieża radiowa w %1 odbudowana przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_aggressionChanged">
+        <Original>%3 aggression changed from %4 to %5</Original>
+        <Polish>Agresja %3 zmieniła się z %4 na %5</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_populationMajority">
+        <Original>Most of the population now supports the rebellion</Original>
+        <Polish>Większość ludności popiera teraz rebelię</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_populationMajorityLost">
+        <Original>The rebellion lost the support of most of the population</Original>
+        <Polish>Rebelia straciła poparcie większości ludności</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_rewardSplitChanged">
+        <Original>%2 set the reward split to %3% faction tax and %4% commander cut</Original>
+        <Polish>%2 ustawia podział nagród: %3% podatku dla frakcji i %4% dla dowódcy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_itemUnlocked">
+        <Original>%3 unlocked in the arsenal</Original>
+        <Polish>%3 odblokowane w arsenale</Polish>
+      </Key>
     </Container>
     <Container name="dialog_main_garrisons">
       <Key ID="STR_antistasi_dialogs_main_garrisons_tab_button">

@@ -38,6 +38,13 @@ private _popTotal = 0;
 
 } forEach citiesX;
 
+// Chronicle: population majority gained or lost, once per change
+private _majority = _popReb > (_popTotal / 2);
+if (_majority != (missionNamespace getVariable ["A3A_campaignLogMajority", false])) then {
+    A3A_campaignLogMajority = _majority;
+    [["populationMajorityLost", "populationMajority"] select _majority] call A3A_fnc_campaignLogAdd;
+};
+
 _popReport = format["Total Pop: %1, Dead Pop: %2, Rebel Support: %3", _popTotal, _popKilled, _popReb];
 Info(_popReport);
 

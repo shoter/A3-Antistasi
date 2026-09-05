@@ -16,7 +16,7 @@ Return Value:
 Scope: Server
 Environment: Any
 Public: No
-Dependencies: A3A_fnc_junkyardClock
+Dependencies: A3A_fnc_junkyardClock, A3A_campaignLogCap
 
 Example:
     ["siteCaptured", "outpost_3", [Occupants], markerPos "outpost_3"] call A3A_fnc_campaignLogAdd;
@@ -24,7 +24,6 @@ Example:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define CHRONICLE_CAP 300
 #define ACTOR_RADIUS 500
 #define ACTOR_MAX_NAMES 4
 
@@ -55,8 +54,8 @@ A3A_campaignLogVersion = A3A_campaignLogVersion + 1;
 publicVariable "A3A_campaignLogVersion";
 
 A3A_campaignLog pushBack [A3A_campaignLogVersion, call A3A_fnc_junkyardClock, _type, _target, _params, _actor];
-if (count A3A_campaignLog > CHRONICLE_CAP) then {
-    A3A_campaignLog deleteRange [0, count A3A_campaignLog - CHRONICLE_CAP];
+if (count A3A_campaignLog > A3A_campaignLogCap) then {
+    A3A_campaignLog deleteRange [0, count A3A_campaignLog - A3A_campaignLogCap];
 };
 
 Debug_3("Chronicle #%1: %2 at %3", A3A_campaignLogVersion, _type, _target);

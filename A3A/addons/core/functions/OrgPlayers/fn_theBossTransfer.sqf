@@ -7,6 +7,15 @@ private _oldBoss = theBoss;
 theBoss = _newBoss;
 publicVariable "theBoss";
 
+// Chronicle entry, silent transfers are respawns and admin fixes
+if (!_silent && {!isNull _newBoss} && {_oldBoss != _newBoss}) then {
+    if (isNull _oldBoss) then {
+        ["commanderAssigned", "", [], name _newBoss] call A3A_fnc_campaignLogAdd;
+    } else {
+        ["commanderChanged", "", [name _oldBoss], name _newBoss] call A3A_fnc_campaignLogAdd;
+    };
+};
+
 if (!isNull _oldBoss) then {
     Debug_1("Removing %1 from Boss roles.", name _oldBoss);
 

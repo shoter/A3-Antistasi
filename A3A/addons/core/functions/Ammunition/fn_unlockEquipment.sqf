@@ -23,6 +23,10 @@ if (!_dontAddToArsenal) then {
 	private _arsenalTab = _className call jn_fnc_arsenal_itemType;
 	[_arsenalTab,_className,-1] call jn_fnc_arsenal_addItem;
 	if (!isNil "serverInitDone") then {ServerDebug_1("Item unlocked: %1", _className)};
+	// Chronicle entry, magazines come along with their weapon and would only add noise
+	if (isServer && {!isNil "serverInitDone"} && {!isClass (configFile >> "CfgMagazines" >> _className)}) then {
+		["itemUnlocked", "", [_className]] call A3A_fnc_campaignLogAdd;
+	};
 };
 
 {

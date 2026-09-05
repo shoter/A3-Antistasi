@@ -185,6 +185,9 @@ else
     Info("Initial arsenal unlocks completed");
     call A3A_fnc_checkRadiosUnlocked;
     [] call A3A_fnc_arsenalManage;
+
+    // First chronicle entry of a new campaign
+    ["campaignStarted", "", [getText (configFile >> "CfgWorlds" >> worldName >> "description"), FactionGet(reb,"name"), FactionGet(occ,"name"), FactionGet(inv,"name")]] call A3A_fnc_campaignLogAdd;
 };
 
 if (_startType != "load") then {

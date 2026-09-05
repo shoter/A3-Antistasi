@@ -3470,7 +3470,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     sizeEx = GUI_TEXT_SIZE_SMALL;
                     x = 8 * GRID_W;
                     y = 7 * GRID_H;
-                    w = 14 * GRID_W;
+                    w = 15 * GRID_W;
                     h = 4 * GRID_H;
                 };
 
@@ -3479,7 +3479,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_CHRONICLEFILTER_SITES;
                     text = $STR_antistasi_dialogs_main_chronicle_filter_sites;
                     onButtonClick = "[""filter"", [""sites""]] call A3A_GUI_fnc_chronicleTab;";
-                    x = 23 * GRID_W;
+                    x = 24 * GRID_W;
                 };
 
                 class TownsFilter : AllFilter
@@ -3487,7 +3487,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_CHRONICLEFILTER_TOWNS;
                     text = $STR_antistasi_dialogs_main_chronicle_filter_towns;
                     onButtonClick = "[""filter"", [""towns""]] call A3A_GUI_fnc_chronicleTab;";
-                    x = 38 * GRID_W;
+                    x = 40 * GRID_W;
                 };
 
                 class AttacksFilter : AllFilter
@@ -3495,7 +3495,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_CHRONICLEFILTER_ATTACKS;
                     text = $STR_antistasi_dialogs_main_chronicle_filter_attacks;
                     onButtonClick = "[""filter"", [""attacks""]] call A3A_GUI_fnc_chronicleTab;";
-                    x = 53 * GRID_W;
+                    x = 56 * GRID_W;
+                };
+
+                class MissionsFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_MISSIONS;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_missions;
+                    onButtonClick = "[""filter"", [""missions""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 72 * GRID_W;
                 };
 
                 class HQFilter : AllFilter
@@ -3503,7 +3511,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_CHRONICLEFILTER_HQ;
                     text = $STR_antistasi_dialogs_main_chronicle_filter_hq;
                     onButtonClick = "[""filter"", [""hq""]] call A3A_GUI_fnc_chronicleTab;";
-                    x = 68 * GRID_W;
+                    x = 88 * GRID_W;
                 };
 
                 class PlayersFilter : AllFilter
@@ -3511,7 +3519,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_CHRONICLEFILTER_PLAYERS;
                     text = $STR_antistasi_dialogs_main_chronicle_filter_players;
                     onButtonClick = "[""filter"", [""players""]] call A3A_GUI_fnc_chronicleTab;";
-                    x = 83 * GRID_W;
+                    x = 104 * GRID_W;
+                };
+
+                class ArsenalFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_ARSENAL;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_arsenal;
+                    onButtonClick = "[""filter"", [""arsenal""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 120 * GRID_W;
                 };
 
                 class CampaignFilter : AllFilter
@@ -3519,7 +3535,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_CHRONICLEFILTER_CAMPAIGN;
                     text = $STR_antistasi_dialogs_main_chronicle_filter_campaign;
                     onButtonClick = "[""filter"", [""campaign""]] call A3A_GUI_fnc_chronicleTab;";
-                    x = 98 * GRID_W;
+                    x = 136 * GRID_W;
                 };
 
                 class ChronicleList : A3A_ListNBox
@@ -3545,6 +3561,38 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 12 * GRID_H;
                     w = 32 * GRID_W;
                     h = 12 * GRID_H;
+                };
+
+                // Paging, the list shows one page of the filtered entries, newest first
+                class NewerPageButton : A3A_Button
+                {
+                    idc = A3A_IDC_CHRONICLENEWERPAGEBUTTON;
+                    text = $STR_antistasi_dialogs_main_chronicle_newer_button;
+                    onButtonClick = "[""page"", [-1]] call A3A_GUI_fnc_chronicleTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 120 * GRID_W;
+                    y = 27 * GRID_H;
+                    w = 15 * GRID_W;
+                    h = 6 * GRID_H;
+                };
+
+                class OlderPageButton : NewerPageButton
+                {
+                    idc = A3A_IDC_CHRONICLEOLDERPAGEBUTTON;
+                    text = $STR_antistasi_dialogs_main_chronicle_older_button;
+                    onButtonClick = "[""page"", [1]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 137 * GRID_W;
+                };
+
+                class PageLabel : A3A_Text
+                {
+                    idc = A3A_IDC_CHRONICLEPAGELABEL;
+                    style = ST_CENTER;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 120 * GRID_W;
+                    y = 34 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 4 * GRID_H;
                 };
             };
         };

@@ -47,4 +47,5 @@ publicVariable "A3A_rewardTaxPercent";
 A3A_rewardCommanderPercent = _cutPercent;
 publicVariable "A3A_rewardCommanderPercent";
 Info_3("Commander %1 set the reward split to faction tax %2 and commander cut %3", name _player, _taxPercent, _cutPercent);
+["rewardSplitChanged", "", [_taxPercent, _cutPercent], name _player] call A3A_fnc_campaignLogAdd;
 true

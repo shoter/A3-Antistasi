@@ -42,6 +42,7 @@ if (_isRuin) then {
         _mrk setMarkerAlpha 0.5;
         if (isNil "serverInitDone") exitWith {};       // Don't notify on load
         ["TaskSucceeded", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+        ["radioTowerDestroyed", getPosATL _origBuilding, [], getPosATL _origBuilding] call A3A_fnc_campaignLogAdd;
     };
 
     // Antenna dead/alive status is handled separately
