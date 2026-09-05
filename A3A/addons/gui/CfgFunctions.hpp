@@ -33,6 +33,7 @@ class CfgFunctions {
             class mapDrawSelectEH {};
             class mapDrawUserMarkersEH {};
             class playerManagementTab {};
+            class playerStatsTab {};
             class playerTab {};
             class recruitDialog {};
             class recruitSquadDialog {};

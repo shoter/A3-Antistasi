@@ -3790,6 +3790,168 @@
         <Polish>Punkt obserwacyjny</Polish>
       </Key>
     </Container>
+    <Container name="dialog_main_playerstats">
+      <Key ID="STR_antistasi_dialogs_main_playerstats_tab_button">
+        <Original>Players</Original>
+        <Polish>Gracze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_filter_label">
+        <Original>Filter</Original>
+        <Polish>Filtr</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_filter_tooltip">
+        <Original>Show only the players whose name contains this text</Original>
+        <Polish>Pokaż tylko graczy, których nazwa zawiera ten tekst</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_kills_label">
+        <Original>Kills</Original>
+        <Polish>Zabójstwa</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_deaths_label">
+        <Original>Deaths</Original>
+        <Polish>Śmierci</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_kd_label">
+        <Original>K/D</Original>
+        <Polish>K/D</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_time_online_label">
+        <Original>Time online</Original>
+        <Polish>Czas online</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_refresh_button">
+        <Original>Refresh</Original>
+        <Polish>Odśwież</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_details_button">
+        <Original>Details</Original>
+        <Polish>Szczegóły</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_loading">
+        <Original>Loading player data from the server...</Original>
+        <Polish>Wczytywanie danych graczy z serwera...</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_no_data">
+        <Original>No player data yet</Original>
+        <Polish>Brak danych o graczach</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_showing">
+        <Original>Showing %1 of %2 players, use the filter to find the others</Original>
+        <Polish>Wyświetlono %1 z %2 graczy, użyj filtru, aby znaleźć pozostałych</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_count">
+        <Original>%1 players</Original>
+        <Polish>Liczba graczy: %1</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_online">
+        <Original>Online</Original>
+        <Polish>Online</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_offline">
+        <Original>Offline</Original>
+        <Polish>Offline</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_member">
+        <Original>Member</Original>
+        <Polish>Członek</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_guest">
+        <Original>Guest</Original>
+        <Polish>Gość</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_combat">
+        <Original>Combat</Original>
+        <Polish>Walka</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_medical">
+        <Original>Medical</Original>
+        <Polish>Medyczne</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_activity">
+        <Original>Activity</Original>
+        <Polish>Aktywność</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_profile">
+        <Original>Profile</Original>
+        <Polish>Profil</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_vehicle_kills_label">
+        <Original>Vehicle kills</Original>
+        <Polish>Zniszczone pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_air_kills_label">
+        <Original>Aircraft kills</Original>
+        <Polish>Zniszczone statki powietrzne</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_civilian_kills_label">
+        <Original>Civilian kills</Original>
+        <Polish>Zabici cywile</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_friendly_kills_label">
+        <Original>Friendly kills</Original>
+        <Polish>Zabici sojusznicy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_player_kills_label">
+        <Original>Player kills</Original>
+        <Polish>Zabici gracze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_longest_kill_label">
+        <Original>Longest kill</Original>
+        <Polish>Najdalsze zabójstwo</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_times_downed_label">
+        <Original>Times downed</Original>
+        <Polish>Powalenia</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_revives_label">
+        <Original>Revives</Original>
+        <Polish>Reanimacje</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_revives_tooltip">
+        <Original>Counted for the Antistasi revive system only, not for ACE medical</Original>
+        <Polish>Liczone tylko dla systemu reanimacji Antistasi, nie dla ACE medical</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_sessions_label">
+        <Original>Sessions</Original>
+        <Polish>Sesje</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_first_seen_label">
+        <Original>First seen</Original>
+        <Polish>Pierwsza wizyta</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_last_seen_label">
+        <Original>Last seen</Original>
+        <Polish>Ostatnia wizyta</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_current_session_label">
+        <Original>Current session</Original>
+        <Polish>Bieżąca sesja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_rank_label">
+        <Original>Rank</Original>
+        <Polish>Ranga</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_score_label">
+        <Original>Score</Original>
+        <Polish>Punkty</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_money_label">
+        <Original>Money</Original>
+        <Polish>Pieniądze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_money_earned_label">
+        <Original>Money earned</Original>
+        <Polish>Zarobione pieniądze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_missions_label">
+        <Original>Missions completed</Original>
+        <Polish>Ukończone misje</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_money_value">
+        <Original>PLN %1</Original>
+        <Polish>%1 PLN</Polish>
+      </Key>
+    </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">
         <Original>Assassination</Original>

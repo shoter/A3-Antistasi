@@ -30,6 +30,9 @@ if (A3A_hasACE) then {
     };
 };
 
+// Player statistics: enemy infantry kills are credited here because the unit that downed the victim is only known on this machine
+[_victim, _killer, _this param [2, objNull], "kills"] call A3A_fnc_playerStats_reportKill;
+
 
 if (_victimSide == Occupants or _victimSide == Invaders) then {
     [_victim, _victimGroup, _killer] spawn A3A_fnc_AIreactOnKill;

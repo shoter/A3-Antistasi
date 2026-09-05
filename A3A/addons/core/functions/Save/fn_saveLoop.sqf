@@ -20,6 +20,10 @@ A3A_saveTarget set [3, createHashMap];							// new saves are always JSON
 } forEach (call A3A_fnc_playableUnits);
 ["savedPlayers", A3A_playerSaveData] call A3A_fnc_setStatVariable;			// new format, just store the hashmap
 
+// Player statistics (Players tab): commit the running sessions so the saved time online is current
+call A3A_fnc_playerStats_flushSessions;
+["playerStats", A3A_playerStats] call A3A_fnc_setStatVariable;
+
 // Collect the persistent global variables defined in params config
 private _savedParams = [];
 {

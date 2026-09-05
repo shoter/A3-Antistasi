@@ -14,6 +14,7 @@ if (_pointsX > 0) then
 {
 	_moneyJ = _moneyJ + (_pointsX * 10);
 	_playerX setVariable ["moneyX",_moneyJ,true];
+	[[_playerX] call A3A_fnc_playerStats_getUID, [["moneyEarned", _pointsX * 10]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
 	if (_pointsX > 1) then
 	{
 		_textX = format ["<br/><br/><br/><br/><br/><br/>" + localize "STR_A3A_fn_orgp_playerScoreAdd_money" + " PLN",_pointsX*10];

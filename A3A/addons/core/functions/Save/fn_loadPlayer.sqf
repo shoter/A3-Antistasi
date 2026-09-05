@@ -11,6 +11,8 @@ if !(_playerId in A3A_playerSaveData) then {
 	[_playerId, _unit] call A3A_fnc_resetPlayer;
 };
 
+[_playerId, _unit] call A3A_fnc_playerStats_onConnect;
+
 Info_2("Loading player data for ID %1 into unit %2", _playerId, _unit);
 
 private _playerHM = A3A_playerSaveData get _playerID;

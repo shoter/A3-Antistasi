@@ -14,6 +14,9 @@ private _layer = ["A3A_infoCenter"] call BIS_fnc_rscLayer;
 if (captive _unit) then {_unit setCaptive false};
 if (isMultiplayer) exitWith {_unit setVariable ["respawning",false]; _unit setDamage 1;};
 
+// Player statistics: in singleplayer the player never dies, so the death is counted here
+[[_unit] call A3A_fnc_playerStats_getUID, [["deaths", 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
+
 _unit spawn {
     sleep 15;
     _group = group _this;
