@@ -69,6 +69,15 @@ Write-Host "Antistasi $version"
 Write-Host "Source : $sourceRoot"
 Write-Host "Output : $modOut"
 
+# ---------------------------------------------------------------- refuse to build while Arma has the PBOs open
+$locked = Get-ChildItem $addonsOut -Filter "*.pbo" -ErrorAction SilentlyContinue | Where-Object {
+    try { $s = [System.IO.File]::Open($_.FullName, 'Open', 'ReadWrite', 'None'); $s.Close(); $false } catch { $true }
+}
+if ($locked) {
+    $arma = Get-Process -Name 'arma3server*', 'arma3*' -ErrorAction SilentlyContinue | ForEach-Object { "$($_.ProcessName) (PID $($_.Id))" }
+    throw "PBOs in $addonsOut are in use ($($locked.Name -join ', ')). Stop Arma first: $($arma -join ', ')"
+}
+
 # ---------------------------------------------------------------- prepare output (only the generated parts are wiped)
 New-Item -ItemType Directory -Force -Path $modOut | Out-Null
 foreach ($dir in @($addonsOut, $keysOut)) {

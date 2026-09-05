@@ -54,15 +54,23 @@ private _tiers = [
     [OccAndInv("vehiclesMilitiaLightArmed"), 2000],
     [OccAndInv("vehiclesLightArmed"), 2500],
     [OccAndInv("vehiclesGunBoats"), 3000],
-    [OccAndInv("vehiclesLightAPCs"), 6000],
-    [OccAndInv("vehiclesAmphibious") + OccAndInv("vehiclesHelisLight"), 8000],
-    [OccAndInv("vehiclesAPCs"), 10000],
-    [OccAndInv("vehiclesRadar") + OccAndInv("vehiclesHelisTransport"), 15000],
-    [OccAndInv("vehiclesIFVs"), 18000],
-    [OccAndInv("vehiclesLightTanks") + OccAndInv("vehiclesAirPatrol"), 20000],
-    [OccAndInv("vehiclesAA") + OccAndInv("vehiclesHelisLightAttack"), 25000],
-    [OccAndInv("vehiclesTanks") + OccAndInv("vehiclesSAM") + OccAndInv("vehiclesArtillery") + OccAndInv("vehiclesPlanesTransport"), 30000],
-    [OccAndInv("vehiclesHeavyTanks"), 45000],
+
+    // Military ground vehicles: up to 10000 after jitter, except tanks, artillery and heavy tanks which go up to 20000
+    [OccAndInv("vehiclesLightAPCs"), 2500],
+    [OccAndInv("vehiclesAPCs") + OccAndInv("vehiclesAmphibious") + OccAndInv("vehiclesRadar"), 4000],
+    [OccAndInv("vehiclesIFVs"), 5500],
+    [OccAndInv("vehiclesLightTanks"), 6000],
+    [OccAndInv("vehiclesAA"), 7000],
+    [OccAndInv("vehiclesSAM"), 8500],
+    [OccAndInv("vehiclesTanks") + OccAndInv("vehiclesArtillery"), 12000],
+    [OccAndInv("vehiclesHeavyTanks"), 17000],
+
+    // Air
+    [OccAndInv("vehiclesHelisLight"), 8000],
+    [OccAndInv("vehiclesHelisTransport"), 15000],
+    [OccAndInv("vehiclesAirPatrol"), 20000],
+    [OccAndInv("vehiclesHelisLightAttack"), 25000],
+    [OccAndInv("vehiclesPlanesTransport"), 30000],
     [OccAndInv("vehiclesHelisAttack"), 55000],
     [OccAndInv("vehiclesPlanesCAS"), 80000],
     [OccAndInv("vehiclesPlanesAA"), 100000]
@@ -78,8 +86,8 @@ if (_base == -1) then {
     private _armed = ([_class] call A3A_fnc_getVehicleWeapons) isNotEqualTo [];
     _base = call {
         if (getNumber (_cfg >> "isUav") > 0) exitWith { 5000 };
-        if (_class isKindOf "Tank") exitWith { 30000 };
-        if (_class isKindOf "Wheeled_APC_F" or _class isKindOf "Tracked_APC") exitWith { 12000 };
+        if (_class isKindOf "Tank") exitWith { 12000 };
+        if (_class isKindOf "Wheeled_APC_F" or _class isKindOf "Tracked_APC") exitWith { 4500 };
         if (_class isKindOf "Helicopter") exitWith { [10000, 40000] select _armed };
         if (_class isKindOf "Plane") exitWith { [30000, 80000] select _armed };
         if (_class isKindOf "Ship") exitWith { [800, 3000] select _armed };

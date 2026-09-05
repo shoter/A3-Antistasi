@@ -27,7 +27,7 @@ private _titleStr = localize "STR_A3A_fn_junkyard_title";
 if (!isNil "HR_GRG_placing" && {HR_GRG_placing}) exitWith { [_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_placing"] call A3A_fnc_customHint };
 if (player != player getVariable ["owner", player]) exitWith { [_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_control"] call A3A_fnc_customHint };
 if ([getPosATL player] call A3A_fnc_enemyNearCheck) exitWith { [_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_enemy"] call A3A_fnc_customHint };
-if !(player inArea respawnTeamPlayer) exitWith { [_titleStr, localize "STR_A3A_fn_junkyard_notAtHQ"] call A3A_fnc_customHint };
+if !(player inArea "Synd_HQ") exitWith { [_titleStr, localize "STR_A3A_fn_junkyard_notAtHQ"] call A3A_fnc_customHint };
 
 private _index = A3A_junkyardStock findIf { _x#0 == _class };
 if (_index == -1) exitWith { [_titleStr, localize "STR_A3A_fn_junkyard_soldOut"] call A3A_fnc_customHint };
@@ -41,8 +41,9 @@ private _fnc_placed = {
     params ["_vehicle", "_useFactionFunds"];
     if (isNull _vehicle) exitWith {};
     if (!_useFactionFunds) then { _vehicle setVariable ["ownerX", getPlayerUID player, true] };
+    // Wreck state first, while the vehicle is still local to us and before the server garrisons it
+    [_vehicle] call A3A_fnc_junkyardApplyWreckState;
     [_vehicle, teamPlayer] call A3A_fnc_AIVehInit;
-    [_vehicle] spawn A3A_fnc_junkyardApplyWreckState;
     [_vehicle, player, _useFactionFunds] remoteExecCall ["A3A_fnc_junkyardPurchase", 2];
 };
 

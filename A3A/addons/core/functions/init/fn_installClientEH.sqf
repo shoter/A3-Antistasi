@@ -108,6 +108,7 @@ player addAction ["Open Heli Garage",
 ];
 
 // Commander rally flag self-actions. Anyone can teleport to the flag from the HQ flag (see initClient).
+// Removal is always available, but only while looking at the deployed flag from close by.
 player addAction [localize "STR_A3A_fn_init_installClientEH_deployFlag", {
     private _remaining = if (isNull A3A_deployedFlag) then { 0 } else { A3A_deployedFlagCooldown - (serverTime - A3A_deployedFlagTime) };
     if (_remaining > 0) exitWith {
@@ -119,4 +120,4 @@ player addAction [localize "STR_A3A_fn_init_installClientEH_deployFlag", {
 
 player addAction [localize "STR_A3A_fn_init_installClientEH_removeFlag", {
     [player] remoteExecCall ["A3A_fnc_deployedFlagRemove", 2];
-}, nil, 0, false, true, "", "(_this == theBoss) and !isNull A3A_deployedFlag"];
+}, nil, 0, false, true, "", "(_this == theBoss) and !isNull A3A_deployedFlag and (cursorObject == A3A_deployedFlag) and (_this distance A3A_deployedFlag < 10)"];

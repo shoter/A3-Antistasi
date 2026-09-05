@@ -512,6 +512,7 @@ class CfgFunctions
         class Junkyard {
             file = QPATHTOFOLDER(functions\Junkyard);
             class getVehicleWeapons {};
+            class junkyardAdminRefresh {};
             class junkyardApplyWreckState {};
             class junkyardBuy {};
             class junkyardClock {};
