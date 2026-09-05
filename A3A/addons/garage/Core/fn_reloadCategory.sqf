@@ -29,7 +29,21 @@ lbClear _ctrl;
 private _selected = -1;
 private _HR_GRG_SelectedVehicles = [-1,-1,""];
 {
-    _y params ["_displayName", "_class", "_lockedUID", "_checkedOut", "", ["_lockName", ""], "", ["_lockTime", []]];
+    _y params ["_displayName", "_class", "_lockedUID", "_checkedOut", ["_state", []], ["_lockName", ""], "", ["_lockTime", []]];
+
+    // Antistasi junkyard wreck: deadline lives in the damage state, see HR_GRG_fnc_getDamage
+    private _junkTooltip = "";
+    private _junkUntil = (_state param [1, []]) param [3, -1];
+    if (_junkUntil isEqualType 0 && { _junkUntil > (call A3A_fnc_junkyardClock) }) then {
+        _displayName = format ["%1 [%2]", _displayName, localize "STR_HR_GRG_Junkyard_Tag"];
+        private _remaining = _junkUntil - (call A3A_fnc_junkyardClock);
+        private _sinceBuy = (A3A_junkyardJunkDuration - _remaining) max 0;
+        _junkTooltip = format [localize "STR_HR_GRG_Junkyard_ToolTip",
+            [_sinceBuy, 1, 1, false, 2, false, true] call A3A_fnc_timeSpan_format,
+            [_remaining, 1, 1, false, 2, false, true] call A3A_fnc_timeSpan_format
+        ] + " ";
+    };
+
     private _index = _ctrl lbAdd _displayName;
     _ctrl lbSetData [_index, str _x];
     _ctrl lbSetValue [_index, _x];
@@ -37,7 +51,7 @@ private _HR_GRG_SelectedVehicles = [-1,-1,""];
     _ctrl lbSetPictureColor [_index, [1, 1, 1, 1]];
     _ctrl lbSetPictureColorSelected [_index, [0.85, 0.85, 0.55, 1]];
 
-    private _tooltipText = "";
+    private _tooltipText = _junkTooltip;
     if !( _checkedOut isEqualTo "" ) then {
         private _color = [1,0.1,0.1,1];
         if ( (HR_GRG_SelectedVehicles#1) isEqualTo _x ) then {

@@ -16813,5 +16813,37 @@
         <Original>Antistasi has detected a blacklisted mod on your server:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
       </Key>
     </Container>
+    <Container name="A3A_fn_junkyard">
+      <Key ID="STR_A3A_fn_junkyard_title">
+        <Original>Junkyard</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_action">
+        <Original>Junkyard</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_newStock">
+        <Original>New wrecks have arrived at the junkyard. Check the garage crate at HQ.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_soldOut">
+        <Original>That wreck has already been sold.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_noMoney">
+        <Original>Not enough money. This wreck costs %1 PLN.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_notAtHQ">
+        <Original>The junkyard only delivers to HQ.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_placing">
+        <Original>Buying wreck for %1 PLN.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_bought">
+        <Original>You bought a wrecked %1 for %2 PLN. It needs repairs, fuel and ammo. It will not be repaired for free for the next %3.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_expired">
+        <Original>Your %1 is no longer a junk vehicle. HQ and garage can repair it again.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_pylons">
+        <Original>Pylon weapons</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

@@ -509,6 +509,20 @@ class CfgFunctions
             class underAttack {};
         };
 
+        class Junkyard {
+            file = QPATHTOFOLDER(functions\Junkyard);
+            class getVehicleWeapons {};
+            class junkyardApplyWreckState {};
+            class junkyardBuy {};
+            class junkyardClock {};
+            class junkyardExpire {};
+            class junkyardIsJunk {};
+            class junkyardLoop {};
+            class junkyardPrice {};
+            class junkyardPurchase {};
+            class junkyardRefresh {};
+        };
+
         class ModsAndDLC {
             file = QPATHTOFOLDER(functions\ModsAndDLC);
             class darkMapFix {};

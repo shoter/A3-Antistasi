@@ -24,6 +24,7 @@ class CfgFunctions {
             class getLocationMarkerType {};
             class getVehicleCrewCount {};
             class hqDialog {};
+            class junkyardDialog {};
             class mainDialog {};
             class mapDrawHcGroupsEH {};
             class mapDrawOutpostsEH {};

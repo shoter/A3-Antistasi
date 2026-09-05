@@ -17,6 +17,7 @@ Version 3.11.1
    * Added a commander-deployable rally flag with a free, faster teleport from the HQ flag
    * Loot crates no longer have a capacity limit when looting to crate
    * Changed the currency symbol from € to PLN
+   * Added the Junkyard at the HQ garage crate: buy heavily damaged civilian and military vehicles, restocked hourly. Wrecks get no free repairs for 10 hours and are marked as junk in the garage
 
 
 .. admonition:: Template updates

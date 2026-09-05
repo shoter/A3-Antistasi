@@ -53,6 +53,8 @@ if (!isNull A3A_deployedFlag) then {
 	// Position and remaining redeploy cooldown (serverTime restarts with the server, same approach as nextTick)
 	["deployedFlag", [getPosATL A3A_deployedFlag, (A3A_deployedFlagCooldown - (serverTime - A3A_deployedFlagTime)) max 0]] call A3A_fnc_setStatVariable;
 };
+// Junkyard stock, seconds until the next delivery, and the campaign clock used for junk expiry deadlines
+["junkyard", [A3A_junkyardStock, (A3A_junkyardNextRefresh - serverTime) max 0, call A3A_fnc_junkyardClock]] call A3A_fnc_setStatVariable;
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
 ["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;
 ["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;

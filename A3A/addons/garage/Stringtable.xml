@@ -1445,5 +1445,13 @@
         <Czech>Povolit úpravu pylónů</Czech>
       </Key>
     </Container>
+    <Container name="HR_GRG_junkyard">
+      <Key ID="STR_HR_GRG_Junkyard_Tag">
+        <Original>JUNK</Original>
+      </Key>
+      <Key ID="STR_HR_GRG_Junkyard_ToolTip">
+        <Original>Junkyard wreck bought %1 ago. No free repairs for another %2.</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

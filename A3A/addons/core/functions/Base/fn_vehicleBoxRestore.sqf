@@ -76,6 +76,7 @@ private _hqVehicles = (vehicles inAreaArray [_posHQ, 150, 150]) select {
 
 if (HR_GRG_hasRepairSource) then {
     {
+        if ([_x] call A3A_fnc_junkyardIsJunk) then { continue };      // junkyard wrecks are not repaired for free until their junk status expires
         _x setDamage 0;
         if (_x getVariable ["incapacitated",false]) then {_x setVariable ["incapacitated",false,true]};
     } forEach _hqVehicles;

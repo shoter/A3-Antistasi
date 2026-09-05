@@ -73,6 +73,14 @@ DECLARE_SERVER_VAR(A3A_deployedFlag, objNull);
 DECLARE_SERVER_VAR(A3A_deployedFlagTime, -999999);
 DECLARE_SERVER_VAR(A3A_deployedFlagCooldown, 30*60);
 
+// Junkyard: wrecked vehicle shop at the HQ garage crate. Stock is [[class, price], ...], refresh is serverTime of next delivery
+DECLARE_SERVER_VAR(A3A_junkyardStock, []);
+DECLARE_SERVER_VAR(A3A_junkyardNextRefresh, -1);
+DECLARE_SERVER_VAR(A3A_junkyardRefreshInterval, 60*60);
+DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // plus one wildcard vehicle from all loaded vehicle classes
+DECLARE_SERVER_VAR(A3A_junkyardJunkDuration, 10*60*60);  // seconds of campaign uptime a bought wreck stays "junk" (no free repairs)
+DECLARE_SERVER_VAR(A3A_junkyardClockOffset, 0);          // campaign clock = offset + serverTime, restored from save
+
 DECLARE_SERVER_VAR(skillFIA, 1);																		//Initial skill level for FIA soldiers
 //Initial Occupant Aggression
 DECLARE_SERVER_VAR(aggressionOccupants, 0);

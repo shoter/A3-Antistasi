@@ -9,6 +9,9 @@ build
 *.bat
 AntistasiBuilder.cfg
 
+# Local build settings, see Tools/Builder/buildConfig.template.json
+Tools/Builder/buildConfig.json
+
 #Ignore mission files that have been copied to A3-Antistasi
 A3-Antistasi/description.ext
 A3-Antistasi/mission.sqm

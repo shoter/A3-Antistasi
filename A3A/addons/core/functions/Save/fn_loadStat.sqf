@@ -36,7 +36,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag"
+    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard"
 ];
 
 private _varName = _this select 0;
@@ -58,6 +58,15 @@ if (_varName in _specialVarLoads) then {
         [_pos] call A3A_fnc_deployedFlagCreate;
         A3A_deployedFlagTime = serverTime - A3A_deployedFlagCooldown + _remaining;
         publicVariable "A3A_deployedFlagTime";
+    };
+    if (_varName == 'junkyard') then {
+        _varValue params [["_stock", [], [[]]], ["_remaining", 0, [0]], ["_clock", 0, [0]]];
+        A3A_junkyardStock = _stock;
+        publicVariable "A3A_junkyardStock";
+        A3A_junkyardNextRefresh = serverTime + _remaining;
+        publicVariable "A3A_junkyardNextRefresh";
+        A3A_junkyardClockOffset = _clock - serverTime;      // campaign clock continues where the save left it
+        publicVariable "A3A_junkyardClockOffset";
     };
     if (_varName == 'membersX') then {membersX = +_varValue; publicVariable "membersX"};
     if (_varName == 'mrkNATO') then {{sidesX setVariable [[_x] call _translateMarker,Occupants,true]} forEach _varValue;};

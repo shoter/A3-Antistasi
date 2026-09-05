@@ -5629,5 +5629,31 @@
         <Spanish>El vehículo objetivo se ha alejado demasiado y no se puede repostar.</Spanish>
       </Key>
     </Container>
+    <Container name="dialog_junkyard">
+      <Key ID="STR_antistasi_dialogs_junkyard_titlebar">
+        <Original>Junkyard</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_info">
+        <Original>%1 wrecks in stock. Next delivery in %2.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_faction_funds">
+        <Original>Pay with faction funds</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_empty">
+        <Original>The junkyard is empty. Come back after the next delivery.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_seats">
+        <Original>Driver %1 | Gunners %2 | Passengers %3</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_weapons">
+        <Original>Weapons: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_unarmed">
+        <Original>Unarmed</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_button_tooltip">
+        <Original>Buy wrecked %1 for %2 PLN. Heavily damaged, low fuel, little or no ammo. No free repairs for the first %3 hours.</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>
