@@ -4,6 +4,8 @@ Maintainer: Shoter
     Lists every player that ever joined the campaign (online and offline) with kills, deaths, K/D and time online,
     one line of controls per player with a Details button. The rows come from the server (A3A_fnc_playerStats_request),
     the details of one player from A3A_fnc_playerStats_requestDetails; both answer through this function.
+    The Details view is built at runtime inside a scrolling group: label/value sections, the movement and role tables
+    and the per-weapon table at the bottom.
 
 Arguments:
     <STRING> Mode
@@ -36,6 +38,14 @@ FIX_LINE_NUMBERS()
 #define MAX_ROWS 100
 #define ROW_HEIGHT (4 * GRID_H)
 
+// Details layout, grid units inside the scrolling group (138 usable, the rest is scrollbar)
+#define DETAILS_LEFT 1
+#define DETAILS_RIGHT 73
+#define DETAILS_COLUMN_W 66
+#define DETAILS_LABEL_W 38
+#define DETAILS_ROW_STEP 5
+#define DETAILS_SECTION_GAP 3
+
 params [["_mode","onLoad"], ["_params",[]]];
 
 private _display = findDisplay A3A_IDD_MAINDIALOG;
@@ -56,6 +66,11 @@ private _fnc_formatTime = {
     params ["_seconds"];
     if (_seconds < 60) exitWith { "0" + localize "STR_antistasi_timeSpan_minutes_abbr" };
     [_seconds, 1, 1, false, 2, false, true] call A3A_fnc_timeSpan_format;
+};
+
+private _fnc_formatDistance = {
+    params ["_metres"];
+    if (_metres >= 1000) then { format ["%1 km", (_metres / 1000) toFixed 1] } else { format ["%1 m", round _metres] };
 };
 
 private _fnc_formatDate = {
@@ -218,29 +233,14 @@ switch (_mode) do
         }];
         _backButton ctrlShow true;
 
-        // Name from the cached row, the values are blanked until the server answers
+        // Name from the cached row, the panel stays empty until the server answers
         private _rows = _tab getVariable ["playerRows", []];
         private _rowIndex = _rows findIf { (_x select 0) == _uid };
         private _name = if (_rowIndex == -1) then { _uid } else { _rows select _rowIndex select 1 };
         (_display displayCtrl A3A_IDC_PLAYERDETAILS_NAME) ctrlSetText _name;
         (_display displayCtrl A3A_IDC_PLAYERDETAILS_STATUS) ctrlSetText "";
-        {
-            (_display displayCtrl _x) ctrlSetText "...";
-        } forEach [
-            A3A_IDC_PLAYERDETAILS_KILLS, A3A_IDC_PLAYERDETAILS_VEHICLEKILLS, A3A_IDC_PLAYERDETAILS_AIRKILLS,
-            A3A_IDC_PLAYERDETAILS_CIVILIANKILLS, A3A_IDC_PLAYERDETAILS_FRIENDLYKILLS, A3A_IDC_PLAYERDETAILS_PLAYERKILLS,
-            A3A_IDC_PLAYERDETAILS_LONGESTKILL, A3A_IDC_PLAYERDETAILS_DEATHS, A3A_IDC_PLAYERDETAILS_KD,
-            A3A_IDC_PLAYERDETAILS_TIMESDOWNED, A3A_IDC_PLAYERDETAILS_REVIVES, A3A_IDC_PLAYERDETAILS_SESSIONS,
-            A3A_IDC_PLAYERDETAILS_FIRSTSEEN, A3A_IDC_PLAYERDETAILS_LASTSEEN, A3A_IDC_PLAYERDETAILS_TIMEONLINE,
-            A3A_IDC_PLAYERDETAILS_CURRENTSESSION, A3A_IDC_PLAYERDETAILS_RANK, A3A_IDC_PLAYERDETAILS_SCORE,
-            A3A_IDC_PLAYERDETAILS_MONEY, A3A_IDC_PLAYERDETAILS_MONEYEARNED, A3A_IDC_PLAYERDETAILS_MISSIONS
-        ];
-
-        // The Steam UID is for admins only, like on the Player Management tab
-        private _isAdmin = [] call FUNCMAIN(isLocalAdmin);
-        (_display displayCtrl A3A_IDC_PLAYERDETAILS_UIDLABEL) ctrlShow _isAdmin;
-        (_display displayCtrl A3A_IDC_PLAYERDETAILS_UID) ctrlShow _isAdmin;
-        (_display displayCtrl A3A_IDC_PLAYERDETAILS_UID) ctrlSetText ([_uid, ""] select !_isAdmin);
+        { ctrlDelete _x } forEach allControls (_display displayCtrl A3A_IDC_PLAYERDETAILS_SCROLL);
+        (_display displayCtrl A3A_IDC_PLAYERDETAILS_STATUSTEXT) ctrlSetText localize "STR_antistasi_dialogs_main_playerstats_loading";
 
         [clientOwner, _uid] remoteExecCall ["A3A_fnc_playerStats_requestDetails", 2];
     };
@@ -268,12 +268,83 @@ switch (_mode) do
         if (_name == "") then { _name = _uid };
         (_display displayCtrl A3A_IDC_PLAYERDETAILS_NAME) ctrlSetText _name;
 
+        private _textColor = [A3A_COLOR_TEXT] call FUNC(configColorToArray);
         private _statusCtrl = _display displayCtrl A3A_IDC_PLAYERDETAILS_STATUS;
         _statusCtrl ctrlSetText format ["%1, %2",
             localize (["STR_antistasi_dialogs_main_playerstats_offline", "STR_antistasi_dialogs_main_playerstats_online"] select _online),
             localize (["STR_antistasi_dialogs_main_playerstats_guest", "STR_antistasi_dialogs_main_playerstats_member"] select _member)
         ];
-        _statusCtrl ctrlSetTextColor (if (_online) then { [A3A_COLOR_TEXT] call FUNC(configColorToArray) } else { A3A_COLOR_TEXT_DARKER_SQF });
+        _statusCtrl ctrlSetTextColor (if (_online) then { _textColor } else { A3A_COLOR_TEXT_DARKER_SQF });
+        (_display displayCtrl A3A_IDC_PLAYERDETAILS_STATUSTEXT) ctrlSetText "";
+
+        private _scroll = _display displayCtrl A3A_IDC_PLAYERDETAILS_SCROLL;
+        { ctrlDelete _x } forEach allControls _scroll;
+
+        // Control factory, positions in grid units relative to the scrolling group
+        private _fnc_add = {
+            params ["_class", "_left", "_top", "_width", "_text", ["_tooltip", ""], ["_height", 4]];
+            private _ctrl = _display ctrlCreate [_class, -1, _scroll];
+            _ctrl ctrlSetPosition [_left * GRID_W, _top * GRID_H, _width * GRID_W, _height * GRID_H];
+            _ctrl ctrlCommit 0;
+            _ctrl ctrlSetText _text;
+            if (_tooltip != "") then { _ctrl ctrlSetTooltip _tooltip };
+            _ctrl
+        };
+
+        // A section title followed by label/value rows: [labelKey, valueText, tooltipKey]. Returns the next free top.
+        private _fnc_column = {
+            params ["_left", "_top", "_sectionKey", "_rows"];
+            ["A3A_SectionLabelCenter", _left, _top, DETAILS_COLUMN_W, localize _sectionKey] call _fnc_add;
+            _top = _top + DETAILS_ROW_STEP;
+            {
+                _x params ["_labelKey", "_value", ["_tooltipKey", ""]];
+                private _tooltip = if (_tooltipKey == "") then { "" } else { localize _tooltipKey };
+                ["A3A_Text", _left, _top, DETAILS_LABEL_W, localize _labelKey, _tooltip] call _fnc_add;
+                ["A3A_TextRight", _left + DETAILS_LABEL_W, _top, DETAILS_COLUMN_W - DETAILS_LABEL_W, _value, _tooltip] call _fnc_add;
+                _top = _top + DETAILS_ROW_STEP;
+            } forEach _rows;
+            _top
+        };
+
+        // A section title, a header line and text rows: columns [headerKey, x offset, width, rightAligned]. Returns the next free top.
+        private _fnc_table = {
+            params ["_left", "_top", "_sectionKey", "_width", "_tableColumns", "_tableRows", ["_emptyKey", ""]];
+            ["A3A_SectionLabelCenter", _left, _top, _width, localize _sectionKey] call _fnc_add;
+            _top = _top + DETAILS_ROW_STEP;
+            {
+                _x params ["_headerKey", "_offset", "_columnWidth", "_rightAligned"];
+                private _header = [["A3A_Text", "A3A_TextRight"] select _rightAligned, _left + _offset, _top, _columnWidth, localize _headerKey] call _fnc_add;
+                _header ctrlSetFontHeight GUI_TEXT_SIZE_SMALL;
+                _header ctrlSetTextColor A3A_COLOR_TEXT_DARKER_SQF;
+            } forEach _tableColumns;
+            _top = _top + 4;
+            if (_tableRows isEqualTo [] && {_emptyKey != ""}) then {
+                ["A3A_Text", _left, _top, _width, localize _emptyKey] call _fnc_add;
+                _top = _top + 4;
+            };
+            {
+                private _cells = _x;
+                {
+                    _x params ["", "_offset", "_columnWidth", "_rightAligned"];
+                    [["A3A_Text", "A3A_TextRight"] select _rightAligned, _left + _offset, _top, _columnWidth, _cells select _forEachIndex] call _fnc_add;
+                } forEach _tableColumns;
+                _top = _top + 4;
+            } forEach _tableRows;
+            _top
+        };
+
+        private _fnc_money = {
+            params ["_amount"];
+            if (_amount < 0) then { "-" } else { format [localize "STR_antistasi_dialogs_main_playerstats_money_value", _amount] };
+        };
+
+        private _fnc_weaponName = {
+            params ["_class"];
+            private _config = configFile >> "CfgWeapons" >> _class;
+            if !(isClass _config) then { _config = configFile >> "CfgVehicles" >> _class };
+            private _displayName = getText (_config >> "displayName");
+            if (_displayName == "") then { _class } else { _displayName };
+        };
 
         private _kills = _stats getOrDefault ["kills", 0];
         private _deaths = _stats getOrDefault ["deaths", 0];
@@ -285,37 +356,138 @@ switch (_mode) do
             if (_displayName isEqualType "" && {_displayName != ""}) then { _rankName = _displayName };
         };
 
-        private _moneyFormat = localize "STR_antistasi_dialogs_main_playerstats_money_value";
+        #define KEY(suffix) "STR_antistasi_dialogs_main_playerstats_" + suffix
+        #define STAT(key) (_stats getOrDefault [key, 0])
+
+        // Row 1: Combat | Activity
+        private _combatRows = [
+            [KEY("kills_label"), str _kills],
+            [KEY("vehicle_kills_label"), str STAT("vehicleKills")],
+            [KEY("air_kills_label"), str STAT("airKills")],
+            [KEY("civilian_kills_label"), str STAT("civilianKills")],
+            [KEY("friendly_kills_label"), str STAT("friendlyKills")],
+            [KEY("player_kills_label"), str STAT("playerKills")],
+            [KEY("longest_kill_label"), format ["%1 m", STAT("longestKill")]],
+            [KEY("deaths_label"), str _deaths],
+            [KEY("kd_label"), [_kills, _deaths] call _fnc_formatKD]
+        ];
+        private _activityRows = [
+            [KEY("sessions_label"), str STAT("sessions")],
+            [KEY("first_seen_label"), [_stats getOrDefault ["firstSeen", []]] call _fnc_formatDate],
+            [KEY("last_seen_label"), [_stats getOrDefault ["lastSeen", []]] call _fnc_formatDate],
+            [KEY("time_online_label"), [STAT("timeOnline")] call _fnc_formatTime],
+            [KEY("longest_session_label"), [STAT("longestSession")] call _fnc_formatTime],
+            [KEY("commander_time_label"), [STAT("commanderTime")] call _fnc_formatTime],
+            [KEY("undercover_time_label"), [STAT("undercoverTime")] call _fnc_formatTime]
+        ];
+        if (_online) then { _activityRows pushBack [KEY("current_session_label"), [_currentSession max 0] call _fnc_formatTime] };
+
+        private _top = 0;
+        private _leftBottom = [DETAILS_LEFT, _top, KEY("section_combat"), _combatRows] call _fnc_column;
+        private _rightBottom = [DETAILS_RIGHT, _top, KEY("section_activity"), _activityRows] call _fnc_column;
+        _top = (_leftBottom max _rightBottom) + DETAILS_SECTION_GAP;
+
+        // Row 2: Medical | Profile
+        private _medicalRows = [
+            [KEY("times_downed_label"), str STAT("timesDowned")],
+            [KEY("revives_label"), str STAT("revives"), KEY("revives_tooltip")]
+        ];
+        private _profileRows = [
+            [KEY("rank_label"), _rankName],
+            [KEY("score_label"), _score call _fnc_formatNumber],
+            [KEY("missions_label"), _missions call _fnc_formatNumber],
+            [KEY("money_label"), [_money] call _fnc_money],
+            [KEY("money_earned_label"), [STAT("moneyEarned")] call _fnc_money],
+            [KEY("money_spent_label"), [STAT("moneySpent")] call _fnc_money, KEY("money_spent_tooltip")],
+            [KEY("money_donated_label"), [STAT("moneyDonated")] call _fnc_money],
+            [KEY("scrap_money_label"), [STAT("scrapMoney")] call _fnc_money]
+        ];
+        _leftBottom = [DETAILS_LEFT, _top, KEY("section_medical"), _medicalRows] call _fnc_column;
+        _rightBottom = [DETAILS_RIGHT, _top, KEY("section_profile"), _profileRows] call _fnc_column;
+        _top = (_leftBottom max _rightBottom) + DETAILS_SECTION_GAP;
+
+        // Row 3: Operations | Travel and vehicles
+        private _operationsRows = [
+            [KEY("captures_label"), str STAT("captures"), KEY("captures_tooltip")],
+            [KEY("defences_label"), str STAT("defences"), KEY("defences_tooltip")],
+            [KEY("intel_found_label"), str STAT("intelFound")],
+            [KEY("recruits_lost_label"), str STAT("recruitsLost")],
+            [KEY("vehicles_lost_label"), str STAT("vehiclesLost")]
+        ];
+        private _travelRows = [
+            [KEY("vehicles_bought_label"), str STAT("vehiclesBought")],
+            [KEY("vehicles_scrapped_label"), str STAT("vehiclesScrapped")],
+            [KEY("fast_travels_label"), str STAT("fastTravels")],
+            [KEY("flag_teleports_label"), str STAT("flagTeleports")],
+            [KEY("air_taxi_rides_label"), str STAT("airTaxiRides")]
+        ];
+        _leftBottom = [DETAILS_LEFT, _top, KEY("section_operations"), _operationsRows] call _fnc_column;
+        _rightBottom = [DETAILS_RIGHT, _top, KEY("section_travel"), _travelRows] call _fnc_column;
+        _top = (_leftBottom max _rightBottom) + DETAILS_SECTION_GAP;
+
+        // Row 4: Movement table | Roles table
+        private _movement = _stats getOrDefault ["movement", createHashMap];
+        private _movementRows = [];
         {
-            _x params ["_idc", "_text"];
-            (_display displayCtrl _idc) ctrlSetText _text;
-        } forEach [
-            [A3A_IDC_PLAYERDETAILS_KILLS, str _kills],
-            [A3A_IDC_PLAYERDETAILS_VEHICLEKILLS, str (_stats getOrDefault ["vehicleKills", 0])],
-            [A3A_IDC_PLAYERDETAILS_AIRKILLS, str (_stats getOrDefault ["airKills", 0])],
-            [A3A_IDC_PLAYERDETAILS_CIVILIANKILLS, str (_stats getOrDefault ["civilianKills", 0])],
-            [A3A_IDC_PLAYERDETAILS_FRIENDLYKILLS, str (_stats getOrDefault ["friendlyKills", 0])],
-            [A3A_IDC_PLAYERDETAILS_PLAYERKILLS, str (_stats getOrDefault ["playerKills", 0])],
-            [A3A_IDC_PLAYERDETAILS_LONGESTKILL, format ["%1 m", _stats getOrDefault ["longestKill", 0]]],
-            [A3A_IDC_PLAYERDETAILS_DEATHS, str _deaths],
-            [A3A_IDC_PLAYERDETAILS_KD, [_kills, _deaths] call _fnc_formatKD],
-            [A3A_IDC_PLAYERDETAILS_TIMESDOWNED, str (_stats getOrDefault ["timesDowned", 0])],
-            [A3A_IDC_PLAYERDETAILS_REVIVES, str (_stats getOrDefault ["revives", 0])],
-            [A3A_IDC_PLAYERDETAILS_SESSIONS, str (_stats getOrDefault ["sessions", 0])],
-            [A3A_IDC_PLAYERDETAILS_FIRSTSEEN, [_stats getOrDefault ["firstSeen", []]] call _fnc_formatDate],
-            [A3A_IDC_PLAYERDETAILS_LASTSEEN, [_stats getOrDefault ["lastSeen", []]] call _fnc_formatDate],
-            [A3A_IDC_PLAYERDETAILS_TIMEONLINE, [_stats getOrDefault ["timeOnline", 0]] call _fnc_formatTime],
-            [A3A_IDC_PLAYERDETAILS_CURRENTSESSION, [_currentSession max 0] call _fnc_formatTime],
-            [A3A_IDC_PLAYERDETAILS_RANK, _rankName],
-            [A3A_IDC_PLAYERDETAILS_SCORE, _score call _fnc_formatNumber],
-            [A3A_IDC_PLAYERDETAILS_MONEY, if (_money < 0) then { "-" } else { format [_moneyFormat, _money] }],
-            [A3A_IDC_PLAYERDETAILS_MONEYEARNED, format [_moneyFormat, _stats getOrDefault ["moneyEarned", 0]]],
-            [A3A_IDC_PLAYERDETAILS_MISSIONS, _missions call _fnc_formatNumber]
+            private _bucket = _movement getOrDefault [_x, [0, 0]];
+            if !(_bucket isEqualType [] && {count _bucket >= 2}) then { _bucket = [0, 0] };
+            _movementRows pushBack [localize KEY("movement_" + _x), [_bucket select 0] call _fnc_formatTime, [_bucket select 1] call _fnc_formatDistance];
+        } forEach ["foot", "ground", "air", "boat", "swim", "static"];
+        private _movementColumns = [
+            ["STR_antistasi_dialogs_main_towns_name_label", 0, 30, false],
+            [KEY("column_time"), 30, 18, true],
+            [KEY("column_distance"), 48, 18, true]
         ];
 
-        // The running session only makes sense for connected players
-        (_display displayCtrl A3A_IDC_PLAYERDETAILS_CURRENTSESSIONLABEL) ctrlShow _online;
-        (_display displayCtrl A3A_IDC_PLAYERDETAILS_CURRENTSESSION) ctrlShow _online;
+        private _roles = _stats getOrDefault ["roles", createHashMap];
+        private _roleNames = ["rifleman", "autorifleman", "grenadier", "medic", "engineer", "teamleader", "commander"];
+        { if !(_x in _roleNames) then { _roleNames pushBack _x } } forEach (keys _roles);
+        private _roleRows = [];
+        {
+            private _roleTime = _roles getOrDefault [_x, 0];
+            if !(_roleTime isEqualType 0) then { _roleTime = 0 };
+            private _roleLabel = localize ("STR_antistasi_dialogs_roleselect_role_" + _x);
+            if (_roleLabel == "") then { _roleLabel = _x };
+            _roleRows pushBack [_roleLabel, [_roleTime] call _fnc_formatTime];
+        } forEach _roleNames;
+        private _roleColumns = [
+            ["STR_antistasi_dialogs_main_towns_name_label", 0, 40, false],
+            [KEY("column_time"), 40, 26, true]
+        ];
+        _leftBottom = [DETAILS_LEFT, _top, KEY("section_movement"), DETAILS_COLUMN_W, _movementColumns, _movementRows] call _fnc_table;
+        _rightBottom = [DETAILS_RIGHT, _top, KEY("section_roles"), DETAILS_COLUMN_W, _roleColumns, _roleRows] call _fnc_table;
+        _top = (_leftBottom max _rightBottom) + DETAILS_SECTION_GAP;
+
+        // Row 5: weapons and vehicles, most kills first, then most time
+        private _weapons = _stats getOrDefault ["weapons", createHashMap];
+        private _weaponEntries = [];
+        {
+            private _values = _y;
+            if !(_values isEqualType []) then { continue };
+            while { count _values < 5 } do { _values pushBack 0 };
+            _values params ["_seconds", "_soldiers", "_vehicles", "_aircraft", "_shots"];
+            _weaponEntries pushBack [_soldiers + _vehicles + _aircraft, _seconds, _x, [_x] call _fnc_weaponName, _seconds, _soldiers, _vehicles, _aircraft, _shots];
+        } forEach _weapons;
+        _weaponEntries sort false;
+        private _weaponRows = _weaponEntries apply {
+            [_x select 3, [_x select 4] call _fnc_formatTime, str (_x select 5), str (_x select 6), str (_x select 7), str (_x select 8)]
+        };
+        private _weaponColumns = [
+            [KEY("column_weapon"), 0, 54, false],
+            [KEY("column_time"), 54, 18, true],
+            [KEY("column_soldiers"), 72, 16, true],
+            [KEY("column_vehicles"), 88, 16, true],
+            [KEY("column_aircraft"), 104, 16, true],
+            [KEY("column_shots"), 120, 18, true]
+        ];
+        _top = [DETAILS_LEFT, _top, KEY("section_weapons"), 138, _weaponColumns, _weaponRows, KEY("no_weapons")] call _fnc_table;
+
+        // Steam UID at the very bottom, admins only, like on the Player Management tab
+        if ([] call FUNCMAIN(isLocalAdmin)) then {
+            _top = _top + DETAILS_SECTION_GAP;
+            ["A3A_Text", DETAILS_LEFT, _top, DETAILS_LABEL_W, localize "STR_antistasi_dialogs_main_admin_player_uid_label"] call _fnc_add;
+            ["A3A_TextRight", DETAILS_LEFT + DETAILS_LABEL_W, _top, 138 - DETAILS_LABEL_W, _uid] call _fnc_add;
+        };
     };
 
     default

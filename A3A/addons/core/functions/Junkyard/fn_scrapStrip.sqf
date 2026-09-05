@@ -54,6 +54,7 @@ private _class = typeOf _wreck;
 private _price = [_class] call A3A_fnc_junkyardPrice;
 private _pay = round ((_price * (SCRAP_SHARE_MIN + random (SCRAP_SHARE_MAX - SCRAP_SHARE_MIN))) max A3A_scrapMinPay);
 [_pay, _player] call A3A_fnc_resourcesPlayer;
+[[_player] call A3A_fnc_playerStats_getUID, [["vehiclesScrapped", 1], ["scrapMoney", _pay]]] call A3A_fnc_playerStats_add;
 
 // Hand the husk to the garbage cleaner: front of the queue with its proximity bumps used up, so the next pass deletes it
 _wreck setVariable ["A3A_gcBumps", A3A_gcMaxBumps];

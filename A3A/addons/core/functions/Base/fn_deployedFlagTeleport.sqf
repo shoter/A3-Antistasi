@@ -39,4 +39,4 @@ if (!(player call A3A_fnc_isMember || player == theBoss) && {!([_destPos] call A
     [_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_members"] call A3A_fnc_customHint;
 };
 
-[player, _destPos, player, true, 3] call A3A_fnc_fastTravelMove;
+[player, _destPos, player, true, 3, "flagTeleports"] call A3A_fnc_fastTravelMove;

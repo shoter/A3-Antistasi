@@ -82,6 +82,7 @@ if(_caller getVariable ["intelFound", false]) then
         [localize "STR_A3A_fn_intel_title1", localize "STR_A3A_fn_intel_leader_compl_found"] call A3A_fnc_customHint;
         ["Small", _side] remoteExec ["A3A_fnc_selectIntel", 2];
         [5, _caller] call A3A_fnc_playerScoreAdd;
+        [[_caller] call A3A_fnc_playerStats_getUID, [["intelFound", 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
     }
     else
     {

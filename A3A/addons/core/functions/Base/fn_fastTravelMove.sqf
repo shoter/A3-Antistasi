@@ -10,6 +10,7 @@ Arguments:
     <OBJECT> Player who ordered the fast travel
     <BOOL> Skip the money cost [DEFAULT = false]
     <SCALAR> Travel time divisor, e.g. 3 for three times faster [DEFAULT = 1]
+    <STRING> Player statistic counted for the ordering player on arrival, "fastTravels" or "flagTeleports" [DEFAULT = "fastTravels"]
 
 Scope: Local
 Environment: Scheduled
@@ -27,7 +28,7 @@ License: APL-ND
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_groupX", "_base", "_player", ["_free", false, [false]], ["_timeDivisor", 1, [0]]];
+params ["_groupX", "_base", "_player", ["_free", false, [false]], ["_timeDivisor", 1, [0]], ["_statKey", "fastTravels", [""]]];
 private _titleStr = localize "STR_A3A_fn_dialogs_ftradio_title";
 private _isHC = (_groupX isEqualType grpNull);
 private _destCentre = if (_base isEqualType "") then { markerPos _base } else { _base };
@@ -131,6 +132,9 @@ private _destPos = _destCentre getPos [30, random 360];
 		_x doFollow leader _x;
 	};
 } forEach _ftUnits;
+
+// Player statistics: the move went through
+[[_player] call A3A_fnc_playerStats_getUID, [[_statKey, 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
 
 if (!_isHC) then {
 	disableUserInput false;

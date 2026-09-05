@@ -9,6 +9,13 @@ publishes it as the Workshop change note, so write it for players. Format and ru
 ### Changed
 - Chronicle entries are stamped with the server's clock instead of campaign uptime. For the last seven days the time column says how long ago it happened, older entries show the date as dd.mm, and hovering over the time shows the full date and time. Entries written before this update keep showing campaign uptime.
 
+## 2026-09-05 - Player statistics in depth
+
+### Added
+- The Details view of the Players tab now scrolls and shows much more: time and distance travelled on foot, in ground vehicles, aircraft and boats, swimming and on static weapons; time in each role and as commander; time undercover; longest session; money spent, donated and earned from scrap; captures and defences the player took part in; intel found; recruits and vehicles lost; vehicles bought, wrecks scrapped, fast travels, rally flag teleports and air taxi rides.
+- A weapons and vehicles table at the bottom of Details: for every weapon carried or vehicle used, the time with it, the soldiers, vehicles and aircraft killed with it, and the shots fired.
+- Everything is collected from now on and stored in the campaign save with the other player statistics; older records start these at zero.
+
 ## 2026-09-05 - Chronicle records more and keeps more
 
 ### Added

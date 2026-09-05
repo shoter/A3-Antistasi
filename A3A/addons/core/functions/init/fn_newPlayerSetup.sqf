@@ -45,3 +45,6 @@ player addEventHandler ["Killed", {
 
 // Prevent players getting shot by their own AIs. EH is respawn-persistent
 player addEventHandler ["HandleRating", {0}];
+
+// Player statistics: shot counting, attached again here after singleplayer respawns
+[player] call A3A_fnc_playerStats_attachFiredEH;

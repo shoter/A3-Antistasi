@@ -44,7 +44,22 @@ _params = _params apply { if (_x isEqualType sideUnknown) then { [_x] call _fnc_
 
 // A position resolves to the rebel players near it, e.g. the ones who captured a site
 if (_actor isEqualType []) then {
-    private _names = (allPlayers inAreaArray [_actor, ACTOR_RADIUS, ACTOR_RADIUS]) select { side group _x == teamPlayer } apply { name _x };
+    private _present = (allPlayers inAreaArray [_actor, ACTOR_RADIUS, ACTOR_RADIUS]) select { side group _x == teamPlayer };
+
+    // Player statistics: everyone present gets the capture or the defence credited
+    private _statKey = switch (_type) do {
+        case "siteCaptured";
+        case "townCaptured": { "captures" };
+        case "attackRepelled";
+        case "punishmentRepelled";
+        case "hqDefended": { "defences" };
+        default { "" };
+    };
+    if (_statKey != "") then {
+        { [[_x] call A3A_fnc_playerStats_getUID, [[_statKey, 1]]] call A3A_fnc_playerStats_add } forEach _present;
+    };
+
+    private _names = _present apply { name _x };
     private _extra = (count _names) - ACTOR_MAX_NAMES;
     _names resize ((count _names) min ACTOR_MAX_NAMES);
     _actor = _names joinString ", ";

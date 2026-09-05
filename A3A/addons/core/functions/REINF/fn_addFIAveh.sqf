@@ -36,6 +36,7 @@ private _fnc_placed = {
 	_vehicle setFuel random [0.10, 0.175, 0.25];
 	[_vehicle] call A3A_fnc_clampVehicleAmmo;
 	[_vehicle, teamPlayer] call A3A_fnc_AIVehInit;
+	[[player] call A3A_fnc_playerStats_getUID, [["vehiclesBought", 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
 	[_vehicle] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2];
 };
 

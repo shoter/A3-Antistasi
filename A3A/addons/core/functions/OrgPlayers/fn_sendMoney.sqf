@@ -54,6 +54,7 @@ if (_donateTo isEqualType "") exitWith {
         case ("faction"): {
             if ([-_donateAmount, _donateFrom] call A3A_fnc_resourcesPlayer) exitWith {
                 Info_3("%1 [UID: %2] donated $%3 to faction",name _donateFrom, getPlayerUID _donateFrom, _donateAmount);
+                [[_donateFrom] call A3A_fnc_playerStats_getUID, [["moneyDonated", _donateAmount]]] call A3A_fnc_playerStats_add;
                 [0, _donateAmount] call A3A_fnc_resourcesFIA;
                 private _scoreReward = 1 * (_donateAmount / 100);
                 player setVariable ["score", (player getVariable ["score", 0]) + _scoreReward, true];  // Raise player score for donating.
@@ -78,6 +79,7 @@ if (isNull _donateTo || !isPlayer _donateTo) exitWith {
 if ([-_donateAmount, _donateFrom] call A3A_fnc_resourcesPlayer) exitWith {
     [_donateAmount, _donateTo] call A3A_fnc_resourcesPlayer;
     Info_5("%1 [UID: %2] donated $%3 to %4 [UID: %5]",name _donateFrom, getPlayerUID _donateFrom, _donateAmount, name _donateTo, getPlayerUID _donateTo);
+    [[_donateFrom] call A3A_fnc_playerStats_getUID, [["moneyDonated", _donateAmount]]] call A3A_fnc_playerStats_add;
     [_title, format [localize "STR_A3A_fn_orgp_donMon_donated_player", name _donateTo, _donateAmount]] remoteExecCall ["A3A_fnc_customHint", _donateFrom];
     [_title, format [localize "STR_A3A_fn_orgp_donMon_received_money", _donateAmount, name _donateFrom]] remoteExecCall ["A3A_fnc_customHint", _donateTo];
     true;  // Return

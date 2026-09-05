@@ -1,6 +1,6 @@
 /*
 Maintainer: Shoter
-    Ends the statistics session of a player and adds its length to the time online.
+    Ends the statistics session of a player, adds its length to the time online and keeps the longest session.
     Called from the PlayerDisconnected mission event handler; UIDs without a session (headless clients) are ignored.
 
 Arguments:
@@ -32,11 +32,12 @@ params [["_uid", "", [""]]];
 
 if (_uid == "" || {!(_uid in A3A_playerSessions)}) exitWith {};
 
-private _start = A3A_playerSessions deleteAt _uid;
-private _elapsed = (serverTime - _start) max 0;
+(A3A_playerSessions deleteAt _uid) params ["_lastFlush", "_sessionStart"];
+private _elapsed = (serverTime - _lastFlush) max 0;
 
 private _stats = [_uid] call A3A_fnc_playerStats_get;
 _stats set ["timeOnline", (_stats get "timeOnline") + _elapsed];
+_stats set ["longestSession", (_stats get "longestSession") max ((serverTime - _sessionStart) max 0)];
 _stats set ["lastSeen", systemTimeUTC];
 
-Info_2("Ended statistics session of player %1 after %2 seconds", _uid, round _elapsed);
+Info_2("Ended statistics session of player %1 after %2 seconds", _uid, round (serverTime - _sessionStart));

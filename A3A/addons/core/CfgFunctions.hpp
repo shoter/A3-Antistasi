@@ -638,6 +638,8 @@ class CfgFunctions
         class PlayerStats {
             file = QPATHTOFOLDER(functions\PlayerStats);
             class playerStats_add {};
+            class playerStats_attachFiredEH {};
+            class playerStats_clientInit {};
             class playerStats_flushSessions {};
             class playerStats_get {};
             class playerStats_getUID {};
@@ -648,6 +650,8 @@ class CfgFunctions
             class playerStats_request {};
             class playerStats_requestDetails {};
             class playerStats_resolveKiller {};
+            class playerStats_sampleLoop {};
+            class playerStats_weaponClass {};
         };
 
         class proxy {
