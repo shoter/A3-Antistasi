@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Chronicle records more and keeps more
+
+### Added
+- The Chronicle now also records mission outcomes with the players who were there, commander changes, the start of the campaign, radio towers destroyed and rebuilt, enemy aggression level changes, the moment most of the population sides with the rebels or turns away again, changes to the reward split, and every weapon, item or backpack unlocked in the arsenal. Two new filters, Missions and Arsenal, go with them.
+
+### Changed
+- The Chronicle keeps 3000 entries instead of 300 and shows them 50 per page, newest first, with Newer and Older buttons. Existing saves keep their entries.
+
 ## 2026-09-05 - One GitHub release per build
 
 ### Changed

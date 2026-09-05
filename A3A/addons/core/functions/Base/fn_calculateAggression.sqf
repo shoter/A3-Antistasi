@@ -35,6 +35,9 @@ aggressionInvaders = _newInvadersValue;
 publicVariable "aggressionOccupants";
 publicVariable "aggressionInvaders";
 
+private _oldLevelOccupants = aggressionLevelOccupants;
+private _oldLevelInvaders = aggressionLevelInvaders;
+
 private _levelBoundsOccupants = [((aggressionLevelOccupants - 1) * 20) - 2.5, aggressionLevelOccupants * 20 + 2.5];
 private _levelBoundsInvaders = [((aggressionLevelInvaders - 1) * 20) - 2.5, aggressionLevelInvaders * 20 + 2.5];
 
@@ -78,6 +81,12 @@ else
 
 if(_levelsChanged) then
 {
+    // Chronicle entries, not on the silent recalculation after a load
+    if (!_silent) then {
+        if (aggressionLevelOccupants != _oldLevelOccupants) then { ["aggressionChanged", "", [Occupants, _oldLevelOccupants, aggressionLevelOccupants]] call A3A_fnc_campaignLogAdd };
+        if (aggressionLevelInvaders != _oldLevelInvaders) then { ["aggressionChanged", "", [Invaders, _oldLevelInvaders, aggressionLevelInvaders]] call A3A_fnc_campaignLogAdd };
+    };
+
     //Updating HUDs of players
     [] remoteExec ["A3A_fnc_statistics", [teamPlayer, civilian]];
     if(!_silent) then

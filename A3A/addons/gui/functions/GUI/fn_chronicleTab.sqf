@@ -15,12 +15,14 @@ Environment: Unscheduled
 Public: No
 Dependencies:
     <NUMBER> A3A_campaignLogVersion
+    <NUMBER> A3A_campaignLogCap
     <ARRAY> A3A_campaignLog (only read where this machine is the server)
     A3A_fnc_campaignLogRequest, A3A_fnc_localizar, A3A_fnc_junkyardClock, A3A_fnc_timeSpan_format
 
 Example:
     ["update"] call FUNC(chronicleTab);
     ["filter", ["attacks"]] call FUNC(chronicleTab);
+    ["page", [1]] call FUNC(chronicleTab); // one page of older entries
     ["receive", [12, [[12, 3600, "siteCaptured", "outpost_3", ["AAF"], "Shoter"]]]] call FUNC(chronicleTab); // sent by the server
     ["showOnMap"] call FUNC(chronicleTab);
 
@@ -34,7 +36,7 @@ License: APL-ND
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define CHRONICLE_CAP 300
+#define CHRONICLE_PAGE_SIZE 50
 
 params [["_mode","onLoad"], ["_params",[]]];
 
@@ -48,13 +50,15 @@ private _filters = [
     ["sites", A3A_IDC_CHRONICLEFILTER_SITES],
     ["towns", A3A_IDC_CHRONICLEFILTER_TOWNS],
     ["attacks", A3A_IDC_CHRONICLEFILTER_ATTACKS],
+    ["missions", A3A_IDC_CHRONICLEFILTER_MISSIONS],
     ["hq", A3A_IDC_CHRONICLEFILTER_HQ],
     ["players", A3A_IDC_CHRONICLEFILTER_PLAYERS],
+    ["arsenal", A3A_IDC_CHRONICLEFILTER_ARSENAL],
     ["campaign", A3A_IDC_CHRONICLEFILTER_CAMPAIGN]
 ];
 
 // Event type -> [filter, tone, kinds of the extra params]
-// Kinds: "text" as is, "marker" localized site name, "rank" rank display name
+// Kinds: "text" as is, "marker" localized site name, "rank" rank display name, "aggro" aggression level name, "item" config display name
 // Tones: "good" rebel gain, "bad" rebel loss, "warning" incoming attack, "neutral", "enemy" enemy-vs-enemy
 private _types = createHashMapFromArray [
     ["siteCaptured",         ["sites",    "good",    ["text"]]],
@@ -77,7 +81,19 @@ private _types = createHashMapFromArray [
     ["playerPromoted",       ["players",  "good",    ["rank"]]],
     ["warLevelChanged",      ["campaign", "neutral", ["text", "text"]]],
     ["campaignWon",          ["campaign", "good",    []]],
-    ["campaignLost",         ["campaign", "bad",     []]]
+    ["campaignLost",         ["campaign", "bad",     []]],
+    ["missionSucceeded",     ["missions", "good",    ["text"]]],
+    ["missionFailed",        ["missions", "bad",     ["text"]]],
+    ["commanderAssigned",    ["players",  "neutral", []]],
+    ["commanderChanged",     ["players",  "neutral", ["text"]]],
+    ["campaignStarted",      ["campaign", "neutral", ["text", "text", "text", "text"]]],
+    ["radioTowerDestroyed",  ["sites",    "good",    []]],
+    ["radioTowerRebuilt",    ["sites",    "good",    []]],
+    ["aggressionChanged",    ["campaign", "neutral", ["text", "aggro", "aggro"]]],
+    ["populationMajority",   ["campaign", "good",    []]],
+    ["populationMajorityLost", ["campaign", "bad",   []]],
+    ["rewardSplitChanged",   ["players",  "neutral", ["text", "text"]]],
+    ["itemUnlocked",         ["arsenal",  "good",    ["item"]]]
 ];
 
 // The server reads its own log, everyone else keeps the copy filled by "receive"
@@ -130,11 +146,20 @@ switch (_mode) do
         lbClear _listBox;
         private _shown = 0;
 
-        // Newest first
+        // Entries that pass the filter, newest first, then only the current page of them
+        private _visible = [];
         for "_i" from (count _entries - 1) to 0 step -1 do {
+            private _category = (_types getOrDefault [(_entries select _i) select 2, ["campaign", "neutral", []]]) select 0;
+            if (_filter == "all" || {_filter == _category}) then { _visible pushBack _i };
+        };
+        private _pageCount = (ceil ((count _visible) / CHRONICLE_PAGE_SIZE)) max 1;
+        private _page = ((_tab getVariable ["page", 0]) min (_pageCount - 1)) max 0;
+        _tab setVariable ["page", _page];
+
+        {
+            private _i = _x;
             (_entries select _i) params ["", "_time", "_type", "_target", "_eventParams", "_actor"];
-            (_types getOrDefault [_type, ["campaign", "neutral", []]]) params ["_category", "_tone", "_kinds"];
-            if (_filter != "all" && {_filter != _category}) then { continue };
+            (_types getOrDefault [_type, ["campaign", "neutral", []]]) params ["", "_tone", "_kinds"];
 
             // Text is "%1 target, %2 actor, %3.. params", all localized here rather than on the server
             private _targetName = call {
@@ -150,6 +175,12 @@ switch (_mode) do
                 _formatParams pushBack (call {
                     if (_kind == "marker") exitWith { [_value] call A3A_fnc_localizar };
                     if (_kind == "rank") exitWith { [_value, "displayName"] call BIS_fnc_rankParams };
+                    if (_kind == "aggro") exitWith { format ["%1 (%2)", _value, [_value] call A3A_fnc_getAggroLevelString] };
+                    if (_kind == "item") exitWith {
+                        private _cfg = [configFile >> "CfgWeapons", configFile >> "CfgVehicles", configFile >> "CfgGlasses", configFile >> "CfgMagazines"] select { isClass (_x >> _value) };
+                        private _name = if (_cfg isEqualTo []) then { "" } else { getText ((_cfg select 0) >> _value >> "displayName") };
+                        if (_name isEqualTo "") then { _value } else { _name }
+                    };
                     _value
                 });
             } forEach _eventParams;
@@ -167,7 +198,7 @@ switch (_mode) do
             _listBox lnbSetColor [[_index, 0], _color];
             _listBox lnbSetColor [[_index, 1], _color];
             _shown = _shown + 1;
-        };
+        } forEach (_visible select [_page * CHRONICLE_PAGE_SIZE, CHRONICLE_PAGE_SIZE]);
 
         if (_shown == 0) then {
             private _key = ["STR_antistasi_dialogs_main_chronicle_empty", "STR_antistasi_dialogs_main_chronicle_loading"] select _loading;
@@ -181,13 +212,26 @@ switch (_mode) do
             _x params ["_id", "_idc"];
             (_display displayCtrl _idc) ctrlSetTextColor ([A3A_COLOR_TEXT_DARKER_SQF, [1, 1, 1, 1]] select (_id == _filter));
         } forEach _filters;
+
+        (_display displayCtrl A3A_IDC_CHRONICLENEWERPAGEBUTTON) ctrlEnable (_page > 0);
+        (_display displayCtrl A3A_IDC_CHRONICLEOLDERPAGEBUTTON) ctrlEnable (_page < _pageCount - 1);
+        (_display displayCtrl A3A_IDC_CHRONICLEPAGELABEL) ctrlSetText format [localize "STR_antistasi_dialogs_main_chronicle_page", _page + 1, _pageCount];
     };
 
     case ("filter"):
     {
-        // Takes 1 parameter: <STRING> filter id, one of the ids in _filters
+        // Takes 1 parameter: <STRING> filter id, one of the ids in _filters. Starts again from the newest entries.
         _params params [["_filter", "all", [""]]];
         _tab setVariable ["filter", _filter];
+        _tab setVariable ["page", 0];
+        ["render"] call FUNC(chronicleTab);
+    };
+
+    case ("page"):
+    {
+        // Takes 1 parameter: <NUMBER> pages to move by, positive towards older entries. "render" clamps the result.
+        _params params [["_delta", 0, [0]]];
+        _tab setVariable ["page", (_tab getVariable ["page", 0]) + _delta];
         ["render"] call FUNC(chronicleTab);
     };
 
@@ -200,7 +244,7 @@ switch (_mode) do
         private _knownSeq = missionNamespace getVariable ["A3A_chronicleSeq", 0];
         private _log = missionNamespace getVariable ["A3A_chronicleLog", []];
         _log append (_entries select { (_x select 0) > _knownSeq });      // a repeated request must not duplicate rows
-        if (count _log > CHRONICLE_CAP) then { _log deleteRange [0, count _log - CHRONICLE_CAP] };
+        if (count _log > A3A_campaignLogCap) then { _log deleteRange [0, count _log - A3A_campaignLogCap] };
         A3A_chronicleLog = _log;
         A3A_chronicleSeq = _seq max _knownSeq;
         Debug_2("Received %1 chronicle entries, now at #%2", count _entries, A3A_chronicleSeq);

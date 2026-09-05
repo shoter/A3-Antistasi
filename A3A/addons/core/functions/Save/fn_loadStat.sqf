@@ -100,6 +100,13 @@ if (_varName in _specialVarLoads) then {
         // Version is the sequence number of the newest entry, so client deltas continue across restarts
         A3A_campaignLogVersion = if (A3A_campaignLog isEqualTo []) then { 0 } else { (A3A_campaignLog select (count A3A_campaignLog - 1)) select 0 };
         publicVariable "A3A_campaignLogVersion";
+        // Population majority state comes from the newest majority entry, so the next check does not repeat it
+        A3A_campaignLogMajority = false;
+        for "_i" from (count A3A_campaignLog - 1) to 0 step -1 do {
+            private _type = (A3A_campaignLog select _i) select 2;
+            if (_type == "populationMajority") exitWith { A3A_campaignLogMajority = true };
+            if (_type == "populationMajorityLost") exitWith {};
+        };
     };
     if (_varName == 'membersX') then {membersX = +_varValue; publicVariable "membersX"};
     if (_varName == 'mrkNATO') then {{sidesX setVariable [[_x] call _translateMarker,Occupants,true]} forEach _varValue;};
