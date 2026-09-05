@@ -79,6 +79,10 @@ DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // plus one wildcard ve
 DECLARE_SERVER_VAR(A3A_junkyardJunkDuration, 10*60*60);  // seconds of campaign uptime a bought wreck stays "junk" (no free repairs)
 DECLARE_SERVER_VAR(A3A_junkyardClockOffset, 0);          // campaign clock = offset + serverTime, restored from save
 
+// Scrapyard: engineers with a toolkit strip dead vehicles for 1-3% of their junkyard price
+DECLARE_SERVER_VAR(A3A_scrapStripDuration, 45);          // seconds of hold action
+DECLARE_SERVER_VAR(A3A_scrapMinPay, 50);                 // PLN floor per wreck
+
 // Mission reward split set by the commander in the HQ dialog, whole percentages of every reward (see A3A_tasks_fnc_rewardPlayers)
 DECLARE_SERVER_VAR(A3A_rewardTaxPercent, 0);             // paid into the faction fund, 0-50
 DECLARE_SERVER_VAR(A3A_rewardCommanderPercent, 20);      // paid to the commander personally, 0-20, the rest goes to the players

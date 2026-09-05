@@ -524,6 +524,9 @@ class CfgFunctions
             class junkyardPrice {};
             class junkyardPurchase {};
             class junkyardRefresh {};
+            class scrapActionMonitor {};
+            class scrapCanStrip {};
+            class scrapStrip {};
         };
 
         class ModsAndDLC {
