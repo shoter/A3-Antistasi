@@ -6,7 +6,7 @@ Maintainer: Shoter
     Nested tables:
         movement: category -> [seconds, metres] for "foot", "ground", "air", "boat", "swim" and "static"
         roles:    role name -> seconds
-        weapons:  weapon or vehicle class -> [seconds, enemy soldier kills, vehicle kills, aircraft kills, shots fired]
+        weapons:  weapon or vehicle class -> [seconds, enemy soldier kills, vehicle kills, aircraft kills, shots fired, hits]
 
 Arguments:
     <STRING> Player UID

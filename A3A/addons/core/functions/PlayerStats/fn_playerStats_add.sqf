@@ -2,13 +2,13 @@
 Maintainer: Shoter
     Adds to the statistics of a player. Remote executed on the server by the machines that observe the events.
     Only keys that exist in the record and hold numbers are accepted, anything else is ignored.
-    Weapon deltas go into the per-weapon table: [seconds, enemy soldier kills, vehicle kills, aircraft kills, shots fired].
+    Weapon deltas go into the per-weapon table: [seconds, enemy soldier kills, vehicle kills, aircraft kills, shots fired, hits].
 
 Arguments:
     <STRING> Player UID
     <ARRAY<ARRAY>> Increments as [key, delta] pairs                                              [DEFAULT=[]]
     <ARRAY<ARRAY>> Maxima as [key, value] pairs, the key keeps the larger value                   [DEFAULT=[]]
-    <ARRAY<ARRAY>> Weapon deltas as [weapon or vehicle class, [dSeconds, dSoldiers, dVehicles, dAircraft, dShots]] pairs  [DEFAULT=[]]
+    <ARRAY<ARRAY>> Weapon deltas as [weapon or vehicle class, [dSeconds, dSoldiers, dVehicles, dAircraft, dShots, dHits]] pairs  [DEFAULT=[]]
 
 Return Value:
     Nothing
@@ -20,7 +20,7 @@ Dependencies:
     <HASHMAP> A3A_playerStats
 
 Example:
-    [getPlayerUID player, [["kills", 1]], [["longestKill", 320]], [["arifle_MX_F", [0, 1, 0, 0, 0]]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
+    [getPlayerUID player, [["kills", 1]], [["longestKill", 320]], [["arifle_MX_F", [0, 1, 0, 0, 0, 0]]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
 
 License: APL-ND
 
@@ -29,7 +29,7 @@ License: APL-ND
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define WEAPON_FIELDS 5
+#define WEAPON_FIELDS 6
 
 if (!isServer) exitWith { Error("Miscalled server-only function") };
 

@@ -4239,6 +4239,22 @@
         <Original>No weapon use recorded yet</Original>
         <Polish>Brak zapisanego użycia broni</Polish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_shots_fired_label">
+        <Original>Shots fired</Original>
+        <Polish>Oddane strzały</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_accuracy_label">
+        <Original>Accuracy</Original>
+        <Polish>Celność</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_accuracy_tooltip">
+        <Original>Share of shots that hit a living enemy soldier or an enemy vehicle</Original>
+        <Polish>Odsetek strzałów, które trafiły żywego wrogiego żołnierza lub wrogi pojazd</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_accuracy">
+        <Original>Accuracy</Original>
+        <Polish>Celność</Polish>
+      </Key>
     </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">

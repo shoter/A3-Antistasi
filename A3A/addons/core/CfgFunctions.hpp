@@ -643,6 +643,7 @@ class CfgFunctions
             class playerStats_flushSessions {};
             class playerStats_get {};
             class playerStats_getUID {};
+            class playerStats_isEnemyTarget {};
             class playerStats_onConnect {};
             class playerStats_onDisconnect {};
             class playerStats_onEntityKilled {};

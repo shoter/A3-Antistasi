@@ -5,7 +5,7 @@ Maintainer: Shoter
     one line of controls per player with a Details button. The rows come from the server (A3A_fnc_playerStats_request),
     the details of one player from A3A_fnc_playerStats_requestDetails; both answer through this function.
     The Details view is built at runtime inside a scrolling group: label/value sections, the movement and role tables
-    and the per-weapon table at the bottom.
+    and the per-weapon table with kills, shots and accuracy at the bottom.
 
 Arguments:
     <STRING> Mode
@@ -306,14 +306,15 @@ switch (_mode) do
             _top
         };
 
-        // A section title, a header line and text rows: columns [headerKey, x offset, width, rightAligned]. Returns the next free top.
+        // A section title, a header line and text rows: columns [headerKey, x offset, width, rightAligned, tooltipKey]. Returns the next free top.
         private _fnc_table = {
             params ["_left", "_top", "_sectionKey", "_width", "_tableColumns", "_tableRows", ["_emptyKey", ""]];
             ["A3A_SectionLabelCenter", _left, _top, _width, localize _sectionKey] call _fnc_add;
             _top = _top + DETAILS_ROW_STEP;
             {
-                _x params ["_headerKey", "_offset", "_columnWidth", "_rightAligned"];
-                private _header = [["A3A_Text", "A3A_TextRight"] select _rightAligned, _left + _offset, _top, _columnWidth, localize _headerKey] call _fnc_add;
+                _x params ["_headerKey", "_offset", "_columnWidth", "_rightAligned", ["_tooltipKey", ""]];
+                private _tooltip = if (_tooltipKey == "") then { "" } else { localize _tooltipKey };
+                private _header = [["A3A_Text", "A3A_TextRight"] select _rightAligned, _left + _offset, _top, _columnWidth, localize _headerKey, _tooltip] call _fnc_add;
                 _header ctrlSetFontHeight GUI_TEXT_SIZE_SMALL;
                 _header ctrlSetTextColor A3A_COLOR_TEXT_DARKER_SQF;
             } forEach _tableColumns;
@@ -359,6 +360,21 @@ switch (_mode) do
         #define KEY(suffix) ("STR_antistasi_dialogs_main_playerstats_" + suffix)
         #define STAT(key) (_stats getOrDefault [key, 0])
 
+        // Shots and hits over every weapon and vehicle, for the overall accuracy
+        private _weapons = _stats getOrDefault ["weapons", createHashMap];
+        private _totalShots = 0;
+        private _totalHits = 0;
+        {
+            if (_y isEqualType []) then {
+                _totalShots = _totalShots + (_y param [4, 0, [0]]);
+                _totalHits = _totalHits + (_y param [5, 0, [0]]);
+            };
+        } forEach _weapons;
+        private _fnc_accuracy = {
+            params ["_shots", "_hits"];
+            if (_shots <= 0) then { "-" } else { (str round (100 * _hits / _shots)) + "%" };
+        };
+
         // Row 1: Combat | Activity
         private _combatRows = [
             [KEY("kills_label"), str _kills],
@@ -369,7 +385,9 @@ switch (_mode) do
             [KEY("player_kills_label"), str STAT("playerKills")],
             [KEY("longest_kill_label"), format ["%1 m", STAT("longestKill")]],
             [KEY("deaths_label"), str _deaths],
-            [KEY("kd_label"), [_kills, _deaths] call _fnc_formatKD]
+            [KEY("kd_label"), [_kills, _deaths] call _fnc_formatKD],
+            [KEY("shots_fired_label"), str _totalShots],
+            [KEY("accuracy_label"), [_totalShots, _totalHits] call _fnc_accuracy, KEY("accuracy_tooltip")]
         ];
         private _activityRows = [
             [KEY("sessions_label"), str STAT("sessions")],
@@ -458,26 +476,26 @@ switch (_mode) do
         _top = (_leftBottom max _rightBottom) + DETAILS_SECTION_GAP;
 
         // Row 5: weapons and vehicles, most kills first, then most time
-        private _weapons = _stats getOrDefault ["weapons", createHashMap];
         private _weaponEntries = [];
         {
             private _values = _y;
             if !(_values isEqualType []) then { continue };
-            while { count _values < 5 } do { _values pushBack 0 };
-            _values params ["_seconds", "_soldiers", "_vehicles", "_aircraft", "_shots"];
-            _weaponEntries pushBack [_soldiers + _vehicles + _aircraft, _seconds, _x, [_x] call _fnc_weaponName, _seconds, _soldiers, _vehicles, _aircraft, _shots];
+            while { count _values < 6 } do { _values pushBack 0 };
+            _values params ["_seconds", "_soldiers", "_vehicles", "_aircraft", "_shots", "_hits"];
+            _weaponEntries pushBack [_soldiers + _vehicles + _aircraft, _seconds, _x, [_x] call _fnc_weaponName, _seconds, _soldiers, _vehicles, _aircraft, _shots, _hits];
         } forEach _weapons;
         _weaponEntries sort false;
         private _weaponRows = _weaponEntries apply {
-            [_x select 3, [_x select 4] call _fnc_formatTime, str (_x select 5), str (_x select 6), str (_x select 7), str (_x select 8)]
+            [_x select 3, [_x select 4] call _fnc_formatTime, str (_x select 5), str (_x select 6), str (_x select 7), str (_x select 8), [_x select 8, _x select 9] call _fnc_accuracy]
         };
         private _weaponColumns = [
-            [KEY("column_weapon"), 0, 54, false],
-            [KEY("column_time"), 54, 18, true],
-            [KEY("column_soldiers"), 72, 16, true],
-            [KEY("column_vehicles"), 88, 16, true],
-            [KEY("column_aircraft"), 104, 16, true],
-            [KEY("column_shots"), 120, 18, true]
+            [KEY("column_weapon"), 0, 44, false],
+            [KEY("column_time"), 44, 16, true],
+            [KEY("column_soldiers"), 60, 14, true],
+            [KEY("column_vehicles"), 74, 14, true],
+            [KEY("column_aircraft"), 88, 14, true],
+            [KEY("column_shots"), 102, 16, true],
+            [KEY("column_accuracy"), 118, 20, true, KEY("accuracy_tooltip")]
         ];
         _top = [DETAILS_LEFT, _top, KEY("section_weapons"), 138, _weaponColumns, _weaponRows, KEY("no_weapons")] call _fnc_table;
 

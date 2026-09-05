@@ -1,7 +1,7 @@
 /*
 Maintainer: Shoter
-    Client side of the player statistics: counts the shots the local player fires per weapon or vehicle and sends
-    the totals to the server once a minute. The Fired handler is attached to the current body and re-attached after
+    Client side of the player statistics: counts the shots the local player fires per weapon or vehicle, and the
+    ones that hit an enemy, and sends the totals to the server once a minute. The Fired handler is attached to the current body and re-attached after
     every respawn. Called once from initClient.
 
 Arguments:
@@ -31,7 +31,7 @@ if (!hasInterface) exitWith {};
 if (!isNil "A3A_playerStats_clientInitDone") exitWith {};
 A3A_playerStats_clientInitDone = true;
 
-A3A_playerStats_shotsBuffer = createHashMap;        // weapon or vehicle class -> shots since the last flush
+A3A_playerStats_shotsBuffer = createHashMap;        // weapon or vehicle class -> [shots, hits] since the last flush
 
 [player] call A3A_fnc_playerStats_attachFiredEH;
 
@@ -46,7 +46,7 @@ addMissionEventHandler ["EntityRespawned", {
         sleep FLUSH_INTERVAL;
         if (A3A_playerStats_shotsBuffer isEqualTo createHashMap) then { continue };
         private _deltas = [];
-        { _deltas pushBack [_x, [0, 0, 0, 0, _y]] } forEach A3A_playerStats_shotsBuffer;
+        { _deltas pushBack [_x, [0, 0, 0, 0, _y select 0, _y select 1]] } forEach A3A_playerStats_shotsBuffer;
         A3A_playerStats_shotsBuffer = createHashMap;
         [[player] call A3A_fnc_playerStats_getUID, [], [], _deltas] remoteExecCall ["A3A_fnc_playerStats_add", 2];
     };

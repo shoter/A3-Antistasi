@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Player accuracy
+
+### Added
+- Accuracy in a player's Details: the share of shots that hit a living enemy soldier or an enemy vehicle, overall in the Combat section (with the total shots fired) and per weapon or vehicle in the table at the bottom. Hits are counted from now on, so weapons used before this build show accuracy from their next shots.
+
 ## 2026-09-05 - Players tab fixes
 
 ### Fixed
