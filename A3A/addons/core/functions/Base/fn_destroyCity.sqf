@@ -1,5 +1,8 @@
 params ["_markerX"];
 
+// Rebel town upgrades go first, the damage loop below would wreck their props anyway
+[_markerX, "destroyed"] call A3A_fnc_townUpgradeClearCity;
+
 private _positionX = getMarkerPos _markerX;
 private _size = [_markerX] call A3A_fnc_sizeMarker;
 

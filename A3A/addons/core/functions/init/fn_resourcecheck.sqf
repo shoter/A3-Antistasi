@@ -14,6 +14,8 @@ while {true} do
 
 	private _resAdd = 50;//0
 	private _hrAdd = 2; // A3A_balancePlayerScaleBase;
+	private _upgradeRes = 0;		// extra income from town upgrades, for the report
+	private _upgradeHR = 0;
 
 	//private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
 	{
@@ -26,6 +28,22 @@ while {true} do
 		private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
 		private _resAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100) * A3A_rebelCashPopMult;
 		private _hrAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100) * A3A_rebelHRTickMult;
+
+		// Town upgrades, only present while the town is rebel-held
+		private _upgrades = A3A_cityInvest getOrDefault [_city, createHashMap];
+		if ("market" in _upgrades) then {
+			private _bonus = _resAddCity * (((A3A_townUpgradeHM get "market") # 4) - 1);
+			_resAddCity = _resAddCity + _bonus;
+			_upgradeRes = _upgradeRes + _bonus;
+		};
+		if ("recruit" in _upgrades) then {
+			private _bonus = _hrAddCity * (((A3A_townUpgradeHM get "recruit") # 4) - 1);
+			_hrAddCity = _hrAddCity + _bonus;
+			_upgradeHR = _upgradeHR + _bonus;
+		};
+		if ("clinic" in _upgrades) then {
+			[(A3A_townUpgradeHM get "clinic") # 4, _city, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+		};
 
 		_resAdd = _resAdd + _resAddCity;
 		_hrAdd = _hrAdd + _hrAddCity;
@@ -65,6 +83,9 @@ while {true} do
 		[_arsenalTab, _class, _count] call jn_fnc_arsenal_addItem;
 	} forEach (A3A_faction_reb get "initialRebelEquipment");
     private _textX = format ["<t size='0.6' color='#C1C0BB'>" + (localize "STR_A3A_fn_init_resourceCheck_income"), _hrAdd toFixed 1, ceil _resAdd];
+	if (_upgradeRes > 0 or _upgradeHR > 0) then {
+		_textX = format ["%1<br/>" + localize "STR_A3A_fn_townUpgrades_income", _textX, ceil _upgradeRes, _upgradeHR toFixed 1];
+	};
 	// Reward tax already went into the faction fund as missions completed, report the total since the last tick
 	private _taxCollected = missionNamespace getVariable ["A3A_rewardTaxCollected", 0];
 	if (_taxCollected > 0 || (missionNamespace getVariable ["A3A_rewardTaxPercent", 0]) > 0) then {

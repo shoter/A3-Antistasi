@@ -91,6 +91,12 @@ switch (_mode) do
             Trace_1("_fastTravelBlockers: %1", _fastTravelBlockers);
             private _ftUnit = [player, leader (_fastTravelMap getVariable "hcGroup")] select _hcMode;
             [_ftUnit, [vehicle _ftUnit], markerPos _selectedMarker] call FUNCMAIN(calculateFastTravelCost) params ["_fastTravelCost","_fastTravelTime"];
+            // Safehouse town upgrade: free and faster travel for players
+            private _safehouse = !_hcMode && {!isNil "A3A_townUpgradeHM"} && {_selectedMarker in citiesX} && {[_selectedMarker, "safehouse"] call A3A_fnc_townUpgradeHas};
+            if (_safehouse) then {
+                _fastTravelCost = 0;
+                _fastTravelTime = (round (_fastTravelTime / ((A3A_townUpgradeHM get "safehouse") # 4))) max 1;
+            };
             private _ftCostAllowed = (player getVariable ["moneyX", 0] >= _fastTravelCost);
 
             private _isFastTravelAllowed = _fastTravelBlockers isEqualTo [];
@@ -131,6 +137,7 @@ switch (_mode) do
             private _timeString = [[_fastTravelTime] call FUNCMAIN(secondsToTimeSpan),0,0,false,2] call FUNCMAIN(timeSpan_format);
             Trace_1("_infoText: %1", '"'+_infoText+'"');
             _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_time" + " " + _timeString + ".<br/><br/>";
+            if (_safehouse) then { _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_safehouse" + "<br/><br/>" };
 
             Trace_1("_infoText: %1", '"'+_infoText+'"');
             if (!_hcMode) then {
@@ -240,7 +247,16 @@ switch (_mode) do
             [_hcGroup,_marker,player] spawn A3A_fnc_fastTravelMove;
         } else {
             closeDialog 1;
-            [player,_marker,player] spawn A3A_fnc_fastTravelMove;
+            // Safehouse town upgrade: free, faster, and you arrive at the safehouse itself
+            private _safehouseData = [];
+            if (_marker in citiesX && {!isNil "A3A_townUpgradeHM"} && {!isNil "A3A_cityInvest"}) then {
+                _safehouseData = (A3A_cityInvest getOrDefault [_marker, createHashMap]) getOrDefault ["safehouse", []];
+            };
+            if (_safehouseData isNotEqualTo []) then {
+                [player, ASLToATL (_safehouseData # 0), player, true, (A3A_townUpgradeHM get "safehouse") # 4] spawn A3A_fnc_fastTravelMove;
+            } else {
+                [player,_marker,player] spawn A3A_fnc_fastTravelMove;
+            };
         };
     };
 

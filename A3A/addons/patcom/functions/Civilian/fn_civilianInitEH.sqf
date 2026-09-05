@@ -61,7 +61,7 @@ _unit addEventHandler ["Killed", {
     };
 
     if (_victim == _killer) then {
-        [-1, getPosATL _victim] remoteExecCall ["A3A_fnc_citySupportChange", 2];        // what case is this?
+        [-1, getPosATL _victim, true, true] remoteExecCall ["A3A_fnc_citySupportChange", 2];        // what case is this?
     } else {
         [_victim, _killer, objNull, "civilianKills"] call A3A_fnc_playerStats_reportKill;
         if (isPlayer _killer) then {
@@ -74,7 +74,7 @@ _unit addEventHandler ["Killed", {
         if (side group _killer == teamPlayer) then {
             ServerDebug("aggroEvent | Rebels killed a civilian");
             [Occupants, 10 * _multiplier, 60] remoteExec ["A3A_fnc_addAggression",2];
-            [-3 * _multiplier, getPosATL _victim] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+            [-3 * _multiplier, getPosATL _victim, true, true] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         };
     };
 

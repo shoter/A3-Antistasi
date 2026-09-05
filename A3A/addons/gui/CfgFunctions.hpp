@@ -42,6 +42,7 @@ class CfgFunctions {
             class setUpPlacerHints {};
             class teamLeaderRTSPlacerDialog {};
             class townsTab {};
+            class townUpgradesTab {};
             class warStatusTab {};
         };
 

@@ -44,6 +44,16 @@ private _vehCount = round (2 + random 1 + A3A_balancePlayerScale);
 private _data = [Invaders, _mrkOrigin, _mrkDest, "attack", _vehCount, _delay, ["airboost", "specops"]] call A3A_fnc_createAttackForceMixed;
 _data params ["_resources", "_vehicles", "_crewGroups", "_cargoGroups"];
 
+// Town upgrades: point a couple of squads at the rebel installations
+private _upgradePositions = (A3A_cityInvest getOrDefault [_mrkDest, createHashMap]) apply { _y # 0 };
+if (_upgradePositions isNotEqualTo []) then {
+    {
+        if (_forEachIndex >= 2) exitWith {};
+        private _target = selectRandom _upgradePositions;
+        (waypoints _x select -1) setWaypointPosition [[_target # 0, _target # 1, 0], 0];
+    } forEach _cargoGroups;
+};
+
 // May as well do it properly here
 A3A_supportStrikes pushBack [Invaders, "TROOPS", markerPos _mrkDest, time + 1800, 1800, _resources];
 
@@ -90,6 +100,9 @@ private _missionMinTime = time + 600;
 private _soldiers = [];
 { _soldiers append units _x } forEach _cargoGroups;
 
+// Unguarded town upgrades get sabotaged while the raid lasts
+private _sabotage = [_mrkDest, _soldiers] spawn A3A_fnc_townUpgradeSabotage;
+
 waitUntil {
     sleep 10;
 //    Debug_4("Soldiers %1 initial, %2 active. Civs %3 initial, %4 active", count _soldiers, {_x call A3A_fnc_canFight} count _soldiers, count _civilians, {alive _x} count _civilians);
@@ -97,6 +110,8 @@ waitUntil {
     or (time > _missionMinTime and ({alive _x} count _civilians < count _civilians / 4))
     or (time > _missionExpireTime)
 };
+
+terminate _sabotage;
 
 private _fnc_adjustNearCities = {
     params ["_position", "_maxSupport", "_maxDist"];

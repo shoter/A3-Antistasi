@@ -68,6 +68,17 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     w = 30 * GRID_W;
                     h = 5 * GRID_H;
                 };
+
+                class TownUpgradesTabButton : A3A_Button
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_buy_town_upgrades_tab_button;
+                    onButtonClick = "[""switchTab"", [""townupgrades""]] call A3A_GUI_fnc_buyVehicleDialog";
+                    x = 120 * GRID_W;
+                    y = 0;
+                    w = 30 * GRID_W;
+                    h = 5 * GRID_H;
+                };
             };
         };
 
@@ -140,6 +151,55 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     y = 4 * GRID_H;
                     w = PX_W(DIALOG_W);
                     h = PX_H(DIALOG_H) - 8 * GRID_H;
+                };
+            };
+        };
+
+        // Town upgrade kits, bound to a town picked in the combo box. Cards are built by A3A_GUI_fnc_townUpgradesTab
+        class TownUpgradesTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_BUYTOWNUPGRADESMAIN;
+            show = false;
+
+            class Controls
+            {
+                class TownLabel : A3A_InfoTextLeft
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_buy_town_upgrades_town_label;
+                    x = 7 * GRID_W;
+                    y = 1 * GRID_H;
+                    w = 13 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class TownCombo : A3A_ComboBox_Small
+                {
+                    idc = A3A_IDC_TOWNUPGRADESTOWNCOMBO;
+                    onLBSelChanged = "[""townSelected""] call A3A_GUI_fnc_townUpgradesTab;";
+                    x = 20 * GRID_W;
+                    y = 1 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class InfoText : A3A_InfoTextLeft
+                {
+                    idc = A3A_IDC_TOWNUPGRADESINFO;
+                    text = "";
+                    x = 64 * GRID_W;
+                    y = 1 * GRID_H;
+                    w = 90 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class CardsControlsGroup : A3A_ControlsGroupNoHScrollbars
+                {
+                    idc = A3A_IDC_TOWNUPGRADESGROUP;
+                    x = 0;
+                    y = 6 * GRID_H;
+                    w = PX_W(DIALOG_W);
+                    h = PX_H(DIALOG_H) - 10 * GRID_H;
                 };
             };
         };

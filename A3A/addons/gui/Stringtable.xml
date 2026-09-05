@@ -3617,6 +3617,22 @@
         <Original>Click to sort by this column</Original>
         <Polish>Kliknij, aby sortować według tej kolumny</Polish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_upgrades_label">
+        <Original>Upgrades</Original>
+        <Polish>Ulepszenia</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_upgrades_title">
+        <Original>Upgrades in %1</Original>
+        <Polish>Ulepszenia w %1</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_upgrades_none">
+        <Original>No upgrades</Original>
+        <Polish>Brak ulepszeń</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_upgrades_legend">
+        <Original>Upgrade codes</Original>
+        <Polish>Kody ulepszeń</Polish>
+      </Key>
     </Container>
     <Container name="dialog_main_chronicle">
       <Key ID="STR_antistasi_dialogs_main_chronicle_tab_button">
@@ -6159,6 +6175,32 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_junkyard_button_tooltip">
         <Original>Buy wrecked %1 for %2 PLN. Heavily damaged, low fuel, little or no ammo. No free repairs for the first %3 hours.</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_buy_town_upgrades">
+      <Key ID="STR_antistasi_dialogs_buy_town_upgrades_tab_button">
+        <Original>Town upgrades</Original>
+        <Polish>Ulepszenia miast</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_town_upgrades_town_label">
+        <Original>Town</Original>
+        <Polish>Miasto</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_town_upgrades_no_towns">
+        <Original>No rebel-held towns.</Original>
+        <Polish>Brak miast pod kontrolą rebeliantów.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_town_upgrades_info">
+        <Original>Faction funds: %1 PLN. Population: %2. Kits are bound to the chosen town, prices grow with its population.</Original>
+        <Polish>Fundusze frakcji: %1 PLN. Populacja: %2. Zestawy są przypisane do wybranego miasta, ceny rosną z jego populacją.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_town_upgrades_button_tooltip">
+        <Original>Buy a %1 kit for %2 for %3 PLN. Haul the crate to the town and build it within 100 m of the centre.</Original>
+        <Polish>Kup zestaw %1 dla %2 za %3 PLN. Zawieź skrzynię do miasta i zbuduj w promieniu 100 m od centrum.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_fast_travel_safehouse">
+        <Original>Safehouse: travel is free and faster.</Original>
+        <Polish>Kryjówka: podróż jest darmowa i szybsza.</Polish>
       </Key>
     </Container>
   </Package>

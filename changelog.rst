@@ -19,6 +19,8 @@ Version 3.11.1
    * Changed the currency symbol from € to PLN
    * Added the Junkyard at the HQ garage crate: buy heavily damaged civilian and military vehicles, restocked hourly. Wrecks get no free repairs for 10 hours and are marked as junk in the garage
    * Added wreck stripping: engineers with a toolkit can strip any destroyed vehicle for 1-3% of its junkyard price (at least 50 PLN). Wrecks inside a spawned enemy base have to wait until it is captured or cleared
+   * Added town upgrades: the commander buys a kit for a rebel town in the Buy Vehicle dialog, rebels haul the crate there and build a clinic, market, recruitment office, radio relay, militia post or safehouse. Each gives a passive bonus until the town is lost, invader punishment raids can sabotage them
+   * Fixed the police station multiplier in city support changes, it never applied because of an undefined variable
 
 
 .. admonition:: Template updates

@@ -9,6 +9,14 @@ publishes it as the Workshop change note, so write it for players. Format and ru
 ### Changed
 - The air taxi flies you to any point you click on the map, not only to towns, outposts and other location markers. Water and off-map clicks are refused; the pilot picks a landing zone near the spot and hover-drops you if there is none.
 
+## 2026-09-05 - Town upgrades
+
+### Added
+- Town upgrades: the commander buys an upgrade kit for a rebel-held town in the Buy Vehicle dialog (new tab, price grows with the town's population). Rebels carry or truck the crate to that town and build it within 100 m of the centre. Clinic (+0.1 support per tick, civilian deaths hurt support half as much), market (+10% money), recruitment office (+10% HR), radio relay (counts as a rebel radio tower), militia post (garrison limit x1.5) and safehouse (free, faster fast travel and a 'lie low' action that clears undercover heat). One of each per town, shown as map markers and in the Towns tab. Upgrades are lost when the town falls, is destroyed, or is left unguarded during an invader punishment raid. Kits in transit and installed upgrades are stored in the campaign save.
+
+### Fixed
+- The police station multiplier on town support changes never applied because of an undefined variable. Towns without a police station now gain support 1.5x faster, as intended.
+
 ## 2026-09-05 - Helicopter air taxi
 
 ### Added
