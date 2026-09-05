@@ -16891,8 +16891,11 @@
       <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_enemy1">
         <Original>Enemies are too close to your position for a pickup.</Original>
       </Key>
-      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_marker">
-        <Original>Pick a location marker as the destination.</Original>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_off_map">
+        <Original>The destination is outside the map.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_water">
+        <Original>The destination is in the water. Pick a spot on land.</Original>
       </Key>
       <Key ID="STR_A3A_fn_logistics_airTaxi_blk_too_close">
         <Original>The destination is too close to bother a pilot.</Original>

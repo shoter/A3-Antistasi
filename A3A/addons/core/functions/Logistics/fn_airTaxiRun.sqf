@@ -14,7 +14,7 @@ Arguments:
     <GROUP> Crew group
     <POSITION> Origin position to return to
     <POSITION> Pickup landing zone
-    <STRING> Destination marker
+    <POSITION> Destination position
     <POSITION> Destination landing zone, [] for a hover drop
     <NUMBER> Garage vehicle UID
     <ARRAY> Garage entry copied at request time
@@ -31,17 +31,17 @@ Dependencies:
     A3A_fnc_heliLandAtPos, A3A_fnc_airTaxiFindLZ, A3A_fnc_airTaxiBoard, A3A_fnc_airTaxiUnload, A3A_fnc_airTaxiFinish
 
 Example:
-    [_player, _uid, _heli, _crewGroup, _originPos, _pickupLZ, _destMarker, _destLZ, _vehUID, _entry, _money, _hr] spawn A3A_fnc_airTaxiRun;
+    [_player, _uid, _heli, _crewGroup, _originPos, _pickupLZ, _destPos, _destLZ, _vehUID, _entry, _money, _hr] spawn A3A_fnc_airTaxiRun;
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_player", "_uid", "_heli", "_crewGroup", "_originPos", "_pickupLZ", "_destMarker", "_destLZ", "_vehUID", "_entry", "_money", "_hr"];
+params ["_player", "_uid", "_heli", "_crewGroup", "_originPos", "_pickupLZ", "_destPos", "_destLZ", "_vehUID", "_entry", "_money", "_hr"];
 
 _crewGroup setVariable ["A3A_AIScriptHandle", _thisScript];
 private _midHeight = [100, 150] select (A3A_climate isEqualTo "tropical");
-private _destPos = markerPos _destMarker;
-private _destName = [_destMarker] call A3A_fnc_localizar;
+private _destName = mapGridPosition _destPos;
+if (citiesX isNotEqualTo []) then { _destName = format ["%1 (%2)", _destName, [citiesX, _destPos] call BIS_fnc_nearestPosition] };
 private _outcome = "";              // "" while the trip is still on
 private _passengers = [];
 private _landPad = objNull;

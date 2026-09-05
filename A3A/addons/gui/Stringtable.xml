@@ -2973,13 +2973,13 @@
         <Original>Select a helicopter from the garage.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_taxi_select_location">
-        <Original>Click the map to select where you want to be flown to.</Original>
+        <Original>Click anywhere on the map to select where you want to be flown to.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_taxi_helicopter">
         <Original>Helicopter: %1</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_taxi_destination">
-        <Original>Destination: %1 (%2)</Original>
+        <Original>Destination: grid %1 near %2</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_taxi_distance">
         <Original>Distance: %1 km</Original>

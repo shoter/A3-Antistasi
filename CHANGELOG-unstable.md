@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the `unstable-latest` GitHub prerelease and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Air taxi to any spot
+
+### Changed
+- The air taxi flies you to any point you click on the map, not only to towns, outposts and other location markers. Water and off-map clicks are refused; the pilot picks a landing zone near the spot and hover-drops you if there is none.
+
 ## 2026-09-05 - Helicopter air taxi
 
 ### Added

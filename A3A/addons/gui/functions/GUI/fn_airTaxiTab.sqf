@@ -1,7 +1,7 @@
 /*
 Maintainer: Shoter
     Handles updating and controls on the Air Taxi tab of the Main dialog.
-    The player picks a garaged helicopter from the list and a destination on the shared fast travel map,
+    The player picks a garaged helicopter from the list and any destination on the shared fast travel map,
     sees the fare, the pilot's HR, seats and blockers, and requests the pickup from the server.
 
 Arguments:
@@ -64,7 +64,7 @@ switch (_mode) do
         };
 
         private _heliUID = _tab getVariable ["selectedHeliUID", -1];
-        private _marker = _map getVariable ["selectedMarker", ""];
+        private _destPos = _map getVariable ["airTaxiDestination", []];
         private _lines = [];
         private _canCommit = true;
 
@@ -85,20 +85,20 @@ switch (_mode) do
             };
         };
 
-        // Destination
-        if (_marker == "") then {
+        // Destination: any clicked position, named by grid and nearest town
+        if (_destPos isEqualTo []) then {
             _lines pushBack localize "STR_antistasi_dialogs_main_air_taxi_select_location";
             _canCommit = false;
         } else {
-            private _locationName = [_marker] call FUNC(getLocationMarkerName);
-            _lines pushBack format [localize "STR_antistasi_dialogs_main_air_taxi_destination", _locationName, mapGridPosition markerPos _marker];
-            private _distanceKm = (round ((getPosATL player distance2D markerPos _marker) / 100)) / 10;
+            private _nearest = if (citiesX isEqualTo []) then { "" } else { [citiesX, _destPos] call BIS_fnc_nearestPosition };
+            _lines pushBack format [localize "STR_antistasi_dialogs_main_air_taxi_destination", mapGridPosition _destPos, _nearest];
+            private _distanceKm = (round ((getPosATL player distance2D _destPos) / 100)) / 10;
             _lines pushBack format [localize "STR_antistasi_dialogs_main_air_taxi_distance", _distanceKm];
         };
 
         // Fare, time and seats once both are chosen
-        if (_marker != "" && _class != "") then {
-            ([getPosATL player, markerPos _marker, _class] call FUNCMAIN(airTaxiFare)) params ["_money", "_hr", "", "_eta"];
+        if (_destPos isNotEqualTo [] && _class != "") then {
+            ([getPosATL player, _destPos, _class] call FUNCMAIN(airTaxiFare)) params ["_money", "_hr", "", "_eta"];
             private _etaString = [[_eta] call FUNCMAIN(secondsToTimeSpan), 0, 0, false, 2] call FUNCMAIN(timeSpan_format);
             _lines pushBack format [localize "STR_antistasi_dialogs_main_air_taxi_eta", _etaString];
             _lines pushBack format [localize "STR_antistasi_dialogs_main_air_taxi_fare", _money, _hr];
@@ -124,10 +124,10 @@ switch (_mode) do
         };
 
         // Blockers
-        private _blockers = if (_marker == "") then {
+        private _blockers = if (_destPos isEqualTo []) then {
             [player] call FUNCMAIN(airTaxiCanRequest)
         } else {
-            [player, _marker] call FUNCMAIN(airTaxiCanRequest)
+            [player, _destPos] call FUNCMAIN(airTaxiCanRequest)
         };
         if (_blockers isNotEqualTo []) then {
             _canCommit = false;
@@ -138,8 +138,8 @@ switch (_mode) do
         _commitButton ctrlEnable _canCommit;
 
         // Pan to location
-        if (_marker != "") then {
-            _map ctrlMapAnimAdd [0.2, ctrlMapScale _map, markerPos _marker];
+        if (_destPos isNotEqualTo []) then {
+            _map ctrlMapAnimAdd [0.2, ctrlMapScale _map, _destPos];
             ctrlMapAnimCommit _map;
         };
     };
@@ -207,27 +207,20 @@ switch (_mode) do
 
     case ("mapClicked"):
     {
-        // Same location picking as the fast travel tab, without a side filter: any marker is a valid destination
+        // Unlike fast travel, any point on the map is a valid destination; the pilot finds a landing zone near it
         Debug_1("Air Taxi map clicked: %1", _params);
         _params params ["_clickedPosition"];
         private _clickedWorldPosition = _map ctrlMapScreenToWorld _clickedPosition;
-        private _locations = airportsX + resourcesX + factories + outposts + seaports + citiesX + outpostsFIA + ["Synd_HQ"];
-        private _selectedMarker = [_locations, _clickedWorldPosition] call BIS_fnc_nearestPosition;
+        private _destPos = [_clickedWorldPosition # 0, _clickedWorldPosition # 1, 0];
 
-        private _markerMapPosition = _map ctrlMapWorldToScreen (getMarkerPos _selectedMarker);
-        private _maxDistance = 8 * GRID_W;
-        if (_clickedPosition distance _markerMapPosition > _maxDistance) exitWith {
-            ["clearSelectedLocation"] call FUNC(airTaxiTab);
-            ["update"] call FUNC(airTaxiTab);
-        };
-
-        _map setVariable ["selectedMarker", _selectedMarker];
-        _map setVariable ["selectMarkerData", [getMarkerPos _selectedMarker]];
+        _map setVariable ["airTaxiDestination", _destPos];
+        _map setVariable ["selectMarkerData", [_destPos]];       // read by the selection reticle drawer
         ["update"] call FUNC(airTaxiTab);
     };
 
     case ("clearSelectedLocation"):
     {
+        _map setVariable ["airTaxiDestination", []];
         _map setVariable ["selectedMarker", ""];
         _map setVariable ["selectMarkerData", []];
     };
@@ -235,10 +228,10 @@ switch (_mode) do
     case ("commitButtonClicked"):
     {
         private _uid = _tab getVariable ["selectedHeliUID", -1];
-        private _marker = _map getVariable ["selectedMarker", ""];
-        if (_uid == -1 || _marker == "") exitWith {};
+        private _destPos = _map getVariable ["airTaxiDestination", []];
+        if (_uid == -1 || _destPos isEqualTo []) exitWith {};
         closeDialog 1;
-        [player, _uid, _marker, clientOwner] remoteExecCall ["A3A_fnc_airTaxiRequest", 2];
+        [player, _uid, _destPos, clientOwner] remoteExecCall ["A3A_fnc_airTaxiRequest", 2];
     };
 
     default {

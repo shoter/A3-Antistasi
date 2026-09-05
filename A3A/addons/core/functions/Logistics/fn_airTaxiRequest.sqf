@@ -8,7 +8,7 @@ Maintainer: Shoter
 Arguments:
     <OBJECT> Requesting player
     <NUMBER> Garage vehicle UID of the helicopter
-    <STRING> Destination marker
+    <POSITION> Destination position, anywhere on land
     <NUMBER> Client id of the requester (clientOwner), used for the reply
 
 Return Value:
@@ -21,12 +21,12 @@ Dependencies:
     HR_GRG_Vehicles, HR_GRG_Users, A3A_airTaxiActive
 
 Example:
-    [player, _vehUID, "outpost_1", clientOwner] remoteExecCall ["A3A_fnc_airTaxiRequest", 2];
+    [player, _vehUID, markerPos "outpost_1", clientOwner] remoteExecCall ["A3A_fnc_airTaxiRequest", 2];
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params [["_player", objNull, [objNull]], ["_vehUID", -1, [0]], ["_destMarker", "", [""]], ["_client", -1, [0]]];
+params [["_player", objNull, [objNull]], ["_vehUID", -1, [0]], ["_destPos", [], [[]]], ["_client", -1, [0]]];
 if (!isServer) exitWith { Error("Called on a client, server only") };
 if (isNull _player || _client < 0) exitWith {};
 if (isNil "HR_GRG_Vehicles") then { [] call HR_GRG_fnc_initServer };
@@ -39,7 +39,7 @@ private _fnc_reject = {
 
 // Player and destination
 private _uid = getPlayerUID _player;
-private _blockers = [_player, _destMarker] call A3A_fnc_airTaxiCanRequest;
+private _blockers = [_player, _destPos] call A3A_fnc_airTaxiCanRequest;
 if (_blockers isNotEqualTo []) exitWith { [_blockers # 0] call _fnc_reject };
 if (_uid in A3A_airTaxiActive) exitWith { ["active"] call _fnc_reject };
 
@@ -54,7 +54,7 @@ if (!(_lockUID in ["", _uid]) && { !(_player call HR_GRG_canOverrideLock) }) exi
 private _pickupPos = getPosATL _player;
 private _pickupLZ = [_pickupPos] call A3A_fnc_airTaxiFindLZ;
 if (_pickupLZ isEqualTo []) exitWith { ["no_lz"] call _fnc_reject };
-private _destPos = markerPos _destMarker;
+_destPos = [_destPos # 0, _destPos # 1, 0];
 private _destLZ = [_destPos, false] call A3A_fnc_airTaxiFindLZ;
 
 // Fare
@@ -88,9 +88,9 @@ if (isNull _heli || { !canMove _heli }) exitWith {
 };
 
 _player setVariable ["A3A_airTaxi", [_heli, "INBOUND"], true];
-private _script = [_player, _uid, _heli, _crewGroup, _originPos, _pickupLZ, _destMarker, _destLZ, _vehUID, _entry, _money, _hr] spawn A3A_fnc_airTaxiRun;
+private _script = [_player, _uid, _heli, _crewGroup, _originPos, _pickupLZ, _destPos, _destLZ, _vehUID, _entry, _money, _hr] spawn A3A_fnc_airTaxiRun;
 A3A_airTaxiActive set [_uid, _script];
 
 private _etaString = [[_eta] call A3A_fnc_secondsToTimeSpan, 0, 0, false, 2] call A3A_fnc_timeSpan_format;
 ["STR_A3A_fn_logistics_airTaxi_requested", [_dispName, _etaString]] remoteExecCall ["A3A_fnc_airTaxiHint", _client];
-Info_5("Air taxi %1 (garage UID %2) requested by %3 to %4 for $%5", _dispName, _vehUID, name _player, _destMarker, _money);
+Info_5("Air taxi %1 (garage UID %2) requested by %3 to %4 for $%5", _dispName, _vehUID, name _player, mapGridPosition _destPos, _money);
