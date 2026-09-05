@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Defector escort mission
+
+### Added
+- New rescue mission, **Escort defecting officer**: an enemy officer wants out and waits in a civilian car on a country road near one of their outposts. Bring a vehicle, pick them up (drive off in their car or tell them to follow you) and get them alive to HQ or one of your airbases. Once they are with you their own side calls in support and sends a road patrol after the escort. Delivery pays 2000-6000 money, a large intel find and a temporary drop in that side's aggression. If the officer dies the mission fails. When you hold a seaport, half the time the officer instead asks to be taken there for a boat pickup. Request it through Rescue missions like the prisoner and refugee missions.
+
 ## 2026-09-05 - Scrap pays less
 
 ### Changed
