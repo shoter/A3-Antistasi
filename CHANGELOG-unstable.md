@@ -4,6 +4,13 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Player statistics in depth
+
+### Added
+- The Details view of the Players tab now scrolls and shows much more: time and distance travelled on foot, in ground vehicles, aircraft and boats, swimming and on static weapons; time in each role and as commander; time undercover; longest session; money spent, donated and earned from scrap; captures and defences the player took part in; intel found; recruits and vehicles lost; vehicles bought, wrecks scrapped, fast travels, rally flag teleports and air taxi rides.
+- A weapons and vehicles table at the bottom of Details: for every weapon carried or vehicle used, the time with it, the soldiers, vehicles and aircraft killed with it, and the shots fired.
+- Everything is collected from now on and stored in the campaign save with the other player statistics; older records start these at zero.
+
 ## 2026-09-05 - Chronicle records more and keeps more
 
 ### Added
