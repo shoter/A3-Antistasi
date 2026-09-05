@@ -79,6 +79,9 @@ DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // plus one wildcard ve
 DECLARE_SERVER_VAR(A3A_junkyardJunkDuration, 10*60*60);  // seconds of campaign uptime a bought wreck stays "junk" (no free repairs)
 DECLARE_SERVER_VAR(A3A_junkyardClockOffset, 0);          // campaign clock = offset + serverTime, restored from save
 
+// Chronicle: sequence number of the newest campaign log entry, clients fetch the delta when they open the tab
+DECLARE_SERVER_VAR(A3A_campaignLogVersion, 0);
+
 DECLARE_SERVER_VAR(skillFIA, 1);																		//Initial skill level for FIA soldiers
 //Initial Occupant Aggression
 DECLARE_SERVER_VAR(aggressionOccupants, 0);
@@ -123,6 +126,9 @@ Info("Setting server only variables");
 // Don't need to be distributed
 occRadioKeys = 0;
 invRadioKeys = 0;
+
+// Chronicle entries [seq, campaign time, type, target, params, actor], clients get them through A3A_fnc_campaignLogRequest
+A3A_campaignLog = [];
 
 // New garrison data structure
 A3A_garrison = createHashMap;

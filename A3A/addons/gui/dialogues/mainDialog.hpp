@@ -131,6 +131,17 @@ class A3A_MainDialog : A3A_TabbedDialog
                     w = 30 * GRID_W;
                     h = 5 * GRID_H;
                 };
+
+                class ChronicleTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_CHRONICLETABBUTTON;
+                    text = $STR_antistasi_dialogs_main_chronicle_tab_button;
+                    onButtonClick = "[""switchTab"", [""chronicle""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 120 * GRID_W;
+                    y = 0;
+                    w = 30 * GRID_W;
+                    h = 5 * GRID_H;
+                };
             };
         };
 
@@ -3139,6 +3150,112 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSSHOWONMAPBUTTON;
                     text = $STR_antistasi_dialogs_main_towns_show_on_map_button;
                     onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
+                    x = 120 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+            };
+        };
+
+
+        class ChronicleTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_CHRONICLETAB;
+            show = false;
+
+            class controls
+            {
+                class ChronicleListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 106 * GRID_W;
+                    h = 82 * GRID_H;
+                };
+
+                // Category filters, A3A_GUI_fnc_chronicleTab draws the active one in brighter text
+                class AllFilter : A3A_Button
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_ALL;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_all;
+                    tooltip = $STR_antistasi_dialogs_main_chronicle_filter_tooltip;
+                    onButtonClick = "[""filter"", [""all""]] call A3A_GUI_fnc_chronicleTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 14 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class SitesFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_SITES;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_sites;
+                    onButtonClick = "[""filter"", [""sites""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 23 * GRID_W;
+                };
+
+                class TownsFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_TOWNS;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_towns;
+                    onButtonClick = "[""filter"", [""towns""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 38 * GRID_W;
+                };
+
+                class AttacksFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_ATTACKS;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_attacks;
+                    onButtonClick = "[""filter"", [""attacks""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 53 * GRID_W;
+                };
+
+                class HQFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_HQ;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_hq;
+                    onButtonClick = "[""filter"", [""hq""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 68 * GRID_W;
+                };
+
+                class PlayersFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_PLAYERS;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_players;
+                    onButtonClick = "[""filter"", [""players""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 83 * GRID_W;
+                };
+
+                class CampaignFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_CAMPAIGN;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_campaign;
+                    onButtonClick = "[""filter"", [""campaign""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 98 * GRID_W;
+                };
+
+                class ChronicleList : A3A_ListNBox
+                {
+                    idc = A3A_IDC_CHRONICLELIST;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 106 * GRID_W;
+                    h = 82 * GRID_H;
+                    onLBDblClick = "[""showOnMap""] call A3A_GUI_fnc_chronicleTab";
+
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    rowHeight = 4 * GRID_H;
+                    columns[] = {0, 0.22}; // Time ago, Event
+                };
+
+                class ShowOnMapButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_CHRONICLESHOWONMAPBUTTON;
+                    text = $STR_antistasi_dialogs_main_chronicle_show_on_map_button;
+                    onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_chronicleTab";
                     x = 120 * GRID_W;
                     y = 12 * GRID_H;
                     w = 32 * GRID_W;

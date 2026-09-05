@@ -11,6 +11,7 @@ class CfgFunctions {
             class buildContextMenu {};
             class buyVehicleDialog {};
             class buyVehicleTabs {};
+            class chronicleTab {};
             class commanderTab {};
             class configColorToArray {};
             class constructTab {};

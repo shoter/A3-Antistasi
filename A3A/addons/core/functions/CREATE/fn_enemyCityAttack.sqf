@@ -27,6 +27,7 @@ private _targside = sidesX getVariable _city;
 private _nameDest = [_city] call A3A_fnc_localizar;
 private _text = format [localize "STR_A3A_fn_base_enemyCityAttack", Faction(_side) get "name", Faction(_targside) get "name", _nameDest];
 ["RadioIntercepted", [_text]] remoteExec ["BIS_fnc_showNotification", 0];
+["enemyAttackStarted", _city, [_side, _targside, _mrkOrigin]] call A3A_fnc_campaignLogAdd;
 
 // Send in a UAV. Add half a vehicle if they're unavailable
 // ["_type", "_side", "_caller", "_maxSpend", "_target", "_targPos", "_reveal", "_delay"];

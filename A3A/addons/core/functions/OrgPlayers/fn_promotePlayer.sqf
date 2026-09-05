@@ -23,6 +23,7 @@ _promoted = false;
 			_promoted = true;
 			[_player,_newRank] remoteExec ["A3A_fnc_ranksMP"];
 			_player setVariable ["rankX",_newRank,true];
+			["playerPromoted", "", [_newRank], name _player] call A3A_fnc_campaignLogAdd;
 			_textX = format ["%1%2: %3.<br/>",_textX, name _player, _newRank];
 			[-1*(50*_multiplier),_player] call A3A_fnc_playerScoreAdd;
 			_multiplier = _multiplier + 1;

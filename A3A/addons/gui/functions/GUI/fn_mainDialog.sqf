@@ -244,6 +244,12 @@ switch (_mode) do
                 // No permission check needed
                 _selectedTabIDC = A3A_IDC_TOWNSTAB;
             };
+
+            case ("chronicle"):
+            {
+                // No permission check needed
+                _selectedTabIDC = A3A_IDC_CHRONICLETAB;
+            };
         };
 
         // Log attempt at accessing tab without permission
@@ -266,7 +272,8 @@ switch (_mode) do
             A3A_IDC_AIRSUPPORTTAB,
             A3A_IDC_PLAYERMANAGEMENTTAB,
             A3A_IDC_WARSTATUSTAB,
-            A3A_IDC_TOWNSTAB
+            A3A_IDC_TOWNSTAB,
+            A3A_IDC_CHRONICLETAB
         ];
 
         // Hide all tabs
@@ -355,6 +362,11 @@ switch (_mode) do
             case ("towns"):
             {
                 ["update"] call FUNC(townsTab);
+            };
+
+            case ("chronicle"):
+            {
+                ["update"] call FUNC(chronicleTab);
             };
         };
     };

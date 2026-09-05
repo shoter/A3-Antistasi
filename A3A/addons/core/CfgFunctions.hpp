@@ -125,6 +125,8 @@ class CfgFunctions
             class blackout {};
             class buildHQ {};
             class calculateAggression {};
+            class campaignLogAdd {};
+            class campaignLogRequest {};
             class canManageAI {};
             class canMoveHQ {};
             class chooseAttack {};
