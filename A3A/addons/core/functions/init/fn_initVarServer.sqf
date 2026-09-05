@@ -93,6 +93,7 @@ A3A_rewardTaxCollected = 0;                              // PLN of reward tax co
 // Chronicle: sequence number of the newest campaign log entry, clients fetch the delta when they open the tab
 DECLARE_SERVER_VAR(A3A_campaignLogVersion, 0);
 DECLARE_SERVER_VAR(A3A_campaignLogCap, 3000);            // entries kept in the chronicle, the oldest are dropped first
+DECLARE_SERVER_VAR(A3A_campaignLogUtcOffset, ([systemTime] call A3A_fnc_systemTimeToMinutes) - ([systemTimeUTC] call A3A_fnc_systemTimeToMinutes));  // minutes the server clock is ahead of UTC, entries carry server time
 
 DECLARE_SERVER_VAR(skillFIA, 1);																		//Initial skill level for FIA soldiers
 //Initial Occupant Aggression
@@ -142,7 +143,7 @@ invRadioKeys = 0;
 // Town upgrades: registered prop objects (city|id -> object) and kit crates in transit
 A3A_townUpgradeObjects = createHashMap;
 A3A_townKits = [];
-// Chronicle entries [seq, campaign time, type, target, params, actor], clients get them through A3A_fnc_campaignLogRequest
+// Chronicle entries [seq, campaign time, type, target, params, actor, server date-time], clients get them through A3A_fnc_campaignLogRequest
 A3A_campaignLog = [];
 A3A_campaignLogMajority = false;    // whether the last population check found a rebel majority, restored from the log on load
 

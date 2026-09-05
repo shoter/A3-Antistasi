@@ -16,14 +16,15 @@ Public: No
 Dependencies:
     <NUMBER> A3A_campaignLogVersion
     <NUMBER> A3A_campaignLogCap
+    <NUMBER> A3A_campaignLogUtcOffset
     <ARRAY> A3A_campaignLog (only read where this machine is the server)
-    A3A_fnc_campaignLogRequest, A3A_fnc_localizar, A3A_fnc_junkyardClock, A3A_fnc_timeSpan_format
+    A3A_fnc_campaignLogRequest, A3A_fnc_localizar, A3A_fnc_junkyardClock, A3A_fnc_timeSpan_format, A3A_fnc_systemTimeToMinutes, A3A_fnc_pad_2Digits
 
 Example:
     ["update"] call FUNC(chronicleTab);
     ["filter", ["attacks"]] call FUNC(chronicleTab);
     ["page", [1]] call FUNC(chronicleTab); // one page of older entries
-    ["receive", [12, [[12, 3600, "siteCaptured", "outpost_3", ["AAF"], "Shoter"]]]] call FUNC(chronicleTab); // sent by the server
+    ["receive", [12, [[12, 3600, "siteCaptured", "outpost_3", ["AAF"], "Shoter", [2026, 9, 5, 17, 46]]]]] call FUNC(chronicleTab); // sent by the server
     ["showOnMap"] call FUNC(chronicleTab);
 
 License: APL-ND
@@ -37,6 +38,7 @@ License: APL-ND
 FIX_LINE_NUMBERS()
 
 #define CHRONICLE_PAGE_SIZE 50
+#define CHRONICLE_RELATIVE_DAYS 7       // younger entries say how long ago, older ones show the date
 
 params [["_mode","onLoad"], ["_params",[]]];
 
@@ -131,6 +133,8 @@ switch (_mode) do
         private _filter = _tab getVariable ["filter", "all"];
         private _entries = call _fnc_entries;
         private _now = call A3A_fnc_junkyardClock;
+        // Entries carry the server's local clock, so "now" is our UTC clock moved to the server's offset
+        private _nowServerMinutes = ([systemTimeUTC] call A3A_fnc_systemTimeToMinutes) + (missionNamespace getVariable ["A3A_campaignLogUtcOffset", 0]);
 
         private _toneColorHM = createHashMapFromArray [
             ["good", ["Map", "Independent"] call BIS_fnc_displayColorGet],
@@ -158,7 +162,7 @@ switch (_mode) do
 
         {
             private _i = _x;
-            (_entries select _i) params ["", "_time", "_type", "_target", "_eventParams", "_actor"];
+            (_entries select _i) params ["", "_time", "_type", "_target", "_eventParams", "_actor", ["_stamp", [], [[]]]];
             (_types getOrDefault [_type, ["campaign", "neutral", []]]) params ["", "_tone", "_kinds"];
 
             // Text is "%1 target, %2 actor, %3.. params", all localized here rather than on the server
@@ -186,13 +190,28 @@ switch (_mode) do
             } forEach _eventParams;
             private _text = format _formatParams;
 
-            private _secs = (_now - _time) max 0;
-            private _ago = if (_secs < 60) then { _justNow } else {
-                format [_agoFormat, [_secs, 1, 0, false, 2, false, true] call A3A_fnc_timeSpan_format]
+            // Time column: how long ago for recent entries, the date for older ones. Hovering shows the full server date and time.
+            private _ago = "";
+            private _dateTime = "";
+            if (_stamp isEqualTo []) then {
+                // Entries written before the server date was stored only know the campaign clock
+                private _secs = (_now - _time) max 0;
+                _ago = if (_secs < 60) then { _justNow } else { format [_agoFormat, [_secs, 1, 0, false, 1, false, true] call A3A_fnc_timeSpan_format] };
+            } else {
+                _stamp params ["_year", "_month", "_day", "_hour", "_minute"];
+                private _dayMonth = format ["%1.%2", (str _day) call A3A_fnc_pad_2Digits, (str _month) call A3A_fnc_pad_2Digits];
+                _dateTime = format ["%1.%2 %3:%4", _dayMonth, _year, (str _hour) call A3A_fnc_pad_2Digits, (str _minute) call A3A_fnc_pad_2Digits];
+                private _ageMinutes = (_nowServerMinutes - ([_stamp] call A3A_fnc_systemTimeToMinutes)) max 0;
+                _ago = call {
+                    if (_ageMinutes < 1) exitWith { _justNow };
+                    if (_ageMinutes < CHRONICLE_RELATIVE_DAYS * 1440) exitWith { format [_agoFormat, [_ageMinutes * 60, 1, 0, false, 1, false, true] call A3A_fnc_timeSpan_format] };
+                    _dayMonth
+                };
             };
 
             private _index = _listBox lnbAddRow [_ago, _text];
             _listBox lnbSetValue [[_index, 0], _i];
+            _listBox lnbSetTooltip [[_index, 0], _dateTime];
             _listBox lnbSetTooltip [[_index, 1], _text];
             private _color = _toneColorHM get _tone;
             _listBox lnbSetColor [[_index, 0], _color];

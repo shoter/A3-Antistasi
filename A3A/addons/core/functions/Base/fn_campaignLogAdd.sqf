@@ -3,6 +3,7 @@ Maintainer: Shoter
     Appends an entry to the campaign chronicle kept on the server and bumps the version clients use to fetch deltas.
     Entries stay JSON-safe (numbers, strings, arrays) so they survive the save file; the text is localized on the client
     by A3A_GUI_fnc_chronicleTab from the type id, the target, the actor and the extra params.
+    An entry is [seq, campaign clock seconds, type, target, params, actor, server date-time as [year, month, day, hour, minute]].
 
 Arguments:
     <STRING> Event type id, localized on the client as STR_antistasi_dialogs_main_chronicle_ev_<type>
@@ -16,7 +17,7 @@ Return Value:
 Scope: Server
 Environment: Any
 Public: No
-Dependencies: A3A_fnc_junkyardClock, A3A_campaignLogCap
+Dependencies: A3A_fnc_junkyardClock, A3A_fnc_systemTimeToMinutes, A3A_campaignLogCap
 
 Example:
     ["siteCaptured", "outpost_3", [Occupants], markerPos "outpost_3"] call A3A_fnc_campaignLogAdd;
@@ -53,7 +54,11 @@ if (_actor isEqualType []) then {
 A3A_campaignLogVersion = A3A_campaignLogVersion + 1;
 publicVariable "A3A_campaignLogVersion";
 
-A3A_campaignLog pushBack [A3A_campaignLogVersion, call A3A_fnc_junkyardClock, _type, _target, _params, _actor];
+// Server clock offset from UTC, refreshed here so a daylight saving change on a long-running server is picked up
+A3A_campaignLogUtcOffset = ([systemTime] call A3A_fnc_systemTimeToMinutes) - ([systemTimeUTC] call A3A_fnc_systemTimeToMinutes);
+publicVariable "A3A_campaignLogUtcOffset";
+
+A3A_campaignLog pushBack [A3A_campaignLogVersion, call A3A_fnc_junkyardClock, _type, _target, _params, _actor, systemTime select [0, 5]];
 if (count A3A_campaignLog > A3A_campaignLogCap) then {
     A3A_campaignLog deleteRange [0, count A3A_campaignLog - A3A_campaignLogCap];
 };

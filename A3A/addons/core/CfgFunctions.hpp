@@ -896,6 +896,7 @@ class CfgFunctions
             class dateToTimeString {};
             class secondsToTimeSpan {};
             class systemTime_format_S {};
+            class systemTimeToMinutes {};
             class timeSpan_format {};
             class systemTimeDurationToTimeSpan {};
         };

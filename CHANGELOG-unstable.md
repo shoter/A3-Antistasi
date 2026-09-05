@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Chronicle shows real dates
+
+### Changed
+- Chronicle entries are stamped with the server's clock instead of campaign uptime. For the last seven days the time column says how long ago it happened, older entries show the date as dd.mm, and hovering over the time shows the full date and time. Entries written before this update keep showing campaign uptime.
+
 ## 2026-09-05 - Chronicle records more and keeps more
 
 ### Added
