@@ -79,6 +79,10 @@ DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // plus one wildcard ve
 DECLARE_SERVER_VAR(A3A_junkyardJunkDuration, 10*60*60);  // seconds of campaign uptime a bought wreck stays "junk" (no free repairs)
 DECLARE_SERVER_VAR(A3A_junkyardClockOffset, 0);          // campaign clock = offset + serverTime, restored from save
 
+// Scrapyard: engineers with a toolkit strip dead vehicles for 1-3% of their junkyard price
+DECLARE_SERVER_VAR(A3A_scrapStripDuration, 45);          // seconds of hold action
+DECLARE_SERVER_VAR(A3A_scrapMinPay, 50);                 // PLN floor per wreck
+
 DECLARE_SERVER_VAR(skillFIA, 1);																		//Initial skill level for FIA soldiers
 //Initial Occupant Aggression
 DECLARE_SERVER_VAR(aggressionOccupants, 0);
