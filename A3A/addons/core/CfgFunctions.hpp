@@ -386,6 +386,7 @@ class CfgFunctions
             class garrisonServer_remUnit {};
             class garrisonServer_remUnitType {};
             class garrisonServer_remVehicle {};
+            class garrisonServer_sendCounts {};
             class garrisonServer_sendData {};
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
@@ -557,6 +558,7 @@ class CfgFunctions
             class theBossToggleEligibility {};
             class theBossTransfer {};
             class theBossSteal {};
+            class setRewardShares {};
             class assignBossIfNone {};
             class tierCheck {};
             class unitTraits {};

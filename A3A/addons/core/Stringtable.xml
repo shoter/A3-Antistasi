@@ -4158,6 +4158,9 @@
         <Korean>세금 획득&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;인력: +%1&lt;br/&gt;자금: +%2 </Korean>
         <Russian>Доход&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;HR: +%1&lt;br/&gt;Деньги: +%2 PLN</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_init_resourceCheck_tax">
+        <Original>Reward tax collected: +%1 PLN</Original>
+      </Key>
       <Key ID="STR_A3A_fn_init_initClient_addAct_recruitSquad">
         <Original>Squad Recruitment</Original>
       </Key>
