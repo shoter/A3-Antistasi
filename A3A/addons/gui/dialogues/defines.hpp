@@ -168,6 +168,10 @@ Maintainer: DoomMetal
 #define A3A_COLOR_TEXT_DARKER {0.7,0.7,0.7,1}
 #define A3A_COLOR_TEXT_DARKER_SQF [0.7,0.7,0.7,1]
 
+// Garrisons tab row tints
+#define A3A_COLOR_UNDERSTRENGTH_SQF [1,0.8,0.4,1]
+#define A3A_COLOR_UNDER_ATTACK_SQF [1,0.35,0.25,1]
+
 // Active elements ("selection color")
 #define A3A_COLOR_ACTIVE {0.95,0.95,0.95,1}
 
