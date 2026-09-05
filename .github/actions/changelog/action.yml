@@ -1,0 +1,59 @@
+name: Render unstable changelog entry
+description: >-
+  Renders the top entry of CHANGELOG-unstable.md as Markdown (GitHub release body) and Steam BBCode
+  (Workshop change note). When the push did not touch the changelog, both outputs become a notice
+  instead, so the notes of the previous push are not published a second time.
+
+inputs:
+  before:
+    description: >-
+      SHA the branch pointed at before this push (github.event.before). Empty or all zeros, as on
+      workflow_dispatch or a new branch, skips the "was the changelog updated" check.
+    required: false
+    default: ""
+
+outputs:
+  markdown:
+    description: Top changelog entry as Markdown
+    value: ${{ steps.render.outputs.markdown }}
+  bbcode:
+    description: Top changelog entry as Steam BBCode, sanitized for the manifest and capped at 7000 characters
+    value: ${{ steps.render.outputs.bbcode }}
+  updated:
+    description: '"true" when CHANGELOG-unstable.md changed in this push or the check was skipped, else "false"'
+    value: ${{ steps.render.outputs.updated }}
+
+runs:
+  using: composite
+  steps:
+    - name: Render the top entry of CHANGELOG-unstable.md
+      id: render
+      shell: pwsh
+      env:
+        BEFORE: ${{ inputs.before }}
+        PYTHONIOENCODING: utf-8
+      run: |
+        $PSNativeCommandUseErrorActionPreference = $false
+        $updated = $true
+        if ($env:BEFORE -and $env:BEFORE -ne ("0" * 40)) {
+          # A depth-1 fetch of the previous tip is enough to diff the two trees.
+          git fetch --quiet --no-tags --depth=1 origin $env:BEFORE
+          if ($LASTEXITCODE -eq 0) {
+            $changed = git diff --name-only $env:BEFORE HEAD -- CHANGELOG-unstable.md
+            $updated = [bool]$changed
+          } else {
+            Write-Host "Could not fetch $env:BEFORE (force push?), publishing the top entry as it is"
+          }
+        }
+        "updated=$($updated.ToString().ToLower())" | Add-Content $env:GITHUB_OUTPUT
+        if (-not $updated) {
+          Write-Host "::warning file=CHANGELOG-unstable.md::CHANGELOG-unstable.md was not updated in this push. Every push to unstable needs an entry at the top of it, see CLAUDE.md."
+          "markdown=_No changelog entry was written for this push, see the commits instead._" | Add-Content $env:GITHUB_OUTPUT
+          "bbcode=No changelog entry was written for this push, see the commits on GitHub instead." | Add-Content $env:GITHUB_OUTPUT
+          exit 0
+        }
+        $python = if ($IsWindows) { "python" } else { "python3" }
+        & $python Tools/renderChangelog.py --format markdown --github-output markdown
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        & $python Tools/renderChangelog.py --format bbcode --max-chars 7000 --github-output bbcode
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
