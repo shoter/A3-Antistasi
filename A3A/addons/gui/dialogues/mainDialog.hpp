@@ -2596,7 +2596,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_DONATIONMONEYTEXT;
                     style = ST_RIGHT;
-                    text = "€ 0";
+                    text = "PLN 0";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 113 * GRID_W;
                     y = 30 * GRID_H;
@@ -2633,7 +2633,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     style = ST_RIGHT;
-                    text = "€";
+                    text = "PLN";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 139 * GRID_W;
                     y = 40 * GRID_H;

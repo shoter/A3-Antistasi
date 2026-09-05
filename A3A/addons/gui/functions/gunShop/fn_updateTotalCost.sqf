@@ -23,7 +23,7 @@ private _totalCost = 0;
 } forEach A3A_shoppingCart;
 
 
-_control ctrlSetText format ["%1 € %2",localize "STR_antistasi_gun_shop_total_cost_text" ,_totalCost];
+_control ctrlSetText format ["%1 PLN %2",localize "STR_antistasi_gun_shop_total_cost_text" ,_totalCost];
 _control ctrlSetFade 0;
 _control ctrlCommit 0;
 

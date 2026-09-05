@@ -179,14 +179,14 @@
         <Chinesesimp>空格键: 放置物品</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_teamleader_placer_t_key">
-        <Original>T: Rebuild for %1 €</Original>
-        <German>T: Wiederaufbau für %1 €</German>
-        <Italian>T: Ricostruisci per %1 €</Italian>
-        <Spanish>T: Reconstruir por %1 €</Spanish>
-        <French>T: Reconstruire pour %1 €</French>
-        <Korean>T: %1€로 재건축하기</Korean>
-        <Czech>T: Přestavět za %1 €</Czech>
-        <Chinesesimp>T: 耗费 %1 € 来重建</Chinesesimp>
+        <Original>T: Rebuild for %1 PLN</Original>
+        <German>T: Wiederaufbau für %1 PLN</German>
+        <Italian>T: Ricostruisci per %1 PLN</Italian>
+        <Spanish>T: Reconstruir por %1 PLN</Spanish>
+        <French>T: Reconstruire pour %1 PLN</French>
+        <Korean>T: %1 PLN로 재건축하기</Korean>
+        <Czech>T: Přestavět za %1 PLN</Czech>
+        <Chinesesimp>T: 耗费 %1 PLN 来重建</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_teamleader_placer_title">
         <Original>Teamleader Builder</Original>
@@ -985,9 +985,9 @@
         <Chinesesimp>战争等级：</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
-        <Original>This will cost € %1</Original>
-        <Czech>Toto bude stát € %1</Czech>
-        <Spanish>Esto costará € %1</Spanish>
+        <Original>This will cost PLN %1</Original>
+        <Czech>Toto bude stát PLN %1</Czech>
+        <Spanish>Esto costará PLN %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_maxed">
         <Original>Rebel training maxed!</Original>
@@ -3230,9 +3230,9 @@
         <Chinesesimp>无可用载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_player_money_text">
-        <Original>Current money: € %1</Original>
-        <Spanish>Dinero actual: € %1</Spanish>
-        <Russian>Текущий баланс: € %1</Russian>
+        <Original>Current money: PLN %1</Original>
+        <Spanish>Dinero actual: PLN %1</Spanish>
+        <Russian>Текущий баланс: PLN %1</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_sell_vehicle">
         <Original>Sell</Original>
@@ -3495,9 +3495,9 @@
         <Spanish>Codigos de Radio: %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_money">
-        <Original>Money: %1€</Original>
-        <Czech>Peníze: %1€</Czech>
-        <Spanish>Dinero %1€</Spanish>
+        <Original>Money: %1 PLN</Original>
+        <Czech>Peníze: %1 PLN</Czech>
+        <Spanish>Dinero %1 PLN</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_HR">
         <Original>HR: %1</Original>
@@ -4266,17 +4266,17 @@
         <Chinesesimp>您没有足够的人力来处理此请求（需要 %1 个）</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_recruit_squad_hint_insufficient_money">
-        <Original>You do not have enough money for this request (%1 € required)</Original>
-        <German>Du hast nicht genug Geld für diese Anfrage (%1 € benötigt)</German>
-        <Italian>Non hai abbastanza denaro per questa richiesta (%1 € necessari)</Italian>
+        <Original>You do not have enough money for this request (%1 PLN required)</Original>
+        <German>Du hast nicht genug Geld für diese Anfrage (%1 PLN benötigt)</German>
+        <Italian>Non hai abbastanza denaro per questa richiesta (%1 PLN necessari)</Italian>
         <Spanish>No tiene suficiente Dinero para esto (1% requerido)</Spanish>
-        <French>Vous n'avez pas assez d'argent pour cette demande (%1 € requis)</French>
-        <Korean>이 요청을 수행할 자금이 부족합니다 (%1€ 필요)</Korean>
-        <Russian>У вас недостаточно денег для этого (%1 € необходимо)</Russian>
-        <Polish>Nie masz wystarczającej ilości pieniędzy na to żądanie (wymagane %1 €)</Polish>
-        <Czech>Na tuto žádost nemáte dostatek peněz (vyžadováno%1 €)</Czech>
+        <French>Vous n'avez pas assez d'argent pour cette demande (%1 PLN requis)</French>
+        <Korean>이 요청을 수행할 자금이 부족합니다 (%1 PLN 필요)</Korean>
+        <Russian>У вас недостаточно денег для этого (%1 PLN необходимо)</Russian>
+        <Polish>Nie masz wystarczającej ilości pieniędzy na to żądanie (wymagane %1 PLN)</Polish>
+        <Czech>Na tuto žádost nemáte dostatek peněz (vyžadováno%1 PLN)</Czech>
         <Portuguese>Não tens dinheiro suficiente para este pedido (%1 necessário)</Portuguese>
-        <Turkish>Bu istek için yeterli paranız yok (%1 € gerekli)</Turkish>
+        <Turkish>Bu istek için yeterli paranız yok (%1 PLN gerekli)</Turkish>
         <Chinesesimp>您没有足够的金钱来处理此请求（需要 %1 ）</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_recruit_squad_hint_moving_hq">

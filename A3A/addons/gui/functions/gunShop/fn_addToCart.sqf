@@ -39,7 +39,7 @@ if(_className in A3A_shoppingCart) exitWith
 	
 	private _totalCost = _map getOrDefault ["_controlCost", -1];
 	private _weaponPrice = _map getOrDefault ["_price", -1];
-	_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _weaponPrice * _amount]);
+	_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>PLN %1</t>", _weaponPrice * _amount]);
 	_totalCost ctrlCommit 0;
 
 
@@ -86,7 +86,7 @@ _displayText ctrlCommit 0;
 
 private _totalCost = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
 _totalCost ctrlSetPosition [1 * GRID_W, 14 * GRID_H, 11 * GRID_W, 3 * GRID_H];
-_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _price]);
+_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>PLN %1</t>", _price]);
 _totalCost ctrlCommit 0;
 
 private _stockText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];

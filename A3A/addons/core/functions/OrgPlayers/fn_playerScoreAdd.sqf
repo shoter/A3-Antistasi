@@ -16,7 +16,7 @@ if (_pointsX > 0) then
 	_playerX setVariable ["moneyX",_moneyJ,true];
 	if (_pointsX > 1) then
 	{
-		_textX = format ["<br/><br/><br/><br/><br/><br/>" + localize "STR_A3A_fn_orgp_playerScoreAdd_money" + " €",_pointsX*10];
+		_textX = format ["<br/><br/><br/><br/><br/><br/>" + localize "STR_A3A_fn_orgp_playerScoreAdd_money" + " PLN",_pointsX*10];
 		[petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",_playerX];
 		//[] remoteExec ["A3A_fnc_statistics",_playerX];
 		if (_pointsX >= 10) then { // Dumb way to track mission completion without changing every mission file

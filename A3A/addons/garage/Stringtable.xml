@@ -476,10 +476,10 @@
         <Russian>Этот автомобиль не подходит для нашего рынка</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_sold">
-        <Original>Vehicle sold for %1 €.</Original>
-        <Spanish>Vehículo vendido por %1 €.</Spanish>
-        <French>Véhicule vendu pour %1 €.</French>
-        <Russian>Техника продана за %1 €.</Russian>
+        <Original>Vehicle sold for %1 PLN.</Original>
+        <Spanish>Vehículo vendido por %1 PLN.</Spanish>
+        <French>Véhicule vendu pour %1 PLN.</French>
+        <Russian>Техника продана за %1 PLN.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_toggleLock_limit">
         <Original>You have too many vehicles locked</Original>

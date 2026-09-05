@@ -16,6 +16,7 @@ Version 3.11.1
    * :issue:`3926` Added some buttons to the main menu and changed the main logo
    * Added a commander-deployable rally flag with a free, faster teleport from the HQ flag
    * Loot crates no longer have a capacity limit when looting to crate
+   * Changed the currency symbol from € to PLN
 
 
 .. admonition:: Template updates

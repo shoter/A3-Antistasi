@@ -339,7 +339,7 @@ switch (_mode) do
 
         private _factionMoney = server getVariable ["resourcesFIA", 0];
         private _factionMoneyText = _display displayCtrl A3A_IDC_FACTIONMONEYTEXT;
-        _factionMoneyText ctrlSetText format ["%1 €", floor _factionMoney];
+        _factionMoneyText ctrlSetText format ["%1 PLN", floor _factionMoney];
 
         // Faction money slider update
         private _factionMoneySlider = _display displayCtrl A3A_IDC_FACTIONMONEYSLIDER;
@@ -513,15 +513,15 @@ switch (_mode) do
         _atMissilePriceText = _display displayCtrl A3A_IDC_ATMISSILEPRICE;
         _aaMissilePriceText = _display displayCtrl A3A_IDC_AAMISSILEPRICE;
 
-        _riflemanPriceText ctrlSetText str _riflemanPrice + "€";
-        _squadLeaderPriceText ctrlSetText str _squadLeaderPrice + "€";
-        _autoriflemanPriceText ctrlSetText str _autoriflemanPrice + "€";
-        _grenadierPriceText ctrlSetText str _grenadierPrice + "€";
-        _medicPriceText ctrlSetText str _medicPrice + "€";
-        _marksmanPriceText ctrlSetText str _marksmanPrice + "€";
-        _atPriceText ctrlSetText str _atPrice + "€";
-        _atMissilePriceText ctrlSetText str _atMissilePrice + "€";
-        _aaMissilePriceText ctrlSetText str _aaMissilePrice + "€";
+        _riflemanPriceText ctrlSetText str _riflemanPrice + " PLN";
+        _squadLeaderPriceText ctrlSetText str _squadLeaderPrice + " PLN";
+        _autoriflemanPriceText ctrlSetText str _autoriflemanPrice + " PLN";
+        _grenadierPriceText ctrlSetText str _grenadierPrice + " PLN";
+        _medicPriceText ctrlSetText str _medicPrice + " PLN";
+        _marksmanPriceText ctrlSetText str _marksmanPrice + " PLN";
+        _atPriceText ctrlSetText str _atPrice + " PLN";
+        _atMissilePriceText ctrlSetText str _atMissilePrice + " PLN";
+        _aaMissilePriceText ctrlSetText str _aaMissilePrice + " PLN";
 
         // Disable add buttons if faction is lacking the resources to recruit them (1HR + money)
         _hr = server getVariable ["hr", 0];

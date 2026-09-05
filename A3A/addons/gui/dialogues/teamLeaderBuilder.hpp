@@ -49,7 +49,7 @@ class A3A_teamLeaderBuilder
         class RemMoneyText: A3A_TitlebarText
         {
             idc = A3A_IDC_TEAMLEADERBUILDERMONEY;
-            text = "500 €";
+            text = "500 PLN";
             x = SCREEN_RIGHT - PX_W(80);
             y = SCREEN_BOTTOM - PX_H(41);
             w = PX_W(40);

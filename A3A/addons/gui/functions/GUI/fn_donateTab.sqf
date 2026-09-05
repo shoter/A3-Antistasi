@@ -52,7 +52,7 @@ switch (_mode) do
         _moneySlider sliderSetPosition 0;
 
         private _moneyText = _display displayCtrl A3A_IDC_DONATIONMONEYTEXT;
-        _moneyText ctrlSetText format ["%1 €", _money];
+        _moneyText ctrlSetText format ["%1 PLN", _money];
 
         private _playerListCtrl = _display displayCtrl A3A_IDC_DONATEPLAYERLIST;
         private _players = allPlayers - entities "HeadlessClient_F";
