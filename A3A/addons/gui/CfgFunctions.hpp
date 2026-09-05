@@ -19,6 +19,7 @@ class CfgFunctions {
             class donateTab {};
             class fastTravelTab {};
             class fireMissionEH {};
+            class garrisonsTab {};
             class getGroupInfo {};
             class getGroupVehicle {};
             class getLocationMarkerName {};

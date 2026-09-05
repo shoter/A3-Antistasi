@@ -60,6 +60,10 @@ class A3A_DummyDialog
     };
 };
 
+// Tab strip: the tab buttons share the dialog width equally. Bump the count when adding a tab.
+#define TAB_BUTTON_COUNT 6
+#define TAB_BUTTON_W (DIALOG_W / TAB_BUTTON_COUNT)
+
 class A3A_MainDialog : A3A_TabbedDialog
 {
     idd = A3A_IDD_MAINDIALOG;
@@ -88,6 +92,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class Controls
             {
+                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle
                 class PlayerTabButton : A3A_Button
                 {
                     idc = A3A_IDC_PLAYERTABBUTTON;
@@ -95,7 +100,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     onButtonClick = "[""switchTab"", [""player""]] call A3A_GUI_fnc_mainDialog;";
                     x = 0;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -104,20 +109,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_COMMANDERTABBUTTON;
                     text = $STR_antistasi_dialogs_main_commander_tab_button;
                     onButtonClick = "[""switchTab"", [""commander""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 30 * GRID_W;
+                    x = 1 * TAB_BUTTON_W * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
-                    h = 5 * GRID_H;
-                };
-
-                class TownsTabButton : A3A_Button
-                {
-                    idc = A3A_IDC_TOWNSTABBUTTON;
-                    text = $STR_antistasi_dialogs_main_towns_tab_button;
-                    onButtonClick = "[""switchTab"", [""towns""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 90 * GRID_W;
-                    y = 0;
-                    w = 30 * GRID_W;
+                    w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -126,9 +120,31 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_ADMINTABBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_tab_button;
                     onButtonClick = "[""switchTab"", [""admin""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 60 * GRID_W;
+                    x = 2 * TAB_BUTTON_W * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = TAB_BUTTON_W * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class TownsTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_TOWNSTABBUTTON;
+                    text = $STR_antistasi_dialogs_main_towns_tab_button;
+                    onButtonClick = "[""switchTab"", [""towns""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 3 * TAB_BUTTON_W * GRID_W;
+                    y = 0;
+                    w = TAB_BUTTON_W * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class GarrisonsTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_GARRISONSTABBUTTON;
+                    text = $STR_antistasi_dialogs_main_garrisons_tab_button;
+                    onButtonClick = "[""switchTab"", [""garrisons""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 4 * TAB_BUTTON_W * GRID_W;
+                    y = 0;
+                    w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -137,9 +153,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_CHRONICLETABBUTTON;
                     text = $STR_antistasi_dialogs_main_chronicle_tab_button;
                     onButtonClick = "[""switchTab"", [""chronicle""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 120 * GRID_W;
+                    x = 5 * TAB_BUTTON_W * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
             };
@@ -3154,6 +3170,132 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 12 * GRID_H;
                     w = 32 * GRID_W;
                     h = 12 * GRID_H;
+                };
+            };
+        };
+
+
+        class GarrisonsTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_GARRISONSTAB;
+            show = false;
+
+            class controls
+            {
+                class GarrisonsListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 72 * GRID_H;
+                };
+
+                // Column headers, clicking one sorts the table by that column.
+                // X positions follow the column fractions of GarrisonsList below (8 + fraction * 144).
+                class NameHeader : A3A_Button
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_NAME;
+                    text = $STR_antistasi_dialogs_main_towns_name_label;
+                    tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
+                    onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_garrisonsTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 33 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class TypeHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_TYPE;
+                    text = $STR_antistasi_dialogs_main_garrisons_type_label;
+                    onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 42 * GRID_W;
+                    w = 19 * GRID_W;
+                };
+
+                class TroopsHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_TROOPS;
+                    text = $STR_antistasi_dialogs_main_garrisons_troops_label;
+                    onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 62 * GRID_W;
+                    w = 15 * GRID_W;
+                };
+
+                class VehiclesHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_VEHICLES;
+                    text = $STR_antistasi_dialogs_main_garrisons_vehicles_label;
+                    onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 78 * GRID_W;
+                    w = 16 * GRID_W;
+                };
+
+                class StaticsHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_STATICS;
+                    text = $STR_antistasi_dialogs_main_garrisons_statics_label;
+                    onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 95 * GRID_W;
+                    w = 15 * GRID_W;
+                };
+
+                class StatusHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_STATUS;
+                    text = $STR_antistasi_dialogs_main_garrisons_status_label;
+                    onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 111 * GRID_W;
+                    w = 23 * GRID_W;
+                };
+
+                class GridHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_GRID;
+                    text = $STR_antistasi_dialogs_main_towns_grid_label;
+                    onButtonClick = "[""sortBy"", [6]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 135 * GRID_W;
+                    w = 17 * GRID_W;
+                };
+
+                class GarrisonsList : A3A_ListNBox
+                {
+                    idc = A3A_IDC_GARRISONSLIST;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 72 * GRID_H;
+                    onLBSelChanged = "[""selectionChanged""] call A3A_GUI_fnc_garrisonsTab";
+                    onLBDblClick = "[""showOnMap""] call A3A_GUI_fnc_garrisonsTab";
+
+                    sizeEx = GUI_TEXT_SIZE_MEDIUM;
+                    rowHeight = 4 * GRID_H;
+                    columns[] = {0, 0.236, 0.375, 0.486, 0.604, 0.715, 0.882}; // Name, Type, Troops, Vehicles, Statics, Status, Grid
+                };
+
+                class ShowOnMapButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_GARRISONSSHOWONMAPBUTTON;
+                    text = $STR_antistasi_dialogs_main_towns_show_on_map_button;
+                    onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_garrisonsTab";
+                    x = 8 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 8 * GRID_H;
+                };
+
+                class ManageButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_GARRISONSMANAGEBUTTON;
+                    text = $STR_antistasi_dialogs_main_garrisons_manage_button;
+                    tooltip = $STR_antistasi_dialogs_main_garrisons_manage_tooltip;
+                    onButtonClick = "[""manage""] call A3A_GUI_fnc_garrisonsTab";
+                    x = 44 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 8 * GRID_H;
                 };
             };
         };

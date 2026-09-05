@@ -309,6 +309,9 @@ call A3A_fnc_initBuildableObjects;
 // Start cursorObject monitor loop for adding removeStructure actions
 0 spawn A3A_fnc_initBuilderMonitors;
 
+// Start cursorObject monitor loop for adding the strip-for-scrap action to wrecks
+0 spawn A3A_fnc_scrapActionMonitor;
+
 
 
 disableSerialization;

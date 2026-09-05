@@ -18,6 +18,7 @@ Version 3.11.1
    * Loot crates no longer have a capacity limit when looting to crate
    * Changed the currency symbol from € to PLN
    * Added the Junkyard at the HQ garage crate: buy heavily damaged civilian and military vehicles, restocked hourly. Wrecks get no free repairs for 10 hours and are marked as junk in the garage
+   * Added wreck stripping: engineers with a toolkit can strip any destroyed vehicle for 1-3% of its junkyard price (at least 50 PLN). Wrecks inside a spawned enemy base have to wait until it is captured or cleared
 
 
 .. admonition:: Template updates
