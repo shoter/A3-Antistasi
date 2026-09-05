@@ -55,6 +55,12 @@ private _makeUnconscious =
     _unit setVariable ["overallDamage", 0];
     if (isPlayer _unit) then { _unit allowDamage false };
 
+    // Player statistics: remember who downed us (broadcast, the server credits the kill after a bleed-out) and count the down
+    _unit setVariable ["A3A_downedBy", _injurer, true];
+    if (isPlayer _unit && {_unit == _unit getVariable ["owner", _unit]}) then {
+        [[_unit] call A3A_fnc_playerStats_getUID, [["timesDowned", 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
+    };
+
     if (vehicle _unit != _unit) then { moveOut _unit };
 
     private _fromside = if (!isNull _injurer) then {side group _injurer} else {sideUnknown};

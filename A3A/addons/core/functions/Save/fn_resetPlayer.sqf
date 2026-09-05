@@ -7,6 +7,7 @@ if (!isServer) exitWith {
 params ["_playerId", "_unit"];
 
 Info_2("Resetting player data for ID %1, unit %2", _playerId, _unit);
+[_playerId, _unit] call A3A_fnc_playerStats_onConnect;
 
 // Don't restore more money than this player had previously
 private _money = initialPlayerMoney;

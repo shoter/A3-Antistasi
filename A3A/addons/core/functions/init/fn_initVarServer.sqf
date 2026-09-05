@@ -184,6 +184,8 @@ prestigeIsChanging = false;
 playerHasBeenPvP = [];
 
 A3A_playerSaveData = createHashMap;
+A3A_playerStats = createHashMap;		// uid -> statistics record for the Players tab, see A3A_fnc_playerStats_get
+A3A_playerSessions = createHashMap;		// uid -> serverTime at which the running session started, not saved
 A3A_destroyedBuildings = [];		// server side only now
 
 testingTimerIsActive = false;

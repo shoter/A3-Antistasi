@@ -209,6 +209,12 @@ if (isServer) then {
 		} forEach _savedPlayers;
 	};
 
+	// Player statistics (Players tab), kept apart from the personal saves so that stats never fake one
+	private _savedStats = "playerStats" call A3A_fnc_returnSavedStat;
+	if (!isNil "_savedStats" && { _savedStats isEqualType createHashMap }) then {
+		{ if (_y isEqualType createHashMap) then { A3A_playerStats set [_x, _y] } } forEach _savedStats;
+	};
+
     Info("Persistent Load Completed.");
 
 	// uh, why here?

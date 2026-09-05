@@ -122,6 +122,7 @@ if !(_cured getVariable ["incapacitated", false]) exitWith {
 
 // Successful revive
 if (_isMedic) then {_cured setDamage 0} else {_cured setDamage 0.25};
+if (_player) then { [[_medic] call A3A_fnc_playerStats_getUID, [["revives", 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2] };
 if (!_hasMedkit) then {
     if (count _medicFAKs == 0) then { _cured removeItem selectRandom _curedFAKs }
     else { _medic removeItem selectRandom _medicFAKs };

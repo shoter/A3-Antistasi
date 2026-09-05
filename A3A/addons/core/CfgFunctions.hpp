@@ -613,6 +613,21 @@ class CfgFunctions
             class trimPath {};
         };
 
+        class PlayerStats {
+            file = QPATHTOFOLDER(functions\PlayerStats);
+            class playerStats_add {};
+            class playerStats_flushSessions {};
+            class playerStats_get {};
+            class playerStats_getUID {};
+            class playerStats_onConnect {};
+            class playerStats_onDisconnect {};
+            class playerStats_onEntityKilled {};
+            class playerStats_reportKill {};
+            class playerStats_request {};
+            class playerStats_requestDetails {};
+            class playerStats_resolveKiller {};
+        };
+
         class proxy {
             file = QPATHTOFOLDER(functions\proxy);
             class onPlayerRespawn {};
