@@ -554,6 +554,7 @@ class CfgFunctions
             class theBossToggleEligibility {};
             class theBossTransfer {};
             class theBossSteal {};
+            class setRewardShares {};
             class assignBossIfNone {};
             class tierCheck {};
             class unitTraits {};

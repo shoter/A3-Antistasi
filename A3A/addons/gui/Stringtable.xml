@@ -914,6 +914,21 @@
         <Turkish>Yağmuru Durdur</Turkish>
         <Chinesesimp>停止下雨</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_tax_label">
+        <Original>Reward tax:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_tax_tooltip">
+        <Original>Share of every mission reward paid into the faction fund. Collected silently, the periodic income report shows the total.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_cut_label">
+        <Original>Commander cut:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_cut_tooltip">
+        <Original>Share of every mission reward paid to the commander personally. Whatever is left after the tax and the cut is split between the players who took part.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_shares_guest_tooltip">
+        <Original>Only a member commander can change the reward split.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_hq_take_money_button">
         <Original>Take</Original>
         <German>Nehmen</German>
