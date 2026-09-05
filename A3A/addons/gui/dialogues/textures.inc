@@ -102,6 +102,7 @@ Maintainer: DoomMetal
 
 // From Arma
 #define A3A_Icon_Construct          "\a3\ui_f\data\igui\cfg\cursors\iconRepairVehicle_ca.paa"
+#define A3A_Icon_AirTaxi            "\a3\ui_f\data\GUI\Rsc\RscDisplayGarage\helicopter_ca.paa"
 #define A3A_Icon_Close              "\A3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_end_ca.paa"
 #define A3A_Icon_Back               "\A3\ui_f\data\GUI\RscCommon\RscHTML\arrow_left_ca.paa"
 #define A3A_Icon_Remotecontrol      "\a3\modules_f_curator\data\portraitremotecontrol_ca.paa"

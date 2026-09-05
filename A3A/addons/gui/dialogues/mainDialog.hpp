@@ -61,7 +61,7 @@ class A3A_DummyDialog
 };
 
 // Tab strip: the tab buttons share the dialog width equally. Bump the count when adding a tab.
-#define TAB_BUTTON_COUNT 6
+#define TAB_BUTTON_COUNT 7
 #define TAB_BUTTON_W (DIALOG_W / TAB_BUTTON_COUNT)
 
 class A3A_MainDialog : A3A_TabbedDialog
@@ -92,7 +92,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class Controls
             {
-                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle
+                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle, Players
                 class PlayerTabButton : A3A_Button
                 {
                     idc = A3A_IDC_PLAYERTABBUTTON;
@@ -158,6 +158,17 @@ class A3A_MainDialog : A3A_TabbedDialog
                     w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
+
+                class PlayerStatsTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_PLAYERSTATSTABBUTTON;
+                    text = $STR_antistasi_dialogs_main_playerstats_tab_button;
+                    onButtonClick = "[""switchTab"", [""playerstats""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 6 * TAB_BUTTON_W * GRID_W;
+                    y = 0;
+                    w = TAB_BUTTON_W * GRID_W;
+                    h = 5 * GRID_H;
+                };
             };
         };
 
@@ -174,99 +185,135 @@ class A3A_MainDialog : A3A_TabbedDialog
             class Controls
             {
                 // Left side button column
-
-                // Undercover
-                class UndercoverIcon : A3A_Picture
+                // Scrollable so more buttons fit vertically than the tab is tall
+                class PlayerButtonsGroup : A3A_ControlsGroupNoHScrollbars
                 {
-                    idc = A3A_IDC_UNDERCOVERICON;
-                    text = A3A_Icon_Undercover;
+                    idc = A3A_IDC_PLAYERBUTTONSGROUP;
                     x = 8 * GRID_W;
-                    y = 13 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
-
-                class UndercoverButton : A3A_Button
-                {
-                    idc = A3A_IDC_UNDERCOVERBUTTON;
-                    text = $STR_antistasi_dialogs_main_undercover;
-                    // onButtonClick = "[] call A3A_fnc_goUndercover; closeDialog 0";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
                     y = 11 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
-                };
+                    w = 60 * GRID_W;
+                    h = 87 * GRID_H;
 
-                // Fast Travel
-                class FastTravelIcon : A3A_Picture
-                {
-                    idc = A3A_IDC_FASTTRAVELICON;
-                    text = A3A_Icon_FastTravel;
-                    x = 8 * GRID_W;
-                    y = 34 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
+                    class controls
+                    {
+                        // Undercover
+                        class UndercoverIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_UNDERCOVERICON;
+                            text = A3A_Icon_Undercover;
+                            x = 0;
+                            y = 2 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
 
-                class FastTravelButton : A3A_Button
-                {
-                    idc = A3A_IDC_FASTTRAVELBUTTON;
-                    text = $STR_antistasi_dialogs_main_fast_travel;
-                    tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
-                    onButtonClick = "[""setHcMode"", [false]] call A3A_GUI_fnc_fastTravelTab; [""switchTab"", [""fasttravel""]] call A3A_GUI_fnc_mainDialog";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
-                    y = 32 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
-                };
+                        class UndercoverButton : A3A_Button
+                        {
+                            idc = A3A_IDC_UNDERCOVERBUTTON;
+                            text = $STR_antistasi_dialogs_main_undercover;
+                            // onButtonClick = "[] call A3A_fnc_goUndercover; closeDialog 0";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 0;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
 
-                // Construct
-                class ConstructIcon : A3A_Picture
-                {
-                    idc = A3A_IDC_CONSTRUCTICON;
-                    text = A3A_Icon_Construct;
-                    x = 8 * GRID_W;
-                    y = 55 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
+                        // Fast Travel
+                        class FastTravelIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_FASTTRAVELICON;
+                            text = A3A_Icon_FastTravel;
+                            x = 0;
+                            y = 23 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
 
-                class ConstructButton : A3A_Button
-                {
-                    idc = A3A_IDC_CONSTRUCTBUTTON;
-                    //text = $STR_antistasi_dialogs_main_construct;
-                    text = $STR_antistasi_dialogs_main_warstatus_main;
-                    onButtonClick = "[""switchTab"", [""warstatus""]] call A3A_GUI_fnc_mainDialog;";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
-                    y = 53 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
-                };
+                        class FastTravelButton : A3A_Button
+                        {
+                            idc = A3A_IDC_FASTTRAVELBUTTON;
+                            text = $STR_antistasi_dialogs_main_fast_travel;
+                            tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
+                            onButtonClick = "[""setHcMode"", [false]] call A3A_GUI_fnc_fastTravelTab; [""switchTab"", [""fasttravel""]] call A3A_GUI_fnc_mainDialog";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 21 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
 
-                // AI Management
-                class AIManagementIcon : A3A_Picture
-                {
-                    idc = A3A_IDC_AIMANAGEMENTICON;
-                    text = A3A_Icon_AI_Management;
-                    x = 8 * GRID_W;
-                    y = 76 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
+                        // Air Taxi
+                        class AirTaxiIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_AIRTAXIICON;
+                            text = A3A_Icon_AirTaxi;
+                            x = 0;
+                            y = 44 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
 
-                class AIManagementButton : A3A_Button
-                {
-                    idc = A3A_IDC_AIMANAGEMENTBUTTON;
-                    text = $STR_antistasi_dialogs_main_ai_management;
-                    onButtonClick = "[""switchTab"", [""aimanagement""]] call A3A_GUI_fnc_mainDialog;";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
-                    y = 74 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
+                        class AirTaxiButton : A3A_Button
+                        {
+                            idc = A3A_IDC_AIRTAXIBUTTON;
+                            text = $STR_antistasi_dialogs_main_air_taxi;
+                            tooltip = $STR_antistasi_dialogs_main_air_taxi_tooltip;
+                            onButtonClick = "[""switchTab"", [""airtaxi""]] call A3A_GUI_fnc_mainDialog;";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 42 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        // Construct
+                        class ConstructIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONSTRUCTICON;
+                            text = A3A_Icon_Construct;
+                            x = 0;
+                            y = 65 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class ConstructButton : A3A_Button
+                        {
+                            idc = A3A_IDC_CONSTRUCTBUTTON;
+                            //text = $STR_antistasi_dialogs_main_construct;
+                            text = $STR_antistasi_dialogs_main_warstatus_main;
+                            onButtonClick = "[""switchTab"", [""warstatus""]] call A3A_GUI_fnc_mainDialog;";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 63 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        // AI Management
+                        class AIManagementIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_AIMANAGEMENTICON;
+                            text = A3A_Icon_AI_Management;
+                            x = 0;
+                            y = 86 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class AIManagementButton : A3A_Button
+                        {
+                            idc = A3A_IDC_AIMANAGEMENTBUTTON;
+                            text = $STR_antistasi_dialogs_main_ai_management;
+                            onButtonClick = "[""switchTab"", [""aimanagement""]] call A3A_GUI_fnc_mainDialog;";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 84 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+                    };
                 };
 
 
@@ -1825,7 +1872,8 @@ class A3A_MainDialog : A3A_TabbedDialog
         class FastTravelMap : A3A_MapControl
         {
             idc = A3A_IDC_FASTTRAVELMAP;
-            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call A3A_GUI_fnc_fastTravelTab";
+            // Shared by the Fast Travel and Air Taxi subtabs, dispatch on the one that is shown (7580 = A3A_IDC_AIRTAXITAB)
+            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab] select ctrlShown ((ctrlParent (_this select 0)) displayCtrl 7580))";
             x = CENTER_X(DIALOG_W) + 48 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
             w = 104 * GRID_W;
@@ -1900,6 +1948,80 @@ class A3A_MainDialog : A3A_TabbedDialog
                     text = $STR_antistasi_dialogs_main_fast_travel;
                     // tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
                     onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_fastTravelTab;";
+                    sizeEx = GUI_TEXT_SIZE_LARGE;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+            };
+        };
+
+        class AirTaxiTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_AIRTAXITAB;
+            // Narrow for the same reason as FastTravelTab: it must not cover the shared map control
+            w = 44 * GRID_W;
+            show = false;
+
+            class controls
+            {
+                class AirTaxiLabel : A3A_SectionLabelRight
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_air_taxi;
+                    x = 8 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 26 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class AirTaxiRefreshButton : A3A_Button
+                {
+                    idc = A3A_IDC_AIRTAXIREFRESHBUTTON;
+                    text = $STR_antistasi_dialogs_main_air_taxi_refresh_button;
+                    tooltip = $STR_antistasi_dialogs_main_air_taxi_refresh_tooltip;
+                    onButtonClick = "[""requestHelis""] call A3A_GUI_fnc_airTaxiTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 34 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 10 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class AirTaxiBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 68 * GRID_H;
+                };
+
+                class AirTaxiHeliList : A3A_Listbox
+                {
+                    idc = A3A_IDC_AIRTAXIHELILIST;
+                    onLBSelChanged = "[""heliSelected""] call A3A_GUI_fnc_airTaxiTab;";
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 24 * GRID_H;
+                };
+
+                class AirTaxiInfoText : A3A_StructuredText
+                {
+                    idc = A3A_IDC_AIRTAXIINFOTEXT;
+                    x = 8 * GRID_W;
+                    y = 37 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 43 * GRID_H;
+                };
+
+                class AirTaxiCommitButton : A3A_Button
+                {
+                    idc = A3A_IDC_AIRTAXICOMMITBUTTON;
+                    text = $STR_antistasi_dialogs_main_air_taxi_request_button;
+                    onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_airTaxiTab;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 8 * GRID_W;
                     y = 80 * GRID_H;
@@ -3423,6 +3545,645 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 12 * GRID_H;
                     w = 32 * GRID_W;
                     h = 12 * GRID_H;
+                };
+            };
+        };
+
+
+        class PlayerStatsTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_PLAYERSTATSTAB;
+            show = false;
+
+            class controls
+            {
+                class FilterLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_filter_label;
+                    x = 8 * GRID_W;
+                    y = 2 * GRID_H;
+                    w = 12 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class FilterEdit : A3A_Edit
+                {
+                    idc = A3A_IDC_PLAYERSTATSFILTEREDIT;
+                    text = "";
+                    tooltip = $STR_antistasi_dialogs_main_playerstats_filter_tooltip;
+                    onKeyUp = "[""render""] call A3A_GUI_fnc_playerStatsTab; false";
+                    x = 20 * GRID_W;
+                    y = 2 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class RefreshButton : A3A_Button
+                {
+                    idc = A3A_IDC_PLAYERSTATSREFRESHBUTTON;
+                    text = $STR_antistasi_dialogs_main_playerstats_refresh_button;
+                    onButtonClick = "[""refresh""] call A3A_GUI_fnc_playerStatsTab;";
+                    x = 129 * GRID_W;
+                    y = 2 * GRID_H;
+                    w = 23 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                // Column headers, clicking one sorts the table by that column.
+                // X positions follow the row layout created in fn_playerStatsTab "render" (list x + column offset).
+                class NameHeader : A3A_Button
+                {
+                    idc = A3A_IDC_PLAYERSTATSHEADER_NAME;
+                    text = $STR_antistasi_dialogs_main_towns_name_label;
+                    tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
+                    onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_playerStatsTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 9 * GRID_H;
+                    w = 46 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class KillsHeader : NameHeader
+                {
+                    idc = A3A_IDC_PLAYERSTATSHEADER_KILLS;
+                    text = $STR_antistasi_dialogs_main_playerstats_kills_label;
+                    onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_playerStatsTab;";
+                    x = 55 * GRID_W;
+                    w = 14 * GRID_W;
+                };
+
+                class DeathsHeader : NameHeader
+                {
+                    idc = A3A_IDC_PLAYERSTATSHEADER_DEATHS;
+                    text = $STR_antistasi_dialogs_main_playerstats_deaths_label;
+                    onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_playerStatsTab;";
+                    x = 70 * GRID_W;
+                    w = 14 * GRID_W;
+                };
+
+                class KDHeader : NameHeader
+                {
+                    idc = A3A_IDC_PLAYERSTATSHEADER_KD;
+                    text = $STR_antistasi_dialogs_main_playerstats_kd_label;
+                    onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_playerStatsTab;";
+                    x = 85 * GRID_W;
+                    w = 14 * GRID_W;
+                };
+
+                class TimeHeader : NameHeader
+                {
+                    idc = A3A_IDC_PLAYERSTATSHEADER_TIME;
+                    text = $STR_antistasi_dialogs_main_playerstats_time_online_label;
+                    onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_playerStatsTab;";
+                    x = 100 * GRID_W;
+                    w = 28 * GRID_W;
+                };
+
+                class PlayerListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 14 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 80 * GRID_H;
+                };
+
+                // Rows are created at runtime, one line of controls per player with a Details button, see fn_playerStatsTab "render"
+                class PlayerList : A3A_ControlsGroupNoHScrollbars
+                {
+                    idc = A3A_IDC_PLAYERSTATSLIST;
+                    x = 8 * GRID_W;
+                    y = 14 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 80 * GRID_H;
+                };
+
+                class StatusText : A3A_Text
+                {
+                    idc = A3A_IDC_PLAYERSTATSSTATUSTEXT;
+                    text = "";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 95 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+            };
+        };
+
+
+        class PlayerStatsDetailsTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_PLAYERSTATSDETAILSTAB;
+            show = false;
+
+            class controls
+            {
+                class PlayerName : A3A_Text
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_NAME;
+                    text = "";
+                    sizeEx = GUI_TEXT_SIZE_LARGE;
+                    x = 8 * GRID_W;
+                    y = 6 * GRID_H;
+                    w = 100 * GRID_W;
+                    h = 6 * GRID_H;
+                };
+
+                class PlayerStatus : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_STATUS;
+                    text = "";
+                    x = 110 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 42 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                // Left column: combat and medical. Labels x=8 w=40, values x=48 w=28, one row every 5 grid units
+                class CombatSection : A3A_SectionLabelCenter
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_section_combat;
+                    x = 8 * GRID_W;
+                    y = 13 * GRID_H;
+                    w = 68 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class MedicalSection : A3A_SectionLabelCenter
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_section_medical;
+                    x = 8 * GRID_W;
+                    y = 65 * GRID_H;
+                    w = 68 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class KillsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_kills_label;
+                    x = 8 * GRID_W;
+                    y = 18 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class KillsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_KILLS;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 18 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class VehicleKillsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_vehicle_kills_label;
+                    x = 8 * GRID_W;
+                    y = 23 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class VehicleKillsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_VEHICLEKILLS;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 23 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class AirKillsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_air_kills_label;
+                    x = 8 * GRID_W;
+                    y = 28 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class AirKillsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_AIRKILLS;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 28 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class CivilianKillsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_civilian_kills_label;
+                    x = 8 * GRID_W;
+                    y = 33 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class CivilianKillsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_CIVILIANKILLS;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 33 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class FriendlyKillsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_friendly_kills_label;
+                    x = 8 * GRID_W;
+                    y = 38 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class FriendlyKillsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_FRIENDLYKILLS;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 38 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class PlayerKillsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_player_kills_label;
+                    x = 8 * GRID_W;
+                    y = 43 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class PlayerKillsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_PLAYERKILLS;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 43 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class LongestKillLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_longest_kill_label;
+                    x = 8 * GRID_W;
+                    y = 48 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class LongestKillValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_LONGESTKILL;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 48 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class DeathsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_deaths_label;
+                    x = 8 * GRID_W;
+                    y = 53 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class DeathsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_DEATHS;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 53 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class KDLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_kd_label;
+                    x = 8 * GRID_W;
+                    y = 58 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class KDValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_KD;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 58 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class TimesDownedLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_times_downed_label;
+                    x = 8 * GRID_W;
+                    y = 70 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class TimesDownedValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_TIMESDOWNED;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 70 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class RevivesLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_revives_label;
+                    tooltip = $STR_antistasi_dialogs_main_playerstats_revives_tooltip;
+                    x = 8 * GRID_W;
+                    y = 75 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class RevivesValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_REVIVES;
+                    text = "";
+                    x = 48 * GRID_W;
+                    y = 75 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                // Right column: activity and profile. Labels x=84 w=38, values x=122 w=30
+                class ActivitySection : A3A_SectionLabelCenter
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_section_activity;
+                    x = 84 * GRID_W;
+                    y = 13 * GRID_H;
+                    w = 68 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class ProfileSection : A3A_SectionLabelCenter
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_section_profile;
+                    x = 84 * GRID_W;
+                    y = 45 * GRID_H;
+                    w = 68 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class SessionsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_sessions_label;
+                    x = 84 * GRID_W;
+                    y = 18 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class SessionsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_SESSIONS;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 18 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class FirstSeenLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_first_seen_label;
+                    x = 84 * GRID_W;
+                    y = 23 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class FirstSeenValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_FIRSTSEEN;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 23 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class LastSeenLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_last_seen_label;
+                    x = 84 * GRID_W;
+                    y = 28 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class LastSeenValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_LASTSEEN;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 28 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class TimeOnlineLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_time_online_label;
+                    x = 84 * GRID_W;
+                    y = 33 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class TimeOnlineValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_TIMEONLINE;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 33 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class CurrentSessionLabel : A3A_Text
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_CURRENTSESSIONLABEL;
+                    text = $STR_antistasi_dialogs_main_playerstats_current_session_label;
+                    x = 84 * GRID_W;
+                    y = 38 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class CurrentSessionValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_CURRENTSESSION;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 38 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class RankLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_rank_label;
+                    x = 84 * GRID_W;
+                    y = 50 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class RankValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_RANK;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 50 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class ScoreLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_score_label;
+                    x = 84 * GRID_W;
+                    y = 55 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class ScoreValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_SCORE;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 55 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class MoneyLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_money_label;
+                    x = 84 * GRID_W;
+                    y = 60 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class MoneyValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_MONEY;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 60 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class MoneyEarnedLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_money_earned_label;
+                    x = 84 * GRID_W;
+                    y = 65 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class MoneyEarnedValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_MONEYEARNED;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 65 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class MissionsLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_playerstats_missions_label;
+                    x = 84 * GRID_W;
+                    y = 70 * GRID_H;
+                    w = 38 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class MissionsValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_MISSIONS;
+                    text = "";
+                    x = 122 * GRID_W;
+                    y = 70 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                // Steam UID, shown to admins only (see fn_playerStatsTab "updateDetails")
+                class UidLabel : A3A_Text
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_UIDLABEL;
+                    text = $STR_antistasi_dialogs_main_admin_player_uid_label;
+                    x = 84 * GRID_W;
+                    y = 77 * GRID_H;
+                    w = 20 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class UidValue : A3A_TextRight
+                {
+                    idc = A3A_IDC_PLAYERDETAILS_UID;
+                    text = "";
+                    x = 104 * GRID_W;
+                    y = 77 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 4 * GRID_H;
                 };
             };
         };

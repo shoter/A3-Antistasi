@@ -213,6 +213,11 @@ switch (_mode) do
                 _selectedTabIDC = A3A_IDC_FASTTRAVELTAB;
             };
 
+            case ("airtaxi"):
+            {
+                _selectedTabIDC = A3A_IDC_AIRTAXITAB;
+            };
+
             case ("construct"):
             {
                 _selectedTabIDC = A3A_IDC_CONSTRUCTTAB;
@@ -261,6 +266,18 @@ switch (_mode) do
                 // No permission check needed
                 _selectedTabIDC = A3A_IDC_CHRONICLETAB;
             };
+
+            case ("playerstats"):
+            {
+                // No permission check needed
+                _selectedTabIDC = A3A_IDC_PLAYERSTATSTAB;
+            };
+
+            case ("playerstatsdetails"):
+            {
+                // Sub tab of the Players tab, no permission check needed
+                _selectedTabIDC = A3A_IDC_PLAYERSTATSDETAILSTAB;
+            };
         };
 
         // Log attempt at accessing tab without permission
@@ -285,7 +302,10 @@ switch (_mode) do
             A3A_IDC_WARSTATUSTAB,
             A3A_IDC_TOWNSTAB,
             A3A_IDC_GARRISONSTAB,
-            A3A_IDC_CHRONICLETAB
+            A3A_IDC_CHRONICLETAB,
+            A3A_IDC_PLAYERSTATSTAB,
+            A3A_IDC_PLAYERSTATSDETAILSTAB,
+            A3A_IDC_AIRTAXITAB
         ];
 
         // Hide all tabs
@@ -341,6 +361,12 @@ switch (_mode) do
                 ["update"] call FUNC(fastTravelTab);
             };
 
+            case ("airtaxi"):
+            {
+                ["clearSelectedLocation"] call FUNC(airTaxiTab);
+                ["update"] call FUNC(airTaxiTab);
+            };
+
             case ("construct"):
             {
                 ["update"] call FUNC(constructTab);
@@ -384,6 +410,16 @@ switch (_mode) do
             case ("chronicle"):
             {
                 ["update"] call FUNC(chronicleTab);
+            };
+
+            case ("playerstats"):
+            {
+                ["update"] call FUNC(playerStatsTab);
+            };
+
+            case ("playerstatsdetails"):
+            {
+                ["updateDetails"] call FUNC(playerStatsTab);
             };
         };
     };

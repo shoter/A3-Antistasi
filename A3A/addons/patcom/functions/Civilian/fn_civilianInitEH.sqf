@@ -63,6 +63,7 @@ _unit addEventHandler ["Killed", {
     if (_victim == _killer) then {
         [-1, getPosATL _victim, true, true] remoteExecCall ["A3A_fnc_citySupportChange", 2];        // what case is this?
     } else {
+        [_victim, _killer, objNull, "civilianKills"] call A3A_fnc_playerStats_reportKill;
         if (isPlayer _killer) then {
             if (_victim getVariable "unitType" == FactionGet(civ, "unitWorker")) then {_killer addRating 1000};
             [-10,_killer] call A3A_fnc_playerScoreAdd;

@@ -37,6 +37,15 @@ colorTeamPlayer = "colorGUER";
 respawnTeamPlayer = "respawn_guerrila";			// not really sure why we have two markers here (also "Synd_HQ")
 posHQ = getMarkerPos respawnTeamPlayer;
 
+// Air taxi (Logistics/fn_airTaxi*)
+A3A_airTaxiFareBase = 200;          // flat fee per trip
+A3A_airTaxiFarePerKm = 100;         // per km of pickup-to-destination distance
+A3A_airTaxiHR = 1;                  // HR taken for the pilot
+A3A_airTaxiRefundHR = true;         // refund the pilot's HR when the helicopter makes it back to the garage
+A3A_airTaxiBoardTime = 60;          // seconds the helicopter waits at the pickup zone
+A3A_airTaxiMinDistance = 500;       // minimum pickup-to-destination distance
+A3A_airTaxiHoverHeight = 3;         // hover-drop height when no landing zone exists
+
 ////////////////////////////////////////
 //     DECLARING PATCOM VARIABLES    ///
 ////////////////////////////////////////

@@ -26,6 +26,7 @@ class CfgFunctions
             class captureX {};
             class chargeWithSmoke {};
             class combatLanding {};
+            class heliLandAtPos {};
             class coverage {};
             class destroyBuilding {};
             class doFlank {};
@@ -553,6 +554,24 @@ class CfgFunctions
             class townUpgradeSaveData {};
         };
 
+        class Logistics {
+            file = QPATHTOFOLDER(functions\Logistics);
+            class airTaxiBoard {};
+            class airTaxiCanRequest {};
+            class airTaxiEntryCheck {};
+            class airTaxiFare {};
+            class airTaxiFindLZ {};
+            class airTaxiFinish {};
+            class airTaxiGarageSync {};
+            class airTaxiHint {};
+            class airTaxiListHelis {};
+            class airTaxiOrigin {};
+            class airTaxiRequest {};
+            class airTaxiRun {};
+            class airTaxiSpawn {};
+            class airTaxiUnload {};
+        };
+
         class ModsAndDLC {
             file = QPATHTOFOLDER(functions\ModsAndDLC);
             class darkMapFix {};
@@ -614,6 +633,21 @@ class CfgFunctions
             class roadAStar {};
             class roadConnPoint {};
             class trimPath {};
+        };
+
+        class PlayerStats {
+            file = QPATHTOFOLDER(functions\PlayerStats);
+            class playerStats_add {};
+            class playerStats_flushSessions {};
+            class playerStats_get {};
+            class playerStats_getUID {};
+            class playerStats_onConnect {};
+            class playerStats_onDisconnect {};
+            class playerStats_onEntityKilled {};
+            class playerStats_reportKill {};
+            class playerStats_request {};
+            class playerStats_requestDetails {};
+            class playerStats_resolveKiller {};
         };
 
         class proxy {

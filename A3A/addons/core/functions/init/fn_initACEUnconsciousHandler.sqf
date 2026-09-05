@@ -19,6 +19,11 @@ Info("initACEUnconsciousHandler started");
 	{
 		_unit setVariable ["incapacitated", true, true];	// for canFight tests
 
+		// Player statistics: count the down of a player body (remote-controlled AIs point their owner at the controlling player)
+		if (isPlayer _unit && {_unit == _unit getVariable ["owner", _unit]}) then {
+			[[_unit] call A3A_fnc_playerStats_getUID, [["timesDowned", 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
+		};
+
         // Pass group lead if unit is the leader
         if (_unit == leader (group _unit)) then
         {

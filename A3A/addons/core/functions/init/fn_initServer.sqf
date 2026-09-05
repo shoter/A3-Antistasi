@@ -264,6 +264,7 @@ addMissionEventHandler ["PlayerDisconnected",{
     private _temp = server getVariable ["jna_playersInArsenal",[]];
     _temp = _temp - [param [4]];
     server setVariable ["jna_playersInArsenal",_temp,true];
+    [_this select 1] call A3A_fnc_playerStats_onDisconnect;         // uid, ends the statistics session
     _this call A3A_fnc_onHeadlessClientDisconnect;
     false;
 }];
@@ -277,6 +278,7 @@ private _savedDestroyed = A3A_destroyedBuildings; A3A_destroyedBuildings = [];
 addMissionEventHandler ["EntityKilled", {
     params ["_victim", "_killer", "_instigator"];
     if (typeof _victim == "") exitWith {};
+    [_victim, _killer, _instigator] call A3A_fnc_playerStats_onEntityKilled;
     private _killerSide = side group (if (isNull _instigator) then {_killer} else {_instigator});
     if (isPlayer _killer) then {
         private _killerUID = getPlayerUID _killer;
