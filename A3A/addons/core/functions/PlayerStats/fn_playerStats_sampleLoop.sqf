@@ -2,7 +2,7 @@
 Maintainer: Shoter
     Server loop that samples every connected player a few times a minute and accumulates the time-based statistics:
     time and distance per movement category (on foot, ground vehicle, aircraft, boat, swimming, static weapon),
-    time per role, time as commander, time undercover and time per weapon or vehicle in use.
+    time per role (commander included), time undercover and time per weapon or vehicle in use.
     Dead bodies are skipped, so only time spent alive is counted. Teleports (fast travel, respawn) are not distance.
 
 Arguments:
@@ -79,13 +79,12 @@ while { true } do {
         _bucket set [0, (_bucket select 0) + SAMPLE_INTERVAL];
         _bucket set [1, (_bucket select 1) + _distance];
 
-        // Role, commander, undercover
+        // Role and undercover
         private _role = if (_body == theBoss) then { "commander" } else { _body getVariable ["A3A_Role", "rifleman"] };
         if !(_role isEqualType "") then { _role = "rifleman" };
         private _roles = _stats get "roles";
         _roles set [_role, (_roles getOrDefault [_role, 0]) + SAMPLE_INTERVAL];
 
-        if (_body == theBoss) then { _stats set ["commanderTime", (_stats get "commanderTime") + SAMPLE_INTERVAL] };
         // Downed players are made captive by the revive system, that is not undercover
         if (captive _unit && {!(_unit getVariable ["incapacitated", false])}) then {
             _stats set ["undercoverTime", (_stats get "undercoverTime") + SAMPLE_INTERVAL];

@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Players tab fixes
+
+### Fixed
+- The Movement table in a player's Details showed key names such as `movement_foot` instead of the category names.
+
+### Changed
+- Time as commander is no longer listed twice in Details: it stays in the Roles table as the commander row and leaves the Activity section.
+
 ## 2026-09-05 - Chronicle shows real dates
 
 ### Changed

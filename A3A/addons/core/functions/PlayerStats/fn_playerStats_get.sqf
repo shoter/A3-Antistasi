@@ -64,7 +64,6 @@ private _stats = A3A_playerStats getOrDefault [_uid, createHashMap, true];
     ["moneySpent", 0],
     ["moneyDonated", 0],
     ["scrapMoney", 0],
-    ["commanderTime", 0],
     ["undercoverTime", 0],
     ["captures", 0],
     ["defences", 0],

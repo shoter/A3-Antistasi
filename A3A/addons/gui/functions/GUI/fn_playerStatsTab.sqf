@@ -356,7 +356,7 @@ switch (_mode) do
             if (_displayName isEqualType "" && {_displayName != ""}) then { _rankName = _displayName };
         };
 
-        #define KEY(suffix) "STR_antistasi_dialogs_main_playerstats_" + suffix
+        #define KEY(suffix) ("STR_antistasi_dialogs_main_playerstats_" + suffix)
         #define STAT(key) (_stats getOrDefault [key, 0])
 
         // Row 1: Combat | Activity
@@ -377,7 +377,6 @@ switch (_mode) do
             [KEY("last_seen_label"), [_stats getOrDefault ["lastSeen", []]] call _fnc_formatDate],
             [KEY("time_online_label"), [STAT("timeOnline")] call _fnc_formatTime],
             [KEY("longest_session_label"), [STAT("longestSession")] call _fnc_formatTime],
-            [KEY("commander_time_label"), [STAT("commanderTime")] call _fnc_formatTime],
             [KEY("undercover_time_label"), [STAT("undercoverTime")] call _fnc_formatTime]
         ];
         if (_online) then { _activityRows pushBack [KEY("current_session_label"), [_currentSession max 0] call _fnc_formatTime] };

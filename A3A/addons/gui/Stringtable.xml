@@ -4111,10 +4111,6 @@
         <Original>Weapons and vehicles</Original>
         <Polish>Broń i pojazdy</Polish>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_playerstats_commander_time_label">
-        <Original>Time as commander</Original>
-        <Polish>Czas jako dowódca</Polish>
-      </Key>
       <Key ID="STR_antistasi_dialogs_main_playerstats_undercover_time_label">
         <Original>Time undercover</Original>
         <Polish>Czas pod przykrywką</Polish>
