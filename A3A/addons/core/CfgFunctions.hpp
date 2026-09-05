@@ -26,6 +26,7 @@ class CfgFunctions
             class captureX {};
             class chargeWithSmoke {};
             class combatLanding {};
+            class heliLandAtPos {};
             class coverage {};
             class destroyBuilding {};
             class doFlank {};
@@ -523,6 +524,24 @@ class CfgFunctions
             class junkyardPrice {};
             class junkyardPurchase {};
             class junkyardRefresh {};
+        };
+
+        class Logistics {
+            file = QPATHTOFOLDER(functions\Logistics);
+            class airTaxiBoard {};
+            class airTaxiCanRequest {};
+            class airTaxiEntryCheck {};
+            class airTaxiFare {};
+            class airTaxiFindLZ {};
+            class airTaxiFinish {};
+            class airTaxiGarageSync {};
+            class airTaxiHint {};
+            class airTaxiListHelis {};
+            class airTaxiOrigin {};
+            class airTaxiRequest {};
+            class airTaxiRun {};
+            class airTaxiSpawn {};
+            class airTaxiUnload {};
         };
 
         class ModsAndDLC {

@@ -108,6 +108,23 @@ switch (_mode) do
             _fastTravelIcon ctrlSetTooltip _prettyString;
         };
 
+        // Air taxi
+        private _airTaxiButton = _display displayCtrl A3A_IDC_AIRTAXIBUTTON;
+        private _airTaxiIcon = _display displayCtrl A3A_IDC_AIRTAXIICON;
+        private _airTaxiBlockers = [player] call A3A_fnc_airTaxiCanRequest;
+        if (_airTaxiBlockers isEqualTo []) then {
+            _airTaxiButton ctrlEnable true;
+            _airTaxiButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_taxi_tooltip";
+            _airTaxiIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            _airTaxiIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_taxi_tooltip";
+        } else {
+            _airTaxiButton ctrlEnable false;
+            private _prettyString = localize ("STR_A3A_fn_logistics_airTaxi_blk_" + (_airTaxiBlockers # 0));
+            _airTaxiButton ctrlSetTooltip _prettyString;
+            _airTaxiIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            _airTaxiIcon ctrlSetTooltip _prettyString;
+        };
+
         // Construct
         /* private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
         private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;

@@ -16842,5 +16842,106 @@
         <Original>Pylon weapons</Original>
       </Key>
     </Container>
+    <Container name="A3A_fn_logistics">
+      <Key ID="STR_A3A_fn_logistics_airTaxi_title">
+        <Original>Air Taxi</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_active">
+        <Original>You already have an air taxi on the way.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_control">
+        <Original>You cannot request an air taxi while controlling another unit.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_ff">
+        <Original>Friendly fire offenders cannot request an air taxi.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_in_vehicle">
+        <Original>Leave your vehicle before requesting a pickup.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_undercover">
+        <Original>You cannot request an air taxi while undercover.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_enemy1">
+        <Original>Enemies are too close to your position for a pickup.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_marker">
+        <Original>Pick a location marker as the destination.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_too_close">
+        <Original>The destination is too close to bother a pilot.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_members">
+        <Original>Guests can only be flown within the member leash.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_heli">
+        <Original>That helicopter is not available in the garage.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_junk">
+        <Original>That helicopter is a junkyard wreck and cannot fly yet.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_fuel">
+        <Original>That helicopter has too little fuel for a taxi run.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_money">
+        <Original>You cannot afford the fare of $%1.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_hr">
+        <Original>The faction has no HR to spare for a pilot.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_lz">
+        <Original>No landing zone near you. Move to open ground and try again.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_blk_no_spawn">
+        <Original>The helicopter could not take off from base. Fare refunded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_requested">
+        <Original>%1 is taking off. Estimated time to destination %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_landing">
+        <Original>Your taxi is landing nearby. Get your squad ready to board.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_boarding">
+        <Original>Board now, the taxi departs in %1 s.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_departed">
+        <Original>Departing for %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_hover_drop">
+        <Original>No landing zone at the destination, the pilot will hover. Jump!</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_arrived">
+        <Original>You have arrived at %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_no_show">
+        <Original>Nobody boarded, the pilot is returning to base.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_hostile_lz">
+        <Original>Landing zone too hot, the pilot aborted the pickup.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_landing_failed">
+        <Original>The pilot could not land near you and is returning to base.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_player_lost">
+        <Original>The passenger is gone, the pilot is returning to base.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_stuck">
+        <Original>The helicopter cannot take off. Everyone out.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_no_spawn">
+        <Original>The helicopter was lost on takeoff from base.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_destroyed">
+        <Original>Your taxi was shot down.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_completed">
+        <Original>The helicopter is back in the garage.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_completed_refund">
+        <Original>The helicopter is back in the garage. Fare and HR refunded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_airTaxi_lost_refund">
+        <Original>The helicopter was lost on its way back. Fare and HR refunded.</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

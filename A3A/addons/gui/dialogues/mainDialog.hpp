@@ -147,99 +147,135 @@ class A3A_MainDialog : A3A_TabbedDialog
             class Controls
             {
                 // Left side button column
-
-                // Undercover
-                class UndercoverIcon : A3A_Picture
+                // Scrollable so more buttons fit vertically than the tab is tall
+                class PlayerButtonsGroup : A3A_ControlsGroupNoHScrollbars
                 {
-                    idc = A3A_IDC_UNDERCOVERICON;
-                    text = A3A_Icon_Undercover;
+                    idc = A3A_IDC_PLAYERBUTTONSGROUP;
                     x = 8 * GRID_W;
-                    y = 13 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
-
-                class UndercoverButton : A3A_Button
-                {
-                    idc = A3A_IDC_UNDERCOVERBUTTON;
-                    text = $STR_antistasi_dialogs_main_undercover;
-                    // onButtonClick = "[] call A3A_fnc_goUndercover; closeDialog 0";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
                     y = 11 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
-                };
+                    w = 60 * GRID_W;
+                    h = 87 * GRID_H;
 
-                // Fast Travel
-                class FastTravelIcon : A3A_Picture
-                {
-                    idc = A3A_IDC_FASTTRAVELICON;
-                    text = A3A_Icon_FastTravel;
-                    x = 8 * GRID_W;
-                    y = 34 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
+                    class controls
+                    {
+                        // Undercover
+                        class UndercoverIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_UNDERCOVERICON;
+                            text = A3A_Icon_Undercover;
+                            x = 0;
+                            y = 2 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
 
-                class FastTravelButton : A3A_Button
-                {
-                    idc = A3A_IDC_FASTTRAVELBUTTON;
-                    text = $STR_antistasi_dialogs_main_fast_travel;
-                    tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
-                    onButtonClick = "[""setHcMode"", [false]] call A3A_GUI_fnc_fastTravelTab; [""switchTab"", [""fasttravel""]] call A3A_GUI_fnc_mainDialog";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
-                    y = 32 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
-                };
+                        class UndercoverButton : A3A_Button
+                        {
+                            idc = A3A_IDC_UNDERCOVERBUTTON;
+                            text = $STR_antistasi_dialogs_main_undercover;
+                            // onButtonClick = "[] call A3A_fnc_goUndercover; closeDialog 0";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 0;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
 
-                // Construct
-                class ConstructIcon : A3A_Picture
-                {
-                    idc = A3A_IDC_CONSTRUCTICON;
-                    text = A3A_Icon_Construct;
-                    x = 8 * GRID_W;
-                    y = 55 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
+                        // Fast Travel
+                        class FastTravelIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_FASTTRAVELICON;
+                            text = A3A_Icon_FastTravel;
+                            x = 0;
+                            y = 23 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
 
-                class ConstructButton : A3A_Button
-                {
-                    idc = A3A_IDC_CONSTRUCTBUTTON;
-                    //text = $STR_antistasi_dialogs_main_construct;
-                    text = $STR_antistasi_dialogs_main_warstatus_main;
-                    onButtonClick = "[""switchTab"", [""warstatus""]] call A3A_GUI_fnc_mainDialog;";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
-                    y = 53 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
-                };
+                        class FastTravelButton : A3A_Button
+                        {
+                            idc = A3A_IDC_FASTTRAVELBUTTON;
+                            text = $STR_antistasi_dialogs_main_fast_travel;
+                            tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
+                            onButtonClick = "[""setHcMode"", [false]] call A3A_GUI_fnc_fastTravelTab; [""switchTab"", [""fasttravel""]] call A3A_GUI_fnc_mainDialog";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 21 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
 
-                // AI Management
-                class AIManagementIcon : A3A_Picture
-                {
-                    idc = A3A_IDC_AIMANAGEMENTICON;
-                    text = A3A_Icon_AI_Management;
-                    x = 8 * GRID_W;
-                    y = 76 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
+                        // Air Taxi
+                        class AirTaxiIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_AIRTAXIICON;
+                            text = A3A_Icon_AirTaxi;
+                            x = 0;
+                            y = 44 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
 
-                class AIManagementButton : A3A_Button
-                {
-                    idc = A3A_IDC_AIMANAGEMENTBUTTON;
-                    text = $STR_antistasi_dialogs_main_ai_management;
-                    onButtonClick = "[""switchTab"", [""aimanagement""]] call A3A_GUI_fnc_mainDialog;";
-                    sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 20 * GRID_W;
-                    y = 74 * GRID_H;
-                    w = 36 * GRID_W;
-                    h = 12 * GRID_H;
+                        class AirTaxiButton : A3A_Button
+                        {
+                            idc = A3A_IDC_AIRTAXIBUTTON;
+                            text = $STR_antistasi_dialogs_main_air_taxi;
+                            tooltip = $STR_antistasi_dialogs_main_air_taxi_tooltip;
+                            onButtonClick = "[""switchTab"", [""airtaxi""]] call A3A_GUI_fnc_mainDialog;";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 42 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        // Construct
+                        class ConstructIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONSTRUCTICON;
+                            text = A3A_Icon_Construct;
+                            x = 0;
+                            y = 65 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class ConstructButton : A3A_Button
+                        {
+                            idc = A3A_IDC_CONSTRUCTBUTTON;
+                            //text = $STR_antistasi_dialogs_main_construct;
+                            text = $STR_antistasi_dialogs_main_warstatus_main;
+                            onButtonClick = "[""switchTab"", [""warstatus""]] call A3A_GUI_fnc_mainDialog;";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 63 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        // AI Management
+                        class AIManagementIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_AIMANAGEMENTICON;
+                            text = A3A_Icon_AI_Management;
+                            x = 0;
+                            y = 86 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class AIManagementButton : A3A_Button
+                        {
+                            idc = A3A_IDC_AIMANAGEMENTBUTTON;
+                            text = $STR_antistasi_dialogs_main_ai_management;
+                            onButtonClick = "[""switchTab"", [""aimanagement""]] call A3A_GUI_fnc_mainDialog;";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 84 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+                    };
                 };
 
 
@@ -1798,7 +1834,8 @@ class A3A_MainDialog : A3A_TabbedDialog
         class FastTravelMap : A3A_MapControl
         {
             idc = A3A_IDC_FASTTRAVELMAP;
-            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call A3A_GUI_fnc_fastTravelTab";
+            // Shared by the Fast Travel and Air Taxi subtabs, dispatch on the one that is shown (7560 = A3A_IDC_AIRTAXITAB)
+            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab] select ctrlShown ((ctrlParent (_this select 0)) displayCtrl 7560))";
             x = CENTER_X(DIALOG_W) + 48 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
             w = 104 * GRID_W;
@@ -1873,6 +1910,80 @@ class A3A_MainDialog : A3A_TabbedDialog
                     text = $STR_antistasi_dialogs_main_fast_travel;
                     // tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
                     onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_fastTravelTab;";
+                    sizeEx = GUI_TEXT_SIZE_LARGE;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+            };
+        };
+
+        class AirTaxiTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_AIRTAXITAB;
+            // Narrow for the same reason as FastTravelTab: it must not cover the shared map control
+            w = 44 * GRID_W;
+            show = false;
+
+            class controls
+            {
+                class AirTaxiLabel : A3A_SectionLabelRight
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_air_taxi;
+                    x = 8 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 26 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class AirTaxiRefreshButton : A3A_Button
+                {
+                    idc = A3A_IDC_AIRTAXIREFRESHBUTTON;
+                    text = $STR_antistasi_dialogs_main_air_taxi_refresh_button;
+                    tooltip = $STR_antistasi_dialogs_main_air_taxi_refresh_tooltip;
+                    onButtonClick = "[""requestHelis""] call A3A_GUI_fnc_airTaxiTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 34 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 10 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class AirTaxiBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 68 * GRID_H;
+                };
+
+                class AirTaxiHeliList : A3A_Listbox
+                {
+                    idc = A3A_IDC_AIRTAXIHELILIST;
+                    onLBSelChanged = "[""heliSelected""] call A3A_GUI_fnc_airTaxiTab;";
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 24 * GRID_H;
+                };
+
+                class AirTaxiInfoText : A3A_StructuredText
+                {
+                    idc = A3A_IDC_AIRTAXIINFOTEXT;
+                    x = 8 * GRID_W;
+                    y = 37 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 43 * GRID_H;
+                };
+
+                class AirTaxiCommitButton : A3A_Button
+                {
+                    idc = A3A_IDC_AIRTAXICOMMITBUTTON;
+                    text = $STR_antistasi_dialogs_main_air_taxi_request_button;
+                    onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_airTaxiTab;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 8 * GRID_W;
                     y = 80 * GRID_H;

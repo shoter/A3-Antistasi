@@ -209,6 +209,11 @@ switch (_mode) do
                 _selectedTabIDC = A3A_IDC_FASTTRAVELTAB;
             };
 
+            case ("airtaxi"):
+            {
+                _selectedTabIDC = A3A_IDC_AIRTAXITAB;
+            };
+
             case ("construct"):
             {
                 _selectedTabIDC = A3A_IDC_CONSTRUCTTAB;
@@ -266,7 +271,8 @@ switch (_mode) do
             A3A_IDC_AIRSUPPORTTAB,
             A3A_IDC_PLAYERMANAGEMENTTAB,
             A3A_IDC_WARSTATUSTAB,
-            A3A_IDC_TOWNSTAB
+            A3A_IDC_TOWNSTAB,
+            A3A_IDC_AIRTAXITAB
         ];
 
         // Hide all tabs
@@ -320,6 +326,12 @@ switch (_mode) do
             {
                 ["clearSelectedLocation"] call FUNC(fastTravelTab);
                 ["update"] call FUNC(fastTravelTab);
+            };
+
+            case ("airtaxi"):
+            {
+                ["clearSelectedLocation"] call FUNC(airTaxiTab);
+                ["update"] call FUNC(airTaxiTab);
             };
 
             case ("construct"):

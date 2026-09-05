@@ -181,6 +181,8 @@ A3A_gcQueue = [];				// List of postmortem objects to clean up
 A3A_gcCleanTime = 3600;			// Base time for deleting postmortem objects
 A3A_gcMaxBumps = 3;				// Max times to delay cleanup for an object that's near players
 
+A3A_airTaxiActive = createHashMap;	// player UID -> air taxi flight script, one taxi per player
+
 hcArray = [];					// array of headless client IDs
 
 membersX = [];					// These two published later by startGame

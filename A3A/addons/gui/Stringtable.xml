@@ -2938,7 +2938,63 @@
         <Spanish>No puedes permitirte esto</Spanish>
       </Key>
     </Container>
+    <Container name="dialog_main_air_taxi">
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_refresh_button">
+        <Original>Refresh</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_refresh_tooltip">
+        <Original>Ask the garage for the current list of helicopters</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_request_button">
+        <Original>Request pickup</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_loading">
+        <Original>Contacting the garage...</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_no_helis">
+        <Original>No transport or civilian helicopters are available in the garage.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_select_heli">
+        <Original>Select a helicopter from the garage.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_select_location">
+        <Original>Click the map to select where you want to be flown to.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_helicopter">
+        <Original>Helicopter: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_destination">
+        <Original>Destination: %1 (%2)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_distance">
+        <Original>Distance: %1 km</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_eta">
+        <Original>Estimated time to destination: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_fare">
+        <Original>Fare: $%1 plus %2 HR for the pilot</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_seats">
+        <Original>Passengers: %1 of %2 seats</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_seats_warning">
+        <Original>Not everyone will fit. Only the first %1 units to board will fly.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_pickup_squad">
+        <Original>Squad members within 50 m will be picked up with you.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_locked_tooltip">
+        <Original>This helicopter is locked by another player.</Original>
+      </Key>
+    </Container>
     <Container name="dialog_main_player">
+      <Key ID="STR_antistasi_dialogs_main_air_taxi">
+        <Original>Air Taxi</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_taxi_tooltip">
+        <Original>Request a garaged helicopter to pick up your squad and fly you to any location</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_add_to_air_support">
         <Original>Add to air support</Original>
         <German>Zur Luftunterstützung hinzufügen</German>
