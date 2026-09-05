@@ -17,6 +17,7 @@ Dependencies:
     <NAMESPACE> A3A_cityData
     <OBJECT> sidesX
     <ARRAY> destroyedSites
+    <HASHMAP> A3A_cityInvest, A3A_townUpgradeHM, A3A_townUpgradeOrder
 
 Example:
     ["update"] call FUNC(townsTab);
@@ -46,8 +47,19 @@ private _columns = [
     [A3A_IDC_TOWNSHEADER_SUPPORT, "STR_antistasi_dialogs_main_towns_support_label"],
     [A3A_IDC_TOWNSHEADER_POPULATION, "STR_antistasi_dialogs_main_towns_population_label"],
     [A3A_IDC_TOWNSHEADER_GARRISON, "STR_antistasi_dialogs_main_towns_garrison_label"],
+    [A3A_IDC_TOWNSHEADER_UPGRADES, "STR_antistasi_dialogs_main_towns_upgrades_label"],
     [A3A_IDC_TOWNSHEADER_GRID, "STR_antistasi_dialogs_main_towns_grid_label"]
 ];
+
+private _upgradesReady = !isNil "A3A_townUpgradeHM" && !isNil "A3A_cityInvest";
+
+// Installed upgrade ids of a town in display order
+private _fnc_installed = {
+    params ["_city"];
+    if (!_upgradesReady) exitWith { [] };
+    private _installed = keys (A3A_cityInvest getOrDefault [_city, createHashMap]);
+    A3A_townUpgradeOrder select { _x in _installed };
+};
 
 switch (_mode) do
 {
@@ -100,10 +112,14 @@ switch (_mode) do
                 _garrisonCount = parseNumber ((_garrisonText splitString "/") select 0);
             };
 
+            // Installed town upgrades as letter codes
+            private _installed = [_city] call _fnc_installed;
+            private _upgradesText = if (_installed isEqualTo []) then { "-" } else { (_installed apply { (A3A_townUpgradeHM get _x) # 3 }) joinString " " };
+
             private _grid = mapGridPosition markerPos _city;
 
-            private _displayStrings = [_city, _ownerLabel, (str round _supportReb) + "%", str _numCiv, _garrisonText, _grid];
-            private _sortKeys = [toLower _city, _ownerLabel, _supportReb, _numCiv, _garrisonCount, _grid];
+            private _displayStrings = [_city, _ownerLabel, (str round _supportReb) + "%", str _numCiv, _garrisonText, _upgradesText, _grid];
+            private _sortKeys = [toLower _city, _ownerLabel, _supportReb, _numCiv, _garrisonCount, count _installed, _grid];
 
             _rows pushBack [_sortKeys select _sortColumn, toLower _city, _displayStrings, _color, _city];
         } forEach citiesX;
@@ -129,6 +145,9 @@ switch (_mode) do
             if (_forEachIndex == _sortColumn) then { _caption = _caption + " " + _arrow };
             (_display displayCtrl _idc) ctrlSetText _caption;
         } forEach _columns;
+
+        // Selection is gone after the rebuild, show the legend
+        ["selectionChanged"] call FUNC(townsTab);
     };
 
     case ("sortBy"):
@@ -144,6 +163,36 @@ switch (_mode) do
         };
 
         ["update"] call FUNC(townsTab);
+    };
+
+    case ("selectionChanged"):
+    {
+        // Upgrades of the selected town, or the code legend when no row is selected
+        private _text = _display displayCtrl A3A_IDC_TOWNSUPGRADESTEXT;
+        if (!_upgradesReady) exitWith { _text ctrlSetStructuredText parseText "" };
+
+        private _index = lnbCurSelRow _listBox;
+        private _city = if (_index < 0) then { "" } else { _listBox lnbData [_index, 0] };
+        private _lines = [];
+
+        if (_city == "") then {
+            _lines pushBack format ["<t size='0.8'>%1</t>", localize "STR_antistasi_dialogs_main_towns_upgrades_legend"];
+            {
+                _lines pushBack format ["%1   %2", (A3A_townUpgradeHM get _x) # 3, localize format ["STR_A3A_fn_townUpgrades_name_%1", _x]];
+            } forEach A3A_townUpgradeOrder;
+        } else {
+            _lines pushBack format ["<t size='0.8'>%1</t>", format [localize "STR_antistasi_dialogs_main_towns_upgrades_title", _city]];
+            private _installed = [_city] call _fnc_installed;
+            if (_installed isEqualTo []) then {
+                _lines pushBack (localize "STR_antistasi_dialogs_main_towns_upgrades_none");
+            } else {
+                {
+                    _lines pushBack format ["%1   %2", (A3A_townUpgradeHM get _x) # 3, localize format ["STR_A3A_fn_townUpgrades_name_%1", _x]];
+                } forEach _installed;
+            };
+        };
+
+        _text ctrlSetStructuredText parseText format ["<t size='0.7'>%1</t>", _lines joinString "<br/>"];
     };
 
     case ("showOnMap"):

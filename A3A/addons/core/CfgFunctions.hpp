@@ -525,6 +525,28 @@ class CfgFunctions
             class junkyardRefresh {};
         };
 
+        class TownUpgrades {
+            file = QPATHTOFOLDER(functions\TownUpgrades);
+            class initTownUpgrades {};
+            class townKitAddActions {};
+            class townKitBuy {};
+            class townKitCreate {};
+            class townKitInstallStart {};
+            class townKitPurchase {};
+            class townKitRemove {};
+            class townKitReturn {};
+            class townUpgradeAddActions {};
+            class townUpgradeClearCity {};
+            class townUpgradeCreate {};
+            class townUpgradeDismantle {};
+            class townUpgradeHas {};
+            class townUpgradeInstall {};
+            class townUpgradePrice {};
+            class townUpgradeRemove {};
+            class townUpgradeSabotage {};
+            class townUpgradeSaveData {};
+        };
+
         class ModsAndDLC {
             file = QPATHTOFOLDER(functions\ModsAndDLC);
             class darkMapFix {};

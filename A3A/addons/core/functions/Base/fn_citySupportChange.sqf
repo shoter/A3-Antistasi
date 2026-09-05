@@ -8,7 +8,7 @@ if (!isServer) exitWith {Error("Server-only function miscalled")};
 
 Trace_1("Params: %1", _this);
 
-params [["_change",""], ["_pos",""], ["_scaled", true]]; // nil protection
+params [["_change",""], ["_pos",""], ["_scaled", true], ["_isCivDeath", false, [false]]]; // nil protection
 if !(_change isEqualType 0) exitWith {Error("The first parameter, the support change, must be a number");};
 if (_pos isEqualTo "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
 
@@ -30,14 +30,22 @@ if (_scaled) then {
 	_change = 10 * _change / sqrt _numCiv;			// normalized to 1 = 1% at size 100
 };
 
+// Town upgrades (rebel-held towns only, cleared when the town is lost)
+private _upgrades = A3A_cityInvest getOrDefault [_city, createHashMap];
+if (_isCivDeath and _change < 0 and "clinic" in _upgrades) then {
+	_change = _change * A3A_townUpgradeClinicDeathMult;
+};
+
 if (_change > 0) then {
-	private _antenna = A3A_antennaMap get _city;
-	if (!alive _antenna) then { _change = _change * 1.5 } else {
+	private _antenna = A3A_antennaMap getOrDefault [_city, objNull];
+	private _mult = if (!alive _antenna) then { 1.5 } else {
 		private _antSide = sidesX getVariable (A3A_antennaMap get netId _antenna);
-		_change = _change * ([1, 2] select (_antSide == teamPlayer));
+		[1, 2] select (_antSide == teamPlayer);
 	};
-	private _stationPos = A3A_garrison get _site getOrDefault ["policeStation", false];
-	if (_stationPos isEqualTo []) then { _change = _change * 1.5 };
+	if ("radio" in _upgrades) then { _mult = (A3A_townUpgradeHM get "radio") # 4 };		// rebel radio relay counts as a friendly antenna
+	private _stationPos = A3A_garrison get _city getOrDefault ["policeStation", false];
+	if !(_stationPos isEqualType []) then { _mult = _mult * 1.5 };						// no police station
+	_change = _change * (_mult min 3);
 };
 
 Trace_2("City %1 change %2", _city, _change);

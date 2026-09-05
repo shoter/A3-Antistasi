@@ -79,6 +79,9 @@ DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // plus one wildcard ve
 DECLARE_SERVER_VAR(A3A_junkyardJunkDuration, 10*60*60);  // seconds of campaign uptime a bought wreck stays "junk" (no free repairs)
 DECLARE_SERVER_VAR(A3A_junkyardClockOffset, 0);          // campaign clock = offset + serverTime, restored from save
 
+// Town upgrades installed per rebel town: city -> (id -> [posWorld, vectorDir, vectorUp]). Published again on every change
+DECLARE_SERVER_VAR(A3A_cityInvest, createHashMap);
+
 DECLARE_SERVER_VAR(skillFIA, 1);																		//Initial skill level for FIA soldiers
 //Initial Occupant Aggression
 DECLARE_SERVER_VAR(aggressionOccupants, 0);
@@ -123,6 +126,10 @@ Info("Setting server only variables");
 // Don't need to be distributed
 occRadioKeys = 0;
 invRadioKeys = 0;
+
+// Town upgrades: registered prop objects (city|id -> object) and kit crates in transit
+A3A_townUpgradeObjects = createHashMap;
+A3A_townKits = [];
 
 // New garrison data structure
 A3A_garrison = createHashMap;
@@ -450,6 +457,13 @@ DECLARE_SERVER_VAR(A3A_smokeMuzzleHM, _smokeMuzzleHM);
 call A3A_fnc_initUtilityItems;
 ONLY_DECLARE_SERVER_VAR(A3A_utilityItemList);
 ONLY_DECLARE_SERVER_VAR(A3A_utilityItemHM);
+
+// Town upgrade catalogue
+call A3A_fnc_initTownUpgrades;
+ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeHM);
+ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeOrder);
+ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeCrateClass);
+ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeRadius);
 
 //fast ropes are hard defined here, because of old fixed offsets.
 //fastrope needs to be rewritten and then we can get get ridd of this

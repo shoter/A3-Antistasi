@@ -30,6 +30,9 @@ if (_side == teamPlayer) then {
 sidesX setVariable [_city, _side, true];
 [_city, _side, _prevSide] call A3A_fnc_garrisonServer_changeSide;
 
+// Rebel town upgrades do not survive losing the town
+if (_prevSide == teamPlayer and _side != teamPlayer) then { [_city, "flipped"] call A3A_fnc_townUpgradeClearCity };
+
 _cityData set [2, _cityData#2 min 0];					// clear accumulated HR if positive
 A3A_cityData setVariable [_city, _cityData, true];		// publish. Some client-side stuff needs support data
 [_city] call A3A_fnc_mrkUpdate;

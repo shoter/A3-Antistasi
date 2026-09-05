@@ -176,6 +176,9 @@ if (isServer) then {
 	["nextTick"] call A3A_fnc_getStatVariable;
 	["deployedFlag"] call A3A_fnc_getStatVariable;
 	["junkyard"] call A3A_fnc_getStatVariable;
+	// Town upgrades after destroyed cities, garrisons and city markers are settled
+	["cityInvest"] call A3A_fnc_getStatVariable;
+	["townKits"] call A3A_fnc_getStatVariable;
 
 	{_x setPosATL getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
 

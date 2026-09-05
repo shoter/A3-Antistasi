@@ -51,6 +51,8 @@ switch (_mode) do
             {_selectedTabIDC = A3A_IDC_BUYSTATICMAIN;};
             case("other"):
             {_selectedTabIDC = A3A_IDC_BUYOTHERMAIN;};
+            case("townupgrades"):
+            {_selectedTabIDC = A3A_IDC_BUYTOWNUPGRADESMAIN;};
         };
 
         if (_selectedTabIDC == -1) exitWith {
@@ -62,6 +64,7 @@ switch (_mode) do
             A3A_IDC_BUYREBVEHICLEMAIN,
             A3A_IDC_BUYSTATICMAIN,
             A3A_IDC_BUYOTHERMAIN,
+            A3A_IDC_BUYTOWNUPGRADESMAIN,
             A3A_IDC_BUYVEHICLEPREVIEW
         ];
 
@@ -109,6 +112,7 @@ switch (_mode) do
         ["vehicles", [A3A_IDC_BUYREBVEHICLEMAIN, A3A_IDC_REBVEHICLESGROUP, _militaryVehicles]] call A3A_GUI_fnc_buyVehicleTabs;
         ["vehicles", [A3A_IDC_BUYSTATICMAIN, A3A_IDC_STATICSGROUP, _statics]] call A3A_GUI_fnc_buyVehicleTabs;
         ["other"] call A3A_GUI_fnc_buyVehicleTabs;
+        ["onLoad"] call A3A_GUI_fnc_townUpgradesTab;
 
         // show the vehicle tab so that user don't freak out
         _defaultTab = [A3A_IDC_BUYCIVVEHICLEMAIN, A3A_IDC_BUYREBVEHICLEMAIN] select (count _civilianVehicles == 0);

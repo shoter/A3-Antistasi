@@ -36,7 +36,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard"
+    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits"
 ];
 
 private _varName = _this select 0;
@@ -65,6 +65,28 @@ if (_varName in _specialVarLoads) then {
         publicVariable "A3A_junkyardNextRefresh";
         A3A_junkyardClockOffset = _clock - serverTime;      // campaign clock continues where the save left it
         publicVariable "A3A_junkyardClockOffset";
+    };
+    if (_varName == 'cityInvest') then {
+        // city -> (id -> [posWorld, vectorDir, vectorUp]). Entries that no longer make sense (map change, town lost) are skipped
+        {
+            private _city = _x;
+            {
+                private _id = _x;
+                if !(_city in citiesX and {_id in A3A_townUpgradeHM} and {sidesX getVariable [_city, sideUnknown] == teamPlayer} and {!(_city in destroyedSites)}) then {
+                    Error_2("Skipping saved town upgrade %1 in %2", _id, _city);
+                    continue;
+                };
+                _y params ["_posWorld", "_vecDir", "_vecUp"];
+                [_city, _id, _posWorld, _vecDir, _vecUp] call A3A_fnc_townUpgradeCreate;
+            } forEach _y;
+        } forEach _varValue;
+    };
+    if (_varName == 'townKits') then {
+        {
+            _x params ["_id", "_city", "_paid", "_pos", "_dir"];
+            if !(_id in A3A_townUpgradeHM and {_city in citiesX}) then { Error_2("Skipping saved town kit %1 for %2", _id, _city); continue };
+            [_id, _city, _pos, _dir, _paid] call A3A_fnc_townKitCreate;
+        } forEach _varValue;
     };
     if (_varName == 'membersX') then {membersX = +_varValue; publicVariable "membersX"};
     if (_varName == 'mrkNATO') then {{sidesX setVariable [[_x] call _translateMarker,Occupants,true]} forEach _varValue;};
