@@ -1,7 +1,7 @@
 /*
 Maintainer: Shoter
     Removes the commander rally flag and its map marker, and broadcasts A3A_deployedFlag as objNull.
-    Does not reset A3A_deployedFlagTime: the redeploy cooldown only gates replacing an existing flag.
+    Also clears the JIP entry that adds the remove action to the flag on clients.
 
 Arguments:
     <OBJECT> Player requesting the removal. objNull for internal calls (no permission check, no hint) [DEFAULT = objNull]
@@ -33,6 +33,7 @@ A3A_deployedFlag = objNull;
 publicVariable "A3A_deployedFlag";
 
 deleteMarker "A3A_deployedFlagMrk";
+remoteExec ["", "A3A_deployedFlagAction"];
 if (!isNull _flag) then { deleteVehicle _flag };
 
 if (!isNull _player) then {

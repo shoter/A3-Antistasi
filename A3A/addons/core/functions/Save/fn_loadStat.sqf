@@ -54,10 +54,8 @@ if (_varName in _specialVarLoads) then {
     if (_varName == 'bombRuns') then {bombRuns = _varValue; publicVariable "bombRuns"};
     if (_varName == 'nextTick') then {nextTick = time + _varValue};
     if (_varName == 'deployedFlag') then {
-        _varValue params ["_pos", ["_remaining", 0]];
+        _varValue params ["_pos"];      // older saves also carried a remaining cooldown, ignored
         [_pos] call A3A_fnc_deployedFlagCreate;
-        A3A_deployedFlagTime = serverTime - A3A_deployedFlagCooldown + _remaining;
-        publicVariable "A3A_deployedFlagTime";
     };
     if (_varName == 'junkyard') then {
         _varValue params [["_stock", [], [[]]], ["_remaining", 0, [0]], ["_clock", 0, [0]]];

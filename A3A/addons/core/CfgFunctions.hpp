@@ -137,6 +137,7 @@ class CfgFunctions
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};
+            class deployedFlagAddAction {};
             class deployedFlagCreate {};
             class deployedFlagPlace {};
             class deployedFlagRemove {};

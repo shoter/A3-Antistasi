@@ -68,10 +68,8 @@ DECLARE_SERVER_VAR(chopForest, false);
 // Whether petros is currently being moved
 DECLARE_SERVER_VAR(A3A_petrosMoving, false);
 
-// Commander-deployed rally flag: object, serverTime of last deploy, redeploy cooldown (seconds)
+// Commander-deployed rally flag object, objNull when none is deployed
 DECLARE_SERVER_VAR(A3A_deployedFlag, objNull);
-DECLARE_SERVER_VAR(A3A_deployedFlagTime, -999999);
-DECLARE_SERVER_VAR(A3A_deployedFlagCooldown, 30*60);
 
 // Junkyard: wrecked vehicle shop at the HQ garage crate. Stock is [[class, price], ...], refresh is serverTime of next delivery
 DECLARE_SERVER_VAR(A3A_junkyardStock, []);

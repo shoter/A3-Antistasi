@@ -4170,9 +4170,6 @@
       <Key ID="STR_A3A_fn_init_installClientEH_removeFlag">
         <Original>Remove rally flag</Original>
       </Key>
-      <Key ID="STR_A3A_fn_init_installClientEH_deployFlag_cooldown">
-        <Original>The rally flag was deployed recently. You can redeploy it in %1.</Original>
-      </Key>
     </Container>
     <Container name="A3A_fn_intel">
       <Key ID="STR_A3A_fn_intel_doc_success">

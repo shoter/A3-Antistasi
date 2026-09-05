@@ -107,16 +107,9 @@ player addAction ["Open Heli Garage",
 ", nil, 4, true, true, "","(count (nearestObjects [player, ['a3a_helipad'], 8, true]) > 0) && {((isNil 'HR_GRG_Placing') || {!HR_GRG_Placing}) && player isEqualTo vehicle player && _this == _this getVariable ['owner',objNull]}"
 ];
 
-// Commander rally flag self-actions. Anyone can teleport to the flag from the HQ flag (see initClient).
+// Commander rally flag: deploy in front of the commander. Only one flag can exist at a time, the previous one has to be
+// removed first through the action on the rally flag itself or on the HQ flag (see deployedFlagAddAction and initClient).
+// Anyone can teleport to the flag from the HQ flag (see initClient).
 player addAction [localize "STR_A3A_fn_init_installClientEH_deployFlag", {
-    private _remaining = if (isNull A3A_deployedFlag) then { 0 } else { A3A_deployedFlagCooldown - (serverTime - A3A_deployedFlagTime) };
-    if (_remaining > 0) exitWith {
-        private _prettyTime = [_remaining,1,1,false,2,false,true] call A3A_fnc_timeSpan_format;
-        [localize "STR_A3A_fn_base_deployedFlag_title", format [localize "STR_A3A_fn_init_installClientEH_deployFlag_cooldown", _prettyTime]] call A3A_fnc_customHint;
-    };
     [player] remoteExecCall ["A3A_fnc_deployedFlagPlace", 2];
-}, nil, 0, false, true, "", "(_this == theBoss) and !A3A_petrosMoving and (vehicle _this == _this) and (_this == _this getVariable ['owner',objNull])"];
-
-player addAction [localize "STR_A3A_fn_init_installClientEH_removeFlag", {
-    [player] remoteExecCall ["A3A_fnc_deployedFlagRemove", 2];
-}, nil, 0, false, true, "", "(_this == theBoss) and !isNull A3A_deployedFlag"];
+}, nil, 0, false, true, "", "(_this == theBoss) and isNull A3A_deployedFlag and !A3A_petrosMoving and (vehicle _this == _this) and (_this == _this getVariable ['owner',objNull])"];

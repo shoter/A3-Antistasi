@@ -47,5 +47,8 @@ _mrk setMarkerText (localize "STR_A3A_fn_base_deployedFlagCreate_marker");
 A3A_deployedFlag = _flag;
 publicVariable "A3A_deployedFlag";
 
+// Remove action lives on the flag itself so the commander has to be at the flag (or the HQ flag) to remove it
+[_flag] remoteExec ["A3A_fnc_deployedFlagAddAction", 0, "A3A_deployedFlagAction"];
+
 Info_1("Deployed flag created at %1", _pos);
 _flag;
