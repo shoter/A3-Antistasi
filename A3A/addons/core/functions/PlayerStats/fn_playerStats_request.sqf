@@ -50,8 +50,8 @@ private _rows = [];
     if !(_stats isEqualType createHashMap) then { continue };
 
     private _timeOnline = _stats getOrDefault ["timeOnline", 0];
-    private _sessionStart = A3A_playerSessions get _uid;
-    if (!isNil "_sessionStart") then { _timeOnline = _timeOnline + ((_now - _sessionStart) max 0) };
+    private _session = A3A_playerSessions get _uid;
+    if (!isNil "_session") then { _timeOnline = _timeOnline + ((_now - (_session select 0)) max 0) };
 
     private _online = _uid in _onlineUnits;
     private _name = if (_online) then { name (_onlineUnits get _uid) } else { _stats getOrDefault ["name", ""] };

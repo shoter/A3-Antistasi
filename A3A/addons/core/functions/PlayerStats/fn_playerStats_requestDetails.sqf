@@ -41,10 +41,12 @@ if (_uid == "" || {!(_uid in A3A_playerStats)}) exitWith {};
 private _stats = +([_uid] call A3A_fnc_playerStats_get);
 
 private _currentSession = -1;
-private _sessionStart = A3A_playerSessions get _uid;
-if (!isNil "_sessionStart") then {
+private _session = A3A_playerSessions get _uid;
+if (!isNil "_session") then {
+    _session params ["_lastFlush", "_sessionStart"];
     _currentSession = (serverTime - _sessionStart) max 0;
-    _stats set ["timeOnline", (_stats get "timeOnline") + _currentSession];
+    _stats set ["timeOnline", (_stats get "timeOnline") + ((serverTime - _lastFlush) max 0)];
+    _stats set ["longestSession", (_stats get "longestSession") max _currentSession];
 };
 
 // Player body when online

@@ -3,6 +3,11 @@ Maintainer: Shoter
     Returns the persistent statistics record of a player, creating it with default values when missing.
     Keys that are missing or hold a wrong type (records from older saves, tampered saves) are reset to their defaults.
 
+    Nested tables:
+        movement: category -> [seconds, metres] for "foot", "ground", "air", "boat", "swim" and "static"
+        roles:    role name -> seconds
+        weapons:  weapon or vehicle class -> [seconds, enemy soldier kills, vehicle kills, aircraft kills, shots fired]
+
 Arguments:
     <STRING> Player UID
 
@@ -50,11 +55,30 @@ private _stats = A3A_playerStats getOrDefault [_uid, createHashMap, true];
     ["longestKill", 0],
     ["timeOnline", 0],
     ["sessions", 0],
+    ["longestSession", 0],
     ["firstSeen", []],
     ["lastSeen", []],
     ["timesDowned", 0],
     ["revives", 0],
-    ["moneyEarned", 0]
+    ["moneyEarned", 0],
+    ["moneySpent", 0],
+    ["moneyDonated", 0],
+    ["scrapMoney", 0],
+    ["commanderTime", 0],
+    ["undercoverTime", 0],
+    ["captures", 0],
+    ["defences", 0],
+    ["intelFound", 0],
+    ["recruitsLost", 0],
+    ["vehiclesLost", 0],
+    ["vehiclesBought", 0],
+    ["vehiclesScrapped", 0],
+    ["fastTravels", 0],
+    ["flagTeleports", 0],
+    ["airTaxiRides", 0],
+    ["movement", createHashMap],
+    ["roles", createHashMap],
+    ["weapons", createHashMap]
 ];
 
 _stats

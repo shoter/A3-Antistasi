@@ -1,8 +1,8 @@
 /*
 Maintainer: Shoter
-    Credits a kill to the player responsible for it and forwards it to the server.
-    Called where the victim is local, from the Killed event handlers of enemy and civilian units,
-    because the unit that downed the victim is only known on that machine.
+    Credits a kill to the player responsible for it and forwards it to the server, together with the weapon
+    or vehicle it was made with. Called where the victim is local, from the Killed event handlers of enemy
+    and civilian units, because the unit that downed the victim is only known on that machine.
 
 Arguments:
     <OBJECT> Victim
@@ -38,8 +38,11 @@ private _uid = [_shooter] call A3A_fnc_playerStats_getUID;
 if (_uid == "") exitWith {};
 
 private _maxima = [];
+private _weapons = [];
 if (_statKey == "kills") then {
     _maxima = [["longestKill", round (_shooter distance _victim)]];
+    private _weapon = [_shooter] call A3A_fnc_playerStats_weaponClass;
+    if (_weapon != "") then { _weapons = [[_weapon, [0, 1, 0, 0, 0]]] };
 };
 
-[_uid, [[_statKey, 1]], _maxima] remoteExecCall ["A3A_fnc_playerStats_add", 2];
+[_uid, [[_statKey, 1]], _maxima, _weapons] remoteExecCall ["A3A_fnc_playerStats_add", 2];
