@@ -3505,6 +3505,48 @@
         <Spanish>RH: %1</Spanish>
       </Key>
     </Container>
+    <Container name="dialog_main_towns">
+      <Key ID="STR_antistasi_dialogs_main_towns_tab_button">
+        <Original>Towns</Original>
+        <Polish>Miasta</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_name_label">
+        <Original>Name</Original>
+        <Polish>Nazwa</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_owner_label">
+        <Original>Owner</Original>
+        <Polish>Właściciel</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_support_label">
+        <Original>Support</Original>
+        <Polish>Poparcie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_population_label">
+        <Original>Population</Original>
+        <Polish>Populacja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_garrison_label">
+        <Original>Garrison</Original>
+        <Polish>Garnizon</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_grid_label">
+        <Original>Grid</Original>
+        <Polish>Siatka</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_show_on_map_button">
+        <Original>Show on map</Original>
+        <Polish>Pokaż na mapie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_destroyed">
+        <Original>Destroyed</Original>
+        <Polish>Zniszczone</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_towns_sort_tooltip">
+        <Original>Click to sort by this column</Original>
+        <Polish>Kliknij, aby sortować według tej kolumny</Polish>
+      </Key>
+    </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">
         <Original>Assassination</Original>

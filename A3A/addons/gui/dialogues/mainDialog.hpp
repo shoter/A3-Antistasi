@@ -110,6 +110,17 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 5 * GRID_H;
                 };
 
+                class TownsTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_TOWNSTABBUTTON;
+                    text = $STR_antistasi_dialogs_main_towns_tab_button;
+                    onButtonClick = "[""switchTab"", [""towns""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 90 * GRID_W;
+                    y = 0;
+                    w = 30 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
                 class AdminTabButton : A3A_Button
                 {
                     idc = A3A_IDC_ADMINTABBUTTON;
@@ -3026,6 +3037,110 @@ class A3A_MainDialog : A3A_TabbedDialog
                     onButtonClick = "[""adminCopyUID""] call A3A_GUI_fnc_playerManagementTab";
                     x = 120 * GRID_W;
                     y = 82 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+            };
+        };
+
+
+        class TownsTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_TOWNSTAB;
+            show = false;
+
+            class controls
+            {
+                class TownsListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 106 * GRID_W;
+                    h = 82 * GRID_H;
+                };
+
+                // Column headers, clicking one sorts the table by that column.
+                // X positions follow the column fractions of TownsList below (8 + fraction * 106).
+                class NameHeader : A3A_Button
+                {
+                    idc = A3A_IDC_TOWNSHEADER_NAME;
+                    text = $STR_antistasi_dialogs_main_towns_name_label;
+                    tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
+                    onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_townsTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class OwnerHeader : NameHeader
+                {
+                    idc = A3A_IDC_TOWNSHEADER_OWNER;
+                    text = $STR_antistasi_dialogs_main_towns_owner_label;
+                    onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_townsTab;";
+                    x = 37 * GRID_W;
+                    w = 18 * GRID_W;
+                };
+
+                class SupportHeader : NameHeader
+                {
+                    idc = A3A_IDC_TOWNSHEADER_SUPPORT;
+                    text = $STR_antistasi_dialogs_main_towns_support_label;
+                    onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_townsTab;";
+                    x = 56 * GRID_W;
+                    w = 11 * GRID_W;
+                };
+
+                class PopulationHeader : NameHeader
+                {
+                    idc = A3A_IDC_TOWNSHEADER_POPULATION;
+                    text = $STR_antistasi_dialogs_main_towns_population_label;
+                    onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_townsTab;";
+                    x = 68 * GRID_W;
+                    w = 17 * GRID_W;
+                };
+
+                class GarrisonHeader : NameHeader
+                {
+                    idc = A3A_IDC_TOWNSHEADER_GARRISON;
+                    text = $STR_antistasi_dialogs_main_towns_garrison_label;
+                    onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_townsTab;";
+                    x = 86 * GRID_W;
+                    w = 13 * GRID_W;
+                };
+
+                class GridHeader : NameHeader
+                {
+                    idc = A3A_IDC_TOWNSHEADER_GRID;
+                    text = $STR_antistasi_dialogs_main_towns_grid_label;
+                    onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_townsTab;";
+                    x = 100 * GRID_W;
+                    w = 14 * GRID_W;
+                };
+
+                class TownsList : A3A_ListNBox
+                {
+                    idc = A3A_IDC_TOWNSLIST;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 106 * GRID_W;
+                    h = 82 * GRID_H;
+                    onLBDblClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
+
+                    sizeEx = GUI_TEXT_SIZE_MEDIUM;
+                    rowHeight = 4 * GRID_H;
+                    columns[] = {0, 0.27, 0.45, 0.57, 0.74, 0.87}; // Name, Owner, Support, Population, Garrison, Grid
+                };
+
+                class ShowOnMapButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_TOWNSSHOWONMAPBUTTON;
+                    text = $STR_antistasi_dialogs_main_towns_show_on_map_button;
+                    onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
+                    x = 120 * GRID_W;
+                    y = 12 * GRID_H;
                     w = 32 * GRID_W;
                     h = 12 * GRID_H;
                 };

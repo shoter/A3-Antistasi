@@ -37,6 +37,7 @@ class CfgFunctions {
             class requestMissionDialog {};
             class setUpPlacerHints {};
             class teamLeaderRTSPlacerDialog {};
+            class townsTab {};
             class warStatusTab {};
         };
 
