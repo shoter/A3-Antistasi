@@ -5693,6 +5693,9 @@
       <Key ID="STR_antistasi_dialogs_junkyard_unarmed">
         <Original>Unarmed</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_refresh">
+        <Original>Refresh stock (admin)</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_junkyard_button_tooltip">
         <Original>Buy wrecked %1 for %2 PLN. Heavily damaged, low fuel, little or no ammo. No free repairs for the first %3 hours.</Original>
       </Key>

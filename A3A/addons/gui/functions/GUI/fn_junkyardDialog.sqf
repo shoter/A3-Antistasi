@@ -39,6 +39,9 @@ player setCaptive false;
 private _isBoss = player == theBoss;
 { (_display displayCtrl _x) ctrlShow _isBoss } forEach [A3A_IDC_JUNKYARDFACTIONFUNDS, A3A_IDC_JUNKYARDFACTIONFUNDSTEXT];
 
+// Debug refresh button for admins (server re-checks admin status)
+(_display displayCtrl A3A_IDC_JUNKYARDREFRESHBUTTON) ctrlShow (call A3A_fnc_isLocalAdmin);
+
 // Stock summary and next delivery
 private _remaining = (A3A_junkyardNextRefresh - serverTime) max 0;
 private _prettyTime = [_remaining, 1, 1, false, 2, false, true] call A3A_fnc_timeSpan_format;

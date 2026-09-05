@@ -48,6 +48,19 @@ class A3A_JunkyardDialog : A3A_DefaultDialog
             h = 4 * GRID_H;
         };
 
+        // Debug: admins only, hidden for everyone else by the onLoad function
+        class RefreshButton : A3A_Button
+        {
+            idc = A3A_IDC_JUNKYARDREFRESHBUTTON;
+            text = $STR_antistasi_dialogs_junkyard_refresh;
+            show = false;
+            onButtonClick = "closeDialog 0; [player] remoteExecCall ['A3A_fnc_junkyardAdminRefresh', 2];";
+            x = DIALOG_X + DIALOG_W * GRID_W - 82 * GRID_W;
+            y = DIALOG_Y + 0.5 * GRID_H;
+            w = 32 * GRID_W;
+            h = 5 * GRID_H;
+        };
+
         class VehiclesControlsGroup : A3A_ControlsGroupNoHScrollbars
         {
             idc = A3A_IDC_JUNKYARDVEHICLESGROUP;
