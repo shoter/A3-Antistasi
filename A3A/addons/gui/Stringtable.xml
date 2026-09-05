@@ -4091,6 +4091,158 @@
         <Original>PLN %1</Original>
         <Polish>%1 PLN</Polish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_operations">
+        <Original>Operations</Original>
+        <Polish>Operacje</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_travel">
+        <Original>Travel and vehicles</Original>
+        <Polish>Podróże i pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_movement">
+        <Original>Movement</Original>
+        <Polish>Ruch</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_roles">
+        <Original>Roles</Original>
+        <Polish>Role</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_section_weapons">
+        <Original>Weapons and vehicles</Original>
+        <Polish>Broń i pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_commander_time_label">
+        <Original>Time as commander</Original>
+        <Polish>Czas jako dowódca</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_undercover_time_label">
+        <Original>Time undercover</Original>
+        <Polish>Czas pod przykrywką</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_longest_session_label">
+        <Original>Longest session</Original>
+        <Polish>Najdłuższa sesja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_money_spent_label">
+        <Original>Money spent</Original>
+        <Polish>Wydane pieniądze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_money_spent_tooltip">
+        <Original>Everything paid out: purchases, fares and donations</Original>
+        <Polish>Wszystkie wydatki: zakupy, opłaty i darowizny</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_money_donated_label">
+        <Original>Money donated</Original>
+        <Polish>Przekazane pieniądze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_scrap_money_label">
+        <Original>Scrap earnings</Original>
+        <Polish>Zarobek ze złomu</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_captures_label">
+        <Original>Captures</Original>
+        <Polish>Zdobycia</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_captures_tooltip">
+        <Original>Sites and towns captured while within 500 m</Original>
+        <Polish>Miejsca i miasta zdobyte, gdy gracz był w promieniu 500 m</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_defences_label">
+        <Original>Defences</Original>
+        <Polish>Obrony</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_defences_tooltip">
+        <Original>Attacks repelled and HQ assaults survived while within 500 m</Original>
+        <Polish>Odparte ataki i obronione HQ, gdy gracz był w promieniu 500 m</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_intel_found_label">
+        <Original>Intel found</Original>
+        <Polish>Znalezione informacje</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_recruits_lost_label">
+        <Original>Recruits lost</Original>
+        <Polish>Straceni rekruci</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_vehicles_lost_label">
+        <Original>Vehicles lost</Original>
+        <Polish>Stracone pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_vehicles_bought_label">
+        <Original>Vehicles bought</Original>
+        <Polish>Kupione pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_vehicles_scrapped_label">
+        <Original>Wrecks scrapped</Original>
+        <Polish>Rozebrane wraki</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_fast_travels_label">
+        <Original>Fast travels</Original>
+        <Polish>Szybkie podróże</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_flag_teleports_label">
+        <Original>Rally flag teleports</Original>
+        <Polish>Teleporty do flagi</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_air_taxi_rides_label">
+        <Original>Air taxi rides</Original>
+        <Polish>Przeloty taksówką</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_movement_foot">
+        <Original>On foot</Original>
+        <Polish>Pieszo</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_movement_ground">
+        <Original>Ground vehicle</Original>
+        <Polish>Pojazd lądowy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_movement_air">
+        <Original>Aircraft</Original>
+        <Polish>Statek powietrzny</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_movement_boat">
+        <Original>Boat</Original>
+        <Polish>Łódź</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_movement_swim">
+        <Original>Swimming</Original>
+        <Polish>Pływanie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_movement_static">
+        <Original>Static weapon</Original>
+        <Polish>Broń stacjonarna</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_time">
+        <Original>Time</Original>
+        <Polish>Czas</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_distance">
+        <Original>Distance</Original>
+        <Polish>Dystans</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_weapon">
+        <Original>Weapon / vehicle</Original>
+        <Polish>Broń / pojazd</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_soldiers">
+        <Original>Soldiers</Original>
+        <Polish>Żołnierze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_vehicles">
+        <Original>Vehicles</Original>
+        <Polish>Pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_aircraft">
+        <Original>Aircraft</Original>
+        <Polish>Lotnictwo</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_column_shots">
+        <Original>Shots</Original>
+        <Polish>Strzały</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_playerstats_no_weapons">
+        <Original>No weapon use recorded yet</Original>
+        <Polish>Brak zapisanego użycia broni</Polish>
+      </Key>
     </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">

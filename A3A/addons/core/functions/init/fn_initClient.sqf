@@ -335,6 +335,9 @@ if (A3A_hasACE) then {call A3A_fnc_initACE};
 
 A3A_aliveTime = time;
 
+// Player statistics: shots fired per weapon are counted here and sent to the server once a minute
+call A3A_fnc_playerStats_clientInit;
+
 initClientDone = true;
 Info("initClient completed");
 

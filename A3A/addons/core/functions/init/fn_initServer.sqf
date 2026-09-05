@@ -304,6 +304,9 @@ addMissionEventHandler ["EntityKilled", {
     };
 }];
 
+// Player statistics: time and distance per movement category, roles, undercover, weapons in use
+[] spawn A3A_fnc_playerStats_sampleLoop;
+
 // Shouldn't need these now due to attach/detach covering all cases
 /*if (A3A_hasACE) then {
     // Handler for detecting ACE load of static weapons. God why?

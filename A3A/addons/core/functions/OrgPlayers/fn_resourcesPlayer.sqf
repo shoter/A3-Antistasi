@@ -39,5 +39,10 @@ if (_moneyAdjustment < 0 && -_moneyAdjustment > _storedMoney) exitWith {false}; 
 _storedMoney = _storedMoney + _moneyAdjustment;
 _playerObject setVariable ["moneyX", _storedMoney, true];
 
+// Player statistics: every payment (purchases, fares, donations) is an outflow
+if (_moneyAdjustment < 0) then {
+    [[_playerObject] call A3A_fnc_playerStats_getUID, [["moneySpent", -_moneyAdjustment]]] call A3A_fnc_playerStats_add;
+};
+
 [] remoteExec ["A3A_fnc_statistics", _playerObject];
 true;

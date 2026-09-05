@@ -90,6 +90,7 @@ if (isNull _heli || { !canMove _heli }) exitWith {
 _player setVariable ["A3A_airTaxi", [_heli, "INBOUND"], true];
 private _script = [_player, _uid, _heli, _crewGroup, _originPos, _pickupLZ, _destPos, _destLZ, _vehUID, _entry, _money, _hr] spawn A3A_fnc_airTaxiRun;
 A3A_airTaxiActive set [_uid, _script];
+[[_player] call A3A_fnc_playerStats_getUID, [["airTaxiRides", 1]]] call A3A_fnc_playerStats_add;
 
 private _etaString = [[_eta] call A3A_fnc_secondsToTimeSpan, 0, 0, false, 2] call A3A_fnc_timeSpan_format;
 ["STR_A3A_fn_logistics_airTaxi_requested", [_dispName, _etaString]] remoteExecCall ["A3A_fnc_airTaxiHint", _client];

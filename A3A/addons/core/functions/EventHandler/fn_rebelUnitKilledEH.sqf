@@ -5,6 +5,12 @@ params ["_victim", "_killer"];
 
 _victim setVariable ["spawner",nil,true];
 
+// Player statistics: recruits point their owner at the player who hired them
+private _recruitOwner = _victim getVariable ["owner", objNull];
+if (_recruitOwner isEqualType objNull && {!isNull _recruitOwner} && {_recruitOwner != _victim} && {isPlayer _recruitOwner}) then {
+    [[_recruitOwner] call A3A_fnc_playerStats_getUID, [["recruitsLost", 1]]] remoteExecCall ["A3A_fnc_playerStats_add", 2];
+};
+
 /* Did this in EntityKilled instead...
 private _marker = _victim getVariable "markerX";
 if (!isNil "_marker") then {

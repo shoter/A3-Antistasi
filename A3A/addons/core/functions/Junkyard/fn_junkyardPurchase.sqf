@@ -48,6 +48,7 @@ private _paid = if (_useFactionFunds) then {
 if (!_paid) exitWith { [format [localize "STR_A3A_fn_junkyard_noMoney", _cost]] call _fnc_fail };
 
 A3A_junkyardStock deleteAt _index;
+[[_player] call A3A_fnc_playerStats_getUID, [["vehiclesBought", 1]]] call A3A_fnc_playerStats_add;
 publicVariable "A3A_junkyardStock";
 
 [_vehicle] spawn A3A_fnc_rebelVehPlacedWorker;
