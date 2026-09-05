@@ -1,6 +1,6 @@
 name: Release unstable
 
-# Every push to `unstable` builds the mod and republishes the rolling "unstable" prerelease on this fork.
+# Every push to `unstable` builds the mod and republishes the rolling "unstable-latest" prerelease on this fork.
 # The release always points at the latest commit and carries a single asset: A3A-unstable.zip
 # (a zip with a top-level @A3A folder ready to drop into an Arma 3 install).
 
@@ -60,13 +60,13 @@ jobs:
       - name: Move the unstable tag to this commit
         shell: pwsh
         run: |
-          git tag -f unstable ${{ github.sha }}
-          git push -f origin unstable
+          git tag -f unstable-latest ${{ github.sha }}
+          git push -f origin refs/tags/unstable-latest
 
       - name: Publish rolling prerelease
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: unstable
+          tag_name: unstable-latest
           name: Unstable ${{ steps.version.outputs.version }}
           prerelease: true
           make_latest: false
