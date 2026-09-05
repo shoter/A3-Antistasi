@@ -32,6 +32,7 @@ sleep 0.5;
 {
 	if (!isNil {_x getVariable "markerX"}) then { continue };
 	if (_x getVariable ["A3A_airTaxi", false]) then { continue };			// AI-flown taxi on its way back to the garage
+	if !(_x isNil "A3A_garrisonResupply") then { continue };				// AI-driven ammo truck on a garrison resupply run
 	if !(_x isKindOf "StaticWeapon" or unitIsUAV _x) then { [_x, 500] call _fnc_distCheck };
 } forEach (vehicles select {_x getVariable ["ownerSide", sideUnknown] == teamPlayer});
 

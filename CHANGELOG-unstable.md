@@ -4,6 +4,16 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Garrison resupply trucks and static ammo readouts
+
+### Added
+- **Resupply** button on the Garrisons tab: pick one of your garaged ammo trucks and send it to the selected site. An AI driver takes the truck out of the garage, drives it there by road (it shows as a friendly vehicle marker and enemy sites along the way spawn around it, so it can be intercepted), spends the truck's ammo points on the static weapons first and then on the crewed vehicles, and drives back into the garage with whatever points are left. Costs the ammo points spent plus 1 HR for the driver (refunded when the truck never got there). A site that is despawned when the truck arrives gets its stored ammo topped up and comes back rearmed on its next spawn. The chronicle records each delivery or lost truck. A run in progress is not saved, so a server restart loses the truck like an air taxi flight.
+- **Ammo %** column on the Garrisons tab: average ammunition left in the site's static weapons, sortable, shown in orange below 50%, `-` for sites without statics. Sites with a truck on the way show the status **Resupplying**.
+- The garrison management tab (HQ > Garrisons) now lists every static weapon of the site with its ammo left and who mans it: AI, a player or nobody.
+
+### Changed
+- The garrison management tab's Build watchpost, Rebuild assets and Dismiss buttons moved into one row under the new statics table.
+
 ## 2026-09-05 - Defector escort mission
 
 ### Added

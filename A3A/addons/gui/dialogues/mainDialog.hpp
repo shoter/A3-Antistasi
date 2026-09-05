@@ -3345,7 +3345,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     sizeEx = GUI_TEXT_SIZE_SMALL;
                     x = 8 * GRID_W;
                     y = 7 * GRID_H;
-                    w = 33 * GRID_W;
+                    w = 31 * GRID_W;
                     h = 4 * GRID_H;
                 };
 
@@ -3354,8 +3354,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_GARRISONSHEADER_TYPE;
                     text = $STR_antistasi_dialogs_main_garrisons_type_label;
                     onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_garrisonsTab;";
-                    x = 42 * GRID_W;
-                    w = 19 * GRID_W;
+                    x = 40 * GRID_W;
+                    w = 18 * GRID_W;
                 };
 
                 class TroopsHeader : NameHeader
@@ -3363,8 +3363,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_GARRISONSHEADER_TROOPS;
                     text = $STR_antistasi_dialogs_main_garrisons_troops_label;
                     onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_garrisonsTab;";
-                    x = 62 * GRID_W;
-                    w = 15 * GRID_W;
+                    x = 59 * GRID_W;
+                    w = 14 * GRID_W;
                 };
 
                 class VehiclesHeader : NameHeader
@@ -3372,8 +3372,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_GARRISONSHEADER_VEHICLES;
                     text = $STR_antistasi_dialogs_main_garrisons_vehicles_label;
                     onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_garrisonsTab;";
-                    x = 78 * GRID_W;
-                    w = 16 * GRID_W;
+                    x = 74 * GRID_W;
+                    w = 14 * GRID_W;
                 };
 
                 class StaticsHeader : NameHeader
@@ -3381,26 +3381,36 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_GARRISONSHEADER_STATICS;
                     text = $STR_antistasi_dialogs_main_garrisons_statics_label;
                     onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_garrisonsTab;";
-                    x = 95 * GRID_W;
-                    w = 15 * GRID_W;
+                    x = 89 * GRID_W;
+                    w = 14 * GRID_W;
+                };
+
+                class AmmoHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_AMMO;
+                    text = $STR_antistasi_dialogs_main_garrisons_ammo_label;
+                    tooltip = $STR_antistasi_dialogs_main_garrisons_ammo_tooltip;
+                    onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 104 * GRID_W;
+                    w = 14 * GRID_W;
                 };
 
                 class StatusHeader : NameHeader
                 {
                     idc = A3A_IDC_GARRISONSHEADER_STATUS;
                     text = $STR_antistasi_dialogs_main_garrisons_status_label;
-                    onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_garrisonsTab;";
-                    x = 111 * GRID_W;
-                    w = 23 * GRID_W;
+                    onButtonClick = "[""sortBy"", [6]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 119 * GRID_W;
+                    w = 18 * GRID_W;
                 };
 
                 class GridHeader : NameHeader
                 {
                     idc = A3A_IDC_GARRISONSHEADER_GRID;
                     text = $STR_antistasi_dialogs_main_towns_grid_label;
-                    onButtonClick = "[""sortBy"", [6]] call A3A_GUI_fnc_garrisonsTab;";
-                    x = 135 * GRID_W;
-                    w = 17 * GRID_W;
+                    onButtonClick = "[""sortBy"", [7]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 138 * GRID_W;
+                    w = 14 * GRID_W;
                 };
 
                 class GarrisonsList : A3A_ListNBox
@@ -3415,7 +3425,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                     sizeEx = GUI_TEXT_SIZE_MEDIUM;
                     rowHeight = 4 * GRID_H;
-                    columns[] = {0, 0.236, 0.375, 0.486, 0.604, 0.715, 0.882}; // Name, Type, Troops, Vehicles, Statics, Status, Grid
+                    columns[] = {0, 0.222, 0.354, 0.458, 0.562, 0.667, 0.771, 0.903}; // Name, Type, Troops, Vehicles, Statics, Ammo, Status, Grid
                 };
 
                 class ShowOnMapButton : A3A_ShortcutButton
@@ -3438,6 +3448,30 @@ class A3A_MainDialog : A3A_TabbedDialog
                     x = 44 * GRID_W;
                     y = 86 * GRID_H;
                     w = 32 * GRID_W;
+                    h = 8 * GRID_H;
+                };
+
+                // Garrison resupply: pick a garaged ammo truck, send it to the selected site
+                class ResupplyTruckCombo : A3A_ComboBox_Small
+                {
+                    idc = A3A_IDC_GARRISONSRESUPPLYTRUCK;
+                    tooltip = $STR_antistasi_dialogs_main_garrisons_resupply_truck_tooltip;
+                    onLBSelChanged = "[""selectionChanged""] call A3A_GUI_fnc_garrisonsTab";
+                    x = 80 * GRID_W;
+                    y = 88 * GRID_H;
+                    w = 40 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class ResupplyButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_GARRISONSRESUPPLYBUTTON;
+                    text = $STR_antistasi_dialogs_main_garrisons_resupply_button;
+                    tooltip = $STR_antistasi_dialogs_main_garrisons_resupply_tooltip;
+                    onButtonClick = "[""resupply""] call A3A_GUI_fnc_garrisonsTab";
+                    x = 121 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 31 * GRID_W;
                     h = 8 * GRID_H;
                 };
             };

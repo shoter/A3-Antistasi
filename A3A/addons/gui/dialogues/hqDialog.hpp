@@ -821,7 +821,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     x = 10 * GRID_W;
                     y = 17 * GRID_H;
                     w = 50 * GRID_W;
-                    h = 51 * GRID_H;
+                    h = 45 * GRID_H;
 
                     class controls
                     {
@@ -1461,15 +1461,64 @@ class A3A_HqDialog : A3A_DefaultDialog
                     };
                 };
 
+                // Static weapons of the site with ammo left and crew, filled by updateGarrisonTab
+                class StaticsHeader : A3A_Text
+                {
+                    idc = A3A_IDC_GARRISONSTATICSHEADER;
+                    text = $STR_antistasi_dialogs_hq_garrisons_statics_header;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 10 * GRID_W;
+                    y = 63 * GRID_H;
+                    w = 50 * GRID_W;
+                    h = 3 * GRID_H;
+                };
+
+                class StaticsListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 10 * GRID_W;
+                    y = 66 * GRID_H;
+                    w = 50 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+
+                class StaticsList : A3A_ListNBox
+                {
+                    idc = A3A_IDC_GARRISONSTATICSLIST;
+                    x = 10 * GRID_W;
+                    y = 66 * GRID_H;
+                    w = 50 * GRID_W;
+                    h = 12 * GRID_H;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    rowHeight = 3 * GRID_H;
+                    columns[] = {0, 0.56, 0.78}; // Name, Ammo, Crew
+                };
+
+                // Site management buttons in one row under the statics table
+                class BuildWatchpostButton : A3A_ShortcutButton
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_hq_garrisons_build_watchpost_button;
+                    onButtonClick = "[""buildWatchpost""] spawn A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
+                    x = 10 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 16 * GRID_W;
+                    h = 10 * GRID_H;
+                    size = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                };
+
                 class RebuildButton : A3A_ShortcutButton
                 {
                     idc = A3A_IDC_REBUILDGARRISONBUTTON;
                     text = $STR_antistasi_dialogs_hq_garrisons_rebuild_assets_button;
                     onButtonClick = "[""rebuildAssets""] spawn A3A_GUI_fnc_hqDialog";
-                    x = 10 * GRID_W;
-                    y = 78 * GRID_H;
-                    w = 22 * GRID_W;
-                    h = 12 * GRID_H;
+                    x = 27 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 16 * GRID_W;
+                    h = 10 * GRID_H;
+                    size = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
                 };
 
                 class DismissGarrisonButton : A3A_ShortcutButton
@@ -1477,38 +1526,13 @@ class A3A_HqDialog : A3A_DefaultDialog
                     idc = A3A_IDC_DISMISSGARRISONBUTTON;
                     text = $STR_antistasi_dialogs_hq_garrisons_dismiss_garrison_button;
                     onButtonClick = "[""dismissGarrison""] spawn A3A_GUI_fnc_hqDialog";
-                    x = 38 * GRID_W;
-                    y = 78 * GRID_H;
-                    w = 22 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                
-                // Build / Remove outpost buttons
-                class BuildWatchpostButton : A3A_ShortcutButton
-                {
-                    idc = -1;
-                    text = $STR_antistasi_dialogs_hq_garrisons_build_watchpost_button;
-                    onButtonClick = "[""buildWatchpost""] spawn A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
-                    x = 10 * GRID_W;
-                    y = 64 * GRID_H;
-                    w = 22 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                /*
-                // Feature is depreciated, find another use for this button
-                class RemoveWatchpostButton : A3A_ShortcutButton
-                {
-                    idc = -1;
-                    text = $STR_antistasi_dialogs_hq_garrisons_remove_watchpost_button;
-                    onButtonClick = "[""removeWatchpost""] spawn A3A_GUI_fnc_hqDialog";
-                    x = 38 * GRID_W;
+                    x = 44 * GRID_W;
                     y = 80 * GRID_H;
-                    w = 22 * GRID_W;
-                    h = 12 * GRID_H;
+                    w = 16 * GRID_W;
+                    h = 10 * GRID_H;
+                    size = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
                 };
-                */
             };
         };
 

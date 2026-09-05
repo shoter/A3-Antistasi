@@ -91,6 +91,8 @@ private _types = createHashMapFromArray [
     ["campaignStarted",      ["campaign", "neutral", ["text", "text", "text", "text"]]],
     ["radioTowerDestroyed",  ["sites",    "good",    []]],
     ["radioTowerRebuilt",    ["sites",    "good",    []]],
+    ["garrisonResupplied",   ["sites",    "good",    ["text", "text", "text"]]],
+    ["garrisonResupplyLost", ["sites",    "bad",     ["text"]]],
     ["aggressionChanged",    ["campaign", "neutral", ["text", "aggro", "aggro"]]],
     ["populationMajority",   ["campaign", "good",    []]],
     ["populationMajorityLost", ["campaign", "bad",   []]],

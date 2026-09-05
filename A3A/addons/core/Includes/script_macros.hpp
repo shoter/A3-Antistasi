@@ -10,3 +10,6 @@
 
 #define ADDONLOADED(addon) EADDONLOADED(A3A,addon)
 #define EADDONLOADED(prefix,addon)(isClass (configFile/QUOTE(CfgPatches)/QDOUBLES(prefix,addon)))
+
+// Ammo points charged per magazine price for vehicle rearming, shared by the rearm dialog and the garrison resupply trucks
+#define A3A_REARM_PRICE_MUL 0.2

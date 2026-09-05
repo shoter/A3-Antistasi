@@ -2,10 +2,12 @@
 Maintainer: Shoter
     Handles updating, sorting and controls on the Garrisons tab of the Main dialog.
     Lists every rebel-held site (HQ, airbases, outposts, seaports, factories, resources, roadblocks and watchposts)
-    with troops, vehicles, statics and spawn/attack status. Commander only, the tab button is disabled for everyone else.
+    with troops, vehicles, statics, static ammo and spawn/attack status. Commander only, the tab button is disabled for everyone else.
+    The Resupply button sends a garaged ammo truck, picked in the combo box, to rearm the selected site (fn_garrisonResupplyRequest).
 
     Troops are read from the "Dum" marker text broadcast by the server (see fn_mrkUpdate), the HQ has no such marker.
-    Vehicle and static counts are requested from the server (fn_garrisonServer_sendCounts) and cached for 30 seconds.
+    Vehicle, static and ammo counts are requested from the server (fn_garrisonServer_sendCounts) and cached for 30 seconds,
+    the ammo truck list (fn_garrisonResupplyListTrucks) is refreshed with them.
 
 Arguments:
     <STRING> Mode
@@ -42,7 +44,11 @@ FIX_LINE_NUMBERS()
 #define COUNTS_REQUEST_TIMEOUT 5
 // Seconds between colour toggles of the rows under attack
 #define BLINK_INTERVAL 0.5
-#define COLUMN_COUNT 7
+#define COLUMN_COUNT 8
+// Column index of the static ammo percentage, coloured on its own when low
+#define AMMO_COLUMN 5
+// Static ammo below this fraction is shown in the understrength colour
+#define AMMO_LOW_PCT 50
 
 params [["_mode","onLoad"], ["_params",[]]];
 
@@ -57,6 +63,7 @@ private _columns = [
     [A3A_IDC_GARRISONSHEADER_TROOPS, "STR_antistasi_dialogs_main_garrisons_troops_label"],
     [A3A_IDC_GARRISONSHEADER_VEHICLES, "STR_antistasi_dialogs_main_garrisons_vehicles_label"],
     [A3A_IDC_GARRISONSHEADER_STATICS, "STR_antistasi_dialogs_main_garrisons_statics_label"],
+    [A3A_IDC_GARRISONSHEADER_AMMO, "STR_antistasi_dialogs_main_garrisons_ammo_label"],
     [A3A_IDC_GARRISONSHEADER_STATUS, "STR_antistasi_dialogs_main_garrisons_status_label"],
     [A3A_IDC_GARRISONSHEADER_GRID, "STR_antistasi_dialogs_main_towns_grid_label"]
 ];
@@ -89,6 +96,13 @@ switch (_mode) do
             [clientOwner] remoteExecCall ["A3A_fnc_garrisonServer_sendCounts", 2];
         };
 
+        // The ammo trucks for the Resupply combo box are fetched with the counts, the reply lands in "trucksReceived"
+        private _trucksRequestAge = time - (missionNamespace getVariable ["A3A_GUI_resupplyTrucksRequestTime", -1000000]);
+        if (_countsAge > COUNTS_CACHE_LIFETIME && {_trucksRequestAge > COUNTS_REQUEST_TIMEOUT}) then {
+            missionNamespace setVariable ["A3A_GUI_resupplyTrucksRequestTime", time];
+            ["requestTrucks"] call FUNC(garrisonsTab);
+        };
+
         private _typeLabelHM = createHashMapFromArray [
             ["hq", localize "STR_antistasi_dialogs_main_garrisons_type_hq"],
             ["airbase", localize "STR_antistasi_dialogs_main_garrisons_type_airbase"],
@@ -102,9 +116,10 @@ switch (_mode) do
 
         // [sort rank, label]. The rank is the sort key so the ordering does not depend on the language
         private _statusUnderAttack = [0, localize "STR_antistasi_dialogs_main_garrisons_status_under_attack"];
-        private _statusSpawned = [1, localize "STR_antistasi_dialogs_main_garrisons_status_spawned"];
-        private _statusIdle = [2, localize "STR_antistasi_dialogs_main_garrisons_status_idle"];
-        private _statusDestroyed = [3, localize "STR_antistasi_dialogs_main_towns_destroyed"];
+        private _statusResupplying = [1, localize "STR_antistasi_dialogs_main_garrisons_status_resupplying"];
+        private _statusSpawned = [2, localize "STR_antistasi_dialogs_main_garrisons_status_spawned"];
+        private _statusIdle = [3, localize "STR_antistasi_dialogs_main_garrisons_status_idle"];
+        private _statusDestroyed = [4, localize "STR_antistasi_dialogs_main_towns_destroyed"];
 
         private _colorDefault = [1, 1, 1, 1];
         private _colorUnderStrength = A3A_COLOR_UNDERSTRENGTH_SQF;
@@ -129,7 +144,7 @@ switch (_mode) do
             private _grid = mapGridPosition markerPos _marker;
             private _limit = [_marker] call A3A_fnc_getGarrisonLimit;
 
-            (_counts getOrDefault [_marker, [-1, -1, -1]]) params ["_cachedTroops", "_vehicles", "_statics"];
+            (_counts getOrDefault [_marker, [-1, -1, -1, -1, false]]) params ["_cachedTroops", "_vehicles", "_statics", "_ammoPct", "_resupplying"];
 
             // Troops come from the "Dum" marker text, "<label>: troops/limit" or no suffix at all when empty.
             // HQ has no such marker so it uses the cached server count instead.
@@ -152,6 +167,7 @@ switch (_mode) do
             private _status = call {
                 if (_underAttack) exitWith { _statusUnderAttack };
                 if (_marker in destroyedSites) exitWith { _statusDestroyed };
+                if (_resupplying) exitWith { _statusResupplying };
                 if (spawner getVariable [_marker, 2] != 2) exitWith { _statusSpawned };
                 _statusIdle
             };
@@ -165,11 +181,18 @@ switch (_mode) do
 
             private _vehiclesText = [str _vehicles, "?"] select (_vehicles < 0);
             private _staticsText = [str _statics, "?"] select (_statics < 0);
-            private _displayStrings = [_name, _typeLabel, _troopsText, _vehiclesText, _staticsText, _statusLabel, _grid];
-            private _sortKeys = [toLower _name, _typeLabel, _troops, _vehicles, _statics, _statusRank, _grid];
+            // Static ammo: unknown until the counts arrive, "-" for sites without statics
+            private _ammoText = call {
+                if (_statics < 0) exitWith { "?" };
+                if (_ammoPct < 0) exitWith { "-" };
+                format ["%1%2", _ammoPct, "%"]
+            };
+            private _ammoLow = _ammoPct >= 0 && {_ammoPct < AMMO_LOW_PCT};
+            private _displayStrings = [_name, _typeLabel, _troopsText, _vehiclesText, _staticsText, _ammoText, _statusLabel, _grid];
+            private _sortKeys = [toLower _name, _typeLabel, _troops, _vehicles, _statics, _ammoPct, _statusRank, _grid];
 
             _rows pushBack [_sortKeys select _sortColumn, toLower _name, _marker];
-            _rowData set [_marker, [_displayStrings, _color, _underAttack]];
+            _rowData set [_marker, [_displayStrings, _color, _underAttack, _ammoLow, _resupplying]];
         } forEach _sites;
 
         // Keys are homogeneous per column (strings for name/type/grid, numbers for the rest),
@@ -184,11 +207,13 @@ switch (_mode) do
         private _attackRows = [];
         {
             _x params ["", "", "_marker"];
-            (_rowData get _marker) params ["_displayStrings", "_color", "_underAttack"];
+            (_rowData get _marker) params ["_displayStrings", "_color", "_underAttack", "_ammoLow", "_resupplying"];
             private _index = _listBox lnbAddRow _displayStrings;
             _listBox lnbSetData [[_index, 0], _marker];
             _listBox lnbSetValue [[_index, 0], parseNumber _underAttack];
+            _listBox lnbSetValue [[_index, 1], parseNumber _resupplying];
             [_listBox, _index, _color] call _fnc_setRowColor;
+            if (_ammoLow) then { _listBox lnbSetColor [[_index, AMMO_COLUMN], _colorUnderStrength] };
             if (_underAttack) then { _attackRows pushBack [_index, _color] };
             if (_marker == _selectedMarker) then { _listBox lnbSetCurSelRow _index };
         } forEach _rows;
@@ -249,6 +274,71 @@ switch (_mode) do
         _manageButton ctrlSetTooltip localize (
             ["STR_antistasi_dialogs_main_garrisons_manage_tooltip", "STR_antistasi_dialogs_hq_garrisons_under_attack"] select _underAttack
         );
+
+        // Resupply needs a site that is not HQ, not under attack, not already being resupplied, and a truck to send
+        private _resupplyButton = _display displayCtrl A3A_IDC_GARRISONSRESUPPLYBUTTON;
+        private _truckCombo = _display displayCtrl A3A_IDC_GARRISONSRESUPPLYTRUCK;
+        private _marker = if (_index < 0) then { "" } else { _listBox lnbData [_index, 0] };
+        private _resupplying = _index >= 0 && {(_listBox lnbValue [_index, 1]) == 1};
+        private _truckUID = if (lbCurSel _truckCombo < 0) then { -1 } else { _truckCombo lbValue (lbCurSel _truckCombo) };
+        private _blocker = call {
+            if (_marker isEqualTo "") exitWith { "STR_antistasi_dialogs_main_garrisons_resupply_no_site_tooltip" };
+            if (_marker == "Synd_HQ") exitWith { "STR_antistasi_dialogs_main_garrisons_resupply_hq_tooltip" };
+            if (_underAttack) exitWith { "STR_antistasi_dialogs_hq_garrisons_under_attack" };
+            if (_resupplying) exitWith { "STR_antistasi_dialogs_main_garrisons_resupply_active_tooltip" };
+            if (_truckUID < 0) exitWith { "STR_antistasi_dialogs_main_garrisons_resupply_no_truck_tooltip" };
+            ""
+        };
+        _resupplyButton ctrlEnable (_blocker isEqualTo "");
+        _resupplyButton ctrlSetTooltip localize ([_blocker, "STR_antistasi_dialogs_main_garrisons_resupply_tooltip"] select (_blocker isEqualTo ""));
+    };
+
+    case ("resupply"):
+    {
+        // Sends the ammo truck picked in the combo box to the selected site, the server validates and answers with hints
+        private _index = lnbCurSelRow _listBox;
+        if (_index < 0) exitWith {};
+        private _marker = _listBox lnbData [_index, 0];
+        if (_marker isEqualTo "") exitWith {};
+        if (player isNotEqualTo theBoss) exitWith {};
+
+        private _truckCombo = _display displayCtrl A3A_IDC_GARRISONSRESUPPLYTRUCK;
+        if (lbCurSel _truckCombo < 0) exitWith {};
+        private _truckUID = _truckCombo lbValue (lbCurSel _truckCombo);
+
+        Trace_2("Requesting resupply of %1 with garage truck %2", _marker, _truckUID);
+        [player, _marker, _truckUID, clientOwner] remoteExecCall ["A3A_fnc_garrisonResupplyRequest", 2];
+
+        // The status and the truck list change on the server, fetch both again on the next update
+        missionNamespace setVariable ["A3A_GUI_garrisonCountsTime", nil];
+        ["requestTrucks"] call FUNC(garrisonsTab);
+    };
+
+    case ("requestTrucks"):
+    {
+        // Asks the server for the garaged ammo trucks, the reply lands in "trucksReceived"
+        [player, clientOwner] remoteExecCall ["A3A_fnc_garrisonResupplyListTrucks", 2];
+    };
+
+    case ("trucksReceived"):
+    {
+        // Takes 1 parameter: <ARRAY> [[vehUID, displayName, ammoPoints], ...] as sent by A3A_fnc_garrisonResupplyListTrucks
+        _params params [["_trucks", [], [[]]]];
+        if (isNull _display) exitWith {};
+
+        private _truckCombo = _display displayCtrl A3A_IDC_GARRISONSRESUPPLYTRUCK;
+        private _selectedUID = if (lbCurSel _truckCombo < 0) then { -1 } else { _truckCombo lbValue (lbCurSel _truckCombo) };
+        lbClear _truckCombo;
+        {
+            _x params ["_vehUID", "_dispName", "_points"];
+            private _row = _truckCombo lbAdd format [localize "STR_antistasi_dialogs_main_garrisons_resupply_truck_entry", _dispName, round _points];
+            _truckCombo lbSetValue [_row, _vehUID];
+            if (_vehUID == _selectedUID) then { _truckCombo lbSetCurSel _row };
+        } forEach _trucks;
+        if (lbCurSel _truckCombo < 0 && {lbSize _truckCombo > 0}) then { _truckCombo lbSetCurSel 0 };
+        Trace_1("Received %1 ammo trucks for garrison resupply", count _trucks);
+
+        ["selectionChanged"] call FUNC(garrisonsTab);
     };
 
     case ("showOnMap"):
@@ -292,13 +382,13 @@ switch (_mode) do
 
     case ("countsReceived"):
     {
-        // Takes 1 parameter: <ARRAY> [[marker, troops, vehicles, statics], ...] as sent by A3A_fnc_garrisonServer_sendCounts
+        // Takes 1 parameter: <ARRAY> [[marker, troops, vehicles, statics, ammoPct, resupplying], ...] as sent by A3A_fnc_garrisonServer_sendCounts
         _params params [["_countsArray", [], [[]]]];
 
         private _counts = createHashMap;
         {
-            _x params ["_marker", "_troops", "_vehicles", "_statics"];
-            _counts set [_marker, [_troops, _vehicles, _statics]];
+            _x params ["_marker", "_troops", "_vehicles", "_statics", ["_ammoPct", -1], ["_resupplying", false]];
+            _counts set [_marker, [_troops, _vehicles, _statics, _ammoPct, _resupplying]];
         } forEach _countsArray;
         missionNamespace setVariable ["A3A_GUI_garrisonCounts", _counts];
         missionNamespace setVariable ["A3A_GUI_garrisonCountsTime", time];

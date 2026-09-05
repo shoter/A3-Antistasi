@@ -1,6 +1,6 @@
 /*
 Maintainer: Shoter
-    Removes or re-inserts an air taxi helicopter entry in the garage pool.
+    Removes or re-inserts a garage entry taken out by an AI job (air taxi helicopter, garrison resupply truck).
     Run on the server and on every client with the garage dialog open (HR_GRG_Users),
     so their copies of HR_GRG_Vehicles stay in sync and the list refreshes.
     Mirrors the pool mutation and refresh done by HR_GRG_fnc_removeFromPool.
@@ -10,6 +10,7 @@ Arguments:
     <NUMBER> Garage vehicle UID
     <ARRAY> Garage entry to insert (ignored for "remove") [DEFAULT = []]
     <NUMBER> Source registry index for "insert": 0 ammo, 1 fuel, 2 repair, -1 none [DEFAULT = -1]
+    <NUMBER> Garage category index, see garage/Core/fn_getCatIndex.sqf: 3 helicopters, 6 support vehicles [DEFAULT = 3]
 
 Return Value:
     <nil>
@@ -27,10 +28,10 @@ Example:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params [["_mode", "", [""]], ["_vehUID", -1, [0]], ["_entry", [], [[]]], ["_sourceIndex", -1, [0]]];
+params [["_mode", "", [""]], ["_vehUID", -1, [0]], ["_entry", [], [[]]], ["_sourceIndex", -1, [0]], ["_catIndex", 3, [0]]];
 if (isNil "HR_GRG_Vehicles") exitWith {};       // client without an open garage dialog, nothing to sync
 
-private _cat = HR_GRG_Vehicles # 3;      // helicopter category, see garage/CfgDefines.inc
+private _cat = HR_GRG_Vehicles # _catIndex;      // helicopter category by default, see garage/Core/fn_getCatIndex.sqf
 
 switch (_mode) do {
     case ("remove"): {
@@ -53,7 +54,7 @@ switch (_mode) do {
         };
     };
 
-    default { Error_1("Unknown air taxi garage sync mode %1", _mode) };
+    default { Error_1("Unknown garage sync mode %1", _mode) };
 };
 
 // Refresh the garage dialog if this machine has one open (controls of a closed dialog are null and disabled)

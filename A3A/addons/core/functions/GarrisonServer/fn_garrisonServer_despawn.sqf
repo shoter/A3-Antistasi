@@ -31,6 +31,7 @@ if ("_civ" in _marker) exitWith {
 
 
 // Things to clean up on despawn
+private _side = sidesX getVariable _marker;
 if (_side != teamPlayer) then {
     // If it's an enemy marker then cleanup old/misplaced vehicles on despawn
     [_marker, false, false] call A3A_fnc_garrisonServer_cleanup;

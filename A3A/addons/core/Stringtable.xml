@@ -17097,6 +17097,54 @@
       <Key ID="STR_A3A_fn_logistics_airTaxi_lost_refund">
         <Original>The helicopter was lost on its way back. Fare and HR refunded.</Original>
       </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_title">
+        <Original>Garrison Resupply</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_marker">
+        <Original>Ammo truck</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_requested">
+        <Original>%1 is leaving HQ for %2 with %4 ammo points. Estimated time to arrival %3.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_arrived">
+        <Original>The ammo truck has reached %1 and is handing over the ammunition.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_completed">
+        <Original>%1 is back in the garage. %3 ammo points spent on %4 weapons at %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_stranded">
+        <Original>%1 rearmed %2 (%3 ammo points, %4 weapons) but could not get home. It is waiting to be driven back.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_stuck">
+        <Original>%1 never reached %2 and was brought back. The HR was refunded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_lost">
+        <Original>%1 was lost on its way to %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_not_commander">
+        <Original>Only the commander can send resupply trucks.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_bad_site">
+        <Original>That site cannot be resupplied.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_active">
+        <Original>An ammo truck is already on its way to that site.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_under_attack">
+        <Original>The site is under attack, wait until it is clear.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_no_hr">
+        <Original>Not enough HR for the driver.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_nothing_to_do">
+        <Original>Every weapon at that site is already fully loaded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_no_truck">
+        <Original>That ammo truck is not available or has no ammo points left.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_resupply_blk_no_spawn">
+        <Original>The ammo truck could not be placed at HQ. HR refunded.</Original>
+      </Key>
     </Container>
   </Package>
 </Project>

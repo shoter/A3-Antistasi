@@ -23,4 +23,5 @@ if !(_marker in A3A_garrison) exitWith {
     Error_1("Garrison %1 does not exist", _marker);
 };
 
-["garrisonDataSent", [_marker, A3A_garrison get _marker]] remoteExecCall ["A3A_GUI_fnc_hqDialog", theBoss];
+// The statics readout rides along so the management tab can list ammo and crew without a second round trip
+["garrisonDataSent", [_marker, A3A_garrison get _marker, [_marker, true] call A3A_fnc_garrisonServer_ammoInfo]] remoteExecCall ["A3A_GUI_fnc_hqDialog", theBoss];

@@ -568,6 +568,28 @@ switch (_mode) do
 
         ["updateGarrisonWepNum"] spawn A3A_GUI_fnc_hqDialog;
 
+        // Static weapons of the site: name, ammo left, who mans it. Sent by the server with the garrison data.
+        private _staticsList = _display displayCtrl A3A_IDC_GARRISONSTATICSLIST;
+        private _staticsInfo = _garrisonMap getVariable ["currentStaticsInfo", []];
+        private _crewLabels = [
+            localize "STR_antistasi_dialogs_hq_garrisons_static_crew_none",
+            localize "STR_antistasi_dialogs_hq_garrisons_static_crew_ai",
+            localize "STR_antistasi_dialogs_hq_garrisons_static_crew_player"
+        ];
+        lbClear _staticsList;
+        {
+            _x params ["", "_class", "_fraction", "_crewState"];
+            private _ammoPct = round (100 * _fraction);
+            private _crewText = if (_crewState < 0) then { localize "STR_antistasi_dialogs_hq_garrisons_static_crew_despawned" } else { _crewLabels select _crewState };
+            private _row = _staticsList lnbAddRow [getText (configFile >> "CfgVehicles" >> _class >> "displayName"), format ["%1%2", _ammoPct, "%"], _crewText];
+            if (_ammoPct < 50) then { _staticsList lnbSetColor [[_row, 1], A3A_COLOR_UNDERSTRENGTH_SQF] };
+            if (_crewState < 0) then { _staticsList lnbSetColor [[_row, 2], A3A_COLOR_TEXT_DARKER_SQF] };
+        } forEach _staticsInfo;
+        if (_staticsInfo isEqualTo []) then {
+            private _row = _staticsList lnbAddRow [localize "STR_antistasi_dialogs_hq_garrisons_no_statics", "", ""];
+            _staticsList lnbSetColor [[_row, 0], A3A_COLOR_TEXT_DARKER_SQF];
+        };
+
         // Disable any management buttons if garrison is under attack
         private _garrisonUnderAttack = [markerPos _selectedMarker] call FUNCMAIN(enemyNearCheck);
         if (_garrisonUnderAttack) then {
@@ -691,12 +713,13 @@ switch (_mode) do
 
     case ("garrisonDataSent"):
     {
-        _params params ["_marker", "_garrisonData"];
+        _params params ["_marker", "_garrisonData", ["_staticsInfo", [], [[]]]];
 
         // If the data's from a previous click then ignore it
         if (_marker != _garrisonMap getVariable ["selectedMarker", ""]) exitWith {};
 
         _garrisonMap setVariable ["currentGarrisonData", _garrisonData];
+        _garrisonMap setVariable ["currentStaticsInfo", _staticsInfo];       // [[vehID, class, ammoFraction, crewState], ...]
         ["updateGarrisonTab"] call FUNC(hqDialog);
     };
 

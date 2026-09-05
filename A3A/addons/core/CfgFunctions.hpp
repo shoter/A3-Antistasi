@@ -88,6 +88,7 @@ class CfgFunctions
             class dress {};
             class empty {};
             class equipmentClassToCategories {};
+            class getAmmoFraction {};
             class equipmentIsValidForCurrentModset {};
             class equipmentSort {};
             class fetchRebelGear {};
@@ -378,12 +379,14 @@ class CfgFunctions
             class garrisonServer_addUnitType {};
             class garrisonServer_addVehicle {};
             class garrisonServer_addVehicleType {};
+            class garrisonServer_ammoInfo {};
             class garrisonServer_cityReinf {};
             class garrisonServer_changeSide {};
             class garrisonServer_cleanup {};
             class garrisonServer_clear {};
             class garrisonServer_delete {};
             class garrisonServer_despawn {};
+            class garrisonServer_findVehicle {};
             class garrisonServer_initVIDs {};
             class garrisonServer_looted {};
             class garrisonServer_remUnit {};
@@ -570,6 +573,14 @@ class CfgFunctions
             class airTaxiRun {};
             class airTaxiSpawn {};
             class airTaxiUnload {};
+            class garrisonResupplyApply {};
+            class garrisonResupplyFinish {};
+            class garrisonResupplyHint {};
+            class garrisonResupplyListTrucks {};
+            class garrisonResupplyRequest {};
+            class garrisonResupplyRun {};
+            class garrisonResupplySpawn {};
+            class garrisonResupplyTruckPoints {};
         };
 
         class ModsAndDLC {
@@ -705,6 +716,7 @@ class CfgFunctions
             class equipRebel {};
             class FIAinit {};
             class FIAskillAdd {};
+            class findHQVehicleSlot {};
             class garrisonAdd {};
             class garrisonDialog {};
             class getHCSquadPrice {};

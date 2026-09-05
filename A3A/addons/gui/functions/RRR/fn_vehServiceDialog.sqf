@@ -31,7 +31,7 @@ FIX_LINE_NUMBERS()
 
 #define BLACKLISTED_MAGS ["FakeWeapon", "FakeMagazine"]
 #define BLACKLISTED_SIMS ["laserDesignate"]
-#define PRICE_MUL 0.2
+#define PRICE_MUL A3A_REARM_PRICE_MUL       // shared with A3A_fnc_garrisonResupplyApply, see script_macros.hpp
 
 params[
     ["_mode","onLoad"],

@@ -33,7 +33,8 @@ Trace_1("Called with params %1", _this);
 
 if (_client < 0) exitWith { Error("No client to send garrison counts to") };
 
-// [marker, troops, vehicles, statics] per rebel site. Cities are covered by the Towns tab.
+// [marker, troops, vehicles, statics, ammoPct, resupplying] per rebel site. Cities are covered by the Towns tab.
+// ammoPct is the mean fill of the static weapons in percent, -1 when the site has none.
 private _counts = [];
 {
     private _marker = _x;
@@ -43,7 +44,17 @@ private _counts = [];
 
     private _vehicles = _garrison getOrDefault ["vehicles", []];
     private _statics = { (_x # 0) isKindOf "StaticWeapon" } count _vehicles;
-    _counts pushBack [_marker, count (_garrison getOrDefault ["troops", []]), (count _vehicles) - _statics, _statics];
+
+    private _ammoPct = -1;
+    private _staticsInfo = [_marker, true] call A3A_fnc_garrisonServer_ammoInfo;
+    if (_staticsInfo isNotEqualTo []) then {
+        private _sum = 0;
+        { _sum = _sum + (_x # 2) } forEach _staticsInfo;
+        _ammoPct = round (100 * _sum / count _staticsInfo);
+    };
+    private _resupplying = _marker in A3A_garrisonResupplyActive;
+
+    _counts pushBack [_marker, count (_garrison getOrDefault ["troops", []]), (count _vehicles) - _statics, _statics, _ammoPct, _resupplying];
 } forEach A3A_garrison;
 
 ["countsReceived", [_counts]] remoteExecCall ["A3A_GUI_fnc_garrisonsTab", _client];

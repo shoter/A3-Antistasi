@@ -1053,6 +1053,24 @@
         <Turkish>İzleme Noktası Oluştur</Turkish>
         <Chinesesimp>建造观察哨</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_statics_header">
+        <Original>Static weapons: ammo and crew</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_static_crew_none">
+        <Original>Empty</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_static_crew_ai">
+        <Original>AI</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_static_crew_player">
+        <Original>Player</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_static_crew_despawned">
+        <Original>-</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_no_statics">
+        <Original>No static weapons in this garrison</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_hq_garrisons_dismiss_garrison_button">
         <Original>Dismiss Garrison</Original>
         <German>Entlasse Garnison</German>
@@ -3695,6 +3713,12 @@
         <Original>rebel forces</Original>
         <Polish>siły rebeliantów</Polish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_garrisonResupplied">
+        <Original>%1 resupplied by %3 (%4 ammo points, %5 weapons)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_garrisonResupplyLost">
+        <Original>Ammo truck %3 lost on its way to %1</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_chronicle_ev_siteCaptured">
         <Original>%1 captured from %3 by %2</Original>
         <Polish>%1 zdobyte od %3 przez: %2</Polish>
@@ -3884,6 +3908,39 @@
       <Key ID="STR_antistasi_dialogs_main_garrisons_manage_tooltip">
         <Original>Open the garrison management for the selected site</Original>
         <Polish>Otwórz zarządzanie garnizonem wybranego miejsca</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_ammo_label">
+        <Original>Ammo %</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_ammo_tooltip">
+        <Original>Average ammunition left in the static weapons of the site. Click to sort.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_resupplying">
+        <Original>Resupplying</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_button">
+        <Original>Resupply</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_tooltip">
+        <Original>Send the selected ammo truck from the garage to rearm the statics and crewed vehicles of this site. Costs the ammo points it spends and 1 HR for the driver.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_truck_tooltip">
+        <Original>Garaged ammo truck to send, with its ammo points</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_truck_entry">
+        <Original>%1 (%2 pts)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_no_site_tooltip">
+        <Original>Select a site to resupply</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_hq_tooltip">
+        <Original>HQ is rearmed at the garage, pick another site</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_active_tooltip">
+        <Original>An ammo truck is already on its way to this site</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_resupply_no_truck_tooltip">
+        <Original>No ammo truck with ammo points in the garage</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_garrisons_status_idle">
         <Original>Idle</Original>
