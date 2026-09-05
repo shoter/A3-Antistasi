@@ -914,6 +914,21 @@
         <Turkish>Yağmuru Durdur</Turkish>
         <Chinesesimp>停止下雨</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_tax_label">
+        <Original>Reward tax:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_tax_tooltip">
+        <Original>Share of every mission reward paid into the faction fund. Collected silently, the periodic income report shows the total.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_cut_label">
+        <Original>Commander cut:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_cut_tooltip">
+        <Original>Share of every mission reward paid to the commander personally. Whatever is left after the tax and the cut is split between the players who took part.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_reward_shares_guest_tooltip">
+        <Original>Only a member commander can change the reward split.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_hq_take_money_button">
         <Original>Take</Original>
         <German>Nehmen</German>
@@ -3561,6 +3576,234 @@
       <Key ID="STR_antistasi_dialogs_main_towns_upgrades_legend">
         <Original>Upgrade codes</Original>
         <Polish>Kody ulepszeń</Polish>
+      </Key>
+    </Container>
+    <Container name="dialog_main_chronicle">
+      <Key ID="STR_antistasi_dialogs_main_chronicle_tab_button">
+        <Original>Chronicle</Original>
+        <Polish>Kronika</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_all">
+        <Original>All</Original>
+        <Polish>Wszystko</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_sites">
+        <Original>Sites</Original>
+        <Polish>Obiekty</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_towns">
+        <Original>Towns</Original>
+        <Polish>Miasta</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_attacks">
+        <Original>Attacks</Original>
+        <Polish>Ataki</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_hq">
+        <Original>HQ</Original>
+        <Polish>HQ</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_players">
+        <Original>Players</Original>
+        <Polish>Gracze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_campaign">
+        <Original>Campaign</Original>
+        <Polish>Kampania</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_filter_tooltip">
+        <Original>Show only this kind of event</Original>
+        <Polish>Pokaż tylko ten rodzaj wydarzeń</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_show_on_map_button">
+        <Original>Show on map</Original>
+        <Polish>Pokaż na mapie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ago">
+        <Original>%1 ago</Original>
+        <Polish>%1 temu</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_just_now">
+        <Original>Just now</Original>
+        <Polish>Przed chwilą</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_loading">
+        <Original>Fetching the chronicle from the server...</Original>
+        <Polish>Pobieranie kroniki z serwera...</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_empty">
+        <Original>Nothing has happened yet</Original>
+        <Polish>Nic się jeszcze nie wydarzyło</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_no_actor">
+        <Original>rebel forces</Original>
+        <Polish>siły rebeliantów</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_siteCaptured">
+        <Original>%1 captured from %3 by %2</Original>
+        <Polish>%1 zdobyte od %3 przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_siteLost">
+        <Original>%1 lost to %3</Original>
+        <Polish>%1 utracone na rzecz %3</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_siteChangedHands">
+        <Original>%1 taken by %3 from %4</Original>
+        <Polish>%1 przejęte przez %3 od %4</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_townCaptured">
+        <Original>%1 sided with the rebels, taken from %3 by %2</Original>
+        <Polish>%1 przeszło na stronę rebeliantów, odebrane %3 przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_townLost">
+        <Original>%1 fell to %3</Original>
+        <Polish>%1 przeszło w ręce %3</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_townChanged">
+        <Original>%1 taken by %3 from %4</Original>
+        <Polish>%1 przejęte przez %3 od %4</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_townDestroyed">
+        <Original>%1 destroyed by %3</Original>
+        <Polish>%1 zniszczone przez %3</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_attackStarted">
+        <Original>%3 attacking %1 from %4</Original>
+        <Polish>%3 atakuje %1 z %4</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_counterattackStarted">
+        <Original>%3 counterattacking %1 from %4</Original>
+        <Polish>%3 kontratakuje %1 z %4</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_attackRepelled">
+        <Original>Attack by %3 on %1 repelled by %2</Original>
+        <Polish>Atak %3 na %1 odparty przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_enemyAttackStarted">
+        <Original>%3 attacking %4 at %1 from %5</Original>
+        <Polish>%3 atakuje %4 w %1 z %5</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_punishmentStarted">
+        <Original>%3 punishing %1 from %4</Original>
+        <Polish>%3 przeprowadza karną ekspedycję na %1 z %4</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_punishmentRepelled">
+        <Original>Punishment of %1 by %3 repelled by %2</Original>
+        <Polish>Karna ekspedycja %3 na %1 odparta przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_hqAttacked">
+        <Original>HQ at %1 attacked by %3 from %4</Original>
+        <Polish>HQ w %1 zaatakowane przez %3 z %4</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_hqDefended">
+        <Original>HQ at %1 defended against %3 by %2</Original>
+        <Polish>HQ w %1 obronione przed %3 przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_petrosKilled">
+        <Original>Petros killed at %1 by %3</Original>
+        <Polish>Petros zabity w %1 przez %3</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_hqMoved">
+        <Original>HQ moved to %1 by %2</Original>
+        <Polish>HQ przeniesione do %1 przez: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_playerPromoted">
+        <Original>%2 promoted to %3</Original>
+        <Polish>%2 awansuje na stopień %3</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_warLevelChanged">
+        <Original>War level changed from %3 to %4</Original>
+        <Polish>Poziom wojny zmienił się z %3 na %4</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_campaignWon">
+        <Original>The rebellion has won the war</Original>
+        <Polish>Rebelia wygrała wojnę</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_campaignLost">
+        <Original>The rebellion has been crushed</Original>
+        <Polish>Rebelia została rozbita</Polish>
+      </Key>
+    </Container>
+    <Container name="dialog_main_garrisons">
+      <Key ID="STR_antistasi_dialogs_main_garrisons_tab_button">
+        <Original>Garrisons</Original>
+        <Polish>Garnizony</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_tab_disabled_tooltip">
+        <Original>Only the commander can access the garrisons tab</Original>
+        <Polish>Tylko dowódca ma dostęp do zakładki garnizonów</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_label">
+        <Original>Type</Original>
+        <Polish>Typ</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_troops_label">
+        <Original>Troops</Original>
+        <Polish>Żołnierze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_vehicles_label">
+        <Original>Vehicles</Original>
+        <Polish>Pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_statics_label">
+        <Original>Statics</Original>
+        <Polish>Stacjonarne</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_label">
+        <Original>Status</Original>
+        <Polish>Status</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_manage_button">
+        <Original>Manage</Original>
+        <Polish>Zarządzaj</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_manage_tooltip">
+        <Original>Open the garrison management for the selected site</Original>
+        <Polish>Otwórz zarządzanie garnizonem wybranego miejsca</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_idle">
+        <Original>Idle</Original>
+        <Polish>Nieaktywny</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_spawned">
+        <Original>Spawned</Original>
+        <Polish>Aktywny</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_under_attack">
+        <Original>Under attack</Original>
+        <Polish>Atakowany</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_hq">
+        <Original>HQ</Original>
+        <Polish>Kwatera główna</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_airbase">
+        <Original>Airbase</Original>
+        <Polish>Baza lotnicza</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_outpost">
+        <Original>Outpost</Original>
+        <Polish>Posterunek</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_seaport">
+        <Original>Seaport</Original>
+        <Polish>Port</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_factory">
+        <Original>Factory</Original>
+        <Polish>Fabryka</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_resource">
+        <Original>Resource</Original>
+        <Polish>Zasoby</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_roadblock">
+        <Original>Roadblock</Original>
+        <Polish>Blokada drogowa</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_watchpost">
+        <Original>Watchpost</Original>
+        <Polish>Punkt obserwacyjny</Polish>
       </Key>
     </Container>
     <Container name="dialog_mission_request">

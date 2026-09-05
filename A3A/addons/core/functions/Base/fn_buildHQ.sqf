@@ -60,6 +60,8 @@ respawnTeamPlayer setMarkerPos _newPos;
 posHQ = _newPos; publicVariable "posHQ";
 "Synd_HQ" setMarkerPos _newPos;
 
+["hqMoved", _newPos, [], if (isNull theBoss) then { "" } else { name theBoss }] call A3A_fnc_campaignLogAdd;
+
 chopForest = false; publicVariable "chopForest";
 
 [_newPos] call A3A_fnc_relocateHQObjects;

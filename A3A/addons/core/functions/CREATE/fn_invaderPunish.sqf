@@ -29,6 +29,7 @@ private _nameDest = [_mrkDest] call A3A_fnc_localizar;
 private _taskId = "invaderPunish" + str A3A_taskCount;
 [[teamPlayer,civilian,Occupants],_taskId,[format [localize "STR_A3A_fn_base_invaderPunish_long",_nameDest,FactionGet(inv,"name")],format [localize "STR_A3A_fn_base_invaderPunish_title",FactionGet(inv,"name")],_mrkDest],_posDest,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
 [_taskId, "invaderPunish", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
+["punishmentStarted", _mrkDest, [Invaders, _mrkOrigin]] call A3A_fnc_campaignLogAdd;
 
 
 if (isNil "_delay") then {
@@ -125,6 +126,7 @@ private _fnc_adjustNearCities = {
 if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time > _missionExpireTime)) then {
     Info_1("Rebels defeated a punishment attack against %1", _mrkDest);
     [_taskId, "invaderPunish", "SUCCEEDED"] call A3A_fnc_taskSetState;
+    ["punishmentRepelled", _mrkDest, [Invaders], _posDest] call A3A_fnc_campaignLogAdd;
     [_posDest, 20, 3000] call _fnc_adjustNearCities;
 
     A3A_punishmentDefBuff = A3A_punishmentDefBuff + 1;
@@ -141,6 +143,7 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
 
     destroyedSites = destroyedSites + [_mrkDest];
     publicVariable "destroyedSites";
+    ["townDestroyed", _mrkDest, [Invaders]] call A3A_fnc_campaignLogAdd;
     private _mineTypes = A3A_faction_inv get "minefieldAPERS";
     for "_i" from 1 to 60 do {
         private _mineX = createMine [selectRandom _mineTypes,_posDest,[],_size];

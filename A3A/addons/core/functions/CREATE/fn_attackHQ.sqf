@@ -25,6 +25,7 @@ forcedSpawn pushBack "Synd_HQ"; publicVariable "forcedSpawn";
 private _taskId = "DEF_HQ" + str A3A_taskCount;
 [[teamPlayer,civilian],_taskId,[localize "STR_A3A_fn_base_attackHQ_defendLong", localize "STR_A3A_fn_base_attackHQ_defendTitle",respawnTeamPlayer],_targPos,true,10,true,"Defend",true] call BIS_fnc_taskCreate;
 [_taskId, "DEF_HQ", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
+["hqAttacked", _targPos, [_side, _airbase]] call A3A_fnc_campaignLogAdd;
 
 
 // Send in a UAV. Add half a vehicle if they're unavailable
@@ -89,6 +90,7 @@ if (!alive _origPetros) then {
     // Other results handled by petros death code
 } else {
     [_taskId, "DEF_HQ", "SUCCEEDED"] call A3A_fnc_taskSetState;
+    ["hqDefended", _targPos, [_side], _targPos] call A3A_fnc_campaignLogAdd;
     if (_targPos distance markerPos respawnTeamPlayer < 500) then {			// assume we fought it out?
         [_side, 10, 60] remoteExec ["A3A_fnc_addAggression",2];
         // This is bullshit really

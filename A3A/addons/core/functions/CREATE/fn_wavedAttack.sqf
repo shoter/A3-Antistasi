@@ -40,6 +40,13 @@ if (_targside == teamPlayer) then {
     ["RadioIntercepted", [_text]] remoteExec ["BIS_fnc_showNotification", 0];
 };
 
+// Chronicle entry
+if (_targside == teamPlayer) then {
+    [["attackStarted", "counterattackStarted"] select _isCounterattack, _mrkDest, [_side, _mrkOrigin]] call A3A_fnc_campaignLogAdd;
+} else {
+    ["enemyAttackStarted", _mrkDest, [_side, _targside, _mrkOrigin]] call A3A_fnc_campaignLogAdd;
+};
+
 // Generate reveal value for the attack wave notifications
 private _reveal = call {
     if (_targside != teamPlayer) exitWith {0};
@@ -184,6 +191,7 @@ if (_victory) then {
     if (_targSide != teamPlayer) exitWith {};
     [_taskId, "rebelAttack", "SUCCEEDED"] call A3A_fnc_taskSetState;
     [50, false, markerPos _mrkDest, 500] call A3A_tasks_fnc_rewardPlayers;
+    ["attackRepelled", _mrkDest, [_side], markerPos _mrkDest] call A3A_fnc_campaignLogAdd;
 };
 [_taskId, "rebelAttack", 30] spawn A3A_fnc_taskDelete;
 

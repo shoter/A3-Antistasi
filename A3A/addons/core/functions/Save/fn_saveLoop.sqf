@@ -49,6 +49,7 @@ Debug_1("Saving params: %1", _savedParams);
 ["destroyedSites", destroyedSites] call A3A_fnc_setStatVariable;
 ["chopForest", chopForest] call A3A_fnc_setStatVariable;
 ["nextTick", nextTick - time] call A3A_fnc_setStatVariable;
+["rewardShares", [A3A_rewardTaxPercent, A3A_rewardCommanderPercent]] call A3A_fnc_setStatVariable;
 if (!isNull A3A_deployedFlag) then {
 	["deployedFlag", [getPosATL A3A_deployedFlag]] call A3A_fnc_setStatVariable;
 };
@@ -58,6 +59,7 @@ if (!isNull A3A_deployedFlag) then {
 ([] call A3A_fnc_townUpgradeSaveData) params ["_cityInvestSave", "_townKitsSave"];
 ["cityInvest", _cityInvestSave] call A3A_fnc_setStatVariable;
 ["townKits", _townKitsSave] call A3A_fnc_setStatVariable;
+["campaignLog", A3A_campaignLog] call A3A_fnc_setStatVariable;
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
 ["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;
 ["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;

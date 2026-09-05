@@ -11,6 +11,7 @@ class CfgFunctions {
             class buildContextMenu {};
             class buyVehicleDialog {};
             class buyVehicleTabs {};
+            class chronicleTab {};
             class commanderTab {};
             class configColorToArray {};
             class constructTab {};
@@ -18,6 +19,7 @@ class CfgFunctions {
             class donateTab {};
             class fastTravelTab {};
             class fireMissionEH {};
+            class garrisonsTab {};
             class getGroupInfo {};
             class getGroupVehicle {};
             class getLocationMarkerName {};

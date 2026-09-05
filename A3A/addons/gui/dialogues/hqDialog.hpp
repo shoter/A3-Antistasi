@@ -467,7 +467,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     x = 70 * GRID_W;
                     y = 33 * GRID_H;
                     w = 90 * GRID_W;
-                    h = 28 * GRID_H;
+                    h = 38 * GRID_H;
 
                     class controls
                     {
@@ -606,6 +606,72 @@ class A3A_HqDialog : A3A_DefaultDialog
                             h = 9 * GRID_H;
                         };
 
+                        // Mission reward split: faction tax and commander cut, the rest goes to the players
+                        // Ranges, tooltips and enabled state are set in updateMainTab
+                        class RewardTaxLabel : A3A_Text
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_hq_reward_tax_label;
+                            tooltip = $STR_antistasi_dialogs_hq_reward_tax_tooltip;
+                            x = 0 * GRID_W;
+                            y = 29 * GRID_H;
+                            w = 30 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class RewardTaxSlider : A3A_Slider
+                        {
+                            idc = A3A_IDC_REWARDTAXSLIDER;
+                            x = 31 * GRID_W;
+                            y = 29 * GRID_H;
+                            w = 26 * GRID_W;
+                            h = 4 * GRID_H;
+                            onSliderPosChanged = "[""rewardSharesChanged""] spawn A3A_GUI_fnc_hqDialog";
+                        };
+
+                        class RewardTaxText : A3A_Text
+                        {
+                            idc = A3A_IDC_REWARDTAXTEXT;
+                            style = ST_RIGHT;
+                            text = "0%";
+                            x = 60 * GRID_W;
+                            y = 29 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class RewardCutLabel : A3A_Text
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_hq_reward_cut_label;
+                            tooltip = $STR_antistasi_dialogs_hq_reward_cut_tooltip;
+                            x = 0 * GRID_W;
+                            y = 34 * GRID_H;
+                            w = 30 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class RewardCutSlider : A3A_Slider
+                        {
+                            idc = A3A_IDC_REWARDCUTSLIDER;
+                            x = 31 * GRID_W;
+                            y = 34 * GRID_H;
+                            w = 26 * GRID_W;
+                            h = 4 * GRID_H;
+                            onSliderPosChanged = "[""rewardSharesChanged""] spawn A3A_GUI_fnc_hqDialog";
+                        };
+
+                        class RewardCutText : A3A_Text
+                        {
+                            idc = A3A_IDC_REWARDCUTTEXT;
+                            style = ST_RIGHT;
+                            text = "20%";
+                            x = 60 * GRID_W;
+                            y = 34 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
                     };
                 };
 
@@ -616,7 +682,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                 {
                     idc = -1;
                     x = 70 * GRID_W;
-                    y = 65 * GRID_H;
+                    y = 74 * GRID_H;
                     w = 90 * GRID_W;
                     h = 26 * GRID_H;
 

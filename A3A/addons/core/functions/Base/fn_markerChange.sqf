@@ -22,6 +22,13 @@ Info_3("Changing side of %1 from %2 to %3", _markerX, _loser, _winner);
 
 sidesX setVariable [_markerX,_winner,true];
 
+// Chronicle entry, before the war tier check so a tier change follows the capture
+call {
+	if (_winner == teamPlayer) exitWith { ["siteCaptured", _markerX, [_loser], _positionX] call A3A_fnc_campaignLogAdd };
+	if (_loser == teamPlayer) exitWith { ["siteLost", _markerX, [_winner]] call A3A_fnc_campaignLogAdd };
+	["siteChangedHands", _markerX, [_winner, _loser]] call A3A_fnc_campaignLogAdd;
+};
+
 // Do the garrison update
 [_markerX, _winner, _loser] call A3A_fnc_garrisonServer_changeSide;
 

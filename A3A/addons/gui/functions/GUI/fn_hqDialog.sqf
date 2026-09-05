@@ -347,6 +347,33 @@ switch (_mode) do
         _factionMoneySlider sliderSetSpeed [100, 100];
         _factionMoneySlider sliderSetPosition 0;
 
+        // Mission reward split sliders, limits match A3A_fnc_setRewardShares
+        private _taxPercent = missionNamespace getVariable ["A3A_rewardTaxPercent", 0];
+        private _cutPercent = missionNamespace getVariable ["A3A_rewardCommanderPercent", 20];
+        private _rewardTaxSlider = _display displayCtrl A3A_IDC_REWARDTAXSLIDER;
+        private _rewardCutSlider = _display displayCtrl A3A_IDC_REWARDCUTSLIDER;
+        _rewardTaxSlider sliderSetRange [0, 50];
+        _rewardTaxSlider sliderSetSpeed [1, 5];
+        _rewardTaxSlider sliderSetPosition _taxPercent;
+        _rewardCutSlider sliderSetRange [0, 20];
+        _rewardCutSlider sliderSetSpeed [1, 5];
+        _rewardCutSlider sliderSetPosition _cutPercent;
+        (_display displayCtrl A3A_IDC_REWARDTAXTEXT) ctrlSetText ((str _taxPercent) + "%");
+        (_display displayCtrl A3A_IDC_REWARDCUTTEXT) ctrlSetText ((str _cutPercent) + "%");
+        _display setVariable ["rewardSharesSent", [_taxPercent, _cutPercent]];
+
+        // Guest commanders can't change the split while membership is enabled
+        private _canSetShares = [player] call A3A_fnc_isMember;
+        _rewardTaxSlider ctrlEnable _canSetShares;
+        _rewardCutSlider ctrlEnable _canSetShares;
+        if (_canSetShares) then {
+            _rewardTaxSlider ctrlSetTooltip localize "STR_antistasi_dialogs_hq_reward_tax_tooltip";
+            _rewardCutSlider ctrlSetTooltip localize "STR_antistasi_dialogs_hq_reward_cut_tooltip";
+        } else {
+            _rewardTaxSlider ctrlSetTooltip localize "STR_antistasi_dialogs_hq_reward_shares_guest_tooltip";
+            _rewardCutSlider ctrlSetTooltip localize "STR_antistasi_dialogs_hq_reward_shares_guest_tooltip";
+        };
+
     };
 
     case ("updateGarrisonTab"):
@@ -373,13 +400,15 @@ switch (_mode) do
         // Get selected marker
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
 
-        // If no marker is selected (as in you just opened the garrison tab),
-        // simulate a map click event to select HQ
+        // If no marker is selected (as in you just opened the garrison tab), simulate a map click event
+        // to select the site requested by the Garrisons tab "Manage" button, or HQ otherwise
         if (_selectedMarker isEqualTo "") exitWith
         {
-            Trace("No marker selected, selecting HQ");
-            _hqMapPos = _garrisonMap ctrlMapWorldToScreen (getMarkerPos "Synd_HQ");
-            ["garrisonMapClicked", [_hqMapPos]] call FUNC(hqDialog);
+            private _startMarker = player getVariable ["A3A_garrisonMenuMarker", "Synd_HQ"];
+            player setVariable ["A3A_garrisonMenuMarker", nil];
+            Trace_1("No marker selected, selecting %1", _startMarker);
+            private _startMapPos = _garrisonMap ctrlMapWorldToScreen (getMarkerPos _startMarker);
+            ["garrisonMapClicked", [_startMapPos]] call FUNC(hqDialog);
         };
 
         private _garrison = _garrisonMap getVariable "currentGarrisonData";
@@ -643,6 +672,21 @@ switch (_mode) do
         private _factionMoneyEditBoxValue = floor parseNumber ctrlText _factionMoneyEditBox;
         [_factionMoneyEditBoxValue] call FUNCMAIN(theBossSteal);
         ["updateMainTab"] call FUNC(hqDialog);
+    };
+
+    case ("rewardSharesChanged"):
+    {
+        private _rewardTaxSlider = _display displayCtrl A3A_IDC_REWARDTAXSLIDER;
+        private _rewardCutSlider = _display displayCtrl A3A_IDC_REWARDCUTSLIDER;
+        private _taxPercent = round sliderPosition _rewardTaxSlider;
+        private _cutPercent = round sliderPosition _rewardCutSlider;
+        (_display displayCtrl A3A_IDC_REWARDTAXTEXT) ctrlSetText ((str _taxPercent) + "%");
+        (_display displayCtrl A3A_IDC_REWARDCUTTEXT) ctrlSetText ((str _cutPercent) + "%");
+
+        // Dragging fires for every sub-percent move, only tell the server about whole-percent changes
+        if (_display getVariable ["rewardSharesSent", []] isEqualTo [_taxPercent, _cutPercent]) exitWith {};
+        _display setVariable ["rewardSharesSent", [_taxPercent, _cutPercent]];
+        [player, _taxPercent, _cutPercent] remoteExecCall ["A3A_fnc_setRewardShares", 2];
     };
 
     case ("garrisonDataSent"):

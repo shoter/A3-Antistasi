@@ -1,6 +1,10 @@
 name: Publish to Main Release on Steam
 
+# The Workshop change note is the top entry of CHANGELOG-unstable.md, which every push has to update (see CLAUDE.md).
+
 on:
+  push:
+    branches: [unstable]
   workflow_dispatch:
 
 jobs:
@@ -8,9 +12,17 @@ jobs:
   build:
     runs-on: windows-latest
     timeout-minutes: 5
+    outputs:
+      changelog: ${{ steps.changelog.outputs.bbcode }}
     steps:
     - name: Checkout the code
       uses: actions/checkout@v3.3.0
+
+    - name: Render the changelog entry for this push
+      id: changelog
+      uses: ./.github/actions/changelog
+      with:
+        before: ${{ github.event.before }}
 
     - name: Increment version locally
       run: chmod +x ./tools/incrementVersion.js &&
@@ -36,13 +48,18 @@ jobs:
         name: A3A
         path: A3A
 
+    # Logs in with a cached Steam session (config.vdf) so Steam Guard does not block the runner.
+    # To (re)generate STEAM_CONFIG_VDF: run `steamcmd +login <user> <pass> +quit` locally, enter the
+    # Steam Guard code, then paste the contents of steamcmd's config/config.vdf into the secret.
     - name: Publish to Steam Workshop
-      uses: arma-actions/workshop-upload@v1.0.2
+      uses: m00nl1ght-dev/steam-workshop-deploy@v4
       with:
-        appId: '107410'      # default
-        itemId: ${{ secrets.WORKSHOPID }} # https://steamcommunity.com/sharedfiles/filedetails/?id=[...]]
-        contentPath: 'A3A'
-        changelog: '[url=https://github.com/official-antistasi-community/A3-Antistasi/commit/${{github.sha}}]Update from branch: ${{github.REF_NAME}}[/url].'
-      env:
-        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-        STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
+        username: ${{ secrets.STEAM_USERNAME }}
+        configVdf: ${{ secrets.STEAM_CONFIG_VDF }}
+        appId: '107410'
+        publishedFileId: ${{ secrets.WORKSHOPID }} # https://steamcommunity.com/sharedfiles/filedetails/?id=[...]
+        path: 'A3A'
+        changeNote: |
+          ${{ needs.build.outputs.changelog }}
+
+          [url=${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}]Build of branch ${{ github.ref_name }} at ${{ github.sha }}[/url]

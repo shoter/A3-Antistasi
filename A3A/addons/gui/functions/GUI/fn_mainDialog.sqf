@@ -49,6 +49,10 @@ switch (_mode) do
             private _commanderTabButton = _display displayCtrl A3A_IDC_COMMANDERTABBUTTON;
             _commanderTabButton ctrlEnable false;
             _commanderTabButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_tab_disabled_tooltip";
+
+            private _garrisonsTabButton = _display displayCtrl A3A_IDC_GARRISONSTABBUTTON;
+            _garrisonsTabButton ctrlEnable false;
+            _garrisonsTabButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_garrisons_tab_disabled_tooltip";
         };
 
         if !([] call FUNCMAIN(isLocalAdmin)) then {
@@ -244,6 +248,19 @@ switch (_mode) do
                 // No permission check needed
                 _selectedTabIDC = A3A_IDC_TOWNSTAB;
             };
+
+            case ("garrisons"):
+            {
+                if (player == theBoss) then {
+                    _selectedTabIDC = A3A_IDC_GARRISONSTAB;
+                };
+            };
+
+            case ("chronicle"):
+            {
+                // No permission check needed
+                _selectedTabIDC = A3A_IDC_CHRONICLETAB;
+            };
         };
 
         // Log attempt at accessing tab without permission
@@ -266,7 +283,9 @@ switch (_mode) do
             A3A_IDC_AIRSUPPORTTAB,
             A3A_IDC_PLAYERMANAGEMENTTAB,
             A3A_IDC_WARSTATUSTAB,
-            A3A_IDC_TOWNSTAB
+            A3A_IDC_TOWNSTAB,
+            A3A_IDC_GARRISONSTAB,
+            A3A_IDC_CHRONICLETAB
         ];
 
         // Hide all tabs
@@ -355,6 +374,16 @@ switch (_mode) do
             case ("towns"):
             {
                 ["update"] call FUNC(townsTab);
+            };
+
+            case ("garrisons"):
+            {
+                ["update"] call FUNC(garrisonsTab);
+            };
+
+            case ("chronicle"):
+            {
+                ["update"] call FUNC(chronicleTab);
             };
         };
     };

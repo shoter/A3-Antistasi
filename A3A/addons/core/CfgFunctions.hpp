@@ -125,6 +125,8 @@ class CfgFunctions
             class blackout {};
             class buildHQ {};
             class calculateAggression {};
+            class campaignLogAdd {};
+            class campaignLogRequest {};
             class canManageAI {};
             class canMoveHQ {};
             class chooseAttack {};
@@ -386,6 +388,7 @@ class CfgFunctions
             class garrisonServer_remUnit {};
             class garrisonServer_remUnitType {};
             class garrisonServer_remVehicle {};
+            class garrisonServer_sendCounts {};
             class garrisonServer_sendData {};
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
@@ -523,6 +526,9 @@ class CfgFunctions
             class junkyardPrice {};
             class junkyardPurchase {};
             class junkyardRefresh {};
+            class scrapActionMonitor {};
+            class scrapCanStrip {};
+            class scrapStrip {};
         };
 
         class TownUpgrades {
@@ -576,6 +582,7 @@ class CfgFunctions
             class theBossToggleEligibility {};
             class theBossTransfer {};
             class theBossSteal {};
+            class setRewardShares {};
             class assignBossIfNone {};
             class tierCheck {};
             class unitTraits {};
