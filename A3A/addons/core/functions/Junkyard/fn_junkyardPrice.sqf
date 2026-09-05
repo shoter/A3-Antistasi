@@ -2,7 +2,7 @@
 Maintainer: Shoter
     Junkyard price of a wrecked vehicle. Tier table by faction category, with a fallback by vehicle kind
     for classes that belong to no faction in the conflict. Adds a small random jitter and rounds.
-    Tune the numbers in this file only.
+    Tune the numbers in this file only. Civilian tiers are priced at 3x and everything else at 2x of the original table.
 
 Arguments:
     <STRING> Vehicle class name
@@ -30,50 +30,50 @@ if !(isClass _cfg) exitWith { 0 };
 
 // [classes, base price]. First match wins, so civilian tiers come first.
 private _tiers = [
-    [Reb("vehiclesCivCar") + arrayCivVeh, 100],
-    [Reb("vehiclesCivBoat") + civBoats, 150],
-    [Reb("vehiclesCivTruck") + Reb("vehiclesCivSupply"), 200],
-    [Reb("vehiclesCivHeli"), 3500],
-    [Reb("vehiclesCivPlane"), 5000],
+    [Reb("vehiclesCivCar") + arrayCivVeh, 300],
+    [Reb("vehiclesCivBoat") + civBoats, 450],
+    [Reb("vehiclesCivTruck") + Reb("vehiclesCivSupply"), 600],
+    [Reb("vehiclesCivHeli"), 10500],
+    [Reb("vehiclesCivPlane"), 15000],
 
-    [Reb("vehiclesBasic"), 200],
-    [Reb("vehiclesLightUnarmed"), 400],
-    [Reb("vehiclesTruck"), 600],
-    [Reb("vehiclesBoat"), 800],
-    [Reb("vehiclesMedical"), 1500],
-    [Reb("vehiclesLightArmed") + Reb("vehiclesAT"), 2500],
-    [Reb("vehiclesAA"), 3000],
-    [Reb("vehiclesPlane"), 5000],
+    [Reb("vehiclesBasic"), 400],
+    [Reb("vehiclesLightUnarmed"), 800],
+    [Reb("vehiclesTruck"), 1200],
+    [Reb("vehiclesBoat"), 1600],
+    [Reb("vehiclesMedical"), 3000],
+    [Reb("vehiclesLightArmed") + Reb("vehiclesAT"), 5000],
+    [Reb("vehiclesAA"), 6000],
+    [Reb("vehiclesPlane"), 10000],
 
-    [OccAndInv("vehiclesPolice") + OccAndInv("vehiclesMilitiaCars") + OccAndInv("vehiclesBasic"), 300],
-    [OccAndInv("vehiclesLightUnarmed"), 400],
-    [OccAndInv("vehiclesMilitiaTrucks"), 500],
-    [OccAndInv("vehiclesTrucks"), 600],
-    [OccAndInv("vehiclesCargoTrucks") + OccAndInv("vehiclesTransportBoats"), 800],
-    [OccAndInv("vehiclesAmmoTrucks") + OccAndInv("vehiclesRepairTrucks") + OccAndInv("vehiclesFuelTrucks") + OccAndInv("vehiclesMedical"), 1500],
-    [OccAndInv("vehiclesMilitiaLightArmed"), 2000],
-    [OccAndInv("vehiclesLightArmed"), 2500],
-    [OccAndInv("vehiclesGunBoats"), 3000],
+    [OccAndInv("vehiclesPolice") + OccAndInv("vehiclesMilitiaCars") + OccAndInv("vehiclesBasic"), 600],
+    [OccAndInv("vehiclesLightUnarmed"), 800],
+    [OccAndInv("vehiclesMilitiaTrucks"), 1000],
+    [OccAndInv("vehiclesTrucks"), 1200],
+    [OccAndInv("vehiclesCargoTrucks") + OccAndInv("vehiclesTransportBoats"), 1600],
+    [OccAndInv("vehiclesAmmoTrucks") + OccAndInv("vehiclesRepairTrucks") + OccAndInv("vehiclesFuelTrucks") + OccAndInv("vehiclesMedical"), 3000],
+    [OccAndInv("vehiclesMilitiaLightArmed"), 4000],
+    [OccAndInv("vehiclesLightArmed"), 5000],
+    [OccAndInv("vehiclesGunBoats"), 6000],
 
-    // Military ground vehicles: up to 10000 after jitter, except tanks, artillery and heavy tanks which go up to 20000
-    [OccAndInv("vehiclesLightAPCs"), 2500],
-    [OccAndInv("vehiclesAPCs") + OccAndInv("vehiclesAmphibious") + OccAndInv("vehiclesRadar"), 4000],
-    [OccAndInv("vehiclesIFVs"), 5500],
-    [OccAndInv("vehiclesLightTanks"), 6000],
-    [OccAndInv("vehiclesAA"), 7000],
-    [OccAndInv("vehiclesSAM"), 8500],
-    [OccAndInv("vehiclesTanks") + OccAndInv("vehiclesArtillery"), 12000],
-    [OccAndInv("vehiclesHeavyTanks"), 17000],
+    // Military ground vehicles: up to 20000 after jitter, except tanks, artillery and heavy tanks which go up to 40000
+    [OccAndInv("vehiclesLightAPCs"), 5000],
+    [OccAndInv("vehiclesAPCs") + OccAndInv("vehiclesAmphibious") + OccAndInv("vehiclesRadar"), 8000],
+    [OccAndInv("vehiclesIFVs"), 11000],
+    [OccAndInv("vehiclesLightTanks"), 12000],
+    [OccAndInv("vehiclesAA"), 14000],
+    [OccAndInv("vehiclesSAM"), 17000],
+    [OccAndInv("vehiclesTanks") + OccAndInv("vehiclesArtillery"), 24000],
+    [OccAndInv("vehiclesHeavyTanks"), 34000],
 
     // Air
-    [OccAndInv("vehiclesHelisLight"), 8000],
-    [OccAndInv("vehiclesHelisTransport"), 15000],
-    [OccAndInv("vehiclesAirPatrol"), 20000],
-    [OccAndInv("vehiclesHelisLightAttack"), 25000],
-    [OccAndInv("vehiclesPlanesTransport"), 30000],
-    [OccAndInv("vehiclesHelisAttack"), 55000],
-    [OccAndInv("vehiclesPlanesCAS"), 80000],
-    [OccAndInv("vehiclesPlanesAA"), 100000]
+    [OccAndInv("vehiclesHelisLight"), 16000],
+    [OccAndInv("vehiclesHelisTransport"), 30000],
+    [OccAndInv("vehiclesAirPatrol"), 40000],
+    [OccAndInv("vehiclesHelisLightAttack"), 50000],
+    [OccAndInv("vehiclesPlanesTransport"), 60000],
+    [OccAndInv("vehiclesHelisAttack"), 110000],
+    [OccAndInv("vehiclesPlanesCAS"), 160000],
+    [OccAndInv("vehiclesPlanesAA"), 200000]
 ];
 
 private _base = -1;
@@ -85,14 +85,14 @@ private _base = -1;
 if (_base == -1) then {
     private _armed = ([_class] call A3A_fnc_getVehicleWeapons) isNotEqualTo [];
     _base = call {
-        if (getNumber (_cfg >> "isUav") > 0) exitWith { 5000 };
-        if (_class isKindOf "Tank") exitWith { 12000 };
-        if (_class isKindOf "Wheeled_APC_F" or _class isKindOf "Tracked_APC") exitWith { 4500 };
-        if (_class isKindOf "Helicopter") exitWith { [10000, 40000] select _armed };
-        if (_class isKindOf "Plane") exitWith { [30000, 80000] select _armed };
-        if (_class isKindOf "Ship") exitWith { [800, 3000] select _armed };
-        if (_class isKindOf "Car") exitWith { [500, 2500] select _armed };
-        1000;
+        if (getNumber (_cfg >> "isUav") > 0) exitWith { 10000 };
+        if (_class isKindOf "Tank") exitWith { 24000 };
+        if (_class isKindOf "Wheeled_APC_F" or _class isKindOf "Tracked_APC") exitWith { 9000 };
+        if (_class isKindOf "Helicopter") exitWith { [20000, 80000] select _armed };
+        if (_class isKindOf "Plane") exitWith { [60000, 160000] select _armed };
+        if (_class isKindOf "Ship") exitWith { [1600, 6000] select _armed };
+        if (_class isKindOf "Car") exitWith { [1000, 5000] select _armed };
+        2000;
     };
 };
 

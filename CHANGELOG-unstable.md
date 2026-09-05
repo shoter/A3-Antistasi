@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Junkyard prices raised
+
+### Changed
+- Junkyard prices went up: civilian cars, trucks, boats, helicopters and planes cost 3x as much as before, every other vehicle 2x. Scrap payouts for stripped wrecks stay at 1-3% of the junkyard price, so they rise with it.
+
 ## 2026-09-05 - Player accuracy
 
 ### Added
