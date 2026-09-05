@@ -95,28 +95,28 @@ _lootBodies = {
     _unit setUnitLoadout (configFile >> "EmptyLoadout");
     _unit forceAddUniform _uniform;
 
-    //try to add items to container
+    //try to add items to container. Loot crates have no capacity limit, only unlocked items are left behind
     {
-        if ((_container canAdd _x) and !(_x in _unlocked)) then {
+        if !(_x in _unlocked) then {
             _container addWeaponCargoGlobal [_x,1];
         } else {(_leftovers#0) pushBack [_x, 1]};
     } forEach (_gear#0);
 
     {
         _x params ["_magType", "_ammoCount"];
-        if ((_container canAdd _magType) and !(_magType in _unlocked)) then {
+        if !(_magType in _unlocked) then {
             _container addMagazineAmmoCargo [_magType, 1, _ammoCount];
-        } else {(_leftovers#1) pushBack [_magType, 1, _ammoCount, 0]};                 // format compatible with lootFromContainer output        
+        } else {(_leftovers#1) pushBack [_magType, 1, _ammoCount, 0]};                 // format compatible with lootFromContainer output
     } forEach (_gear#1);
 
     {
-        if ((_container canAdd _x) and !(_x in _unlocked)) then {
+        if !(_x in _unlocked) then {
             _container addItemCargoGlobal [_x,1];
         } else {(_leftovers#2) pushBack [_x,1]};
     } forEach (_gear#2);
 
     {
-        if ((_container canAdd _x) and !(_x in _unlocked)) then {
+        if !(_x in _unlocked) then {
             _container addBackpackCargoGlobal [_x,1];
         } else {(_leftovers#3) pushBack [_x,1]};
     } forEach (_gear#3);

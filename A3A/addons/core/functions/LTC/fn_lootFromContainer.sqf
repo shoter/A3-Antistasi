@@ -33,6 +33,9 @@ if (isNil "_override") then {
     _container = _override;
 };
 
+// Vehicles respect their cargo capacity, loot crates (passed as _override by lootToCrate) do not
+private _checkCapacity = isNil "_override";
+
 if (isNil "_container") exitWith {
     [_titleStr, localize "STR_A3A_fn_ltc_lfc_noveh"] call A3A_fnc_customHint;
     [_target, clientOwner, true] remoteExecCall ["A3A_fnc_canTransfer", 2];
@@ -116,7 +119,7 @@ _transferCargo = {
         private _type = _weaponTypes#_i;
         private _count = _weaponCounts#_i;
 
-        if ((_container canAdd [_type, _count]) and !(_type in _unlocked)) then {
+        if ((!_checkCapacity or {_container canAdd [_type, _count]}) and !(_type in _unlocked)) then {
             _container addWeaponCargoGlobal [_type, _count];
         } else {
             (_leftover#0) pushBack [_type, _count];
@@ -129,7 +132,7 @@ _transferCargo = {
         private _count = floor (_ammo/_max);
         private _remainder = _ammo%_max;
 
-        if (_container canAdd [_type, _count] and !(_type in _unlocked)) then {
+        if ((!_checkCapacity or {_container canAdd [_type, _count]}) and !(_type in _unlocked)) then {
             _container addMagazineAmmoCargo [_type, _count, _max];
             if !(_remainder isEqualTo 0) then {
                 _container addMagazineAmmoCargo [_type, 1, _remainder];
@@ -144,7 +147,7 @@ _transferCargo = {
         private _type = _itemsTypes#_i;
         private _count = _itemsCounts#_i;
 
-        if ((_container canAdd [_type, _count]) and !(_type in _unlocked)) then {
+        if ((!_checkCapacity or {_container canAdd [_type, _count]}) and !(_type in _unlocked)) then {
             _container addItemCargoGlobal [_type, _count];
         } else {
             (_leftover#2) pushBack [_type, _count];
@@ -156,7 +159,7 @@ _transferCargo = {
         private _type = (_backpackTypes#_i) call BIS_fnc_basicBackpack;
         private _count = _backpackCounts#_i;
 
-        if ((_container canAdd [_type, _count]) and !(_type in _unlocked)) then {
+        if ((!_checkCapacity or {_container canAdd [_type, _count]}) and !(_type in _unlocked)) then {
             _container addBackpackCargoGlobal [_type, _count];
         } else {
             (_leftover#3) pushBack [_type, _count];
