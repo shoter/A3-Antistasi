@@ -386,6 +386,7 @@ class CfgFunctions
             class garrisonServer_remUnit {};
             class garrisonServer_remUnitType {};
             class garrisonServer_remVehicle {};
+            class garrisonServer_sendCounts {};
             class garrisonServer_sendData {};
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};

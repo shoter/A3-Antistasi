@@ -400,13 +400,15 @@ switch (_mode) do
         // Get selected marker
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
 
-        // If no marker is selected (as in you just opened the garrison tab),
-        // simulate a map click event to select HQ
+        // If no marker is selected (as in you just opened the garrison tab), simulate a map click event
+        // to select the site requested by the Garrisons tab "Manage" button, or HQ otherwise
         if (_selectedMarker isEqualTo "") exitWith
         {
-            Trace("No marker selected, selecting HQ");
-            _hqMapPos = _garrisonMap ctrlMapWorldToScreen (getMarkerPos "Synd_HQ");
-            ["garrisonMapClicked", [_hqMapPos]] call FUNC(hqDialog);
+            private _startMarker = player getVariable ["A3A_garrisonMenuMarker", "Synd_HQ"];
+            player setVariable ["A3A_garrisonMenuMarker", nil];
+            Trace_1("No marker selected, selecting %1", _startMarker);
+            private _startMapPos = _garrisonMap ctrlMapWorldToScreen (getMarkerPos _startMarker);
+            ["garrisonMapClicked", [_startMapPos]] call FUNC(hqDialog);
         };
 
         private _garrison = _garrisonMap getVariable "currentGarrisonData";

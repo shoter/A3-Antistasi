@@ -3562,6 +3562,88 @@
         <Polish>Kliknij, aby sortować według tej kolumny</Polish>
       </Key>
     </Container>
+    <Container name="dialog_main_garrisons">
+      <Key ID="STR_antistasi_dialogs_main_garrisons_tab_button">
+        <Original>Garrisons</Original>
+        <Polish>Garnizony</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_tab_disabled_tooltip">
+        <Original>Only the commander can access the garrisons tab</Original>
+        <Polish>Tylko dowódca ma dostęp do zakładki garnizonów</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_label">
+        <Original>Type</Original>
+        <Polish>Typ</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_troops_label">
+        <Original>Troops</Original>
+        <Polish>Żołnierze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_vehicles_label">
+        <Original>Vehicles</Original>
+        <Polish>Pojazdy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_statics_label">
+        <Original>Statics</Original>
+        <Polish>Stacjonarne</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_label">
+        <Original>Status</Original>
+        <Polish>Status</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_manage_button">
+        <Original>Manage</Original>
+        <Polish>Zarządzaj</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_manage_tooltip">
+        <Original>Open the garrison management for the selected site</Original>
+        <Polish>Otwórz zarządzanie garnizonem wybranego miejsca</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_idle">
+        <Original>Idle</Original>
+        <Polish>Nieaktywny</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_spawned">
+        <Original>Spawned</Original>
+        <Polish>Aktywny</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_status_under_attack">
+        <Original>Under attack</Original>
+        <Polish>Atakowany</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_hq">
+        <Original>HQ</Original>
+        <Polish>Kwatera główna</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_airbase">
+        <Original>Airbase</Original>
+        <Polish>Baza lotnicza</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_outpost">
+        <Original>Outpost</Original>
+        <Polish>Posterunek</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_seaport">
+        <Original>Seaport</Original>
+        <Polish>Port</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_factory">
+        <Original>Factory</Original>
+        <Polish>Fabryka</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_resource">
+        <Original>Resource</Original>
+        <Polish>Zasoby</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_roadblock">
+        <Original>Roadblock</Original>
+        <Polish>Blokada drogowa</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_type_watchpost">
+        <Original>Watchpost</Original>
+        <Polish>Punkt obserwacyjny</Polish>
+      </Key>
+    </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">
         <Original>Assassination</Original>
