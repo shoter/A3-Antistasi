@@ -137,6 +137,10 @@ class CfgFunctions
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};
+            class deployedFlagCreate {};
+            class deployedFlagPlace {};
+            class deployedFlagRemove {};
+            class deployedFlagTeleport {};
             class destroyCity {};
             class distance {};
             class distanceUnits {};

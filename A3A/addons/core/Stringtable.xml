@@ -2869,6 +2869,21 @@
         <Turkish>Hava araçlarını sadece insanlar kullanabilir.</Turkish>
         <Chinesesimp>只有人类才能驾驶飞行器</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_deployedFlag_title">
+        <Original>Rally Flag</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_deployedFlagCreate_marker">
+        <Original>Rally Flag</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_deployedFlagPlace_deployed">
+        <Original>The commander has deployed a rally flag. Rebels can teleport to it from the HQ flag.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_deployedFlagRemove_removed">
+        <Original>The rally flag has been removed.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_deployedFlagTeleport_noFlag">
+        <Original>There is no rally flag deployed.</Original>
+      </Key>
     </Container>
     <Container name="A3A_fn_dialogs">
       <Key ID="STR_A3A_fn_dialogs_clrforest_cleared">
@@ -4145,6 +4160,18 @@
       </Key>
       <Key ID="STR_A3A_fn_init_initClient_addAct_recruitSquad">
         <Original>Squad Recruitment</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initClient_addAct_teleportFlag">
+        <Original>Teleport to rally flag</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_init_installClientEH_deployFlag">
+        <Original>Deploy rally flag</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_init_installClientEH_removeFlag">
+        <Original>Remove rally flag</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_init_installClientEH_deployFlag_cooldown">
+        <Original>The rally flag was deployed recently. You can redeploy it in %1.</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_intel">

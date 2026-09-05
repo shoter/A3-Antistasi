@@ -36,7 +36,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys", "cityData"
+    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag"
 ];
 
 private _varName = _this select 0;
@@ -53,6 +53,12 @@ if (_varName in _specialVarLoads) then {
     };
     if (_varName == 'bombRuns') then {bombRuns = _varValue; publicVariable "bombRuns"};
     if (_varName == 'nextTick') then {nextTick = time + _varValue};
+    if (_varName == 'deployedFlag') then {
+        _varValue params ["_pos", ["_remaining", 0]];
+        [_pos] call A3A_fnc_deployedFlagCreate;
+        A3A_deployedFlagTime = serverTime - A3A_deployedFlagCooldown + _remaining;
+        publicVariable "A3A_deployedFlagTime";
+    };
     if (_varName == 'membersX') then {membersX = +_varValue; publicVariable "membersX"};
     if (_varName == 'mrkNATO') then {{sidesX setVariable [[_x] call _translateMarker,Occupants,true]} forEach _varValue;};
     if (_varName == 'mrkCSAT') then {{sidesX setVariable [[_x] call _translateMarker,Invaders,true]} forEach _varValue;};

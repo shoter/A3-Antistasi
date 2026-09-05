@@ -174,6 +174,7 @@ if (isServer) then {
 
 	["posHQ"] call A3A_fnc_getStatVariable;				// second call, this one after buildings compat
 	["nextTick"] call A3A_fnc_getStatVariable;
+	["deployedFlag"] call A3A_fnc_getStatVariable;
 
 	{_x setPosATL getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
 

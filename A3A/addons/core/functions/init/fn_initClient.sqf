@@ -249,6 +249,7 @@ boxX addAction [localize "STR_A3A_fn_init_initclient_addact_transfer", {[] spawn
 flagX allowDamage false;
 flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", { if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else { createDialog "A3A_RecruitDialog"; };},nil,0,false,true,"","!A3A_petrosMoving",4];
 flagx addAction [localize "STR_A3A_fn_init_initClient_addAct_recruitSquad", { createDialog "A3A_RecruitSquadDialog"; },nil,0,false,true,"","(_this == theBoss) and !A3A_petrosMoving",4];
+flagX addAction [localize "STR_A3A_fn_init_initClient_addAct_teleportFlag", { [] spawn A3A_fnc_deployedFlagTeleport; },nil,0,false,true,"","!isNull A3A_deployedFlag and (side group _this == teamPlayer) and (_this == _this getVariable ['owner',objNull]) and !A3A_petrosMoving",4];
 
 //Adds a light to the flag
 private _flagLight = "#lightpoint" createVehicle (getPos flagX);

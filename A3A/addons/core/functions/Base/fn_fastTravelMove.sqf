@@ -6,8 +6,10 @@ Maintainer: Tiny-DM
 
 Arguments:
     <GROUP or OBJECT> HC group or player to fast travel
-    <STRING> Marker to travel to
+    <STRING or POSITION> Marker or position to travel to
     <OBJECT> Player who ordered the fast travel
+    <BOOL> Skip the money cost [DEFAULT = false]
+    <SCALAR> Travel time divisor, e.g. 3 for three times faster [DEFAULT = 1]
 
 Scope: Local
 Environment: Scheduled
@@ -17,6 +19,7 @@ Dependencies:
 Example:
     [player,"Synd_HQ",player] spawn A3A_fnc_fastTravelMove; // Moves player back to HQ
     [_hcGroup,"airport",player] spawn A3A_fnc_fastTravelMove; // Moves given HC group to the first defined airport, regardless of side.
+    [player, getPosATL A3A_deployedFlag, player, true, 3] spawn A3A_fnc_fastTravelMove; // Moves player to the rally flag, free and three times faster
 
 License: APL-ND
 */
@@ -24,13 +27,15 @@ License: APL-ND
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_groupX", "_base", "_player"];
+params ["_groupX", "_base", "_player", ["_free", false, [false]], ["_timeDivisor", 1, [0]]];
 private _titleStr = localize "STR_A3A_fn_dialogs_ftradio_title";
 private _isHC = (_groupX isEqualType grpNull);
+private _destCentre = if (_base isEqualType "") then { markerPos _base } else { _base };
 
 private _ftUnit = [_player, leader _groupX] select _isHC;
-[_ftUnit, [vehicle _ftUnit], markerPos _base] call FUNCMAIN(calculateFastTravelCost) params ["_travelCost","_travelTime"];
-if !(_isHC) then {[-_travelCost] call A3A_fnc_resourcesPlayer};
+[_ftUnit, [vehicle _ftUnit], _destCentre] call FUNCMAIN(calculateFastTravelCost) params ["_travelCost","_travelTime"];
+_travelTime = (round (_travelTime / _timeDivisor)) max 1;
+if (!_isHC and !_free) then {[-_travelCost] call A3A_fnc_resourcesPlayer};
 
 if (!_isHC) then {
 	openMap false;
@@ -75,7 +80,7 @@ _ftUnits = _ftUnits select { _x == vehicle _x };
 
 
 // Do the actual teleport. Vehicles before units, try to place everything in proximity.
-private _destPos = markerPos _base getPos [30, random 360];
+private _destPos = _destCentre getPos [30, random 360];
 {
 	private _vehPlace = false;
 	if !(_x isKindOf "StaticWeapon") then {

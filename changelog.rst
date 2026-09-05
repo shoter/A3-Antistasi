@@ -14,7 +14,8 @@ Version 3.11.1
    * :issue:`3875` Added some custom, not so serious ACE medical items
    * :issue:`3902` Allowed rebel AI to mount and use aircraft
    * :issue:`3926` Added some buttons to the main menu and changed the main logo
-   
+   * Added a commander-deployable rally flag with a free, faster teleport from the HQ flag
+
 
 .. admonition:: Template updates
 

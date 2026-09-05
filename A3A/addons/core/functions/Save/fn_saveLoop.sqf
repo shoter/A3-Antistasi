@@ -49,6 +49,10 @@ Debug_1("Saving params: %1", _savedParams);
 ["destroyedSites", destroyedSites] call A3A_fnc_setStatVariable;
 ["chopForest", chopForest] call A3A_fnc_setStatVariable;
 ["nextTick", nextTick - time] call A3A_fnc_setStatVariable;
+if (!isNull A3A_deployedFlag) then {
+	// Position and remaining redeploy cooldown (serverTime restarts with the server, same approach as nextTick)
+	["deployedFlag", [getPosATL A3A_deployedFlag, (A3A_deployedFlagCooldown - (serverTime - A3A_deployedFlagTime)) max 0]] call A3A_fnc_setStatVariable;
+};
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
 ["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;
 ["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;

@@ -68,6 +68,11 @@ DECLARE_SERVER_VAR(chopForest, false);
 // Whether petros is currently being moved
 DECLARE_SERVER_VAR(A3A_petrosMoving, false);
 
+// Commander-deployed rally flag: object, serverTime of last deploy, redeploy cooldown (seconds)
+DECLARE_SERVER_VAR(A3A_deployedFlag, objNull);
+DECLARE_SERVER_VAR(A3A_deployedFlagTime, -999999);
+DECLARE_SERVER_VAR(A3A_deployedFlagCooldown, 30*60);
+
 DECLARE_SERVER_VAR(skillFIA, 1);																		//Initial skill level for FIA soldiers
 //Initial Occupant Aggression
 DECLARE_SERVER_VAR(aggressionOccupants, 0);
