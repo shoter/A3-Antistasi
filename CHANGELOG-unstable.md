@@ -1,8 +1,13 @@
 # Unstable changelog
 
 Every push to `unstable` adds one entry at the top of this file, newest first. The release workflow
-publishes the top entry as the body of the `unstable-latest` GitHub prerelease and the Steam workflow
+publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
+
+## 2026-09-05 - One GitHub release per build
+
+### Changed
+- Every push to `unstable` now publishes its own GitHub release, tagged `unstable-<version>` (for example `unstable-3.11.1.a243ee3`) with the asset `A3A-unstable-<version>.zip`, instead of rewriting the single rolling `unstable-latest` prerelease. Each build is a full release marked as the latest one, so the repository's `releases/latest` link always points at the newest build, and older builds stay downloadable from the Releases page. Builds queue behind each other instead of cancelling, so every pushed commit gets a release. The Steam Workshop upload is unchanged.
 
 ## 2026-09-05 - Air taxi to any spot
 

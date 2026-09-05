@@ -1,8 +1,10 @@
 name: Release unstable
 
-# Every push to `unstable` builds the mod and republishes the rolling "unstable-latest" prerelease on this fork.
-# The release always points at the latest commit and carries a single asset: A3A-unstable.zip
-# (a zip with a top-level @A3A folder ready to drop into an Arma 3 install).
+# Every push to `unstable` builds the mod and publishes it as a new GitHub release on this fork,
+# marked as the latest release, so <repo>/releases/latest always points at the newest build.
+# Each build gets its own tag `unstable-<version>` (for example unstable-3.11.1.a243ee3) on the pushed
+# commit and a single asset A3A-unstable-<version>.zip (a zip with a top-level @A3A folder ready to
+# drop into an Arma 3 install). Older builds stay downloadable from the Releases page.
 # The release notes are the top entry of CHANGELOG-unstable.md, which every push has to update (see CLAUDE.md).
 
 on:
@@ -13,14 +15,15 @@ on:
 permissions:
   contents: write
 
+# Builds queue behind each other instead of cancelling, so every pushed commit gets its release.
 concurrency:
   group: release-unstable
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: windows-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -38,7 +41,9 @@ jobs:
           }
           $v = $v.TrimEnd(".")
           "version=$v" >> $env:GITHUB_OUTPUT
-          Write-Host "Antistasi $v"
+          "tag=unstable-$v" >> $env:GITHUB_OUTPUT
+          "asset=A3A-unstable-$v.zip" >> $env:GITHUB_OUTPUT
+          Write-Host "Antistasi $v -> release tag unstable-$v, asset A3A-unstable-$v.zip"
 
       - name: Render the changelog entry for this push
         id: changelog
@@ -56,28 +61,25 @@ jobs:
         shell: pwsh
         run: |
           Rename-Item build\A3A "@A3A"
-          Compress-Archive -Path "build\@A3A" -DestinationPath A3A-unstable.zip -Force
+          Compress-Archive -Path "build\@A3A" -DestinationPath "${{ steps.version.outputs.asset }}" -Force
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: A3A-unstable
-          path: A3A-unstable.zip
+          path: ${{ steps.version.outputs.asset }}
 
-      - name: Move the unstable tag to this commit
-        shell: pwsh
-        run: |
-          git tag -f unstable-latest ${{ github.sha }}
-          git push -f origin refs/tags/unstable-latest
-
-      - name: Publish rolling prerelease
+      # Creates the tag on the pushed commit together with the release. A re-run on the same commit
+      # finds the existing release for that tag and replaces its asset instead of failing.
+      - name: Publish release for this build
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: unstable-latest
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
           name: Unstable ${{ steps.version.outputs.version }}
-          prerelease: true
-          make_latest: false
-          files: A3A-unstable.zip
+          prerelease: false
+          make_latest: true
+          files: ${{ steps.version.outputs.asset }}
           body: |
             Automatic build of branch `unstable` at [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}).
 
@@ -87,5 +89,5 @@ jobs:
 
             Older entries: [CHANGELOG-unstable.md](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/CHANGELOG-unstable.md)
 
-            Unzip `A3A-unstable.zip` into your Arma 3 folder; it contains a ready-to-use `@A3A` mod folder.
+            Unzip `${{ steps.version.outputs.asset }}` into your Arma 3 folder; it contains a ready-to-use `@A3A` mod folder.
             PBOs are signed with a throwaway key generated for this build (`Keys\a3a.bikey`).

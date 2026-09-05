@@ -2,7 +2,7 @@
 
 Arma 3 Antistasi mod, fork of official-antistasi-community/A3-Antistasi. Development happens on the `unstable` branch, and every push to `unstable` is built and published automatically:
 
-- `.github/workflows/releaseUnstable.yml` republishes the rolling `unstable-latest` GitHub prerelease (asset `A3A-unstable.zip`).
+- `.github/workflows/releaseUnstable.yml` publishes a new GitHub release for the pushed commit, tagged `unstable-<version>` (asset `A3A-unstable-<version>.zip`) and marked as the latest release.
 - `.github/workflows/publishBranchToSteam.yml` uploads the build to the Steam Workshop item.
 
 Both take their release notes from the top entry of `CHANGELOG-unstable.md`, through `.github/actions/changelog` and `Tools/renderChangelog.py`. That makes the rule below mandatory.
@@ -11,7 +11,7 @@ Both take their release notes from the top entry of `CHANGELOG-unstable.md`, thr
 
 Before pushing to `unstable`, add an entry describing what that push changes to the top of `CHANGELOG-unstable.md` and push it together with the changes. This applies to every push: features, fixes, merges of finished branches, and workflow or tooling changes alike.
 
-Why: the release workflow publishes the top entry as the body of the `unstable-latest` release, and the Steam workflow publishes it as the Workshop change note. If a push does not touch `CHANGELOG-unstable.md`, both workflows publish a "no changelog entry was written for this push" notice and emit a warning instead of publishing the previous entry a second time.
+Why: the release workflow publishes the top entry as the body of the push's GitHub release, and the Steam workflow publishes it as the Workshop change note. If a push does not touch `CHANGELOG-unstable.md`, both workflows publish a "no changelog entry was written for this push" notice and emit a warning instead of publishing the previous entry a second time.
 
 How:
 

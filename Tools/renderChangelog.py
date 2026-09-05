@@ -3,7 +3,7 @@
 Renders the newest entry of CHANGELOG-unstable.md for the release workflows.
 
 Every push to `unstable` gets one entry at the top of CHANGELOG-unstable.md (the rule lives in CLAUDE.md).
-The release workflow publishes that entry as the body of the `unstable-latest` GitHub prerelease (Markdown),
+The release workflow publishes that entry as the body of the push's GitHub release (Markdown),
 the Steam workflow as the Workshop change note (BBCode). Both go through .github/actions/changelog,
 which calls this script.
 
