@@ -124,6 +124,14 @@ class Tasks {
         weight = 1;
         isLegacy = 1;
     };
+    class RES_Defector {
+        category = "RES";
+        func = QFUNC(RES_Defector);
+        params = QFUNC(RES_Defector_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+    };
     class SUP_PoliceStation {
         category = "SUPP";
         func = QFUNCMAIN(SUP_PoliceStation);

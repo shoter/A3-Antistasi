@@ -239,6 +239,42 @@
       <Key ID="STR_A3A_Tasks_taxi_angry">
         <Original>Are you just driving me around in circles? I'm outta here.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_title">
+        <Original>Escort defecting officer</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_desc">
+        <Original>A %1 officer stationed near %2 wants out and is offering intel and money for safe passage. They are waiting in a civilian car at the marked spot until %3. Bring a vehicle: once you pick them up their own side will come looking. Get them alive to %4.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_destHQ">
+        <Original>our HQ or any of our airbases</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_destBoat">
+        <Original>our seaport at %1, where a boat will take them off the island</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_follow">
+        <Original>Tell the officer to follow you</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_pickup">
+        <Original>The officer is with you. Their side knows they are missing, so expect company on the road. Get them alive to %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_transitDesc">
+        <Original>We have the defector. Get them alive to %1 before %2. If they die, everything they know dies with them.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_success">
+        <Original>The defector is safe. They handed over %1 € and everything they know about %2's plans.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_boat">
+        <Original>The boat is waiting at the pier. The defector is on their way off the island.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_dead">
+        <Original>The defector is dead. Whatever they knew died with them.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_timeout">
+        <Original>The officer gave up waiting for us and slipped away.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_RES_Defector_angry">
+        <Original>The defector has lost faith in us and made off on their own.</Original>
+      </Key>
       <Key ID="STR_antistasi_LTasks_LOG_Ammo_title">
         <Original>Steal or Destroy Ammotruck</Original>
       </Key>
