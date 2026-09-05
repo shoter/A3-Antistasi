@@ -3,6 +3,7 @@ name: Release unstable
 # Every push to `unstable` builds the mod and republishes the rolling "unstable-latest" prerelease on this fork.
 # The release always points at the latest commit and carries a single asset: A3A-unstable.zip
 # (a zip with a top-level @A3A folder ready to drop into an Arma 3 install).
+# The release notes are the top entry of CHANGELOG-unstable.md, which every push has to update (see CLAUDE.md).
 
 on:
   push:
@@ -38,6 +39,12 @@ jobs:
           $v = $v.TrimEnd(".")
           "version=$v" >> $env:GITHUB_OUTPUT
           Write-Host "Antistasi $v"
+
+      - name: Render the changelog entry for this push
+        id: changelog
+        uses: ./.github/actions/changelog
+        with:
+          before: ${{ github.event.before }}
 
       - name: Build addons
         shell: pwsh
@@ -75,6 +82,10 @@ jobs:
             Automatic build of branch `unstable` at [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}).
 
             Antistasi version: **${{ steps.version.outputs.version }}**
+
+            ${{ steps.changelog.outputs.markdown }}
+
+            Older entries: [CHANGELOG-unstable.md](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/CHANGELOG-unstable.md)
 
             Unzip `A3A-unstable.zip` into your Arma 3 folder; it contains a ready-to-use `@A3A` mod folder.
             PBOs are signed with a throwaway key generated for this build (`Keys\a3a.bikey`).

@@ -176,6 +176,8 @@ if (isServer) then {
 	["nextTick"] call A3A_fnc_getStatVariable;
 	["deployedFlag"] call A3A_fnc_getStatVariable;
 	["junkyard"] call A3A_fnc_getStatVariable;
+	["rewardShares"] call A3A_fnc_getStatVariable;
+	["campaignLog"] call A3A_fnc_getStatVariable;
 
 	{_x setPosATL getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
 

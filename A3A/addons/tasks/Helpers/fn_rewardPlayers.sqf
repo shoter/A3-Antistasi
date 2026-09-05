@@ -1,6 +1,9 @@
 /*
-    Splits mission reward between nearby players and the commander
-    Commander takes 1/5 of the total
+    Splits mission reward between the faction fund, the commander and nearby players
+    The commander sets the split in the HQ dialog (see A3A_fnc_setRewardShares):
+        A3A_rewardTaxPercent        share paid into the faction fund, 0-50, default 0
+        A3A_rewardCommanderPercent  share paid to the commander personally, 0-20, default 20
+    Whatever is left is split equally between the rewarded players
 
 Parameters:
     <NUMBER> Total reward
@@ -27,14 +30,26 @@ private _rewardPlayers = call {
     units _nearPlayer inAreaArray [_position, _radius, _radius];
 };
 
+// Faction tax comes off the top and goes straight into the war chest
+// Reward points are worth 10 PLN each, see A3A_fnc_playerScoreAdd
+private _taxPercent = 0 max (missionNamespace getVariable ["A3A_rewardTaxPercent", 0]) min 50;
+private _taxReward = _totReward * _taxPercent / 100;
+private _playerReward = _totReward - _taxReward;
+if (_taxReward > 0) then {
+    private _taxMoney = round (_taxReward * 10);
+    [0, _taxMoney, true] spawn A3A_fnc_resourcesFIA;        // silent, the periodic income report shows the total instead
+    A3A_rewardTaxCollected = (missionNamespace getVariable ["A3A_rewardTaxCollected", 0]) + _taxMoney;
+};
+
 // Now have list of players to be rewarded, add in the commander
 
 if (!isNull theBoss) then {
-    private _bossReward = 0.2 * _totReward;
-    _totReward = 0.8 * _totReward;
-    if (theBoss in _rewardPlayers) then { _bossReward = _bossReward + _totReward / count _rewardPlayers };
-    [round _bossReward, theBoss] call A3A_fnc_playerScoreAdd;
+    private _cutPercent = 0 max (missionNamespace getVariable ["A3A_rewardCommanderPercent", 20]) min 20;
+    private _bossReward = _totReward * _cutPercent / 100;
+    _playerReward = _playerReward - _bossReward;
+    if (theBoss in _rewardPlayers) then { _bossReward = _bossReward + _playerReward / count _rewardPlayers };
+    if (round _bossReward > 0) then { [round _bossReward, theBoss] call A3A_fnc_playerScoreAdd };
 };
 
-private _reward = round (_totReward / (count _rewardPlayers max 1));
+private _reward = round (_playerReward / (count _rewardPlayers max 1));
 { [_reward, _x] call A3A_fnc_playerScoreAdd } forEach (_rewardPlayers - [theBoss]);

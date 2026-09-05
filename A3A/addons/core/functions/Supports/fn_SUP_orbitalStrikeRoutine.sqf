@@ -126,6 +126,7 @@ private _citiesInRange = (citiesX - destroyedSites) select {((getMarkerPos _x) d
 	publicVariable "destroyedSites";
     sidesX setVariable [_x, Invaders, true];
     garrison setVariable [_x, [], true];
+    ["townDestroyed", _x, [Invaders]] call A3A_fnc_campaignLogAdd;
     [_x] call A3A_fnc_mrkUpdate;
     sleep 10;
 } forEach _citiesInRange;

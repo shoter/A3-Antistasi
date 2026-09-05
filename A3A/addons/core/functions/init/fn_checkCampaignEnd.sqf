@@ -43,11 +43,20 @@ Info(_popReport);
 
 sleep 5; //This lets players have a few seconds after an event before the win/loss screen shows
 
+// Chronicle entry only once, this check can run from several places at the same time
+private _fnc_logEnd = {
+    if (!isNil "A3A_campaignLogEnded") exitWith {};
+    A3A_campaignLogEnded = true;
+    [_this] call A3A_fnc_campaignLogAdd;
+};
+
 if (_popKilled > (_popTotal / 3)) then {
+    "campaignLost" call _fnc_logEnd;
     isNil { ["ended", true] call A3A_fnc_writebackSaveVar };
     ["destroyedSites",false,true] remoteExec ["BIS_fnc_endMission"];
 };
 if (_popReb > (_popTotal / 2) and ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == count airportsX)) then {
+    "campaignWon" call _fnc_logEnd;
     isNil { ["ended", true] call A3A_fnc_writebackSaveVar };
     ["end1",true,true,true,true] remoteExec ["BIS_fnc_endMission",0];
 };

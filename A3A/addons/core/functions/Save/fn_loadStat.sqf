@@ -36,7 +36,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard"
+    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "rewardShares", "campaignLog"
 ];
 
 private _varName = _this select 0;
@@ -65,6 +65,19 @@ if (_varName in _specialVarLoads) then {
         publicVariable "A3A_junkyardNextRefresh";
         A3A_junkyardClockOffset = _clock - serverTime;      // campaign clock continues where the save left it
         publicVariable "A3A_junkyardClockOffset";
+    };
+    if (_varName == 'rewardShares') then {
+        _varValue params [["_taxPercent", 0, [0]], ["_cutPercent", 20, [0]]];
+        A3A_rewardTaxPercent = 0 max round _taxPercent min 50;
+        publicVariable "A3A_rewardTaxPercent";
+        A3A_rewardCommanderPercent = 0 max round _cutPercent min 20;
+        publicVariable "A3A_rewardCommanderPercent";
+    };
+    if (_varName == 'campaignLog') then {
+        A3A_campaignLog = +_varValue;
+        // Version is the sequence number of the newest entry, so client deltas continue across restarts
+        A3A_campaignLogVersion = if (A3A_campaignLog isEqualTo []) then { 0 } else { (A3A_campaignLog select (count A3A_campaignLog - 1)) select 0 };
+        publicVariable "A3A_campaignLogVersion";
     };
     if (_varName == 'membersX') then {membersX = +_varValue; publicVariable "membersX"};
     if (_varName == 'mrkNATO') then {{sidesX setVariable [[_x] call _translateMarker,Occupants,true]} forEach _varValue;};

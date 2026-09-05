@@ -60,6 +60,10 @@ class A3A_DummyDialog
     };
 };
 
+// Tab strip: the tab buttons share the dialog width equally. Bump the count when adding a tab.
+#define TAB_BUTTON_COUNT 6
+#define TAB_BUTTON_W (DIALOG_W / TAB_BUTTON_COUNT)
+
 class A3A_MainDialog : A3A_TabbedDialog
 {
     idd = A3A_IDD_MAINDIALOG;
@@ -88,6 +92,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class Controls
             {
+                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle
                 class PlayerTabButton : A3A_Button
                 {
                     idc = A3A_IDC_PLAYERTABBUTTON;
@@ -95,7 +100,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     onButtonClick = "[""switchTab"", [""player""]] call A3A_GUI_fnc_mainDialog;";
                     x = 0;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -104,20 +109,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_COMMANDERTABBUTTON;
                     text = $STR_antistasi_dialogs_main_commander_tab_button;
                     onButtonClick = "[""switchTab"", [""commander""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 30 * GRID_W;
+                    x = 1 * TAB_BUTTON_W * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
-                    h = 5 * GRID_H;
-                };
-
-                class TownsTabButton : A3A_Button
-                {
-                    idc = A3A_IDC_TOWNSTABBUTTON;
-                    text = $STR_antistasi_dialogs_main_towns_tab_button;
-                    onButtonClick = "[""switchTab"", [""towns""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 90 * GRID_W;
-                    y = 0;
-                    w = 30 * GRID_W;
+                    w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -126,9 +120,42 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_ADMINTABBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_tab_button;
                     onButtonClick = "[""switchTab"", [""admin""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 60 * GRID_W;
+                    x = 2 * TAB_BUTTON_W * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = TAB_BUTTON_W * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class TownsTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_TOWNSTABBUTTON;
+                    text = $STR_antistasi_dialogs_main_towns_tab_button;
+                    onButtonClick = "[""switchTab"", [""towns""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 3 * TAB_BUTTON_W * GRID_W;
+                    y = 0;
+                    w = TAB_BUTTON_W * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class GarrisonsTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_GARRISONSTABBUTTON;
+                    text = $STR_antistasi_dialogs_main_garrisons_tab_button;
+                    onButtonClick = "[""switchTab"", [""garrisons""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 4 * TAB_BUTTON_W * GRID_W;
+                    y = 0;
+                    w = TAB_BUTTON_W * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class ChronicleTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_CHRONICLETABBUTTON;
+                    text = $STR_antistasi_dialogs_main_chronicle_tab_button;
+                    onButtonClick = "[""switchTab"", [""chronicle""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 5 * TAB_BUTTON_W * GRID_W;
+                    y = 0;
+                    w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
                 };
             };
@@ -1834,8 +1861,8 @@ class A3A_MainDialog : A3A_TabbedDialog
         class FastTravelMap : A3A_MapControl
         {
             idc = A3A_IDC_FASTTRAVELMAP;
-            // Shared by the Fast Travel and Air Taxi subtabs, dispatch on the one that is shown (7560 = A3A_IDC_AIRTAXITAB)
-            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab] select ctrlShown ((ctrlParent (_this select 0)) displayCtrl 7560))";
+            // Shared by the Fast Travel and Air Taxi subtabs, dispatch on the one that is shown (7580 = A3A_IDC_AIRTAXITAB)
+            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab] select ctrlShown ((ctrlParent (_this select 0)) displayCtrl 7580))";
             x = CENTER_X(DIALOG_W) + 48 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
             w = 104 * GRID_W;
@@ -3250,6 +3277,238 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSSHOWONMAPBUTTON;
                     text = $STR_antistasi_dialogs_main_towns_show_on_map_button;
                     onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
+                    x = 120 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+            };
+        };
+
+
+        class GarrisonsTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_GARRISONSTAB;
+            show = false;
+
+            class controls
+            {
+                class GarrisonsListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 72 * GRID_H;
+                };
+
+                // Column headers, clicking one sorts the table by that column.
+                // X positions follow the column fractions of GarrisonsList below (8 + fraction * 144).
+                class NameHeader : A3A_Button
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_NAME;
+                    text = $STR_antistasi_dialogs_main_towns_name_label;
+                    tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
+                    onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_garrisonsTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 33 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class TypeHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_TYPE;
+                    text = $STR_antistasi_dialogs_main_garrisons_type_label;
+                    onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 42 * GRID_W;
+                    w = 19 * GRID_W;
+                };
+
+                class TroopsHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_TROOPS;
+                    text = $STR_antistasi_dialogs_main_garrisons_troops_label;
+                    onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 62 * GRID_W;
+                    w = 15 * GRID_W;
+                };
+
+                class VehiclesHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_VEHICLES;
+                    text = $STR_antistasi_dialogs_main_garrisons_vehicles_label;
+                    onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 78 * GRID_W;
+                    w = 16 * GRID_W;
+                };
+
+                class StaticsHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_STATICS;
+                    text = $STR_antistasi_dialogs_main_garrisons_statics_label;
+                    onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 95 * GRID_W;
+                    w = 15 * GRID_W;
+                };
+
+                class StatusHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_STATUS;
+                    text = $STR_antistasi_dialogs_main_garrisons_status_label;
+                    onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 111 * GRID_W;
+                    w = 23 * GRID_W;
+                };
+
+                class GridHeader : NameHeader
+                {
+                    idc = A3A_IDC_GARRISONSHEADER_GRID;
+                    text = $STR_antistasi_dialogs_main_towns_grid_label;
+                    onButtonClick = "[""sortBy"", [6]] call A3A_GUI_fnc_garrisonsTab;";
+                    x = 135 * GRID_W;
+                    w = 17 * GRID_W;
+                };
+
+                class GarrisonsList : A3A_ListNBox
+                {
+                    idc = A3A_IDC_GARRISONSLIST;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 72 * GRID_H;
+                    onLBSelChanged = "[""selectionChanged""] call A3A_GUI_fnc_garrisonsTab";
+                    onLBDblClick = "[""showOnMap""] call A3A_GUI_fnc_garrisonsTab";
+
+                    sizeEx = GUI_TEXT_SIZE_MEDIUM;
+                    rowHeight = 4 * GRID_H;
+                    columns[] = {0, 0.236, 0.375, 0.486, 0.604, 0.715, 0.882}; // Name, Type, Troops, Vehicles, Statics, Status, Grid
+                };
+
+                class ShowOnMapButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_GARRISONSSHOWONMAPBUTTON;
+                    text = $STR_antistasi_dialogs_main_towns_show_on_map_button;
+                    onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_garrisonsTab";
+                    x = 8 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 8 * GRID_H;
+                };
+
+                class ManageButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_GARRISONSMANAGEBUTTON;
+                    text = $STR_antistasi_dialogs_main_garrisons_manage_button;
+                    tooltip = $STR_antistasi_dialogs_main_garrisons_manage_tooltip;
+                    onButtonClick = "[""manage""] call A3A_GUI_fnc_garrisonsTab";
+                    x = 44 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 8 * GRID_H;
+                };
+            };
+        };
+
+
+        class ChronicleTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_CHRONICLETAB;
+            show = false;
+
+            class controls
+            {
+                class ChronicleListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 106 * GRID_W;
+                    h = 82 * GRID_H;
+                };
+
+                // Category filters, A3A_GUI_fnc_chronicleTab draws the active one in brighter text
+                class AllFilter : A3A_Button
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_ALL;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_all;
+                    tooltip = $STR_antistasi_dialogs_main_chronicle_filter_tooltip;
+                    onButtonClick = "[""filter"", [""all""]] call A3A_GUI_fnc_chronicleTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 14 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class SitesFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_SITES;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_sites;
+                    onButtonClick = "[""filter"", [""sites""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 23 * GRID_W;
+                };
+
+                class TownsFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_TOWNS;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_towns;
+                    onButtonClick = "[""filter"", [""towns""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 38 * GRID_W;
+                };
+
+                class AttacksFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_ATTACKS;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_attacks;
+                    onButtonClick = "[""filter"", [""attacks""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 53 * GRID_W;
+                };
+
+                class HQFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_HQ;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_hq;
+                    onButtonClick = "[""filter"", [""hq""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 68 * GRID_W;
+                };
+
+                class PlayersFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_PLAYERS;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_players;
+                    onButtonClick = "[""filter"", [""players""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 83 * GRID_W;
+                };
+
+                class CampaignFilter : AllFilter
+                {
+                    idc = A3A_IDC_CHRONICLEFILTER_CAMPAIGN;
+                    text = $STR_antistasi_dialogs_main_chronicle_filter_campaign;
+                    onButtonClick = "[""filter"", [""campaign""]] call A3A_GUI_fnc_chronicleTab;";
+                    x = 98 * GRID_W;
+                };
+
+                class ChronicleList : A3A_ListNBox
+                {
+                    idc = A3A_IDC_CHRONICLELIST;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 106 * GRID_W;
+                    h = 82 * GRID_H;
+                    onLBDblClick = "[""showOnMap""] call A3A_GUI_fnc_chronicleTab";
+
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    rowHeight = 4 * GRID_H;
+                    columns[] = {0, 0.22}; // Time ago, Event
+                };
+
+                class ShowOnMapButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_CHRONICLESHOWONMAPBUTTON;
+                    text = $STR_antistasi_dialogs_main_chronicle_show_on_map_button;
+                    onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_chronicleTab";
                     x = 120 * GRID_W;
                     y = 12 * GRID_H;
                     w = 32 * GRID_W;

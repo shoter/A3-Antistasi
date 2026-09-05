@@ -45,6 +45,7 @@ petros addMPEventHandler ["mpkilled",
     if ((side _killer == Invaders) or (side _killer == Occupants) or petros getVariable ["A3A_napalmHit", false]) then
     {
         garrison setVariable ["Synd_HQ", [], true];
+        ["petrosKilled", getPosATL petros, [side _killer]] call A3A_fnc_campaignLogAdd;
         _hr = server getVariable "hr";
         _res = server getVariable "resourcesFIA";
         [-1*(round(_hr*0.9)), -1*(round(_res*0.9))] spawn A3A_fnc_resourcesFIA;
