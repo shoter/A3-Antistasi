@@ -1,0 +1,80 @@
+name: Release unstable
+
+# Every push to `unstable` builds the mod and republishes the rolling "unstable" prerelease on this fork.
+# The release always points at the latest commit and carries a single asset: A3A-unstable.zip
+# (a zip with a top-level @A3A folder ready to drop into an Arma 3 install).
+
+on:
+  push:
+    branches: [unstable]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-unstable
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Stamp commit hash into version
+        run: node ./Tools/incrementVersion.js -b ${{ github.sha }}
+
+      - name: Read version
+        id: version
+        shell: pwsh
+        run: |
+          $v = ""
+          foreach ($line in (Get-Content A3A\addons\core\Includes\script_version.hpp)) {
+            if ($line -match "(?<= )([\w\d]*)(?![ \w\d])") { $v += $Matches[0] + "." }
+          }
+          $v = $v.TrimEnd(".")
+          "version=$v" >> $env:GITHUB_OUTPUT
+          Write-Host "Antistasi $v"
+
+      - name: Build addons
+        shell: pwsh
+        run: |
+          .\Tools\Builder\buildAddons.ps1 -modFileName mod_dev.cpp
+          if (-not (Test-Path build\A3A\addons\core.pbo)) { throw "Build produced no PBOs" }
+
+      - name: Package mod folder
+        shell: pwsh
+        run: |
+          Rename-Item build\A3A "@A3A"
+          Compress-Archive -Path "build\@A3A" -DestinationPath A3A-unstable.zip -Force
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: A3A-unstable
+          path: A3A-unstable.zip
+
+      - name: Move the unstable tag to this commit
+        shell: pwsh
+        run: |
+          git tag -f unstable ${{ github.sha }}
+          git push -f origin unstable
+
+      - name: Publish rolling prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: unstable
+          name: Unstable ${{ steps.version.outputs.version }}
+          prerelease: true
+          make_latest: false
+          files: A3A-unstable.zip
+          body: |
+            Automatic build of branch `unstable` at [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}).
+
+            Antistasi version: **${{ steps.version.outputs.version }}**
+
+            Unzip `A3A-unstable.zip` into your Arma 3 folder; it contains a ready-to-use `@A3A` mod folder.
+            PBOs are signed with a throwaway key generated for this build (`Keys\a3a.bikey`).
