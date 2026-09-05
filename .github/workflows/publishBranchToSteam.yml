@@ -1,5 +1,7 @@
 name: Publish to Main Release on Steam
 
+# The Workshop change note is the top entry of CHANGELOG-unstable.md, which every push has to update (see CLAUDE.md).
+
 on:
   push:
     branches: [unstable]
@@ -10,9 +12,17 @@ jobs:
   build:
     runs-on: windows-latest
     timeout-minutes: 5
+    outputs:
+      changelog: ${{ steps.changelog.outputs.bbcode }}
     steps:
     - name: Checkout the code
       uses: actions/checkout@v3.3.0
+
+    - name: Render the changelog entry for this push
+      id: changelog
+      uses: ./.github/actions/changelog
+      with:
+        before: ${{ github.event.before }}
 
     - name: Increment version locally
       run: chmod +x ./tools/incrementVersion.js &&
@@ -49,4 +59,7 @@ jobs:
         appId: '107410'
         publishedFileId: ${{ secrets.WORKSHOPID }} # https://steamcommunity.com/sharedfiles/filedetails/?id=[...]
         path: 'A3A'
-        changeNote: '[url=${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}]Update from branch: ${{ github.ref_name }}[/url].'
+        changeNote: |
+          ${{ needs.build.outputs.changelog }}
+
+          [url=${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}]Build of branch ${{ github.ref_name }} at ${{ github.sha }}[/url]
