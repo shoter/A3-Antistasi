@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the `unstable-latest` GitHub prerelease and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Helicopter air taxi
+
+### Added
+- Air Taxi in the Battle Command menu (Y), Player tab: charter a garaged transport or civilian helicopter. An AI pilot flies in from the nearest friendly airbase or the HQ, lands next to you, waits up to 60 s for you and your squad to board, flies you to any location marker you pick on the map and brings the helicopter back to the garage. No landing zone at the destination means a 3 m hover drop. The fare is 200 PLN plus 100 PLN per km from your own money, plus 1 HR for the pilot, refunded when he makes it home. A taxi that never picks you up refunds everything; a taxi shot down on the way loses the fare, the HR and the helicopter. Any marker can be the destination, enemy-held ones included, but garrisons along the route wake up as you fly over them.
+
+### Changed
+- The Player tab's button column now scrolls, so more buttons fit.
+
 ## 2026-09-05 - Players tab
 
 ### Added
