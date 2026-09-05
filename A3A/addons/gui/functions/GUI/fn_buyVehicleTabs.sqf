@@ -98,7 +98,7 @@ if (_tab isEqualTo "vehicles") then
         private _button = _display ctrlCreate ["A3A_ShortcutButton", -1, _itemControlsGroup];
         _button ctrlSetPosition [0, 25 * GRID_H, 44 * GRID_W, 12 * GRID_H];
         _button ctrlSetText _displayName;
-        _button ctrlSetTooltip format [localize "STR_antistasi_dialogs_buy_vehicle_button_tooltip", _displayName, _price, "PLN"];
+        _button ctrlSetTooltip format [localize "STR_antistasi_dialogs_buy_vehicle_button_tooltip", _displayName, _price, "€"];
         _button setVariable ["className", _className];
         _button setVariable ["model", _model];
         _button ctrlAddEventHandler ["ButtonClick", {
@@ -160,7 +160,7 @@ if (_tab isEqualTo "vehicles") then
 
         private _priceText = _display ctrlCreate ["A3A_InfoTextRight", -1, _itemControlsGroup];
         _priceText ctrlSetPosition[23 * GRID_W, 21 * GRID_H, 20 * GRID_W, 3 * GRID_H];
-        _priceText ctrlSetText format ["%1 PLN",_price];
+        _priceText ctrlSetText format ["%1 €",_price];
         _priceText ctrlCommit 0;
 
         // Undercover icon
@@ -360,7 +360,7 @@ if  (_tab in ["other"]) then
         private _button = _display ctrlCreate ["A3A_ShortcutButton", -1, _itemControlsGroup];
         _button ctrlSetPosition [0, 25 * GRID_H, 44 * GRID_W, 12 * GRID_H];
         _button ctrlSetText _displayName;
-        _button ctrlSetTooltip format [localize "STR_antistasi_dialogs_buy_item_tooltip", _displayName, _price, "PLN"];
+        _button ctrlSetTooltip format [localize "STR_antistasi_dialogs_buy_item_tooltip", _displayName, _price, "€"];
         _button setVariable ["className", _className];
         _button setVariable ["model", _model];
         _button ctrlAddEventHandler ["ButtonClick", { closeDialog 2; [player, _this#0 getVariable "className"] call A3A_fnc_buyItem }];
@@ -420,7 +420,7 @@ if  (_tab in ["other"]) then
 
         private _priceText = _display ctrlCreate ["A3A_InfoTextRight", -1, _itemControlsGroup];
         _priceText ctrlSetPosition[23 * GRID_W, 21 * GRID_H, 20 * GRID_W, 3 * GRID_H];
-        _priceText ctrlSetText format ["%1 PLN",_price];
+        _priceText ctrlSetText format ["%1 €",_price];
         _priceText ctrlCommit 0;
 
         private _itemPic = _display ctrlCreate ["A3A_PictureStroke", -1, _itemControlsGroup];

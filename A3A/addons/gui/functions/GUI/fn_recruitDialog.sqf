@@ -48,7 +48,7 @@ switch (_mode) do
             private _button = _display displayCtrl _x#2;
             private _unitType = _x#3;
             private _price = server getVariable FactionGet(reb, _unitType);
-            private _updatedPriceText = ((str _price) + " PLN");
+            private _updatedPriceText = ((str _price) + " €");
             _priceText ctrlSetText _updatedPriceText;
 
             // Disable buttons and darken icon if not enough money or HR for the unit

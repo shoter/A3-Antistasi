@@ -31,7 +31,7 @@ private _rewardPlayers = call {
 };
 
 // Faction tax comes off the top and goes straight into the war chest
-// Reward points are worth 10 PLN each, see A3A_fnc_playerScoreAdd
+// Reward points are worth 10 € each, see A3A_fnc_playerScoreAdd
 private _taxPercent = 0 max (missionNamespace getVariable ["A3A_rewardTaxPercent", 0]) min 50;
 private _taxReward = _totReward * _taxPercent / 100;
 private _playerReward = _totReward - _taxReward;

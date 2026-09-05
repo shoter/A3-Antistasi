@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Euro symbol is back
+
+### Changed
+- The currency symbol is € again instead of PLN, everywhere money is shown (HQ, shops, garage, recruitment, junkyard, town upgrades, mission rewards).
+
 ## 2026-09-05 - Junkyard prices raised
 
 ### Changed

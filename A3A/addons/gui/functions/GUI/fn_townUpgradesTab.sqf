@@ -127,7 +127,7 @@ switch (_mode) do
 
             private _name = localize format ["STR_A3A_fn_townUpgrades_name_%1", _id];
             private _price = [_id, _city] call A3A_fnc_townUpgradePrice;
-            _priceText ctrlSetText format ["%1 PLN", _price];
+            _priceText ctrlSetText format ["%1 €", _price];
 
             // Empty reason means the card can be bought
             private _blocker = call {

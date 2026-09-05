@@ -4,7 +4,7 @@ Maintainer: Caleb Serafin
     Donates money to faction or person.
     Gives the player a score for donating to faction.
     If no arguments are passed, money is donated to the faction.
-    If one player object is passed, PLN 100 is donated to who he is looking at.
+    If one player object is passed, € 100 is donated to who he is looking at.
 
 Arguments:
     <OBJECT> The player object who loses money.

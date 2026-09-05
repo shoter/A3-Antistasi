@@ -101,7 +101,7 @@ private _added = 0;
 
     private _priceText = _display ctrlCreate ["A3A_InfoTextRight", -1, _itemControlsGroup];
     _priceText ctrlSetPosition [23 * GRID_W, (PICTURE_H - 4) * GRID_H, 20 * GRID_W, 3 * GRID_H];
-    _priceText ctrlSetText format ["%1 PLN", _price];
+    _priceText ctrlSetText format ["%1 €", _price];
     _priceText ctrlCommit 0;
 
     private _infoText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];

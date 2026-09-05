@@ -62,4 +62,4 @@ _wreck setVariable ["A3A_gcBumps", A3A_gcMaxBumps];
 
 private _displayName = getText (configFile >> "CfgVehicles" >> _class >> "displayName");
 [_titleStr, format [localize "STR_A3A_fn_junkyard_scrap_stripped", _displayName, _pay]] remoteExec ["A3A_fnc_customHint", _player];
-Info_3("Scrapyard: %1 stripped %2 for %3 PLN", name _player, _class, _pay);
+Info_3("Scrapyard: %1 stripped %2 for %3 €", name _player, _class, _pay);

@@ -1,14 +1,14 @@
 /*
 Maintainer: Shoter
     Price of a town upgrade kit for a given town. Scales with the square root of the town population,
-    a 250 population town pays the base price, a 1000 population town pays double. Rounded to 50 PLN, minimum 500.
+    a 250 population town pays the base price, a 1000 population town pays double. Rounded to 50 €, minimum 500.
 
 Arguments:
     <STRING> Upgrade id, key of A3A_townUpgradeHM
     <STRING> City marker name
 
 Return Value:
-    <SCALAR> Price in PLN, 0 for an unknown upgrade
+    <SCALAR> Price in €, 0 for an unknown upgrade
 
 Scope: Any
 Environment: Any

@@ -8,7 +8,7 @@ Arguments:
     <STRING> Vehicle class name
 
 Return Value:
-    <SCALAR> Price in PLN, 0 if the class does not exist
+    <SCALAR> Price in €, 0 if the class does not exist
 
 Scope: Anywhere (faction hashmaps and civilian lists are broadcast)
 Environment: Any

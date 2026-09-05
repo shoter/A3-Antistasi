@@ -81,7 +81,7 @@ switch (_mode) do
             _button setVariable ["vehicle", if (_hasVehicle) then {""} else {_vehicle}];
             private _price = [_group, _vehicle] call A3A_fnc_getHCSquadPrice;
             _price params ["_reqMoney", "_reqHR"];
-            _priceText ctrlSetText (format ["%1 PLN %2 HR", _reqMoney, _reqHR]);
+            _priceText ctrlSetText (format ["%1 € %2 HR", _reqMoney, _reqHR]);
             if (_money < _reqMoney || _hr < _reqHR) then {
                 _button ctrlEnable false;
                 _button ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";

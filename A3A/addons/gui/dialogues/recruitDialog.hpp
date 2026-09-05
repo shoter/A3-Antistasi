@@ -37,7 +37,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITMILITIAMANPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
           y = 19 * GRID_H;
@@ -71,7 +71,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITAUTORIFLEMANPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
           y = 35 * GRID_H;
@@ -105,7 +105,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITGRENADIERPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
           y = 51 * GRID_H;
@@ -139,7 +139,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITANTITANKPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
           y = 67 * GRID_H;
@@ -173,7 +173,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITATMISSILEPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
           y = 83 * GRID_H;
@@ -207,7 +207,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITMEDICPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
           y = 19 * GRID_H;
@@ -241,7 +241,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITMARKSMANPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
           y = 35 * GRID_H;
@@ -275,7 +275,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITENGINEERPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
           y = 51 * GRID_H;
@@ -309,7 +309,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITBOMBSPECIALISTPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
           y = 67 * GRID_H;
@@ -343,7 +343,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITAAMISSILEPRICE;
           style = ST_CENTER;
-          text = "PLN 0";
+          text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
           y = 83 * GRID_H;

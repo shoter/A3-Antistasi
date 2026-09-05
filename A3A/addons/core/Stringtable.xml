@@ -1810,17 +1810,17 @@
         <Chinesesimp>驻军</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_movehq_removed">
-        <Original>Garrison removed&lt;br/&gt;&lt;br/&gt;Recovered Money: %1 PLN&lt;br/&gt;Recovered HR: %2</Original>
-        <Italian>Guarnigione rimossa&lt;br/&gt;&lt;br/&gt;Soldi Recuperati: %1 PLN&lt;br/&gt; HR recuperate: %2</Italian>
-        <Spanish>Guarnición eliminada&lt;br/&gt;&lt;br/&gt;Dinero recuperado: %1 PLN&lt;br/&gt;RH recuperados: %2</Spanish>
-        <French>Garnison supprimée&lt;br/&gt;&lt;br/&gt;Argent Récupéré : %1 PLN&lt;br/&gt;RH Récupéré : %2</French>
-        <Korean>주둔군 회수됨&lt;br/&gt;&lt;br/&gt;회수된 돈: %1 PLN&lt;br/&gt;회수된 인적 자원 : %2</Korean>
-        <Russian>Гарнизон удален&lt;br/&gt;&lt;br/&gt;Восстановленные деньги: %1 PLN&lt;br/&gt;Возвращено HR: %2</Russian>
-        <Polish>Garnizon usunięty&lt;br/&gt;&lt;br/&gt;Odzyskane pieniądze: %1 PLN&lt;br/&gt;Odzyskane HR: %2</Polish>
-        <Czech>Posádka odstraněna&lt;br/&gt;&lt;br/&gt;Vrácené peníze: %1 PLN&lt;br/&gt;Vrácené HR: %2</Czech>
+        <Original>Garrison removed&lt;br/&gt;&lt;br/&gt;Recovered Money: %1 €&lt;br/&gt;Recovered HR: %2</Original>
+        <Italian>Guarnigione rimossa&lt;br/&gt;&lt;br/&gt;Soldi Recuperati: %1 €&lt;br/&gt; HR recuperate: %2</Italian>
+        <Spanish>Guarnición eliminada&lt;br/&gt;&lt;br/&gt;Dinero recuperado: %1 €&lt;br/&gt;RH recuperados: %2</Spanish>
+        <French>Garnison supprimée&lt;br/&gt;&lt;br/&gt;Argent Récupéré : %1 €&lt;br/&gt;RH Récupéré : %2</French>
+        <Korean>주둔군 회수됨&lt;br/&gt;&lt;br/&gt;회수된 돈: %1 €&lt;br/&gt;회수된 인적 자원 : %2</Korean>
+        <Russian>Гарнизон удален&lt;br/&gt;&lt;br/&gt;Восстановленные деньги: %1 €&lt;br/&gt;Возвращено HR: %2</Russian>
+        <Polish>Garnizon usunięty&lt;br/&gt;&lt;br/&gt;Odzyskane pieniądze: %1 €&lt;br/&gt;Odzyskane HR: %2</Polish>
+        <Czech>Posádka odstraněna&lt;br/&gt;&lt;br/&gt;Vrácené peníze: %1 €&lt;br/&gt;Vrácené HR: %2</Czech>
         <Portuguese>Guarnição removida&lt;br/&gt;&lt;br/&gt;Dinheiro recuperado: %1&lt;br/&gt;RH recuperados: %2</Portuguese>
-        <Turkish>Garnizon kaldırıldı. &lt;br/&gt;&lt;br/&gt;Kurtarılan Para: %1 PLN&lt;br/&gt;Kurtarılan HR: %2</Turkish>
-        <Chinesesimp>驻军已移除&lt;br/&gt;&lt;br/&gt;已收回资金: %1 PLN&lt;br/&gt;已回收人力: %2</Chinesesimp>
+        <Turkish>Garnizon kaldırıldı. &lt;br/&gt;&lt;br/&gt;Kurtarılan Para: %1 €&lt;br/&gt;Kurtarılan HR: %2</Turkish>
+        <Chinesesimp>驻军已移除&lt;br/&gt;&lt;br/&gt;已收回资金: %1 €&lt;br/&gt;已回收人力: %2</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_movehq_stay">
         <Original>HQ Garrison will stay here and distract the enemy.</Original>
@@ -2034,16 +2034,16 @@
         <Chinesesimp>你的班组需要有一个通信员才可以给其他班组下达命令</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_outpdiag_no_resources">
-        <Original>You lack the resources to build this Watchpost or Roadblock. &lt;br/&gt;&lt;br/&gt; %1 HR and %2 PLN needed.</Original>
-        <Italian>Ti mancano le risorse per costruire questo Posto di Guardia o Posto di Blocco. &lt;br/&gt;&lt;br/&gt; %1 HR e %2 PLN richiesti.</Italian>
-        <Spanish>No tiene los recursos para construir este puesto de vigilancia o bloqueo de carretera. &lt;br/&gt;&lt;br/&gt; Necesita %1 RH y %2 PLN.</Spanish>
-        <French>Vous manquez de ressources pour construire ce Poste d'Observation ou Barrage Routier. &lt;br/&gt;&lt;br/&gt; %1 RH et %2 PLN requis.</French>
-        <Korean>당신은 감시초소나 검문소를 건설하기 위한 자원이 부족합니다.&lt;br/&gt;&lt;br/&gt; 인력 %1 포인트와 %2 PLN가 필요합니다.</Korean>
-        <Russian>Вам не хватает ресурсов, чтобы построить этот сторожевой пост или блокпост на дороге. &lt;br/&gt;&lt;br/&gt; Требуется %1 HR и %2 PLN.</Russian>
-        <Czech>Chybí ti zdroje, abys vybudoval Předsunutou hlídku nebo Zátaras. &lt;br/&gt;&lt;br/&gt; %1 HR a %2 PLN je vyžadováno.</Czech>
-        <Portuguese>Faltam recursos para construir este Posto de Vigia ou Bloqueio de Estrada. &lt;br/&gt;&lt;br/&gt; %1 RH e %2 PLN necessários.</Portuguese>
-        <Turkish>Bu mevkiiyi kurmak için yetersiz kaynaklar. &lt;br/&gt;&lt;br/&gt; %1 HR ve %2 PLN gerekli.</Turkish>
-        <Chinesesimp>你缺少建造哨塔或者路障的资源. &lt;br/&gt;&lt;br/&gt; 需要 %1 人力 以及 %2 PLN .</Chinesesimp>
+        <Original>You lack the resources to build this Watchpost or Roadblock. &lt;br/&gt;&lt;br/&gt; %1 HR and %2 € needed.</Original>
+        <Italian>Ti mancano le risorse per costruire questo Posto di Guardia o Posto di Blocco. &lt;br/&gt;&lt;br/&gt; %1 HR e %2 € richiesti.</Italian>
+        <Spanish>No tiene los recursos para construir este puesto de vigilancia o bloqueo de carretera. &lt;br/&gt;&lt;br/&gt; Necesita %1 RH y %2 €.</Spanish>
+        <French>Vous manquez de ressources pour construire ce Poste d'Observation ou Barrage Routier. &lt;br/&gt;&lt;br/&gt; %1 RH et %2 € requis.</French>
+        <Korean>당신은 감시초소나 검문소를 건설하기 위한 자원이 부족합니다.&lt;br/&gt;&lt;br/&gt; 인력 %1 포인트와 %2 €가 필요합니다.</Korean>
+        <Russian>Вам не хватает ресурсов, чтобы построить этот сторожевой пост или блокпост на дороге. &lt;br/&gt;&lt;br/&gt; Требуется %1 HR и %2 €.</Russian>
+        <Czech>Chybí ti zdroje, abys vybudoval Předsunutou hlídku nebo Zátaras. &lt;br/&gt;&lt;br/&gt; %1 HR a %2 € je vyžadováno.</Czech>
+        <Portuguese>Faltam recursos para construir este Posto de Vigia ou Bloqueio de Estrada. &lt;br/&gt;&lt;br/&gt; %1 RH e %2 € necessários.</Portuguese>
+        <Turkish>Bu mevkiiyi kurmak için yetersiz kaynaklar. &lt;br/&gt;&lt;br/&gt; %1 HR ve %2 € gerekli.</Turkish>
+        <Chinesesimp>你缺少建造哨塔或者路障的资源. &lt;br/&gt;&lt;br/&gt; 需要 %1 人力 以及 %2 € .</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_outpdiag_radio">
         <Original>Radio required</Original>
@@ -2223,17 +2223,17 @@
         <Chinesesimp>通信塔已被重建</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_no_money">
-        <Original>You do not have enough money to rebuild any Asset. You need 5.000 PLN.</Original>
-        <Italian>Non hai abbastanza denaro per ricostruire alcuna risorsa. Necessiti 5.000 PLN.</Italian>
-        <Spanish>No tiene dinero suficiente para reconstruir ningún objeto. Necesita 5.000 PLN.</Spanish>
-        <French>Vous n'avez pas assez d'argent pour reconstuire des Biens. Vous avez besoin de 5.000 PLN.</French>
-        <Korean>당신은 이 에셋을 재건축하기 위한 돈을 충분히 가지고 있지 않습니다. 5000 PLN가 필요합니다.</Korean>
-        <Russian>У вас недостаточно денег, чтобы восстановить какой-либо объект. Вам нужно 5.000 PLN.</Russian>
-        <Polish>Nie masz wystarczająco dużo pieniędzy, aby odbudować jakikolwiek obiekt. Potrzebujesz 5 000 PLN.</Polish>
-        <Czech>Nemáš dostatek peněz pro znovu postavený jakéhokoliv Assetu. Potřebuješ 5 000 PLN.</Czech>
-        <Portuguese>Não tens dinheiro suficiente para reconstruir qualquer Ativo. Precisas de 5.000 PLN.</Portuguese>
-        <Turkish>Yeni ekipman yapmak için yeterinde paranız yok. 5.000 PLN'ya ihtiyacınız var.</Turkish>
-        <Chinesesimp>你当前的资金不足以重建任何资产. 你需要 5.000 PLN.</Chinesesimp>
+        <Original>You do not have enough money to rebuild any Asset. You need 5.000 €.</Original>
+        <Italian>Non hai abbastanza denaro per ricostruire alcuna risorsa. Necessiti 5.000 €.</Italian>
+        <Spanish>No tiene dinero suficiente para reconstruir ningún objeto. Necesita 5.000 €.</Spanish>
+        <French>Vous n'avez pas assez d'argent pour reconstuire des Biens. Vous avez besoin de 5.000 €.</French>
+        <Korean>당신은 이 에셋을 재건축하기 위한 돈을 충분히 가지고 있지 않습니다. 5000 €가 필요합니다.</Korean>
+        <Russian>У вас недостаточно денег, чтобы восстановить какой-либо объект. Вам нужно 5.000 €.</Russian>
+        <Polish>Nie masz wystarczająco dużo pieniędzy, aby odbudować jakikolwiek obiekt. Potrzebujesz 5 000 €.</Polish>
+        <Czech>Nemáš dostatek peněz pro znovu postavený jakéhokoliv Assetu. Potřebuješ 5 000 €.</Czech>
+        <Portuguese>Não tens dinheiro suficiente para reconstruir qualquer Ativo. Precisas de 5.000 €.</Portuguese>
+        <Turkish>Yeni ekipman yapmak için yeterinde paranız yok. 5.000 €'ya ihtiyacınız var.</Turkish>
+        <Chinesesimp>你当前的资金不足以重建任何资产. 你需要 5.000 €.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
         <Original>There is nothing to rebuild on this site.</Original>
@@ -2280,9 +2280,9 @@
         <Russian>HR: %1%2</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_resourcesFIA_money">
-        <Original>Money: %1%2 PLN</Original>
-        <Korean>자금: %1%2 PLN</Korean>
-        <Russian>Деньги: %1%2 PLN</Russian>
+        <Original>Money: %1%2 €</Original>
+        <Korean>자금: %1%2 €</Korean>
+        <Russian>Деньги: %1%2 €</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_resourcesFIA_resources">
         <Original>%1 Resources</Original>
@@ -2395,14 +2395,14 @@
         <Chinesesimp>载具已出售</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_isComm">
-        <Original>Rank: %5 | HR: %1 | Your Money: %6 PLN | %11 Money: %2 PLN | Airstrikes: %7 | %9 Aggr: %3 | %10 Aggr: %4 | War Level: %8 | Undercover Mode: %12</Original>
-        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 PLN | %11의 자금: %2 PLN | 공습: %7 | %9 공격성: %3 | %10 공격성: %4 | 전쟁 레벨: %8 | 위장 모드: %12</Korean>
-        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 PLN | Деньги %11: %2 PLN | Авиаудары: %7 | %9 Агрессия: %3 | %10 Агрессия: %4 | Уровень войны: %8 | Режим скрытности: %12</Russian>
+        <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %11 Money: %2 € | Airstrikes: %7 | %9 Aggr: %3 | %10 Aggr: %4 | War Level: %8 | Undercover Mode: %12</Original>
+        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %11의 자금: %2 € | 공습: %7 | %9 공격성: %3 | %10 공격성: %4 | 전쟁 레벨: %8 | 위장 모드: %12</Korean>
+        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %11: %2 € | Авиаудары: %7 | %9 Агрессия: %3 | %10 Агрессия: %4 | Уровень войны: %8 | Режим скрытности: %12</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_notComm">
-        <Original>Commander: %3 | Rank: %2 | HR: %1 | Your Money: %4 PLN | %8 Aggr: %5 | %9 Aggr: %6 | War Level: %7 | Undercover Mode: %10</Original>
-        <Korean>지휘관: %3 | 계급: %2 | 인력: %1 | 당신의 자금: %4 PLN | %8 공격성: %5 | %9 공격성: %6 | 전쟁 레벨: %7 | 위장 모드: %10</Korean>
-        <Russian>Командир: %3 | Ранг: %2 | HR: %1 | Ваши деньги: %4 PLN | %8 Аггр: %5 | %9 Аггр: %6 | Уровень войны: %7 | Режим скрытности: %10</Russian>
+        <Original>Commander: %3 | Rank: %2 | HR: %1 | Your Money: %4 € | %8 Aggr: %5 | %9 Aggr: %6 | War Level: %7 | Undercover Mode: %10</Original>
+        <Korean>지휘관: %3 | 계급: %2 | 인력: %1 | 당신의 자금: %4 € | %8 공격성: %5 | %9 공격성: %6 | 전쟁 레벨: %7 | 위장 모드: %10</Korean>
+        <Russian>Командир: %3 | Ранг: %2 | HR: %1 | Ваши деньги: %4 € | %8 Аггр: %5 | %9 Аггр: %6 | Уровень войны: %7 | Режим скрытности: %10</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_unlockveh_locked">
         <Original>Vehicle locked.</Original>
@@ -2945,9 +2945,9 @@
         <Russian>В Н И М А Н И Е</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_dialogHQ_upgrade">
-        <Original>Current level: %2. Next Level Training Cost: %1 PLN.</Original>
-        <Korean>현재 레벨: %2. 다음 레벨 훈련 비용: %1 PLN.</Korean>
-        <Russian>Текущий уровень: %2. Стоимость обучения на следующем уровне: %1 PLN.</Russian>
+        <Original>Current level: %2. Next Level Training Cost: %1 €.</Original>
+        <Korean>현재 레벨: %2. 다음 레벨 훈련 비용: %1 €.</Korean>
+        <Russian>Текущий уровень: %2. Стоимость обучения на следующем уровне: %1 €.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_begin">
         <Original>Fast traveling, travel time: %1, please wait.</Original>
@@ -3282,14 +3282,14 @@
         <Chinesesimp>你的班组需要有一个通信员才可以给其他班组下达命令</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_minediag_no_resource">
-        <Original>Not enough resources to recruit a mine deploying team (%1 PLN and %2 HR needed).</Original>
-        <Italian>Non vi sono abbastanza risorse per reclutare un team di zappatori (%1 PLN e %2 HR richiesti).</Italian>
-        <Spanish>No hay suficientes recursos para reclutar un equipo de despliegue de minas (Se necesitan %1 PLN and %2 RH).</Spanish>
-        <French>Pas assez de ressources pour recruter une équipe de déploiement de mines (%1 PLN et %2 RH nécessaires).</French>
-        <Korean>지뢰매설조를 모집할 만큼 충분한 자원이 없습니다.(%1 PLN그리고 %2 인적 자원 필요)</Korean>
-        <Russian>Недостаточно ресурсов для найма саперов (требуется %1 PLN и %2 HR).</Russian>
-        <Polish>Niewystarczające zasoby, aby zrekrutować zespół minerski (potrzeba %1 PLN i %2 HR).</Polish>
-        <Czech>Nedostatek zdrojů pro najmutí týmu, který položí miny (Potřebuješ %1 PLN a %2 HR).</Czech>
+        <Original>Not enough resources to recruit a mine deploying team (%1 € and %2 HR needed).</Original>
+        <Italian>Non vi sono abbastanza risorse per reclutare un team di zappatori (%1 € e %2 HR richiesti).</Italian>
+        <Spanish>No hay suficientes recursos para reclutar un equipo de despliegue de minas (Se necesitan %1 € and %2 RH).</Spanish>
+        <French>Pas assez de ressources pour recruter une équipe de déploiement de mines (%1 € et %2 RH nécessaires).</French>
+        <Korean>지뢰매설조를 모집할 만큼 충분한 자원이 없습니다.(%1 €그리고 %2 인적 자원 필요)</Korean>
+        <Russian>Недостаточно ресурсов для найма саперов (требуется %1 € и %2 HR).</Russian>
+        <Polish>Niewystarczające zasoby, aby zrekrutować zespół minerski (potrzeba %1 € i %2 HR).</Polish>
+        <Czech>Nedostatek zdrojů pro najmutí týmu, který položí miny (Potřebuješ %1 € a %2 HR).</Czech>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_minediag_timer">
         <Original>You need at least 5 mines of this type to build a Minefield.</Original>
@@ -3549,15 +3549,15 @@
         <Chinesesimp>招募班组</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_squadOptions">
-        <Original>Cost: %1 PLN. HR: %2</Original>
-        <Korean>비용: %1 PLN. 인력: %2</Korean>
-        <Russian>Цена: %1 PLN. HR: %2</Russian>
+        <Original>Cost: %1 €. HR: %2</Original>
+        <Korean>비용: %1 €. 인력: %2</Korean>
+        <Russian>Цена: %1 €. HR: %2</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_unit_recruit">
-        <Original>Cost: %1 PLN</Original>
-        <French>Coût! %1 PLN</French>
-        <Korean>비용: %1 PLN</Korean>
-        <Russian>Цена: %1 PLN</Russian>
+        <Original>Cost: %1 €</Original>
+        <French>Coût! %1 €</French>
+        <Korean>비용: %1 €</Korean>
+        <Russian>Цена: %1 €</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_unit_recruit_radioOP">
         <Original>Radio Operator</Original>
@@ -4154,12 +4154,12 @@
         <Russian>%1 присоединился к %2</Russian>
       </Key>
       <Key ID="STR_A3A_fn_init_resourceCheck_income">
-        <Original>Taxes Income&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;Manpower: +%1&lt;br/&gt;Money: +%2 PLN</Original>
+        <Original>Taxes Income&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;Manpower: +%1&lt;br/&gt;Money: +%2 €</Original>
         <Korean>세금 획득&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;인력: +%1&lt;br/&gt;자금: +%2 </Korean>
-        <Russian>Доход&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;HR: +%1&lt;br/&gt;Деньги: +%2 PLN</Russian>
+        <Russian>Доход&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;HR: +%1&lt;br/&gt;Деньги: +%2 €</Russian>
       </Key>
       <Key ID="STR_A3A_fn_init_resourceCheck_tax">
-        <Original>Reward tax collected: +%1 PLN</Original>
+        <Original>Reward tax collected: +%1 €</Original>
       </Key>
       <Key ID="STR_A3A_fn_init_initClient_addAct_recruitSquad">
         <Original>Squad Recruitment</Original>
@@ -5461,19 +5461,19 @@
     </Container>
     <Container name="A3A_fn_OrgPlayers">
       <Key ID="STR_A3A_fn_orgp_donMon_donated_faction">
-        <Original>You have donated %1 PLN to the cause. This will raise your status among our forces.</Original>
-        <Korean>당신은 %1 PLN를 기부했습니다. 이는 우리 군에서 당신의 지위가 높아질 것입니다.</Korean>
-        <Russian>Вы пожертвовали %1 PLN на дело. Это повысит ваш статус среди наших сил.</Russian>
+        <Original>You have donated %1 € to the cause. This will raise your status among our forces.</Original>
+        <Korean>당신은 %1 €를 기부했습니다. 이는 우리 군에서 당신의 지위가 높아질 것입니다.</Korean>
+        <Russian>Вы пожертвовали %1 € на дело. Это повысит ваш статус среди наших сил.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_donated_player">
-        <Original>You have donated %2 PLN to %1.</Original>
-        <Korean>당신은 %1에 %2 PLN를 기부했습니다.</Korean>
-        <Russian>Вы пожертвовали %2 PLN для %1.</Russian>
+        <Original>You have donated %2 € to %1.</Original>
+        <Korean>당신은 %1에 %2 €를 기부했습니다.</Korean>
+        <Russian>Вы пожертвовали %2 € для %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_no_less">
-        <Original>Insufficient Funds&lt;br/&gt;You have less than %1 PLN to donate.</Original>
-        <Korean>자금 부족&lt;br/&gt;%1 PLN 보다 적은 금액을 가지고 있습니다.</Korean>
-        <Russian>Недостаточно средств&lt;br/&gt;Вы пожертвовали менее %1 PLN.</Russian>
+        <Original>Insufficient Funds&lt;br/&gt;You have less than %1 € to donate.</Original>
+        <Korean>자금 부족&lt;br/&gt;%1 € 보다 적은 금액을 가지고 있습니다.</Korean>
+        <Russian>Недостаточно средств&lt;br/&gt;Вы пожертвовали менее %1 €.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_no_looking">
         <Original>You must be looking at a player in order to give him money.</Original>
@@ -5491,8 +5491,8 @@
         <Russian>Сумма пожертвования должна быть больше 0.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_received_money">
-        <Original>You received a %1 PLN donation from %2.</Original>
-        <Russian>Вы получили пожертвование в размере %1 PLN от %2.</Russian>
+        <Original>You received a %1 € donation from %2.</Original>
+        <Russian>Вы получили пожертвование в размере %1 € от %2.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_titel">
         <Original>Donate Money</Original>
@@ -5728,14 +5728,14 @@
         <Chinesesimp>%1 没有足以能够拿取的资源</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_tBSteal_grab_yes">
-        <Original>You grabbed %1 PLN from the %2 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %2 forces.</Original>
-        <Italian>Hai preso 100 PLN dal fondo %1.&lt;br/&gt;&lt;br/&gt;Ciò influirà sul tuo status tra le forze %1.</Italian>
-        <French>Vous aves pris 100 PLN de la réserve d'argent de %1. &lt;br/&gt;&lt;br/&gt; Cela va affecter votre prestige et votre statut au sein des forces de %1.</French>
-        <Korean>당신은 %1의 공동 자금에서 100 PLN를 가져갔습니다.&lt;br/&gt;&lt;br/&gt;이는 %1의 군 내에서 당신의 지위와 위신에 영향을 미칠 것입니다.</Korean>
-        <Russian>Вы забрали 100 PLN из фонда %1.&lt;br/&gt;&lt;br/&gt;Это повлияет на ваш престиж и статус среди сил %1.</Russian>
-        <Polish>Zgarnąłeś 100 PLN z puli pieniędzy %1.&lt;br/&gt;&lt;br/&gt;Wpłynie to na twój prestiż i status wśród sił %1.</Polish>
-        <Czech>Vzal jsi 100 PLN z rozpočtu %1.&lt;br/&gt;&lt;br/&gt;Tento čin ovlivní tvé postavení mezi členy %1</Czech>
-        <Chinesesimp>你从 %1 资金池中拿取了100 PLN. &lt;br/&gt;&lt;br/&gt; 这将影响你在 %1阵营中的声誉以及地位.</Chinesesimp>
+        <Original>You grabbed %1 € from the %2 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %2 forces.</Original>
+        <Italian>Hai preso 100 € dal fondo %1.&lt;br/&gt;&lt;br/&gt;Ciò influirà sul tuo status tra le forze %1.</Italian>
+        <French>Vous aves pris 100 € de la réserve d'argent de %1. &lt;br/&gt;&lt;br/&gt; Cela va affecter votre prestige et votre statut au sein des forces de %1.</French>
+        <Korean>당신은 %1의 공동 자금에서 100 €를 가져갔습니다.&lt;br/&gt;&lt;br/&gt;이는 %1의 군 내에서 당신의 지위와 위신에 영향을 미칠 것입니다.</Korean>
+        <Russian>Вы забрали 100 € из фонда %1.&lt;br/&gt;&lt;br/&gt;Это повлияет на ваш престиж и статус среди сил %1.</Russian>
+        <Polish>Zgarnąłeś 100 € z puli pieniędzy %1.&lt;br/&gt;&lt;br/&gt;Wpłynie to na twój prestiż i status wśród sił %1.</Polish>
+        <Czech>Vzal jsi 100 € z rozpočtu %1.&lt;br/&gt;&lt;br/&gt;Tento čin ovlivní tvé postavení mezi členy %1</Czech>
+        <Chinesesimp>你从 %1 资金池中拿取了100 €. &lt;br/&gt;&lt;br/&gt; 这将影响你在 %1阵营中的声誉以及地位.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_tBSteal_titel">
         <Original>Money Grab</Original>
@@ -6263,14 +6263,14 @@
         <Chinesesimp>你需要离旗杆近一点才能购买载具</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_addFIAVeh_no_money">
-        <Original>You do not have enough money for this vehicle: %1 PLN required.</Original>
-        <Italian>Non hai abbastanza soldi per questo veicolo: %1 PLN richiesti.</Italian>
-        <French>Vous n'avez pas assez d'argent pour acheter ce véhicule: %1 PLN requis.</French>
-        <Korean>이 차량을 구입하기 위한 자금이 부족합니다: %1 PLN 필요.</Korean>
-        <Russian>У вас недостаточно денег для покупки этого транспорта: требуется %1 PLN.</Russian>
-        <Polish>Nie masz wystarczających środków na ten pojazd: %1 PLN wymagane.</Polish>
-        <Czech>Nemáš dostatek peněz na toto vozidlo: %1 PLN vyžadováno.</Czech>
-        <Chinesesimp>你没有足够的资金来购买此载具: 需要 %1 PLN.</Chinesesimp>
+        <Original>You do not have enough money for this vehicle: %1 € required.</Original>
+        <Italian>Non hai abbastanza soldi per questo veicolo: %1 € richiesti.</Italian>
+        <French>Vous n'avez pas assez d'argent pour acheter ce véhicule: %1 € requis.</French>
+        <Korean>이 차량을 구입하기 위한 자금이 부족합니다: %1 € 필요.</Korean>
+        <Russian>У вас недостаточно денег для покупки этого транспорта: требуется %1 €.</Russian>
+        <Polish>Nie masz wystarczających środków na ten pojazd: %1 € wymagane.</Polish>
+        <Czech>Nemáš dostatek peněz na toto vozidlo: %1 € vyžadováno.</Czech>
+        <Chinesesimp>你没有足够的资金来购买此载具: 需要 %1 €.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_addFIAVeh_no_placing">
         <Original>Unable to buy vehicle, you are already placing something.</Original>
@@ -6303,14 +6303,14 @@
         <Chinesesimp>添加载具</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_addSqdHC_buyveh">
-        <Original>Buy a vehicle for this squad for %1 PLN.</Original>
-        <Italian>Compra un veicolo per questa squadra per %1 PLN.</Italian>
-        <French>Acheter un véhicule pour cette escouade pour %1 PLN.</French>
-        <Korean>이 팀을 위한 차량을 %1 PLN에 구입합니다.</Korean>
-        <Russian>Купить технику для этого отряда за %1 PLN.</Russian>
-        <Polish>Kup pojazd dla tego oddziału za %1 PLN.</Polish>
-        <Czech>Zakoupit vozidlo pro toto družstvo za %1 PLN.</Czech>
-        <Chinesesimp>花费 %1 PLN 为该班组增添一辆载具</Chinesesimp>
+        <Original>Buy a vehicle for this squad for %1 €.</Original>
+        <Italian>Compra un veicolo per questa squadra per %1 €.</Italian>
+        <French>Acheter un véhicule pour cette escouade pour %1 €.</French>
+        <Korean>이 팀을 위한 차량을 %1 €에 구입합니다.</Korean>
+        <Russian>Купить технику для этого отряда за %1 €.</Russian>
+        <Polish>Kup pojazd dla tego oddziału za %1 €.</Polish>
+        <Czech>Zakoupit vozidlo pro toto družstvo za %1 €.</Czech>
+        <Chinesesimp>花费 %1 € 为该班组增添一辆载具</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_addSqdHC_no_commander">
         <Original>Only the Commander has access to this function.</Original>
@@ -6373,24 +6373,24 @@
         <Chinesesimp>你当前的游玩模式并不支持拆解/部署 固定式武器.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_addSqdHC_no_money">
-        <Original>You do not have enough money for this request (%1 PLN required).</Original>
-        <Italian>Non hai abbastanza soldi per questo veicolo (%1 PLN richiesti).</Italian>
-        <French>Vous n'avez pas assez d'argent pour cette requête (%1 PLN requis).</French>
-        <Korean>이 요청을 수행하기 위한 자금이 부족합니다(%1 PLN 필요).</Korean>
-        <Russian>У вас недостаточно денег для этого запроса (требуется %1 PLN).</Russian>
-        <Polish>Nie masz wystarczających środków na realizację tego żądania (wymagane %1 PLN).</Polish>
-        <Czech>Nemáš dostatek peněz na tento požadavek (%1 PLN vyžadováno).</Czech>
-        <Chinesesimp>你没有足够的资金来完成这个任务 (需要 %1 PLN).</Chinesesimp>
+        <Original>You do not have enough money for this request (%1 € required).</Original>
+        <Italian>Non hai abbastanza soldi per questo veicolo (%1 € richiesti).</Italian>
+        <French>Vous n'avez pas assez d'argent pour cette requête (%1 € requis).</French>
+        <Korean>이 요청을 수행하기 위한 자금이 부족합니다(%1 € 필요).</Korean>
+        <Russian>У вас недостаточно денег для этого запроса (требуется %1 €).</Russian>
+        <Polish>Nie masz wystarczających środków na realizację tego żądania (wymagane %1 €).</Polish>
+        <Czech>Nemáš dostatek peněz na tento požadavek (%1 € vyžadováno).</Czech>
+        <Chinesesimp>你没有足够的资金来完成这个任务 (需要 %1 €).</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_addSqdHC_no_money2">
-        <Original>No money left to buy a transport vehicle (%1 PLN required), creating barefoot squad.</Original>
-        <Italian>Non vi sono fondi rimasti per comprare un veicolo da trasporto (%1 PLN richiesti), costituzione di squadra appiedata.</Italian>
-        <French>Pas assez d'argent pour acheter ce véhicule de transport (%1 PLN requis), création d'une escouade à pied.</French>
-        <Korean>수송 차량을 만들 자금이 없으며(%1 PLN 필요), 뚜벅이 분대로 소환합니다.</Korean>
-        <Russian>Денег на покупку транспортного средства (требуется %1 PLN) не хватает, найм пешего отряда.</Russian>
-        <Polish>Nie ma pieniędzy na zakup pojazdu transportowego (wymagane %1 PLN), tworzenie oddziału bez pojazdu.</Polish>
+        <Original>No money left to buy a transport vehicle (%1 € required), creating barefoot squad.</Original>
+        <Italian>Non vi sono fondi rimasti per comprare un veicolo da trasporto (%1 € richiesti), costituzione di squadra appiedata.</Italian>
+        <French>Pas assez d'argent pour acheter ce véhicule de transport (%1 € requis), création d'une escouade à pied.</French>
+        <Korean>수송 차량을 만들 자금이 없으며(%1 € 필요), 뚜벅이 분대로 소환합니다.</Korean>
+        <Russian>Денег на покупку транспортного средства (требуется %1 €) не хватает, найм пешего отряда.</Russian>
+        <Polish>Nie ma pieniędzy na zakup pojazdu transportowego (wymagane %1 €), tworzenie oddziału bez pojazdu.</Polish>
         <Czech>Nezbyli žádné peníze k zakoupení transportního vozidla (%1 vyžadováno), vytvářím pěší družstvo.</Czech>
-        <Chinesesimp>没有足够剩余的资金来购买运输载具 (需要 %1 PLN), 创建步行作战班组</Chinesesimp>
+        <Chinesesimp>没有足够剩余的资金来购买运输载具 (需要 %1 €), 创建步行作战班组</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_addSqdHC_no_movehq">
         <Original>You cannot recruit a new squad while you are moving your HQ.</Original>
@@ -6692,13 +6692,13 @@
         <Chinesesimp>你当前班组内没有可调用的工程师. 他们可能正在忙别的事又或者已经倒下了.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_build_no_money">
-        <Original>You do not have enough money for this construction (%1 PLN needed).</Original>
-        <Italian>Non hai abbastanza soldi per questa costruzione (%1 PLN richiesti).</Italian>
-        <French>Vous n'avez pas assez d'argent pour cette construction (%1 PLN requis).</French>
-        <Korean>이 공사에 필요한 비용(%1 PLN 필요)이 부족합니다.</Korean>
-        <Russian>У вас недостаточно денег для этого строительства (требуется %1 PLN).</Russian>
-        <Polish>Nie masz wystarczających środków na tę budowę (potrzeba %1 PLN).</Polish>
-        <Chinesesimp>你没有足够的资金来建造该建筑 (需要 %1 PLN).</Chinesesimp>
+        <Original>You do not have enough money for this construction (%1 € needed).</Original>
+        <Italian>Non hai abbastanza soldi per questa costruzione (%1 € richiesti).</Italian>
+        <French>Vous n'avez pas assez d'argent pour cette construction (%1 € requis).</French>
+        <Korean>이 공사에 필요한 비용(%1 € 필요)이 부족합니다.</Korean>
+        <Russian>У вас недостаточно денег для этого строительства (требуется %1 €).</Russian>
+        <Polish>Nie masz wystarczających środków na tę budowę (potrzeba %1 €).</Polish>
+        <Chinesesimp>你没有足够的资金来建造该建筑 (需要 %1 €).</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_build_no_outside">
         <Original>You cannot build a bunker outside a controlled zone.</Original>
@@ -7137,14 +7137,14 @@
         <Chinesesimp>只有我们的指挥官才能使用该功能</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_FIASkAdd_no_money">
-        <Original>You do not have enough money to afford additional training. %1 PLN needed.</Original>
-        <Italian>Non hai abbastanza soldi per permetterti addestramento aggiuntivo. %1 PLN richiesti.</Italian>
-        <French>Vous n'avez pas assez d'argent pour vous permettre des entrainements supplémentaires. %1 PLN nécessaires.</French>
-        <Korean>추가적인 훈련에 필요한 자금이 없습니다. %1 PLN가 필요합니다.</Korean>
-        <Russian>У вас недостаточно денег, чтобы позволить себе обучение. Необходимо %1 PLN.</Russian>
-        <Polish>Nie masz wystarczająco dużo pieniędzy, aby pozwolić sobie na dodatkowe szkolenie. %1 PLN potrzebne.</Polish>
-        <Czech>Nemáš dostatečné finance na další trénink. Potřebuješ ještě %1 PLN.</Czech>
-        <Chinesesimp>你当前没有足够的资金来维持额外的训练. 需要 %1 PLN. </Chinesesimp>
+        <Original>You do not have enough money to afford additional training. %1 € needed.</Original>
+        <Italian>Non hai abbastanza soldi per permetterti addestramento aggiuntivo. %1 € richiesti.</Italian>
+        <French>Vous n'avez pas assez d'argent pour vous permettre des entrainements supplémentaires. %1 € nécessaires.</French>
+        <Korean>추가적인 훈련에 필요한 자금이 없습니다. %1 €가 필요합니다.</Korean>
+        <Russian>У вас недостаточно денег, чтобы позволить себе обучение. Необходимо %1 €.</Russian>
+        <Polish>Nie masz wystarczająco dużo pieniędzy, aby pozwolić sobie na dodatkowe szkolenie. %1 € potrzebne.</Polish>
+        <Czech>Nemáš dostatečné finance na další trénink. Potřebuješ ještě %1 €.</Czech>
+        <Chinesesimp>你当前没有足够的资金来维持额外的训练. 需要 %1 €. </Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_FIASkAdd_no_wl">
         <Original>You cannot upgrade training in the current War Level.</Original>
@@ -7219,12 +7219,12 @@
         <Chinesesimp>额外的驻军单位无法被添加到观察哨</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_garrDia_removed">
-        <Original>Garrison removed&lt;br/&gt;&lt;br/&gt;Recovered Money: %1 PLN&lt;br/&gt;Recovered HR: %2</Original>
-        <Italian>Guarnigione rimossa&lt;br/&gt;&lt;br/&gt;Soldi Recuperati: %1 PLN&lt;br/&gt; HR recuperate: %2</Italian>
-        <French>Garnison supprimée&lt;br/&gt;&lt;br/&gt;Argent Récupéré : %1 PLN&lt;br/&gt;RH Récupéré : %2</French>
-        <Korean>주둔군 회수됨&lt;br/&gt;&lt;br/&gt;회수된 돈: %1 PLN&lt;br/&gt;회수된 인적 자원 : %2</Korean>
-        <Russian>Гарнизон удален&lt;br/&gt;&lt;br/&gt;Восстановленные деньги: %1 PLN&lt;br/&gt;Возвращено HR: %2</Russian>
-        <Chinesesimp>驻军已移除&lt;br/&gt;&lt;br/&gt;已收回资金: %1 PLN&lt;br/&gt;已回收人力: %2</Chinesesimp>
+        <Original>Garrison removed&lt;br/&gt;&lt;br/&gt;Recovered Money: %1 €&lt;br/&gt;Recovered HR: %2</Original>
+        <Italian>Guarnigione rimossa&lt;br/&gt;&lt;br/&gt;Soldi Recuperati: %1 €&lt;br/&gt; HR recuperate: %2</Italian>
+        <French>Garnison supprimée&lt;br/&gt;&lt;br/&gt;Argent Récupéré : %1 €&lt;br/&gt;RH Récupéré : %2</French>
+        <Korean>주둔군 회수됨&lt;br/&gt;&lt;br/&gt;회수된 돈: %1 €&lt;br/&gt;회수된 인적 자원 : %2</Korean>
+        <Russian>Гарнизон удален&lt;br/&gt;&lt;br/&gt;Восстановленные деньги: %1 €&lt;br/&gt;Возвращено HR: %2</Russian>
+        <Chinesesimp>驻军已移除&lt;br/&gt;&lt;br/&gt;已收回资金: %1 €&lt;br/&gt;已回收人力: %2</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_garrDia_title">
         <Original>Garrison</Original>
@@ -7415,12 +7415,12 @@
         <Chinesesimp>只有服务器白名单玩家才能雇佣AI单位</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_reinfPlayer_no_money">
-        <Original>You do not have enough money for this kind of unit (%1 PLN needed).</Original>
-        <Italian>Non hai abbastanza fondi per questo tipo di unità (%1 PLN richiesti).</Italian>
-        <French>Vous n'avez pas assez d'argent pour ce type d'unité (%1 PLN requis).</French>
-        <Korean>이런 종류의 유닛에 필요한 충분한 비용이 없습니다 (%1 PLN 필요).</Korean>
-        <Russian>У вас недостаточно денег для такого устройства (требуется %1 PLN).</Russian>
-        <Chinesesimp>您没有足够的钱来添加此类单位（需要 %1 PLN）。</Chinesesimp>
+        <Original>You do not have enough money for this kind of unit (%1 € needed).</Original>
+        <Italian>Non hai abbastanza fondi per questo tipo di unità (%1 € richiesti).</Italian>
+        <French>Vous n'avez pas assez d'argent pour ce type d'unité (%1 € requis).</French>
+        <Korean>이런 종류의 유닛에 필요한 충분한 비용이 없습니다 (%1 € 필요).</Korean>
+        <Russian>У вас недостаточно денег для такого устройства (требуется %1 €).</Russian>
+        <Chinesesimp>您没有足够的钱来添加此类单位（需要 %1 €）。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_reinfPlayer_no_wait">
         <Original>You need to wait %1 seconds to be able to recruit units again.</Original>
@@ -7903,13 +7903,13 @@
         <Chinesesimp>&lt;br/&gt;资金:</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_save_saveLoop_text_options">
-        <Original>PLN&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Further infomation is provided in &lt;t color='#f0d498'&gt;Map Screen &gt; Game Options &gt; Persistent Save-game&lt;/t&gt;.</Original>
-        <Italian>PLN&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Ulteriori informazioni in: &lt;t color='#f0d498'&gt;Schermata Mappa &gt; Opzioni di Gioco &gt; Salvataggio Persistente&lt;/t&gt;.</Italian>
-        <French>PLN&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Informations complémentaires dans &lt;t color='#f0d498'&gt;Ecran Carte &gt; Options de jeu &gt; Sauvegarde Persistante&lt;/t&gt;.</French>
-        <Korean>PLN&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;더 자세한 정보는&lt;t color='#f0d498'&gt;맵 스크린 &gt; 게임 옵션 &gt; 게임 영구 저장&lt;/t&gt;에서 제공됩니다.</Korean>
-        <Russian>PLN&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Дополнительная информация представлена в &lt;t color='#f0d498'&gt;Карта &gt; Параметры игры &gt; Сохранение игры&lt;/t&gt;.</Russian>
-        <Czech>PLN&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Další informace jsou v &lt;t color='#f0d498'&gt;Obrazovce mapy &gt; Možnosti hry &gt; Trvalé uložení&lt;/t&gt;.</Czech>
-        <Chinesesimp>PLN&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;更多的信息将提供在&lt;t color='#f0d498'&gt;地图界面 &gt; 游戏选项 &gt; 持久化存档&lt;/t&gt;.</Chinesesimp>
+        <Original>€&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Further infomation is provided in &lt;t color='#f0d498'&gt;Map Screen &gt; Game Options &gt; Persistent Save-game&lt;/t&gt;.</Original>
+        <Italian>€&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Ulteriori informazioni in: &lt;t color='#f0d498'&gt;Schermata Mappa &gt; Opzioni di Gioco &gt; Salvataggio Persistente&lt;/t&gt;.</Italian>
+        <French>€&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Informations complémentaires dans &lt;t color='#f0d498'&gt;Ecran Carte &gt; Options de jeu &gt; Sauvegarde Persistante&lt;/t&gt;.</French>
+        <Korean>€&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;더 자세한 정보는&lt;t color='#f0d498'&gt;맵 스크린 &gt; 게임 옵션 &gt; 게임 영구 저장&lt;/t&gt;에서 제공됩니다.</Korean>
+        <Russian>€&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Дополнительная информация представлена в &lt;t color='#f0d498'&gt;Карта &gt; Параметры игры &gt; Сохранение игры&lt;/t&gt;.</Russian>
+        <Czech>€&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;Další informace jsou v &lt;t color='#f0d498'&gt;Obrazovce mapy &gt; Možnosti hry &gt; Trvalé uložení&lt;/t&gt;.</Czech>
+        <Chinesesimp>€&lt;/t&gt;&lt;/t&gt;&lt;br/&gt;&lt;br/&gt;更多的信息将提供在&lt;t color='#f0d498'&gt;地图界面 &gt; 游戏选项 &gt; 持久化存档&lt;/t&gt;.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_save_saveLoop_title1">
         <Original>Save Game</Original>
@@ -8370,17 +8370,17 @@
         <Chinesesimp>您缺少HR来招募单位。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_garrison_error_no_money">
-        <Original>You don't have enough money for adding this kind of unit (%1 PLN needed).</Original>
-        <Italian>Non hai abbastanza fondi per aggiungere questo tipo di unità (%1 PLN richiesti).</Italian>
-        <Spanish>No tienes suficiente dinero para añadir este tipo de unidad (Necesitas %1 PLN).</Spanish>
-        <French>Vous n'avez pas assez d'argent pour ajouter ce type d'unité (%1 PLN requis).</French>
-        <Korean>이런 종류의 유닛을 추가할 충분한 비용이 없습니다 (%1 PLN 필요).</Korean>
-        <Russian>У вас недостаточно денег для добавления такого юнита (необходимо %1 PLN).</Russian>
-        <Polish>Nie masz wystarczających środków na dodanie tego rodzaju jednostki (wymagany %1 PLN).</Polish>
-        <Czech>Nemáte dostatek peněz pro přidání této jednotky (%1 PLN potřebných).</Czech>
-        <Portuguese>Não tens dinheiro suficiente para adicionar este tipo de unidade (%1 PLN necessário)</Portuguese>
-        <Turkish>Bu tür bir birim eklemek için yeterli paranız yok (%1 PLN gerekli).</Turkish>
-        <Chinesesimp>您没有足够的钱来添加此类单位（需要 %1 PLN）。</Chinesesimp>
+        <Original>You don't have enough money for adding this kind of unit (%1 € needed).</Original>
+        <Italian>Non hai abbastanza fondi per aggiungere questo tipo di unità (%1 € richiesti).</Italian>
+        <Spanish>No tienes suficiente dinero para añadir este tipo de unidad (Necesitas %1 €).</Spanish>
+        <French>Vous n'avez pas assez d'argent pour ajouter ce type d'unité (%1 € requis).</French>
+        <Korean>이런 종류의 유닛을 추가할 충분한 비용이 없습니다 (%1 € 필요).</Korean>
+        <Russian>У вас недостаточно денег для добавления такого юнита (необходимо %1 €).</Russian>
+        <Polish>Nie masz wystarczających środków na dodanie tego rodzaju jednostki (wymagany %1 €).</Polish>
+        <Czech>Nemáte dostatek peněz pro přidání této jednotky (%1 € potřebných).</Czech>
+        <Portuguese>Não tens dinheiro suficiente para adicionar este tipo de unidade (%1 € necessário)</Portuguese>
+        <Turkish>Bu tür bir birim eklemek için yeterli paranız yok (%1 € gerekli).</Turkish>
+        <Chinesesimp>您没有足够的钱来添加此类单位（需要 %1 €）。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_garrison_error_no_mortar">
         <Original>You can't add mortars to Roadblock or Watchpost garrisons.</Original>
@@ -12351,17 +12351,17 @@
         <Chinesesimp>重建资产</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_button_rebuild_assets_tooltip">
-        <Original>Cost: PLN5000</Original>
-        <German>Kosten: 5.000 PLN</German>
-        <Italian>Costo: PLN5000</Italian>
-        <Spanish>Coste : 5000 PLN</Spanish>
-        <French>Coût : 5000 PLN</French>
-        <Korean>가격: 5000 PLN</Korean>
+        <Original>Cost: €5000</Original>
+        <German>Kosten: 5.000 €</German>
+        <Italian>Costo: €5000</Italian>
+        <Spanish>Coste : 5000 €</Spanish>
+        <French>Coût : 5000 €</French>
+        <Korean>가격: 5000 €</Korean>
         <Russian>Цена: 5000$</Russian>
-        <Polish>Koszt: PLN5000</Polish>
-        <Czech>Cena: 5000 PLN</Czech>
-        <Turkish>Maliyet: PLN5000</Turkish>
-        <Chinesesimp>花费: 5000 PLN</Chinesesimp>
+        <Polish>Koszt: €5000</Polish>
+        <Czech>Cena: 5000 €</Czech>
+        <Turkish>Maliyet: €5000</Turkish>
+        <Chinesesimp>花费: 5000 €</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_button_train_ai_text">
         <Original>Train your Troops</Original>
@@ -12390,30 +12390,30 @@
         <Chinesesimp>提升AI技能等级</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_button_withdraw_text">
-        <Original>Grab 100 PLN from Pool</Original>
-        <German>Entnehme 100 PLN aus der Kasse</German>
-        <Italian>Prendi 100 PLN dal conto</Italian>
-        <Spanish>Coger 100 PLN de la caja</Spanish>
-        <French>Prendre 100 PLN de la cagnotte</French>
-        <Korean>팩션 자금에서 100 PLN 가져가기</Korean>
+        <Original>Grab 100 € from Pool</Original>
+        <German>Entnehme 100 € aus der Kasse</German>
+        <Italian>Prendi 100 € dal conto</Italian>
+        <Spanish>Coger 100 € de la caja</Spanish>
+        <French>Prendre 100 € de la cagnotte</French>
+        <Korean>팩션 자금에서 100 € 가져가기</Korean>
         <Russian>Взять 100$ из фонда</Russian>
-        <Polish>Weź 100 PLN z Puli</Polish>
-        <Czech>Vzít 100 PLN ze společného fondu</Czech>
-        <Turkish>Havuzdan 100 PLN al</Turkish>
-        <Chinesesimp>从资金池中拿取100 PLN</Chinesesimp>
+        <Polish>Weź 100 € z Puli</Polish>
+        <Czech>Vzít 100 € ze společného fondu</Czech>
+        <Turkish>Havuzdan 100 € al</Turkish>
+        <Chinesesimp>从资金池中拿取100 €</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_button_withdraw_tooltip">
-        <Original>Take 100 PLN from faction pool and add it to your personal account. It will damage your position among the faction in the commander career</Original>
-        <German>Transferiere 100 PLN aus der Fraktionskasse zu deinem persönlichen Konto. Dies wird deiner Reputation bezüglich deiner Karriere innerhalb der Fraktion schaden.</German>
-        <Italian>Prendi 100 PLN dalla cassa della fazione e inseriscili nel tuo account personale. Danneggerà la tua posizione all'interno della fazione per la tua carriera da comandante</Italian>
-        <Spanish>Coge 100 PLN de la caja de la facción y añadela a tu cuenta perosnal. Dañará tu posición entre la facción por la carrera de la comandancia</Spanish>
-        <French>Prendre 100 PLN de la cagnotte de la faction pour l'ajouter sur votre compte. Cela va nuire à votre statut et à votre carrière de commandant.</French>
-        <Korean>팩션 자금 100 PLN를 당신의 계좌로 옮깁니다. 이 행위는 지휘관으로서의 평판에 악영향을 줄 것입니다.</Korean>
+        <Original>Take 100 € from faction pool and add it to your personal account. It will damage your position among the faction in the commander career</Original>
+        <German>Transferiere 100 € aus der Fraktionskasse zu deinem persönlichen Konto. Dies wird deiner Reputation bezüglich deiner Karriere innerhalb der Fraktion schaden.</German>
+        <Italian>Prendi 100 € dalla cassa della fazione e inseriscili nel tuo account personale. Danneggerà la tua posizione all'interno della fazione per la tua carriera da comandante</Italian>
+        <Spanish>Coge 100 € de la caja de la facción y añadela a tu cuenta perosnal. Dañará tu posición entre la facción por la carrera de la comandancia</Spanish>
+        <French>Prendre 100 € de la cagnotte de la faction pour l'ajouter sur votre compte. Cela va nuire à votre statut et à votre carrière de commandant.</French>
+        <Korean>팩션 자금 100 €를 당신의 계좌로 옮깁니다. 이 행위는 지휘관으로서의 평판에 악영향을 줄 것입니다.</Korean>
         <Russian>Перевести 100$ из фонда сопротивления себе на счёт. Это вредит вашей репутации как командира</Russian>
-        <Polish>Weź 100 PLN z puli frakcji i dodaj je do swojego konta osobistego. Zaszkodzi to twojej reputacji wśród twojej frakcji w karierze dowódcy</Polish>
-        <Czech>Převod 100 PLN ze společného fondu na váš účet.Poškodí vaši pozici v frakci a též vaší kariéru velitele</Czech>
-        <Turkish>Grup kasasından 100 PLN alın ve kişisel hesabınıza ekleyin. Komutan kariyerinde grup içindeki konumunuza zarar verir</Turkish>
-        <Chinesesimp>从阵营的资金池中拿取100 PLN并将其添加到您的个人帐户中。这会损害您在指挥官生涯中的地位</Chinesesimp>
+        <Polish>Weź 100 € z puli frakcji i dodaj je do swojego konta osobistego. Zaszkodzi to twojej reputacji wśród twojej frakcji w karierze dowódcy</Polish>
+        <Czech>Převod 100 € ze společného fondu na váš účet.Poškodí vaši pozici v frakci a též vaší kariéru velitele</Czech>
+        <Turkish>Grup kasasından 100 € alın ve kişisel hesabınıza ekleyin. Komutan kariyerinde grup içindeki konumunuza zarar verir</Turkish>
+        <Chinesesimp>从阵营的资金池中拿取100 €并将其添加到您的个人帐户中。这会损害您在指挥官生涯中的地位</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_frame_text">
         <Original>HQ Options: Commander Only</Original>
@@ -15557,15 +15557,15 @@
         <Chinesesimp>使用该选项将你面前的玩家加入到会员列表</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_money_donate_faction">
-        <Original>Donate 100 PLN to Faction</Original>
-        <Italian>Dona 100 PLN alla Fazione</Italian>
-        <Spanish>Donar 100 PLN a la Facción</Spanish>
-        <French>Faire un don de 100 PLN à la Faction</French>
-        <Korean>팩션에 100 PLN 기부</Korean>
-        <Russian>Пожертвовать 100 PLN фракции</Russian>
-        <Polish>Wpłać 100 PLN dla frakcji</Polish>
-        <Czech>Darujte 100 PLN frakci</Czech>
-        <Chinesesimp>向阵营捐赠 100 PLN</Chinesesimp>
+        <Original>Donate 100 € to Faction</Original>
+        <Italian>Dona 100 € alla Fazione</Italian>
+        <Spanish>Donar 100 € a la Facción</Spanish>
+        <French>Faire un don de 100 € à la Faction</French>
+        <Korean>팩션에 100 € 기부</Korean>
+        <Russian>Пожертвовать 100 € фракции</Russian>
+        <Polish>Wpłać 100 € dla frakcji</Polish>
+        <Czech>Darujte 100 € frakci</Czech>
+        <Chinesesimp>向阵营捐赠 100 €</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_money_donate_faction_tooltip">
         <Original>It will increase your prestige among your faction</Original>
@@ -15579,16 +15579,16 @@
         <Chinesesimp>这将会提升你在我方阵营中的威望</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_money_donate_player">
-        <Original>Donate 100 PLN to player</Original>
-        <German>Spieler 100 PLN spenden</German>
-        <Italian>Dona 100 PLN al giocatore</Italian>
-        <Spanish>Donar 100 PLN a un jugador</Spanish>
-        <French>Faire un don de 100 PLN au joueur</French>
-        <Korean>플레이어에게 100 PLN를 기부</Korean>
-        <Russian>Пожертвуйте 100 PLN игроку</Russian>
-        <Polish>Wpłać 100 PLN dla gracza</Polish>
-        <Czech>Darujte 100 PLN hráči</Czech>
-        <Chinesesimp>向玩家捐赠 100 PLN</Chinesesimp>
+        <Original>Donate 100 € to player</Original>
+        <German>Spieler 100 € spenden</German>
+        <Italian>Dona 100 € al giocatore</Italian>
+        <Spanish>Donar 100 € a un jugador</Spanish>
+        <French>Faire un don de 100 € au joueur</French>
+        <Korean>플레이어에게 100 €를 기부</Korean>
+        <Russian>Пожертвуйте 100 € игроку</Russian>
+        <Polish>Wpłać 100 € dla gracza</Polish>
+        <Czech>Darujte 100 € hráči</Czech>
+        <Chinesesimp>向玩家捐赠 100 €</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_money_remove_member">
         <Original>Remove Server Member</Original>
@@ -16827,16 +16827,16 @@
         <Original>That wreck has already been sold.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_noMoney">
-        <Original>Not enough money. This wreck costs %1 PLN.</Original>
+        <Original>Not enough money. This wreck costs %1 €.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_notAtHQ">
         <Original>The junkyard only delivers to HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_placing">
-        <Original>Buying wreck for %1 PLN.</Original>
+        <Original>Buying wreck for %1 €.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_bought">
-        <Original>You bought a wrecked %1 for %2 PLN. It needs repairs, fuel and ammo. It will not be repaired for free for the next %3.</Original>
+        <Original>You bought a wrecked %1 for %2 €. It needs repairs, fuel and ammo. It will not be repaired for free for the next %3.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_expired">
         <Original>Your %1 is no longer a junk vehicle. HQ and garage can repair it again.</Original>
@@ -16851,7 +16851,7 @@
         <Original>Strip for scrap</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_stripped">
-        <Original>You stripped the wrecked %1 for %2 PLN of scrap.</Original>
+        <Original>You stripped the wrecked %1 for %2 € of scrap.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_alreadyStripped">
         <Original>This wreck has already been stripped.</Original>
@@ -16922,16 +16922,16 @@
         <Original>Lie low</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_placingKit">
-        <Original>Buying %1 kit for %2 for %3 PLN.</Original>
+        <Original>Buying %1 kit for %2 for %3 €.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_placing">
         <Original>Placing %1 for %2. Build within %3 m of the town centre.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_bought">
-        <Original>%1 kit for %2 bought for %3 PLN. Haul the crate to %2 and install it within %4 m of the town centre.</Original>
+        <Original>%1 kit for %2 bought for %3 €. Haul the crate to %2 and install it within %4 m of the town centre.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_returned">
-        <Original>%1 kit for %2 returned, %3 PLN refunded.</Original>
+        <Original>%1 kit for %2 returned, %3 € refunded.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_installed">
         <Original>%1 built in %2 by %3.</Original>
@@ -16961,7 +16961,7 @@
         <Original>Kits can only be returned at HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_noMoney">
-        <Original>Not enough faction funds. This kit costs %1 PLN.</Original>
+        <Original>Not enough faction funds. This kit costs %1 €.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_townNotRebel">
         <Original>%1 is not under rebel control.</Original>
@@ -16991,7 +16991,7 @@
         <Original>Enemies nearby, you cannot lie low here.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_income">
-        <Original>Town upgrades: +%1 PLN, +%2 HR</Original>
+        <Original>Town upgrades: +%1 €, +%2 HR</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_logistics">

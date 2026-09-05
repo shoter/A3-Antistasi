@@ -178,7 +178,7 @@ private _createdCtrls = [];
     private _displayPrice = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayPrice ctrlSetPosition _priceBox;
     private _priceAlign = ["left", "right"] select (_columnCount == 1);
-    _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='%2' valign='middle' color='#52D273' shadow='2'>PLN %1</t>", _itemPrice, _priceAlign]);
+    _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='%2' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _itemPrice, _priceAlign]);
     _displayPrice ctrlCommit 0;
 
     private _modLogo = _display ctrlCreate ["A3A_PictureStroke", -1, _itemControlsGroup];
