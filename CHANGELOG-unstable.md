@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the `unstable-latest` GitHub prerelease and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Campaign chronicle
+
+### Added
+- Chronicle tab in the Battle Command menu (Y), readable by every player: a timeline of the campaign. It records sites and towns captured, lost or changing hands between the enemies, incoming attacks and whether they were repelled, punishments, HQ attacks and defences, HQ moves, Petros' death, promotions, war level changes and the end of the campaign. Entries name the rebel players who were there, show how long ago it happened, can be filtered by category, and a double-click jumps to the place on the map. The last 300 events are kept and stored in the campaign save.
+
+### Changed
+- The Battle Command tab buttons are narrower so that six tabs fit in the strip.
+
 ## 2026-09-05 - Player statistics and release notes
 
 ### Added
