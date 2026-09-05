@@ -24,8 +24,8 @@ Example:
 FIX_LINE_NUMBERS()
 
 // Share of the junkyard price paid out for a wreck, tune here
-#define SCRAP_SHARE_MIN 0.01
-#define SCRAP_SHARE_MAX 0.03
+#define SCRAP_SHARE_MIN 0.005
+#define SCRAP_SHARE_MAX 0.015
 
 if !(isServer) exitWith { Error("Attempted to call server function as non-server") };
 params [["_wreck", objNull, [objNull]], ["_player", objNull, [objNull]]];

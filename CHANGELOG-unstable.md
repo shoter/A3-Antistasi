@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-05 - Scrap pays less
+
+### Changed
+- Stripping a wreck for scrap now pays 0.5-1.5% of its junkyard price instead of 1-3%, still at least 50 per wreck. With the higher junkyard prices from the previous build, scrap money ends up roughly where it was before.
+
 ## 2026-09-05 - Euro symbol is back
 
 ### Changed
