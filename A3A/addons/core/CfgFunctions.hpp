@@ -520,7 +520,9 @@ class CfgFunctions
 
         class Junkyard {
             file = QPATHTOFOLDER(functions\Junkyard);
+            class getVehicleWeaponClasses {};
             class getVehicleWeapons {};
+            class getVehicleWeaponTiers {};
             class junkyardAdminRefresh {};
             class junkyardApplyWreckState {};
             class junkyardBuy {};

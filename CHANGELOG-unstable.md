@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-12 - Junkyard armament and armor pricing
+
+### Changed
+- Junkyard prices now depend on what a vehicle carries. The strongest weapon sets the multiplier: machine guns and grenade launchers 1.5x, autocannons and rocket pods 2.5x, guided missiles, bombs, tank guns and artillery 4x, plus a little more for every additional weapon. Armor adds up to 3x on top, so a main battle tank costs far more than an armed pickup. The stock already on offer keeps its old prices until the next delivery. Scrap payouts for stripped wrecks follow the same prices, so armed and armored wrecks pay more scrap.
+
 ## 2026-09-12 - Rally flag rework
 
 ### Changed

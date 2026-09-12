@@ -1,7 +1,9 @@
 /*
 Maintainer: Shoter
     Junkyard price of a wrecked vehicle. Tier table by faction category, with a fallback by vehicle kind
-    for classes that belong to no faction in the conflict. Adds a small random jitter and rounds.
+    for classes that belong to no faction in the conflict. Armament and armor raise the price: the strongest weapon
+    sets a multiplier by weapon tier (see A3A_fnc_getVehicleWeaponTiers) with a little extra per additional weapon,
+    and the config armor value adds a capped premium. Adds a small random jitter and rounds.
     Tune the numbers in this file only. Civilian tiers are priced at 3x and everything else at 2x of the original table.
 
 Arguments:
@@ -13,7 +15,7 @@ Return Value:
 Scope: Anywhere (faction hashmaps and civilian lists are broadcast)
 Environment: Any
 Public: Yes
-Dependencies:
+Dependencies: A3A_fnc_getVehicleWeaponTiers
 
 Example:
     ["O_MBT_02_cannon_F"] call A3A_fnc_junkyardPrice;
@@ -27,6 +29,16 @@ FIX_LINE_NUMBERS()
 params [["_class", "", [""]]];
 private _cfg = configFile >> "CfgVehicles" >> _class;
 if !(isClass _cfg) exitWith { 0 };
+
+// Armament: multiplier by tier of the strongest weapon (1 = machine guns, 2 = autocannons and rockets, 3 = missiles and tank guns),
+// plus an extra per additional weapon, capped
+private _weaponTierMultipliers = [1.5, 2.5, 4];
+private _extraPerWeapon = 0.25;
+private _extraPerWeaponMax = 1;
+
+// Armor: 1 + armor / divisor, capped. Cars sit around 50, MRAPs 200, APCs 400 and tanks 1000, giving about 1.1x, 1.4x, 1.8x and 3x.
+private _armorDivisor = 500;
+private _armorMultiplierMax = 3;
 
 // [classes, base price]. First match wins, so civilian tiers come first.
 private _tiers = [
@@ -55,7 +67,7 @@ private _tiers = [
     [OccAndInv("vehiclesLightArmed"), 5000],
     [OccAndInv("vehiclesGunBoats"), 6000],
 
-    // Military ground vehicles: up to 20000 after jitter, except tanks, artillery and heavy tanks which go up to 40000
+    // Military ground vehicles, before the armament and armor multipliers: up to 20000 after jitter, except tanks, artillery and heavy tanks which go up to 40000
     [OccAndInv("vehiclesLightAPCs"), 5000],
     [OccAndInv("vehiclesAPCs") + OccAndInv("vehiclesAmphibious") + OccAndInv("vehiclesRadar"), 8000],
     [OccAndInv("vehiclesIFVs"), 11000],
@@ -81,9 +93,11 @@ private _base = -1;
     if (_class in (_x#0)) exitWith { _base = _x#1 };
 } forEach _tiers;
 
+private _weaponTiers = [_class] call A3A_fnc_getVehicleWeaponTiers;
+
 // Fallback for vehicles outside the conflict factions (junkyard wildcard): by kind and armament
 if (_base == -1) then {
-    private _armed = ([_class] call A3A_fnc_getVehicleWeapons) isNotEqualTo [];
+    private _armed = _weaponTiers isNotEqualTo [];
     _base = call {
         if (getNumber (_cfg >> "isUav") > 0) exitWith { 10000 };
         if (_class isKindOf "Tank") exitWith { 24000 };
@@ -95,6 +109,16 @@ if (_base == -1) then {
         2000;
     };
 };
+
+// Armament multiplier: strongest weapon's tier, plus a little per additional weapon
+if (_weaponTiers isNotEqualTo []) then {
+    private _multiplier = _weaponTierMultipliers # ((_weaponTiers # 0) - 1);
+    _multiplier = _multiplier + ((_extraPerWeapon * (count _weaponTiers - 1)) min _extraPerWeaponMax);
+    _base = _base * _multiplier;
+};
+
+// Armor premium
+_base = _base * ((1 + (getNumber (_cfg >> "armor") / _armorDivisor)) min _armorMultiplierMax);
 
 // Jitter and rounding, same brackets as the gun shop
 private _price = _base * (0.85 + random 0.3);
