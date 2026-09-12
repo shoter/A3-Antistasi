@@ -49,7 +49,9 @@ private _requestMissionButton = _display displayCtrl A3A_IDC_MISSIONREQUESTBUTTO
 private _garrisonButton = _display displayCtrl A3A_IDC_ACCESSGARRISONSBUTTON;
 private _persistentSaveButton = _display displayCtrl A3A_IDC_PERSISTENTSAVECMDBUTTON;
 private _HCSquadsButton = _display displayCtrl A3A_IDC_HCSQUADSBUTTON;
-private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_HCSquadsButton];
+private _commanderButtonsGroup = _display displayCtrl A3A_IDC_COMMANDERBUTTONSGROUP;
+private _deployFlagButton = _display displayCtrl A3A_IDC_DEPLOYFLAGBUTTON;
+private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_HCSquadsButton,_commanderButtonsGroup];
 
 switch (_mode) do
 {
@@ -71,6 +73,11 @@ switch (_mode) do
 
         // Show base buttons
         {_x ctrlShow true} forEach _baseButtons;
+
+        // The rally flag can only be planted on foot, by a commander in control of their own unit
+        private _canDeployFlag = vehicle player == player && {!A3A_petrosMoving} && {player == player getVariable ["owner", player]};
+        _deployFlagButton ctrlEnable _canDeployFlag;
+        _deployFlagButton ctrlSetTooltip localize (["STR_antistasi_dialogs_main_deploy_flag_on_foot_tooltip", "STR_antistasi_dialogs_main_deploy_flag_tooltip"] select _canDeployFlag);
 
         // Check for radio, most of this isn't usable without one
         if !([player] call A3A_fnc_hasRadio) exitWith
@@ -1082,6 +1089,13 @@ switch (_mode) do
             uiSleep 1;
             player setVariable ["A3A_showGarrisonMenu", nil];
         };
+    };
+
+    case ("deployFlagButtonClicked"):
+    {
+        Trace("Commander deploying the rally flag");
+        closeDialog 1;
+        [player] remoteExecCall ["A3A_fnc_deployedFlagPlace", 2];
     };
 
     case ("showGarbageCleanOptions"):

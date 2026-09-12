@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-12 - Rally flag rework
+
+### Changed
+- **Deploy Rally Flag** moved from the commander's scroll-wheel menu to the Commander tab of the Battle Command menu; the button rows there scroll now. The commander can plant the flag as often as they like, a new flag replaces the old one. Taking the flag away without replacing it still happens at the flag itself or at the HQ flag.
+- Teleporting to the rally flag from the HQ flag now opens a confirmation dialog with the distance, the travel time, the price, whether enemies are at the flag and how many of your squad's AI come along. The Teleport button is greyed out when you cannot afford the trip.
+- Enemies at the flag no longer block the teleport. With enemies within 50 m of the flag the trip costs 50-150 € depending on the distance, takes the regular fast travel time and drops your squad scattered 50-100 m around the flag. Without enemies there it costs 5-15 €, takes a third of the time and lands you right at the flag.
+- The rally flag is for people on foot only: you have to be on foot to use it, and only your squad's AI on foot within 50 m of you come along. Vehicles stay behind.
+
 ## 2026-09-08 - Larger loot to crate radius options
 
 ### Added

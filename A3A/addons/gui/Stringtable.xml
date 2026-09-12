@@ -2184,6 +2184,18 @@
         <Turkish>Karargahtaki Çöpleri Temizle</Turkish>
         <Chinesesimp>清理HQ垃圾</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_deploy_flag_button">
+        <Original>Deploy Rally Flag</Original>
+        <Polish>Postaw flagę zbiórki</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deploy_flag_tooltip">
+        <Original>Plants the rally flag in front of you, replacing the current one. Rebels can teleport to it from the HQ flag. Remove it at the flag or at the HQ flag.</Original>
+        <Polish>Stawia flagę zbiórki przed tobą, zastępując obecną. Rebelianci mogą się do niej teleportować od flagi w HQ. Usuniesz ją przy fladze albo przy fladze w HQ.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deploy_flag_on_foot_tooltip">
+        <Original>You have to be on foot to deploy the rally flag.</Original>
+        <Polish>Aby postawić flagę zbiórki, musisz być pieszo.</Polish>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_add_vehicle">
         <Original>Add Vehicle</Original>
         <German>Fahrzeug hinzufügen</German>
@@ -6490,6 +6502,52 @@
       <Key ID="STR_antistasi_dialogs_main_fast_travel_safehouse">
         <Original>Safehouse: travel is free and faster.</Original>
         <Polish>Kryjówka: podróż jest darmowa i szybsza.</Polish>
+      </Key>
+    </Container>
+    <Container name="dialog_deployed_flag">
+      <Key ID="STR_antistasi_dialogs_deployed_flag_titlebar">
+        <Original>Rally Flag</Original>
+        <Polish>Flaga zbiórki</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_distance">
+        <Original>Distance: %1</Original>
+        <Polish>Odległość: %1</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_enemies_yes">
+        <Original>Enemies at the flag: YES</Original>
+        <Polish>Wrogowie przy fladze: TAK</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_enemies_no">
+        <Original>Enemies at the flag: no</Original>
+        <Polish>Wrogowie przy fladze: nie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_time">
+        <Original>Travel time: %1</Original>
+        <Polish>Czas podróży: %1</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_cost">
+        <Original>Cost: %1 €</Original>
+        <Polish>Koszt: %1 €</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_squad">
+        <Original>Squad AI coming along: %1 (on foot, within 50 m of you)</Original>
+        <Polish>AI z drużyny, które podróżują z tobą: %1 (pieszo, w promieniu 50 m od ciebie)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_hot">
+        <Original>Enemies are within 50 m of the rally flag. Your squad lands scattered 50-100 m around it and the trip takes the full fast travel time.</Original>
+        <Polish>Wrogowie są w promieniu 50 m od flagi zbiórki. Twoja drużyna wyląduje rozproszona 50-100 m wokół niej, a podróż zajmie tyle co zwykła szybka podróż.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_cold">
+        <Original>No enemies within 50 m of the rally flag. Your squad lands right at the flag, three times faster than fast travel.</Original>
+        <Polish>Brak wrogów w promieniu 50 m od flagi zbiórki. Twoja drużyna wyląduje tuż przy fladze, trzy razy szybciej niż zwykłą szybką podróżą.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_cancel">
+        <Original>Cancel</Original>
+        <Polish>Anuluj</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_deployed_flag_accept">
+        <Original>Teleport</Original>
+        <Polish>Teleportuj</Polish>
       </Key>
     </Container>
   </Package>

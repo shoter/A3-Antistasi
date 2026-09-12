@@ -1426,126 +1426,151 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 24 * GRID_H;
                 };
 
-                class AccessGarrisonsButton : A3A_Button
+                // Commander actions. More rows than fit under the HC squads button, so they scroll.
+                class CommanderButtonsGroup : A3A_ControlsGroupNoHScrollbars
                 {
-                    idc = A3A_IDC_ACCESSGARRISONSBUTTON;
-                    text = $STR_antistasi_dialogs_main_garrisons_button;
-                    onButtonClick = "[""garrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
-                    x = 10 * GRID_W;
+                    idc = A3A_IDC_COMMANDERBUTTONSGROUP;
+                    x = 8 * GRID_W;
                     y = 38 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class PersistentSaveButton : A3A_ShortcutButton
-                {
-                    idc = A3A_IDC_PERSISTENTSAVECMDBUTTON;
-                    text = $STR_antistasi_dialogs_main_persistent_save_button;
-                    onButtonClick = "[""persistentSaveButtonClicked""] call A3A_GUI_fnc_commanderTab;";
-                    x = 36 * GRID_W;
-                    y = 38 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class RecruitSquadButton : A3A_ShortcutButton
-                {
-                    idc = A3A_IDC_RECRUITSQUADCMDBUTTON;
-                    text = $STR_antistasi_dialogs_main_recruit_squad_button;
-                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RecruitSquadDialog""};";
-                    x = 10 * GRID_W;
-                    y = 52 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class MissionRequestButton : A3A_ShortcutButton
-                {
-                    idc = A3A_IDC_MISSIONREQUESTBUTTON;
-                    text = "Request Mission";
-                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RequestMissionDialog""};";
-                    x = 36 * GRID_W;
-                    y = 52 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class CustomizeLoadoutsButton : A3A_ShortcutButton
-                {
-                    idc = A3A_IDC_CUSTOMIZELOADOUTSBUTTON;
-                    text = $STR_antistasi_dialogs_main_customize_loadouts_button;
-                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_customLoadoutsDialog""};";
-                    x = 10 * GRID_W;
-                    y = 66 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class ArsenalLimitsButton : A3A_ShortcutButton
-                {
-                    idc = A3A_IDC_ARSENALLIMITSBUTTON;
-                    text = $STR_antistasi_dialogs_main_arsenal_limits_button;
-                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_ArsenalLimitsDialog""};";
-                    x = 36 * GRID_W;
-                    y = 66 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class AirSupportButton : A3A_Button
-                {
-                    idc = A3A_IDC_AIRSUPPORTBUTTON;
-                    text = $STR_antistasi_dialogs_main_air_support_button;
-                    onButtonClick = "[""switchTab"", [""airsupport""]] call A3A_GUI_fnc_mainDialog;";
-                    x = 10 * GRID_W;
-                    y = 80 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class GarbageCleanButton : A3A_ShortcutButton
-                {
-                    idc = A3A_IDC_GARBAGECLEANBUTTON;
-                    text = $STR_antistasi_dialogs_main_garbage_clean_button;
-                    onButtonclick = "[""showGarbageCleanOptions""] call A3A_GUI_fnc_commanderTab";
-                    x = 36 * GRID_W;
-                    y = 80 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 12 * GRID_H;
-                };
-
-                class GarbageCleanControlsGroup : A3A_ControlsGroupNoScrollbars
-                {
-                    idc = A3A_IDC_GARBAGECLEANCONTROLSGROUP;
-                    x = 10 * GRID_W;
-                    y = 80 * GRID_H;
-                    w = 50 * GRID_W;
-                    h = 12 * GRID_H;
+                    w = 58 * GRID_W;
+                    h = 58 * GRID_H;
 
                     class controls
                     {
-                        class GarbageCleanMapButton : A3A_ShortcutButton
+                        class AccessGarrisonsButton : A3A_Button
                         {
-                            idc = -1;
-                            text = $STR_antistasi_dialogs_main_garbage_clean_all;
-                            onButtonClick = "[""garbageCleanMapButtonClicked""] call A3A_GUI_fnc_commanderTab";
-                            x = 0 * GRID_W;
+                            idc = A3A_IDC_ACCESSGARRISONSBUTTON;
+                            text = $STR_antistasi_dialogs_main_garrisons_button;
+                            onButtonClick = "[""garrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
+                            x = 2 * GRID_W;
                             y = 0 * GRID_H;
                             w = 24 * GRID_W;
                             h = 12 * GRID_H;
                         };
 
-                        class GarbageCleanHQButton : A3A_ShortcutButton
+                        class PersistentSaveButton : A3A_ShortcutButton
                         {
-                            idc = -1;
-                            text = $STR_antistasi_dialogs_main_garbage_clean_hq;
-                            onButtonClick = "[""garbageCleanHqButtonClicked""] call A3A_GUI_fnc_commanderTab";
-                            x = 26 * GRID_W;
+                            idc = A3A_IDC_PERSISTENTSAVECMDBUTTON;
+                            text = $STR_antistasi_dialogs_main_persistent_save_button;
+                            onButtonClick = "[""persistentSaveButtonClicked""] call A3A_GUI_fnc_commanderTab;";
+                            x = 28 * GRID_W;
                             y = 0 * GRID_H;
                             w = 24 * GRID_W;
                             h = 12 * GRID_H;
                         };
 
+                        class RecruitSquadButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_RECRUITSQUADCMDBUTTON;
+                            text = $STR_antistasi_dialogs_main_recruit_squad_button;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RecruitSquadDialog""};";
+                            x = 2 * GRID_W;
+                            y = 14 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class MissionRequestButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_MISSIONREQUESTBUTTON;
+                            text = "Request Mission";
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RequestMissionDialog""};";
+                            x = 28 * GRID_W;
+                            y = 14 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class CustomizeLoadoutsButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_CUSTOMIZELOADOUTSBUTTON;
+                            text = $STR_antistasi_dialogs_main_customize_loadouts_button;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_customLoadoutsDialog""};";
+                            x = 2 * GRID_W;
+                            y = 28 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class ArsenalLimitsButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_ARSENALLIMITSBUTTON;
+                            text = $STR_antistasi_dialogs_main_arsenal_limits_button;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_ArsenalLimitsDialog""};";
+                            x = 28 * GRID_W;
+                            y = 28 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class AirSupportButton : A3A_Button
+                        {
+                            idc = A3A_IDC_AIRSUPPORTBUTTON;
+                            text = $STR_antistasi_dialogs_main_air_support_button;
+                            onButtonClick = "[""switchTab"", [""airsupport""]] call A3A_GUI_fnc_mainDialog;";
+                            x = 2 * GRID_W;
+                            y = 42 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class GarbageCleanButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_GARBAGECLEANBUTTON;
+                            text = $STR_antistasi_dialogs_main_garbage_clean_button;
+                            onButtonclick = "[""showGarbageCleanOptions""] call A3A_GUI_fnc_commanderTab";
+                            x = 28 * GRID_W;
+                            y = 42 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class GarbageCleanControlsGroup : A3A_ControlsGroupNoScrollbars
+                        {
+                            idc = A3A_IDC_GARBAGECLEANCONTROLSGROUP;
+                            x = 2 * GRID_W;
+                            y = 42 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 12 * GRID_H;
+
+                            class controls
+                            {
+                                class GarbageCleanMapButton : A3A_ShortcutButton
+                                {
+                                    idc = -1;
+                                    text = $STR_antistasi_dialogs_main_garbage_clean_all;
+                                    onButtonClick = "[""garbageCleanMapButtonClicked""] call A3A_GUI_fnc_commanderTab";
+                                    x = 0 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 24 * GRID_W;
+                                    h = 12 * GRID_H;
+                                };
+
+                                class GarbageCleanHQButton : A3A_ShortcutButton
+                                {
+                                    idc = -1;
+                                    text = $STR_antistasi_dialogs_main_garbage_clean_hq;
+                                    onButtonClick = "[""garbageCleanHqButtonClicked""] call A3A_GUI_fnc_commanderTab";
+                                    x = 26 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 24 * GRID_W;
+                                    h = 12 * GRID_H;
+                                };
+                            };
+                        };
+
+                        // Rally flag. Enabled by the commander tab update only while the commander is on foot.
+                        class DeployFlagButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_DEPLOYFLAGBUTTON;
+                            text = $STR_antistasi_dialogs_main_deploy_flag_button;
+                            tooltip = $STR_antistasi_dialogs_main_deploy_flag_tooltip;
+                            onButtonClick = "[""deployFlagButtonClicked""] call A3A_GUI_fnc_commanderTab;";
+                            x = 2 * GRID_W;
+                            y = 56 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
                     };
                 };
 

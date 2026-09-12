@@ -146,6 +146,7 @@ class CfgFunctions
             class deployedFlagPlace {};
             class deployedFlagRemove {};
             class deployedFlagTeleport {};
+            class deployedFlagTeleportInfo {};
             class destroyCity {};
             class distance {};
             class distanceUnits {};

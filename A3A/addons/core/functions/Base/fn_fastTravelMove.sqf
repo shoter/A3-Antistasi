@@ -20,7 +20,7 @@ Dependencies:
 Example:
     [player,"Synd_HQ",player] spawn A3A_fnc_fastTravelMove; // Moves player back to HQ
     [_hcGroup,"airport",player] spawn A3A_fnc_fastTravelMove; // Moves given HC group to the first defined airport, regardless of side.
-    [player, getPosATL A3A_deployedFlag, player, true, 3] spawn A3A_fnc_fastTravelMove; // Moves player to the rally flag, free and three times faster
+    [player, _safehousePos, player, true, 2] spawn A3A_fnc_fastTravelMove; // Moves player to a position, free of charge and twice as fast
 
 License: APL-ND
 */

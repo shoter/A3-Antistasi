@@ -22,3 +22,4 @@ Maintainer: DoomMetal
 #include "remarksDialog.hpp"
 #include "bugReportDialog.hpp"
 #include "vehServiceDialog.hpp"
+#include "deployedFlagDialog.hpp"
