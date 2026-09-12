@@ -32,9 +32,9 @@ if !(isClass _cfg) exitWith { 0 };
 
 // Armament: multiplier by tier of the strongest weapon (1 = machine guns, 2 = autocannons and rockets, 3 = missiles and tank guns),
 // plus an extra per additional weapon, capped
-private _weaponTierMultipliers = [1.5, 2.5, 4];
-private _extraPerWeapon = 0.25;
-private _extraPerWeaponMax = 1;
+private _weaponTierMultipliers = [1.25, 1.5, 2];
+private _extraPerWeapon = 0.125;
+private _extraPerWeaponMax = 0.5;
 
 // Armor: 1 + armor / divisor, capped. Cars sit around 50, MRAPs 200, APCs 400 and tanks 1000, giving about 1.1x, 1.4x, 1.8x and 3x.
 private _armorDivisor = 500;

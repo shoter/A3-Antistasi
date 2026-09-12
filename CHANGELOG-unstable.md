@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-12 - Junkyard pricing calibration
+
+### Changed
+- Junkyard weapon multipliers halved: machine guns and grenade launchers now 1.25x, autocannons and rocket pods 1.5x, guided missiles, bombs, tank guns and artillery 2x, plus a smaller bonus per additional weapon. An attack helicopter or a tank now costs about half of what the previous build asked. The armor premium is unchanged.
+
+### Fixed
+- Junkyard weapon tiers checked against the real vanilla ammunition values: .50 cal machine guns count as machine guns again instead of autocannons, unguided rocket pods count as rocket pods instead of artillery, and artillery rockets such as the MLRS count as artillery instead of machine guns. Stock already on offer keeps its prices until the next delivery.
+
 ## 2026-09-12 - Rally flag price follows the war level
 
 ### Changed

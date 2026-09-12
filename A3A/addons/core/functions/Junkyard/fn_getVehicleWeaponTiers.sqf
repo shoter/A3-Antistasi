@@ -2,10 +2,10 @@
 Maintainer: Shoter
     Rates the armament of a vehicle class for pricing. One tier per real weapon, plus one for the default
     pylon loadout when the vehicle has dynamic pylons. A weapon's tier is that of the strongest magazine it accepts:
-        3 - guided missiles, bombs, tank guns, artillery shells and heavy rockets
-        2 - autocannons and rocket pods
+        3 - guided missiles, bombs, tank guns, artillery shells and artillery rockets
+        2 - autocannons and unguided rocket pods
         1 - machine guns, grenade launchers and anything else
-    Tune the two thresholds below; the tier multipliers live in A3A_fnc_junkyardPrice.
+    Tune the autocannon threshold below; the tier multipliers live in A3A_fnc_junkyardPrice.
 
 Arguments:
     <STRING> Vehicle class name
@@ -24,10 +24,8 @@ Example:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-// Bullets with at least this hit value count as autocannon rounds: 12.7 mm stays below, 20 mm and up are above
-#define AUTOCANNON_HIT 30
-// Unguided rockets with at least this hit value count as artillery
-#define HEAVY_ROCKET_HIT 100
+// Bullets with at least this hit value count as autocannon rounds. Vanilla 12.7 mm rounds have hit 30 to 35, 20 mm and up 60 or more
+#define AUTOCANNON_HIT 40
 
 params [["_class", "", [""]]];
 private _cfg = configFile >> "CfgVehicles" >> _class;
@@ -41,10 +39,10 @@ private _wellsCfg = configFile >> "CfgMagazineWells";
 private _fnc_ammoTier = {
     params ["_ammo"];
     if (_ammo == "" or {!isClass (_ammoCfg >> _ammo)}) exitWith { 0 };
-    if (_ammo isKindOf ["MissileBase", _ammoCfg] or {_ammo isKindOf ["BombCore", _ammoCfg]} or {_ammo isKindOf ["ShellBase", _ammoCfg]}) exitWith { 3 };
-    private _hit = getNumber (_ammoCfg >> _ammo >> "hit");
-    if (_ammo isKindOf ["RocketBase", _ammoCfg]) exitWith { [2, 3] select (_hit >= HEAVY_ROCKET_HIT) };
-    if (_ammo isKindOf ["BulletBase", _ammoCfg] and {_hit >= AUTOCANNON_HIT}) exitWith { 2 };
+    // Artillery rockets and cluster bombs are submunition ammo, not rockets
+    if (_ammo isKindOf ["MissileBase", _ammoCfg] or {_ammo isKindOf ["BombCore", _ammoCfg]} or {_ammo isKindOf ["ShellBase", _ammoCfg]} or {_ammo isKindOf ["SubmunitionBase", _ammoCfg]}) exitWith { 3 };
+    if (_ammo isKindOf ["RocketBase", _ammoCfg]) exitWith { 2 };
+    if (_ammo isKindOf ["BulletBase", _ammoCfg] and {getNumber (_ammoCfg >> _ammo >> "hit") >= AUTOCANNON_HIT}) exitWith { 2 };
     1
 };
 
