@@ -5,8 +5,9 @@ Maintainer: Shoter
     it is not possible. Shared by the confirmation dialog on the HQ flag and by A3A_fnc_deployedFlagTeleport.
 
     Enemies able to fight within 50 m of the flag count as enemy presence. They never block the teleport, they make it
-    cost 50-150 instead of 5-15 (scaled by the distance, the maximum is reached at half the map size), keep the full
-    fast travel time (three times faster otherwise) and make the teleport scatter the squad around the flag.
+    cost 10-20 times the war level instead of 5-15 (30-60 at war level 3, scaled by the distance, the maximum is
+    reached at half the map size), keep the full fast travel time (three times faster otherwise) and make the teleport
+    scatter the squad around the flag.
     Keep the numbers in sync with the dialog texts (STR_antistasi_dialogs_deployed_flag_hot / _cold).
 
 Arguments:
@@ -56,7 +57,7 @@ private _enemyPresent = ((units Occupants + units Invaders) inAreaArray [_destPo
 
 // Price grows with the distance and tops out at half the map size
 private _fraction = (_distance / (worldSize / 2)) min 1;
-(if (_enemyPresent) then { [50, 150] } else { [5, 15] }) params ["_costMin", "_costMax"];
+(if (_enemyPresent) then { [10 * tierWar, 20 * tierWar] } else { [5, 15] }) params ["_costMin", "_costMax"];
 private _cost = round (_costMin + (_costMax - _costMin) * _fraction);
 
 // Regular fast travel time for a person on foot, three times faster when nobody is waiting at the flag

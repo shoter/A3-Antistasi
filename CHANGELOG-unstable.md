@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-12 - Rally flag price follows the war level
+
+### Changed
+- Teleporting to the rally flag while enemies are at it now costs 10-20 € times the war level, depending on the distance (30-60 € at war level 3), instead of a flat 50-150 €. Without enemies at the flag it still costs 5-15 €.
+
 ## 2026-09-12 - Junkyard armament and armor pricing
 
 ### Changed
