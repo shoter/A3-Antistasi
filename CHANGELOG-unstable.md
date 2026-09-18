@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-18 - Garrisons tab for everyone
+
+### Changed
+- The **Garrisons** tab of the Battle Command menu (Y) is now open to every player, not only the commander: everyone can see the rebel sites with their troops, vehicles, statics, ammo and status, sort the list and show a site on the map. The **Manage** button and the resupply controls (ammo truck list and **Resupply** button) are still shown to the commander only.
+
 ## 2026-09-18 - Loot crate delivery
 
 ### Added

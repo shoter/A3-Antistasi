@@ -2,7 +2,7 @@
 Maintainer: Shoter
     Handles updating, sorting and controls on the Garrisons tab of the Main dialog.
     Lists every rebel-held site (HQ, airbases, outposts, seaports, factories, resources, roadblocks and watchposts)
-    with troops, vehicles, statics, static ammo and spawn/attack status. Commander only, the tab button is disabled for everyone else.
+    with troops, vehicles, statics, static ammo and spawn/attack status. Open to everyone, the Manage and Resupply controls are shown to the commander only.
     The Resupply button sends a garaged ammo truck, picked in the combo box, to rearm the selected site (fn_garrisonResupplyRequest).
 
     Troops are read from the "Dum" marker text broadcast by the server (see fn_mrkUpdate), the HQ has no such marker.
@@ -98,7 +98,7 @@ switch (_mode) do
 
         // The ammo trucks for the Resupply combo box are fetched with the counts, the reply lands in "trucksReceived"
         private _trucksRequestAge = time - (missionNamespace getVariable ["A3A_GUI_resupplyTrucksRequestTime", -1000000]);
-        if (_countsAge > COUNTS_CACHE_LIFETIME && {_trucksRequestAge > COUNTS_REQUEST_TIMEOUT}) then {
+        if (player isEqualTo theBoss && {_countsAge > COUNTS_CACHE_LIFETIME} && {_trucksRequestAge > COUNTS_REQUEST_TIMEOUT}) then {
             missionNamespace setVariable ["A3A_GUI_resupplyTrucksRequestTime", time];
             ["requestTrucks"] call FUNC(garrisonsTab);
         };
@@ -266,6 +266,13 @@ switch (_mode) do
 
     case ("selectionChanged"):
     {
+        // Everyone can read the tab, managing and resupplying a garrison is for the commander only
+        private _isCommander = player isEqualTo theBoss;
+        {
+            (_display displayCtrl _x) ctrlShow _isCommander;
+        } forEach [A3A_IDC_GARRISONSMANAGEBUTTON, A3A_IDC_GARRISONSRESUPPLYTRUCK, A3A_IDC_GARRISONSRESUPPLYBUTTON];
+        if (!_isCommander) exitWith {};
+
         // Manage is blocked while the selected site is under attack, same rule as the HQ dialog
         private _manageButton = _display displayCtrl A3A_IDC_GARRISONSMANAGEBUTTON;
         private _index = lnbCurSelRow _listBox;

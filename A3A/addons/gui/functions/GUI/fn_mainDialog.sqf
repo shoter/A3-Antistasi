@@ -49,10 +49,6 @@ switch (_mode) do
             private _commanderTabButton = _display displayCtrl A3A_IDC_COMMANDERTABBUTTON;
             _commanderTabButton ctrlEnable false;
             _commanderTabButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_tab_disabled_tooltip";
-
-            private _garrisonsTabButton = _display displayCtrl A3A_IDC_GARRISONSTABBUTTON;
-            _garrisonsTabButton ctrlEnable false;
-            _garrisonsTabButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_garrisons_tab_disabled_tooltip";
         };
 
         if !([] call FUNCMAIN(isLocalAdmin)) then {
@@ -256,9 +252,8 @@ switch (_mode) do
 
             case ("garrisons"):
             {
-                if (player == theBoss) then {
-                    _selectedTabIDC = A3A_IDC_GARRISONSTAB;
-                };
+                // No permission check needed, the tab hides its commander controls itself
+                _selectedTabIDC = A3A_IDC_GARRISONSTAB;
             };
 
             case ("chronicle"):
