@@ -48,13 +48,22 @@ if (_pos distance2D _player > 100) exitWith { ["not_alive"] call _fnc_reject }; 
 _blockers = _blockers + _modeBlockers;
 if (_blockers isNotEqualTo []) exitWith { [_blockers # 0] call _fnc_reject };
 
+// Silent faction transaction, then refresh every top bar: a silent resourcesFIA does not do that itself
+private _fnc_factionResources = {
+    _this spawn {
+        params ["_hrChange", "_moneyChange"];
+        [_hrChange, _moneyChange, true] call A3A_fnc_resourcesFIA;
+        [] remoteExec ["A3A_fnc_statistics", [teamPlayer, civilian]];
+    };
+};
+
 // Charge
 private _total = _fee + _deposit;
 if (_factionPays) then {
-    [-1, -_total, true] spawn A3A_fnc_resourcesFIA;
+    [-1, -_total] call _fnc_factionResources;
 } else {
     if !([-_total, _player] call A3A_fnc_resourcesPlayer) exitWith { _total = -1 };
-    [-1, 0, true] spawn A3A_fnc_resourcesFIA;
+    [-1, 0] call _fnc_factionResources;
 };
 if (_total < 0) exitWith { ["no_money"] call _fnc_reject };
 

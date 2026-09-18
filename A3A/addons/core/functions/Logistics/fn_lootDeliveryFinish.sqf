@@ -68,16 +68,25 @@ if (_home) then {
     };
 };
 
+// Silent faction transaction, then refresh every top bar: a silent resourcesFIA does not do that itself
+private _fnc_factionResources = {
+    _this spawn {
+        params ["_hrChange", "_moneyChange"];
+        [_hrChange, _moneyChange, true] call A3A_fnc_resourcesFIA;
+        [] remoteExec ["A3A_fnc_statistics", [teamPlayer, civilian]];
+    };
+};
+
 // Refunds: the money goes back to the payer, to the faction when that player has left
 private _money = 0;
 if (_home) then { _money = _deposit };
 if (_noSpawn) then { _money = _deposit + _fee };
 if (_home || _noSpawn) then {
     if (_factionPays || { isNull _player }) then {
-        [_hr, _money, true] spawn A3A_fnc_resourcesFIA;
+        [_hr, _money] call _fnc_factionResources;
     } else {
         [_money, _player] call A3A_fnc_resourcesPlayer;
-        [_hr, 0, true] spawn A3A_fnc_resourcesFIA;
+        [_hr, 0] call _fnc_factionResources;
     };
 };
 

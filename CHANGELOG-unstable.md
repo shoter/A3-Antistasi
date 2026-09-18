@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-18 - Loot crate delivery top bar fix
+
+### Fixed
+- Ordering a loot crate delivery, and the refund when the pickup or plane returns, now update the money and HR in the top bar right away. The amounts were charged correctly before, the bar only caught up later.
+
 ## 2026-09-18 - Garrisons tab for everyone
 
 ### Changed
