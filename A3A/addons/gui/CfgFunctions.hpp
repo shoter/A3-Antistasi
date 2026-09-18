@@ -29,6 +29,7 @@ class CfgFunctions {
             class getVehicleCrewCount {};
             class hqDialog {};
             class junkyardDialog {};
+            class lootDeliveryDialog {};
             class mainDialog {};
             class mapDrawHcGroupsEH {};
             class mapDrawOutpostsEH {};

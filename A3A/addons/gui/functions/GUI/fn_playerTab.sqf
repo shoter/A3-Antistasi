@@ -125,6 +125,23 @@ switch (_mode) do
             _airTaxiIcon ctrlSetTooltip _prettyString;
         };
 
+        // Loot crate delivery
+        private _lootCrateButton = _display displayCtrl A3A_IDC_LOOTCRATEBUTTON;
+        private _lootCrateIcon = _display displayCtrl A3A_IDC_LOOTCRATEICON;
+        private _lootCrateBlockers = ([player] call A3A_fnc_lootDeliveryInfo) # 4;
+        if (_lootCrateBlockers isEqualTo []) then {
+            _lootCrateButton ctrlEnable true;
+            _lootCrateButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_loot_crate_tooltip";
+            _lootCrateIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            _lootCrateIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_loot_crate_tooltip";
+        } else {
+            _lootCrateButton ctrlEnable false;
+            private _prettyString = localize ("STR_A3A_fn_logistics_lootDelivery_blk_" + (_lootCrateBlockers # 0));
+            _lootCrateButton ctrlSetTooltip _prettyString;
+            _lootCrateIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            _lootCrateIcon ctrlSetTooltip _prettyString;
+        };
+
         // Construct
         /* private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
         private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;

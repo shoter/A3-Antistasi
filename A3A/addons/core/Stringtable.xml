@@ -17007,6 +17007,75 @@
       </Key>
     </Container>
     <Container name="A3A_fn_logistics">
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_title">
+        <Original>Loot Crate Delivery</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_marker_drop">
+        <Original>Loot crate drop (%1)</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_marker_pickup">
+        <Original>Loot crate pickup</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_marker_plane">
+        <Original>Loot crate plane</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_disabled">
+        <Original>Loot crates are switched off in the mission parameters.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_hq_moving">
+        <Original>HQ is being moved, deliveries start from there.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_not_alive">
+        <Original>You have to be up and at the drop position to order a loot crate.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_water">
+        <Original>A loot crate cannot be delivered onto water.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_no_vehicle">
+        <Original>Your faction has no vehicle for this kind of delivery.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_no_airport">
+        <Original>The plane needs a rebel-held airport to start from.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_no_hr">
+        <Original>The faction has no HR left for the crew.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_blk_no_money">
+        <Original>Not enough money.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_requested_pickup">
+        <Original>A pickup is leaving HQ with your loot crate. Paid %1 € and 1 HR; %2 € and the HR come back when the pickup returns to HQ. Drop point and pickup are marked on the map.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_requested_plane">
+        <Original>A plane is on its way with your loot crate. Paid %1 € and 1 HR; %2 € and the HR come back when the plane returns to HQ. Drop point and plane are marked on the map.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_dropped">
+        <Original>Your loot crate has been delivered, see the green marker on the map.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_returned_pickup">
+        <Original>The delivery pickup is back at HQ. %1 € and 1 HR refunded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_returned_plane">
+        <Original>The delivery plane is back over HQ. %1 € and 1 HR refunded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_lost_pickup">
+        <Original>The delivery pickup was lost before it reached you. No crate, no refund.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_lost_plane">
+        <Original>The delivery plane was lost before it reached you. No crate, no refund.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_lost_return_pickup">
+        <Original>The delivery pickup did not make it back to HQ. The deposit and the HR are lost.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_lost_return_plane">
+        <Original>The delivery plane did not make it back to HQ. The deposit and the HR are lost.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_no_spawn_pickup">
+        <Original>The delivery pickup could not be sent out. %1 € and 1 HR refunded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_lootDelivery_no_spawn_plane">
+        <Original>The delivery plane could not be sent out. %1 € and 1 HR refunded.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_logistics_airTaxi_title">
         <Original>Air Taxi</Original>
       </Key>

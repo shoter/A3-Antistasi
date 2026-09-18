@@ -313,6 +313,30 @@ class A3A_MainDialog : A3A_TabbedDialog
                             w = 36 * GRID_W;
                             h = 12 * GRID_H;
                         };
+
+                        // Loot crate delivery
+                        class LootCrateIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_LOOTCRATEICON;
+                            text = A3A_Icon_LootCrate;
+                            x = 0;
+                            y = 107 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class LootCrateButton : A3A_Button
+                        {
+                            idc = A3A_IDC_LOOTCRATEBUTTON;
+                            text = $STR_antistasi_dialogs_main_loot_crate;
+                            tooltip = $STR_antistasi_dialogs_main_loot_crate_tooltip;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_LootDeliveryDialog""};";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 105 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
                     };
                 };
 

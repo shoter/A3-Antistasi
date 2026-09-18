@@ -4,6 +4,17 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-18 - Loot crate delivery
+
+### Added
+- New **Loot Crate** button on the Player tab of the Battle Command menu (Y), below AI Management (scroll the button column). Anyone can order a loot crate to where they stand; the crate goes to that spot even if you move on. The commander pays from the faction funds, everyone else from their own money. The 1 HR for the crew always comes from the faction.
+- An order dialog lists the price of both options and greys out the ones you cannot afford or that are unavailable:
+  - **Pickup**: 1 HR + 50 € x war level + the price of the civilian car. It leaves HQ, follows the roads, unloads the crate at the road closest to you and drives back. The car price and the HR are refunded when it reaches HQ again.
+  - **Plane**: 1 HR + 50 € x war level + 1000 €. It appears in the air above the closest rebel-held airport, drops the crate on a parachute over your position and despawns above HQ, refunding the 1000 € and the HR. Needs a rebel airport.
+- Pickup and plane are civilian, so enemies ignore them. If one is destroyed, loses its driver or gets hopelessly stuck, the deposit and the HR are gone.
+- The drop point is marked on the map for everyone: yellow while the delivery is on its way, green at the crate for 60 seconds after the drop, red for 60 seconds when the delivery was lost. The pickup or plane has its own marker, refreshed every 10 seconds.
+- The delivered crate is a regular loot crate: loot to crate, carrying, loading into vehicles and garaging all work. The button is disabled when the **Loot to crate radius** setting is off.
+
 ## 2026-09-12 - Junkyard pricing calibration
 
 ### Changed

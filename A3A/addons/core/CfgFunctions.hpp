@@ -584,6 +584,14 @@ class CfgFunctions
             class garrisonResupplyRun {};
             class garrisonResupplySpawn {};
             class garrisonResupplyTruckPoints {};
+            class lootDeliveryCrate {};
+            class lootDeliveryFinish {};
+            class lootDeliveryHint {};
+            class lootDeliveryInfo {};
+            class lootDeliveryMarker {};
+            class lootDeliveryPickup {};
+            class lootDeliveryPlane {};
+            class lootDeliveryRequest {};
         };
 
         class ModsAndDLC {

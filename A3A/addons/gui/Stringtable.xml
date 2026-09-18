@@ -3034,6 +3034,12 @@
       </Key>
     </Container>
     <Container name="dialog_main_player">
+      <Key ID="STR_antistasi_dialogs_main_loot_crate">
+        <Original>Loot Crate</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_loot_crate_tooltip">
+        <Original>Have a loot crate delivered to your position by pickup or by plane</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_air_taxi">
         <Original>Air Taxi</Original>
       </Key>
@@ -6502,6 +6508,47 @@
       <Key ID="STR_antistasi_dialogs_main_fast_travel_safehouse">
         <Original>Safehouse: travel is free and faster.</Original>
         <Polish>Kryjówka: podróż jest darmowa i szybsza.</Polish>
+      </Key>
+    </Container>
+    <Container name="dialog_loot_delivery">
+      <Key ID="STR_antistasi_dialogs_loot_delivery_titlebar">
+        <Original>Loot Crate Delivery</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_cancel">
+        <Original>Cancel</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_pickup">
+        <Original>Pickup</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_plane">
+        <Original>Plane</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_payer_faction">
+        <Original>Paid from the faction funds: %1 € and %2 HR available.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_payer_personal">
+        <Original>Paid from your own money: %1 € available. The faction provides the crew: %2 HR available.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_position">
+        <Original>The crate is delivered to where you stand now (grid %1), even if you move on.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_pickup_title">
+        <Original>Pickup - %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_plane_title">
+        <Original>Plane - %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_cost">
+        <Original>Price: %1 € + 1 HR (%2 € delivery, %3 € deposit)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_refund">
+        <Original>Refunded on return to HQ: %1 € + 1 HR</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_pickup_note">
+        <Original>Drives from HQ along the roads and unloads at the road closest to you. Civilian, enemies ignore it.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_loot_delivery_plane_note">
+        <Original>Starts above %1 and drops the crate on a parachute. Civilian, enemies ignore it.</Original>
       </Key>
     </Container>
     <Container name="dialog_deployed_flag">
