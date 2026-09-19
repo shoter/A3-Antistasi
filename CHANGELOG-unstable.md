@@ -4,6 +4,19 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-19 - Sub-commanders
+
+### Added
+- The commander can designate **sub-commanders**: new **Sub-commanders** button on the Commander tab of the Battle Command menu (Y). The dialog lists every player on the server with a **Designate** / **Remove** button per player; any number of players can hold the role and only the commander can change it.
+- A sub-commander can:
+  - recruit high command squads with the faction's money and HR, from the Commander tab or at the HQ flag. The squads are on the sub-commander's own high command bar, the commander cannot command them. The squad cap is per player, the same as the commander's (6 as guest, 10 as member).
+  - pay for junkyard vehicles from the faction funds, with the same **faction funds** checkbox the commander has.
+  - pay for utility items from the faction funds like the commander does. That includes the builder boxes, so fortifications are built on the faction's budget. Commander-only items stay commander-only.
+- Sub-commanders get a cut-down Commander tab: their squads on the map and in the HC squads list, **Recruit squad**, and the squad actions (dismiss, mount, add vehicle, garrison, fast travel, remote control, mortar fire missions). The artillery key works for them too, and their top bar shows the faction funds.
+- When a sub-commander leaves the server or loses the role, their squads pass to the commander. They are not handed back later. On a persistent save their squads are refunded the same way the commander's are.
+- The role is saved with the campaign by player: it survives reconnects, restarts and a change of commander. Sub-commanders who are offline stay in the dialog so they can be removed. A sub-commander who becomes commander leaves the list.
+- Everyone is told when a sub-commander is designated or removed and the Chronicle records it. The commander gets a notice whenever a sub-commander spends faction resources (who, what, how much). The Players tab shows the role behind the name of the commander and the sub-commanders.
+
 ## 2026-09-18 - Loot crate delivery top bar fix
 
 ### Fixed

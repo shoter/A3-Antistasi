@@ -55,9 +55,29 @@ _newUnit addOwnedMine _x;
 
 disableUserInput false;
 //_newUnit enableSimulation true;
+// Keeps the UID readable on this body while the player remote controls an AI
+_newUnit setVariable ["A3A_playerUID", getPlayerUID _newUnit, true];
 if (_oldUnit == theBoss) then
 	{
 	[_newUnit, true] remoteExec ["A3A_fnc_theBossTransfer", 2];
+	}
+else
+	{
+	// High command squads of a sub-commander follow them to the new body
+	private _hcGroups = hcAllGroups _oldUnit;
+	if (_hcGroups isNotEqualTo []) then
+		{
+		if ([_newUnit] call A3A_fnc_isSubCommander) then
+			{
+			hcRemoveAllGroups _oldUnit;
+			{ _newUnit hcSetGroup [_x] } forEach _hcGroups;
+			}
+		else
+			{
+			// Role lost while dead, the commander gets the squads
+			[_oldUnit] remoteExecCall ["A3A_fnc_subCommanderTransferSquads", 2];
+			};
+		};
 	};
 //Give them a map, in case they're commander and need to replace petros.
 _newUnit setUnitLoadout [[],[],[],[selectRandom ((A3A_faction_civ get "uniforms") + (A3A_faction_reb get "uniforms")), []],[],[],"","",[],

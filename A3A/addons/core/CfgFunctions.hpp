@@ -605,9 +605,11 @@ class CfgFunctions
             class donateMoney {};
             class sendMoney {};
             class isClientAdmin {};
+            class isCommandStaff {};
             class isLocalAdmin {};
             class isLocalAdminOrServer {};
             class isMember {};
+            class isSubCommander {};
             class makePlayerBossIfEligible {};
             class memberAdd {};
             class membersList {};
@@ -624,6 +626,10 @@ class CfgFunctions
             class theBossTransfer {};
             class theBossSteal {};
             class setRewardShares {};
+            class subCommanderNotify {};
+            class subCommanderSet {};
+            class subCommanderSpent {};
+            class subCommanderTransferSquads {};
             class assignBossIfNone {};
             class tierCheck {};
             class unitTraits {};

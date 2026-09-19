@@ -1595,6 +1595,19 @@ class A3A_MainDialog : A3A_TabbedDialog
                             w = 24 * GRID_W;
                             h = 12 * GRID_H;
                         };
+
+                        // Sub-commanders. Commander only, hidden for sub-commanders by the commander tab update.
+                        class SubCommandersButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_SUBCOMMANDERSBUTTON;
+                            text = $STR_antistasi_dialogs_main_subcommanders_button;
+                            tooltip = $STR_antistasi_dialogs_main_subcommanders_tooltip;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_SubCommandersDialog""};";
+                            x = 28 * GRID_W;
+                            y = 56 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
                     };
                 };
 

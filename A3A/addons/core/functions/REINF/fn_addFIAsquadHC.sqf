@@ -4,7 +4,8 @@ private _titleStr = localize "STR_A3A_fn_reinf_addSqdHC_title";
 
 params ["_typeGroup", ["_withBackpck", ""], ["_spawnVeh", ""]];
 
-if (player != theBoss) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_commander"] call A3A_fnc_customHint;};
+// Sub-commanders recruit their own squads, paid from the faction funds like the commander's
+if !([player] call A3A_fnc_isCommandStaff) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_commander"] call A3A_fnc_customHint;};
 if (markerAlpha respawnTeamPlayer == 0) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_movehq"] call A3A_fnc_customHint;};
 if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_radio"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_radio2"] call A3A_fnc_customHint;}};
 if ([getPosATL petros] call A3A_fnc_enemyNearCheck) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_enemy"] call A3A_fnc_customHint;};

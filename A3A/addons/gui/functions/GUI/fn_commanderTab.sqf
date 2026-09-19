@@ -51,6 +51,7 @@ private _persistentSaveButton = _display displayCtrl A3A_IDC_PERSISTENTSAVECMDBU
 private _HCSquadsButton = _display displayCtrl A3A_IDC_HCSQUADSBUTTON;
 private _commanderButtonsGroup = _display displayCtrl A3A_IDC_COMMANDERBUTTONSGROUP;
 private _deployFlagButton = _display displayCtrl A3A_IDC_DEPLOYFLAGBUTTON;
+private _subCommandersButton = _display displayCtrl A3A_IDC_SUBCOMMANDERSBUTTON;
 private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_HCSquadsButton,_commanderButtonsGroup];
 
 switch (_mode) do
@@ -73,6 +74,13 @@ switch (_mode) do
 
         // Show base buttons
         {_x ctrlShow true} forEach _baseButtons;
+
+        // Sub-commanders only get their high command squads and squad recruiting, the rest of the tab is the commander's
+        private _isBoss = player isEqualTo theBoss;
+        {_x ctrlShow _isBoss} forEach [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_deployFlagButton,_subCommandersButton];
+        // Recruit squad moves into the first slot of the then empty button group
+        _recruitSquadButton ctrlSetPosition [2 * GRID_W, ([0, 14] select _isBoss) * GRID_H];
+        _recruitSquadButton ctrlCommit 0;
 
         // The rally flag can only be planted on foot, by a commander in control of their own unit
         private _canDeployFlag = vehicle player == player && {!A3A_petrosMoving} && {player == player getVariable ["owner", player]};

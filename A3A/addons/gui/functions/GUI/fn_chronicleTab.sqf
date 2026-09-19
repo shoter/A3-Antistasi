@@ -97,6 +97,8 @@ private _types = createHashMapFromArray [
     ["populationMajority",   ["campaign", "good",    []]],
     ["populationMajorityLost", ["campaign", "bad",   []]],
     ["rewardSplitChanged",   ["players",  "neutral", ["text", "text"]]],
+    ["subCommanderAssigned", ["players",  "neutral", ["text"]]],
+    ["subCommanderRemoved",  ["players",  "neutral", ["text"]]],
     ["itemUnlocked",         ["arsenal",  "good",    ["item"]]]
 ];
 

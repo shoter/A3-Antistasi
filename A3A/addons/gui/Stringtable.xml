@@ -1424,6 +1424,10 @@
         <Turkish>Sadece komutan, komutan paneline ulaşabilir</Turkish>
         <Chinesesimp>只有指挥官可以访问指挥官选项卡</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_commander_tab_subcommander_tooltip">
+        <Original>Sub-commander: your high command squads and squad recruiting</Original>
+        <Polish>Poddowódca: twoje oddziały wysokiego dowodzenia i rekrutacja oddziałów</Polish>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_player_tab_button">
         <Original>Player</Original>
         <German>Spieler</German>
@@ -2195,6 +2199,14 @@
       <Key ID="STR_antistasi_dialogs_main_deploy_flag_on_foot_tooltip">
         <Original>You have to be on foot to deploy the rally flag.</Original>
         <Polish>Aby postawić flagę zbiórki, musisz być pieszo.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_subcommanders_button">
+        <Original>Sub-commanders</Original>
+        <Polish>Poddowódcy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_subcommanders_tooltip">
+        <Original>Designate players who recruit their own high command squads and spend faction funds on junkyard vehicles and utility items.</Original>
+        <Polish>Wyznacz graczy, którzy rekrutują własne oddziały wysokiego dowodzenia i wydają fundusze frakcji na pojazdy ze złomowiska i przedmioty użytkowe.</Polish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_add_vehicle">
         <Original>Add Vehicle</Original>
@@ -3888,6 +3900,14 @@
       <Key ID="STR_antistasi_dialogs_main_chronicle_ev_itemUnlocked">
         <Original>%3 unlocked in the arsenal</Original>
         <Polish>%3 odblokowane w arsenale</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_subCommanderAssigned">
+        <Original>%2 designated %3 as sub-commander</Original>
+        <Polish>%2 wyznacza gracza %3 na poddowódcę</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_chronicle_ev_subCommanderRemoved">
+        <Original>%2 removed %3 from the sub-commanders</Original>
+        <Polish>%2 odbiera graczowi %3 funkcję poddowódcy</Polish>
       </Key>
     </Container>
     <Container name="dialog_main_garrisons">
@@ -6549,6 +6569,64 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_loot_delivery_plane_note">
         <Original>Starts above %1 and drops the crate on a parachute. Civilian, enemies ignore it.</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_subcommanders">
+      <Key ID="STR_antistasi_dialogs_subcommanders_titlebar">
+        <Original>Sub-commanders</Original>
+        <Polish>Poddowódcy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_info">
+        <Original>Sub-commanders recruit their own high command squads and pay for junkyard vehicles and utility items, builder boxes included, from the faction funds. Their squads are theirs alone to command: you take them over only when the player leaves the server or loses the role. You are told whenever a sub-commander spends faction resources.</Original>
+        <Polish>Poddowódcy rekrutują własne oddziały wysokiego dowodzenia i płacą z funduszy frakcji za pojazdy ze złomowiska oraz przedmioty użytkowe, w tym skrzynie budowlane. Swoimi oddziałami dowodzą tylko oni: przejmujesz je dopiero, gdy gracz opuści serwer albo straci funkcję. Dostajesz powiadomienie, gdy poddowódca wydaje zasoby frakcji.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_role_label">
+        <Original>Role</Original>
+        <Polish>Funkcja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_squads_label">
+        <Original>Squads</Original>
+        <Polish>Oddziały</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_squads_tooltip">
+        <Original>High command squads under this player</Original>
+        <Polish>Oddziały wysokiego dowodzenia podległe temu graczowi</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_role_commander">
+        <Original>Commander</Original>
+        <Polish>Dowódca</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_role_subcommander">
+        <Original>Sub-commander</Original>
+        <Polish>Poddowódca</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_role_subcommander_offline">
+        <Original>Sub-commander (offline)</Original>
+        <Polish>Poddowódca (offline)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_role_player">
+        <Original>Player</Original>
+        <Polish>Gracz</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_designate_button">
+        <Original>Designate</Original>
+        <Polish>Wyznacz</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_designate_tooltip">
+        <Original>Make this player a sub-commander</Original>
+        <Polish>Wyznacz tego gracza na poddowódcę</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_remove_button">
+        <Original>Remove</Original>
+        <Polish>Odbierz</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_remove_tooltip">
+        <Original>Take the role away. The player's high command squads pass to you.</Original>
+        <Polish>Odbierz funkcję. Oddziały wysokiego dowodzenia gracza przechodzą pod twoje dowództwo.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_subcommanders_count">
+        <Original>Sub-commanders: %1</Original>
+        <Polish>Poddowódcy: %1</Polish>
       </Key>
     </Container>
     <Container name="dialog_deployed_flag">

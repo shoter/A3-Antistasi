@@ -25,7 +25,7 @@ class A3A_JunkyardDialog : A3A_DefaultDialog
             h = 4 * GRID_H;
         };
 
-        // Commander only, hidden for everyone else by the onLoad function
+        // Commander and sub-commanders only, hidden for everyone else by the onLoad function
         class FactionFundsCheckbox : A3A_CheckBox
         {
             idc = A3A_IDC_JUNKYARDFACTIONFUNDS;

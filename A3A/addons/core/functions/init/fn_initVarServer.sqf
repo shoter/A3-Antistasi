@@ -90,6 +90,9 @@ DECLARE_SERVER_VAR(A3A_rewardTaxPercent, 0);             // paid into the factio
 DECLARE_SERVER_VAR(A3A_rewardCommanderPercent, 20);      // paid to the commander personally, 0-20, the rest goes to the players
 A3A_rewardTaxCollected = 0;                              // € of reward tax collected since the last income report, server only
 
+// Sub-commanders designated by the commander, uid -> name. Saved, see A3A_fnc_subCommanderSet
+DECLARE_SERVER_VAR(A3A_subCommanders, createHashMap);
+
 // Chronicle: sequence number of the newest campaign log entry, clients fetch the delta when they open the tab
 DECLARE_SERVER_VAR(A3A_campaignLogVersion, 0);
 DECLARE_SERVER_VAR(A3A_campaignLogCap, 3000);            // entries kept in the chronicle, the oldest are dropped first
@@ -146,6 +149,8 @@ A3A_townKits = [];
 // Chronicle entries [seq, campaign time, type, target, params, actor, server date-time], clients get them through A3A_fnc_campaignLogRequest
 A3A_campaignLog = [];
 A3A_campaignLogMajority = false;    // whether the last population check found a rebel majority, restored from the log on load
+// High command squads of sub-commanders who left while there was no commander, the next commander gets them
+A3A_orphanHCGroups = [];
 
 // New garrison data structure
 A3A_garrison = createHashMap;

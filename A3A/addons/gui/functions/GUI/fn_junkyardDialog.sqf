@@ -35,9 +35,9 @@ if (_mode != "onLoad") exitWith { Error_1("JunkyardDialog mode does not exist: %
 private _display = findDisplay A3A_IDD_JUNKYARDDIALOG;
 player setCaptive false;
 
-// Faction funds option is for the commander only
-private _isBoss = player == theBoss;
-{ (_display displayCtrl _x) ctrlShow _isBoss } forEach [A3A_IDC_JUNKYARDFACTIONFUNDS, A3A_IDC_JUNKYARDFACTIONFUNDSTEXT];
+// Faction funds option is for the commander and the sub-commanders only
+private _isCommandStaff = [player] call A3A_fnc_isCommandStaff;
+{ (_display displayCtrl _x) ctrlShow _isCommandStaff } forEach [A3A_IDC_JUNKYARDFACTIONFUNDS, A3A_IDC_JUNKYARDFACTIONFUNDSTEXT];
 
 // Debug refresh button for admins (server re-checks admin status)
 (_display displayCtrl A3A_IDC_JUNKYARDREFRESHBUTTON) ctrlShow (call A3A_fnc_isLocalAdmin);
@@ -118,7 +118,7 @@ private _added = 0;
     _button ctrlAddEventHandler ["ButtonClick", {
         params ["_control"];
         private _display = findDisplay A3A_IDD_JUNKYARDDIALOG;
-        private _useFactionFunds = player == theBoss && { cbChecked (_display displayCtrl A3A_IDC_JUNKYARDFACTIONFUNDS) };
+        private _useFactionFunds = ([player] call A3A_fnc_isCommandStaff) && { cbChecked (_display displayCtrl A3A_IDC_JUNKYARDFACTIONFUNDS) };
         private _className = _control getVariable "className";
         closeDialog 2;
         [_className, _useFactionFunds] spawn A3A_fnc_junkyardBuy;

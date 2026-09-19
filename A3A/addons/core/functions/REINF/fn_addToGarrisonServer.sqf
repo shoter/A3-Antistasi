@@ -39,7 +39,10 @@ if (isNull _groupX) then {
     [_titleStr, localize "STR_A3A_garrison_adding_to_garrison"] remoteExecCall ["A3A_fnc_customHint", _player];
 } else {
     [_titleStr, format [localize "STR_A3A_garrison_adding_to_garrison_hc", groupID _groupX]] remoteExecCall ["A3A_fnc_customHint", _player];
-    theBoss hcRemoveGroup _groupX;
+    // The squad answers to the commander or to the sub-commander who recruited it
+    private _hcOwner = hcLeader _groupX;
+    if (isNull _hcOwner) then { _hcOwner = theBoss };
+    _hcOwner hcRemoveGroup _groupX;
     _groupX deleteGroupWhenEmpty true;
 };
 

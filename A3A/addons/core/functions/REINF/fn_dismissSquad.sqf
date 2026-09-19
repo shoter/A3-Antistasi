@@ -27,8 +27,11 @@ if (_leave) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_dissSquad_no_nato"]
 _pos = getMarkerPos respawnTeamPlayer;
 
 {
-	theBoss sideChat format [localize "STR_A3A_fn_reinf_dismissSquad_RTB", _x];
-	theBoss hcRemoveGroup _x;
+	// The squad answers to the commander or to the sub-commander who recruited it
+	private _hcOwner = hcLeader _x;
+	if (isNull _hcOwner) then { _hcOwner = theBoss };
+	_hcOwner sideChat format [localize "STR_A3A_fn_reinf_dismissSquad_RTB", _x];
+	_hcOwner hcRemoveGroup _x;
 	_wp = _x addWaypoint [_pos, 0];
 	_wp setWaypointType "MOVE";
 	sleep 3

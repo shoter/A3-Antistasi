@@ -9,7 +9,9 @@ private _ang = 0;
 
 _roundPlural = if (round _rounds == 1) then {localize "STR_A3A_fn_ai_artySupport_singleRound"} else {localize "STR_A3A_fn_ai_artySupport_multiRound"};
 _textX = format [localize "STR_A3A_fn_ai_artySupport_fireMission", mapGridPosition _startPos, round _rounds, _roundPlural];
-[theBoss,"sideChat",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+// The fire mission is called by whoever commands the mortar squad: the commander or a sub-commander
+private _caller = if (hasInterface && {[player] call A3A_fnc_isSubCommander}) then { player } else { theBoss };
+[_caller,"sideChat",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 
 private _eta = (_units#0) getArtilleryETA [_startPos, ((getArtilleryAmmo [_units#0])#0)];
 _textX = if (_rounds == 1) then {

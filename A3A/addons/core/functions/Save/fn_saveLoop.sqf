@@ -54,6 +54,7 @@ Debug_1("Saving params: %1", _savedParams);
 ["chopForest", chopForest] call A3A_fnc_setStatVariable;
 ["nextTick", nextTick - time] call A3A_fnc_setStatVariable;
 ["rewardShares", [A3A_rewardTaxPercent, A3A_rewardCommanderPercent]] call A3A_fnc_setStatVariable;
+["subCommanders", A3A_subCommanders] call A3A_fnc_setStatVariable;
 if (!isNull A3A_deployedFlag) then {
 	["deployedFlag", [getPosATL A3A_deployedFlag]] call A3A_fnc_setStatVariable;
 };
@@ -84,7 +85,15 @@ private _sideToStr = createHashMapFromArray [[teamPlayer,0], [Occupants,1],	[Inv
 
 private ["_hrBackground","_resourcesBackground","_veh","_typeVehX","_weaponsX","_ammunition","_items","_backpcks","_containers","_arrayEst","_posVeh","_dierVeh","_prestigeOPFOR","_prestigeBLUFOR","_city","_dataX","_markersX","_garrison","_arrayMrkMF","_arrayOutpostsFIA","_positionOutpost","_typeMine","_posMine","_detected","_typesX","_exists","_friendX"];
 
-_hrBackground = (server getVariable "hr") + ({(alive _x) and (not isPlayer _x) and (_x getVariable ["spawner",false]) and ((group _x in (hcAllGroups theBoss) or (isPlayer (leader _x))) and (side group _x == teamPlayer))} count allUnits);
+// High command squads are refunded rather than saved: the commander's and those of the sub-commanders
+private _hcGroups = hcAllGroups theBoss;
+{
+	private _body = _x getVariable ["owner", _x];			// different, if remote-controlling
+	if (_body != theBoss) then { _hcGroups append (hcAllGroups _body) };
+} forEach (allPlayers - entities "HeadlessClient_F");
+_hcGroups append A3A_orphanHCGroups;
+
+_hrBackground = (server getVariable "hr") + ({(alive _x) and (not isPlayer _x) and (_x getVariable ["spawner",false]) and ((group _x in _hcGroups or (isPlayer (leader _x))) and (side group _x == teamPlayer))} count allUnits);
 _resourcesBackground = server getVariable "resourcesFIA";
 
 // TODO: Sort this garbage out
@@ -92,7 +101,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 	_friendX = _x;
 	if ((_friendX getVariable ["spawner",false]) and (side group _friendX == teamPlayer))then {
 		if ((alive _friendX) and (!isPlayer _friendX)) then {
-			if ((group _friendX in hcAllGroups theBoss) and !((group _friendX) getVariable ["esNATO",false])) then {
+			if ((group _friendX in _hcGroups) and !((group _friendX) getVariable ["esNATO",false])) then {
 				_resourcesBackground = _resourcesBackground + (server getVariable [(_friendX getVariable "unitType"),0]) / 2;
 				_backpck = backpack _friendX;
 				if (_backpck != "") then {
@@ -104,7 +113,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 					_typeVehX = typeOf _veh;
 					if (isNil {_veh getVariable "markerX"}) then {
 						if ((_veh isKindOf "StaticWeapon") or (driver _veh == _friendX)) then {
-							if (group _friendX in hcAllGroups theBoss) then {
+							if (group _friendX in _hcGroups) then {
 								_resourcesBackground = _resourcesBackground + ([_typeVehX] call A3A_fnc_vehiclePrice);
 								if (count attachedObjects _veh != 0) then {{_resourcesBackground = _resourcesBackground + ([typeOf _x] call A3A_fnc_vehiclePrice)} forEach attachedObjects _veh};
 							};

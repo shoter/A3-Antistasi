@@ -60,7 +60,9 @@ if !(isNil "_base") then {
     private _nearMarkers = markersX inAreaArrayIndexes [_base, 500, 500] apply { markersX # _x };
     if (_nearMarkers arrayIntersect forcedSpawn isNotEqualTo []) exitWith {_blockers append ["no_attack1"]};
     if ([markerPos _base] call A3A_fnc_enemyNearCheck) then {_blockers append ["no_attack2"]};
-    if (!(_player call A3A_fnc_isMember || _player == theBoss) && {!([markerPos _base] call A3A_fnc_playerLeashCheckPosition)}) then {_blockers append ["no_members"]};
+    // Guest sub-commanders send their high command squads anywhere like the commander, the leash only holds their own travel
+    private _leashExempt = _player call A3A_fnc_isMember || {_player == theBoss} || {_isHC && {[_player] call A3A_fnc_isSubCommander}};
+    if (!_leashExempt && {!([markerPos _base] call A3A_fnc_playerLeashCheckPosition)}) then {_blockers append ["no_members"]};
 };
 
 _blockers;

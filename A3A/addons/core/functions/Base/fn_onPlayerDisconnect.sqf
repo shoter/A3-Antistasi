@@ -24,6 +24,9 @@ if (_realUnit == theBoss) then
 	[] call A3A_fnc_assignBossIfNone;
 };
 
+// High command squads of a leaving sub-commander pass to the commander
+[_realUnit] call A3A_fnc_subCommanderTransferSquads;
+
 //Need to check the group's side, as player may be a civ. Unknown is in case they've been moved out of their group.
 if (side group _unit == teamPlayer || side group _unit == sideUnknown) then
 {

@@ -226,6 +226,11 @@ if (isPlayer A3A_setupPlayer) then {
     // Add current admin (setupPlayer) to members list and make them commander
     membersX pushBackUnique getPlayerUID A3A_setupPlayer;
     theBoss = A3A_setupPlayer;
+    // The commander needs no second role, same as in theBossTransfer
+    if (getPlayerUID A3A_setupPlayer in A3A_subCommanders) then {
+        A3A_subCommanders deleteAt getPlayerUID A3A_setupPlayer;
+        publicVariable "A3A_subCommanders";
+    };
 };
 
 // Add admin as member on state change

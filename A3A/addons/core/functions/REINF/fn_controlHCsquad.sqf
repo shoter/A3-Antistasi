@@ -29,7 +29,8 @@ Example:
 
 private _titleStr = localize "STR_A3A_fn_reinf_controlHQSquad_title";
 
-if (player != theBoss) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_controlHQSquad_no_commander"] call A3A_fnc_customHint;};
+// Commander or sub-commander, each controls the squads on their own high command bar
+if !([player] call A3A_fnc_isCommandStaff) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_controlHQSquad_no_commander"] call A3A_fnc_customHint;};
 if (captive player) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_controlHQSquad_no_undercover"] call A3A_fnc_customHint;};
 if (!isNil "A3A_FFPun_Jailed" && {(getPlayerUID player) in A3A_FFPun_Jailed}) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_controlHQSquad_no_nope"] call A3A_fnc_customHint;};
 
@@ -88,7 +89,7 @@ _timeX = 180;
 
 _unit addAction [localize "STR_A3A_fn_reinf_controlHQSquad_return",{selectPlayer (player getVariable ["owner",player])}];
 
-waitUntil {sleep 1;[_titleStr, format [localize "STR_A3A_fn_reinf_controlHQSquad_return_time", _timeX]] call A3A_fnc_customHint; _timeX = _timeX - 1; (_timeX < 0) or (isPlayer theBoss)};
+waitUntil {sleep 1;[_titleStr, format [localize "STR_A3A_fn_reinf_controlHQSquad_return_time", _timeX]] call A3A_fnc_customHint; _timeX = _timeX - 1; (_timeX < 0) or (isPlayer _owner)};
 
 _owner enableAI "ALL";
 removeAllActions _unit;
@@ -96,6 +97,6 @@ if (!isPlayer (_unit getVariable ["owner",_unit])) then {selectPlayer (_unit get
 //_unit setVariable ["owner",nil,true];
 _unit removeEventHandler ["HandleDamage",_eh2];
 player removeEventHandler ["HandleDamage",_eh1];
-(units group theBoss) joinsilent group theBoss;
-group theBoss selectLeader theBoss;
+(units group _owner) joinsilent group _owner;
+group _owner selectLeader _owner;
 [_titleStr, ""] call A3A_fnc_customHint;

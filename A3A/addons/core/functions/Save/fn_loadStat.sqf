@@ -36,7 +36,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits", "rewardShares", "campaignLog"
+    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits", "rewardShares", "campaignLog", "subCommanders"
 ];
 
 private _varName = _this select 0;
@@ -94,6 +94,14 @@ if (_varName in _specialVarLoads) then {
         publicVariable "A3A_rewardTaxPercent";
         A3A_rewardCommanderPercent = 0 max round _cutPercent min 20;
         publicVariable "A3A_rewardCommanderPercent";
+    };
+    if (_varName == 'subCommanders') then {
+        // uid -> name, anything else in there is dropped
+        A3A_subCommanders = createHashMap;
+        if (_varValue isEqualType createHashMap) then {
+            { if (_x isEqualType "" && {_y isEqualType ""}) then { A3A_subCommanders set [_x, _y] } } forEach _varValue;
+        };
+        publicVariable "A3A_subCommanders";
     };
     if (_varName == 'campaignLog') then {
         A3A_campaignLog = +_varValue;

@@ -5835,6 +5835,34 @@
         <Russian>Командир подал в отставку. Подходящего командира нет.</Russian>
         <Chinesesimp>指挥官已离线.目前没有合适的指挥官.</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_orgp_subCommander_title">
+        <Original>Sub-commanders</Original>
+        <Polish>Poddowódcy</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_subCommander_assigned">
+        <Original>%2 designated %1 as sub-commander.</Original>
+        <Polish>%2 wyznacza gracza %1 na poddowódcę.</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_subCommander_assignedYou">
+        <Original>%2 designated you as sub-commander.&lt;br/&gt;&lt;br/&gt;You can recruit your own high command squads from the Commander tab of the Battle Command menu or at the HQ flag, and only you command them. Squads, junkyard vehicles and utility items, builder boxes included, are paid from the faction funds. The commander is told what you spend.</Original>
+        <Polish>%2 wyznacza cię na poddowódcę.&lt;br/&gt;&lt;br/&gt;Możesz rekrutować własne oddziały wysokiego dowodzenia w zakładce dowódcy w menu Battle Command albo przy fladze w HQ i tylko ty nimi dowodzisz. Oddziały, pojazdy ze złomowiska i przedmioty użytkowe, w tym skrzynie budowlane, są opłacane z funduszy frakcji. Dowódca widzi, co wydajesz.</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_subCommander_removed">
+        <Original>%2 removed %1 from the sub-commanders.</Original>
+        <Polish>%2 odbiera graczowi %1 funkcję poddowódcy.</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_subCommander_removedYou">
+        <Original>%2 took your sub-commander role away. Your high command squads now answer to the commander.</Original>
+        <Polish>%2 odbiera ci funkcję poddowódcy. Twoje oddziały wysokiego dowodzenia podlegają teraz dowódcy.</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_subCommander_spent">
+        <Original>Sub-commander %1 spent %3 € of the faction funds on: %2.</Original>
+        <Polish>Poddowódca %1 wydaje %3 € z funduszy frakcji na: %2.</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_subCommander_spentHr">
+        <Original>Sub-commander %1 spent %3 € of the faction funds and %4 HR on: %2.</Original>
+        <Polish>Poddowódca %1 wydaje %3 € z funduszy frakcji i %4 HR na: %2.</Polish>
+      </Key>
       <Key ID="STR_A3A_fn_orgp_unitTraits_autorifleman_1">
         <Original>Autorifleman role</Original>
         <Italian>Ruolo Fuciliere Automatico.</Italian>

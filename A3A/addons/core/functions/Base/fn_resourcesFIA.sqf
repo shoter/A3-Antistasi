@@ -41,6 +41,12 @@ _textX = _faction + _hr + _money;
 
 if (_textX != "") then
 	{
-	[petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",theBoss];
+	// The commander and the sub-commanders follow the faction resources, the report also refreshes their top bar
+	private _staff = (allPlayers - entities "HeadlessClient_F") select {
+		private _body = _x getVariable ["owner", _x];			// different, if remote-controlling
+		_body != theBoss and {[_body] call A3A_fnc_isSubCommander}
+	};
+	if (!isNull theBoss) then { _staff pushBack theBoss };
+	if (_staff isNotEqualTo []) then { [petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",_staff] };
 	//[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];
 	};

@@ -43,7 +43,7 @@ switch (_key) do {
     case QGVAR(artyMenu): {
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
-        if (player isEqualTo theBoss) then {
+        if ([player] call A3A_fnc_isCommandStaff) then {
             [] spawn {
                 player setVariable ["autoSwitchGroups", [hcSelected player, true]];
                 showCommandingMenu "";                          // clear the command menu so that we have the scroll wheel  

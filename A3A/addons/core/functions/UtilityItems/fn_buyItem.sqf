@@ -27,13 +27,24 @@ private _fnc_placed = {
     params ["_item", "_unit", "_price", "_flags"];
     if (isNull _item) exitWith {};          // placement cancelled
 
-    if ((_unit == theBoss && server getVariable ["resourcesFIA", 0] < _price) || (_unit != theBoss && _unit getVariable ["moneyX", 0] < _price)) exitWith {
-        [_titleStr, localize "STR_A3A_Utility_Items_Insufficient_Funds"] call A3A_fnc_customHint;
+    // Commander and sub-commanders pay from the faction funds, everyone else from their own pocket
+    private _useFactionFunds = [_unit] call A3A_fnc_isCommandStaff;
+    private _funds = if (_useFactionFunds) then { server getVariable ["resourcesFIA", 0] } else { _unit getVariable ["moneyX", 0] };
+    if (_funds < _price) exitWith {
+        [localize "STR_A3A_Utility_Items_Purchase_Title", localize "STR_A3A_Utility_Items_Insufficient_Funds"] call A3A_fnc_customHint;
         deleteVehicle _item;
     };
 
     if (_price > 0) then {
-        if (_unit == theBoss) exitWith { [0, -_price] remoteExec ["A3A_fnc_resourcesFIA", 2] };
+        if (_useFactionFunds) exitWith {
+            [0, -_price] remoteExec ["A3A_fnc_resourcesFIA", 2];
+            // The commander hears about purchases of sub-commanders
+            if (_unit != theBoss) then {
+                private _itemName = (A3A_utilityItemHM getOrDefault [typeOf _item, []]) param [2, ""];
+                if (_itemName == "") then { _itemName = getText (configFile >> "CfgVehicles" >> typeOf _item >> "displayName") };
+                [_unit, _itemName, _price, 0] remoteExecCall ["A3A_fnc_subCommanderSpent", 2];
+            };
+        };
         [-_price] call A3A_fnc_resourcesPlayer;     // uh, we're just assuming _unit == player here
     };
 
@@ -54,7 +65,8 @@ if (("cmmdr" in _flags) && player isNotEqualTo theBoss) exitwith {
     [localize "STR_antistasi_dialogs_buy_item_custom_hint_header", localize "STR_antistasi_dialogs_buy_item_custom_hint_commander_only"] call A3A_fnc_customHint;
 };
 
-if ((_unit == theBoss && server getVariable ["resourcesFIA", 0] < _price) || (_unit != theBoss && _unit getVariable ["moneyX", 0] < _price)) exitWith {
+private _funds = if ([_unit] call A3A_fnc_isCommandStaff) then { server getVariable ["resourcesFIA", 0] } else { _unit getVariable ["moneyX", 0] };
+if (_funds < _price) exitWith {
     [_titleStr, localize "STR_A3A_Utility_Items_Insufficient_Funds"] call A3A_fnc_customHint;
 };
 

@@ -19,7 +19,8 @@ private _player = player getVariable ["owner",player];		// different, if remote-
 private _ucovertxt = ["Off", "<t color='#1DA81D'>On</t>"] select ((captive _player) and !(_player getVariable ["incapacitated",false]));
 if (_player getVariable ["isAFK", false]) then { _ucovertxt = _ucovertxt + " | <t color='#A81D1D'>AFK</t>" };
 
-if (_player != theBoss) then
+// Sub-commanders spend faction money too, so they get the commander's bar with the faction funds on it
+if !([_player] call A3A_fnc_isCommandStaff) then
 	{
 	private _nameC = if !(isNull theBoss) then {name theBoss} else {"None"};
 	_textX = format ["<t size='0.67' shadow='2'>" + localize "STR_A3A_fn_base_statistics_notComm", (server getVariable "hr") toFixed 0, rank _player, _nameC, (_player getVariable "moneyX") toFixed 0,[aggressionLevelOccupants] call A3A_fnc_getAggroLevelString,[aggressionLevelInvaders] call A3A_fnc_getAggroLevelString,tierWar,FactionGet(occ,"name"),FactionGet(inv,"name"),_ucovertxt];

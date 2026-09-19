@@ -6,7 +6,7 @@ Maintainer: Shoter
 Arguments:
     <OBJECT> The placed vehicle
     <OBJECT> Buying player
-    <BOOL> Pay from faction funds (commander only) [DEFAULT = false]
+    <BOOL> Pay from faction funds (commander and sub-commanders only) [DEFAULT = false]
 
 Return Value:
     <nil>
@@ -39,7 +39,7 @@ private _index = A3A_junkyardStock findIf { _x#0 == _class };
 if (_index == -1) exitWith { [localize "STR_A3A_fn_junkyard_soldOut"] call _fnc_fail };
 private _cost = A3A_junkyardStock # _index # 1;
 
-if (_useFactionFunds and {_player != theBoss}) then { _useFactionFunds = false };
+if (_useFactionFunds and {!([_player] call A3A_fnc_isCommandStaff)}) then { _useFactionFunds = false };
 private _paid = if (_useFactionFunds) then {
     if (server getVariable ["resourcesFIA", 0] < _cost) then { false } else { [0, -_cost] call A3A_fnc_resourcesFIA; true };
 } else {
@@ -56,4 +56,6 @@ publicVariable "A3A_junkyardStock";
 private _displayName = getText (configFile >> "CfgVehicles" >> _class >> "displayName");
 private _junkTime = [A3A_junkyardJunkDuration, 1, 1, false, 2, false, true] call A3A_fnc_timeSpan_format;
 [_titleStr, format [localize "STR_A3A_fn_junkyard_bought", _displayName, _cost, _junkTime]] remoteExec ["A3A_fnc_customHint", _player];
+// The commander hears about faction money spent by sub-commanders
+if (_useFactionFunds) then { [_player, _displayName, _cost, 0] call A3A_fnc_subCommanderSpent };
 Info_3("Junkyard: %1 bought %2 for %3", name _player, _class, _cost);

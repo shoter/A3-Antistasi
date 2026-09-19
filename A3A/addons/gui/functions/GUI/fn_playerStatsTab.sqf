@@ -89,6 +89,15 @@ private _fnc_formatNumber = {
     if (_this < 0) then { "-" } else { str _this };
 };
 
+// Role of the commander and the sub-commanders by UID, "" for everyone else
+private _commanderUID = if (isNull theBoss) then { "" } else { theBoss getVariable ["A3A_playerUID", getPlayerUID theBoss] };
+private _fnc_roleName = {
+    params ["_uid"];
+    if (_uid == _commanderUID) exitWith { localize "STR_antistasi_dialogs_subcommanders_role_commander" };
+    if (_uid in A3A_subCommanders) exitWith { localize "STR_antistasi_dialogs_subcommanders_role_subcommander" };
+    ""
+};
+
 switch (_mode) do
 {
     case ("update"):
@@ -149,6 +158,9 @@ switch (_mode) do
             private _y = _i * ROW_HEIGHT;
             private _color = if (_online) then { _textColor } else { A3A_COLOR_TEXT_DARKER_SQF };
             private _nameColor = if (_online && _member) then { A3A_COLOR_MEMBER_SQF } else { _color };
+            // The commander and the sub-commanders carry their role behind the name
+            private _role = [_uid] call _fnc_roleName;
+            if (_role != "") then { _name = format ["%1 (%2)", _name, _role] };
 
             // Positions are relative to the list group, 6 grid units on the right are left for the scrollbar
             {
@@ -270,10 +282,13 @@ switch (_mode) do
 
         private _textColor = [A3A_COLOR_TEXT] call FUNC(configColorToArray);
         private _statusCtrl = _display displayCtrl A3A_IDC_PLAYERDETAILS_STATUS;
-        _statusCtrl ctrlSetText format ["%1, %2",
+        private _statusText = format ["%1, %2",
             localize (["STR_antistasi_dialogs_main_playerstats_offline", "STR_antistasi_dialogs_main_playerstats_online"] select _online),
             localize (["STR_antistasi_dialogs_main_playerstats_guest", "STR_antistasi_dialogs_main_playerstats_member"] select _member)
         ];
+        private _role = [_uid] call _fnc_roleName;
+        if (_role != "") then { _statusText = format ["%1, %2", _statusText, _role] };
+        _statusCtrl ctrlSetText _statusText;
         _statusCtrl ctrlSetTextColor (if (_online) then { _textColor } else { A3A_COLOR_TEXT_DARKER_SQF });
         (_display displayCtrl A3A_IDC_PLAYERDETAILS_STATUSTEXT) ctrlSetText "";
 

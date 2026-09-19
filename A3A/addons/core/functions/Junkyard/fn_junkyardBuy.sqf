@@ -5,7 +5,7 @@ Maintainer: Shoter
 
 Arguments:
     <STRING> Vehicle class from A3A_junkyardStock
-    <BOOL> Pay from faction funds (commander only) [DEFAULT = false]
+    <BOOL> Pay from faction funds (commander and sub-commanders only) [DEFAULT = false]
 
 Return Value:
     <nil>
@@ -33,7 +33,7 @@ private _index = A3A_junkyardStock findIf { _x#0 == _class };
 if (_index == -1) exitWith { [_titleStr, localize "STR_A3A_fn_junkyard_soldOut"] call A3A_fnc_customHint };
 private _cost = A3A_junkyardStock # _index # 1;
 
-if (_useFactionFunds and {player != theBoss}) then { _useFactionFunds = false };
+if (_useFactionFunds and {!([player] call A3A_fnc_isCommandStaff)}) then { _useFactionFunds = false };
 private _funds = if (_useFactionFunds) then { server getVariable ["resourcesFIA", 0] } else { player getVariable ["moneyX", 0] };
 if (_funds < _cost) exitWith { [_titleStr, format [localize "STR_A3A_fn_junkyard_noMoney", _cost]] call A3A_fnc_customHint };
 

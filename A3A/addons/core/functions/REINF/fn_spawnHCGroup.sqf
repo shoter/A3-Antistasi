@@ -49,7 +49,9 @@ _group setGroupIdGlobal [_idFormat + str ({side (leader _x) == teamPlayer} count
 
 private _units = units _group;
 {[_x] call A3A_fnc_FIAinit} forEach _units;
-theBoss hcSetGroup [_group];
+// The squad answers to whoever recruited it: the commander or a sub-commander. Falls back to the commander if the role was lost while placing.
+private _hcOwner = if ([player] call A3A_fnc_isCommandStaff) then { player } else { theBoss };
+_hcOwner hcSetGroup [_group];
 
 petros directSay "SentGenReinforcementsArrived";
 [_titleStr, format [localize "STR_A3A_fn_reinf_spawnHCGro_atCommand", groupID _group]] call A3A_fnc_customHint;
@@ -127,6 +129,8 @@ switch _special do {
 };
 
 [- _costHR, - _cost] remoteExec ["A3A_fnc_resourcesFIA", 2];
+// The commander hears about squads recruited by sub-commanders
+if (_hcOwner != theBoss) then { [_hcOwner, groupID _group, _cost, _costHR] remoteExecCall ["A3A_fnc_subCommanderSpent", 2] };
 
 if !(_bypassAI) then {_group spawn A3A_fnc_attackDrillAI};
 

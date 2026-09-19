@@ -45,10 +45,15 @@ switch (_mode) do
         Debug("MainDialog onLoad starting...");
 
         // Disable/hide unavailable tab buttons
-        if (player isNotEqualTo theBoss) then {
-            private _commanderTabButton = _display displayCtrl A3A_IDC_COMMANDERTABBUTTON;
+        // Sub-commanders get the commander tab too, cut down to their high command squads by the tab itself
+        private _commanderTabButton = _display displayCtrl A3A_IDC_COMMANDERTABBUTTON;
+        if !([player] call FUNCMAIN(isCommandStaff)) then {
             _commanderTabButton ctrlEnable false;
             _commanderTabButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_tab_disabled_tooltip";
+        } else {
+            if (player isNotEqualTo theBoss) then {
+                _commanderTabButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_tab_subcommander_tooltip";
+            };
         };
 
         if !([] call FUNCMAIN(isLocalAdmin)) then {
@@ -74,7 +79,7 @@ switch (_mode) do
             hcSelected player;
         };
         _hcGroupData = [];
-        if (player == theBoss) then
+        if ([player] call FUNCMAIN(isCommandStaff)) then
         {
             {
                 private _groupData = [_x] call FUNC(getGroupInfo);
@@ -188,7 +193,8 @@ switch (_mode) do
 
             case ("commander"):
             {
-                if (player == theBoss) then {
+                // Commander, or a sub-commander who gets the cut-down version of the tab
+                if ([player] call FUNCMAIN(isCommandStaff)) then {
                     _selectedTabIDC = A3A_IDC_COMMANDERTAB;
                 };
             };
