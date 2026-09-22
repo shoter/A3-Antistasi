@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-22 - Longer convoy start delay
+
+### Changed
+- Convoy missions now leave **5 to 25 minutes** after they appear (was 5 to 10), so there is more time to reach and ambush the route. The 60 minutes the convoy has to reach its destination is unchanged.
+
 ## 2026-09-19 - Sub-commanders
 
 ### Added
