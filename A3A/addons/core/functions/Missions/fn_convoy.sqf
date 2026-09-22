@@ -23,7 +23,7 @@ private _reinforcementsX = [];
 
 // Setup start time
 
-if (_startDelay < 0) then { _startDelay = random 20 + 5 }; 		// start delay, 5-25 mins real time
+if (_startDelay < 0) then { _startDelay = random 20 + 10 }; 		// start delay, 10-30 mins real time
 private _startDateNum = dateToNumber date + _startDelay * timeMultiplier / (365*24*60);
 private _startDate = numberToDate [date select 0, _startDateNum];
 private _displayTime = [_startDate] call A3A_fnc_dateToTimeString;
