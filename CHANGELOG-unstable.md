@@ -4,6 +4,12 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-29 - Enemy AI accuracy tweaks
+
+### Changed
+- Enemy gunners on static weapons are less accurate (**60%** of their aiming accuracy) and slower to swing onto targets (**50%** aiming speed) while they man the gun. Static machine guns and AT/AA launchers are affected, mortars are not.
+- Invader soldiers each roll a random **5-20% skill bonus** when they spawn, so invaders are a little sharper than occupiers.
+
 ## 2026-09-22 - Convoy start delay 10 to 30 minutes
 
 ### Changed

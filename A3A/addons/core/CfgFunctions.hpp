@@ -61,6 +61,7 @@ class CfgFunctions
             class recallGroup {};
             class smokeCoverAuto {};
             class staticAutoT {};
+            class staticGunnerAim {};
             class staticMGDrill {};
             class suppressingFire {};
             class surrenderAction {};

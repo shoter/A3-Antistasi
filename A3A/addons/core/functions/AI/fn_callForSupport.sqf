@@ -41,6 +41,7 @@ ServerDebug_4("Leader of %1 (side %2) is starting to request support against %3 
 private _oldSkill = skill _groupLeader;
 private _oldCourage = _groupLeader skill "courage";
 _groupLeader setSkill (_oldSkill - 0.2);
+[_groupLeader, objectParent _groupLeader] call A3A_fnc_staticGunnerAim;      // general setSkill wiped the static gunner aim reduction
 
 sleep _timeToCallSupport;
 
@@ -48,6 +49,7 @@ sleep _timeToCallSupport;
 _groupLeader setSkill _oldSkill;
 _groupLeader setskill ["courage", _oldCourage];
 _groupLeader setskill ["commanding", _oldCourage];
+[_groupLeader, objectParent _groupLeader] call A3A_fnc_staticGunnerAim;
 
 //If the group leader survived the call, proceed
 if(_groupLeader call A3A_fnc_canFight) then

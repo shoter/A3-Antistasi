@@ -84,7 +84,14 @@ private _skill = switch (true) do {
     case ("SF" in _type): { _baseSkill * 1.2 };
     default { _baseSkill };
 };
+// Invaders are the better-trained force: each unit rolls a 5-20% skill bonus
+if (_side == Invaders) then { _skill = (_skill * (1.05 + random 0.15)) min 1 };
 _unit setSkill _skill;
+
+// Mounted guns have no recoil or sway, so gunners on statics get reduced aim while they man one
+[_unit, objectParent _unit] call A3A_fnc_staticGunnerAim;
+_unit addEventHandler ["GetInMan", { [_this#0, _this#2] call A3A_fnc_staticGunnerAim }];
+_unit addEventHandler ["GetOutMan", { [_this#0, objNull] call A3A_fnc_staticGunnerAim }];
 
 //Adjusts squadleaders with improved skill and adds intel action
 if (_type in FactionGet(all,"SquadLeaders")) then
