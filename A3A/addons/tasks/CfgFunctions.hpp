@@ -2,6 +2,13 @@ class CfgFunctions {
     class ADDON {
         class Core {
             file = QPATHTOFOLDER(Core);
+            class boardAccept {};
+            class boardGenerate {};
+            class boardLoop {};
+            class boardPublish {};
+            class boardReward {};
+            class boardUpdate {};
+            class boardValidate {};
             class genTaskUID {};
             class getSettings { postInit = 1; };
             class requestTask {};
@@ -26,6 +33,7 @@ class CfgFunctions {
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);
+            class AS_Collaborator_p {};
             class AS_Official_p {};
             class AS_SpecOp_p {};
             class AS_Traitor_p {};
@@ -47,6 +55,7 @@ class CfgFunctions {
         };
         class Tasks {
             file = QPATHTOFOLDER(Tasks);
+            class AS_Collaborator {};
             class cityBattle {};
             class city_killcop {};
             class city_hostage {};

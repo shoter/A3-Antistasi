@@ -72,6 +72,42 @@
         <Korean>임무</Korean>
         <Russian>Миссии</Russian>
       </Key>
+      <Key ID="STR_A3A_Tasks_board_CON_Outpost">
+        <Original>Capture Location</Original>
+        <Polish>Zajmij pozycję</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_per_pow">
+        <Original>per POW</Original>
+        <Polish>za jeńca</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_per_refugee">
+        <Original>per refugee</Original>
+        <Polish>za uchodźcę</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_note_gunshop">
+        <Original>gun shop access</Original>
+        <Polish>dostęp do sklepu z bronią</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_note_weapons">
+        <Original>weapons crate</Original>
+        <Polish>skrzynia broni</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_note_ammo">
+        <Original>ammo crate</Original>
+        <Polish>skrzynia amunicji</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_note_intel">
+        <Original>large intel report</Original>
+        <Polish>duży raport wywiadowczy</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_gone">
+        <Original>That mission is no longer available.</Original>
+        <Polish>Ta misja jest już nieaktualna.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_busy">
+        <Original>Our people are too close to that place, the enemy would notice. Pull back or pick another mission.</Original>
+        <Polish>Nasi ludzie są za blisko tego miejsca, wróg by to zauważył. Wycofajcie się albo wybierzcie inną misję.</Polish>
+      </Key>
     </Container>
     <Container name="Tasks">
       <Key ID="STR_antistasi_LTasks_AS_official_title">
@@ -286,6 +322,34 @@
       </Key>
       <Key ID="STR_antistasi_LTasks_LOG_Ammo_captured">
         <Original>Ammo Truck Captured.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_AS_Collaborator_title">
+        <Original>Collaborator Car Ambush</Original>
+        <Polish>Zasadzka na kolaboranta</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_AS_Collaborator_desc">
+        <Original>A collaborator in %1 has been passing information about us to the %2. The police will drive him from %1 to %3, leaving at %4. Kill him before he gets there.</Original>
+        <Polish>Kolaborant z %1 przekazuje informacje o nas siłom %2. Policja zawiezie go z %1 do %3, wyjazd o %4. Zabij go, zanim tam dotrze.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_AS_Collaborator_transitDesc">
+        <Original>The police car with the collaborator has left %1 and is heading for %2. Kill him before he gets there.</Original>
+        <Polish>Radiowóz z kolaborantem wyjechał z %1 i jedzie do %2. Zabij go, zanim tam dotrze.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_AS_Collaborator_early">
+        <Original>The police have spotted us. The collaborator's car is leaving now!</Original>
+        <Polish>Policja nas zauważyła. Samochód z kolaborantem właśnie odjeżdża!</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_AS_Collaborator_redirect">
+        <Original>Their outpost has fallen. The police are taking the collaborator to %1 instead.</Original>
+        <Polish>Ich posterunek padł. Policja wiezie kolaboranta do %1.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_AS_Collaborator_dead">
+        <Original>The collaborator is dead.</Original>
+        <Polish>Kolaborant nie żyje.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_AS_Collaborator_arrived">
+        <Original>The collaborator got through. The enemy now knows more about our HQ.</Original>
+        <Polish>Kolaborant dotarł na miejsce. Wróg wie teraz więcej o naszej kwaterze.</Polish>
       </Key>
     </Container>
   </Package>

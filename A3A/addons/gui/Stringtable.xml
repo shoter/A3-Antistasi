@@ -4472,6 +4472,94 @@
         <Original>Mission Request</Original>
         <Spanish>Solicitud de Misión</Spanish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_titlebar">
+        <Original>MISSION BOARD</Original>
+        <Polish>TABLICA MISJI</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_button">
+        <Original>Mission Board</Original>
+        <Polish>Tablica misji</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_col_mission">
+        <Original>Mission</Original>
+        <Polish>Misja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_col_type">
+        <Original>Type</Original>
+        <Polish>Typ</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_col_location">
+        <Original>Location</Original>
+        <Polish>Miejsce</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_col_reward">
+        <Original>Reward</Original>
+        <Polish>Nagroda</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_all">
+        <Original>All categories</Original>
+        <Polish>Wszystkie kategorie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_next">
+        <Original>New missions in %1 min</Original>
+        <Polish>Nowe misje za %1 min</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_accept">
+        <Original>Take mission</Original>
+        <Polish>Przyjmij misję</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_hard_name">
+        <Original>%1 (hard)</Original>
+        <Polish>%1 (trudna)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_money">
+        <Original>%1 €</Original>
+        <Polish>%1 €</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_pay">
+        <Original>%1 € pay</Original>
+        <Polish>%1 € żołdu</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_hr">
+        <Original>%1 HR</Original>
+        <Polish>%1 HR</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_route">
+        <Original>%1 to %2</Original>
+        <Polish>%1 do %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_detail_money">
+        <Original>Faction funds: %1 €%2</Original>
+        <Polish>Fundusze frakcji: %1 €%2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_detail_pay">
+        <Original>Pay: %1 €%2, split between the players who take part</Original>
+        <Polish>Żołd: %1 €%2, dzielony między graczy biorących udział</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_detail_hr">
+        <Original>Recruits: %1 HR%2</Original>
+        <Polish>Rekruci: %1 HR%2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_detail_note">
+        <Original>Also: %1</Original>
+        <Polish>Dodatkowo: %1</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_detail_normal">
+        <Original>Normal difficulty.</Original>
+        <Polish>Normalny poziom trudności.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_detail_hard">
+        <Original>Hard: less time or stronger opposition, bigger reward.</Original>
+        <Polish>Trudna: mniej czasu lub silniejszy opór, większa nagroda.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_pick">
+        <Original>Select a mission to see its details.</Original>
+        <Polish>Wybierz misję, aby zobaczyć szczegóły.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_board_empty">
+        <Original>No missions on the board right now. New ones arrive every 15 minutes.</Original>
+        <Polish>Na tablicy nie ma teraz misji. Nowe pojawiają się co 15 minut.</Polish>
+      </Key>
     </Container>
     <Container name="dialog_recruit_squad">
       <Key ID="STR_antistasi_dialogs_recruit_squad_aa_truck">

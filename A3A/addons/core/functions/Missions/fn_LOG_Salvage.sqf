@@ -32,7 +32,7 @@ _mrk3 setMarkerSize [25, 25];
 
 Debug_3("Salvage Mission Positions: %1, %2, %3", _mrk1Pos, _mrk2Pos, _mrk3Pos);
 
-private _difficultX = if (random 10 < tierWar) then {true} else {false};
+private _difficultX = _this param [1, random 10 < tierWar];		// hard variant, rolled by the mission board
 private _sideX = if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 private _faction = Faction(_sideX);
 

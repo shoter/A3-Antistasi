@@ -5,7 +5,7 @@ if (!isServer and hasInterface) exitWith{};
 
 _markerX = _this select 0;
 
-_difficultX = if (random 10 < tierWar) then {true} else {false};
+_difficultX = _this param [1, random 10 < tierWar];		// hard variant, rolled by the mission board
 
 _sideX = if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 private _faction = Faction(_sideX);
