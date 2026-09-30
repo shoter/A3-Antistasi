@@ -1539,6 +1539,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
+                        // Air Support and Garbage Clean share their row with GarbageCleanControlsGroup, swapped by
+                        // the showGarbageCleanOptions and update modes of fn_commanderTab
                         class AirSupportButton : A3A_Button
                         {
                             idc = A3A_IDC_AIRSUPPORTBUTTON;
@@ -1561,6 +1563,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
+                        // Covers AirSupportButton and GarbageCleanButton. Hidden by fn_commanderTab update after
+                        // CommanderButtonsGroup is shown, because showing the parent shows this group too
                         class GarbageCleanControlsGroup : A3A_ControlsGroupNoScrollbars
                         {
                             idc = A3A_IDC_GARBAGECLEANCONTROLSGROUP;

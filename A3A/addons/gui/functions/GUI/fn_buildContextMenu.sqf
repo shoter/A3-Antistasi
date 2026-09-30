@@ -34,7 +34,7 @@ FIX_LINE_NUMBERS()
 params [["_vehicle", cursorObject, [objNull]]];
 
 // Vehicle section
-private _contextGroup = _display displayCtrl A3A_IDC_CONTEXTGROUP;
+private _contextGroup = _display displayCtrl A3A_IDC_PLAYERCONTEXTGROUP;
 private _noActionsGroup = _display displayCtrl A3A_IDC_NOACTIONSGROUP;
 
 private _contextSingle1Button = _display displayCtrl A3A_IDC_CONTEXTSINGLE1BUTTON;
@@ -52,6 +52,10 @@ private _vehiclePicture = _display displayCtrl A3A_IDC_VEHICLEPICTURE;
 private _containerLabel = _display displayCtrl A3A_IDC_CONTEXTLABEL;
 
 private _disableAll = [_contextSingle1Button, _contextSingle2Button, _contextSingle3Button, _contextSingle4Button, _contextHoriz1Button, _contextHoriz2Button, _noActionsGroup];
+// The no-actions case below hides these, so bring them back for every rebuild. Before hiding the
+// buttons: showing the group shows all its children too
+_contextGroup ctrlShow true;
+_vehicleNameBackground ctrlShow true;
 {_x ctrlShow false; _x ctrlEnable false;} forEach _disableAll;
 
 private _vehType = if ( !isClass (configFile >> "CfgVehicles" >> typeOf _vehicle) ) then { -1 } else {[typeOf _vehicle] call HR_GRG_fnc_getCatIndex};
