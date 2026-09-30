@@ -4,6 +4,16 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Mission board and collaborator ambush
+
+### Changed
+- Missions are no longer handed out at random or on request. They are posted on a **mission board** (Petros' mission action, or the **Mission Board** button on the Commander tab). Every **15 minutes** 3 new missions arrive and 1-2 random ones are taken down. The board holds up to **10 missions per category** and never lists the same mission twice at one location.
+- The board is a table: **Mission | Type | Location | Reward**. The reward is known before you take the mission (faction funds, pay for the players who take part, HR), and hard missions are marked. Filter by category, pick a mission and press **Take mission**. Members and the commander can take missions, one active mission per category as before.
+- The board starts with 2 missions per category and is topped up again when the HQ moves. Missions whose location was captured or whose target is gone drop off the board. The board is not saved: a restarted server posts a fresh one.
+
+### Added
+- New assassination mission, **Collaborator Car Ambush**: a police car waits in an enemy town with the collaborator next to the driver (sometimes two more policemen, always on hard) and leaves for an outpost 5-15 minutes later, or at once if they spot you. Kill the collaborator before he gets there. If he arrives, the enemy learns more about your HQ.
+
 ## 2026-09-29 - Enemy AI accuracy tweaks
 
 ### Changed
