@@ -19,6 +19,7 @@ class CfgFunctions {
             class customLoadoutsDialog {};
             class deployedFlagDialog {};
             class donateTab {};
+            class factionDebugTab {};
             class fastTravelTab {};
             class fireMissionEH {};
             class garrisonsTab {};

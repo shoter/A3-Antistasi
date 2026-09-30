@@ -175,6 +175,10 @@ A3A_resourcesDefenceInv = A3A_balanceResourceRate * (A3A_invaderBalanceMul / 10)
 A3A_resourcesAttackOcc = -10 * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10);								// ~100 min to attack
 A3A_resourcesAttackInv = -10 * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) * (A3A_invaderBalanceMul / 10) * 0.5;	// ~50 min to attack
 
+// Last per-minute income from aggressionUpdateLoop, [defence, attack, defence cap], empty until the first tick. Shown in the Factions debug tab
+A3A_resourceRatesOcc = [];
+A3A_resourceRatesInv = [];
+
 A3A_punishmentDefBuff = 0;
 
 // HQ knowledge values

@@ -975,6 +975,7 @@ class CfgFunctions
             class createDataObject {};
             class createNamespace {};
             class deleteNamespace {};
+            class factionDebugData {};
             class filterAndWeightArray {};
             class findEmptyPos {};
             class findEmptyPosCar {};

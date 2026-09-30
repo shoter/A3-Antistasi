@@ -4351,6 +4351,268 @@
         <Polish>Celność</Polish>
       </Key>
     </Container>
+    <Container name="dialog_main_factiondebug">
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_tab_button">
+        <Original>Factions</Original>
+        <Polish>Frakcje</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_tab_tooltip">
+        <Original>Admin only: resources, aggression and balance values of the enemy factions</Original>
+        <Polish>Tylko dla admina: zasoby, agresja i wartości balansu wrogich frakcji</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_occupants">
+        <Original>Occupants</Original>
+        <Polish>Okupanci</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_invaders">
+        <Original>Invaders</Original>
+        <Polish>Najeźdźcy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_loading">
+        <Original>Waiting for the server...</Original>
+        <Polish>Oczekiwanie na serwer...</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_status">
+        <Original>Refreshes every 2 seconds. Enemy income is added once a minute while players are online.</Original>
+        <Polish>Odświeżane co 2 sekundy. Przychód wroga jest doliczany co minutę, gdy na serwerze są gracze.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_yes">
+        <Original>Yes</Original>
+        <Polish>Tak</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_no">
+        <Original>No</Original>
+        <Polish>Nie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_section_resources">
+        <Original>Resources</Original>
+        <Polish>Zasoby</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_defence">
+        <Original>Defence resources</Original>
+        <Polish>Zasoby obronne</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_defence_tooltip">
+        <Original>Spent on supports and reinforcements against rebels (current / cap)</Original>
+        <Polish>Wydawane na wsparcie i posiłki przeciw rebeliantom (obecne / limit)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_defence_income">
+        <Original>Defence income per 10 min</Original>
+        <Polish>Przychód obronny na 10 min</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_attack">
+        <Original>Attack resources</Original>
+        <Polish>Zasoby ataku</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_attack_tooltip">
+        <Original>The faction launches a major attack when this reaches zero, which then costs it the attack</Original>
+        <Polish>Frakcja rozpoczyna duży atak, gdy wartość osiągnie zero; koszt ataku jest wtedy odejmowany</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_attack_income">
+        <Original>Attack income per 10 min</Original>
+        <Polish>Przychód ataku na 10 min</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_income_tooltip">
+        <Original>Based on the last minute of play, including aggression and the defence/attack shift</Original>
+        <Polish>Na podstawie ostatniej minuty gry, z agresją i przesunięciem między obroną a atakiem</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_next_attack">
+        <Original>Next major attack</Original>
+        <Polish>Następny duży atak</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_next_attack_tooltip">
+        <Original>Estimate at the current attack income</Original>
+        <Polish>Szacunek przy obecnym przychodzie ataku</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_minutes">
+        <Original>in ~%1 min</Original>
+        <Polish>za ~%1 min</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_attack_due">
+        <Original>Due now</Original>
+        <Polish>Teraz</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_attack_waiting">
+        <Original>After the running attack</Original>
+        <Polish>Po trwającym ataku</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_inactive">
+        <Original>Inactive</Original>
+        <Polish>Nieaktywna</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_section_aggression">
+        <Original>Aggression</Original>
+        <Polish>Agresja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_aggression">
+        <Original>Aggression</Original>
+        <Polish>Agresja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_aggression_value">
+        <Original>%1 (level %2)</Original>
+        <Polish>%1 (poziom %2)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_aggression_events">
+        <Original>Aggression events</Original>
+        <Polish>Zdarzenia agresji</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_aggression_events_tooltip">
+        <Original>Recent rebel actions that still add to aggression and fade over time</Original>
+        <Polish>Niedawne akcje rebeliantów, które wciąż podnoszą agresję i z czasem wygasają</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_losses">
+        <Original>Recent losses</Original>
+        <Polish>Niedawne straty</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_losses_value">
+        <Original>%1 (%2 events)</Original>
+        <Polish>%1 (zdarzenia: %2)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_losses_tooltip">
+        <Original>Resource value of units and vehicles lost in the last 20 minutes, used for counterattack decisions</Original>
+        <Polish>Wartość jednostek i pojazdów straconych w ostatnich 20 minutach, używana przy decyzjach o kontrataku</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_hq_knowledge">
+        <Original>HQ knowledge</Original>
+        <Polish>Wiedza o HQ</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_hq_knowledge_tooltip">
+        <Original>How much the faction knows about the location of the current rebel HQ</Original>
+        <Polish>Ile frakcja wie o położeniu obecnego HQ rebeliantów</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_section_sites">
+        <Original>Sites and garrisons</Original>
+        <Polish>Lokacje i garnizony</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_airbases">
+        <Original>Airbases</Original>
+        <Polish>Lotniska</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_outposts">
+        <Original>Outposts</Original>
+        <Polish>Posterunki</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_seaports">
+        <Original>Seaports</Original>
+        <Polish>Porty</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_factories">
+        <Original>Factories</Original>
+        <Polish>Fabryki</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_resources">
+        <Original>Resources</Original>
+        <Polish>Zasoby naturalne</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_towns">
+        <Original>Towns</Original>
+        <Polish>Miasta</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_troops">
+        <Original>Garrison troops</Original>
+        <Polish>Żołnierze w garnizonach</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_troops_tooltip">
+        <Original>Current / full strength</Original>
+        <Polish>Obecnie / pełny stan</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_vehicles">
+        <Original>Garrison vehicles</Original>
+        <Polish>Pojazdy w garnizonach</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_police">
+        <Original>Town police</Original>
+        <Polish>Policja w miastach</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_section_supports">
+        <Original>Supports</Original>
+        <Polish>Wsparcie</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_strikes">
+        <Original>Active strikes</Original>
+        <Polish>Aktywne uderzenia</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_strikes_tooltip">
+        <Original>Support strikes and major attacks whose effect has not expired yet</Original>
+        <Polish>Uderzenia wsparcia i duże ataki, których działanie jeszcze nie wygasło</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_supports">
+        <Original>Active multi-target supports</Original>
+        <Polish>Aktywne wsparcie wielocelowe</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_supports_tooltip">
+        <Original>Supports like CAS, SAM or UAV that are still looking for targets</Original>
+        <Polish>Wsparcie takie jak CAS, SAM czy UAV, które wciąż szuka celów</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_support_spend">
+        <Original>Support spend, last hour</Original>
+        <Polish>Wydatki na wsparcie, ostatnia godzina</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_section_balance">
+        <Original>Balance (whole war)</Original>
+        <Polish>Balans (cała wojna)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_active">
+        <Original>Active in this game mode</Original>
+        <Polish>Aktywna w tym trybie gry</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_active_tooltip">
+        <Original>Whether the faction gains resources and launches attacks in the chosen game mode</Original>
+        <Polish>Czy frakcja zyskuje zasoby i rozpoczyna ataki w wybranym trybie gry</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_players">
+        <Original>Active players</Original>
+        <Polish>Aktywni gracze</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_war_tier">
+        <Original>War tier</Original>
+        <Polish>Poziom wojny</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_player_scale">
+        <Original>Player scale</Original>
+        <Polish>Skala graczy</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_player_scale_tooltip">
+        <Original>Scales enemy income and troops with active players and war tier, including the resource multiplier. 1.00 means 5 players at war tier 6</Original>
+        <Polish>Skaluje przychód i wojska wroga do liczby aktywnych graczy i poziomu wojny, razem z mnożnikiem zasobów. 1,00 oznacza 5 graczy przy poziomie wojny 6</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_resource_rate">
+        <Original>Base income per 10 min</Original>
+        <Polish>Bazowy przychód na 10 min</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_resource_rate_tooltip">
+        <Original>Income before aggression and faction multipliers</Original>
+        <Polish>Przychód przed agresją i mnożnikami frakcji</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_vehicle_cost">
+        <Original>Vehicle cost</Original>
+        <Polish>Koszt pojazdu</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_enemy_mul">
+        <Original>Enemy resource multiplier</Original>
+        <Polish>Mnożnik zasobów wroga</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_attack_mul">
+        <Original>Enemy attack multiplier</Original>
+        <Polish>Mnożnik ataków wroga</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_invader_mul">
+        <Original>Invader multiplier</Original>
+        <Polish>Mnożnik najeźdźców</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_punishment_buff">
+        <Original>Punishment defence buff</Original>
+        <Polish>Premia obronna za karę</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_punishment_buff_tooltip">
+        <Original>Extra Invader defence after a punishment mission, drops with each Invader attack</Original>
+        <Polish>Dodatkowa obrona najeźdźców po misji karnej, spada z każdym ich atakiem</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_factiondebug_big_attack">
+        <Original>Major attack in progress</Original>
+        <Polish>Trwa duży atak</Polish>
+      </Key>
+    </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">
         <Original>Assassination</Original>

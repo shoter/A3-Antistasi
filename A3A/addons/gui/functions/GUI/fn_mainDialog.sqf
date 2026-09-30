@@ -60,6 +60,10 @@ switch (_mode) do
             private _adminTabButton = _display displayCtrl A3A_IDC_ADMINTABBUTTON;
             _adminTabButton ctrlEnable false;
             _adminTabButton ctrlshow false;
+
+            private _factionDebugTabButton = _display displayCtrl A3A_IDC_FACTIONDEBUGTABBUTTON;
+            _factionDebugTabButton ctrlEnable false;
+            _factionDebugTabButton ctrlShow false;
         };
 
         // Hide HC group icons to stop them from interfering with map controls
@@ -279,6 +283,14 @@ switch (_mode) do
                 // Sub tab of the Players tab, no permission check needed
                 _selectedTabIDC = A3A_IDC_PLAYERSTATSDETAILSTAB;
             };
+
+            case ("factiondebug"):
+            {
+                // The server checks again before it answers
+                if ([] call FUNCMAIN(isLocalAdmin)) then {
+                    _selectedTabIDC = A3A_IDC_FACTIONDEBUGTAB;
+                };
+            };
         };
 
         // Log attempt at accessing tab without permission
@@ -306,7 +318,8 @@ switch (_mode) do
             A3A_IDC_CHRONICLETAB,
             A3A_IDC_PLAYERSTATSTAB,
             A3A_IDC_PLAYERSTATSDETAILSTAB,
-            A3A_IDC_AIRTAXITAB
+            A3A_IDC_AIRTAXITAB,
+            A3A_IDC_FACTIONDEBUGTAB
         ];
 
         // Hide all tabs
@@ -421,6 +434,11 @@ switch (_mode) do
             case ("playerstatsdetails"):
             {
                 ["updateDetails"] call FUNC(playerStatsTab);
+            };
+
+            case ("factiondebug"):
+            {
+                ["update"] call FUNC(factionDebugTab);
             };
         };
     };
