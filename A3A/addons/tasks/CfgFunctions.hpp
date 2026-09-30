@@ -42,6 +42,7 @@ class CfgFunctions {
             class RES_Defector_p {};
             class RES_Prisoners_p {};
             class RES_Refugees_p {};
+            class SUP_Elderly_p {};
             class SUP_PoliceStation_p {};
             class SUP_Supplies_p {};
         };
@@ -55,6 +56,7 @@ class CfgFunctions {
             class SUP_Supplies {};
             class LOG_Weapons {};
             class RES_Defector {};
+            class SUP_Elderly {};
         };
     };
 };

@@ -275,6 +275,21 @@
       <Key ID="STR_A3A_Tasks_RES_Defector_angry">
         <Original>The defector has lost faith in us and made off on their own.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_SUP_Elderly_title">
+        <Original>Supplies for the Elderly</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_SUP_Elderly_desc">
+        <Original>An elder living alone outside %1 can no longer make it into town for food and medicine. I have placed a crate of supplies near our HQ. Bring it to their house at the marked spot and unload it there. There is no pay in this and no rush, but people in %1 will hear who looked after their old folks. We don't expect any enemy activity at the house, just keep an eye out for patrols on the way.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_SUP_Elderly_delivered">
+        <Original>The supplies are at the door. The old folks can't pay, but %1 will remember who helped them.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_SUP_Elderly_dead">
+        <Original>The elder we were supposed to help is dead. %1 won't forget it.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_SUP_Elderly_lost">
+        <Original>The supply crate is lost. The delivery is off.</Original>
+      </Key>
       <Key ID="STR_antistasi_LTasks_LOG_Ammo_title">
         <Original>Steal or Destroy Ammotruck</Original>
       </Key>
