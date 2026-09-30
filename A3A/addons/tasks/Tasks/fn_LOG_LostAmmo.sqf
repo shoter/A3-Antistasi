@@ -80,7 +80,7 @@ private _witnessUnits = [];
     private _mrkName = format ["A3A_lostAmmo_%1_%2", _taskId, _forEachIndex];
 
     // Local setters first, the last global one broadcasts the whole marker
-    private _end = _pos getPos [1200, _bearing];
+    private _end = _pos getPos [2500, _bearing];       // past the farthest witness distance, so the length gives nothing away
     private _line = createMarker [_mrkName + "_line", _pos];
     _line setMarkerShapeLocal "POLYLINE";
     _line setMarkerPolylineLocal [_pos#0, _pos#1, _end#0, _end#1];

@@ -3,7 +3,7 @@ Maintainer: Shoter
     Parameter getter for the lost ammo supplies task.
     Picks a spot in the countryside within mission distance where the enemy crate came down,
     the enemy outpost or airbase that sends the recovery team, and 2-4 witness positions
-    250-1000m from the crate with the bearing each of them reports (off by up to 5 degrees).
+    250-2000m from the crate with the bearing each of them reports (off by up to 5 degrees).
 
 Arguments: none
 
@@ -40,7 +40,8 @@ private _fnc_findWitnesses = {
         private _dir = random 360;
         if (_dirs findIf { private _diff = abs (_dir - _x) % 180; _diff < 30 or _diff > 150 } != -1) then { continue };
 
-        private _pos = _cratePos getPos [250 + random 750, _dir];
+        // Sum of three randoms: 250-2000m, most witnesses around the middle of the range
+        private _pos = _cratePos getPos [250 + random (1750/3) + random (1750/3) + random (1750/3), _dir];
         if !([_pos] call _fnc_onMap) then { continue };
         if (surfaceIsWater _pos) then { continue };
         if ((_pos isFlatEmpty [1, -1, 0.5, 1, 0, false, objNull]) isEqualTo []) then { continue };
