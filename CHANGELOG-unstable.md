@@ -4,6 +4,13 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Abandoned Collaborator Hideout mission
+
+### Added
+- New logistics mission on the mission board: **Abandoned Collaborator Hideout**. A collaborator fled his house in a hurry and left his papers and a crate of loot behind. The map only shows a search circle that has the house somewhere inside it, and the house is never at its centre, so search the houses in the area. The place is not guarded.
+- Taking the papers gives medium intel on the enemy he worked for. The crate is filled like an enemy loot crate and is yours to empty or haul away.
+- Reward: **200 € to each player** who came near the house. No faction money and no town support. The mission fails if time runs out or the house is destroyed before the papers are taken.
+
 ## 2026-10-01 - Lost Ammo Supplies: witnesses farther out
 
 ### Changed
