@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Supplies for the Elderly: 2 hour limit
+
+### Changed
+- **Supplies for the Elderly** now expires after **2 hours**, so an ignored delivery no longer blocks other Support missions. The deadline is shown in the task. Expiring costs nothing: the crate is removed and the town's support is unchanged.
+
 ## 2026-09-30 - Mission board and collaborator ambush
 
 ### Changed

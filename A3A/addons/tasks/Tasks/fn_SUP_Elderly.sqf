@@ -2,7 +2,8 @@
 Maintainer: Shoter
     Elderly supplies task. An elder lives in a lone house outside a town and can no longer get
     to the shops. A supply crate appears at HQ; bring it to the house.
-    There is no deadline and no enemy reaction: nobody is spawned or alerted by this task.
+    No enemy reaction: nobody is spawned or alerted by this task. The deadline is a generous two hours,
+    only so that an ignored task does not hold the support category forever; expiry costs nothing.
     There is no pay either, only town support. The task fails if the elder dies or the crate is lost.
 
     Runs in the A3A_tasks_fnc_runTask framework: this file builds the task hashmap and its state functions.
@@ -24,6 +25,7 @@ FIX_LINE_NUMBERS()
 #define SUPPORT_GAIN 10
 #define SUPPORT_LOSS -5
 #define DELIVERY_RADIUS 25
+#define EXPIRY_TIME (2*60*60)
 
 params ["_params", "_checkpoint"];
 _params params ["_city", "_house"];
@@ -33,6 +35,7 @@ private _task = createHashMap;
 _task set ["_hintTitle", localize "STR_A3A_Tasks_SUP_Elderly_title"];
 _task set ["_city", _city];
 _task set ["_house", _house];
+_task set ["_endTime", time + EXPIRY_TIME];
 
 // Supply crate at HQ, same as the city supplies task
 private _hqPos = getMarkerPos respawnTeamPlayer;
@@ -64,7 +67,8 @@ _task set ["_elder", _elder];
 
 // Task. Locks the support category like the other SUPP tasks.
 private _taskId = "SUPP" + str A3A_taskCount;
-private _taskDesc = format [localize "STR_A3A_Tasks_SUP_Elderly_desc", [_city] call A3A_fnc_localizar];
+private _displayTime = [EXPIRY_TIME / 60] call FUNC(minutesFromNow);
+private _taskDesc = format [localize "STR_A3A_Tasks_SUP_Elderly_desc", [_city] call A3A_fnc_localizar, _displayTime];
 [[teamPlayer, civilian], _taskId, [_taskDesc, _task get "_hintTitle", ""], getPosATL _house, false, 0, true, "Heal", true] call BIS_fnc_taskCreate;
 [_taskId, "SUPP", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 _task set ["_taskId", _taskId];
@@ -86,6 +90,7 @@ _task set ["s_waitForDelivery", {
 
     if (!alive _elder) exitWith { _this set ["state", "s_elderDead"]; false };
     if (isNull _box) exitWith { _this set ["state", "s_boxLost"]; false };
+    if (time > _this get "_endTime") exitWith { _this set ["state", "s_expired"]; false };
 
     // Crate unloaded at the house
     if ((_box distance2d _house) min (_box distance2d _elder) > DELIVERY_RADIUS) exitWith {false};
@@ -133,6 +138,16 @@ _task set ["s_elderDead", {
 _task set ["s_boxLost", {
     [_this get "_hintTitle", localize "STR_A3A_Tasks_SUP_Elderly_lost", getPosATL (_this get "_house"), 500] call FUNC(hintNear);
     [_this get "_taskId", "SUPP", "FAILED"] call A3A_fnc_taskSetState;
+    _this set ["state", "s_cleanup"]; false;
+}];
+
+_task set ["s_expired", {
+    // No penalty: someone else looked after them
+    private _hintStr = format [localize "STR_A3A_Tasks_SUP_Elderly_expired", [_this get "_city"] call A3A_fnc_localizar];
+    [_this get "_hintTitle", _hintStr, getPosATL (_this get "_box"), 500] call FUNC(hintNear);
+    [_this get "_taskId", "SUPP", "FAILED"] call A3A_fnc_taskSetState;
+
+    deleteVehicle (_this get "_box");
     _this set ["state", "s_cleanup"]; false;
 }];
 
