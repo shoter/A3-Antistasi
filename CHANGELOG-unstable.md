@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Supplies for the elderly
+
+### Added
+- New Support mission **Supplies for the Elderly**: an elder living alone in a house outside a town needs food. A supply crate appears at HQ; bring it to the marked house and unload it there.
+  - No time limit, and the mission spawns or alerts no enemies. Regular patrols still roam, so watch the road.
+  - No money or HR: the town gains **10 support** on delivery and loses 5 if the elder dies.
+  - While it is open it takes the Support mission slot, like City Supplies. It is not kept across a server restart.
+
 ## 2026-09-29 - Enemy AI accuracy tweaks
 
 ### Changed
