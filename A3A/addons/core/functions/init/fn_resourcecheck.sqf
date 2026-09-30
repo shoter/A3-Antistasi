@@ -122,9 +122,6 @@ while {true} do
  	A3A_oldHQInfoOcc = A3A_oldHQInfoOcc select { _x set [2, _x#2 - 0.1]; _x#2 > 0 };			// arrays of [xpos, ypos, knowledge]
 	A3A_oldHQInfoInv = A3A_oldHQInfoInv select { _x set [2, _x#2 - 0.1]; _x#2 > 0 };
 
-	private _missionChance = 5 * A3A_activePlayerCount;
-	if ((!bigAttackInProgress) and (random 100 < _missionChance)) then {["ANY"] spawn A3A_Tasks_fnc_requestTask};
-
 	// Enemies forget about vehicle threat eventually 
 	{
 		private _killThreat = _x getVariable "A3A_killThreat";

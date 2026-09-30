@@ -2,6 +2,13 @@ class CfgFunctions {
     class ADDON {
         class Core {
             file = QPATHTOFOLDER(Core);
+            class boardAccept {};
+            class boardGenerate {};
+            class boardLoop {};
+            class boardPublish {};
+            class boardReward {};
+            class boardUpdate {};
+            class boardValidate {};
             class genTaskUID {};
             class getSettings { postInit = 1; };
             class requestTask {};
@@ -23,9 +30,11 @@ class CfgFunctions {
             class city_hostage_p {};
             class city_taxi_p {};
             class city_repair_p {};
+            class city_minefield_p {};
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);
+            class AS_Collaborator_p {};
             class AS_Official_p {};
             class AS_SpecOp_p {};
             class AS_Traitor_p {};
@@ -43,20 +52,24 @@ class CfgFunctions {
             class RES_Defector_p {};
             class RES_Prisoners_p {};
             class RES_Refugees_p {};
+            class SUP_Elderly_p {};
             class SUP_PoliceStation_p {};
             class SUP_Supplies_p {};
         };
         class Tasks {
             file = QPATHTOFOLDER(Tasks);
+            class AS_Collaborator {};
             class cityBattle {};
             class city_killcop {};
             class city_hostage {};
             class city_taxi {};
             class city_repair {};
+            class city_minefield {};
             class SUP_Supplies {};
             class LOG_Weapons {};
             class RES_Defector {};
             class DES_Camp {};
+            class SUP_Elderly {};
         };
     };
 };

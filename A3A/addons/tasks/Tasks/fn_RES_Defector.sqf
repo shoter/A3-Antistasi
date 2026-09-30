@@ -9,6 +9,7 @@ Maintainer: Shoter
 
 Arguments:
     <ARRAY> Task params from FUNC(RES_Defector_p): [source marker, pickup position ATL, car direction, variant, destination marker]
+            plus the reward money rolled by the mission board (random 2000-6000 when missing)
     <ANY> Checkpoint data, unused (task is not saved)
 
 Return Value:
@@ -22,7 +23,7 @@ Public: No
 FIX_LINE_NUMBERS()
 
 params ["_params", "_checkpoint"];
-_params params ["_source", "_placePos", "_placeDir", "_variant", "_destMrk"];
+_params params ["_source", "_placePos", "_placeDir", "_variant", "_destMrk", ["_money", 2000 + 100 * floor random 41]];
 Trace_1("Params: %1", _params);
 
 private _side = sidesX getVariable _source;
@@ -35,6 +36,7 @@ _task set ["_source", _source];
 _task set ["_side", _side];
 _task set ["_variant", _variant];
 _task set ["_destMrk", _destMrk];
+_task set ["_money", _money];
 _task set ["_endTime", time + 45*60];
 _task set ["_chaseActive", false];
 
@@ -306,7 +308,7 @@ _task set ["s_transit", {
 _task set ["s_success", {
     private _officer = _this get "_officer";
     private _side = _this get "_side";
-    private _money = 2000 + 100 * floor random 41;          // 2000-6000
+    private _money = _this get "_money";
 
     [0, _money] remoteExec ["A3A_fnc_resourcesFIA", 2];
     [_side, -15, 90] remoteExec ["A3A_fnc_addAggression", 2];
