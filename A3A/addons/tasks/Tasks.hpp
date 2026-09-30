@@ -208,6 +208,16 @@ class Tasks {
         boardName = "STR_A3A_Tasks_LOG_LostAmmo_title";
         boardDifficulty = 0;
     };
+    class LOG_Hideout {
+        category = "LOG";
+        func = QFUNC(LOG_Hideout);
+        params = QFUNC(LOG_Hideout_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_LOG_Hideout_title";
+        boardDifficulty = 0;
+    };
     class SUP_Supplies {
         category = "SUPP";
         func = QFUNC(SUP_Supplies);
