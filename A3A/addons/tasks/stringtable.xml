@@ -275,6 +275,39 @@
       <Key ID="STR_A3A_Tasks_RES_Defector_angry">
         <Original>The defector has lost faith in us and made off on their own.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_title">
+        <Original>Lost Ammo Supplies</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_desc">
+        <Original>%1 lost a large ammo crate while moving supplies, and nobody knows exactly where it came down. %2 locals saw it fall. They are marked on the map with the bearing they saw it on, and each bearing can be off by up to 5 degrees: cross the lines to find the crate. Load it onto a truck and bring it to our HQ or one of our outposts or airbases before %4. In 20 to 40 minutes %1 will send a recovery team from %3 to take it back.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_witness">
+        <Original>Witness %1: %2°</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_dispatch">
+        <Original>Radio intercept: %1 has sent a recovery team and a truck from %2 for the lost crate.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_found">
+        <Original>We found the crate. Load it onto a truck and get it to our HQ or one of our outposts or airbases.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_foundDesc">
+        <Original>We found the lost ammo crate. Load it onto a truck and bring it to our HQ or one of our outposts or airbases before %1, and keep it away from the enemy recovery team.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_loaded">
+        <Original>The enemy has loaded the crate onto a truck heading for %1. Stop it before it gets there.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_loadedDesc">
+        <Original>%1 has the crate on a truck heading for %2. Stop the truck and bring the crate to our HQ or one of our outposts or airbases before %3.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_success">
+        <Original>The ammo crate is ours: 300 € for the war chest, and everything inside it.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_lost">
+        <Original>The enemy got the crate back to %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_LostAmmo_timeout">
+        <Original>The trail has gone cold. The ammo crate is lost.</Original>
+      </Key>
       <Key ID="STR_antistasi_LTasks_LOG_Ammo_title">
         <Original>Steal or Destroy Ammotruck</Original>
       </Key>

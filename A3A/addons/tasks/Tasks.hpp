@@ -148,6 +148,16 @@ class Tasks {
         weight = 1;
         isLegacy = 0;
     };
+    class LOG_LostAmmo {
+        category = "LOG";
+        func = QFUNC(LOG_LostAmmo);
+        params = QFUNC(LOG_LostAmmo_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_LOG_LostAmmo_title";     // Mission board (not merged yet): name and no hard variant
+        boardDifficulty = 0;
+    };
     class SUP_Supplies {
         category = "SUPP";
         func = QFUNC(SUP_Supplies);

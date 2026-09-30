@@ -37,6 +37,7 @@ class CfgFunctions {
             class LOG_Ammo_p {};
             class LOG_Bank_p {};
             class LOG_Gunshop_p {};
+            class LOG_LostAmmo_p {};
             class LOG_Salvage_p {};
             class LOG_Weapons_p {};
             class RES_Defector_p {};
@@ -54,6 +55,7 @@ class CfgFunctions {
             class city_repair {};
             class SUP_Supplies {};
             class LOG_Weapons {};
+            class LOG_LostAmmo {};
             class RES_Defector {};
         };
     };
