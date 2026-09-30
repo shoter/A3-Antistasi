@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Minefield clearing town mission
+
+### Added
+- New town mission, **Clear the minefield**: the enemy has mined a small field (5-10 m, 5-10 mines) on the edge of an enemy-held town. It appears by itself when you are near the town, like the other town missions. The field is marked on the map and the locals have marked the mines, so no mine detector is needed.
+  - Remove every mine: engineers can disarm them, explosives set them off.
+  - Everyone who came to the field (within 100 m) is paid **200 € x war level**, and the town gains **10 support**.
+  - 45 minute limit. If it runs out the remaining mines are removed and nothing is lost. Not kept across a server restart.
+
 ## 2026-09-30 - Supplies for the Elderly: 2 hour limit
 
 ### Changed
