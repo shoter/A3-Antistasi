@@ -4,6 +4,15 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Enemy camp mission
+
+### Added
+- New Destroy mission on the mission board, **Destroy enemy camp**: an enemy squad has pitched camp out in the woods, far from roads and towns. The map only shows a 250 m search area, so you have to find the camp yourself.
+  - The soldiers sit around the campfire, smoking and checking their rifles, while two sentries walk the perimeter. They get up and fight once they spot you, hear shots or someone walks into the camp. Undercover players can walk up to them.
+  - When no defender is left near the fire, use **Burn the camp** at the campfire. The camp's supply crate is full of loot and can be taken along.
+  - Everyone who came within 300 m of the camp is paid **100 € x war level**.
+  - 60 minute limit, extended by up to 20 minutes while you are still at the camp. Not kept across a server restart.
+
 ## 2026-09-30 - Minefield clearing town mission
 
 ### Added
