@@ -3,9 +3,8 @@ FIX_LINE_NUMBERS()
 
 //Mission: Capture/destroy the convoy
 if (!isServer and hasInterface) exitWith {};
-params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1], "_gunshopItems"];
+params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1], "_gunshopItems", ["_difficult", random 10 < tierWar]];
 
-private _difficult = if (random 10 < tierWar) then {true} else {false};
 private _spawnSF = ([5, 0] select (_convoyType == "GunShop")) + random 10 < tierWar;
 private _sideX = if (sidesX getVariable [_mrkOrigin,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 private _faction = Faction(_sideX);

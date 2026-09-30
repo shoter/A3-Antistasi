@@ -16,7 +16,7 @@ FIX_LINE_NUMBERS()
 
 params ["_missionOrigin", "_posCrashOrigin"];
 
-private _difficult = if (random 10 < tierWar) then {true} else {false};
+private _difficult = _this param [2, random 10 < tierWar];		// hard variant, rolled by the mission board
 private _bonus = if (_difficult) then {2} else {1};
 private _missionOriginPos = getMarkerPos _missionOrigin;
 private _sideX = if (sidesX getVariable [_missionOrigin,sideUnknown] == Occupants) then {Occupants} else {Invaders};

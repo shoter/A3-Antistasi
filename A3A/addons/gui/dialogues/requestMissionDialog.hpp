@@ -1,201 +1,165 @@
-class A3A_RequestMissionDialog : A3A_DefaultDialog
+/*
+Maintainer: Shoter
+    Mission board, opened from Petros' mission action or the commander's Mission board button.
+    A table of the missions currently on offer (Mission | Type | Location | Reward), a category filter,
+    the countdown to the next batch of missions, details of the selected mission and a button to take it.
+    Filled by A3A_GUI_fnc_requestMissionDialog.
+*/
+
+class A3A_RequestMissionDialog
 {
-  idd = A3A_IDD_REQUESTMISSIONDIALOG;
+    idd = A3A_IDD_REQUESTMISSIONDIALOG;
+    onLoad = "[""onLoad""] spawn A3A_GUI_fnc_requestMissionDialog";
 
-  class Controls
-  {
-    class TitlebarText : A3A_TitlebarText
+    #undef DIALOG_X
+    #undef DIALOG_Y
+    #define DIALOG_X CENTER_X(190) // Global x pos of dialog
+    #define DIALOG_Y CENTER_Y(110) // Global y pos of dialog
+
+    class ControlsBackground
     {
-      idc = -1;
-      text = $STR_antistasi_dialogs_mission_request_titlebar;
-      x = DIALOG_X;
-      y = DIALOG_Y - 5 * GRID_H;
-      w = DIALOG_W * GRID_W;
-      h = 5 * GRID_H;
+        class TitleBarBackground : A3A_Background
+        {
+            moving = true;
+            colorBackground[] = A3A_COLOR_TITLEBAR_BACKGROUND;
+            x = DIALOG_X;
+            y = DIALOG_Y - 5 * GRID_H;
+            w = 190 * GRID_W;
+            h = 5 * GRID_H;
+        };
+
+        class Background : A3A_Background
+        {
+            x = DIALOG_X;
+            y = DIALOG_Y;
+            w = 190 * GRID_W;
+            h = 110 * GRID_H;
+        };
     };
 
-    // Main content
-    class MainContent : A3A_DefaultControlsGroup
+    class Controls
     {
-      idc = A3A_IDC_REQUESTMISSIONMAIN;
-
-      class Controls
-      {
-        // Conquest
-        class ConquestIcon : A3A_Picture
+        class TitlebarText : A3A_TitlebarText
         {
-          idc = -1;
-          colorBackground[] = A3A_COLOR_TRANSPARENT;
-          text = A3A_Icon_Conquest;
-          x = 15 * GRID_W;
-          y = 14 * GRID_H;
-          w = 16 * GRID_W;
-          h = 16 * GRID_H;
+            idc = -1;
+            text = $STR_antistasi_dialogs_mission_board_titlebar;
+            x = DIALOG_X;
+            y = DIALOG_Y - 5 * GRID_H;
+            w = 180 * GRID_W;
+            h = 5 * GRID_H;
         };
 
-        class ConquestButton : A3A_Button
+        class CategoryFilter : A3A_ComboBox_Small
         {
-          idc = -1;
-          text = $STR_antistasi_dialogs_mission_request_conquest;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""CON""]] call A3A_GUI_fnc_requestMissionDialog;";
-          sizeEx = GUI_TEXT_SIZE_LARGE;
-          x = 7 * GRID_W;
-          y = 34 * GRID_H;
-          w = 32 * GRID_W;
-          h = 12 * GRID_H;
+            idc = A3A_IDC_MISSIONBOARD_FILTER;
+            onLBSelChanged = "[""fillList""] call A3A_GUI_fnc_requestMissionDialog";
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 3 * GRID_H;
+            w = 50 * GRID_W;
+            h = 4 * GRID_H;
         };
 
-        // Destroy
-        class DestroyIcon : A3A_Picture
+        class NextUpdateText : A3A_Text_Small
         {
-          idc = -1;
-          colorBackground[] = A3A_COLOR_TRANSPARENT;
-          text = A3A_Icon_Destroy;
-          x = 53 * GRID_W;
-          y = 14 * GRID_H;
-          w = 16 * GRID_W;
-          h = 16 * GRID_H;
+            idc = A3A_IDC_MISSIONBOARD_NEXTUPDATE;
+            style = ST_RIGHT;
+            text = "";
+            x = DIALOG_X + 60 * GRID_W;
+            y = DIALOG_Y + 3 * GRID_H;
+            w = 126 * GRID_W;
+            h = 4 * GRID_H;
         };
 
-        class DestroyButton : A3A_Button
+        // Column headers. X positions follow the column fractions of MissionList below (4 + fraction * 182).
+        class MissionHeader : A3A_Text_Small
         {
-          idc = -1;
-          text = $STR_antistasi_dialogs_mission_request_destroy;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""DES""]] call A3A_GUI_fnc_requestMissionDialog;";
-          sizeEx = GUI_TEXT_SIZE_LARGE;
-          x = 45 * GRID_W;
-          y = 34 * GRID_H;
-          w = 32 * GRID_W;
-          h = 12 * GRID_H;
+            idc = -1;
+            text = $STR_antistasi_dialogs_mission_board_col_mission;
+            colorText[] = A3A_COLOR_TEXT_DARKER;
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 9 * GRID_H;
+            w = 54 * GRID_W;
+            h = 4 * GRID_H;
         };
 
-        // Assasination
-        class AssassinationIcon : A3A_Picture
+        class TypeHeader : MissionHeader
         {
-          idc = -1;
-          text = A3A_Icon_Assassination;
-          x = 91 * GRID_W;
-          y = 14 * GRID_H;
-          w = 16 * GRID_W;
-          h = 16 * GRID_H;
+            text = $STR_antistasi_dialogs_mission_board_col_type;
+            x = DIALOG_X + 58.6 * GRID_W;
+            w = 27 * GRID_W;
         };
 
-        class AssassinationButton : A3A_Button
+        class LocationHeader : MissionHeader
         {
-          idc = -1;
-          text = $STR_antistasi_dialogs_mission_request_assassination;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""AS""]] call A3A_GUI_fnc_requestMissionDialog;";
-          sizeEx = GUI_TEXT_SIZE_LARGE;
-          x = 83 * GRID_W;
-          y = 34 * GRID_H;
-          w = 32 * GRID_W;
-          h = 12 * GRID_H;
+            text = $STR_antistasi_dialogs_mission_board_col_location;
+            x = DIALOG_X + 85.9 * GRID_W;
+            w = 36 * GRID_W;
         };
 
-        // Convoy
-        class ConvoyIcon : A3A_Picture
+        class RewardHeader : MissionHeader
         {
-          idc = -1;
-          colorBackground[] = A3A_COLOR_TRANSPARENT;
-          text = A3A_Icon_Convoy_Ambush;
-          x = 129 * GRID_W;
-          y = 14 * GRID_H;
-          w = 16 * GRID_W;
-          h = 16 * GRID_H;
+            text = $STR_antistasi_dialogs_mission_board_col_reward;
+            x = DIALOG_X + 122.3 * GRID_W;
+            w = 63 * GRID_W;
         };
 
-        class ConvoyButton : A3A_Button
+        class MissionListBackground : A3A_Background
         {
-          idc = -1;
-          text = $STR_antistasi_dialogs_mission_request_convoy;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""CONVOY""]] call A3A_GUI_fnc_requestMissionDialog;";
-          sizeEx = GUI_TEXT_SIZE_LARGE;
-          x = 121 * GRID_W;
-          y = 34 * GRID_H;
-          w = 32 * GRID_W;
-          h = 12 * GRID_H;
+            idc = -1;
+            colorBackground[] = A3A_COLOR_BACKGROUND;
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 13 * GRID_H;
+            w = 182 * GRID_W;
+            h = 64 * GRID_H;
         };
 
-        // Rescue
-        class RescueIcon : A3A_Picture
+        class MissionList : A3A_ListNBox
         {
-          idc = -1;
-          colorBackground[] = A3A_COLOR_TRANSPARENT;
-          text = A3A_Icon_Rescue;
-          x = 34 * GRID_W;
-          y = 56 * GRID_H;
-          w = 16 * GRID_W;
-          h = 16 * GRID_H;
+            idc = A3A_IDC_MISSIONBOARD_LIST;
+            onLBSelChanged = "[""selectionChanged""] call A3A_GUI_fnc_requestMissionDialog";
+            onLBDblClick = "[""accept""] call A3A_GUI_fnc_requestMissionDialog";
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 13 * GRID_H;
+            w = 182 * GRID_W;
+            h = 64 * GRID_H;
+
+            sizeEx = GUI_TEXT_SIZE_SMALL;
+            rowHeight = 4 * GRID_H;
+            columns[] = {0, 0.3, 0.45, 0.65}; // Mission, Type, Location, Reward
         };
 
-        class RescueButton : A3A_Button
+        class DetailsText : A3A_StructuredText
         {
-          idc = -1;
-          text = $STR_antistasi_dialogs_mission_request_rescue;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""RES""]] call A3A_GUI_fnc_requestMissionDialog;";
-          sizeEx = GUI_TEXT_SIZE_LARGE;
-          x = 26 * GRID_W;
-          y = 76 * GRID_H;
-          w = 32 * GRID_W;
-          h = 12 * GRID_H;
+            idc = A3A_IDC_MISSIONBOARD_DETAILS;
+            text = "";
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 80 * GRID_H;
+            w = 140 * GRID_W;
+            h = 27 * GRID_H;
         };
 
-        // Logistics
-        class LogisticsIcon : A3A_Picture
+        class AcceptButton : A3A_Button
         {
-          idc = -1;
-          colorBackground[] = A3A_COLOR_TRANSPARENT;
-          text = A3A_Icon_Logistics;
-          x = 72 * GRID_W;
-          y = 56 * GRID_H;
-          w = 16 * GRID_W;
-          h = 16 * GRID_H;
+            idc = A3A_IDC_MISSIONBOARD_ACCEPT;
+            text = $STR_antistasi_dialogs_mission_board_accept;
+            onButtonClick = "[""accept""] call A3A_GUI_fnc_requestMissionDialog";
+            x = DIALOG_X + 148 * GRID_W;
+            y = DIALOG_Y + 97 * GRID_H;
+            w = 38 * GRID_W;
+            h = 10 * GRID_H;
         };
 
-        class LogisticsButton : A3A_Button
+        class CloseButton : A3A_CloseButton
         {
-          idc = -1;
-          text = $STR_antistasi_dialogs_mission_request_logistics;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""LOG""]] call A3A_GUI_fnc_requestMissionDialog;";
-          sizeEx = GUI_TEXT_SIZE_LARGE;
-          x = 64 * GRID_W;
-          y = 76 * GRID_H;
-          w = 32 * GRID_W;
-          h = 12 * GRID_H;
+            idc = -1;
+            x = DIALOG_X + 190 * GRID_W - 5 * GRID_W;
+            y = DIALOG_Y - 5 * GRID_H;
         };
-
-        // Support
-        class SupportIcon : A3A_Picture
-        {
-          idc = -1;
-          colorBackground[] = A3A_COLOR_TRANSPARENT;
-          text = A3A_Icon_Support;
-          x = 110 * GRID_W;
-          y = 56 * GRID_H;
-          w = 16 * GRID_W;
-          h = 16 * GRID_H;
-        };
-
-        class SupportButton : A3A_Button
-        {
-          idc = -1;
-          text = $STR_antistasi_dialogs_mission_request_support;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""SUPP""]] call A3A_GUI_fnc_requestMissionDialog;";
-          sizeEx = GUI_TEXT_SIZE_LARGE;
-          x = 102 * GRID_W;
-          y = 76 * GRID_H;
-          w = 32 * GRID_W;
-          h = 12 * GRID_H;
-        };
-
-      };
     };
-
-    class CloseButton : A3A_CloseButton
-    {
-      idc = -1;
-      x = DIALOG_X + DIALOG_W * GRID_W - 5 * GRID_W;
-      y = DIALOG_Y - 5 * GRID_H;
-    };
-  };
 };
+
+// Restore the default dialog position for the dialogs included after this one
+#undef DIALOG_X
+#undef DIALOG_Y
+#define DIALOG_X CENTER_X(DIALOG_W) // Global x pos of dialog
+#define DIALOG_Y CENTER_Y(DIALOG_H) // Global y pos of dialog

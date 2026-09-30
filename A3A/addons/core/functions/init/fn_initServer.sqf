@@ -383,6 +383,7 @@ A3A_garrisonOps = [];
 [] spawn A3A_fnc_aggressionUpdateLoop;              // 1-minute loop
 [] spawn A3A_fnc_garbageCleanerTracker;             // 5-minute loop
 [] spawn A3A_fnc_junkyardLoop;                      // Junkyard restock, hourly
+[] spawn A3A_tasks_fnc_boardLoop;                   // Mission board, new missions every 15 minutes
 
 // Autosave loop. Save if there were any players on the server since the last save.
 [] spawn {

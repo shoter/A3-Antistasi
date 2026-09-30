@@ -4,6 +4,46 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Enemy camp mission
+
+### Added
+- New Destroy mission on the mission board, **Destroy enemy camp**: an enemy squad has pitched camp out in the woods, far from roads and towns. The map only shows a 250 m search area, so you have to find the camp yourself.
+  - The soldiers sit around the campfire, smoking and checking their rifles, while two sentries walk the perimeter. They get up and fight once they spot you, hear shots or someone walks into the camp. Undercover players can walk up to them.
+  - When no defender is left near the fire, use **Burn the camp** at the campfire. The camp's supply crate is full of loot and can be taken along.
+  - Everyone who came within 300 m of the camp is paid **100 € x war level**.
+  - 60 minute limit, extended by up to 20 minutes while you are still at the camp. Not kept across a server restart.
+
+## 2026-09-30 - Minefield clearing town mission
+
+### Added
+- New town mission, **Clear the minefield**: the enemy has mined a small field (5-10 m, 5-10 mines) on the edge of an enemy-held town. It appears by itself when you are near the town, like the other town missions. The field is marked on the map and the locals have marked the mines, so no mine detector is needed.
+  - Remove every mine: engineers can disarm them, explosives set them off.
+  - Everyone who came to the field (within 100 m) is paid **200 € x war level**, and the town gains **10 support**.
+  - 45 minute limit. If it runs out the remaining mines are removed and nothing is lost. Not kept across a server restart.
+
+## 2026-09-30 - Supplies for the Elderly: 2 hour limit
+
+### Changed
+- **Supplies for the Elderly** now expires after **2 hours**, so an ignored delivery no longer blocks other Support missions. The deadline is shown in the task. Expiring costs nothing: the crate is removed and the town's support is unchanged.
+
+## 2026-09-30 - Mission board and collaborator ambush
+
+### Changed
+- Missions are no longer handed out at random or on request. They are posted on a **mission board** (Petros' mission action, or the **Mission Board** button on the Commander tab). Every **15 minutes** 3 new missions arrive and 1-2 random ones are taken down. The board holds up to **10 missions per category** and never lists the same mission twice at one location.
+- The board is a table: **Mission | Type | Location | Reward**. The reward is known before you take the mission (faction funds, pay for the players who take part, HR), and hard missions are marked. The new **Supplies for the Elderly** mission is posted on the board like the others. Filter by category, pick a mission and press **Take mission**. Members and the commander can take missions, one active mission per category as before.
+- The board starts with 2 missions per category and is topped up again when the HQ moves. Missions whose location was captured or whose target is gone drop off the board. The board is not saved: a restarted server posts a fresh one.
+
+### Added
+- New assassination mission, **Collaborator Car Ambush**: a police car waits in an enemy town with the collaborator next to the driver (sometimes two more policemen, always on hard) and leaves for an outpost 5-15 minutes later, or at once if they spot you. Kill the collaborator before he gets there. If he arrives, the enemy learns more about your HQ.
+
+## 2026-09-30 - Supplies for the elderly
+
+### Added
+- New Support mission **Supplies for the Elderly**: an elder living alone in a house outside a town needs food. A supply crate appears at HQ; bring it to the marked house and unload it there.
+  - No time limit, and the mission spawns or alerts no enemies. Regular patrols still roam, so watch the road.
+  - No money or HR: the town gains **10 support** on delivery and loses 5 if the elder dies.
+  - While it is open it takes the Support mission slot, like City Supplies. It is not kept across a server restart.
+
 ## 2026-09-29 - Enemy AI accuracy tweaks
 
 ### Changed

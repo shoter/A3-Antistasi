@@ -11,7 +11,7 @@ private _enemySide = sidesX getVariable _markerX;
 if (_enemySide == teamPlayer) then {_enemySide == Occupants};
 private _faction = Faction(_enemySide);
 
-_difficultX = if (random 10 < tierWar) then {true} else {false};
+_difficultX = _this param [1, random 10 < tierWar];		// hard variant, rolled by the mission board
 _leave = false;
 _contactX = objNull;
 _groupContact = grpNull;

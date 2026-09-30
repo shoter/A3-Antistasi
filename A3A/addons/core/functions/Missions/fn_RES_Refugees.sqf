@@ -7,7 +7,7 @@ private ["_markerX","_difficultX","_leave","_contactX","_groupContact","_tsk","_
 _markerX = _this select 0;
 private _destroyed = _markerX in destroyedSites;
 
-_difficultX = if (random 10 < tierWar) then {true} else {false};
+_difficultX = _this param [1, random 10 < tierWar];		// hard variant, rolled by the mission board
 _leave = false;
 _contactX = objNull;
 _groupContact = grpNull;
