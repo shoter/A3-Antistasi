@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Lost Ammo Supplies: witnesses farther out
+
+### Changed
+- **Lost Ammo Supplies**: the witnesses now stand 250 m to 2 km from the crate instead of 250 m to 1 km, most of them around the middle of that range. The bearing lines on the map are longer to match. Far witnesses make the search area larger, so cross the lines of the nearer ones first.
+
 ## 2026-10-01 - Battle Menu button overlap fixes
 
 ### Fixed
