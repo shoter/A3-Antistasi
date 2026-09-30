@@ -32,6 +32,7 @@ class CfgFunctions {
             class CON_Outpost_p {};
             class convoy_p {};
             class DES_Antenna_p {};
+            class DES_Camp_p {};
             class DES_Heli_p {};
             class DES_Vehicle_p {};
             class LOG_Ammo_p {};
@@ -55,6 +56,7 @@ class CfgFunctions {
             class SUP_Supplies {};
             class LOG_Weapons {};
             class RES_Defector {};
+            class DES_Camp {};
         };
     };
 };

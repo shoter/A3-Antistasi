@@ -275,6 +275,24 @@
       <Key ID="STR_A3A_Tasks_RES_Defector_angry">
         <Original>The defector has lost faith in us and made off on their own.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_title">
+        <Original>Destroy enemy camp</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_desc">
+        <Original>Our scouts report that a %1 squad has pitched camp in the woods near %2. We only know roughly where: search the marked area, deal with the soldiers and burn the camp down before %3. Everyone who takes part is paid %4 €.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_burnAction">
+        <Original>Burn the camp</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_cleared">
+        <Original>The camp is clear. Burn it down with the action at the campfire.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_success">
+        <Original>The enemy camp is burning. You were paid %1 € for your part.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_timeout">
+        <Original>The enemy has broken camp and moved on.</Original>
+      </Key>
       <Key ID="STR_antistasi_LTasks_LOG_Ammo_title">
         <Original>Steal or Destroy Ammotruck</Original>
       </Key>
