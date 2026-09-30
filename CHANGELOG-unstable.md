@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Lost ammo supplies mission
+
+### Added
+- New Logistics mission on the mission board, **Lost Ammo Supplies**: the enemy lost a large ammo crate somewhere in the countryside. Its position is not marked. Instead, 2-4 locals who saw it fall are marked on the map with the bearing they saw it on, each off by up to 5 degrees: cross the lines to find the crate.
+  - 20-40 minutes after the start the enemy sends a recovery team from their nearest outpost: an escort with troops and a cargo truck. If no rebels are near the crate, the truck loads it and drives it back to the outpost. Ambush the truck to take the crate back.
+  - Load the crate onto a truck and bring it to HQ or one of your outposts or airbases: **300 €** for the faction, **30 points** for the group, and the loot inside the crate.
+  - Fails if the crate reaches the enemy outpost, or after 2 hours with nobody near it. Not kept across a server restart.
+
 ## 2026-09-30 - Enemy camp mission
 
 ### Added
