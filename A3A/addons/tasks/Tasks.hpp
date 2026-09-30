@@ -183,5 +183,11 @@ class CityTasks {
         version = 1; //version number of task, update when compatibility is broken between last version and new update
         weight = 1;
     };
+    class Minefield {
+        func = QFUNC(city_minefield);
+        params = QFUNC(city_minefield_p);
+        version = 1;
+        weight = 1;
+    };
 
 };

@@ -23,6 +23,7 @@ class CfgFunctions {
             class city_hostage_p {};
             class city_taxi_p {};
             class city_repair_p {};
+            class city_minefield_p {};
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);
@@ -52,6 +53,7 @@ class CfgFunctions {
             class city_hostage {};
             class city_taxi {};
             class city_repair {};
+            class city_minefield {};
             class SUP_Supplies {};
             class LOG_Weapons {};
             class RES_Defector {};

@@ -221,6 +221,21 @@
       <Key ID="STR_A3A_Tasks_repair_success">
         <Original>Excellent, we've recovered the goods. You can keep the vehicle if you like. We've left some presents in it.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_minefield_title">
+        <Original>Clear the minefield</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_minefield_desc">
+        <Original>The enemy has mined a field on the edge of %1 and the locals have marked the %2 mines they found. Remove every one of them before %3: engineers can disarm them, explosives set them off. Everyone who helps clear the field gets %4 €.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_minefield_progress">
+        <Original>Mine removed. %1 left in the field.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_minefield_success">
+        <Original>The field is clear and the people of %1 won't forget it. You have been paid %2 €.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_minefield_timeout">
+        <Original>The locals got tired of waiting and fenced the minefield off themselves.</Original>
+      </Key>
       <Key ID="STR_A3A_Tasks_taxi_title">
         <Original>Transport rebel agent</Original>
       </Key>
