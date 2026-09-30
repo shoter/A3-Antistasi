@@ -35,6 +35,7 @@ private _gone = call {
     switch (_task) do {
         case "SUP_Supplies": { _marker in destroyedSites or { (A3A_cityData getVariable _marker) select 1 >= 80 } };
         case "LOG_Gunshop": { false };                  // meets in rebel towns too
+        case "SUP_Elderly": { _marker in destroyedSites or { !alive (_args # 1) } };     // any town, the house must still stand
         case "LOG_Weapons": { (_args # 2) call _fnc_rebel };
         case "AS_Collaborator": { _marker call _fnc_rebel or { (_args # 3) call _fnc_rebel } };        // town, destination outpost
         case "DES_Antenna";
@@ -48,5 +49,6 @@ if (_gone) exitWith { "gone" };
 if (!_starting) exitWith { "" };
 
 if (_task in ["AS_Collaborator", "AS_Official", "AS_Traitor", "LOG_Gunshop", "RES_Prisoners", "RES_Refugees"] and { spawner getVariable [_marker, 2] == 0 }) exitWith { "busy" };
+if (_task == "SUP_Elderly" and { (allPlayers - entities "HeadlessClient_F") inAreaArray [getPosATL (_args # 1), 300, 300] isNotEqualTo [] }) exitWith { "busy" };
 if (_task == "RES_Defector" and { (allPlayers - entities "HeadlessClient_F") inAreaArray [_args # 1, 500, 500] isNotEqualTo [] }) exitWith { "busy" };
 "";

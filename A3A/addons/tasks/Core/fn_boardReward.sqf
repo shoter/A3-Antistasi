@@ -42,6 +42,7 @@ switch (_task) do
     case "RES_Prisoners": { [100 * _bonus, 4 * _bonus, 2, "STR_A3A_Tasks_board_per_pow", ""] };
     case "RES_Refugees": { [50 * _bonus, 4 * _bonus, 1, "STR_A3A_Tasks_board_per_refugee", ""] };
     case "RES_Defector": { [_extra, 30, 0, "", "STR_A3A_Tasks_board_note_intel"] };
+    case "SUP_Elderly": { [0, 0, 0, "", "STR_A3A_Tasks_board_note_support"] };        // town support only
     case "SUP_PoliceStation";
     case "SUP_Supplies": { [200, 20, 0, "", ""] };
     case "convoy":

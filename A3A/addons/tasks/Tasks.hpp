@@ -198,6 +198,16 @@ class Tasks {
         boardName = "STR_A3A_Tasks_LOG_Supplies_title";
         boardDifficulty = 0;
     };
+    class SUP_Elderly {
+        category = "SUPP";
+        func = QFUNC(SUP_Elderly);
+        params = QFUNC(SUP_Elderly_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_SUP_Elderly_title";
+        boardDifficulty = 0;
+    };
 };
 
 class CityTasks {
