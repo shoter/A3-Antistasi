@@ -4,6 +4,12 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Battle Menu button overlap fixes
+
+### Fixed
+- **Commander tab (Y):** the Clean all / Clean HQ buttons no longer sit on top of **Air Support** and **Garbage Clean**. They only appear after clicking Garbage Clean, as intended.
+- **Player tab (Y):** when there is nothing to interact with, the leftover vehicle picture and action buttons no longer cover the "no actions" text.
+
 ## 2026-09-30 - Factions debug tab for admins
 
 ### Added
