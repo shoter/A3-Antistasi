@@ -6,7 +6,9 @@ class CfgFunctions {
             class boardGenerate {};
             class boardLoop {};
             class boardPublish {};
+            class boardRestore {};
             class boardReward {};
+            class boardSave {};
             class boardUpdate {};
             class boardValidate {};
             class genTaskUID {};

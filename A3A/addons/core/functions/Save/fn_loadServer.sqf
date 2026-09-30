@@ -219,6 +219,10 @@ if (isServer) then {
 		{ if (_y isEqualType createHashMap) then { A3A_playerStats set [_x, _y] } } forEach _savedStats;
 	};
 
+	// Mission board, put back by A3A_tasks_fnc_boardLoop once the map objects are in place
+	private _savedBoard = "missionBoard" call A3A_fnc_returnSavedStat;
+	if (!isNil "_savedBoard" && { _savedBoard isEqualType [] }) then { A3A_missionBoardSaved = _savedBoard };
+
     Info("Persistent Load Completed.");
 
 	// uh, why here?
