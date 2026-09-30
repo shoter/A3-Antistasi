@@ -39,8 +39,10 @@ switch (_task) do
     case "LOG_Bank": { [5000 * _bonus, 20 * _bonus, 0, "", ""] };
     case "LOG_Gunshop": { [0, 0, 0, "", "STR_A3A_Tasks_board_note_gunshop"] };
     case "LOG_Weapons": { [200, 20, 0, "", "STR_A3A_Tasks_board_note_weapons"] };
+    case "LOG_LostAmmo": { [300, 30, 0, "", "STR_A3A_Tasks_board_note_ammo"] };
     case "RES_Prisoners": { [100 * _bonus, 4 * _bonus, 2, "STR_A3A_Tasks_board_per_pow", ""] };
     case "RES_Refugees": { [50 * _bonus, 4 * _bonus, 1, "STR_A3A_Tasks_board_per_refugee", ""] };
+    case "DES_Camp": { [0, 0, 0, "", "STR_A3A_Tasks_board_note_camp"] };           // paid to each player directly
     case "RES_Defector": { [_extra, 30, 0, "", "STR_A3A_Tasks_board_note_intel"] };
     case "SUP_Elderly": { [0, 0, 0, "", "STR_A3A_Tasks_board_note_support"] };        // town support only
     case "SUP_PoliceStation";

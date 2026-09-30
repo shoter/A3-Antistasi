@@ -41,11 +41,13 @@ class CfgFunctions {
             class CON_Outpost_p {};
             class convoy_p {};
             class DES_Antenna_p {};
+            class DES_Camp_p {};
             class DES_Heli_p {};
             class DES_Vehicle_p {};
             class LOG_Ammo_p {};
             class LOG_Bank_p {};
             class LOG_Gunshop_p {};
+            class LOG_LostAmmo_p {};
             class LOG_Salvage_p {};
             class LOG_Weapons_p {};
             class RES_Defector_p {};
@@ -66,7 +68,9 @@ class CfgFunctions {
             class city_minefield {};
             class SUP_Supplies {};
             class LOG_Weapons {};
+            class LOG_LostAmmo {};
             class RES_Defector {};
+            class DES_Camp {};
             class SUP_Elderly {};
         };
     };

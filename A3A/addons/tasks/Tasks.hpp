@@ -100,6 +100,16 @@ class Tasks {
         boardName = "STR_A3A_fn_mission_des_heli_titel";
         boardDifficulty = 1;
     };
+    class DES_Camp {
+        category = "DES";
+        func = QFUNC(DES_Camp);
+        params = QFUNC(DES_Camp_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_DES_Camp_title";
+        boardDifficulty = 0;
+    };
 /*    class LOG_Ammo {
         category = "LOG";
         func = QFUNCMAIN(LOG_Ammo);
@@ -186,6 +196,16 @@ class Tasks {
         weight = 1;
         isLegacy = 0;
         boardName = "STR_A3A_Tasks_LOG_Weapons_title";
+        boardDifficulty = 0;
+    };
+    class LOG_LostAmmo {
+        category = "LOG";
+        func = QFUNC(LOG_LostAmmo);
+        params = QFUNC(LOG_LostAmmo_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_LOG_LostAmmo_title";
         boardDifficulty = 0;
     };
     class SUP_Supplies {
