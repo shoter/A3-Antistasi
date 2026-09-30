@@ -39,6 +39,7 @@ private _gone = call {
         case "SUP_Elderly": { _marker in destroyedSites or { !alive (_args # 1) } };     // any town, the house must still stand
         case "LOG_Weapons": { (_args # 2) call _fnc_rebel };
         case "LOG_LostAmmo": { (_args # 1) call _fnc_rebel };             // the outpost that sends the recovery team
+        case "LOG_Hideout": { !alive (_args # 1) };                       // any house, it must still stand
         case "AS_Collaborator": { _marker call _fnc_rebel or { (_args # 3) call _fnc_rebel } };        // town, destination outpost
         case "DES_Antenna";
         case "SUP_PoliceStation": { _marker call _fnc_rebel or { !alive (_args # 1) } };
@@ -53,6 +54,7 @@ if (!_starting) exitWith { "" };
 if (_task in ["AS_Collaborator", "AS_Official", "AS_Traitor", "LOG_Gunshop", "RES_Prisoners", "RES_Refugees"] and { spawner getVariable [_marker, 2] == 0 }) exitWith { "busy" };
 if (_task == "SUP_Elderly" and { (allPlayers - entities "HeadlessClient_F") inAreaArray [getPosATL (_args # 1), 300, 300] isNotEqualTo [] }) exitWith { "busy" };
 if (_task == "DES_Camp" and { (allPlayers - entities "HeadlessClient_F") inAreaArray [_args # 0, 800, 800] isNotEqualTo [] }) exitWith { "busy" };
+if (_task == "LOG_Hideout" and { (allPlayers - entities "HeadlessClient_F") inAreaArray [_args # 0, 300, 300] isNotEqualTo [] }) exitWith { "busy" };
 if (_task == "LOG_LostAmmo" and { (allPlayers - entities "HeadlessClient_F") inAreaArray [_args # 0, 1000, 1000] isNotEqualTo [] }) exitWith { "busy" };
 if (_task == "RES_Defector" and { (allPlayers - entities "HeadlessClient_F") inAreaArray [_args # 1, 500, 500] isNotEqualTo [] }) exitWith { "busy" };
 "";
