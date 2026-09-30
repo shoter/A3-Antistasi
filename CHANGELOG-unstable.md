@@ -4,6 +4,16 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-30 - Factions debug tab for admins
+
+### Added
+- New **Factions** tab in the Battle Command menu (Y), shown to admins only. It lists the Occupants and Invaders side by side and refreshes every 2 seconds:
+  - defence and attack resources with their income per 10 minutes, and an estimate of when the next major attack comes
+  - aggression and its level, recent losses and how much each faction knows about the rebel HQ location
+  - sites held, garrison troops and vehicles, town police, active supports and support spending
+  - war-wide balance values: active players, war tier, player scale, multipliers, and whether a major attack is running
+- Other players see no change apart from slightly narrower tab buttons. Saves are not affected.
+
 ## 2026-09-30 - Lost ammo supplies mission
 
 ### Added
