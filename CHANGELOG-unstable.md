@@ -4,6 +4,16 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Mission board is saved
+
+### Changed
+- The mission board is now saved with the campaign. After a server restart or loading the save, the missions that were waiting on the board are back with the same locations, rewards and difficulty. Missions that no longer fit (town taken, target destroyed, HQ moved away) drop off, and categories left with fewer than 2 missions are topped up as before.
+- Missions that were already running when the game was saved are not restored; they are gone after a load, as before. The 15-minute board refresh timer starts over after a load.
+- Older saves have no saved board and start with a fresh one.
+
+### Fixed
+- The bank robbery mission never appeared on the mission board.
+
 ## 2026-10-01 - Abandoned Collaborator Hideout mission
 
 ### Added
