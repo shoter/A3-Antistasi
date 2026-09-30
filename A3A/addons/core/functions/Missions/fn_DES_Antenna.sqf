@@ -6,7 +6,7 @@ private ["_positionX","_timeLimit","_nameDest","_mrkFinal","_tsk"];
 
 params ["_markerX", "_antenna"];
 
-_difficultX = if (random 10 < tierWar) then {true} else {false};
+_difficultX = _this param [2, random 10 < tierWar];		// hard variant, rolled by the mission board
 _leave = false;
 _contactX = objNull;
 _groupContact = grpNull;

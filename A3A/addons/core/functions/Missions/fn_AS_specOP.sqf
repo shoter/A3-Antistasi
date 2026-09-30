@@ -9,7 +9,7 @@ _markerX = _this select 0;
 _positionX = getMarkerPos _markerX;
 
 _sideX = if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
-_difficultX = if (random 10 < tierWar) then {true} else {false};
+_difficultX = _this param [1, random 10 < tierWar];		// hard variant, rolled by the mission board
 _timeLimit = if (_difficultX) then {60} else {120};
 if (A3A_hasIFA) then {_timeLimit = _timeLimit * 2};
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + _timeLimit];

@@ -1497,7 +1497,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         class MissionRequestButton : A3A_ShortcutButton
                         {
                             idc = A3A_IDC_MISSIONREQUESTBUTTON;
-                            text = "Request Mission";
+                            text = $STR_antistasi_dialogs_mission_board_button;
                             onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RequestMissionDialog""};";
                             x = 28 * GRID_W;
                             y = 14 * GRID_H;

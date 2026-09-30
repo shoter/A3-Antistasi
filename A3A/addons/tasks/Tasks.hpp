@@ -27,6 +27,8 @@ class Tasks {
         version = 1;                    // Version number of task, update when compatibility is broken between last version and new update
         weight = 1;
         isLegacy = 1;                   // 1 = simple spawn, 0 = new runTask framework
+        boardName = "STR_A3A_fn_mission_as_off_titel";   // Mission board: name shown in the Mission column (convoys pick theirs by convoy type)
+        boardDifficulty = 1;               // Mission board: 1 = the board rolls the hard variant and passes it as the last mission param
     };
     class AS_specOP {
         category = "AS";
@@ -35,6 +37,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_as_specop_titel";
+        boardDifficulty = 1;
     };
     class AS_Traitor {
         category = "AS";
@@ -43,6 +47,18 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_as_traitor_titel";
+        boardDifficulty = 1;
+    };
+    class AS_Collaborator {
+        category = "AS";
+        func = QFUNC(AS_Collaborator);
+        params = QFUNC(AS_Collaborator_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_AS_Collaborator_title";
+        boardDifficulty = 1;
     };
     class CON_Outpost {
         category = "CON";
@@ -51,6 +67,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_Tasks_board_CON_Outpost";
+        boardDifficulty = 1;
     };
     class convoy {
         category = "CONVOY";
@@ -59,6 +77,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_conv_supply_titel";
+        boardDifficulty = 0;
     };
     class DES_Antenna {
         category = "DES";
@@ -67,6 +87,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_des_ante_titel";
+        boardDifficulty = 1;
     };
     class DES_Heli {
         category = "DES";
@@ -75,6 +97,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_des_heli_titel";
+        boardDifficulty = 1;
     };
 /*    class LOG_Ammo {
         category = "LOG";
@@ -91,6 +115,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_log_bank_titel";
+        boardDifficulty = 1;
     };
     class LOG_Gunshop {
         category = "LOG";
@@ -99,6 +125,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_gunshop_title";
+        boardDifficulty = 0;
     };
     class LOG_Salvage {
         category = "LOG";
@@ -107,6 +135,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_log_salv_titel";
+        boardDifficulty = 1;
     };
     class RES_Prisoners {
         category = "RES";
@@ -115,6 +145,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_res_prison_titel";
+        boardDifficulty = 1;
     };
     class RES_Refugees {
         category = "RES";
@@ -123,6 +155,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_res_refu_titel";
+        boardDifficulty = 1;
     };
     class RES_Defector {
         category = "RES";
@@ -131,6 +165,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 0;
+        boardName = "STR_A3A_Tasks_RES_Defector_title";
+        boardDifficulty = 0;
     };
     class SUP_PoliceStation {
         category = "SUPP";
@@ -139,6 +175,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+        boardName = "STR_A3A_fn_mission_conq_police_title";
+        boardDifficulty = 0;
     };
     class LOG_Weapons {
         category = "LOG";
@@ -147,6 +185,8 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 0;
+        boardName = "STR_A3A_Tasks_LOG_Weapons_title";
+        boardDifficulty = 0;
     };
     class SUP_Supplies {
         category = "SUPP";
@@ -155,6 +195,18 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 0;
+        boardName = "STR_A3A_Tasks_LOG_Supplies_title";
+        boardDifficulty = 0;
+    };
+    class SUP_Elderly {
+        category = "SUPP";
+        func = QFUNC(SUP_Elderly);
+        params = QFUNC(SUP_Elderly_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_SUP_Elderly_title";
+        boardDifficulty = 0;
     };
 };
 

@@ -4,7 +4,7 @@ if (!isServer and hasInterface) exitWith{};
 FIX_LINE_NUMBERS()
 params ["_markerX", "_base"];
 
-_difficultX = if (random 10 < tierWar) then {true} else {false};
+_difficultX = _this param [2, random 10 < tierWar];		// hard variant, rolled by the mission board
 
 _positionX = getMarkerPos _markerX;
 
