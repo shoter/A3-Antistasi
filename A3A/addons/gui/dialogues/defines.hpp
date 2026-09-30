@@ -172,6 +172,9 @@ Maintainer: DoomMetal
 #define A3A_COLOR_UNDERSTRENGTH_SQF [1,0.8,0.4,1]
 #define A3A_COLOR_UNDER_ATTACK_SQF [1,0.35,0.25,1]
 
+// Factions tab section rows
+#define A3A_COLOR_FACTIONDEBUG_SECTION_SQF [1,0.9,0.5,1]
+
 // Active elements ("selection color")
 #define A3A_COLOR_ACTIVE {0.95,0.95,0.95,1}
 

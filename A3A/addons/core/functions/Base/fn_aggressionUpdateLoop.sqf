@@ -72,6 +72,7 @@ while {true} do
         Debug_4("Adding %1 def resources to %2 and %3 atk resources to %4", _resRateDef, A3A_resourcesDefenceOcc, _resRateAtk, A3A_resourcesAttackOcc);
         A3A_resourcesDefenceOcc = (A3A_resourcesDefenceOcc + _resRateDef) min _maxDef;
         A3A_resourcesAttackOcc = A3A_resourcesAttackOcc + _resRateAtk;
+        A3A_resourceRatesOcc = [_resRateDef, _resRateAtk, _maxDef];
 
         A3A_choosingAttack = true;
         if (A3A_resourcesAttackOcc > 0 && !bigAttackInProgress) then
@@ -103,6 +104,7 @@ while {true} do
         Debug_4("Adding %1 def resources to %2 and %3 atk resources to %4", _resRateDef, A3A_resourcesDefenceInv, _resRateAtk, A3A_resourcesAttackInv);
         A3A_resourcesDefenceInv = (A3A_resourcesDefenceInv + _resRateDef) min _maxDef;
         A3A_resourcesAttackInv = A3A_resourcesAttackInv + _resRateAtk;
+        A3A_resourceRatesInv = [_resRateDef, _resRateAtk, _maxDef];
 
         A3A_choosingAttack = true;
         if (A3A_resourcesAttackInv > 0 && !bigAttackInProgress) then

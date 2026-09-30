@@ -61,7 +61,7 @@ class A3A_DummyDialog
 };
 
 // Tab strip: the tab buttons share the dialog width equally. Bump the count when adding a tab.
-#define TAB_BUTTON_COUNT 7
+#define TAB_BUTTON_COUNT 8
 #define TAB_BUTTON_W (DIALOG_W / TAB_BUTTON_COUNT)
 
 class A3A_MainDialog : A3A_TabbedDialog
@@ -92,7 +92,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class Controls
             {
-                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle, Players
+                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle, Players, Factions (admin only)
                 class PlayerTabButton : A3A_Button
                 {
                     idc = A3A_IDC_PLAYERTABBUTTON;
@@ -165,6 +165,18 @@ class A3A_MainDialog : A3A_TabbedDialog
                     text = $STR_antistasi_dialogs_main_playerstats_tab_button;
                     onButtonClick = "[""switchTab"", [""playerstats""]] call A3A_GUI_fnc_mainDialog;";
                     x = 6 * TAB_BUTTON_W * GRID_W;
+                    y = 0;
+                    w = TAB_BUTTON_W * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class FactionDebugTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_FACTIONDEBUGTABBUTTON;
+                    text = $STR_antistasi_dialogs_main_factiondebug_tab_button;
+                    tooltip = $STR_antistasi_dialogs_main_factiondebug_tab_tooltip;
+                    onButtonClick = "[""switchTab"", [""factiondebug""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 7 * TAB_BUTTON_W * GRID_W;
                     y = 0;
                     w = TAB_BUTTON_W * GRID_W;
                     h = 5 * GRID_H;
@@ -1527,6 +1539,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
+                        // Air Support and Garbage Clean share their row with GarbageCleanControlsGroup, swapped by
+                        // the showGarbageCleanOptions and update modes of fn_commanderTab
                         class AirSupportButton : A3A_Button
                         {
                             idc = A3A_IDC_AIRSUPPORTBUTTON;
@@ -1549,6 +1563,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
+                        // Covers AirSupportButton and GarbageCleanButton. Hidden by fn_commanderTab update after
+                        // CommanderButtonsGroup is shown, because showing the parent shows this group too
                         class GarbageCleanControlsGroup : A3A_ControlsGroupNoScrollbars
                         {
                             idc = A3A_IDC_GARBAGECLEANCONTROLSGROUP;
@@ -3873,6 +3889,69 @@ class A3A_MainDialog : A3A_TabbedDialog
                     sizeEx = GUI_TEXT_SIZE_SMALL;
                     x = 8 * GRID_W;
                     y = 95 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+            };
+        };
+
+
+        // Admin only: enemy faction resources, aggression and balance values from the server
+        class FactionDebugTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_FACTIONDEBUGTAB;
+            show = false;
+
+            class controls
+            {
+                // X positions follow the column fractions of FactionDebugList below (8 + fraction * 144)
+                class OccupantsHeader : A3A_Text
+                {
+                    idc = A3A_IDC_FACTIONDEBUGHEADER_OCC;
+                    text = $STR_antistasi_dialogs_main_factiondebug_occupants;
+                    x = 80 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class InvadersHeader : OccupantsHeader
+                {
+                    idc = A3A_IDC_FACTIONDEBUGHEADER_INV;
+                    text = $STR_antistasi_dialogs_main_factiondebug_invaders;
+                    x = 116 * GRID_W;
+                };
+
+                class FactionDebugListBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 78 * GRID_H;
+                };
+
+                // Rows are created by fn_factionDebugTab "render"
+                class FactionDebugList : A3A_ListNBox
+                {
+                    idc = A3A_IDC_FACTIONDEBUGLIST;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 144 * GRID_W;
+                    h = 78 * GRID_H;
+
+                    sizeEx = GUI_TEXT_SIZE_MEDIUM;
+                    rowHeight = 4 * GRID_H;
+                    columns[] = {0, 0.5, 0.75}; // Value, Occupants, Invaders
+                };
+
+                class FactionDebugStatus : A3A_Text
+                {
+                    idc = A3A_IDC_FACTIONDEBUGSTATUS;
+                    text = "";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 8 * GRID_W;
+                    y = 91 * GRID_H;
                     w = 144 * GRID_W;
                     h = 4 * GRID_H;
                 };

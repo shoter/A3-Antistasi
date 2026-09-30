@@ -70,10 +70,12 @@ switch (_mode) do
         _singleGroupView ctrlShow false;
         _fireMissionControlsGroup ctrlShow false;
         _noRadioControlsGroup ctrlShow false;
-        _garbageCleanControlsGroup ctrlShow false;
 
         // Show base buttons
         {_x ctrlShow true} forEach _baseButtons;
+        // Showing CommanderButtonsGroup shows all its children too, so the garbage clean options
+        // (which share the Air Support / Garbage Clean slot) must be hidden after it, not before
+        _garbageCleanControlsGroup ctrlShow false;
 
         // Sub-commanders only get their high command squads and squad recruiting, the rest of the tab is the commander's
         private _isBoss = player isEqualTo theBoss;
