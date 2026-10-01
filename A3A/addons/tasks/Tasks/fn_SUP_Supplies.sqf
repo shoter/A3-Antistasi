@@ -73,7 +73,7 @@ else {
 	_task call _fnc_createTask;
 };
 
-A3A_activeTasks pushBack "SUPP";			// backwards compat with missionRequest
+[_task get "_taskId", "SUPP", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _task set ["checkpoint", "c_started"];
 _task set ["state", "s_waitForPlace"];
@@ -215,8 +215,7 @@ _task set ["s_cleanup", {
 	[_clearTime, _this get "_taskId"] spawn {
 		params ["_delay", "_taskId"];
 		sleep _delay;
-		A3A_activeTasks deleteAt (A3A_activeTasks find "SUPP");
-		publicVariable "A3A_activeTasks";
+		[_taskId, "SUPP", "DELETED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 		[_taskId, true, true] call BIS_fnc_deleteTask;
 	};
 

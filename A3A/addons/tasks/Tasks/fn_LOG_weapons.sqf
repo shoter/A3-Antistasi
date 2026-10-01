@@ -48,7 +48,7 @@ _task set ["_destMrk", _destMrk];
 _task set ["_endTime", time + 30*60];
 _task call _fnc_createTask;
 
-A3A_activeTasks pushBack "LOG";			// backwards compat with missionRequest
+[_task get "_taskId", "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 // Create the truck
 private _faction = Faction(_side);
@@ -305,8 +305,7 @@ _task set ["s_cleanup", {
     (_this get "_taskId") spawn {
         sleep 120;
         [_this, true, true] call BIS_fnc_deleteTask;
-        A3A_activeTasks deleteAt (A3A_activeTasks find "LOG");
-        publicVariable "A3A_activeTasks";
+        [_this, "LOG", "DELETED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
     };
     true;		// delete the task
 }];

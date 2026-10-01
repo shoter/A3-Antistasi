@@ -29,6 +29,7 @@ FIX_LINE_NUMBERS()
 if (!isServer) exitWith { Error("Server-only function miscalled") };
 
 A3A_missionBoard = [];
+A3A_missionBoardActive = [];
 A3A_missionBoardUID = 0;
 if (!isNil "A3A_missionBoardSaved") then {
     [A3A_missionBoardSaved] call FUNC(boardRestore);

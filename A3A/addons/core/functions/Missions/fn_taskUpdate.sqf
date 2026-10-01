@@ -28,7 +28,8 @@ if (_state isEqualTo "CREATED") exitWith
     if (_taskIndex != -1) exitWith { Error_1("Non-unique task ID %1 created", _taskId) };
     A3A_tasksData pushBack [_taskId, _taskType, "CREATED", serverTime];
 
-    if (A3A_activeTasks find _taskType != -1) exitWith { Error_1("Task type %1 already active", _taskType) };
+    // Several tasks of one type can run at once (mission board), the type is listed once
+    if (A3A_activeTasks find _taskType != -1) exitWith {};
     A3A_activeTasks pushBack _taskType; publicVariable "A3A_activeTasks";
 };
 

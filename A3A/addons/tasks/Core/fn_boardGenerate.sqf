@@ -2,7 +2,8 @@
 Maintainer: Shoter
     Creates one mission board entry of the given category.
     Every task of the category gets a few calls of its params getter to find a location that is not
-    on the board already for that task (no two supply runs to the same town), then one task is picked
+    on the board already for that task (no two supply runs to the same town) and where the same task taken
+    from the board is not running right now (see A3A_tasks_fnc_boardAccept), then one task is picked
     by the weights the getters return. The hard variant, convoy type and defector money are rolled
     here, so the board can show the exact reward before anyone takes the mission.
 
@@ -39,7 +40,7 @@ FIX_LINE_NUMBERS()
 
 params ["_category"];
 
-private _takenKeys = A3A_missionBoard apply { _x get "key" };
+private _takenKeys = (A3A_missionBoard apply { _x get "key" }) + ((A3A_missionBoardActive select { !scriptDone (_x # 2) }) apply { _x # 0 });
 private _candidates = [];
 private _weights = [];
 

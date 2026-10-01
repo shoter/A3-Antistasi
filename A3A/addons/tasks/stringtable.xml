@@ -124,6 +124,14 @@
         <Original>Our people are too close to that place, the enemy would notice. Pull back or pick another mission.</Original>
         <Polish>Nasi ludzie są za blisko tego miejsca, wróg by to zauważył. Wycofajcie się albo wybierzcie inną misję.</Polish>
       </Key>
+      <Key ID="STR_A3A_Tasks_board_full">
+        <Original>We already have %1 missions under way. Finish one of them before taking another.</Original>
+        <Polish>Mamy już %1 misji w toku. Dokończcie którąś z nich, zanim weźmiecie kolejną.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_board_running">
+        <Original>We are already on a mission like this one. Finish it before taking another.</Original>
+        <Polish>Już wykonujemy taką misję. Dokończcie ją, zanim weźmiecie kolejną.</Polish>
+      </Key>
     </Container>
     <Container name="Tasks">
       <Key ID="STR_antistasi_LTasks_AS_official_title">
