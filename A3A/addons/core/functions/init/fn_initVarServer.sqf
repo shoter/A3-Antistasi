@@ -217,6 +217,7 @@ A3A_gcMaxBumps = 3;				// Max times to delay cleanup for an object that's near p
 
 A3A_airTaxiActive = createHashMap;	// player UID -> air taxi flight script, one taxi per player
 A3A_garrisonResupplyActive = createHashMap;	// garrison marker -> resupply truck run script, one run per site
+A3A_deliverVehicleActive = createHashMap;	// player UID -> vehicle delivery script, one delivery on the road per player
 
 hcArray = [];					// array of headless client IDs
 
