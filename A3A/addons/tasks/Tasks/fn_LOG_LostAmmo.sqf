@@ -2,7 +2,7 @@
 Maintainer: Shoter
     Lost ammo supplies task. The enemy lost a large ammo crate while moving supplies. The crate's position
     is not revealed: 2-4 civilian witnesses are marked on the map with the bearing they saw it fall on,
-    each off by up to 5 degrees, and the players cross the lines to find it.
+    each off by up to 5 degrees, shown as arrows the players have to extend and cross to find it.
     20-40 minutes after the start the enemy sends a recovery team from their nearest outpost or airbase:
     an escort with troops and a cargo truck that loads the crate and drives it back to the outpost.
     Bringing the crate to HQ or a rebel outpost/airbase pays money and score, and the loot inside is kept.
@@ -61,7 +61,7 @@ _task set ["_crate", _crate];
 private _taskId = "LOG" + str A3A_taskCount;
 _task set ["_taskId", _taskId];
 
-// Witnesses: a civilian looking along the reported bearing, an arrow and a bearing line on the map
+// Witnesses: a civilian looking along the reported bearing, and an arrow on the map pointing the same way
 private _markers = [];
 private _witnessUnits = [];
 {
@@ -80,12 +80,6 @@ private _witnessUnits = [];
     private _mrkName = format ["A3A_lostAmmo_%1_%2", _taskId, _forEachIndex];
 
     // Local setters first, the last global one broadcasts the whole marker
-    private _end = _pos getPos [2500, _bearing];       // past the farthest witness distance, so the length gives nothing away
-    private _line = createMarker [_mrkName + "_line", _pos];
-    _line setMarkerShapeLocal "POLYLINE";
-    _line setMarkerPolylineLocal [_pos#0, _pos#1, _end#0, _end#1];
-    _line setMarkerColor "ColorOrange";
-
     private _icon = createMarker [_mrkName + "_icon", _pos];
     _icon setMarkerShapeLocal "ICON";
     _icon setMarkerTypeLocal "mil_arrow";
@@ -93,7 +87,7 @@ private _witnessUnits = [];
     _icon setMarkerDirLocal _bearing;
     _icon setMarkerText format [localize "STR_A3A_Tasks_LOG_LostAmmo_witness", _forEachIndex + 1, _bearingText];
 
-    _markers append [_line, _icon];
+    _markers pushBack _icon;
 } forEach _witnesses;
 _task set ["_markers", _markers];
 _task set ["_witnessUnits", _witnessUnits];
