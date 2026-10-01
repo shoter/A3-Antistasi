@@ -46,6 +46,10 @@ A3A_airTaxiBoardTime = 60;          // seconds the helicopter waits at the picku
 A3A_airTaxiMinDistance = 500;       // minimum pickup-to-destination distance
 A3A_airTaxiHoverHeight = 3;         // hover-drop height when no landing zone exists
 
+// Vehicle delivery (Logistics/fn_deliverVehicle*)
+A3A_deliverVehicleHR = 1;           // HR taken for the driver, returned when he walks back to a rebel site
+A3A_deliverVehicleMinDistance = 200;    // minimum origin-to-destination distance
+
 ////////////////////////////////////////
 //     DECLARING PATCOM VARIABLES    ///
 ////////////////////////////////////////

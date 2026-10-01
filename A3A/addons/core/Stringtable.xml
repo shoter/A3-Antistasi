@@ -17254,6 +17254,78 @@
       <Key ID="STR_A3A_fn_logistics_resupply_blk_no_spawn">
         <Original>The ammo truck could not be placed at HQ. HR refunded.</Original>
       </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_title">
+        <Original>Vehicle Delivery</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_marker">
+        <Original>Vehicle delivery</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_requested">
+        <Original>%1 is leaving %2. Estimated time to arrival %3.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_delivered">
+        <Original>%1 has been delivered at grid %2. It is yours to drive.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_stranded">
+        <Original>%1 got stuck on the way and was left at grid %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_driver_killed">
+        <Original>The driver of %1 went down. The vehicle was left at grid %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_destroyed">
+        <Original>%1 was destroyed on the way, near grid %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_walking">
+        <Original>The driver is walking back to %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_returned">
+        <Original>The driver made it back to %1. %2 HR returned to the pool.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_driver_lost">
+        <Original>The driver was killed on the way back to %1. The HR is lost.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_active">
+        <Original>You already have a vehicle on the road to you.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_control">
+        <Original>You cannot request a delivery while controlling another unit.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_ff">
+        <Original>Friendly fire offenders cannot request deliveries.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_bad_origin">
+        <Original>Pick the HQ, a rebel outpost or a rebel airport to start from.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_origin_attack">
+        <Original>Enemies are too close to the starting site.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_off_map">
+        <Original>The destination is outside the map.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_water">
+        <Original>The destination is in the water. Pick a spot on land.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_too_close">
+        <Original>The destination is too close to the starting site.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_members">
+        <Original>Guests can only have vehicles delivered within the member leash.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_vehicle">
+        <Original>That vehicle is not available in the garage.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_junk">
+        <Original>That vehicle is a junkyard wreck and cannot be driven yet.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_fuel">
+        <Original>That vehicle has too little fuel for the drive.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_hr">
+        <Original>The faction has no HR to spare for a driver.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_logistics_deliverVehicle_blk_no_spawn">
+        <Original>The vehicle could not be placed at the starting site. It is back in the garage and the HR was refunded.</Original>
+      </Key>
     </Container>
   </Package>
 </Project>

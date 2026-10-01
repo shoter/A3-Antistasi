@@ -18,6 +18,7 @@ class CfgFunctions {
             class configColorToArray {};
             class constructTab {};
             class customLoadoutsDialog {};
+            class deliverVehicleTab {};
             class deployedFlagDialog {};
             class donateTab {};
             class factionDebugTab {};

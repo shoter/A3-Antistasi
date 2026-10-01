@@ -4,6 +4,15 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Deliver Vehicle
+
+### Added
+- **Deliver Vehicle** button on the Player tab of the Battle Menu (Y), below Loot Crate. Pick a garaged car, armoured vehicle or support truck, the rebel site it starts from (HQ, an outpost or an airport, nearest first) and a destination on the map (your own position unless you click elsewhere).
+- An AI driver costs **1 HR** and no money. He drives the vehicle there by road, and enemy sites along the way wake up, so **the delivery can be ambushed**. The vehicle shows on the rebel map while it is on the road.
+- Once it arrives, the vehicle is yours and stays in the world; it does not go back to the garage. If it gets stuck or the driver is killed, it is left where it stopped and you get its map grid.
+- The driver then walks to the nearest rebel site and returns to the HR pool (+1 HR) if he makes it. If he is killed on the way, the HR is lost.
+- One delivery on the road per player at a time. Junkyard wrecks, vehicles under 20% fuel and vehicles locked by other players cannot be delivered. A delivery in progress is not saved.
+
 ## 2026-10-01 - Rebel mortars less accurate
 
 ### Changed
