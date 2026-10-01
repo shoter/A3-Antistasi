@@ -4,6 +4,13 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - No limit per mission type
+
+### Changed
+- The mission board no longer limits you to one active mission per type. Take as many logistics, rescue or other missions as you like, up to **10 board missions running at once**. Petros tells you when the limit is reached; finish a mission to take the next one. City tasks, world events and enemy attacks do not count toward the 10.
+- A mission is not posted again at a place where the same mission is still running, so one antenna or outpost can't pay out twice.
+- **Traitor** assassinations and **Gun Shop** meetings still run one at a time.
+
 ## 2026-10-01 - Enemy Mortar Fire event
 
 ### Added
