@@ -4,6 +4,12 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Rebel mortars less accurate
+
+### Changed
+- **Rebel mortar fire missions** (Battle Menu, Y) are much less accurate. Every round lands somewhere within a dispersion radius of its aim point: **100 m** with no training, shrinking to **25 m** at training level 20. The first trainings improve it the most (level 5: about 72 m, level 10: about 46 m, level 15: about 30 m).
+- The danger area drawn on the map for a fire mission now shows this radius instead of a fixed 30 m.
+
 ## 2026-10-01 - Mission board is saved
 
 ### Changed
