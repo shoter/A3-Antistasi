@@ -346,7 +346,7 @@
         <Original>Lost Ammo Supplies</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_LOG_LostAmmo_desc">
-        <Original>%1 lost a large ammo crate while moving supplies, and nobody knows exactly where it came down. %2 locals saw it fall. They are marked on the map with the bearing they saw it on, and each bearing can be off by up to 5 degrees: cross the lines to find the crate. Load it onto a truck and bring it to our HQ or one of our outposts or airbases before %4. In 20 to 40 minutes %1 will send a recovery team from %3 to take it back.</Original>
+        <Original>%1 lost a large ammo crate while moving supplies, and nobody knows exactly where it came down. %2 locals saw it fall. They are marked on the map with an arrow pointing where they saw it fall, and each bearing can be off by up to 5 degrees: follow the arrows to where they cross to find the crate. Load it onto a truck and bring it to our HQ or one of our outposts or airbases before %4. In 20 to 40 minutes %1 will send a recovery team from %3 to take it back.</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_LOG_LostAmmo_witness">
         <Original>Witness %1: %2°</Original>
