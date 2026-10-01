@@ -4,6 +4,16 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Buying Intel mission
+
+### Added
+- New **Buying Intel** mission on the mission board (LOG). An enemy officer in one of their towns will sell intel for a **1000 € bribe**, paid by players from their own money.
+- A locked civilian truck waits at HQ. Use **Load bribe money** on it to put in part of the bribe (a small window like the Donate tab). The truck unlocks once all 1000 € are in.
+- Drive the truck to the officer, park it within **20 m** of him and use **Hand over the bribe** next to him while **undercover**. He drives back to his outpost and you get a **large intel report**. No money or score reward, but the truck is yours to keep.
+- If his people spot a rebel who is not undercover in the town, he drives off. If you come at him openly or shoot him, he fights. Either way the mission fails. He waits 90 minutes.
+- Bribe money still in the truck when the mission fails goes back to the faction funds once you drive the truck back to HQ.
+- A mission in progress is not saved.
+
 ## 2026-10-01 - Deliver Vehicle
 
 ### Added
