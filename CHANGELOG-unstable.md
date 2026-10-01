@@ -4,6 +4,16 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Enemy Mortar Fire event
+
+### Added
+- **World events**: a new kind of mission that is not on the mission board. Every 30 minutes, with at least one player online, there is a 20% chance that one starts, and it is on the map straight away.
+- First event, **Enemy Mortar Fire**: an enemy outpost or airbase gets a mortar team ready to shell a rebel town, site or the HQ from 1-2 km away. The map shows a 100 m circle where they will probably set up and the target. The briefing says they move out some time in the next 5-30 minutes; there is no warning when they do.
+  - A truck brings an infantry squad that patrols 200 m around the firing spot, and the mortar team walks there from the base. Once set up it fires **20 rounds**, 4 a minute.
+  - Every civilian killed by the barrage costs a lot of town support, our garrison takes losses and houses can come down. This also happens when nobody is near the target.
+  - Kill the mortar team or destroy the mortar to win: faction money and reward points, plus town support if it never fired a round. After the full barrage the mission fails and the enemy walks back to base.
+  - Only one mortar attack at a time. Not saved: a running event is gone after a load.
+
 ## 2026-10-01 - Lost Ammo Supplies: arrows only
 
 ### Changed
