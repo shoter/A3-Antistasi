@@ -10,6 +10,7 @@ class CfgFunctions {
             class airTaxiTab {};
             class arsenalLimitsDialog {};
             class buildContextMenu {};
+            class buyIntelDialog {};
             class buyVehicleDialog {};
             class buyVehicleTabs {};
             class chronicleTab {};
@@ -17,6 +18,7 @@ class CfgFunctions {
             class configColorToArray {};
             class constructTab {};
             class customLoadoutsDialog {};
+            class deliverVehicleTab {};
             class deployedFlagDialog {};
             class donateTab {};
             class factionDebugTab {};

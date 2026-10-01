@@ -3045,6 +3045,53 @@
         <Original>This helicopter is locked by another player.</Original>
       </Key>
     </Container>
+    <Container name="dialog_main_deliver_vehicle">
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_refresh_tooltip">
+        <Original>Ask the garage for the current list of vehicles</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_request_button">
+        <Original>Request delivery</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_loading">
+        <Original>Contacting the garage...</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_no_vehicles">
+        <Original>No cars, armour or support vehicles are available in the garage.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_select_vehicle">
+        <Original>Select a vehicle from the garage.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_vehicle">
+        <Original>Vehicle: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_origin_label">
+        <Original>Start from</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_no_origin">
+        <Original>No rebel site can send a vehicle. Deliveries start from the HQ, an outpost or an airport.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_origin">
+        <Original>Starting from: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_select_location">
+        <Original>Click anywhere on the map to choose where the vehicle is delivered.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_destination">
+        <Original>Destination: grid %1 near %2. Your position unless you click the map.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_distance">
+        <Original>Distance: %1 km, estimated time %2</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_cost">
+        <Original>Cost: %1 HR for the driver. After the delivery he walks to the nearest rebel site and returns to the HR pool if he survives.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_warning">
+        <Original>The vehicle is driven by road and can be ambushed on the way.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_locked_tooltip">
+        <Original>This vehicle is locked by another player.</Original>
+      </Key>
+    </Container>
     <Container name="dialog_main_player">
       <Key ID="STR_antistasi_dialogs_main_loot_crate">
         <Original>Loot Crate</Original>
@@ -3057,6 +3104,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_taxi_tooltip">
         <Original>Request a garaged helicopter to pick up your squad and fly you to any location</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle">
+        <Original>Deliver Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_tooltip">
+        <Original>Have an AI driver bring a garaged vehicle to you from the HQ, an outpost or an airport</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_add_to_air_support">
         <Original>Add to air support</Original>
@@ -7023,6 +7076,28 @@
       <Key ID="STR_antistasi_dialogs_deployed_flag_accept">
         <Original>Teleport</Original>
         <Polish>Teleportuj</Polish>
+      </Key>
+    </Container>
+    <Container name="dialog_buy_intel">
+      <Key ID="STR_antistasi_dialogs_buy_intel_titlebar">
+        <Original>Bribe Money</Original>
+        <Polish>Pieniądze na łapówkę</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_info">
+        <Original>Money in the truck: %1 / %2 €&lt;br/&gt;Still needed: %3 €&lt;br/&gt;Your money: %4 €</Original>
+        <Polish>Pieniądze w ciężarówce: %1 / %2 €&lt;br/&gt;Brakuje jeszcze: %3 €&lt;br/&gt;Twoje pieniądze: %4 €</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_amount">
+        <Original>Amount to load</Original>
+        <Polish>Kwota do załadowania</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_cancel">
+        <Original>Cancel</Original>
+        <Polish>Anuluj</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_load">
+        <Original>Load money</Original>
+        <Polish>Załaduj pieniądze</Polish>
       </Key>
     </Container>
   </Package>

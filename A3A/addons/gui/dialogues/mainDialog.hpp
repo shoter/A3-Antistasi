@@ -349,6 +349,30 @@ class A3A_MainDialog : A3A_TabbedDialog
                             w = 36 * GRID_W;
                             h = 12 * GRID_H;
                         };
+
+                        // Deliver Vehicle
+                        class DeliverVehicleIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_DELIVERVEHICLEICON;
+                            text = A3A_Icon_DeliverVehicle;
+                            x = 0;
+                            y = 128 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class DeliverVehicleButton : A3A_Button
+                        {
+                            idc = A3A_IDC_DELIVERVEHICLEBUTTON;
+                            text = $STR_antistasi_dialogs_main_deliver_vehicle;
+                            tooltip = $STR_antistasi_dialogs_main_deliver_vehicle_tooltip;
+                            onButtonClick = "[""switchTab"", [""delivervehicle""]] call A3A_GUI_fnc_mainDialog;";
+                            sizeEx = GUI_TEXT_SIZE_LARGE;
+                            x = 12 * GRID_W;
+                            y = 126 * GRID_H;
+                            w = 36 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
                     };
                 };
 
@@ -1950,8 +1974,9 @@ class A3A_MainDialog : A3A_TabbedDialog
         class FastTravelMap : A3A_MapControl
         {
             idc = A3A_IDC_FASTTRAVELMAP;
-            // Shared by the Fast Travel and Air Taxi subtabs, dispatch on the one that is shown (7580 = A3A_IDC_AIRTAXITAB)
-            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab] select ctrlShown ((ctrlParent (_this select 0)) displayCtrl 7580))";
+            // Shared by the Fast Travel, Air Taxi and Deliver Vehicle subtabs, dispatch on the one that is shown
+            // (7580 = A3A_IDC_AIRTAXITAB, 7590 = A3A_IDC_DELIVERVEHICLETAB, neither shown = Fast Travel)
+            onMouseButtonClick = "private _shown = [7580, 7590] findIf { ctrlShown ((ctrlParent (_this select 0)) displayCtrl _x) }; [""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab, A3A_GUI_fnc_deliverVehicleTab] select (_shown + 1))";
             x = CENTER_X(DIALOG_W) + 48 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
             w = 104 * GRID_W;
@@ -2100,6 +2125,100 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_AIRTAXICOMMITBUTTON;
                     text = $STR_antistasi_dialogs_main_air_taxi_request_button;
                     onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_airTaxiTab;";
+                    sizeEx = GUI_TEXT_SIZE_LARGE;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+            };
+        };
+
+        class DeliverVehicleTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_DELIVERVEHICLETAB;
+            // Narrow for the same reason as FastTravelTab: it must not cover the shared map control
+            w = 44 * GRID_W;
+            show = false;
+
+            class controls
+            {
+                class DeliverVehicleLabel : A3A_SectionLabelRight
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_deliver_vehicle;
+                    x = 8 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 26 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class DeliverVehicleRefreshButton : A3A_Button
+                {
+                    idc = A3A_IDC_DELIVERVEHICLEREFRESHBUTTON;
+                    text = $STR_antistasi_dialogs_main_air_taxi_refresh_button;
+                    tooltip = $STR_antistasi_dialogs_main_deliver_vehicle_refresh_tooltip;
+                    onButtonClick = "[""requestVehicles""] call A3A_GUI_fnc_deliverVehicleTab;";
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    x = 34 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 10 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class DeliverVehicleBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 68 * GRID_H;
+                };
+
+                class DeliverVehicleList : A3A_Listbox
+                {
+                    idc = A3A_IDC_DELIVERVEHICLELIST;
+                    onLBSelChanged = "[""vehicleSelected""] call A3A_GUI_fnc_deliverVehicleTab;";
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 24 * GRID_H;
+                };
+
+                class DeliverVehicleOriginLabel : A3A_InfoTextLeft
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_deliver_vehicle_origin_label;
+                    x = 8 * GRID_W;
+                    y = 37 * GRID_H;
+                    w = 11 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class DeliverVehicleOriginCombo : A3A_ComboBox_Small
+                {
+                    idc = A3A_IDC_DELIVERVEHICLEORIGINCOMBO;
+                    onLBSelChanged = "[""originSelected""] call A3A_GUI_fnc_deliverVehicleTab;";
+                    x = 19 * GRID_W;
+                    y = 37 * GRID_H;
+                    w = 25 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class DeliverVehicleInfoText : A3A_StructuredText
+                {
+                    idc = A3A_IDC_DELIVERVEHICLEINFOTEXT;
+                    x = 8 * GRID_W;
+                    y = 42 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 38 * GRID_H;
+                };
+
+                class DeliverVehicleCommitButton : A3A_Button
+                {
+                    idc = A3A_IDC_DELIVERVEHICLECOMMITBUTTON;
+                    text = $STR_antistasi_dialogs_main_deliver_vehicle_request_button;
+                    onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_deliverVehicleTab;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 8 * GRID_W;
                     y = 80 * GRID_H;

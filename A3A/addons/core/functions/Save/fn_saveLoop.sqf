@@ -24,6 +24,9 @@ A3A_saveTarget set [3, createHashMap];							// new saves are always JSON
 call A3A_fnc_playerStats_flushSessions;
 ["playerStats", A3A_playerStats] call A3A_fnc_setStatVariable;
 
+// Mission board: missions waiting to be taken, not the ones already running
+["missionBoard", call A3A_tasks_fnc_boardSave] call A3A_fnc_setStatVariable;
+
 // Collect the persistent global variables defined in params config
 private _savedParams = [];
 {

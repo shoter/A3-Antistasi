@@ -65,7 +65,7 @@ private _weights = [];
         if (_result isEqualType false) exitWith {};             // no valid location at all
         _result params ["_weight", "_params"];
         private _marker = _params # 0;
-        if (_marker isEqualType []) then { _marker = [citiesX, _marker] call BIS_fnc_nearestPosition };     // bank and weapons truck give a position
+        if !(_marker isEqualType "") then { _marker = [citiesX, _marker] call BIS_fnc_nearestPosition };     // bank building, weapons truck position
         private _key = _taskName + "|" + _marker;
         if (_key in _takenKeys) then { continue };
         _candidates pushBack [_cfg, _params, _marker, _key];

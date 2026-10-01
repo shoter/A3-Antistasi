@@ -4,7 +4,8 @@ Maintainer: Shoter
     3 new missions every 15 minutes and retires 1-2 random ones, and players pick from it (Petros' mission action
     or the commander's Mission board button). The board starts with 2 missions per category, and is topped up
     to that again when the HQ moves, since missions too far from the new HQ drop off.
-    The board is not saved; a restarted server starts a fresh one.
+    The board is saved with the campaign (A3A_tasks_fnc_boardSave). A loaded campaign starts with the saved board,
+    minus missions that no longer fit, topped up the same way. Missions already taken are not saved.
 
 Arguments:
     None
@@ -29,6 +30,10 @@ if (!isServer) exitWith { Error("Server-only function miscalled") };
 
 A3A_missionBoard = [];
 A3A_missionBoardUID = 0;
+if (!isNil "A3A_missionBoardSaved") then {
+    [A3A_missionBoardSaved] call FUNC(boardRestore);
+    A3A_missionBoardSaved = nil;
+};
 call FUNC(boardPublish);
 
 ["HQPlaced", "A3A_missionBoard_HQPlaced", {

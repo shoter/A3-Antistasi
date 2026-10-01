@@ -1,11 +1,11 @@
 params ["_mainParams","_strikeTime"];
 _mainParams params ["_group","_typeAmmunition","_shortName","_strikeType","_rounds","_startPos","_detail"];
+private _dispersion = call A3A_fnc_rebelMortarDispersion;
 private _fnc_makeEllipse = {
-    params ["_mrkEllipse", ["_strikeType", "point"],["_detail", 30]];
+    params ["_mrkEllipse"];
     _mrkEllipse setMarkerShapeLocal "ELLIPSE";
     _mrkEllipse setMarkerBrushLocal "FDIAGONAL";
-    private _radius = [30, _detail] select (_strikeType == "suppress");
-    _mrkEllipse setMarkerSizeLocal [_radius, _radius];
+    _mrkEllipse setMarkerSizeLocal [_dispersion, _dispersion];
     _mrkEllipse setMarkerColor "ColorGUER";
 };
 private _fnc_makeFinal = {
@@ -43,7 +43,7 @@ switch (_strikeType) do {
         _mrkBarrageLine setMarkerColorLocal "ColorGUER";
         _mrkBarrageLine setMarkerBrushLocal "FDIAGONAL";
         _distance = _startPos distance2D _endPos;
-        _mrkBarrageLine setMarkerSizeLocal [30, _distance/2];
+        _mrkBarrageLine setMarkerSizeLocal [_dispersion, _distance/2];
         private _mrkTextBarrage = format ["Barrage: %1x %2", str _rounds, _shortName];
         _mrkFinal1 setMarkerText _mrkTextBarrage;
         _markers append [_mrkBarrageLine, _mrkEllipse2, _mrkFinal2];
@@ -53,7 +53,7 @@ switch (_strikeType) do {
     {
         private _mrkText1 = format ["Mortar suppression: %1x %2", str _rounds, _shortName];
         _mrkFinal1 setMarkerText _mrkText1;
-        _mrkEllipse1 setMarkerSize [_detail, _detail];
+        _mrkEllipse1 setMarkerSize [_detail + _dispersion, _detail + _dispersion];
         _notiString = format ["suppression: %1x %2", str _rounds, _shortName]; 
     };
     case ("cont"): 

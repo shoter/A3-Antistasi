@@ -224,6 +224,11 @@ switch (_mode) do
                 _selectedTabIDC = A3A_IDC_AIRTAXITAB;
             };
 
+            case ("delivervehicle"):
+            {
+                _selectedTabIDC = A3A_IDC_DELIVERVEHICLETAB;
+            };
+
             case ("construct"):
             {
                 _selectedTabIDC = A3A_IDC_CONSTRUCTTAB;
@@ -319,6 +324,7 @@ switch (_mode) do
             A3A_IDC_PLAYERSTATSTAB,
             A3A_IDC_PLAYERSTATSDETAILSTAB,
             A3A_IDC_AIRTAXITAB,
+            A3A_IDC_DELIVERVEHICLETAB,
             A3A_IDC_FACTIONDEBUGTAB
         ];
 
@@ -379,6 +385,12 @@ switch (_mode) do
             {
                 ["clearSelectedLocation"] call FUNC(airTaxiTab);
                 ["update"] call FUNC(airTaxiTab);
+            };
+
+            case ("delivervehicle"):
+            {
+                ["clearSelectedLocation"] call FUNC(deliverVehicleTab);
+                ["update"] call FUNC(deliverVehicleTab);
             };
 
             case ("construct"):

@@ -56,6 +56,7 @@ class CfgFunctions
             class nearEnemy {};
             class paradrop {};
             class rearmCall {};
+            class rebelMortarDispersion {};
             class rebelReactOnKill {};
             class rebelReturnToBase {};
             class recallGroup {};
@@ -577,6 +578,17 @@ class CfgFunctions
             class airTaxiRun {};
             class airTaxiSpawn {};
             class airTaxiUnload {};
+            class deliverVehicleCanRequest {};
+            class deliverVehicleEntryCheck {};
+            class deliverVehicleEta {};
+            class deliverVehicleFinish {};
+            class deliverVehicleHint {};
+            class deliverVehicleListVehicles {};
+            class deliverVehicleOrigins {};
+            class deliverVehicleRequest {};
+            class deliverVehicleRun {};
+            class deliverVehicleSpawn {};
+            class deliverVehicleWalkHome {};
             class garrisonResupplyApply {};
             class garrisonResupplyFinish {};
             class garrisonResupplyHint {};

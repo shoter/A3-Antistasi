@@ -125,6 +125,23 @@ switch (_mode) do
             _airTaxiIcon ctrlSetTooltip _prettyString;
         };
 
+        // Vehicle delivery
+        private _deliverVehicleButton = _display displayCtrl A3A_IDC_DELIVERVEHICLEBUTTON;
+        private _deliverVehicleIcon = _display displayCtrl A3A_IDC_DELIVERVEHICLEICON;
+        private _deliverVehicleBlockers = [player] call A3A_fnc_deliverVehicleCanRequest;
+        if (_deliverVehicleBlockers isEqualTo []) then {
+            _deliverVehicleButton ctrlEnable true;
+            _deliverVehicleButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_deliver_vehicle_tooltip";
+            _deliverVehicleIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            _deliverVehicleIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_deliver_vehicle_tooltip";
+        } else {
+            _deliverVehicleButton ctrlEnable false;
+            private _prettyString = localize ("STR_A3A_fn_logistics_deliverVehicle_blk_" + (_deliverVehicleBlockers # 0));
+            _deliverVehicleButton ctrlSetTooltip _prettyString;
+            _deliverVehicleIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            _deliverVehicleIcon ctrlSetTooltip _prettyString;
+        };
+
         // Loot crate delivery
         private _lootCrateButton = _display displayCtrl A3A_IDC_LOOTCRATEBUTTON;
         private _lootCrateIcon = _display displayCtrl A3A_IDC_LOOTCRATEICON;

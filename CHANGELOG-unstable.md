@@ -4,6 +4,48 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-01 - Buying Intel mission
+
+### Added
+- New **Buying Intel** mission on the mission board (LOG). An enemy officer in one of their towns will sell intel for a **1000 € bribe**, paid by players from their own money.
+- A locked civilian truck waits at HQ. Use **Load bribe money** on it to put in part of the bribe (a small window like the Donate tab). The truck unlocks once all 1000 € are in.
+- Drive the truck to the officer, park it within **20 m** of him and use **Hand over the bribe** next to him while **undercover**. He drives back to his outpost and you get a **large intel report**. No money or score reward, but the truck is yours to keep.
+- If his people spot a rebel who is not undercover in the town, he drives off. If you come at him openly or shoot him, he fights. Either way the mission fails. He waits 90 minutes.
+- Bribe money still in the truck when the mission fails goes back to the faction funds once you drive the truck back to HQ.
+- A mission in progress is not saved.
+
+## 2026-10-01 - Deliver Vehicle
+
+### Added
+- **Deliver Vehicle** button on the Player tab of the Battle Menu (Y), below Loot Crate. Pick a garaged car, armoured vehicle or support truck, the rebel site it starts from (HQ, an outpost or an airport, nearest first) and a destination on the map (your own position unless you click elsewhere).
+- An AI driver costs **1 HR** and no money. He drives the vehicle there by road, and enemy sites along the way wake up, so **the delivery can be ambushed**. The vehicle shows on the rebel map while it is on the road.
+- Once it arrives, the vehicle is yours and stays in the world; it does not go back to the garage. If it gets stuck or the driver is killed, it is left where it stopped and you get its map grid.
+- The driver then walks to the nearest rebel site and returns to the HR pool (+1 HR) if he makes it. If he is killed on the way, the HR is lost.
+- One delivery on the road per player at a time. Junkyard wrecks, vehicles under 20% fuel and vehicles locked by other players cannot be delivered. A delivery in progress is not saved.
+
+## 2026-10-01 - Rebel mortars less accurate
+
+### Changed
+- **Rebel mortar fire missions** (Battle Menu, Y) are much less accurate. Every round lands somewhere within a dispersion radius of its aim point: **100 m** with no training, shrinking to **25 m** at training level 20. The first trainings improve it the most (level 5: about 72 m, level 10: about 46 m, level 15: about 30 m).
+- The danger area drawn on the map for a fire mission now shows this radius instead of a fixed 30 m.
+
+## 2026-10-01 - Mission board is saved
+
+### Changed
+- The mission board is now saved with the campaign. After a server restart or loading the save, the missions that were waiting on the board are back with the same locations, rewards and difficulty. Missions that no longer fit (town taken, target destroyed, HQ moved away) drop off, and categories left with fewer than 2 missions are topped up as before.
+- Missions that were already running when the game was saved are not restored; they are gone after a load, as before. The 15-minute board refresh timer starts over after a load.
+- Older saves have no saved board and start with a fresh one.
+
+### Fixed
+- The bank robbery mission never appeared on the mission board.
+
+## 2026-10-01 - Abandoned Collaborator Hideout mission
+
+### Added
+- New logistics mission on the mission board: **Abandoned Collaborator Hideout**. A collaborator fled his house in a hurry and left his papers and a crate of loot behind. The map only shows a search circle that has the house somewhere inside it, and the house is never at its centre, so search the houses in the area. The place is not guarded.
+- Taking the papers gives medium intel on the enemy he worked for. The crate is filled like an enemy loot crate and is yours to empty or haul away.
+- Reward: **200 € to each player** who came near the house. No faction money and no town support. The mission fails if time runs out or the house is destroyed before the papers are taken.
+
 ## 2026-10-01 - Lost Ammo Supplies: witnesses farther out
 
 ### Changed

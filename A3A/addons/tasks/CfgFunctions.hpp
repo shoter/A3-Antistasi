@@ -6,7 +6,9 @@ class CfgFunctions {
             class boardGenerate {};
             class boardLoop {};
             class boardPublish {};
+            class boardRestore {};
             class boardReward {};
+            class boardSave {};
             class boardUpdate {};
             class boardValidate {};
             class genTaskUID {};
@@ -46,7 +48,9 @@ class CfgFunctions {
             class DES_Vehicle_p {};
             class LOG_Ammo_p {};
             class LOG_Bank_p {};
+            class LOG_BuyIntel_p {};
             class LOG_Gunshop_p {};
+            class LOG_Hideout_p {};
             class LOG_LostAmmo_p {};
             class LOG_Salvage_p {};
             class LOG_Weapons_p {};
@@ -69,6 +73,9 @@ class CfgFunctions {
             class SUP_Supplies {};
             class LOG_Weapons {};
             class LOG_LostAmmo {};
+            class LOG_Hideout {};
+            class LOG_BuyIntel {};
+            class LOG_BuyIntel_deposit {};
             class RES_Defector {};
             class DES_Camp {};
             class SUP_Elderly {};
