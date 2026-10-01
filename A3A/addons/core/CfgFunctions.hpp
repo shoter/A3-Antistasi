@@ -56,6 +56,7 @@ class CfgFunctions
             class nearEnemy {};
             class paradrop {};
             class rearmCall {};
+            class rebelMortarDispersion {};
             class rebelReactOnKill {};
             class rebelReturnToBase {};
             class recallGroup {};

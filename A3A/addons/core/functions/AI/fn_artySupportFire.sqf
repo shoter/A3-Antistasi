@@ -23,7 +23,8 @@ _textX = if (_rounds == 1) then {
 private _strikeTime = time + _eta;
 [_mainFuncParams, _strikeTime] remoteExec ["A3A_fnc_artySupportMarkers",2];
 
-_startPos = [_startPos,random 10,random 360] call BIS_fnc_relPos; // close by target position, they're not 100% accurate
+// Rounds land anywhere within this radius of their aim point; rebel training shrinks it
+private _dispersion = call A3A_fnc_rebelMortarDispersion;
 
 private _intervalHM = createHashMapFromArray [
 		["point",0],
@@ -35,17 +36,18 @@ private _interval = _intervalHM get _strikeType;
 private _roundsPerUnit = floor (_rounds / (count _units));
 private _ang = if (_strikeType == "barrage") then {_startPos getDir _detail} else {0};
 {
-	[_x, _roundsPerUnit, _typeAmmunition, _strikeType, _startPos, _interval, _ang, _detail] spawn {
-		params ["_piece", "_rounds", "_ammo", "_strikeType", "_startPos", "_interval", "_ang", "_radius"];
+	[_x, _roundsPerUnit, _typeAmmunition, _strikeType, _startPos, _interval, _ang, _detail, _dispersion] spawn {
+		params ["_piece", "_rounds", "_ammo", "_strikeType", "_startPos", "_interval", "_ang", "_radius", "_dispersion"];
 
 		private _eh = _piece addEventHandler ["Fired", { _this#0 setVariable ["A3A_artyFired", true] }];
 
-		private _pos = [_startPos,random 10,random 360] call BIS_fnc_relPos; // close by target position, they're not 100% accurate;
+		private _pos = _startPos;
 		for "_r" from 1 to _rounds do
 		{
 			Trace_1("Firing round %1", _r);
 			_piece setVariable ["A3A_artyFired", nil];
-			_piece commandArtilleryFire [_pos,_ammo,1];
+			private _impactPos = _pos getPos [_dispersion * sqrt random 1, random 360];
+			_piece commandArtilleryFire [_impactPos,_ammo,1];
 			if (_strikeType == "barrage") then
 			{
 				_pos = [_pos,BARRAGEINTERVAL,_ang + 5 - (random 10)] call BIS_fnc_relPos;
