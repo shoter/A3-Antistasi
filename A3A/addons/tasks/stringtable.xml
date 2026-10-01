@@ -112,6 +112,10 @@
         <Original>200 € to each player, intel, loot crate</Original>
         <Polish>200 € dla każdego gracza, dane wywiadu, skrzynia z łupem</Polish>
       </Key>
+      <Key ID="STR_A3A_Tasks_board_note_buyIntel">
+        <Original>large intel report for a 1000 € bribe paid by players, truck</Original>
+        <Polish>duży raport wywiadowczy za łapówkę 1000 € od graczy, ciężarówka</Polish>
+      </Key>
       <Key ID="STR_A3A_Tasks_board_gone">
         <Original>That mission is no longer available.</Original>
         <Polish>Ta misja jest już nieaktualna.</Polish>
@@ -394,6 +398,66 @@
       <Key ID="STR_A3A_Tasks_LOG_Hideout_timeout">
         <Original>The collaborator came back for his papers. They are gone.</Original>
         <Polish>Kolaborant wrócił po swoje dokumenty. Już ich nie ma.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_title">
+        <Original>Buying Intel</Original>
+        <Polish>Kupno informacji</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_desc">
+        <Original>A %1 officer in %2 will sell us intel for a %3 € bribe. A truck is waiting at HQ: load the bribe into it from your own money (it stays locked until the whole sum is in), drive it to him, park it within %4 m of him and hand the money over in person. Go undercover. If his people spot armed rebels in %2, he drives back to his outpost, and he opens fire on anyone who walks up to him openly. He waits until %5. The truck is ours to keep.</Original>
+        <Polish>Oficer sił %1 w %2 sprzeda nam informacje za łapówkę w wysokości %3 €. W kwaterze czeka ciężarówka: załadujcie do niej łapówkę z własnych pieniędzy (pozostaje zamknięta, dopóki nie będzie całej sumy), zawieźcie ją do niego, zaparkujcie w promieniu %4 m od niego i przekażcie mu pieniądze osobiście. Działajcie pod przykrywką. Jeśli jego ludzie zauważą w %2 uzbrojonych rebeliantów, odjedzie do swojego posterunku, a do każdego, kto podejdzie do niego otwarcie, otworzy ogień. Czeka do %5. Ciężarówka zostaje u nas.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_loadAction">
+        <Original>Load bribe money</Original>
+        <Polish>Załaduj pieniądze na łapówkę</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_bribeAction">
+        <Original>Hand over the bribe</Original>
+        <Polish>Wręcz łapówkę</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_loaded">
+        <Original>You loaded %1 € into the truck. It now carries %2 of the %3 € bribe.</Original>
+        <Polish>Załadowano %1 € do ciężarówki. Jest w niej teraz %2 z %3 € łapówki.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_noMoney">
+        <Original>You do not have %1 €.</Original>
+        <Polish>Nie masz %1 €.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_full">
+        <Original>The whole bribe is loaded and the money truck is unlocked. Drive it to the officer.</Original>
+        <Polish>Cała łapówka jest załadowana, a ciężarówka z pieniędzmi otwarta. Zawieźcie ją do oficera.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_success">
+        <Original>The officer took the money and is driving back to his outpost. His intel is ours.</Original>
+        <Polish>Oficer wziął pieniądze i wraca do swojego posterunku. Jego informacje są nasze.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_spotted">
+        <Original>The officer's people spotted armed rebels in %1. He is driving back to his outpost, the deal is off.</Original>
+        <Polish>Ludzie oficera zauważyli uzbrojonych rebeliantów w %1. Wraca do swojego posterunku, umowa jest zerwana.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_fight">
+        <Original>The officer saw armed rebels coming for him and opened fire. The deal is off.</Original>
+        <Polish>Oficer zobaczył zbliżających się uzbrojonych rebeliantów i otworzył ogień. Umowa jest zerwana.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_dead">
+        <Original>The officer is dead. The deal is off.</Original>
+        <Polish>Oficer nie żyje. Umowa jest zerwana.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_truckLost">
+        <Original>The money truck is lost. The officer is driving off, the deal is off.</Original>
+        <Polish>Ciężarówka z pieniędzmi przepadła. Oficer odjeżdża, umowa jest zerwana.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_timeout">
+        <Original>The officer got tired of waiting and is driving back to his outpost.</Original>
+        <Polish>Oficer zmęczył się czekaniem i wraca do swojego posterunku.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_refundHint">
+        <Original>The truck still carries %1 € of bribe money. Drive it back to HQ to return the money to our funds.</Original>
+        <Polish>W ciężarówce wciąż jest %1 € z łapówki. Odwieźcie ją do kwatery, żeby pieniądze wróciły do naszych funduszy.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_BuyIntel_refunded">
+        <Original>The money truck is back at HQ. %1 € went back into our funds.</Original>
+        <Polish>Ciężarówka z pieniędzmi wróciła do kwatery. %1 € wróciło do naszych funduszy.</Polish>
       </Key>
       <Key ID="STR_A3A_Tasks_DES_Camp_title">
         <Original>Destroy enemy camp</Original>

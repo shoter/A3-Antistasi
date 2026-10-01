@@ -7025,5 +7025,27 @@
         <Polish>Teleportuj</Polish>
       </Key>
     </Container>
+    <Container name="dialog_buy_intel">
+      <Key ID="STR_antistasi_dialogs_buy_intel_titlebar">
+        <Original>Bribe Money</Original>
+        <Polish>Pieniądze na łapówkę</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_info">
+        <Original>Money in the truck: %1 / %2 €&lt;br/&gt;Still needed: %3 €&lt;br/&gt;Your money: %4 €</Original>
+        <Polish>Pieniądze w ciężarówce: %1 / %2 €&lt;br/&gt;Brakuje jeszcze: %3 €&lt;br/&gt;Twoje pieniądze: %4 €</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_amount">
+        <Original>Amount to load</Original>
+        <Polish>Kwota do załadowania</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_cancel">
+        <Original>Cancel</Original>
+        <Polish>Anuluj</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_intel_load">
+        <Original>Load money</Original>
+        <Polish>Załaduj pieniądze</Polish>
+      </Key>
+    </Container>
   </Package>
 </Project>

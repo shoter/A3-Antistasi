@@ -218,6 +218,16 @@ class Tasks {
         boardName = "STR_A3A_Tasks_LOG_Hideout_title";
         boardDifficulty = 0;
     };
+    class LOG_BuyIntel {
+        category = "LOG";
+        func = QFUNC(LOG_BuyIntel);
+        params = QFUNC(LOG_BuyIntel_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
+        boardName = "STR_A3A_Tasks_LOG_BuyIntel_title";
+        boardDifficulty = 0;
+    };
     class SUP_Supplies {
         category = "SUPP";
         func = QFUNC(SUP_Supplies);

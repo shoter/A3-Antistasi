@@ -10,6 +10,7 @@ class CfgFunctions {
             class airTaxiTab {};
             class arsenalLimitsDialog {};
             class buildContextMenu {};
+            class buyIntelDialog {};
             class buyVehicleDialog {};
             class buyVehicleTabs {};
             class chronicleTab {};

@@ -25,3 +25,4 @@ Maintainer: DoomMetal
 #include "deployedFlagDialog.hpp"
 #include "lootDeliveryDialog.hpp"
 #include "subCommandersDialog.hpp"
+#include "buyIntelDialog.hpp"

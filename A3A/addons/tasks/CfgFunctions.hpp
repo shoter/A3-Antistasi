@@ -48,6 +48,7 @@ class CfgFunctions {
             class DES_Vehicle_p {};
             class LOG_Ammo_p {};
             class LOG_Bank_p {};
+            class LOG_BuyIntel_p {};
             class LOG_Gunshop_p {};
             class LOG_Hideout_p {};
             class LOG_LostAmmo_p {};
@@ -73,6 +74,8 @@ class CfgFunctions {
             class LOG_Weapons {};
             class LOG_LostAmmo {};
             class LOG_Hideout {};
+            class LOG_BuyIntel {};
+            class LOG_BuyIntel_deposit {};
             class RES_Defector {};
             class DES_Camp {};
             class SUP_Elderly {};
