@@ -11,6 +11,7 @@ class CfgFunctions {
             class boardSave {};
             class boardUpdate {};
             class boardValidate {};
+            class eventLoop {};
             class genTaskUID {};
             class getSettings { postInit = 1; };
             class requestTask {};
@@ -58,6 +59,7 @@ class CfgFunctions {
             class RES_Prisoners_p {};
             class RES_Refugees_p {};
             class SUP_Elderly_p {};
+            class EVT_Mortar_p {};
             class SUP_PoliceStation_p {};
             class SUP_Supplies_p {};
         };
@@ -79,6 +81,7 @@ class CfgFunctions {
             class RES_Defector {};
             class DES_Camp {};
             class SUP_Elderly {};
+            class EVT_Mortar {};
         };
     };
 };

@@ -250,6 +250,15 @@ class Tasks {
     };
 };
 
+// World events: not on the mission board, started at random by FUNC(eventLoop)
+class EventTasks {
+    class EVT_Mortar {
+        func = QFUNC(EVT_Mortar);           // Task function (runTask framework)
+        params = QFUNC(EVT_Mortar_p);       // Parameters function, returns false or [weight, params]
+        weight = 1;
+    };
+};
+
 class CityTasks {
     class Taxi {
         func = QFUNC(city_taxi); // the task information needed to run the task

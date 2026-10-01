@@ -535,6 +535,38 @@
         <Original>The collaborator got through. The enemy now knows more about our HQ.</Original>
         <Polish>Kolaborant dotarł na miejsce. Wróg wie teraz więcej o naszej kwaterze.</Polish>
       </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_title">
+        <Original>Enemy Mortar Fire</Original>
+        <Polish>Ostrzał moździerzowy wroga</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_targetMarker">
+        <Original>Mortar target</Original>
+        <Polish>Cel moździerza</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_desc">
+        <Original>Our scouts report that %1 is getting a mortar team ready at %2. Some time between %3 and %4 it will set out with an escort squad for the marked area and shell %5 from there. Kill the mortar team before it opens fire. If it fires, civilians and our people at %5 will die and houses may come down. Stopping it pays %6 € to the faction, and stopping it before the first round also wins the support of the locals.</Original>
+        <Polish>Nasi zwiadowcy donoszą, że %1 szykuje zespół moździerzowy (%2). Między %3 a %4 wyruszy z oddziałem osłony w zaznaczony rejon i stamtąd ostrzela cel: %5. Zlikwiduj zespół moździerzowy, zanim otworzy ogień. Jeśli zacznie strzelać, zginą cywile i nasi ludzie, a domy mogą się zawalić. Powstrzymanie go daje frakcji %6 €, a powstrzymanie go przed pierwszym pociskiem zjedna nam też poparcie mieszkańców.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_firing">
+        <Original>Incoming! The enemy mortar is shelling %1.</Original>
+        <Polish>Nadlatuje! Wrogi moździerz ostrzeliwuje cel: %1.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_success">
+        <Original>The mortar team was stopped before it fired a single round on %1. The faction gets %2 € and the people of %3 are grateful.</Original>
+        <Polish>Zespół moździerzowy powstrzymany, zanim oddał choć jeden strzał na cel: %1. Frakcja dostaje %2 €, a mieszkańcy miejscowości %3 są wdzięczni.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_successLate">
+        <Original>The enemy mortar was silenced after %1 rounds. The faction gets %2 €.</Original>
+        <Polish>Wrogi moździerz uciszony po %1 pociskach. Frakcja dostaje %2 €.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_failed">
+        <Original>The enemy mortar has finished shelling %1 and its team is pulling back. Civilians killed: %2.</Original>
+        <Polish>Wrogi moździerz zakończył ostrzał celu: %1, a jego zespół się wycofuje. Zabitych cywilów: %2.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_Mortar_cancelled">
+        <Original>The enemy has called off the mortar attack.</Original>
+        <Polish>Wróg odwołał ostrzał moździerzowy.</Polish>
+      </Key>
     </Container>
   </Package>
 </Project>
