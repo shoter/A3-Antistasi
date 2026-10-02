@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-02 - Bigger mortar circle
+
+### Changed
+- **Enemy Mortar Fire**: the map circle around where the mortar team will set up now has a 250 m radius instead of 100 m, so finding them takes more searching.
+
 ## 2026-10-01 - No limit per mission type
 
 ### Changed
