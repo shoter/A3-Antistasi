@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-03 - Big camps are hard camps
+
+### Changed
+- **Destroy enemy camp**: normal camps are back to the original small camp: three tents and a few things around the fire. The big camp with five tents, the radio table and the supply corner under a camo net is now what you find at **hard** camps, next to their machine gun nest.
+
 ## 2026-10-03 - Bigger enemy camps, hard camps
 
 ### Changed
