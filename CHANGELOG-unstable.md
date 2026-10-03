@@ -4,6 +4,18 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-03 - Bigger enemy camps, hard camps
+
+### Changed
+- **Destroy enemy camp**: camps look lived-in now. Five tents instead of three, a table with a radio and a map, camping chairs, a supply corner under a camo net (the loot crate is there now), firewood, food and litter. Camps need a slightly bigger flat clearing, so they may turn up in slightly different places.
+- Normal enemy camps are always guarded by a militia squad. The regular army squads moved to the hard version.
+
+### Added
+- **Hard enemy camps** on the mission board, marked as hard like other hard missions. They pay **200 € per war level** to each player instead of 100.
+  - A regular army squad at the fire, and a fire team with a **guard dog** patrolling further out instead of two sentries. The dog sniffs out undercover rebels, so you can't just walk in.
+  - A manned **machine gun nest** behind sandbags at the edge of the camp. The gun stays behind as loot.
+  - Once the camp is alerted, their **squad leader radios for help**. Take him down within 45 seconds or enemy support may come for you. A hint tells you when the call starts, and whether it got through.
+
 ## 2026-10-02 - Bigger mortar circle
 
 ### Changed
