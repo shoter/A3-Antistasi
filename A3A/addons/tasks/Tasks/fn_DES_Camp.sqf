@@ -6,9 +6,10 @@ Maintainer: Shoter
     When no defender is left standing near the fire, a player burns the camp with a hold action on the campfire.
     Every player who took part (came within 300m of the camp) gets 100 € per war level.
 
-    Hard variant (rolled by the mission board): a regular squad instead of militia, a fire team with a guard dog
-    patrolling further out instead of the sentries, a manned static MG behind sandbags, and the squad leader radios
-    for support if he is still fighting 45 seconds after the camp is alerted. Pays 200 € per war level.
+    Hard variant (rolled by the mission board): a bigger camp (five tents, a table with a radio, supplies under a
+    camo net), a regular squad instead of militia, a fire team with a guard dog patrolling further out instead of
+    the sentries, a manned static MG behind sandbags, and the squad leader radios for support if he is still
+    fighting 45 seconds after the camp is alerted. Pays 200 € per war level.
 
     Runs in the A3A_tasks_fnc_runTask framework: this file builds the task hashmap and its state functions.
 
@@ -69,9 +70,10 @@ private _hasMG = _hard and { _faction get "staticMGs" isNotEqualTo [] };
 private _mgPos = _campPos getPos [MG_DIST, _rot + MG_ANGLE];
 _mgPos set [2, 0];
 
-// Make room for the camp: hide the trees and bushes on the spot, under the camo net and at the MG nest.
+// Make room for the camp: hide the trees and bushes on the spot, and on hard under the camo net and at the MG nest.
 // They come back at cleanup
-private _clearings = [[_campPos, 14], [_campPos getPos [NET_DIST, _rot + NET_ANGLE], 5]];
+private _clearings = [[_campPos, 11]];
+if (_hard) then { _clearings = [[_campPos, 14], [_campPos getPos [NET_DIST, _rot + NET_ANGLE], 5]] };
 if (_hasMG) then { _clearings pushBack [_mgPos, 3.5] };
 private _hiddenTerrain = [];
 {
@@ -82,10 +84,24 @@ _hiddenTerrain = _hiddenTerrain arrayIntersect _hiddenTerrain;
 { _x hideObjectGlobal true } forEach _hiddenTerrain;
 _task set ["_hiddenTerrain", _hiddenTerrain];
 
-// Camp props, laid out around the fire: tents in a horseshoe, a table with a radio on the west side and
-// supplies under a camo net to the north-west (before the random rotation).
-// [type, distance from the fire, angle, extra rotation, burns down with the tents]
+// Camp props, laid out around the fire. [type, distance from the fire, angle, extra rotation, burns down with the tents]
+// Normal: three tents and a few things around the fire
 private _layout = [
+    ["Land_TentA_F", 7.5, 0, 0, true],
+    ["Land_TentDome_F", 8, 115, 0, true],
+    ["Land_TentA_F", 7.5, 235, 0, true],
+    ["Land_Sleeping_bag_F", 5.2, 50, 90, true],
+    ["Land_Sleeping_bag_brown_F", 5.2, 175, 90, true],
+    ["Land_WoodPile_F", 4.5, 295, 90, false],
+    ["Land_Axe_fire_F", 3.8, 310, 0, false],
+    ["Land_Camping_Light_F", 6, 20, 0, false],
+    ["Land_BakedBeans_F", 1.2, 80, 0, false],
+    ["Land_Canteen_F", 1.3, 200, 0, false],
+    ["Land_CampingTable_small_F", 6.5, 270, 0, true]
+];
+// Hard: five tents in a horseshoe, a table with a radio on the west side and supplies under a camo net
+// to the north-west (before the random rotation)
+if (_hard) then { _layout = [
     ["Land_ClutterCutter_large_F", 0, 0, 0, false],
     ["Land_TentA_F", 7.5, 0, 0, true],
     ["Land_TentDome_F", 8, 57, 0, true],
@@ -117,7 +133,7 @@ private _layout = [
     ["Land_Garbage_square3_F", 12, 200, 0, false],
     ["Land_Can_V3_F", 4.6, 140, 0, false],
     ["Land_BottlePlastic_V2_F", 4.6, 215, 0, false]
-];
+] };
 private _objects = [];
 private _burnable = [];
 private _table = objNull;
@@ -134,18 +150,20 @@ private _table = objNull;
     if (_type == "Land_CampingTable_small_F") then { _table = _obj };
 } forEach _layout;
 
-// Radio and map on the table top. [type, offset on the table, extra rotation]
-private _tableTop = (boundingBoxReal _table) # 1 # 2;
-{
-    _x params ["_type", "_offset", "_turn"];
-    private _obj = createVehicle [_type, getPosATL _table, [], 0, "CAN_COLLIDE"];
-    private _pos = _table modelToWorld [_offset, 0, _tableTop];
-    _obj setDir (getDir _table + _turn);
-    _obj setPosATL [_pos # 0, _pos # 1, (_pos # 2) - ((boundingBoxReal _obj) # 0 # 2)];
-    _obj enableSimulationGlobal false;
-    _objects pushBack _obj;
-    _burnable pushBack _obj;            // it would float once the table is gone
-} forEach [["Land_PortableLongRangeRadio_F", -0.2, 90], ["Land_Map_unfolded_F", 0.15, 0]];
+// Hard: radio and map on the table top. [type, offset on the table, extra rotation]
+if (_hard) then {
+    private _tableTop = (boundingBoxReal _table) # 1 # 2;
+    {
+        _x params ["_type", "_offset", "_turn"];
+        private _obj = createVehicle [_type, getPosATL _table, [], 0, "CAN_COLLIDE"];
+        private _pos = _table modelToWorld [_offset, 0, _tableTop];
+        _obj setDir (getDir _table + _turn);
+        _obj setPosATL [_pos # 0, _pos # 1, (_pos # 2) - ((boundingBoxReal _obj) # 0 # 2)];
+        _obj enableSimulationGlobal false;
+        _objects pushBack _obj;
+        _burnable pushBack _obj;            // it would float once the table is gone
+    } forEach [["Land_PortableLongRangeRadio_F", -0.2, 90], ["Land_Map_unfolded_F", 0.15, 0]];
+};
 
 _task set ["_objects", _objects];
 _task set ["_burnable", _burnable];
@@ -154,8 +172,8 @@ private _fire = createVehicle ["Campfire_burning_F", _campPos, [], 0, "CAN_COLLI
 _fire setVectorUp surfaceNormal _campPos;
 _task set ["_fire", _fire];
 
-// Their supplies under the camo net, free for the taking
-private _cratePos = _campPos getPos [11, _rot + 305];
+// Their supplies, free for the taking. On hard under the camo net
+private _cratePos = if (_hard) then { _campPos getPos [11, _rot + 305] } else { _campPos getPos [9.5, _rot + 175] };
 _cratePos set [2, 0];
 private _crate = createVehicle [_faction get "ammobox", _cratePos, [], 0, "CAN_COLLIDE"];
 _crate setDir (_cratePos getDir _campPos);
