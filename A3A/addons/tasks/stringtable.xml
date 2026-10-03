@@ -108,6 +108,10 @@
         <Original>100 € per war level to each player</Original>
         <Polish>100 € za poziom wojny dla każdego gracza</Polish>
       </Key>
+      <Key ID="STR_A3A_Tasks_board_note_camp_hard">
+        <Original>200 € per war level to each player</Original>
+        <Polish>200 € za poziom wojny dla każdego gracza</Polish>
+      </Key>
       <Key ID="STR_A3A_Tasks_board_note_hideout">
         <Original>200 € to each player, intel, loot crate</Original>
         <Polish>200 € dla każdego gracza, dane wywiadu, skrzynia z łupem</Polish>
@@ -484,6 +488,18 @@
       </Key>
       <Key ID="STR_A3A_Tasks_DES_Camp_timeout">
         <Original>The enemy has broken camp and moved on.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_descHard">
+        <Original>This camp is well guarded: a regular squad, a patrol with a guard dog, a machine gun nest and a radio to call for help.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_radioStart">
+        <Original>Their squad leader is on the radio calling for help. Take him down within %1 seconds!</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_radioStopped">
+        <Original>The radioman is down. The camp's call for help never got through.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Camp_radioCalled">
+        <Original>The camp got through on the radio. Enemy support may be on its way.</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_SUP_Elderly_title">
         <Original>Supplies for the Elderly</Original>

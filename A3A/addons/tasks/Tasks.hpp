@@ -108,7 +108,7 @@ class Tasks {
         weight = 1;
         isLegacy = 0;
         boardName = "STR_A3A_Tasks_DES_Camp_title";
-        boardDifficulty = 0;
+        boardDifficulty = 1;
     };
 /*    class LOG_Ammo {
         category = "LOG";

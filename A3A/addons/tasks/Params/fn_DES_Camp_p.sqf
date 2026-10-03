@@ -33,10 +33,12 @@ private _fnc_campSpot = {
     if (_players inAreaArray [_pos, 800, 800] isNotEqualTo []) exitWith {false};
     if (_pos nearRoads 120 isNotEqualTo []) exitWith {false};
     if (nearestTerrainObjects [_pos, ["HOUSE", "BUILDING", "CHURCH", "CHAPEL", "RUIN", "BUNKER", "FORTRESS", "LIGHTHOUSE", "FUELSTATION", "HOSPITAL", "TRANSMITTER", "POWERSOLAR", "POWERWIND", "WATERTOWER", "QUAY", "VIEW-TOWER"], 150, false, true] isNotEqualTo []) exitWith {false};
-    if (nearestTerrainObjects [_pos, ["ROCK", "ROCKS", "WALL", "FENCE", "HIDE", "MAIN ROAD", "ROAD", "TRACK", "TRAIL"], 14, false, true] isNotEqualTo []) exitWith {false};
-    // Flat enough for tents: the centre and a ring around it
+    if (nearestTerrainObjects [_pos, ["ROCK", "ROCKS", "WALL", "FENCE", "HIDE", "MAIN ROAD", "ROAD", "TRACK", "TRAIL"], 17, false, true] isNotEqualTo []) exitWith {false};
+    // Flat enough for tents: the centre, the tent ring and the supply corner further out
     if ((surfaceNormal _pos) # 2 < 0.96) exitWith {false};
-    if ([0, 90, 180, 270] findIf { (surfaceNormal (_pos getPos [9, _x])) # 2 < 0.94 or surfaceIsWater (_pos getPos [12, _x]) } != -1) exitWith {false};
+    if ([0, 45, 90, 135, 180, 225, 270, 315] findIf {
+        (surfaceNormal (_pos getPos [9, _x])) # 2 < 0.94 or (surfaceNormal (_pos getPos [13, _x])) # 2 < 0.92 or surfaceIsWater (_pos getPos [16, _x])
+    } != -1) exitWith {false};
     count nearestTerrainObjects [_pos, ["TREE"], 60, false, true] >= _minTrees;
 };
 
