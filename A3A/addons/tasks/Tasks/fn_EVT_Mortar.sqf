@@ -2,10 +2,11 @@
 Maintainer: Shoter
     Enemy mortar fire event. Not posted on the mission board: A3A_tasks_fnc_eventLoop starts it at random.
     The enemy gets a mortar team ready at one of its outposts or airbases to shell a rebel place 1-2 km away.
-    The briefing gives a 5-30 minute window. When the hidden start time comes, with no message,
-    a truck brings an infantry squad to the firing area, where it patrols 200 m around the spot, and the mortar
-    team walks there from the base. On arrival the team sets up the mortar and fires 20 rounds, 4 a minute, on
-    the rebel place.
+    The briefing gives a 5 minute window that opens 10-55 minutes from now. When the hidden start time in that
+    window comes, with no message, a truck brings an infantry squad to the firing area, where it patrols 200 m
+    around the spot. Two minutes later the two-man mortar team follows on a quad (the faction's basic vehicle;
+    on foot if it has fewer than two seats). On arrival the team sets up the mortar and fires 20 rounds,
+    4 a minute, on the rebel place.
     Where the place is spawned the rounds do the damage themselves. Where it is not, each round can kill a
     garrison soldier or (in towns) a civilian on paper. Every civilian the barrage kills costs a lot of town support,
     and rounds can bring down houses near where they land.
@@ -28,11 +29,13 @@ Public: No
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define START_MIN 5
-#define START_MAX 30
+#define WINDOW_MIN 10
+#define WINDOW_MAX 60
+#define WINDOW_LENGTH 5
+#define TEAM_DELAY 120
 #define GIVE_UP_TIME 3600
-#define AREA_RADIUS 250
-#define AREA_OFFSET 70
+#define AREA_RADIUS 150
+#define AREA_OFFSET 40
 #define PATROL_RADIUS 200
 #define SETUP_TIME 40
 #define ROUNDS 20
@@ -61,7 +64,10 @@ _task set ["_base", _base];
 _task set ["_mortarPos", _mortarPos];
 _task set ["_side", _side];
 _task set ["_spread", _spread];
-_task set ["_startTime", time + 60 * (START_MIN + random (START_MAX - START_MIN))];
+// The briefing names a 5 minute window, the escort sets out at a hidden moment inside it
+private _windowStart = WINDOW_MIN + floor random (WINDOW_MAX - WINDOW_LENGTH - WINDOW_MIN + 1);
+_task set ["_startTime", time + 60 * (_windowStart + random WINDOW_LENGTH)];
+_task set ["_teamDepartTime", 0];
 _task set ["_giveUpTime", 0];
 _task set ["_reward", 200 + 50 * tierWar];
 _task set ["_teamUnits", []];
@@ -71,8 +77,8 @@ _task set ["_crewGroup", grpNull];
 _task set ["_escortGroup", grpNull];
 _task set ["_escortState", "none"];
 _task set ["_dropPos", _mortarPos];
-_task set ["_truckLastPos", []];
-_task set ["_truckStuckTime", 0];
+_task set ["_quad", objNull];
+_task set ["_teamOnQuad", false];
 _task set ["_mortar", objNull];
 _task set ["_setupTime", 0];
 _task set ["_pendingShot", []];              // [aim position, order time, rounds fired before the order]
@@ -99,8 +105,8 @@ _targetMrk setMarkerColor "ColorRed";
 _targetMrk setMarkerText localize "STR_A3A_Tasks_EVT_Mortar_targetMarker";
 _task set ["_targetMrk", _targetMrk];
 
-private _fromTime = [START_MIN] call FUNC(minutesFromNow);
-private _toTime = [START_MAX] call FUNC(minutesFromNow);
+private _fromTime = [_windowStart] call FUNC(minutesFromNow);
+private _toTime = [_windowStart + WINDOW_LENGTH] call FUNC(minutesFromNow);
 private _taskDesc = format [localize "STR_A3A_Tasks_EVT_Mortar_desc", _faction get "name", [_base] call A3A_fnc_localizar, _fromTime, _toTime, _task get "_targetName", _task get "_reward"];
 [[teamPlayer, civilian], _taskId, [_taskDesc, _task get "_hintTitle", _areaMrk], _areaPos, false, 0, true, "Destroy", true] call BIS_fnc_taskCreate;
 [_taskId, "MORTAR", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
@@ -116,30 +122,74 @@ Info_3("Mortar fire event on %1 from %2 at %3", _target, _base, _mortarPos);
 // Helper functions //
 //////////////////////
 
-// Called with the task. Sends the mortar team on foot and the escort squad by truck
-_task set ["_fnc_spawnForces", {
+// Called with a vehicle. True when it moved less than 10 m in the last 90 seconds
+_task set ["_fnc_stuck", {
+    private _check = _this getVariable "A3A_mortarStuckCheck";
+    if (isNil "_check") exitWith {
+        _this setVariable ["A3A_mortarStuckCheck", [time + 90, getPosATL _this]]; false;
+    };
+    _check params ["_checkTime", "_lastPos"];
+    if (time < _checkTime) exitWith {false};
+    _this setVariable ["A3A_mortarStuckCheck", [time + 90, getPosATL _this]];
+    _this distance2d _lastPos < 10;
+}];
+
+// Called with the task. Sends the mortar team, two crewmen on a quad (on foot if the faction has no
+// vehicle with two seats), from the edge of the base facing the firing spot
+_task set ["_fnc_spawnTeam", {
     private _side = _this get "_side";
     private _faction = Faction(_side);
-    private _basePos = markerPos (_this get "_base");
+    private _base = _this get "_base";
+    private _basePos = markerPos _base;
     private _mortarPos = _this get "_mortarPos";
-
-    // Mortar team: two crewmen and a rifleman, on foot from the edge of the base facing the firing spot
     private _teamPos = [_basePos getPos [50, _basePos getDir _mortarPos], 0, 60, 3] call A3A_fnc_findPatrolPos;
+
+    private _quadTypes = (_faction getOrDefault ["vehiclesBasic", []]) select { [_x, true] call BIS_fnc_crewCount >= 2 };
+    private _quad = objNull;
+    if (_quadTypes isNotEqualTo []) then {
+        private _quadType = selectRandom _quadTypes;
+        _quad = [_base, _quadType, _mortarPos] call A3A_fnc_spawnVehicleAtMarker;
+        if (isNull _quad) then { _quad = [_quadType, _teamPos, 50, 5, true] call A3A_fnc_safeVehicleSpawn };
+        if (!isNull _quad) then {
+            [_quad, _side, "legacy"] call A3A_fnc_AIVEHinit;
+            _teamPos = getPosATL _quad;
+        };
+    };
+
     private _team = createGroup [_side, true];
-    {
-        private _unitType = _faction getOrDefault [_x, _faction get "unitRifle"];
+    private _unitType = _faction getOrDefault ["unitStaticCrew", _faction get "unitRifle"];
+    for "_i" from 1 to 2 do {
         private _unit = [_team, _unitType, _teamPos, [], 3, "NONE"] call A3A_fnc_createUnit;
         [_unit, "", false, "legacy"] call A3A_fnc_NATOinit;
-    } forEach ["unitStaticCrew", "unitStaticCrew", "unitRifle"];
+    };
     _team setBehaviourStrong "AWARE";
     _team setSpeedMode "NORMAL";
     _team setFormation "FILE";
+
+    if (!isNull _quad) then {
+        _team addVehicle _quad;
+        (units _team # 0) moveInDriver _quad;
+        (units _team # 1) moveInAny _quad;
+        _this set ["_quad", _quad];
+        _this set ["_teamOnQuad", true];
+    };
     private _wp = _team addWaypoint [_mortarPos, 0];
     _wp setWaypointCompletionRadius 15;
     _this set ["_team", _team];
     _this set ["_teamUnits", units _team];
 
-    // Escort squad, by truck as far as the roads go
+    private _onQuad = !isNull _quad;
+    Debug_2("Mortar event: team left for %1, on a quad: %2", _mortarPos, _onQuad);
+}];
+
+// Called with the task. Sends the escort squad by truck as far as the roads go, on foot without a truck
+_task set ["_fnc_spawnEscort", {
+    private _side = _this get "_side";
+    private _faction = Faction(_side);
+    private _basePos = markerPos (_this get "_base");
+    private _mortarPos = _this get "_mortarPos";
+    private _teamPos = [_basePos getPos [50, _basePos getDir _mortarPos], 0, 60, 3] call A3A_fnc_findPatrolPos;
+
     private _truckTypes = _faction get "vehiclesTrucks";
     if (_truckTypes isEqualTo []) then { _truckTypes = _faction get "vehiclesMilitiaTrucks" };
     private _truck = objNull;
@@ -165,12 +215,10 @@ _task set ["_fnc_spawnForces", {
         _truckWp setWaypointCompletionRadius 20;
         _crewGroup setBehaviourStrong "SAFE";
         _crewGroup setSpeedMode "NORMAL";
-        _this set ["_truckLastPos", getPosATL _truck];
-        _this set ["_truckStuckTime", time + 90];
     };
 
     if (isNull _escort) then {
-        // No truck or no seats in it: the squad walks with the mortar team
+        // No truck or no seats in it: the squad walks from the base
         _escort = [_teamPos, _side, selectRandom (_faction get "groupsSquads")] call A3A_fnc_spawnGroup;
         { [_x, "", false, "legacy"] call A3A_fnc_NATOinit } forEach units _escort;
         private _escortWp = _escort addWaypoint [_mortarPos, 0];
@@ -181,9 +229,8 @@ _task set ["_fnc_spawnForces", {
     };
     _this set ["_escortGroup", _escort];
 
-    private _teamCount = count units _team;
     private _escortCount = count units _escort;
-    Debug_3("Mortar event: team of %1 and escort of %2 left for %3", _teamCount, _escortCount, _mortarPos);
+    Debug_2("Mortar event: escort of %1 left for %2", _escortCount, _mortarPos);
 }];
 
 // Called with the task every tick once the forces are out: escort drives, gets out, walks, patrols
@@ -198,12 +245,7 @@ _task set ["_fnc_escort", {
             private _arrived = _truck distance2d (_this get "_dropPos") < 40;
 
             // Stuck, wrecked or without a driver: get out where it is
-            private _stuck = false;
-            if (time > _this get "_truckStuckTime") then {
-                _stuck = _truck distance2d (_this get "_truckLastPos") < 10;
-                _this set ["_truckLastPos", getPosATL _truck];
-                _this set ["_truckStuckTime", time + 90];
-            };
+            private _stuck = _truck call (_this get "_fnc_stuck");
             if (!_arrived and !_stuck and { alive _truck and canMove _truck and { driver _truck call A3A_fnc_canFight } }) exitWith {};
 
             _escort leaveVehicle _truck;
@@ -295,6 +337,7 @@ _task set ["_fnc_setupMortar", {
     private _faction = Faction(_side);
     private _units = (_this get "_teamUnits") select { _x call A3A_fnc_canFight };
     if (_units isEqualTo []) exitWith {};
+    { if (!isNull objectParent _x) then { moveOut _x } } forEach _units;      // still sitting on the quad
 
     private _mortarType = selectRandom (_faction get "staticMortars");
     private _spot = getPosATL (_units # 0);
@@ -383,8 +426,7 @@ _task set ["_fnc_retreat", {
     { _x setUnitPos "AUTO" } forEach (_this get "_teamUnits");
 
     { if (!isNull _x) then { [_x] spawn A3A_fnc_enemyReturnToBase } } forEach [_team, _this get "_escortGroup", _this get "_crewGroup"];
-    private _truck = _this get "_truck";
-    if (!isNull _truck) then { [_truck] spawn A3A_fnc_vehDespawner };
+    { if (!isNull _x) then { [_x] spawn A3A_fnc_vehDespawner } } forEach [_this get "_truck", _this get "_quad"];
 }];
 
 
@@ -399,14 +441,28 @@ _task set ["s_waitStart", {
     };
     if (time < _this get "_startTime") exitWith {false};
 
-    _this call (_this get "_fnc_spawnForces");
+    _this call (_this get "_fnc_spawnEscort");
+    _this set ["_teamDepartTime", time + TEAM_DELAY];
     _this set ["_giveUpTime", time + GIVE_UP_TIME];
-    _this set ["state", "s_approach"];
+    _this set ["state", "s_escortOut"];
     _this set ["interval", 3];
     false;
 }];
 
-// Mortar team walking to the spot
+// Escort on its way, the mortar team leaves the base two minutes after it
+_task set ["s_escortOut", {
+    _this call (_this get "_fnc_escort");
+    if (_this call (_this get "_fnc_targetGone")) exitWith {
+        _this set ["state", "s_cancel"]; false;
+    };
+    if (time < _this get "_teamDepartTime") exitWith {false};
+
+    _this call (_this get "_fnc_spawnTeam");
+    _this set ["state", "s_approach"];
+    false;
+}];
+
+// Mortar team riding or walking to the spot
 _task set ["s_approach", {
     _this call (_this get "_fnc_escort");
     if (_this call (_this get "_fnc_mortarStopped")) exitWith {
@@ -417,8 +473,27 @@ _task set ["s_approach", {
     };
 
     private _team = _this get "_team";
+    private _mortarPos = _this get "_mortarPos";
+
+    // On the quad until it gets close, gets stuck, breaks down or loses its driver, then on foot
+    if (_this get "_teamOnQuad") then {
+        private _quad = _this get "_quad";
+        private _arrived = _quad distance2d _mortarPos < 40;
+        private _stuck = _quad call (_this get "_fnc_stuck");
+        private _aboard = units _team findIf { objectParent _x == _quad } != -1;
+        if (!_arrived and !_stuck and _aboard and { alive _quad and canMove _quad and { driver _quad call A3A_fnc_canFight } }) exitWith {};
+
+        _team leaveVehicle _quad;
+        { unassignVehicle _x } forEach units _team;
+        private _wp = _team addWaypoint [_mortarPos, 0];
+        _wp setWaypointCompletionRadius 15;
+        _team setCurrentWaypoint _wp;
+        _this set ["_teamOnQuad", false];
+    };
+    if (_this get "_teamOnQuad") exitWith {false};
+
     private _leader = leader _team;
-    private _dist = _leader distance2d (_this get "_mortarPos");
+    private _dist = _leader distance2d _mortarPos;
     if (_dist > 60 or { _dist > 25 and { currentWaypoint _team < count waypoints _team } }) exitWith {false};
 
     { doStop _x } forEach units _team;

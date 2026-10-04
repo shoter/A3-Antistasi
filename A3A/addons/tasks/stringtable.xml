@@ -568,8 +568,8 @@
         <Polish>Cel moździerza</Polish>
       </Key>
       <Key ID="STR_A3A_Tasks_EVT_Mortar_desc">
-        <Original>Our scouts report that %1 is getting a mortar team ready at %2. Some time between %3 and %4 it will set out with an escort squad for the marked area and shell %5 from there. Kill the mortar team before it opens fire. If it fires, civilians and our people at %5 will die and houses may come down. Stopping it pays %6 € to the faction, and stopping it before the first round also wins the support of the locals.</Original>
-        <Polish>Nasi zwiadowcy donoszą, że %1 szykuje zespół moździerzowy (%2). Między %3 a %4 wyruszy z oddziałem osłony w zaznaczony rejon i stamtąd ostrzela cel: %5. Zlikwiduj zespół moździerzowy, zanim otworzy ogień. Jeśli zacznie strzelać, zginą cywile i nasi ludzie, a domy mogą się zawalić. Powstrzymanie go daje frakcji %6 €, a powstrzymanie go przed pierwszym pociskiem zjedna nam też poparcie mieszkańców.</Polish>
+        <Original>Our scouts report that %1 is getting a mortar team ready at %2. Some time between %3 and %4 an escort squad will set out for the marked area, and the mortar team will follow it two minutes later on a light vehicle to shell %5 from there. Kill the mortar team before it opens fire. If it fires, civilians and our people at %5 will die and houses may come down. Stopping it pays %6 € to the faction, and stopping it before the first round also wins the support of the locals.</Original>
+        <Polish>Nasi zwiadowcy donoszą, że %1 szykuje zespół moździerzowy (%2). Między %3 a %4 w zaznaczony rejon wyruszy oddział osłony, a dwie minuty później dołączy do niego zespół moździerzowy na lekkim pojeździe i stamtąd ostrzela cel: %5. Zlikwiduj zespół moździerzowy, zanim otworzy ogień. Jeśli zacznie strzelać, zginą cywile i nasi ludzie, a domy mogą się zawalić. Powstrzymanie go daje frakcji %6 €, a powstrzymanie go przed pierwszym pociskiem zjedna nam też poparcie mieszkańców.</Polish>
       </Key>
       <Key ID="STR_A3A_Tasks_EVT_Mortar_firing">
         <Original>Incoming! The enemy mortar is shelling %1.</Original>
