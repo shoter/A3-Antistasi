@@ -4,6 +4,13 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-04 - Mortar team on a quad
+
+### Changed
+- **Enemy Mortar Fire**: the briefing now gives a **5 minute window** instead of 5-30 minutes. The window opens somewhere 10 to 55 minutes ahead, and the escort squad sets out at a hidden moment inside it.
+- The mortar team is now **two crewmen on a quad** (the faction's light vehicle). They leave the base **2 minutes after** the escort squad and get off near the firing spot, or where the quad gets stuck or loses its driver. Factions without a two-seat light vehicle send the team on foot.
+- The map circle around the firing spot is now **150 m** instead of 250 m.
+
 ## 2026-10-03 - Big camps are hard camps
 
 ### Changed
