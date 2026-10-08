@@ -244,12 +244,38 @@ private _resDefOcc = A3A_resourcesDefenceOcc;
 private _resAttInv = A3A_resourcesAttackInv;
 private _resDefInv = A3A_resourcesDefenceInv;
 
-// Heavily based on deleted handler in AIVehInit
+// Heavily based on vehicleDeletedEH
+// Skips use continue: exitWith in a forEach body would end the whole loop at the first skipped vehicle
 {
 	private _veh = _x;
+
+	// Garrison vehicles are saved with their garrison
+	if (!isNil {_veh getVariable "markerX"}) then { continue };
+
 	private _side = _veh getVariable ["ownerSide", teamPlayer];
+	if (!alive _veh || (_side != Occupants && _side != Invaders)) then { continue };
+
+	private _pool = _veh getVariable ["A3A_resPool", "legacy"];
+
+	// Fixed refund set by attack scripts, e.g. aircraft returning from a won attack. Ignores damage
+	// Split by pool as addEnemyResources does: legacy goes half to each
+	private _fixedRefund = _veh getVariable "A3A_fixedRefund";
+	if (!isNil "_fixedRefund") then {
+		private _refundAtt = [0, _fixedRefund] select (_pool == "attack");
+		private _refundDef = [0, _fixedRefund] select (_pool == "defence");
+		if (_pool == "legacy") then { _refundAtt = _fixedRefund/2; _refundDef = _fixedRefund/2 };
+		if (_side == Occupants) then {
+			_resAttOcc = _resAttOcc + _refundAtt;
+			_resDefOcc = _resDefOcc + _refundDef;
+		} else {
+			_resAttInv = _resAttInv + _refundAtt;
+			_resDefInv = _resDefInv + _refundDef;
+		};
+		continue;
+	};
+
 	private _vehCost = A3A_vehicleResourceCosts getOrDefault [typeof _veh, 0];
-	if (!alive _veh || (_side != Occupants && _side != Invaders) || _vehCost == 0) exitWith {};
+	if (_vehCost == 0) then { continue };
 
 	private _vehDamage = damage _veh;
 	if (getAllHitPointsDamage _veh isNotEqualTo []) then {
@@ -258,7 +284,6 @@ private _resDefInv = A3A_resourcesDefenceInv;
 		_vehDamage = _vehDamage max (_total / count _allHP);
 	};
 
-	private _pool = _veh getVariable ["A3A_resPool", "legacy"];
 //	Debug_5("Vehicle type %1 deleted with side %2, pool %3, cost %4, damage %5", typeof _veh, _side, _pool, _vehCost, _vehDamage);
 
 	if (_pool == "legacy") then {
