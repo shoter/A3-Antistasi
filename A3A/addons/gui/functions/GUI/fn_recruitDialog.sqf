@@ -38,7 +38,8 @@ switch (_mode) do
 
         private _display = findDisplay A3A_IDD_RECRUITDIALOG;
 
-        private _money = if (player == theBoss) then { server getVariable "resourcesFIA" } else { player getVariable "moneyX" };
+        // The commander and sub-commanders recruit on the faction funds
+        private _money = if ([player] call A3A_fnc_isCommandStaff) then { server getVariable "resourcesFIA" } else { player getVariable "moneyX" };
         private _hr = server getVariable "hr";
         call A3A_fnc_fetchRebelGear;
 

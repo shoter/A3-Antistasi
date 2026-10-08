@@ -9,10 +9,7 @@ if (player != theBoss) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC
 if (markerAlpha respawnTeamPlayer == 0) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_movehq"] call A3A_fnc_customHint};
 if !([player] call A3A_fnc_hasRadio) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_radio"] call A3A_fnc_customHint};
 
-private _maxGroups = [6,10] select (player call A3A_fnc_isMember);
-if (count hcAllGroups player >= _maxGroups) exitWith {
-    [_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_many"] call A3A_fnc_customHint;
-};
+// No squad limit here: only the commander converts, and the commander runs any number of squads
 
 private _bannedTypes = [FactionGet(reb,"unitCrew"), FactionGet(reb,"unitUnarmed"), FactionGet(reb,"unitPetros"), "unknown"];
 if (_units isEqualTo []) then {

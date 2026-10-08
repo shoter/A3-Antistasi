@@ -39,6 +39,7 @@ waitUntil {sleep 1; (time > _timeX) or ({(_x distance getMarkerPos respawnTeamPl
 
 _hr = 0;
 _resourcesFIA = 0;
+private _factionRefund = 0;
 _items = [];
 _ammunition = [];
 _weaponsX = [];
@@ -46,7 +47,9 @@ _weaponsX = [];
 {_unit = _x;
 if ([_unit] call A3A_fnc_canFight) then
 	{
-	_resourcesFIA = _resourcesFIA + (server getVariable (_unit getVariable "unitType")) / 2;
+	// Units recruited on the faction funds (commander, sub-commanders) pay back into them, the rest into the player's pocket
+	private _refund = (server getVariable (_unit getVariable "unitType")) / 2;
+	if (_unit getVariable ["A3A_factionFunded", false]) then { _factionRefund = _factionRefund + _refund } else { _resourcesFIA = _resourcesFIA + _refund };
 	_hr = _hr +1;
 	{if (not(([_x] call BIS_fnc_baseWeapon) in unlockedWeapons)) then {_weaponsX pushBack ([_x] call BIS_fnc_baseWeapon)}} forEach weapons _unit;
 	{if (not(_x in unlockedMagazines)) then {_ammunition pushBack _x}} forEach magazines _unit;
@@ -54,7 +57,7 @@ if ([_unit] call A3A_fnc_canFight) then
 	};
 deleteVehicle _x;
 } forEach units _newGroup;
-[_hr,0] remoteExec ["A3A_fnc_resourcesFIA",2]; 
+[_hr,_factionRefund] remoteExec ["A3A_fnc_resourcesFIA",2];
 [_resourcesFIA] call A3A_fnc_resourcesPlayer;
 {boxX addWeaponCargoGlobal [_x,1]} forEach _weaponsX;
 {boxX addMagazineCargoGlobal [_x,1]} forEach _ammunition;

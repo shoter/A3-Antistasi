@@ -64,7 +64,8 @@ if (_globalSave) then
 	{
 		if (alive _x && (_x getVariable ["owner", objNull] == _playerUnit)) then
 		{
-			if (_x != _playerUnit) then {
+			// Units recruited on the faction funds go back to them, A3A_fnc_saveLoop counts those
+			if (_x != _playerUnit && {!(_x getVariable ["A3A_factionFunded", false])}) then {
 				private _unitPrice = server getVariable [_x getVariable "unitType", 0];
 				_totalMoney = _totalMoney + _unitPrice;
 			};

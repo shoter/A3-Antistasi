@@ -6980,8 +6980,8 @@
         <Polish>Poddowódcy</Polish>
       </Key>
       <Key ID="STR_antistasi_dialogs_subcommanders_info">
-        <Original>Sub-commanders recruit their own high command squads and pay for junkyard vehicles and utility items, builder boxes included, from the faction funds. Their squads are theirs alone to command: you take them over only when the player leaves the server or loses the role. You are told whenever a sub-commander spends faction resources.</Original>
-        <Polish>Poddowódcy rekrutują własne oddziały wysokiego dowodzenia i płacą z funduszy frakcji za pojazdy ze złomowiska oraz przedmioty użytkowe, w tym skrzynie budowlane. Swoimi oddziałami dowodzą tylko oni: przejmujesz je dopiero, gdy gracz opuści serwer albo straci funkcję. Dostajesz powiadomienie, gdy poddowódca wydaje zasoby frakcji.</Polish>
+        <Original>Sub-commanders run up to 10 high command squads each. Squads, soldiers for their own group, junkyard vehicles and utility items are paid from the faction funds. Only they command their squads: you take them over only when the player leaves the server or loses the role. You are told whenever a sub-commander spends faction resources.</Original>
+        <Polish>Poddowódcy mają do 10 oddziałów wysokiego dowodzenia. Oddziały, żołnierze do ich drużyny, pojazdy ze złomowiska i przedmioty użytkowe są opłacane z funduszy frakcji. Swoimi oddziałami dowodzą tylko oni: przejmujesz je dopiero, gdy gracz opuści serwer albo straci funkcję. Dostajesz powiadomienie, gdy poddowódca wydaje zasoby frakcji.</Polish>
       </Key>
       <Key ID="STR_antistasi_dialogs_subcommanders_role_label">
         <Original>Role</Original>

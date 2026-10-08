@@ -128,6 +128,18 @@ _resourcesBackground = server getVariable "resourcesFIA";
 	};
 } forEach allUnits;
 
+// Units the commander or a sub-commander recruited into their own group on the faction funds are refunded at full price
+// to the faction funds. A3A_fnc_savePlayer refunds the other units of a player's group to the player and skips these.
+{
+	private _player = _x getVariable ["owner", _x];
+	if (group _player in _hcGroups) then { continue };
+	{
+		if (alive _x && {_x != _player} && {_x getVariable ["owner", objNull] == _player} && {_x getVariable ["A3A_factionFunded", false]}) then {
+			_resourcesBackground = _resourcesBackground + (server getVariable [_x getVariable "unitType", 0]);
+		};
+	} forEach units group _player;
+} forEach (call A3A_fnc_playableUnits);
+
 ["resourcesFIA", _resourcesBackground] call A3A_fnc_setStatVariable;
 ["hr", _hrBackground] call A3A_fnc_setStatVariable;
 

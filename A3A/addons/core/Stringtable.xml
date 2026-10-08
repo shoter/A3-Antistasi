@@ -5844,8 +5844,8 @@
         <Polish>%2 wyznacza gracza %1 na poddowódcę.</Polish>
       </Key>
       <Key ID="STR_A3A_fn_orgp_subCommander_assignedYou">
-        <Original>%2 designated you as sub-commander.&lt;br/&gt;&lt;br/&gt;You can recruit your own high command squads from the Commander tab of the Battle Command menu or at the HQ flag, and only you command them. Squads, junkyard vehicles and utility items, builder boxes included, are paid from the faction funds. The commander is told what you spend.</Original>
-        <Polish>%2 wyznacza cię na poddowódcę.&lt;br/&gt;&lt;br/&gt;Możesz rekrutować własne oddziały wysokiego dowodzenia w zakładce dowódcy w menu Battle Command albo przy fladze w HQ i tylko ty nimi dowodzisz. Oddziały, pojazdy ze złomowiska i przedmioty użytkowe, w tym skrzynie budowlane, są opłacane z funduszy frakcji. Dowódca widzi, co wydajesz.</Polish>
+        <Original>%2 designated you as sub-commander.&lt;br/&gt;&lt;br/&gt;You can recruit your own high command squads from the Commander tab of the Battle Command menu or at the HQ flag, up to 10 at a time, and only you command them. Squads, soldiers recruited into your own group, junkyard vehicles and utility items, builder boxes included, are paid from the faction funds. The commander is told what you spend.</Original>
+        <Polish>%2 wyznacza cię na poddowódcę.&lt;br/&gt;&lt;br/&gt;Możesz rekrutować własne oddziały wysokiego dowodzenia w zakładce dowódcy w menu Battle Command albo przy fladze w HQ, maksymalnie 10 naraz, i tylko ty nimi dowodzisz. Oddziały, żołnierze rekrutowani do twojej drużyny, pojazdy ze złomowiska i przedmioty użytkowe, w tym skrzynie budowlane, są opłacane z funduszy frakcji. Dowódca widzi, co wydajesz.</Polish>
       </Key>
       <Key ID="STR_A3A_fn_orgp_subCommander_removed">
         <Original>%2 removed %1 from the sub-commanders.</Original>
