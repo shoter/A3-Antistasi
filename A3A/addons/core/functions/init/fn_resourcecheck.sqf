@@ -57,7 +57,8 @@ while {true} do
 	_resAdd = _resAdd + _resourcesRebel * A3A_rebelCashResMult;
 
 	private _factoriesRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count factories;
-	private _resBoost = 1 + _factoriesRebel * A3A_rebelCashFactMult;
+	private _seaportsRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count seaports;
+	private _resBoost = 1 + _factoriesRebel * A3A_rebelCashFactMult + _seaportsRebel * A3A_rebelCashSeaportMult;
 	_resAdd = _resAdd * _resBoost;
 
 	Debug_2("Occupant radio keys: %1 - Invader radio keys: %2", occRadioKeys, invRadioKeys);
@@ -65,7 +66,7 @@ while {true} do
 	server setVariable ["hr", _hrAdd + (server getVariable "hr"), true];
 	server setVariable ["resourcesFIA", ceil _resAdd + (server getVariable "resourcesFIA"), true];
 
-	private _newBombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
+	private _newBombRuns = bombRuns + 0.1 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
 	bombRuns = _newBombRuns min (4 + tierWar*2);
 	publicVariable "bombRuns";
 
