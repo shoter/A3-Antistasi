@@ -7,12 +7,14 @@ Environment: Scheduled, should be spawned
 Parameters:
     <GROUP> Group to order
     <STRING> Nearby friendly marker to garrison
+    <BOOL> Optional: True if the troops don't count against the garrison size (default false)
+    <BOOL> Optional: True to leave the group where it is instead of patrolling, e.g. a vehicle crew (default false)
 */
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_group", "_marker"];
+params ["_group", "_marker", ["_uncapped", false], ["_noPatrol", false]];
 
 if (!local _group) exitWith {
     Error("Called with non-local group");
@@ -37,4 +39,4 @@ if (!isNil "_despawnerHandle") then { terminate _despawnerHandle; _group setVari
 ServerDebug_2("Adding group %1 to garrison at %2", _group, _marker);
 
 // Add units to the garrison. Should handle everything else
-[_marker, _group] remoteExecCall ["A3A_fnc_garrisonServer_addGroup", 2];
+[_marker, _group, _uncapped, _noPatrol] remoteExecCall ["A3A_fnc_garrisonServer_addGroup", 2];

@@ -101,7 +101,8 @@ if (_side != teamPlayer) then {
 };
 
 // Spawn vehicles (including statics)
-[_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
+[_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles",
+    _garrisonData getOrDefault ["joinedSlots", []], _garrisonData getOrDefault ["joinedPositions", []]] call A3A_fnc_spawnGarrisonVehicles;
 
 // Spawn a radar system if there's an AA launcher in the garrison
 if (_side != teamPlayer and _garrisonType == "airport") then {

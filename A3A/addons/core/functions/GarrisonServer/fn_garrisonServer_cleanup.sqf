@@ -60,14 +60,18 @@ if ("_civ" in _marker) exitWith
 private _side = sidesX getVariable _marker;
 if (_side == teamPlayer) exitWith {};           // nothing to do here at the moment. TODO: Could use to set threat for unknown vehicles on init?
 
-// Refund any excess troops
+// Refund any excess troops. Troops that joined from a won attack (extraTroops) are allowed above the garrison size
 private _troops = _garrison get "troops";
-private _excess = (_troops#0) - (A3A_garrisonSize get _marker);
+private _garrisonSize = A3A_garrisonSize get _marker;
+private _excess = (_troops#0) - (_garrisonSize + (_garrison getOrDefault ["extraTroops", 0]));
 if (_excess > 0) then {
     Debug_2("Clearing %1 excess troops in %2", _excess, _marker);
     _troops set [0, _troops#0 - _excess];
     if (_garrison get "type" != "city") then { [10*_excess, _side, "defence"] call A3A_fnc_addEnemyResources };
 };
+// The allowance shrinks as those troops die, so it never gets refilled
+private _extraTroops = 0 max ((_troops#0) - _garrisonSize);
+if (_extraTroops > 0) then { _garrison set ["extraTroops", _extraTroops] } else { _garrison deleteAt "extraTroops" };
 
 if (_troopsOnly) exitWith { Trace("Completed") };
 
@@ -84,8 +88,12 @@ private _isAirport = _marker in airportsX;
 
 private _usedSlots = [];
 private _vehicles = _garrison get "vehicles";
+private _joinedPositions = _garrison getOrDefault ["joinedPositions", []];
 {
     _x params ["_vehType", "_slotNum", "", "_vehID"];
+
+    // Vehicle that joined from a won attack keeps its own position
+    if (_slotNum isEqualType [] and { private _pos = _slotNum#0; _joinedPositions findIf { _x distance _pos < 0.5 } != -1 }) then { continue };
 
     if (_slotNum isEqualType [] or { _slotNum >= count _places }) then {
         _vehicles deleteAt _forEachIndex;
@@ -115,3 +123,13 @@ private _vehicles = _garrison get "vehicles";
         Debug_3("%1 (slot type %2) not valid, swapping to %3", _vehType, _slotType, _x#0);
     };
 } forEachReversed _vehicles;
+
+// Forget joined-vehicle marks whose vehicle is gone
+if ("joinedSlots" in _garrison) then {
+    private _slots = _vehicles select { _x#1 isEqualType 0 } apply { _x#1 };
+    _garrison set ["joinedSlots", (_garrison get "joinedSlots") arrayIntersect _slots];
+};
+if ("joinedPositions" in _garrison) then {
+    private _positions = _vehicles select { _x#1 isEqualType [] } apply { _x#1#0 };
+    _garrison set ["joinedPositions", _joinedPositions select { private _pos = _x; _positions findIf { _x distance _pos < 0.5 } != -1 }];
+};

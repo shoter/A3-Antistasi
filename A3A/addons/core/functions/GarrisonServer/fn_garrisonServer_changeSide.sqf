@@ -23,6 +23,11 @@ Trace_1("Called with params %1", _this);
 private _garrison = A3A_garrison get _marker;
 _garrison set ["troops", [[0,0], []] select (_newSide == teamPlayer)];
 
+// Forget what a won attack left behind, see attackJoinGarrison
+_garrison deleteAt "extraTroops";
+_garrison deleteAt "joinedSlots";
+_garrison deleteAt "joinedPositions";
+
 // Refresh loot & intel cooldowns if converted to enemy
 if (_newSide != teamPlayer) then {
     if (_marker in resourcesX or {_marker in factories}) exitWith {};

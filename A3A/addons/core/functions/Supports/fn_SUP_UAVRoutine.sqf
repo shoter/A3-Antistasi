@@ -10,12 +10,13 @@ Arguments:
     <STRING> Classname of aircraft to use
     <SCALAR> Delay time in seconds
     <SCALAR> Amount of information to reveal to rebels, 0-1
+    <SCALAR> Resources spent on the support. Base for the refund of a won attack, see attackJoinGarrison
 */
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_suppData", "_resPool", "_airport", "_planeType", "_sleepTime", "_reveal"];
+params ["_suppData", "_resPool", "_airport", "_planeType", "_sleepTime", "_reveal", ["_spawnCost", 0]];
 _suppData params ["_supportName", "_side", "_suppType", "_suppCenter", "_suppRadius", "_suppTarget"];
 // Doesn't actually process targets at the moment, it's just a dummy
 
@@ -29,6 +30,8 @@ private _groupVeh = group driver _uav;
 { [_x, nil, false, _resPool] call A3A_fnc_NATOinit } forEach (crew _uav);           // arguable
 [-10 * count units _groupVeh, _side, _resPool] call A3A_fnc_addEnemyResources;
 [_uav, _side, _resPool] call A3A_fnc_AIVEHinit;
+_uav setVariable ["SupportData", _suppData];
+_uav setVariable ["A3A_spawnCost", _spawnCost];
 
 _groupVeh setCombatMode "WHITE";                         // Don't fire, just in case they have some OP shit, but allow search movement
 private _wp = _groupVeh addWayPoint [_suppCenter, 0];
