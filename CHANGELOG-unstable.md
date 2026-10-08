@@ -4,6 +4,15 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-08 - Bigger rebel income
+
+### Changed
+- **Towns** now pay up to **2000 €** per 10-minute income tick at full support, up from 1000 €. Each town's share still depends on its population and support, and towns you don't hold still pay half.
+- **Resources** now pay **2500 €** per tick with all of them held, up from 1500 €.
+- **Seaports** now boost income: each rebel seaport adds **+0.1** to the factory multiplier, so with all factories and 7 seaports on Altis your income is multiplied by 3.1 instead of 2.4.
+- **Airports** now add **0.1 air support points** per tick each, down from 0.25, so air support comes in more slowly.
+- Existing saves use the new values as soon as the server runs this build.
+
 ## 2026-10-08 - Enemy resources on save
 
 ### Fixed
