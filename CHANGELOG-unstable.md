@@ -4,6 +4,23 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-08 - Enemy resources on save
+
+### Fixed
+- **Saving during an enemy attack** now gives the enemy back the cost of its surviving vehicles, as intended. Before, the count stopped at the first non-enemy vehicle, so almost none were counted and the enemy lost those resources after a reload.
+- Helicopters and air support flying home from a won attack count with their **150%** refund, and Invader punishment vehicles with their full cost. Garrison vehicles are not counted, since they are saved with their garrison.
+- Existing saves load as before; the difference shows in saves made from now on.
+
+## 2026-10-08 - Retaken sites keep the attackers
+
+### Changed
+- When an enemy attack or counter-attack **retakes one of your sites**, its forces stay there instead of going home:
+  - **Ground vehicles** drive into the site, park and join the garrison with their crews. Next time you come, they are there again with full health, ammo and fuel and a **full crew**.
+  - **Infantry** gets out of the trucks and walks to the site to join the garrison. The garrison can end up **bigger than its normal size**; it won't be refilled past normal once those troops die.
+  - **Helicopters** and air support fly home as before, and give the enemy **150% of their cost** back if they make it home.
+- When an **Invader punishment** destroys a town, the attacking vehicles that get home give the Invaders their full cost back.
+- Existing saves keep working. Lost attacks and fights between the two enemy factions are unchanged.
+
 ## 2026-10-04 - Mortar team on a quad
 
 ### Changed

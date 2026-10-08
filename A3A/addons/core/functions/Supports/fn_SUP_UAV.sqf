@@ -36,9 +36,10 @@ if (_delay < 0) then { _delay = (0.5 + random 1) * (300 - 15*tierWar - 1*_aggro)
 // name, side, suppType, center, radius, targets
 private _suppData = [_supportName, _side, "UAV", _targPos, 1000, [objNull, _targPos]];
 A3A_activeSupports pushBack _suppData;
-[_suppData, _resPool, _airport, _planeType, _delay, _reveal] spawn A3A_fnc_SUP_UAVRoutine;
+// Uh, do these have a vehicle cost atm?
+private _cost = 150+0;            // resource cost of support
+[_suppData, _resPool, _airport, _planeType, _delay, _reveal, _cost] spawn A3A_fnc_SUP_UAVRoutine;
 
 [_reveal, _side, "UAV", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
 
-// Uh, do these have a vehicle cost atm?
-(150+0);            // resource cost of support
+_cost;

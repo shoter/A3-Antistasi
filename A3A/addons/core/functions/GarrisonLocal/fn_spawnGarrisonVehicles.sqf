@@ -10,6 +10,8 @@
     <SIDE> Marker side.
     <ARRAY> Remaining troops to use, either loadout names for rebel or [count, quality] for enemy.
     <ARRAY> Remaining vehicles to spawn.
+    <ARRAY> Optional: Place indexes of vehicles that joined from a won attack. These get a full crew.
+    <ARRAY> Optional: World positions of free-placed vehicles that joined from a won attack. These get a full crew.
 
     Copyright 2025 John Jordan. All Rights Reserved.
     Used and distributed by the Antistasi Community project with permission.
@@ -18,7 +20,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_garrison", "_marker", "_side", "_storedTroops", "_storedVehicles"];
+params ["_garrison", "_marker", "_side", "_storedTroops", "_storedVehicles", ["_joinedSlots", []], ["_joinedPositions", []]];
 
 private _faction = Faction(_side);
 private _markerPos = markerPos _marker;
@@ -95,6 +97,11 @@ private _fnc_isBlocked = {
     if (_vehicle isKindOf "Land" and _vehicle emptyPositions "gunner" > 0) then { _vehicle setVariable ["A3A_rebCrewed", true] };
 
     _vehicles pushBack _vehicle;
+    if (_side != teamPlayer) then {
+        private _joined = if (_posData isEqualType 0) then { _posData in _joinedSlots }
+            else { private _pos = _posData#0; _joinedPositions findIf { _x distance _pos < 0.5 } != -1 };
+        if (_joined) then { _fullCrewed pushBackUnique _vehicle };
+    };
     _vehicle setVariable ["markerX", _marker, true];
     _vehicle setVariable ["A3A_vehID", _idNum, [2, clientOwner]];
     if (!isNil "_state") then { [_vehicle, _state] call HR_GRG_fnc_setState };

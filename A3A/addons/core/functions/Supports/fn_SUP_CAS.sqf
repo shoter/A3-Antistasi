@@ -39,9 +39,10 @@ if (_target isEqualType objNull and {!isNull _target}) then {
 // name, side, suppType, center, radius, [target, targpos]
 private _suppData = [_supportName, _side, "CAS", _targPos, 3000, _targArray];       // should radius be larger?
 A3A_activeSupports pushBack _suppData;
-[_suppData, _resPool, _airport, _vehType, _delay, _reveal] spawn A3A_fnc_SUP_CASRoutine;
+// Vehicle cost + extra support cost for balance
+private _cost = (A3A_vehicleResourceCosts get _vehType) + 100;
+[_suppData, _resPool, _airport, _vehType, _delay, _reveal, _cost] spawn A3A_fnc_SUP_CASRoutine;
 
 [_reveal, _side, "CAS", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
 
-// Vehicle cost + extra support cost for balance
-(A3A_vehicleResourceCosts get _vehType) + 100;
+_cost;

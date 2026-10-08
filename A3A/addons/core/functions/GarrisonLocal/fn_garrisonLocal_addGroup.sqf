@@ -7,6 +7,7 @@
     Arguments:
     <STRING> Marker name.
     <GROUP> Group to add to active garrison.
+    <BOOL> Optional: True to leave the group where it is instead of patrolling, e.g. a vehicle crew (default false).
 
     Copyright 2025 John Jordan. All Rights Reserved.
     Used and distributed by the Antistasi Community project with permission.
@@ -17,7 +18,7 @@ FIX_LINE_NUMBERS()
 
 Trace_1("Called with %1", _this);
 
-params ["_marker", "_group"];
+params ["_marker", "_group", ["_noPatrol", false]];
 
 // Group may not be local at this point, because setGroupOwner takes five seconds with zero ping. 
 // patrolLoop seems to work but updateStatics does not, because splitting the group leaves units at the wrong locality
@@ -40,7 +41,7 @@ private _garrison = A3A_activeGarrison get _marker;
 
 (_garrison get "groups") pushBack _group;
 (_garrison get "troops") append units _group;
-[_group, "Patrol_Defend", 0, 150, -1, true, markerPos _marker, false, false] call A3A_fnc_patrolLoop;
+if (!_noPatrol) then { [_group, "Patrol_Defend", 0, 150, -1, true, markerPos _marker, false, false] call A3A_fnc_patrolLoop };
 _group deleteGroupWhenEmpty true;
 _group addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
 

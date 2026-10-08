@@ -9,6 +9,7 @@ Arguments:
     <STRING> Classname of aircraft to use
     <SCALAR> Delay time in seconds
     <SCALAR> Amount of information to reveal to rebels, 0-1
+    <SCALAR> Resources spent on the support. Base for the refund of a won attack, see attackJoinGarrison
 
 */
 #include "..\..\script_component.hpp"
@@ -16,7 +17,7 @@ FIX_LINE_NUMBERS()
 
 Debug_1("ASFRoutine called with %1", _this);
 
-params ["_suppData", "_resPool", "_airport", "_planeType", "_sleepTime", "_reveal"];
+params ["_suppData", "_resPool", "_airport", "_planeType", "_sleepTime", "_reveal", ["_spawnCost", 0]];
 _suppData params ["_supportName", "_side", "_suppType", "_suppCenter", "_suppRadius", "_suppTarget"];
 
 //Sleep to simulate preparation time
@@ -30,6 +31,7 @@ _plane setVelocityModelSpace [0, 150, 0];
 _plane flyInHeight 1000;
 [_plane, _side, _resPool] call A3A_fnc_AIVehInit;
 _plane setVariable ["SupportData", _suppData];        // for use in EHs
+_plane setVariable ["A3A_spawnCost", _spawnCost];
 [_plane, "AA"] call A3A_fnc_setPlaneLoadout;
 
 private _group = [_side, _plane] call A3A_fnc_createVehicleCrew;

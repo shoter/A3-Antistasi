@@ -6,6 +6,8 @@
     Arguments:
     <STRING> Marker name of garrison.
     <GROUP> Group to add to garrison.
+    <BOOL> Optional: True if the troops don't count against the garrison size (enemy only, default false).
+    <BOOL> Optional: True to leave the group where it is instead of patrolling (default false).
 
     Copyright 2025 John Jordan. All Rights Reserved.
     Used and distributed by the Antistasi Community project with permission.
@@ -14,7 +16,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_group"];
+params ["_marker", "_group", ["_uncapped", false], ["_noPatrol", false]];
 
 Trace_1("Called with params %1", _this);
 
@@ -44,6 +46,12 @@ else
     _troops set [1, _newQuality];
     _troops set [0, _newCount];
 
+    // Troops joining from a won attack stay above the garrison size, see garrisonServer_cleanup
+    if (_uncapped) then {
+        private _garrison = A3A_garrison get _marker;
+        _garrison set ["extraTroops", (_garrison getOrDefault ["extraTroops", 0]) + count units _group];
+    };
+
     // If units were legacy pool, pay now because the units are becoming persistent
     // Probably not used at the moment?
     if (leader _group getVariable ["A3A_resPool", "legacy"] == "legacy") then {
@@ -64,7 +72,7 @@ if (spawner getVariable _marker != 2) then {
         _x setVariable ["spawner", nil, true];          // well... it was probably a spawner before
     } forEach units _group;
 
-    ["addGroup", [_marker, _group]] call A3A_fnc_garrisonOp;
+    ["addGroup", [_marker, _group, _noPatrol]] call A3A_fnc_garrisonOp;
 } else {
     { deleteVehicle _x } forEach units _group;
     deleteGroup _group;

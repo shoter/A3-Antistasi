@@ -197,12 +197,17 @@ if (_victory) then {
 
 ServerInfo("Reached end of winning conditions. Starting despawn");
 
-{ [_x] spawn A3A_fnc_VEHDespawner } forEach _allVehicles;
-{ [_x] spawn A3A_fnc_enemyReturnToBase } forEach _allCrewGroups;
-{
-    [_x, [nil, _mrkDest] select _victory] spawn A3A_fnc_enemyReturnToBase;
-    sleep 10;
-} forEach _allCargoGroups;
+if (_victory and _targSide == teamPlayer) then {
+    // Retook a rebel site: ground vehicles and infantry join its garrison, aircraft go home with a refund bonus
+    [_mrkDest, _side, _allVehicles, _allCrewGroups, _allCargoGroups] spawn A3A_fnc_attackJoinGarrison;
+} else {
+    { [_x] spawn A3A_fnc_VEHDespawner } forEach _allVehicles;
+    { [_x] spawn A3A_fnc_enemyReturnToBase } forEach _allCrewGroups;
+    {
+        [_x, [nil, _mrkDest] select _victory] spawn A3A_fnc_enemyReturnToBase;
+        sleep 10;
+    } forEach _allCargoGroups;
+};
 
 sleep 60;
 

@@ -134,6 +134,12 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
     [30, false, markerPos _mrkDest, 500] call A3A_tasks_fnc_rewardPlayers;
 } else {
     Info_1("Rebels lost a punishment attack against %1", _mrkDest);
+
+    // Vehicles that get home refund their full cost, damage ignored
+    {
+        if (!alive _x) then { continue };
+        _x setVariable ["A3A_fixedRefund", A3A_vehicleResourceCosts getOrDefault [typeOf _x, 0], true];
+    } forEach _vehicles;
     [_taskId, "invaderPunish", "FAILED"] call A3A_fnc_taskSetState;
     [_posDest, -20, 3000] call _fnc_adjustNearCities;
 

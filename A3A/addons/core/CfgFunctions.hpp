@@ -14,6 +14,7 @@ class CfgFunctions
             class artySupportFireOld {};
             class artySupportMarkers {};
             class askHelp {};
+            class attackJoinGarrison {};
             class assaultBuilding {};
             class attackDrillAI {};
             class attackHeli {};
@@ -378,6 +379,7 @@ class CfgFunctions
             class garrisonInfo {};
             class garrisonOp {};
             class garrisonServer_addGroup {};
+            class garrisonServer_addJoinedVehicle {};
             class garrisonServer_addUnitCount {};
             class garrisonServer_addUnitType {};
             class garrisonServer_addVehicle {};
