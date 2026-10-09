@@ -4,6 +4,13 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-09 - No squad limit for the commander
+
+### Changed
+- The **commander** can now run any number of high command squads. **Sub-commanders** can run up to **10**, members and guests alike (guests were limited to 6).
+- **Sub-commanders recruit soldiers into their own group with the faction funds**, like the commander, instead of their own money. The commander is told what they spent.
+- Soldiers recruited with the faction funds are refunded to the faction funds when dismissed or when the game is saved, not to the player who recruited them. This applies to the commander's recruits too. Soldiers recruited before this update still refund the old way.
+
 ## 2026-10-08 - Bigger rebel income
 
 ### Changed
