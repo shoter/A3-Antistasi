@@ -4,6 +4,17 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-09 - More ammo for rearming vehicles
+
+### Changed
+- Vehicle ammo sources hold far more **rearm points**:
+  - **Vehicle ammo crate**: **10,000** points, up from 3,000. It still costs 3,000 €.
+  - **Ammo container**: **50,000** points, up from 12,000. It still costs 12,000 €.
+  - Captured enemy **ammo trucks**: **100,000** points, up from 5,000.
+  - **Any other vehicle that can rearm**: **50,000** points, up from 5,000.
+- Storing an ammo crate or container in the garage now refunds the share of its price that matches the points left: a full crate gives back 3,000 €, a half-used one 1,500 €. Before, it paid 1 € per point left.
+- **Existing saves**: crates, containers and trucks already in your save, on the map or in the garage, keep the points they have now. The new amounts apply to crates you buy and trucks you capture from now on. An old crate also refunds less when stored, since its points now count against 10,000.
+
 ## 2026-10-09 - No squad limit for the commander
 
 ### Changed
