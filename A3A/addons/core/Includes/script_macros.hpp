@@ -13,3 +13,9 @@
 
 // Ammo points charged per magazine price for vehicle rearming, shared by the rearm dialog and the garrison resupply trucks
 #define A3A_REARM_PRICE_MUL 0.2
+
+// Rearm points held by vehicle ammo sources, see A3A_resourceVehValues in fn_initVarServer.sqf
+#define A3A_REARM_POINTS_AMMO_CRATE 10000
+#define A3A_REARM_POINTS_AMMO_CONTAINER 50000
+#define A3A_REARM_POINTS_AMMO_TRUCK 100000
+#define A3A_REARM_POINTS_DEFAULT 50000

@@ -43,7 +43,7 @@ private _cargo = _state param [3, []];
 private _points = if (_cargo isEqualType [] && { _cargo isNotEqualTo [] }) then {
     _cargo # 0
 } else {
-    A3A_resourceVehValues get "rearm" getOrDefault [_class, 5000]
+    A3A_resourceVehValues get "rearm" getOrDefault [_class, A3A_REARM_POINTS_DEFAULT]
 };
 if (!(_points isEqualType 0) || { _points <= 0 }) exitWith { -1 };
 _points

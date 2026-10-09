@@ -675,13 +675,13 @@ private _resourceVehValues = createHashMap;
 private _rearmHM = createHashMap;
 {
 	{
-		_rearmHM set [_x, 5000];
+		_rearmHM set [_x, A3A_REARM_POINTS_AMMO_TRUCK];
 	} forEach _x;
 } forEach [A3A_faction_occ get "vehiclesAmmoTrucks", A3A_faction_inv get "vehiclesAmmoTrucks"];
 
-{
-	_rearmHM set _x;
-} forEach [(A3A_faction_reb get "vehicleAmmoStation"), (A3A_faction_reb get "vehicleAmmoContainer")];
+// The template number of these is only the buy price, the points are set here
+_rearmHM set [(A3A_faction_reb get "vehicleAmmoStation") # 0, A3A_REARM_POINTS_AMMO_CRATE];
+_rearmHM set [(A3A_faction_reb get "vehicleAmmoContainer") # 0, A3A_REARM_POINTS_AMMO_CONTAINER];
 //+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
 _resourceVehValues set ["rearm", _rearmHM];
 

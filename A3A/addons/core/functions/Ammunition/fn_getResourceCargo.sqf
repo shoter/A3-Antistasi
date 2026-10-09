@@ -1,3 +1,5 @@
+#include "..\..\script_component.hpp"
+
 params ["_veh", "_search", ["_giveCargo", true]];
 
 private _isObj = (_veh isEqualType objNull);
@@ -30,6 +32,6 @@ private _isSource = switch (_search) do {
     };
 };
 if (!_isSource) exitWith {-1};
-private _cargoToGive = A3A_resourceVehValues get _search getOrDefault [_typeVeh, 5000];
+private _cargoToGive = A3A_resourceVehValues get _search getOrDefault [_typeVeh, A3A_REARM_POINTS_DEFAULT];
 if (_giveCargo) then {_veh setVariable [_searchVar, _cargoToGive, true]};
 _cargoToGive;

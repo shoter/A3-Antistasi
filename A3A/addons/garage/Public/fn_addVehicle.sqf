@@ -78,7 +78,10 @@ private _utilityRefund = {
             _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
         };
         case ("ammo" in _flags): {
-            _toRefund = floor ([_object, "rearm"] call A3A_fnc_getResourceCargo);
+            // Points and price differ, so refund the share of the price that matches the points left
+            private _maxPoints = A3A_resourceVehValues get "rearm" getOrDefault [typeOf _object, 0];
+            private _points = [_object, "rearm"] call A3A_fnc_getResourceCargo;
+            _toRefund = if (_maxPoints > 0) then { floor (_itemPrice * ((_points / _maxPoints) min 1 max 0)) } else { 0 };
             _feedBack = "STR_HR_GRG_Feedback_addVehicle_Ammo_sold";
         };
         default {
