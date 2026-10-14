@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-14 - Garage holds 999 vehicles
+
+### Changed
+- The garage now holds up to **999 vehicles** by default, instead of 20 plus 4 per War Level. The **Base Capacity** garage setting now goes up to 999. Servers that saved their own garage capacity settings keep them; set **Base Capacity** to 999 and **Capacity Increase** to 0 to match the new default.
+
 ## 2026-10-14 - Loot crates gather other loot crates
 
 ### Changed
