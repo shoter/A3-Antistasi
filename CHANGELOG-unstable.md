@@ -4,6 +4,12 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-14 - Enemy sites despawn later
+
+### Changed
+- Enemy outposts, bases, roadblocks and other enemy sites now stay in place for **1 minute** after the last rebel leaves the area, instead of despawning within seconds. If you die near a site and come back in time, the surviving defenders are still where you left them.
+- If the commander's **rally flag** is within 500 m of the site, it stays for **5 minutes**, so a squad that died there can teleport back to the flag from HQ and return.
+
 ## 2026-10-14 - Garage holds 999 vehicles
 
 ### Changed
