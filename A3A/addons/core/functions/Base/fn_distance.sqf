@@ -29,6 +29,12 @@ Example: [] spawn A3A_fnc_distance;
 #define DISABLED 1
 #define DESPAWN 2
 
+// Seconds an enemy site stays spawned (paused) after the last rebel left its despawn range
+#define ENEMY_DESPAWN_DELAY 60
+// Longer delay when the commander rally flag is close, so a squad that died there can respawn at the flag and return
+#define ENEMY_DESPAWN_DELAY_FLAG 300
+#define ENEMY_DESPAWN_FLAG_RANGE 500
+
 /* -------------------------------------------------------------------------- */
 /*                                 procedures                                 */
 /* -------------------------------------------------------------------------- */
@@ -63,6 +69,7 @@ private _processEnemyMarker = {
             then
             {
                 // ENABLE this marker
+                _despawnTimers deleteAt _marker;
                 spawner setVariable [_marker, ENABLED, true];
                 ["unpause", [_marker]] call A3A_fnc_garrisonOp;
             }
@@ -72,9 +79,18 @@ private _processEnemyMarker = {
                 // or somebody opfor is inside distanceSPWN than exit (marker still DISABLED)
                 if (_rebels inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
                     || { _enemies inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] })
-                exitWith {};
+                exitWith { _despawnTimers deleteAt _marker };
+
+                // Wait out the despawn delay first (marker still DISABLED), so players who died nearby can come back
+                private _outOfRangeSince = _despawnTimers getOrDefault [_marker, -1];
+                if (_outOfRangeSince < 0) exitWith { _despawnTimers set [_marker, time] };
+                // Checked every pass, so placing or removing the flag changes the delay of a running timer
+                private _flagNear = !isNull A3A_deployedFlag
+                    && { A3A_deployedFlag distance2D _position <= ENEMY_DESPAWN_FLAG_RANGE };
+                if (time - _outOfRangeSince < ([ENEMY_DESPAWN_DELAY, ENEMY_DESPAWN_DELAY_FLAG] select _flagNear)) exitWith {};
 
                 // DESPAWN this marker
+                _despawnTimers deleteAt _marker;
                 isNil { [_marker] call A3A_fnc_garrisonServer_despawn };
             };
         };
@@ -89,6 +105,7 @@ private _processEnemyMarker = {
                 && { !(_marker in forcedSpawn) } }) exitWith {};
 
             // ENABLE this marker
+            _despawnTimers deleteAt _marker;      // drop a timer left over if something else despawned the marker
             isNil { [_marker] call A3A_fnc_garrisonServer_spawn };
 
             // Prevent other routines taking spawn places 
@@ -238,6 +255,8 @@ private _occupants = [];
 private _invaders = [];
 private _players = [];
 private _rebEnemies = [];
+// Enemy marker -> time when the last rebel left its despawn range
+private _despawnTimers = createHashMap;
 
 private ["_markers", "_marker", "_position"];
 
