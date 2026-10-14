@@ -53,8 +53,8 @@ if (isNil "HR_GRG_LockLimit_Guest") then { HR_GRG_LockLimit_Guest = 2 };
 HR_GRG_renderPlacementRays = false;
 
 //garage pool cap
-if (isNil "HR_GRG_PoolBase") then { HR_GRG_PoolBase = 20 }; //can be overwritten by CBA settings
-if (isNil "HR_GRG_PoolIncr") then { HR_GRG_PoolIncr = 4 }; //can be overwritten by CBA settings
+if (isNil "HR_GRG_PoolBase") then { HR_GRG_PoolBase = 999 }; //can be overwritten by CBA settings
+if (isNil "HR_GRG_PoolIncr") then { HR_GRG_PoolIncr = 0 }; //can be overwritten by CBA settings
 HR_GRG_VehCap = { HR_GRG_PoolBase + tierWar * HR_GRG_PoolIncr };
 
 //Pylon config
@@ -134,7 +134,7 @@ if (isClass (configfile >> "CBA_Extended_EventHandlers")) then {
         HR_GRG_ServiceDisabled_Repair = _this;
     }] call CBA_fnc_addSetting;
 
-    ["HR_GRG_PoolBase", "SLIDER", [localize "STR_A3A_inc_public_config_baseCapTitle", localize "STR_A3A_inc_public_config_baseCapLong"], [HR_GRG_Prefix,"Garage"], [0, 50, HR_GRG_PoolBase, 0], true, {
+    ["HR_GRG_PoolBase", "SLIDER", [localize "STR_A3A_inc_public_config_baseCapTitle", localize "STR_A3A_inc_public_config_baseCapLong"], [HR_GRG_Prefix,"Garage"], [0, 999, HR_GRG_PoolBase, 0], true, {
         HR_GRG_PoolBase = round _this;
     }] call CBA_fnc_addSetting;
 
