@@ -4,6 +4,13 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-14 - Loot crates gather other loot crates
+
+### Changed
+- **Load loot to crate** now also empties every other loot crate in its radius into the crate you use, and the emptied crates disappear. This covers bought crates, surrender crates, police station crates and delivered crates.
+- Crates that are being carried, loaded on a vehicle, still under a delivery parachute, or open in a player's inventory are left alone.
+- Unlocked items follow the existing **loot unlocked items** setting: when it is off, they land on the ground next to the crate like other leftover loot.
+
 ## 2026-10-09 - More ammo for rearming vehicles
 
 ### Changed

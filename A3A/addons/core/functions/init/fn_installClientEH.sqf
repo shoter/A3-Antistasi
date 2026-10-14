@@ -1,5 +1,16 @@
 player addEventHandler ["FiredMan", A3A_fnc_rebelFiredManEH];
 
+// Containers this player has open in the inventory screen, so loot to crate does not absorb a crate someone is using
+player addEventHandler ["InventoryOpened", {
+    params ["_unit", "_container", "_secondaryContainer"];
+    _unit setVariable ["A3A_LTC_openContainers", [_container, _secondaryContainer] - [objNull], true];
+    false
+}];
+player addEventHandler ["InventoryClosed", {
+    params ["_unit"];
+    _unit setVariable ["A3A_LTC_openContainers", nil, true];
+}];
+
 player addEventHandler ["InventoryOpened", {
     private ["_playerX","_containerX","_typeX"];
     _control = false;

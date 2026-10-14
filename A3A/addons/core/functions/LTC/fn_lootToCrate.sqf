@@ -3,6 +3,7 @@
     [Description]
         Attempts to transfer loot from nearby bodies and ground to the specified container, what is unable to be transfered
         will be left on the ground next to its origin.
+        Other loot crates in range are emptied into the container and deleted.
 
     Arguments:
     0. <Object> The container to try to transfere loot to
@@ -146,6 +147,34 @@ private _weaponHolders = nearestObjects [getposATL _container, ["WeaponHolder","
     } forEach (_return#0);
 
 } forEach _weaponHolders;
+
+
+//----------------------------//
+//absorb other loot crates
+//----------------------------//
+
+// Skips crates that are carried, loaded on a vehicle, under a parachute, or open in a player's inventory screen
+private _crateType = A3A_faction_reb get "surrenderCrate";
+private _openContainers = [];
+{ _openContainers append (_x getVariable ["A3A_LTC_openContainers", []]) } forEach allPlayers;
+private _crates = nearestObjects [getposATL _container, [_crateType], LootToCrateRadius] select {
+    _x != _container
+    && {typeOf _x == _crateType}
+    && {isNull attachedTo _x}
+    && {isNull isVehicleCargo _x}
+    && {!(_x in _openContainers)}
+};
+
+{
+    private _return = [_x, _container] call A3A_fnc_lootFromContainer;
+    deleteVehicle _x;
+
+    // Merge leftovers
+    {
+        (_leftovers#_forEachIndex) append _x;
+    } forEach (_return#0);
+
+} forEach _crates;
 
 
 //--------------------------------------------//
