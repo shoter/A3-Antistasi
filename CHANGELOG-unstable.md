@@ -4,6 +4,19 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Junkyard vehicle repair, scrap or retrieve wrecks
+
+### Added
+- New **Vehicle repair** tab in the junkyard (garage crate at HQ). Wrecks that are retrieved get repaired there in **4 to 20 hours** of server uptime (cheap cars are quick, armor and aircraft take longest). Once repaired they can be bought for **20-60%** of their junkyard price, fully repaired and without junk status. Unsold vehicles leave **12 hours** after they are ready. Skipping or speeding up in-game time does not shorten these timers.
+- The tab lists ready vehicles first, then the repair queue, with countdowns. Commanders and sub-commanders can pay with faction funds. Admins get a **Finish repairs** button for testing.
+- Wrecks now have two actions in the action menu instead of the hold action: **Scrap wreck** pays the scrap money as before and removes the wreck for good, **Retrieve wreck for repair** pays half of that and sends the vehicle to the repair shop. A progress bar at the bottom of the screen shows the work, and the action menu offers a way to stop.
+- **AI Management** tab: new **Scrap wreck** and **Retrieve wreck** buttons send the selected AI to the nearest free wreck within 300 m. You get the money.
+
+### Changed
+- Anyone can scrap or retrieve wrecks, no toolkit needed. Engineers take **5-15 seconds**, everyone else **30-60 seconds**.
+- Worked wrecks disappear right away instead of waiting for the garbage cleaner.
+- **Saves**: the repair shop is saved with the junkyard. Older saves start with an empty shop.
+
 ## 2026-10-21 - Fewer enemy attacks
 
 ### Changed
