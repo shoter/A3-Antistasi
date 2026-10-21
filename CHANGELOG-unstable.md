@@ -4,6 +4,14 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Town upgrade kit labels, stronger market and recruitment office
+
+### Added
+- Looking at a town upgrade kit crate from up to 15 m shows the kit's name and, below it, the town it is meant for (for example **Clinic** / **TO Kavala**).
+
+### Changed
+- The **market** town upgrade now gives **+50%** money income from its town (was +10%), and the **recruitment office** **+50%** HR (was +10%). Upgrades already built in existing saves get the new bonus.
+
 ## 2026-10-21 - Junkyard vehicle repair, scrap or retrieve wrecks
 
 ### Added
