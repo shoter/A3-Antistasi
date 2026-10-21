@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Smaller respawn penalty for poor players
+
+### Changed
+- Dying still costs **15%** of your personal money, but a player with less than **100 €** now loses only **1 €** per death.
+
 ## 2026-10-14 - Enemy sites despawn later
 
 ### Changed
