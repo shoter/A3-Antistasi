@@ -22,15 +22,15 @@ private _fnc_addArrayToWeights = {
 
 private _vehWeights = [];
 
-private _policeWeight =    [ 50, 20,  0,  0,  0,  0,  0,  0,  0,  0] select _level;
-private _milCarWeight =    [ 50, 50, 30, 10,  5,  0,  0,  0,  0,  0] select _level;
-private _milTruckWeight =  [100, 80, 60, 35, 15,  0,  0,  0,  0,  0] select _level;
-private _carWeight =       [  0,  5, 10, 10, 10, 10,  5,  5,  5,  5] select _level;
-private _armedCarWeight =  [ 20, 25, 30, 30, 30, 25, 20, 20, 15, 15] select _level;
-private _truckWeight =     [  0,  5, 10, 20, 25, 25, 20, 15, 10,  5] select _level;
-private _lapcWeight =      [ 30, 40, 50, 50, 45, 40, 35, 30, 25, 20] select _level;
-private _apcWeight =       [  0, 10, 15, 20, 25, 30, 35, 40, 40, 40] select _level;
-private _ifvWeight =       [  0,  0,  2,  4,  6,  8, 12, 16, 20, 25] select _level;
+private _policeWeight =    [ 20, 15, 10,  6,  3,  1,  0,  0,  0,  0] select _level;
+private _milCarWeight =    [ 18, 18, 18, 18, 17, 16, 14, 12, 10,  8] select _level;
+private _milTruckWeight =  [ 45, 38, 32, 26, 20, 15, 10,  6,  3,  0] select _level;
+private _carWeight =       [  1,  2,  3,  3,  4,  5,  6,  7,  8,  9] select _level;
+private _armedCarWeight =  [  4,  5,  6,  7,  8,  9, 11, 12, 13, 15] select _level;
+private _truckWeight =     [  0,  5, 10, 14, 18, 22, 25, 27, 28, 29] select _level;
+private _lapcWeight =      [ 12, 12, 11, 11, 10,  9,  8,  7,  6,  5] select _level;
+private _apcWeight =       [  0,  5,  9, 12, 15, 17, 18, 19, 20, 20] select _level;
+private _ifvWeight =       [  0,  0,  1,  3,  5,  6,  8, 10, 12, 14] select _level;
 
 if (_faction getOrDefault ["attributeMoreTrucks", false]) then {
     _milTruckWeight =      [100, 80, 60, 35, 15,  0,  0,  0,  0,  0] select _level;

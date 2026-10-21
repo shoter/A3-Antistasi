@@ -23,12 +23,12 @@ private _fnc_addArrayToWeights = {
 
 private _vehWeights = [];
 
-private _milCarWeight =     [100, 70, 50, 30, 10,  0,  0,  0,  0,  0] select _level;
-private _carWeight =        [ 0, 30, 30, 40, 50, 50, 50, 40, 35, 30] select _level;
-private _aaWeight =         [ 0,  0,  3,  5,  7,  8, 10, 12, 13, 14] select _level;
-private _ltWeight =         [ 0,  5,  7,  8,  8,  8,  8,  8,  8,  8] select _level;
-private _tankWeight =       [ 0,  0,  3,  5,  8, 11, 14, 17, 20, 28] select _level;
-private _hvytWeight =       [ 0,  0,  0,  2,  4,  6,  8, 10, 12, 14] select _level; 
+private _milCarWeight =     [100, 90, 78, 66, 55, 45, 36, 28, 21, 14] select _level;
+private _carWeight =        [  0,  5,  8, 12, 15, 18, 21, 23, 25, 28] select _level;
+private _aaWeight =         [  0,  0,  3,  5,  7,  9, 11, 13, 14, 15] select _level;
+private _ltWeight =         [  0,  5,  7,  8,  8,  8,  8,  8,  8,  8] select _level;
+private _tankWeight =       [  0,  0,  4,  7, 11, 14, 16, 18, 21, 24] select _level;
+private _hvytWeight =       [  0,  0,  0,  2,  4,  6,  8, 10, 11, 11] select _level; 
 
 // filter out weak AA that shouldn't be tier-scaled (eg. Avenger, zu23)
 private _vehAA = (_faction get "vehiclesAA") select { A3A_vehicleResourceCosts get _x >= 100 };
