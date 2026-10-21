@@ -23,6 +23,10 @@ A3A_supportStrikes = [];
 // _target is [unit, position] array, or [] for free
 A3A_activeSupports = [];
 
+// Land QRF timing per base, marker -> [time the base takes the next land QRF, time its queued QRF spawns are done]
+// Not saved, runtime only
+A3A_landQRFBaseTimes = createHashMap;
+
 // Current HQ detection radius
 call A3A_fnc_calcBuildingReveal;
 
@@ -43,7 +47,7 @@ private _initData = [
     ["CAS",           "TARGET", 0.5, 0.5,   0, 100,  "", "vehiclesPlanesCAS"],
     ["TANK",          "TARGET", 0.5, 0.5,   0, 100,  "", ""],                            // balanced against CAS, lowAir based
     ["QRFLAND",       "TROOPS", 1.0, 1.4,   0,   0,  "", ""],
-    ["QRFAIR",        "TROOPS", 0.5, 0.1,   0,   0,  "", ""],
+    ["QRFAIR",        "TROOPS", 0.4, 0.1,   0,   0,  "", ""],
     ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", "vehiclesPlanesCAS"],            // balanced against airstrikes
     ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", "vehiclesSAM"],                  // balanced against ASF
     ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""],

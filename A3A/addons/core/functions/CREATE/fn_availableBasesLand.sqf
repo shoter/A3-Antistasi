@@ -10,6 +10,8 @@ Arguments:
     <SIDE> Side of enemy faction
     <POS2D or STRING> Target position or marker name to use
     <BOOL> Optional, true to return all bases & weights (Default: false)
+    <BOOL> Optional, true when choosing a base for a land QRF (Default: false)
+           QRFs skip the garrison check and use their own 5 second cooldown, see SUP_QRFLand
 
 Return value:
     <STRING> Marker name of landbase, or nil if none. Or <ARRAY, ARRAY> [landbases, weights]
@@ -18,7 +20,7 @@ Return value:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_side", "_target", ["_returnAll", false]];
+params ["_side", "_target", ["_returnAll", false], ["_forQRF", false]];
 
 private _lowAir = Faction(_side) getOrDefault ["attributeLowAir", false];
 private _nearMarkers = [_target, _lowAir] call A3A_fnc_findLandSupportMarkers;
@@ -26,14 +28,24 @@ private _nearMarkers = [_target, _lowAir] call A3A_fnc_findLandSupportMarkers;
 // Just go simple here for the moment. Point is not to spawn at a site that's under attack
 private _rebelSpawners = units teamPlayer select { _x getVariable ["spawner", false] };
 
+// marker -> [time the base takes the next land QRF, time its queued land QRF spawns are done]
+private _qrfBaseTimes = missionNamespace getVariable ["A3A_landQRFBaseTimes", createHashMap];
+
 private _freeBases = [];
 private _weights = [];
 {
     _x params ["_marker", "_navDist"];
     if (sidesX getVariable [_marker, sideUnknown] != _side) then {continue};
     if (dateToNumber date < server getVariable [_marker, 0]) then {continue};       // addTimeForIdle
-    if (A3A_garrison get _marker get "troops" select 0 < 16) then {continue};
-    if (_rebelSpawners inAreaArray [markerPos _marker, 700, 700] isNotEqualTo []) then {continue};
+    (_qrfBaseTimes getOrDefault [_marker, [0, 0]]) params ["_qrfCooldownEnd", "_qrfSpawnEnd"];
+    if (_forQRF) then {
+        // QRF troops are created fresh rather than taken from the garrison, so no garrison check
+        if (time < _qrfCooldownEnd) then {continue};
+    } else {
+        if (time < _qrfSpawnEnd) then {continue};           // land QRFs still spawning on the vehicle place
+        if (A3A_garrison get _marker get "troops" select 0 < 16) then {continue};
+    };
+    if (_rebelSpawners inAreaArray [markerPos _marker, 550, 550] isNotEqualTo []) then {continue};
 
     _freeBases pushBack _marker;
     _weights pushBack (1 / _navDist^2);

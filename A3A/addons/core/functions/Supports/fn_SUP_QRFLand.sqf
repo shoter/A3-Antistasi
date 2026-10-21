@@ -21,11 +21,8 @@ FIX_LINE_NUMBERS()
 
 params ["_suppName", "_side", "_resPool", "_maxSpend", "_target", "_targPos", "_reveal", "_delay"];
 
-private _base = [_side, _targPos] call A3A_fnc_availableBasesLand;
+private _base = [_side, _targPos, false, true] call A3A_fnc_availableBasesLand;
 if (isNil "_base") exitWith { Info("QRF cancelled because no land bases available"); -1 };
-
-// Prevent ground QRFs spawning on top of each other. Should be gone after a minute.
-[_base, 1] call A3A_fnc_addTimeForIdle;
 
 private _vehCount = 3 min ceil (_maxSpend / A3A_balanceVehicleCost);
 private _attackCount = [0, 0, round random 1, 1] select _vehCount;
@@ -36,6 +33,15 @@ A3A_supportStrikes pushBack [_side, "TROOPS", _targPos, time + 2700, 2700, _estR
 //private _aggro = [aggressionOccupants, aggressionInvaders] select (_side == Invaders);
 // Land QRF delay is purely dependent on travel as they're slow enough already
 if (_delay < 0) then { _delay = 0 };            // land QRFs slow enough already
+
+// The base takes the next land QRF after 5 seconds. All vehicles spawn on the same vehicle place,
+// so this QRF waits until the ones already queued there have spawned (up to ~25s per vehicle)
+(A3A_landQRFBaseTimes getOrDefault [_base, [0, 0]]) params ["", "_spawnEnd"];
+_delay = _delay max (_spawnEnd - time);
+A3A_landQRFBaseTimes set [_base, [time + 5, time + _delay + 25 * _vehCount]];
+
+// Later support calls near the target join this QRF instead of creating another, see createSupport
+A3A_activeSupports pushBack [_suppName, _side, "QRFLAND", _targPos, 600, []];
 
 // kinda epic but whatever
 [[_suppName, _side, _resPool, _delay, _targPos, _base, false, _vehCount, _attackCount, _estResources], "A3A_fnc_SUP_QRFRoutine"] call A3A_fnc_scheduler;

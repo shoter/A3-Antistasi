@@ -49,6 +49,36 @@ private _travelling = true;
 private _soldiers = [];
 { _soldiers append units _x } forEach _cargoGroups;
 
+// Later support calls near the target join this QRF, createSupport passes their targets through the server object
+private _targetsVar = _supportName + "_targets";
+private _handledTargets = 0;
+private _fnc_takeNewTargets = {
+    private _allTargets = server getVariable [_targetsVar, []];
+    private _newTargets = _allTargets select [_handledTargets];
+    _handledTargets = count _allTargets;
+    if (_newTargets isEqualTo []) exitWith {};
+
+    {
+        _x params ["_newTarget", "_newTargPos"];
+        if (isNull _newTarget) then { continue };
+        private _target = _newTarget;
+        { _x reveal [_target, 1.5] } forEach (_crewGroups + _cargoGroups);
+    } forEach _newTargets;
+
+    // Once on site, move the troops to the latest call if it is away from the current objective
+    private _newTargPos = _newTargets select -1 select 1;
+    if (_travelling or {_newTargPos distance2d _targPos < 150}) exitWith {};
+    _targPos = _newTargPos;
+    _searchTime = _searchTime max (time + 300);
+    {
+        if (!isNull objectParent leader _x) then { continue };          // still mounted, leave it to the vehicle behaviour
+        private _sadWP = _x addWaypoint [_targPos, 50];
+        _sadWP setWaypointType "SAD";
+        _x setCurrentWaypoint _sadWP;
+    } forEach _cargoGroups;
+    ServerDebug_2("%1 moves to a new call at %2", _supportName, _targPos);
+};
+
 while {true} do
 {
     private _curSoldiers = { !fleeing _x and _x call A3A_fnc_canFight } count _soldiers;
@@ -78,9 +108,11 @@ while {true} do
     if (!isNil "_nearMrk") then {
         ["zoneCheck", [_nearMrk, true]] remoteExecCall ["A3A_fnc_garrisonOp", 2];      // bounce through server
     };
-    sleep 30;
+    for "_i" from 1 to 6 do { sleep 5; call _fnc_takeNewTargets };
 };
 
+// Stop new calls joining this QRF; the server drops it from the active supports on its next support request
+server setVariable [_supportName + "_done", true, true];
 
 { [_x] spawn A3A_fnc_VEHDespawner } forEach _vehicles;
 { [_x] spawn A3A_fnc_enemyReturnToBase } forEach _crewGroups;

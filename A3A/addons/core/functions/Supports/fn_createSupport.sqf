@@ -29,14 +29,24 @@ waitUntil { isNil "A3A_supportCallInProgress" };
 A3A_supportCallInProgress = true;
 
 // Attempt to use active support if there's a valid one
+// Any QRF heading to the area takes the call, whether the new call rolled land or air
+private _qrfTypes = ["QRFLAND", "QRFAIR"];
 private _supportIndex = A3A_activeSupports findIf {
     _x params ["_suppName", "_suppSide", "_suppType", "_center", "_radius", "_suppTarg", ["_minRadius", 0]];
     private _dist = _targpos distance2d _center;
-    _suppSide == _side and _suppType == _type and _suppTarg isEqualTo [] and _dist < _radius and _dist > _minRadius;
+    private _typeMatch = _suppType == _type or {_type in _qrfTypes and _suppType in _qrfTypes};
+    _suppSide == _side and _typeMatch and _suppTarg isEqualTo [] and _dist < _radius and _dist > _minRadius;
 };
 if (_target isEqualType objNull and _supportIndex != -1) exitWith {
     private _activeSupport = A3A_activeSupports # _supportIndex;
     [_activeSupport, _target, _targPos] call A3A_fnc_addSupportTarget;
+    if (_activeSupport#2 in _qrfTypes) then {
+        // QRF routines may run on a headless client, so pass the target through the server object
+        // and free the slot at once, so that every later call in the area joins this QRF too
+        private _targetsVar = (_activeSupport#0) + "_targets";
+        server setVariable [_targetsVar, (server getVariable [_targetsVar, []]) + [[_target, _targPos]], true];
+        (_activeSupport#5) resize 0;
+    };
     A3A_supportCallInProgress = nil;
     _activeSupport # 0;             // return support name
 };

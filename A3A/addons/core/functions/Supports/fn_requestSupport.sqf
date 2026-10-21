@@ -28,6 +28,13 @@ Info_3("Requested support against %1 from %2 by side %3", _target, _caller, _sid
 // Cleanup old supports
 A3A_supportSpends = A3A_supportSpends select { _x#4 + 3600 > time };        // remove one hour after start time
 A3A_supportStrikes = A3A_supportStrikes select { _x#3 > time };             // remove after end time
+// QRF routines may run on a headless client, so they flag their end on the server object
+{
+    if !(_x#2 in ["QRFLAND", "QRFAIR"] and {server getVariable [(_x#0) + "_done", false]}) then { continue };
+    _x set [4, 0];
+    server setVariable [(_x#0) + "_done", nil, true];
+    server setVariable [(_x#0) + "_targets", nil, true];
+} forEach A3A_activeSupports;
 A3A_activeSupports = A3A_activeSupports select { _x#4 > 0 };                // remove if support radius set to 0
 
 // HQ knowledge update
@@ -125,6 +132,12 @@ private _actSuppHM = createHashMap;
     if (_suppTarg isNotEqualTo [] or _dist > _radius or _dist < _minRadius) then { continue };
     _actSuppHM set [_suppType, _x];
 } forEach A3A_activeSupports;
+// An active QRF takes calls for both QRF types, see createSupport
+{
+    private _activeQRF = _actSuppHM get _x;
+    if (isNil "_activeQRF") then { continue };
+    { if !(_x in _actSuppHM) then { _actSuppHM set [_x, _activeQRF] } } forEach ["QRFLAND", "QRFAIR"];
+} forEach ["QRFLAND", "QRFAIR"];
 Debug_1("Relevant active supports found: %1", _actSuppHM);
 
 
