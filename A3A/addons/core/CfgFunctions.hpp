@@ -537,9 +537,17 @@ class CfgFunctions
             class junkyardPrice {};
             class junkyardPurchase {};
             class junkyardRefresh {};
+            class junkyardRepairAdd {};
+            class junkyardRepairAdminFinish {};
+            class junkyardRepairBuy {};
+            class junkyardRepairPurchase {};
+            class junkyardRepairUpdate {};
             class scrapActionMonitor {};
             class scrapCanStrip {};
+            class scrapDuration {};
             class scrapStrip {};
+            class scrapWork {};
+            class scrapWorkAI {};
         };
 
         class TownUpgrades {

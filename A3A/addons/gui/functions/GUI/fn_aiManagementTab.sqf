@@ -153,6 +153,20 @@ switch (_mode) do
             _aiControlIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
 
+        // Scrap / retrieve nearest wreck: any number of selected AI, but not Petros
+        private _canScrap = count _lbSelection > 0 && !_hasPetros;
+        {
+            _x params ["_button", "_icon", "_tooltipKey"];
+            _button ctrlEnable _canScrap;
+            _button ctrlSetTooltip localize (if (_canScrap) then { _tooltipKey } else {
+                ["STR_antistasi_dialogs_main_ai_management_select_ai_tooltip", "STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip_petros"] select _hasPetros
+            });
+            _icon ctrlSetTextColor ([[A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray), [A3A_COLOR_WHITE] call FUNC(configColorToArray)] select _canScrap);
+        } forEach [
+            [_display displayCtrl A3A_IDC_AISCRAPBUTTON, _display displayCtrl A3A_IDC_AISCRAPICON, "STR_antistasi_dialogs_main_ai_management_scrap_tooltip"],
+            [_display displayCtrl A3A_IDC_AIRETRIEVEBUTTON, _display displayCtrl A3A_IDC_AIRETRIEVEICON, "STR_antistasi_dialogs_main_ai_management_retrieve_tooltip"]
+        ];
+
         // If none are selected, disable all the other buttons
         private _aiAutoLootButton = _display displayCtrl A3A_IDC_AIAUTOLOOTBUTTON;
         private _aiAutoLootIcon = _display displayCtrl A3A_IDC_AIAUTOLOOTICON;
@@ -228,6 +242,18 @@ switch (_mode) do
             _units pushBack (objectFromNetId (_aiListBox lbData _x));
         } forEach lbSelection _aiListBox;
         [_units] call A3A_fnc_autoHealFnc; */
+    };
+
+    case ("scrapWreckButtonClicked"):
+    {
+        // Params: [<STRING> "scrap" or "retrieve"]. Each selected AI works on the nearest free wreck, see A3A_fnc_scrapWorkAI
+        _params params [["_scrapMode", "scrap", [""]]];
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _aiListBox = _display displayCtrl A3A_IDC_AILISTBOX;
+        {
+            private _unit = objectFromNetId (_aiListBox lbData _x);
+            if (_unit != petros) then { [_unit, _scrapMode] spawn A3A_fnc_scrapWorkAI };
+        } forEach lbSelection _aiListBox;
     };
 
     case ("convertSquadButtonClicked"):

@@ -78,11 +78,23 @@ DECLARE_SERVER_VAR(A3A_junkyardRefreshInterval, 60*60);
 DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // plus one wildcard vehicle from all loaded vehicle classes
 DECLARE_SERVER_VAR(A3A_junkyardJunkDuration, 10*60*60);  // seconds of campaign uptime a bought wreck stays "junk" (no free repairs)
 DECLARE_SERVER_VAR(A3A_junkyardClockOffset, 0);          // campaign clock = offset + serverTime, restored from save
+// Junkyard repair shop: scrapped wrecks get repaired and sold. [[id, class, price, queued at, ready at, removed at], ...] on the campaign clock
+DECLARE_SERVER_VAR(A3A_junkyardRepairs, []);
+DECLARE_SERVER_VAR(A3A_junkyardRepairMinHours, 4);       // repair time of the simplest vehicle, campaign uptime
+DECLARE_SERVER_VAR(A3A_junkyardRepairMaxHours, 20);      // repair time of the most complex vehicle
+DECLARE_SERVER_VAR(A3A_junkyardRepairBuyWindow, 12*60*60);   // seconds a repaired vehicle waits for a buyer before it is removed
+DECLARE_SERVER_VAR(A3A_junkyardRepairPriceMin, 0.2);     // share of the junkyard price, rolled per vehicle
+DECLARE_SERVER_VAR(A3A_junkyardRepairPriceMax, 0.6);
+DECLARE_SERVER_VAR(A3A_junkyardRepairMax, 100);          // entries kept at once, the one closest to removal makes room
 
 // Town upgrades installed per rebel town: city -> (id -> [posWorld, vectorDir, vectorUp]). Published again on every change
 DECLARE_SERVER_VAR(A3A_cityInvest, createHashMap);
-// Scrapyard: engineers with a toolkit strip dead vehicles for 1-3% of their junkyard price
-DECLARE_SERVER_VAR(A3A_scrapStripDuration, 45);          // seconds of hold action
+// Scrapyard: anyone scraps wrecks for 0.5-1.5% of their junkyard price, or retrieves them for the repair shop
+DECLARE_SERVER_VAR(A3A_scrapDurationEngineerMin, 5);     // seconds of work for engineers, either action, rolled per job between min and max
+DECLARE_SERVER_VAR(A3A_scrapDurationEngineerMax, 15);
+DECLARE_SERVER_VAR(A3A_scrapDurationMin, 30);            // seconds of work for everyone else, rolled per job between min and max
+DECLARE_SERVER_VAR(A3A_scrapDurationMax, 60);
+DECLARE_SERVER_VAR(A3A_scrapRetrieveShare, 0.5);         // retrieve pays this share of the scrap pay
 DECLARE_SERVER_VAR(A3A_scrapMinPay, 50);                 // € floor per wreck
 
 // Mission reward split set by the commander in the HQ dialog, whole percentages of every reward (see A3A_tasks_fnc_rewardPlayers)

@@ -1,4 +1,4 @@
-class A3A_JunkyardDialog : A3A_DefaultDialog
+class A3A_JunkyardDialog : A3A_TabbedDialog
 {
     idd = A3A_IDD_JUNKYARDDIALOG;
     onLoad = "[""onLoad""] spawn A3A_GUI_fnc_junkyardDialog";
@@ -10,21 +10,132 @@ class A3A_JunkyardDialog : A3A_DefaultDialog
             idc = -1;
             text = $STR_antistasi_dialogs_junkyard_titlebar;
             x = DIALOG_X;
-            y = DIALOG_Y - 5 * GRID_H;
+            y = DIALOG_Y - 10 * GRID_H;
             w = DIALOG_W * GRID_W;
             h = 5 * GRID_H;
         };
 
-        class InfoText : A3A_InfoTextLeft
+        class TabButtons : A3A_ControlsGroupNoScrollbars
         {
-            idc = A3A_IDC_JUNKYARDINFOTEXT;
-            text = "";
-            x = DIALOG_X + 2 * GRID_W;
-            y = DIALOG_Y + 1 * GRID_H;
-            w = 100 * GRID_W;
-            h = 4 * GRID_H;
+            idc = -1;
+            x = DIALOG_X;
+            y = DIALOG_Y - 5 * GRID_H;
+            w = DIALOG_W * GRID_W;
+            h = 5 * GRID_H;
+
+            class Controls
+            {
+                class StockTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_JUNKYARDSTOCKTABBUTTON;
+                    text = $STR_antistasi_dialogs_junkyard_tab_stock;
+                    onButtonClick = "[""switchTab"", [""stock""]] call A3A_GUI_fnc_junkyardDialog";
+                    x = 0;
+                    y = 0;
+                    w = 30 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class RepairTabButton : A3A_Button
+                {
+                    idc = A3A_IDC_JUNKYARDREPAIRTABBUTTON;
+                    text = $STR_antistasi_dialogs_junkyard_tab_repair;
+                    onButtonClick = "[""switchTab"", [""repair""]] call A3A_GUI_fnc_junkyardDialog";
+                    x = 30 * GRID_W;
+                    y = 0;
+                    w = 30 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+            };
         };
 
+        // Wrecks for sale. Shown by the "stock" tab of A3A_GUI_fnc_junkyardDialog, cards built by its onLoad
+        class StockTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_JUNKYARDSTOCKTAB;
+            show = false;
+
+            class Controls
+            {
+                class InfoText : A3A_InfoTextLeft
+                {
+                    idc = A3A_IDC_JUNKYARDINFOTEXT;
+                    text = "";
+                    x = 2 * GRID_W;
+                    y = 1 * GRID_H;
+                    w = 74 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                // Debug: admins only, hidden again for everyone else whenever the tab is shown.
+                // Same rectangle as RepairTab/FinishRepairsButton, the two tabs are never shown together.
+                class RefreshButton : A3A_Button
+                {
+                    idc = A3A_IDC_JUNKYARDREFRESHBUTTON;
+                    text = $STR_antistasi_dialogs_junkyard_refresh;
+                    show = false;
+                    onButtonClick = "closeDialog 0; [player] remoteExecCall ['A3A_fnc_junkyardAdminRefresh', 2];";
+                    x = (DIALOG_W - 82) * GRID_W;
+                    y = 0.5 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class VehiclesControlsGroup : A3A_ControlsGroupNoHScrollbars
+                {
+                    idc = A3A_IDC_JUNKYARDVEHICLESGROUP;
+                    x = 0;
+                    y = 6 * GRID_H;
+                    w = PX_W(DIALOG_W);
+                    h = PX_H(DIALOG_H) - 6 * GRID_H;
+                };
+            };
+        };
+
+        // Repair shop: repaired vehicles first, then the repair queue. Shown by the "repair" tab, rows built by A3A_GUI_fnc_junkyardRepairTab
+        class RepairTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_JUNKYARDREPAIRTAB;
+            show = false;
+
+            class Controls
+            {
+                class InfoText : A3A_InfoTextLeft
+                {
+                    idc = A3A_IDC_JUNKYARDREPAIRINFOTEXT;
+                    text = "";
+                    x = 2 * GRID_W;
+                    y = 1 * GRID_H;
+                    w = 74 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                // Debug: admins only, hidden again for everyone else whenever the tab is shown.
+                // Same rectangle as StockTab/RefreshButton, the two tabs are never shown together.
+                class FinishRepairsButton : A3A_Button
+                {
+                    idc = A3A_IDC_JUNKYARDREPAIRFINISHBUTTON;
+                    text = $STR_antistasi_dialogs_junkyard_repair_finish;
+                    show = false;
+                    onButtonClick = "[player] remoteExecCall ['A3A_fnc_junkyardRepairAdminFinish', 2];";
+                    x = (DIALOG_W - 82) * GRID_W;
+                    y = 0.5 * GRID_H;
+                    w = 32 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class RepairControlsGroup : A3A_ControlsGroupNoHScrollbars
+                {
+                    idc = A3A_IDC_JUNKYARDREPAIRGROUP;
+                    x = 0;
+                    y = 6 * GRID_H;
+                    w = PX_W(DIALOG_W);
+                    h = PX_H(DIALOG_H) - 6 * GRID_H;
+                };
+            };
+        };
+
+        // Shared by both tabs, so it lives outside them. Declared after the tab groups to stay on top of them for clicks.
         // Commander and sub-commanders only, hidden for everyone else by the onLoad function
         class FactionFundsCheckbox : A3A_CheckBox
         {
@@ -48,33 +159,11 @@ class A3A_JunkyardDialog : A3A_DefaultDialog
             h = 4 * GRID_H;
         };
 
-        // Debug: admins only, hidden for everyone else by the onLoad function
-        class RefreshButton : A3A_Button
-        {
-            idc = A3A_IDC_JUNKYARDREFRESHBUTTON;
-            text = $STR_antistasi_dialogs_junkyard_refresh;
-            show = false;
-            onButtonClick = "closeDialog 0; [player] remoteExecCall ['A3A_fnc_junkyardAdminRefresh', 2];";
-            x = DIALOG_X + DIALOG_W * GRID_W - 82 * GRID_W;
-            y = DIALOG_Y + 0.5 * GRID_H;
-            w = 32 * GRID_W;
-            h = 5 * GRID_H;
-        };
-
-        class VehiclesControlsGroup : A3A_ControlsGroupNoHScrollbars
-        {
-            idc = A3A_IDC_JUNKYARDVEHICLESGROUP;
-            x = DIALOG_X;
-            y = DIALOG_Y + 6 * GRID_H;
-            w = PX_W(DIALOG_W);
-            h = PX_H(DIALOG_H) - 6 * GRID_H;
-        };
-
         class CloseButton : A3A_CloseButton
         {
             idc = -1;
             x = DIALOG_X + DIALOG_W * GRID_W - 5 * GRID_W;
-            y = DIALOG_Y - 5 * GRID_H;
+            y = DIALOG_Y - 10 * GRID_H;
         };
     };
 

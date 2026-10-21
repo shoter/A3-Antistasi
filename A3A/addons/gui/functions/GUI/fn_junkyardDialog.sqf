@@ -1,23 +1,27 @@
 /*
 Maintainer: Shoter
-    Handles the initialization of the Junkyard dialog: builds one card per wrecked vehicle in A3A_junkyardStock
-    with preview, seats, weapons, price and a buy button. Card layout follows the Buy Vehicle dialog.
+    Handles the Junkyard dialog. Two tabs: "stock" with one card per wrecked vehicle in A3A_junkyardStock
+    (preview, seats, weapons, price and a buy button, card layout follows the Buy Vehicle dialog), and "repair"
+    with the repair shop, built and kept up to date by A3A_GUI_fnc_junkyardRepairTab.
+    The dialog opens on the tab that was open last.
 
 Arguments:
-    <STRING> Mode, only possible value for this dialog is "onLoad"
-    <ARRAY<ANY>> Array of params for the mode when applicable.
+    <STRING> Mode, "onLoad" or "switchTab"
+    <ARRAY<ANY>> Array of params for the mode when applicable. "switchTab": [<STRING> "stock" or "repair"]
 
 Return Value:
     Nothing
 
 Scope: Clients, Local Arguments, Local Effect
-Environment: Scheduled for onLoad mode
+Environment: Scheduled for onLoad mode, any for switchTab
 Public: No
 Dependencies:
-    A3A_junkyardStock, A3A_junkyardNextRefresh, A3A_GUI_fnc_getVehicleCrewCount, A3A_fnc_getVehicleWeapons, A3A_fnc_junkyardBuy
+    A3A_junkyardStock, A3A_junkyardNextRefresh, A3A_GUI_fnc_getVehicleCrewCount, A3A_fnc_getVehicleWeapons, A3A_fnc_junkyardBuy,
+    A3A_GUI_fnc_junkyardRepairTab
 
 Example:
     ["onLoad"] spawn A3A_GUI_fnc_junkyardDialog;
+    ["switchTab", ["repair"]] call A3A_GUI_fnc_junkyardDialog;
 
 License: APL-ND
 */
@@ -30,17 +34,45 @@ FIX_LINE_NUMBERS()
 
 params [["_mode", "onLoad"], ["_params", []]];
 
+if (_mode == "switchTab") exitWith {
+    _params params [["_tab", "stock", [""]]];
+    private _display = findDisplay A3A_IDD_JUNKYARDDIALOG;
+    if (isNull _display) exitWith {};
+    uiNamespace setVariable ["A3A_junkyardLastTab", _tab];
+    private _isRepair = _tab == "repair";
+
+    (_display displayCtrl A3A_IDC_JUNKYARDOBJECTRENDER) ctrlShow false;
+    (_display displayCtrl A3A_IDC_JUNKYARDSTOCKTAB) ctrlShow !_isRepair;
+    (_display displayCtrl A3A_IDC_JUNKYARDREPAIRTAB) ctrlShow _isRepair;
+
+    // Showing a tab group shows all its children again, so the admin buttons are set after it. The server re-checks admin status.
+    private _isAdmin = call A3A_fnc_isLocalAdmin;
+    (_display displayCtrl A3A_IDC_JUNKYARDREFRESHBUTTON) ctrlShow (_isAdmin && !_isRepair);
+    (_display displayCtrl A3A_IDC_JUNKYARDREPAIRFINISHBUTTON) ctrlShow (_isAdmin && _isRepair);
+
+    // Open tab in the profile's title bar colour
+    private _activeColor = [
+        profileNamespace getVariable ["GUI_BCG_RGB_R", 0.13],
+        profileNamespace getVariable ["GUI_BCG_RGB_G", 0.54],
+        profileNamespace getVariable ["GUI_BCG_RGB_B", 0.21],
+        1
+    ];
+    (_display displayCtrl A3A_IDC_JUNKYARDSTOCKTABBUTTON) ctrlSetBackgroundColor ([_activeColor, [0, 0, 0, 1]] select _isRepair);
+    (_display displayCtrl A3A_IDC_JUNKYARDREPAIRTABBUTTON) ctrlSetBackgroundColor ([[0, 0, 0, 1], _activeColor] select _isRepair);
+};
+
 if (_mode != "onLoad") exitWith { Error_1("JunkyardDialog mode does not exist: %1", _mode) };
 
 private _display = findDisplay A3A_IDD_JUNKYARDDIALOG;
 player setCaptive false;
 
-// Faction funds option is for the commander and the sub-commanders only
+// Faction funds option is for the commander and the sub-commanders only. Shared by both tabs.
 private _isCommandStaff = [player] call A3A_fnc_isCommandStaff;
 { (_display displayCtrl _x) ctrlShow _isCommandStaff } forEach [A3A_IDC_JUNKYARDFACTIONFUNDS, A3A_IDC_JUNKYARDFACTIONFUNDSTEXT];
 
-// Debug refresh button for admins (server re-checks admin status)
-(_display displayCtrl A3A_IDC_JUNKYARDREFRESHBUTTON) ctrlShow (call A3A_fnc_isLocalAdmin);
+// Open the last used tab (also sets the admin buttons), then fill the repair tab in its own thread, it keeps refreshing while the dialog is open
+["switchTab", [uiNamespace getVariable ["A3A_junkyardLastTab", "stock"]]] call A3A_GUI_fnc_junkyardDialog;
+["onLoad"] spawn A3A_GUI_fnc_junkyardRepairTab;
 
 // Stock summary and next delivery
 private _remaining = (A3A_junkyardNextRefresh - serverTime) max 0;

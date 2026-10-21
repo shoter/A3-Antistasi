@@ -2522,7 +2522,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     x = 101 * GRID_W;
                     y = 12 * GRID_H;
                     w = 44 * GRID_W;
-                    h = 76 * GRID_H;
+                    h = 86 * GRID_H;
 
                     class controls
                     {
@@ -2534,7 +2534,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 32 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 10 * GRID_H;
                         };
 
                         class AiControlIcon : A3A_Picture
@@ -2542,7 +2542,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AICONTROLICON;
                             text = A3A_Icon_Remotecontrol;
                             x = 36 * GRID_W;
-                            y = 2 * GRID_H;
+                            y = 1 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };
@@ -2553,9 +2553,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_ai_management_dismiss_button;
                             onButtonClick = "[""dismissButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
-                            y = 16 * GRID_H;
+                            y = 12 * GRID_H;
                             w = 32 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 10 * GRID_H;
                         };
 
                         class DismissIcon : A3A_Picture
@@ -2563,7 +2563,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AIDISMISSICON;
                             text = A3A_Icon_Dismiss;
                             x = 36 * GRID_W;
-                            y = 18 * GRID_H;
+                            y = 13 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };
@@ -2574,9 +2574,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_ai_management_auto_rearm_button;
                             onButtonClick = "[""autoLootButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
-                            y = 32 * GRID_H;
+                            y = 24 * GRID_H;
                             w = 32 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 10 * GRID_H;
                         };
 
                         class AutoLootIcon : A3A_Picture
@@ -2584,7 +2584,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AIAUTOLOOTICON;
                             text = A3A_Icon_Rearm;
                             x = 36 * GRID_W;
-                            y = 34 * GRID_H;
+                            y = 25 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };
@@ -2595,9 +2595,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_ai_management_auto_heal_button;
                             onButtonClick = "[""autoHealButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
-                            y = 48 * GRID_H;
+                            y = 36 * GRID_H;
                             w = 32 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 10 * GRID_H;
                         };
 
                         class AutoHealIcon : A3A_Picture
@@ -2605,7 +2605,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AIAUTOHEALICON;
                             text = A3A_Icon_Heal;
                             x = 36 * GRID_W;
-                            y = 50 * GRID_H;
+                            y = 37 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };
@@ -2616,9 +2616,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_convertToSquad_button;
                             onButtonClick = "[""convertSquadButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
-                            y = 64 * GRID_H;
+                            y = 48 * GRID_H;
                             w = 32 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 10 * GRID_H;
                         };
 
                         class ConvertToSquadIcon : A3A_Picture
@@ -2626,7 +2626,50 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AICONVERTTOSQUADICON;
                             text = A3A_Icon_None;
                             x = 36 * GRID_W;
-                            y = 66 * GRID_H;
+                            y = 49 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        // Scrap / retrieve: each selected AI works on the nearest free wreck, see A3A_fnc_scrapWorkAI
+                        class ScrapWreckButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_AISCRAPBUTTON;
+                            text = $STR_antistasi_dialogs_main_ai_management_scrap_button;
+                            onButtonClick = "[""scrapWreckButtonClicked"", [""scrap""]] call A3A_GUI_fnc_aiManagementTab";
+                            x = 0 * GRID_W;
+                            y = 60 * GRID_H;
+                            w = 32 * GRID_W;
+                            h = 10 * GRID_H;
+                        };
+
+                        class ScrapWreckIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_AISCRAPICON;
+                            text = A3A_Icon_Repair;
+                            x = 36 * GRID_W;
+                            y = 61 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class RetrieveWreckButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_AIRETRIEVEBUTTON;
+                            text = $STR_antistasi_dialogs_main_ai_management_retrieve_button;
+                            onButtonClick = "[""scrapWreckButtonClicked"", [""retrieve""]] call A3A_GUI_fnc_aiManagementTab";
+                            x = 0 * GRID_W;
+                            y = 72 * GRID_H;
+                            w = 32 * GRID_W;
+                            h = 10 * GRID_H;
+                        };
+
+                        class RetrieveWreckIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_AIRETRIEVEICON;
+                            text = A3A_Icon_DeliverVehicle;
+                            x = 36 * GRID_W;
+                            y = 73 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };

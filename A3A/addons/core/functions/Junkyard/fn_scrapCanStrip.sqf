@@ -1,13 +1,14 @@
 /*
 Maintainer: Shoter
-    Whether a unit may strip a wreck for scrap. Shared by the client hold action, where it runs every frame while the
-    player stands next to the wreck, and by the server before it pays out. Keep it cheap and free of sleeps.
+    Whether a unit may scrap or retrieve a wreck. Shared by the client action menu entries, where it runs every frame
+    while the player stands next to the wreck, by the work loops of players and AI, and by the server before it pays out.
+    Keep it cheap and free of sleeps. Any unit may do it, engineers are only faster (see A3A_fnc_scrapDuration).
     Wrecks inside a spawned base held by the enemy are off limits until the base is captured or no fighting enemy is
-    left inside it. The engineer trait is checked by the caller, this only checks the wreck, the toolkit and the base rule.
+    left inside it.
 
 Arguments:
     <OBJECT> Wreck (dead vehicle)
-    <OBJECT> Unit that wants to strip it
+    <OBJECT> Unit that wants to work on it
 
 Return Value:
     <ARRAY> [<BOOL> allowed, <STRING> stringtable key of the refusal reason, "" when allowed]
@@ -31,12 +32,6 @@ if !((_wreck isKindOf "LandVehicle" or _wreck isKindOf "Air" or _wreck isKindOf 
     [false, "STR_A3A_fn_junkyard_scrap_notWreck"]
 };
 if (_wreck getVariable ["A3A_scrapStripped", false]) exitWith { [false, "STR_A3A_fn_junkyard_scrap_alreadyStripped"] };
-
-// Toolkit by item type rather than class name, so modded toolkits count too (620 = TYPE_TOOLKIT in fn_itemType)
-private _cfgWeapons = configFile >> "CfgWeapons";
-if ((items _unit) findIf { getNumber (_cfgWeapons >> _x >> "ItemInfo" >> "type") == 620 } == -1) exitWith {
-    [false, "STR_A3A_fn_junkyard_scrap_noToolkit"]
-};
 
 // Wrecks inside a spawned enemy base wait until it is captured or its defenders are gone. 2 = despawned.
 private _bases = (airportsX + outposts + seaports + factories + resourcesX) select { _wreck inArea _x };

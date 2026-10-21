@@ -32,6 +32,7 @@ class CfgFunctions {
             class getVehicleCrewCount {};
             class hqDialog {};
             class junkyardDialog {};
+            class junkyardRepairTab {};
             class lootDeliveryDialog {};
             class mainDialog {};
             class mapDrawHcGroupsEH {};
@@ -42,6 +43,7 @@ class CfgFunctions {
             class playerManagementTab {};
             class playerStatsTab {};
             class playerTab {};
+            class progressBar {};
             class recruitDialog {};
             class recruitSquadDialog {};
             class requestMissionDialog {};

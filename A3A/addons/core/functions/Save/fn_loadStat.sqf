@@ -58,7 +58,10 @@ if (_varName in _specialVarLoads) then {
         [_pos] call A3A_fnc_deployedFlagCreate;
     };
     if (_varName == 'junkyard') then {
-        _varValue params [["_stock", [], [[]]], ["_remaining", 0, [0]], ["_clock", 0, [0]]];
+        _varValue params [["_stock", [], [[]]], ["_remaining", 0, [0]], ["_clock", 0, [0]], ["_repairs", [], [[]]]];
+        // Repair shop entries keep their campaign clock times. Classes from mods that are no longer loaded are dropped
+        A3A_junkyardRepairs = _repairs select { _x isEqualTypeParams [0, "", 0, 0, 0, 0] and {isClass (configFile >> "CfgVehicles" >> _x#1)} };
+        publicVariable "A3A_junkyardRepairs";
         A3A_junkyardStock = _stock;
         publicVariable "A3A_junkyardStock";
         A3A_junkyardNextRefresh = serverTime + _remaining;

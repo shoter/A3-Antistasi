@@ -16888,25 +16888,85 @@
         <Original>Scrapyard</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_action">
-        <Original>Strip for scrap</Original>
+        <Original>Scrap wreck</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_retrieve_action">
+        <Original>Retrieve wreck for repair</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_scrap_cancel">
+        <Original>Stop working on the wreck</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_scrap_cancelled">
+        <Original>You stopped working on the wreck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_scrap_progress">
+        <Original>Scrapping %1</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_retrieve_progress">
+        <Original>Retrieving %1</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_scrap_retrieved">
+        <Original>You retrieved the wrecked %1 for %2 €. The junkyard repairs it in %3, then it can be bought in the Vehicle repair tab.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_scrap_notRepairable">
+        <Original>The junkyard cannot repair this vehicle. Scrap it instead.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_ai_noWreck">
+        <Original>%1 found no wreck to work on within %2 m.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_ai_inVehicle">
+        <Original>%1 has to be on foot.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_ai_busy">
+        <Original>%1 is already working on a wreck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_ai_scrapGoing">
+        <Original>%1 is going to scrap the %2, %3 m away.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_ai_retrieveGoing">
+        <Original>%1 is going to retrieve the %2, %3 m away.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_ai_gaveUp">
+        <Original>%1 stopped working on the %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_stripped">
-        <Original>You stripped the wrecked %1 for %2 € of scrap.</Original>
+        <Original>You scrapped the wrecked %1 for %2 €. Nothing is left of it.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_alreadyStripped">
-        <Original>This wreck has already been stripped.</Original>
+        <Original>Someone has already scrapped or retrieved this wreck.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_enemyBase">
         <Original>This wreck is inside an enemy base. Capture it or clear the enemies out first.</Original>
       </Key>
-      <Key ID="STR_A3A_fn_junkyard_scrap_noToolkit">
-        <Original>Only an engineer with a toolkit can strip wrecks.</Original>
-      </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_notWreck">
-        <Original>There is nothing left to strip here.</Original>
+        <Original>There is nothing left to work on here.</Original>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_scrap_tooFar">
-        <Original>You have to stand next to the wreck to strip it.</Original>
+        <Original>You have to stay next to the wreck to work on it.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_title">
+        <Original>Vehicle repair</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_readyOne">
+        <Original>The %1 is repaired. Buy it at the junkyard for %2 € before it is sold elsewhere.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_readyMany">
+        <Original>%1 vehicles are repaired and can be bought at the junkyard.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_gone">
+        <Original>That vehicle is no longer at the repair shop.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_notReady">
+        <Original>That vehicle is still being repaired.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_noMoney">
+        <Original>Not enough money. This vehicle costs %1 €.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_placing">
+        <Original>Buying repaired vehicle for %1 €.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_bought">
+        <Original>You bought a repaired %1 for %2 €.</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_townUpgrades">

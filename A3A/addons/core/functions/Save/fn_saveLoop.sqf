@@ -62,8 +62,8 @@ Debug_1("Saving params: %1", _savedParams);
 if (!isNull A3A_deployedFlag) then {
 	["deployedFlag", [getPosATL A3A_deployedFlag]] call A3A_fnc_setStatVariable;
 };
-// Junkyard stock, seconds until the next delivery, and the campaign clock used for junk expiry deadlines
-["junkyard", [A3A_junkyardStock, (A3A_junkyardNextRefresh - serverTime) max 0, call A3A_fnc_junkyardClock]] call A3A_fnc_setStatVariable;
+// Junkyard stock, seconds until the next delivery, the campaign clock used for junk expiry deadlines and the repair shop entries
+["junkyard", [A3A_junkyardStock, (A3A_junkyardNextRefresh - serverTime) max 0, call A3A_fnc_junkyardClock, A3A_junkyardRepairs]] call A3A_fnc_setStatVariable;
 // Town upgrades: installed props per town and kit crates still in transit
 ([] call A3A_fnc_townUpgradeSaveData) params ["_cityInvestSave", "_townKitsSave"];
 ["cityInvest", _cityInvestSave] call A3A_fnc_setStatVariable;

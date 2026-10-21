@@ -1469,6 +1469,18 @@
         <Original>High Command Squads</Original>
         <Spanish>Escuadrones de Alto Mando</Spanish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_ai_management_scrap_button">
+        <Original>Scrap wreck</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_ai_management_scrap_tooltip">
+        <Original>Each selected AI walks to the nearest free wreck and scraps it. Engineers need 5-15 seconds, others 30-60. You get the scrap money.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_ai_management_retrieve_button">
+        <Original>Retrieve wreck</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_ai_management_retrieve_tooltip">
+        <Original>Each selected AI walks to the nearest free wreck the junkyard can repair and retrieves it for the Vehicle repair tab. Pays half of scrapping.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
         <Original>Convert To HC Squad</Original>
         <Spanish>Convertir a escuadra de alto mando</Spanish>
@@ -6973,6 +6985,42 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_junkyard_button_tooltip">
         <Original>Buy wrecked %1 for %2 €. Heavily damaged, low fuel, little or no ammo. No free repairs for the first %3 hours.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_tab_stock">
+        <Original>Wrecks</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_tab_repair">
+        <Original>Vehicle repair</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_info">
+        <Original>%1 ready, %2 in repair. Unsold vehicles leave after %3.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_empty">
+        <Original>No vehicles at the repair shop. Engineers with a toolkit can retrieve wrecks for repair from the action menu.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_ready_header">
+        <Original>Ready to buy (%1)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_queue_header">
+        <Original>In repair (%1)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_ready_status">
+        <Original>Ready, leaves in %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_queue_status">
+        <Original>Ready in %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_buy">
+        <Original>Buy</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_buy_tooltip">
+        <Original>Buy repaired %1 for %2 €. Fully repaired and not junk, so HQ and the garage repair it as usual.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_wait_tooltip">
+        <Original>Still in repair. It will cost %1 € once done.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_finish">
+        <Original>Finish repairs (admin)</Original>
       </Key>
     </Container>
     <Container name="dialog_buy_town_upgrades">
