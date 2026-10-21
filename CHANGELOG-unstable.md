@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Fewer enemy attacks
+
+### Changed
+- Enemy factions attack **1.5x less often**: their attack resources refill more slowly, so the wait before the first attack and between attacks is 1.5x longer. Attack size is unchanged, and the server's attack rate setting still works on top of this. Existing saves keep working.
+
 ## 2026-10-21 - Commander sets the mission area
 
 ### Added
