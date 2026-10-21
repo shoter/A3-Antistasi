@@ -24,7 +24,8 @@ if (_owner != _oldUnit) exitWith {[localize "STR_A3A_fn_proxy_remAI_titel", loca
 _score = _oldUnit getVariable ["score",0];
 _punish = _oldUnit getVariable ["punish",0];
 _moneyX = _oldUnit getVariable ["moneyX",0];
-_moneyX = round (_moneyX - (_moneyX * 0.15));
+// Death costs 15% of the player's money, but only 1$ below 100$
+_moneyX = if (_moneyX < 100) then {_moneyX - 1} else {round (_moneyX - (_moneyX * 0.15))};
 _eligible = _oldUnit getVariable ["eligible",true];
 _rankX = _oldUnit getVariable ["rankX","PRIVATE"];
 
