@@ -39,8 +39,8 @@ private _fnc_pickClass = {
 
 A3A_townUpgradeHM = createHashMapFromArray [
     ["clinic",    [["clinic",    ["Land_MedicalTent_01_white_IDAP_open_F", "Land_MedicalTent_01_aaf_generic_open_F", "Land_MedicalTent_01_MTP_closed_F"]] call _fnc_pickClass, 2500, "loc_Hospital",    "C", 0.1]],
-    ["market",    [["market",    ["Land_MarketShelter_F", "Land_Sacks_goods_F"]] call _fnc_pickClass,                                                                    3000, "n_service",       "M", 1.1]],
-    ["recruit",   [["recruit",   ["Land_Cargo_House_V1_F", "Land_Cargo_House_V2_F"]] call _fnc_pickClass,                                                                 2500, "n_inf",           "R", 1.1]],
+    ["market",    [["market",    ["Land_MarketShelter_F", "Land_Sacks_goods_F"]] call _fnc_pickClass,                                                                    3000, "n_service",       "M", 1.5]],
+    ["recruit",   [["recruit",   ["Land_Cargo_House_V1_F", "Land_Cargo_House_V2_F"]] call _fnc_pickClass,                                                                 2500, "n_inf",           "R", 1.5]],
     ["radio",     [["radio",     ["Land_TTowerSmall_1_F", "Land_TTowerSmall_2_F"]] call _fnc_pickClass,                                                                   3500, "loc_Transmitter", "A", 2]],
     ["militia",   [["militia",   ["Land_BagBunker_Tower_F", "Land_HBarrier_01_big_tower_green_F"]] call _fnc_pickClass,                                                    2000, "loc_Bunker",      "P", 1.5]],
     ["safehouse", [["safehouse", ["Land_Cargo_House_V3_F", "Land_Cargo_House_V1_F"]] call _fnc_pickClass,                                                                  1500, "n_installation",  "S", 2]]

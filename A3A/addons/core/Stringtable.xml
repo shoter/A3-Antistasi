@@ -17009,6 +17009,9 @@
       <Key ID="STR_A3A_fn_townUpgrades_desc_safehouse">
         <Original>Fast travel to this town is free and %1 times faster. Lie low here to shake off the enemy after being spotted.</Original>
       </Key>
+      <Key ID="STR_A3A_fn_townUpgrades_kitLabelTo">
+        <Original>TO %1</Original>
+      </Key>
       <Key ID="STR_A3A_fn_townUpgrades_action_install">
         <Original>Install %1</Original>
       </Key>
