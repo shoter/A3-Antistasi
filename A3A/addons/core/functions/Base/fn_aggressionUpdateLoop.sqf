@@ -58,7 +58,7 @@ while {true} do
     {
         private _aggroMul = [1.0 + aggressionOccupants/200, 0.5 + aggressionOccupants/200] select (gameMode != 1);
         private _resRateDef = _aggroMul * A3A_balanceResourceRate / 10;
-        private _resRateAtk = _aggroMul * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) / 12;       // Attack rate is a bit lower than defence
+        private _resRateAtk = _aggroMul * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) / 18;       // Attack rate is a bit lower than defence. 18 instead of upstream's 12: 1.5x longer between attacks
 
         private _noAirport = -1 == airportsX findIf { sidesX getVariable _x == Occupants };
         if (_noAirport) then { _resRateDef = _resRateDef * 0.6; _resRateAtk = _resRateAtk * 0.6 };
@@ -90,7 +90,7 @@ while {true} do
     {
         private _aggroMul = [1.0 + aggressionInvaders/200, 0.5 + aggressionInvaders/200] select (gameMode != 1);
         private _resRateDef = _aggroMul * (A3A_invaderBalanceMul / 10) * A3A_balanceResourceRate / 10;
-        private _resRateAtk = _aggroMul * (A3A_invaderBalanceMul / 10) * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) / 15;
+        private _resRateAtk = _aggroMul * (A3A_invaderBalanceMul / 10) * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) / 22.5;     // 22.5 instead of upstream's 15: 1.5x longer between attacks
 
         private _noAirport = -1 == airportsX findIf { sidesX getVariable _x == Invaders };
         if (_noAirport) then { _resRateDef = _resRateDef * 0.2 };               // Invaders continue attacking but stop defending
