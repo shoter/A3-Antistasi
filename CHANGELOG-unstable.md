@@ -4,6 +4,17 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Fewer helicopter QRFs, steadier enemy vehicle mix
+
+### Changed
+- When you attack an enemy position, its QRFs now come by land much more often and by helicopter less often.
+  - A base can send a land QRF while your units are 550 m away (was 700 m), no matter how small its garrison is, and it can send the next one 5 seconds later (was 1 minute).
+  - Repeated calls for help during one fight join the QRF already on its way to that area (within 600 m) instead of each sending a new one.
+  - Air QRFs are picked less often.
+- The mix of enemy ground vehicles in attacks and QRFs now changes steadily with war tier. Cars and trucks get rarer as the war goes on, while MRAPs, APCs and tanks get more common.
+  - At war tier 10 expect roughly **10% cars, 25% MRAPs, 19% trucks, 25% APCs/IFVs, 5% AA and 15% tanks** (was no cars, 23% MRAPs, 3% trucks, 50% APCs/IFVs and 19% tanks).
+  - In the early and middle war, militia cars and trucks stay around longer, and MRAPs and APCs show up more slowly.
+
 ## 2026-10-21 - More ammo for rebel statics and AA vehicles
 
 ### Changed
