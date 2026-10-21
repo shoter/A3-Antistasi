@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Server startup fix
+
+### Fixed
+- Fixed a server startup error introduced with the squad composer update. Server variables were not set, so enemy garrisons did not spawn, aggression and enemy resources did not update and player statistics were not recorded. The server log was flooded with `Undefined variable` errors (`distanceSPWN2`, `prestigeIsChanging`, `A3A_playerStats`). Saves are not affected.
+
 ## 2026-10-21 - 1 km mission area
 
 ### Changed
