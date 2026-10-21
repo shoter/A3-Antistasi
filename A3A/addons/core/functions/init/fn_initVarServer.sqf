@@ -93,6 +93,9 @@ A3A_rewardTaxCollected = 0;                              // € of reward tax co
 // Sub-commanders designated by the commander, uid -> name. Saved, see A3A_fnc_subCommanderSet
 DECLARE_SERVER_VAR(A3A_subCommanders, createHashMap);
 
+// Mission area set by the commander, [centre, radius] or [] for the HQ and the lobby mission distance. Saved, see A3A_tasks_fnc_setMissionArea
+DECLARE_SERVER_VAR(A3A_missionArea, []);
+
 // Chronicle: sequence number of the newest campaign log entry, clients fetch the delta when they open the tab
 DECLARE_SERVER_VAR(A3A_campaignLogVersion, 0);
 DECLARE_SERVER_VAR(A3A_campaignLogCap, 3000);            // entries kept in the chronicle, the oldest are dropped first

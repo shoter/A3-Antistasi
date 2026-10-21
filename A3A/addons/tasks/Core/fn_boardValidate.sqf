@@ -2,7 +2,7 @@
 Maintainer: Shoter
     Checks whether a mission board entry still makes sense.
     "gone": the mission no longer fits (location taken by the rebels, target destroyed, town no longer needs supplies,
-    HQ moved away) and should leave the board.
+    HQ or mission area moved away) and should leave the board.
     "busy": only when starting; the location is inside player spawn range right now (or players wait at the defector's
     car), the same rule the params getters apply. The mission stays on the board and can be taken later.
 
@@ -29,9 +29,10 @@ private _task = _entry get "task";
 private _marker = _entry get "marker";
 private _args = _entry get "args";
 private _fnc_rebel = { sidesX getVariable [_this, sideUnknown] == teamPlayer };
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 
 private _gone = call {
-    if (markerPos _marker distance2D markerPos "Synd_HQ" > distanceMission + 1000) exitWith { true };
+    if (markerPos _marker distance2D _areaPos > _areaRad + 1000) exitWith { true };
     switch (_task) do {
         case "SUP_Supplies": { _marker in destroyedSites or { (A3A_cityData getVariable _marker) select 1 >= 80 } };
         case "LOG_Gunshop": { false };                  // meets in rebel towns too

@@ -1,7 +1,8 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _airports = airportsX inAreaArrayIndexes ["Synd_HQ", distanceMission, distanceMission] apply { airportsX#_x }
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
+private _airports = airportsX inAreaArrayIndexes [_areaPos, _areaRad, _areaRad] apply { airportsX#_x }
     select { sidesX getVariable _x != teamPlayer };
 
 private _airport = "";
@@ -22,7 +23,7 @@ while {_airports isNotEqualTo []} do
         _testPos = _originPos getPos [_dist, _ang];
         private _inBounds = _testPos#0 > 1000 and _testPos#1 > 1000 and _testPos#0 < _worldMax and _testPos#1 < _worldMax;
         private _distToHQ = _testPos distance2d markerPos "Synd_HQ";
-        if (!surfaceIsWater _testPos and _distToHQ < distanceMission and _distToHQ > 1500 and _inBounds) exitWith {};
+        if (!surfaceIsWater _testPos and _testPos distance2d _areaPos < _areaRad and _distToHQ > 1500 and _inBounds) exitWith {};
         _ang = (_ang + 5) % 360;
         _dist = _dist - 7;              // about four circuits in a descending spiral 
     };

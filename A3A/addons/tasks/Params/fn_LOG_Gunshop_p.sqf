@@ -1,7 +1,8 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _nearCities = citiesX inAreaArray ["Synd_HQ", distanceMission, distanceMission];
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
+private _nearCities = citiesX inAreaArray [_areaPos, _areaRad, _areaRad];
 
 private _validCities = _nearCities select { spawner getVariable _x != 0 } select { sidesX getVariable _x != teamPlayer };
 if (_validCities isEqualTo [] and count _nearCities >= 4) then {

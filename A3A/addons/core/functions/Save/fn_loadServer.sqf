@@ -181,6 +181,7 @@ if (isServer) then {
 	["townKits"] call A3A_fnc_getStatVariable;
 	["rewardShares"] call A3A_fnc_getStatVariable;
 	["subCommanders"] call A3A_fnc_getStatVariable;
+	["missionArea"] call A3A_fnc_getStatVariable;
 	["campaignLog"] call A3A_fnc_getStatVariable;
 
 	{_x setPosATL getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});

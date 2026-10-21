@@ -28,6 +28,9 @@ License: APL-ND
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+// Mission area radius presets, the server accepts only these (A3A_tasks_fnc_setMissionArea)
+#define MISSION_AREA_RADII [2000, 4000, 6000, 8000, 10000]
+
 params[["_mode","update"], ["_params",[]]];
 
 // Get display and common controls
@@ -52,6 +55,8 @@ private _HCSquadsButton = _display displayCtrl A3A_IDC_HCSQUADSBUTTON;
 private _commanderButtonsGroup = _display displayCtrl A3A_IDC_COMMANDERBUTTONSGROUP;
 private _deployFlagButton = _display displayCtrl A3A_IDC_DEPLOYFLAGBUTTON;
 private _subCommandersButton = _display displayCtrl A3A_IDC_SUBCOMMANDERSBUTTON;
+private _missionAreaButton = _display displayCtrl A3A_IDC_MISSIONAREABUTTON;
+private _missionAreaControlsGroup = _display displayCtrl A3A_IDC_MISSIONAREACONTROLSGROUP;
 private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_HCSquadsButton,_commanderButtonsGroup];
 
 switch (_mode) do
@@ -70,6 +75,8 @@ switch (_mode) do
         _singleGroupView ctrlShow false;
         _fireMissionControlsGroup ctrlShow false;
         _noRadioControlsGroup ctrlShow false;
+        _missionAreaControlsGroup ctrlShow false;
+        _commanderMap setVariable ["selectMissionAreaPos", false];
 
         // Show base buttons
         {_x ctrlShow true} forEach _baseButtons;
@@ -79,7 +86,7 @@ switch (_mode) do
 
         // Sub-commanders only get their high command squads and squad recruiting, the rest of the tab is the commander's
         private _isBoss = player isEqualTo theBoss;
-        {_x ctrlShow _isBoss} forEach [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_deployFlagButton,_subCommandersButton];
+        {_x ctrlShow _isBoss} forEach [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_deployFlagButton,_subCommandersButton,_missionAreaButton];
         // Recruit squad moves into the first slot of the then empty button group
         _recruitSquadButton ctrlSetPosition [2 * GRID_W, ([0, 14] select _isBoss) * GRID_H];
         _recruitSquadButton ctrlCommit 0;
@@ -101,7 +108,7 @@ switch (_mode) do
             {
                 _x ctrlEnable false;
                 _x ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_radio";
-            } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_HCSquadsButton];
+            } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_HCSquadsButton,_missionAreaButton];
         };
 
         // Check for selected groups
@@ -770,6 +777,15 @@ switch (_mode) do
         _params params ["_clickedPosition"];
         private _clickedWorldPosition = _commanderMap ctrlMapScreenToWorld _clickedPosition;
 
+        // Mission area view: every click moves the centre of the new area
+        if (_commanderMap getVariable ["selectMissionAreaPos", false]) exitWith
+        {
+            Trace_1("Set mission area centre: %1", _clickedWorldPosition);
+            private _missionAreaControlsGroup = _display displayCtrl A3A_IDC_MISSIONAREACONTROLSGROUP;
+            _missionAreaControlsGroup setVariable ["areaPos", _clickedWorldPosition];
+            ["updateMissionAreaView"] call FUNC(commanderTab);
+        };
+
         // Special cases for selecting fire mission position(s)
         private _selectFireMissionPos = _commanderMap getVariable ["selectFireMissionPos", false];
         if (_selectFireMissionPos) exitWith
@@ -1082,6 +1098,100 @@ switch (_mode) do
 
         { _x setVariable ["A3A_artyInUse", true, true] } forEach _units;
         [_units,_shellType,_shortName,_strikeType,_roundsNumber,_startPos,_detail] spawn A3A_fnc_artySupportFire;
+    };
+
+    case ("showMissionAreaView"):
+    {
+        Trace("Showing mission area view");
+        // The view covers the HC squads button and the commander buttons, see MissionAreaControlsGroup
+        {_x ctrlShow false} forEach _baseButtons;
+        _multipleGroupsView ctrlShow false;
+        _multipleGroupsBackground ctrlShow false;
+        _multipleGroupsLabel ctrlShow false;
+        _singleGroupView ctrlShow false;
+        _fireMissionControlsGroup ctrlShow false;
+        _missionAreaControlsGroup ctrlShow true;
+
+        // Start from the current area. The lobby mission distance of the HQ default goes to the nearest preset
+        (call A3A_tasks_fnc_getMissionArea) params ["_areaPos", "_areaRad"];
+        private _diffs = MISSION_AREA_RADII apply { abs (_x - _areaRad) };
+        _missionAreaControlsGroup setVariable ["areaPos", [_areaPos # 0, _areaPos # 1]];
+        _missionAreaControlsGroup setVariable ["areaRadius", MISSION_AREA_RADII select (_diffs find selectMin _diffs)];
+
+        // Map clicks now move the centre, and the group selection marker would only get in the way
+        _commanderMap setVariable ["selectMissionAreaPos", true];
+        _commanderMap setVariable ["selectedGroup", grpNull];
+        _commanderMap setVariable ["selectMarkerData", []];
+        _commanderMap ctrlMapAnimAdd [0.2, ctrlMapScale _commanderMap, _areaPos];
+        ctrlMapAnimCommit _commanderMap;
+
+        ["updateMissionAreaView"] call FUNC(commanderTab);
+    };
+
+    case ("updateMissionAreaView"):
+    {
+        private _newPos = _missionAreaControlsGroup getVariable ["areaPos", []];
+        private _newRad = _missionAreaControlsGroup getVariable ["areaRadius", 4000];
+        (call A3A_tasks_fnc_getMissionArea) params ["_areaPos", "_areaRad", "_areaSet"];
+
+        private _posEditBox = _display displayCtrl A3A_IDC_MISSIONAREAPOSEDITBOX;
+        _posEditBox ctrlSetText ([localize "STR_antistasi_dialogs_main_mission_area_click_map", mapGridPosition _newPos] select (_newPos isNotEqualTo []));
+
+        // Radio buttons, the selected radius is the disabled one
+        {
+            _x params ["_idc", "_radius"];
+            (_display displayCtrl _idc) ctrlEnable (_radius != _newRad);
+        } forEach [
+            [A3A_IDC_MISSIONAREARADIUS2BUTTON, 2000],
+            [A3A_IDC_MISSIONAREARADIUS4BUTTON, 4000],
+            [A3A_IDC_MISSIONAREARADIUS6BUTTON, 6000],
+            [A3A_IDC_MISSIONAREARADIUS8BUTTON, 8000],
+            [A3A_IDC_MISSIONAREARADIUS10BUTTON, 10000]
+        ];
+
+        private _currentText = _display displayCtrl A3A_IDC_MISSIONAREACURRENTTEXT;
+        _currentText ctrlSetText (if (_areaSet) then {
+            format [localize "STR_antistasi_dialogs_main_mission_area_current_set", mapGridPosition _areaPos, _areaRad / 1000]
+        } else {
+            format [localize "STR_antistasi_dialogs_main_mission_area_current_hq", _areaRad / 1000]
+        });
+
+        // Accept needs a centre and a change. The same circle again would only reshuffle the board
+        private _unchanged = _areaSet && {_newPos isNotEqualTo []} && {_newPos distance2D _areaPos < 1} && {_newRad == _areaRad};
+        private _acceptButton = _display displayCtrl A3A_IDC_MISSIONAREAACCEPTBUTTON;
+        _acceptButton ctrlEnable (_newPos isNotEqualTo [] && !_unchanged);
+        _acceptButton ctrlSetTooltip (switch (true) do {
+            case (_newPos isEqualTo []): { localize "STR_antistasi_dialogs_main_mission_area_accept_no_pos_tooltip" };
+            case (_unchanged): { localize "STR_antistasi_dialogs_main_mission_area_accept_same_tooltip" };
+            default { localize "STR_antistasi_dialogs_main_mission_area_accept_tooltip" };
+        });
+
+        private _resetButton = _display displayCtrl A3A_IDC_MISSIONAREARESETBUTTON;
+        _resetButton ctrlEnable _areaSet;
+    };
+
+    case ("missionAreaRadiusClicked"):
+    {
+        _params params [["_radius", 4000, [0]]];
+        _missionAreaControlsGroup setVariable ["areaRadius", _radius];
+        ["updateMissionAreaView"] call FUNC(commanderTab);
+    };
+
+    case ("missionAreaAcceptClicked"):
+    {
+        private _newPos = _missionAreaControlsGroup getVariable ["areaPos", []];
+        private _newRad = _missionAreaControlsGroup getVariable ["areaRadius", 4000];
+        if (_newPos isEqualTo []) exitWith {};
+        Trace_2("Commander setting the mission area to %1, radius %2", _newPos, _newRad);
+        [player, _newPos, _newRad] remoteExecCall ["A3A_tasks_fnc_setMissionArea", 2];
+        ["update"] call FUNC(commanderTab);
+    };
+
+    case ("missionAreaResetClicked"):
+    {
+        Trace("Commander resetting the mission area to the HQ");
+        [player, []] remoteExecCall ["A3A_tasks_fnc_setMissionArea", 2];
+        ["update"] call FUNC(commanderTab);
     };
 
     case ("persistentSaveButtonClicked"):

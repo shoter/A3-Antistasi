@@ -36,7 +36,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits", "rewardShares", "campaignLog", "subCommanders"
+    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits", "rewardShares", "campaignLog", "subCommanders", "missionArea"
 ];
 
 private _varName = _this select 0;
@@ -102,6 +102,16 @@ if (_varName in _specialVarLoads) then {
             { if (_x isEqualType "" && {_y isEqualType ""}) then { A3A_subCommanders set [_x, _y] } } forEach _varValue;
         };
         publicVariable "A3A_subCommanders";
+    };
+    if (_varName == 'missionArea') then {
+        // [centre, radius] set by the commander. Anything else means no area: missions centre on the HQ
+        A3A_missionArea = [];
+        if (_varValue isEqualType [] && {count _varValue == 2}) then {
+            _varValue params [["_pos", [], [[]]], ["_radius", 0, [0]]];
+            if (count _pos >= 2 && {_radius in [2000, 4000, 6000, 8000, 10000]}) then { A3A_missionArea = [[_pos # 0, _pos # 1, 0], _radius] };
+        };
+        publicVariable "A3A_missionArea";
+        call A3A_tasks_fnc_missionAreaMarker;
     };
     if (_varName == 'campaignLog') then {
         A3A_campaignLog = +_varValue;

@@ -27,10 +27,11 @@ if (_place isEqualType false) exitWith {
 };
 
 // Other condition is that we need somewhere to take the guy?
-// Allow cities within mission distance & within 3km of this city
+// Allow cities within the mission area & within 3km of this city
 private _nearCities = citiesX inAreaArrayIndexes [markerPos _marker, 3000, 3000] apply { citiesX # _x };
-private _maxDist = distanceMission max (markerPos _marker distance2d markerPos "Synd_HQ");
-_nearCities = _nearCities inAreaArrayIndexes [markerPos "Synd_HQ", _maxDist, _maxDist] apply { _nearCities # _x };
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
+private _maxDist = _areaRad max (markerPos _marker distance2d _areaPos);
+_nearCities = _nearCities inAreaArrayIndexes [_areaPos, _maxDist, _maxDist] apply { _nearCities # _x };
 _nearCities = _nearCities select { markerPos _x distance2d (_place#0) > 1000 };      // min 1km
 
 if (_nearCities isEqualTo []) exitWith {

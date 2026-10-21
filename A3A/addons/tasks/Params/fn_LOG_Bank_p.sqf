@@ -1,10 +1,11 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _nearCities = citiesX inAreaArrayIndexes ["Synd_HQ", distanceMission+500, distanceMission+500] apply { citiesX # _x };
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
+private _nearCities = citiesX inAreaArrayIndexes [_areaPos, _areaRad+500, _areaRad+500] apply { citiesX # _x };
 if (_nearCities isEqualTo []) exitWith {false};
 
-private _banks = banks inAreaArray ["Synd_HQ", distanceMission, distanceMission];
+private _banks = banks inAreaArray [_areaPos, _areaRad, _areaRad];
 _banks = _banks select {
     private _bank = _x;
     private _distances = _nearCities apply { markerPos _x distance2d _bank };

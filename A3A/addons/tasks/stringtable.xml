@@ -591,6 +591,22 @@
         <Original>The enemy has called off the mortar attack.</Original>
         <Polish>Wróg odwołał ostrzał moździerzowy.</Polish>
       </Key>
+      <Key ID="STR_A3A_Tasks_missionArea_title">
+        <Original>Mission Area</Original>
+        <Polish>Obszar misji</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_missionArea_set">
+        <Original>%1 has set the mission area: %3 km around grid %2. New missions come from inside it, and missions outside it have been taken off the board.</Original>
+        <Polish>Nowy obszar misji (ustawia: %1): %3 km wokół kwadratu %2. Nowe misje będą z jego wnętrza, a misje spoza niego zdjęto z tablicy.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_missionArea_reset">
+        <Original>%1 has moved the mission area back to the HQ: missions come from up to %2 km around it again.</Original>
+        <Polish>Obszar misji wraca do HQ (zmiana: %1): misje znów będą do %2 km od niego.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_missionArea_marker">
+        <Original>Mission area (%1 km)</Original>
+        <Polish>Obszar misji (%1 km)</Polish>
+      </Key>
     </Container>
   </Package>
 </Project>

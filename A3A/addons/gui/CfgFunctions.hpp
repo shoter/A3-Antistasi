@@ -38,6 +38,7 @@ class CfgFunctions {
             class mapDrawOutpostsEH {};
             class mapDrawSelectEH {};
             class mapDrawUserMarkersEH {};
+            class missionAreaEH {};
             class playerManagementTab {};
             class playerStatsTab {};
             class playerTab {};

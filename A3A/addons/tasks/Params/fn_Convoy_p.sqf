@@ -1,8 +1,9 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 private _markers = (airportsX + resourcesX + factories + seaports + outposts - blackListDest);
-_markers = _markers inAreaArrayIndexes ["Synd_HQ", distanceMission, distanceMission] apply { _markers#_x }
+_markers = _markers inAreaArrayIndexes [_areaPos, _areaRad, _areaRad] apply { _markers#_x }
     select {sidesX getVariable _x != teamPlayer};
 
 private _convoyPairs = [];

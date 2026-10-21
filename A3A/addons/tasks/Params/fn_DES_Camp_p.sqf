@@ -1,7 +1,7 @@
 /*
 Maintainer: Shoter
     Parameter getter for the enemy camp task.
-    Picks a spot out in the woods within mission distance of HQ: away from towns, bases, roads,
+    Picks a spot out in the woods inside the mission area, at least 800m from HQ: away from towns, bases, roads,
     buildings and players, on flat ground with enough trees around it. On maps without much
     forest it settles for any quiet spot in the countryside.
     The camp belongs to the side holding the nearest military site.
@@ -20,6 +20,7 @@ Public: No
 FIX_LINE_NUMBERS()
 
 private _hqPos = markerPos "Synd_HQ";
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 private _players = call A3A_fnc_playableUnits;
 private _avoidMarkers = markersX + controlsX + outpostsFIA;
 private _militaryMarkers = airportsX + outposts + seaports + resourcesX + factories;
@@ -28,7 +29,7 @@ private _militaryMarkers = airportsX + outposts + seaports + resourcesX + factor
 private _fnc_campSpot = {
     params ["_pos", "_minTrees"];
     if (surfaceIsWater _pos) exitWith {false};
-    if (_pos distance2d _hqPos < 800 or _pos distance2d _hqPos > distanceMission) exitWith {false};
+    if (_pos distance2d _hqPos < 800 or _pos distance2d _areaPos > _areaRad) exitWith {false};
     if (_avoidMarkers findIf { markerPos _x distance2d _pos < 800 } != -1) exitWith {false};
     if (_players inAreaArray [_pos, 800, 800] isNotEqualTo []) exitWith {false};
     if (_pos nearRoads 120 isNotEqualTo []) exitWith {false};
@@ -42,11 +43,13 @@ private _fnc_campSpot = {
     count nearestTerrainObjects [_pos, ["TREE"], 60, false, true] >= _minTrees;
 };
 
+// Search ring around the area centre. Around the HQ it skips the 800m the camp keeps from it
+private _minRad = 0 max (800 - (_areaPos distance2d _hqPos));
 private _campPos = [];
 {
     _x params ["_expression", "_minTrees"];
     for "_i" from 1 to 30 do {
-        private _center = _hqPos getPos [800 + random (distanceMission - 800), random 360];
+        private _center = _areaPos getPos [_minRad + random (_areaRad - _minRad), random 360];
         if (surfaceIsWater _center) then { continue };
         private _places = selectBestPlaces [_center, 500, _expression, 40, 6];
         {

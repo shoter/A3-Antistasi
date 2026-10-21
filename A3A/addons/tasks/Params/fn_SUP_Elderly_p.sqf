@@ -1,7 +1,7 @@
 /*
 Maintainer: Shoter
     Parameter getter for the elderly supplies task.
-    Picks a town within mission distance of HQ and a lone house just outside its edge,
+    Picks a town inside the mission area and a lone house just outside its edge, at least 500m from HQ,
     away from other towns, military sites and players.
 
 Arguments: none
@@ -18,9 +18,10 @@ Public: No
 FIX_LINE_NUMBERS()
 
 private _hqPos = markerPos respawnTeamPlayer;
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 private _players = allPlayers - entities "HeadlessClient_F";
 private _military = markersX - citiesX;
-private _cities = (citiesX - destroyedSites) inAreaArray [_hqPos, distanceMission, distanceMission];
+private _cities = (citiesX - destroyedSites) inAreaArray [_areaPos, _areaRad, _areaRad];
 
 private _city = "";
 private _house = objNull;

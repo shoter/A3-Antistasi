@@ -17,12 +17,12 @@ Public: No
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _hqPos = markerPos "Synd_HQ";
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 private _players = allPlayers - entities "HeadlessClient_F";
 
-private _sources = outposts inAreaArrayIndexes [_hqPos, distanceMission, distanceMission] apply { outposts#_x };
+private _sources = outposts inAreaArrayIndexes [_areaPos, _areaRad, _areaRad] apply { outposts#_x };
 if (_sources isEqualTo []) then {
-    _sources = airportsX inAreaArrayIndexes [_hqPos, distanceMission, distanceMission] apply { airportsX#_x };
+    _sources = airportsX inAreaArrayIndexes [_areaPos, _areaRad, _areaRad] apply { airportsX#_x };
 };
 _sources = _sources select { sidesX getVariable _x != teamPlayer };
 
@@ -70,7 +70,7 @@ if (_place isEqualTo []) exitWith {false};
 private _variant = "hq";
 private _destMrk = "Synd_HQ";
 private _rebelPorts = seaports select { sidesX getVariable _x == teamPlayer }
-    select { markerPos _x distance2d _hqPos < distanceMission + 1000 }
+    select { markerPos _x distance2d _areaPos < _areaRad + 1000 }
     select { markerPos _x distance2d (_place#1) > 1500 };
 if (_rebelPorts isNotEqualTo [] and random 1 < 0.5) then {
     _variant = "boat";

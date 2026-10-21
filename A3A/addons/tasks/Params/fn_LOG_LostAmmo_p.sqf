@@ -1,7 +1,7 @@
 /*
 Maintainer: Shoter
     Parameter getter for the lost ammo supplies task.
-    Picks a spot in the countryside within mission distance where the enemy crate came down,
+    Picks a spot in the countryside inside the mission area, not too close to HQ, where the enemy crate came down,
     the enemy outpost or airbase that sends the recovery team, and 2-4 witness positions
     250-2000m from the crate with the bearing each of them reports (off by up to 5 degrees).
 
@@ -19,8 +19,11 @@ Public: No
 FIX_LINE_NUMBERS()
 
 private _hqPos = markerPos "Synd_HQ";
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 private _players = allPlayers - entities "HeadlessClient_F";
-private _minDist = 1500 min (distanceMission / 2);
+private _minDist = 1500 min (_areaRad / 2);                        // from HQ
+// Search ring around the area centre. Around the HQ it skips the distance the crate keeps from it
+private _minRad = 0 max (_minDist - (_areaPos distance2d _hqPos));
 private _avoidMarkers = markersX + controlsX;
 private _enemySites = (outposts + airportsX + resourcesX + factories + seaports + controlsX) select { sidesX getVariable _x != teamPlayer };
 
@@ -58,8 +61,9 @@ private _fnc_findWitnesses = {
 
 private _result = [];
 for "_i" from 1 to 60 do {
-    private _pos = _hqPos getPos [_minDist + random (distanceMission - _minDist), random 360];
+    private _pos = _areaPos getPos [_minRad + random (_areaRad - _minRad), random 360];
     if !([_pos] call _fnc_onMap) then { continue };
+    if (_pos distance2d _hqPos < _minDist) then { continue };
     if (surfaceIsWater _pos) then { continue };
 
     // Open countryside: away from towns, bases, roadblocks and players, flat, not in a forest, a truck can get there

@@ -1,7 +1,7 @@
 /*
 Maintainer: Shoter
     Parameter getter for the abandoned collaborator hideout task.
-    Picks a random house within mission distance of HQ, away from military sites and players,
+    Picks a random house inside the mission area, at least 500m from HQ, away from military sites and players,
     with room inside for the intel and the loot crate. The map only gets a search circle:
     its centre is 50-150m from the house and its radius reaches the house plus another 50-100m.
     The intel belongs to the side holding the nearest military site.
@@ -20,6 +20,7 @@ Public: No
 FIX_LINE_NUMBERS()
 
 private _hqPos = markerPos "Synd_HQ";
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 private _players = allPlayers - entities "HeadlessClient_F";
 private _militaryMarkers = airportsX + outposts + seaports + resourcesX + factories + controlsX;
 // Lived-in houses only: no military buildings, sheds, churches or ruins
@@ -35,7 +36,7 @@ private _fnc_isHouse = {
     if (count _positions < 3 or count _positions > 24) exitWith {false};
     if (_positions findIf { _x # 2 < 1 } == -1) exitWith {false};
     private _pos = getPosATL _house;
-    if (_pos distance2d _hqPos < 500 or _pos distance2d _hqPos > distanceMission) exitWith {false};
+    if (_pos distance2d _hqPos < 500 or _pos distance2d _areaPos > _areaRad) exitWith {false};
     if (_militaryMarkers inAreaArray [_pos, 400, 400] isNotEqualTo []) exitWith {false};
     if (_militaryMarkers findIf { _pos inArea _x } != -1) exitWith {false};
     _players inAreaArray [_pos, 300, 300] isEqualTo [];
@@ -44,7 +45,7 @@ private _fnc_isHouse = {
 private _house = objNull;
 for "_i" from 1 to 30 do {
     // Uniform over the whole mission area
-    private _pos = _hqPos getPos [distanceMission * sqrt random 1, random 360];
+    private _pos = _areaPos getPos [_areaRad * sqrt random 1, random 360];
     if (surfaceIsWater _pos) then { continue };
     private _candidates = nearestObjects [_pos, ["House"], 300, true] select { [_x] call _fnc_isHouse };
     if (_candidates isNotEqualTo []) exitWith { _house = selectRandom _candidates };

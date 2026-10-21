@@ -58,6 +58,7 @@ Debug_1("Saving params: %1", _savedParams);
 ["nextTick", nextTick - time] call A3A_fnc_setStatVariable;
 ["rewardShares", [A3A_rewardTaxPercent, A3A_rewardCommanderPercent]] call A3A_fnc_setStatVariable;
 ["subCommanders", A3A_subCommanders] call A3A_fnc_setStatVariable;
+["missionArea", A3A_missionArea] call A3A_fnc_setStatVariable;
 if (!isNull A3A_deployedFlag) then {
 	["deployedFlag", [getPosATL A3A_deployedFlag]] call A3A_fnc_setStatVariable;
 };

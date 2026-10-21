@@ -2208,6 +2208,74 @@
         <Original>Designate players who recruit their own high command squads and spend faction funds on junkyard vehicles and utility items.</Original>
         <Polish>Wyznacz graczy, którzy rekrutują własne oddziały wysokiego dowodzenia i wydają fundusze frakcji na pojazdy ze złomowiska i przedmioty użytkowe.</Polish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_button">
+        <Original>Mission Area</Original>
+        <Polish>Obszar misji</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_tooltip">
+        <Original>Choose where on the map the faction's missions take place, and how far around it.</Original>
+        <Polish>Wybierz, w której części mapy frakcja prowadzi misje i jak daleko wokół.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_centre_label">
+        <Original>Centre</Original>
+        <Polish>Środek</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_position_label">
+        <Original>Position</Original>
+        <Polish>Pozycja</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_click_map">
+        <Original>Click the map</Original>
+        <Polish>Kliknij mapę</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_hint">
+        <Original>Click the map to move the centre. Missions come from inside the circle.</Original>
+        <Polish>Kliknij mapę, aby przesunąć środek. Misje będą pochodzić z wnętrza okręgu.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_radius_label">
+        <Original>Radius</Original>
+        <Polish>Promień</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_current_label">
+        <Original>Current area</Original>
+        <Polish>Obecny obszar</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_new_label">
+        <Original>New area</Original>
+        <Polish>Nowy obszar</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_current_hq">
+        <Original>Around the HQ, %1 km (default)</Original>
+        <Polish>Wokół HQ, %1 km (domyślnie)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_current_set">
+        <Original>Grid %1, %2 km</Original>
+        <Polish>Kwadrat %1, %2 km</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_accept">
+        <Original>Accept</Original>
+        <Polish>Zatwierdź</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_accept_tooltip">
+        <Original>Missions outside the new area leave the mission board, and new ones come from inside it. Missions under way are not affected.</Original>
+        <Polish>Misje spoza nowego obszaru znikną z tablicy misji, a nowe będą pochodzić z jego wnętrza. Trwające misje się nie zmienią.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_accept_no_pos_tooltip">
+        <Original>Click the map to place the centre first.</Original>
+        <Polish>Najpierw kliknij mapę, aby wyznaczyć środek.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_accept_same_tooltip">
+        <Original>This is the current mission area already.</Original>
+        <Polish>To już jest obecny obszar misji.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_reset">
+        <Original>Reset to HQ</Original>
+        <Polish>Wróć do HQ</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_mission_area_reset_tooltip">
+        <Original>Missions come from around the HQ again, up to the mission distance set in the lobby.</Original>
+        <Polish>Misje znów będą pochodzić z okolic HQ, do odległości misji ustawionej w lobby.</Polish>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_add_vehicle">
         <Original>Add Vehicle</Original>
         <German>Fahrzeug hinzufügen</German>

@@ -1,8 +1,8 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _hqPos = markerPos "Synd_HQ";
-private _nearCities = citiesX inAreaArrayIndexes [_hqPos, distanceMission, distanceMission] apply { citiesX#_x }
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
+private _nearCities = citiesX inAreaArrayIndexes [_areaPos, _areaRad, _areaRad] apply { citiesX#_x }
     select { sidesX getVariable _x != teamPlayer };
 
 private _weightedMarkers = [];
@@ -11,8 +11,8 @@ private _weightedMarkers = [];
     if !(_stationPos isEqualType []) then { continue };
 
     private _station = nearestBuilding _stationPos;
-    private _dist = markerPos _x distance2d _hqPos;
-    _weightedMarkers append [[_x, _station], (distanceMission - _dist) ^ 2];
+    private _dist = markerPos _x distance2d _areaPos;
+    _weightedMarkers append [[_x, _station], (_areaRad - _dist) ^ 2];
 } forEach (_nearCities - destroyedSites);
 
 if (_weightedMarkers isEqualTo []) exitWith {false};        // no suitable cities

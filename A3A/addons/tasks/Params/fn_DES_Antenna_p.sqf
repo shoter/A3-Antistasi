@@ -1,7 +1,8 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _nearAntennas = A3A_antennas select {alive _x} inAreaArray ["Synd_HQ", distanceMission, distanceMission];
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
+private _nearAntennas = A3A_antennas select {alive _x} inAreaArray [_areaPos, _areaRad, _areaRad];
 private _possible = [];
 {
     private _nearbyMarker = A3A_antennaMap get netId _x;

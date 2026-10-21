@@ -1,27 +1,27 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _hqPos = markerPos "Synd_HQ";
-private _maxDist = distanceMission;
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
+private _maxDist = _areaRad;
 private _markers = (resourcesX + factories + seaports + outposts - blackListDest);      // no airports as source?
-_markers = _markers inAreaArray [_hqPos, _maxDist, _maxDist] select {sidesX getVariable _x != teamPlayer};
+_markers = _markers inAreaArray [_areaPos, _maxDist, _maxDist] select {sidesX getVariable _x != teamPlayer};
 private _players = allPlayers - entities "HeadlessClient_F";
 
 private _place = [];
 while {_place isEqualTo [] and _markers isNotEqualTo []} do {
     private _source = _markers deleteAt floor random count _markers;
-    private _sourceDist = markerPos _source distance2d _hqPos;
+    private _sourceDist = markerPos _source distance2d _areaPos;
     private _side = sidesX getVariable _source;
 
     private _suppMarkers = [_source, false] call A3A_fnc_findLandSupportMarkers apply {_x#0};
-    _suppMarkers = _suppMarkers inAreaArray [_hqPos, _maxDist+500, _maxDist+500] select {sidesX getVariable _x == _side}
+    _suppMarkers = _suppMarkers inAreaArray [_areaPos, _maxDist+500, _maxDist+500] select {sidesX getVariable _x == _side}
         select {spawner getVariable _x == 2};           // only use unspawned destination markers to give better chance of truck despawning on RTB
 
     while {_place isEqualTo [] and _suppMarkers isNotEqualTo []} do {
         private _dest = _suppMarkers deleteAt floor random count _suppMarkers;
         private _destPos = markerPos _dest;
         if (markerPos _source distance2d _destPos < 1200) then {continue};
-        if (_sourceDist + (_destPos distance2d _hqPos) > 1.5*distanceMission) then {continue};      // avoid routes that stay outside mission distance
+        if (_sourceDist + (_destPos distance2d _areaPos) > 1.5*_areaRad) then {continue};      // avoid routes that stay outside mission distance
 
         // ok, now have a source/dest pair to test the route for
         private _exclude = _players + [_source, _dest];         // mixed obj/pos but that should be ok

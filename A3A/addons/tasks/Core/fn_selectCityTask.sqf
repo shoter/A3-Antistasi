@@ -9,6 +9,9 @@ private _breakOut = call {
     if (_force) exitWith {false};
     if (sidesX getVariable _marker == teamPlayer) exitWith {true};
     if (_marker in A3A_activeCityBattles) exitWith {true};
+    // A mission area set by the commander keeps city tasks inside it. Without one they start anywhere, as before
+    (call FUNC(getMissionArea)) params ["_areaPos", "_areaRad", "_areaSet"];
+    if (_areaSet and {!(markerPos _marker inArea [_areaPos, _areaRad, _areaRad, 0, false])}) exitWith {true};
 
     private _chance = A3A_cityTaskTimer get _marker;
     if (random 1 < _chance) exitWith {false};

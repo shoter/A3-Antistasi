@@ -969,7 +969,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 };
 
 
-                // Fire mission view
+                // Fire mission view. MissionAreaControlsGroup uses the same rectangle, the two are never shown together
                 class FireMissionControlsGroup : A3A_ControlsGroupNoScrollbars
                 {
                     idc = A3A_IDC_FIREMISSONCONTROLSGROUP;
@@ -1429,6 +1429,221 @@ class A3A_MainDialog : A3A_TabbedDialog
                     };
                 };
 
+                // Mission area view. Shares the fire mission view's rectangle and covers the HC squads button and
+                // CommanderButtonsGroup: shown by the showMissionAreaView mode of fn_commanderTab, which hides those,
+                // and hidden again by its update mode
+                class MissionAreaControlsGroup : A3A_ControlsGroupNoScrollbars
+                {
+                    idc = A3A_IDC_MISSIONAREACONTROLSGROUP;
+                    x = 8 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 54 * GRID_W;
+                    h = 68 * GRID_H;
+
+                    class controls
+                    {
+                        // Label also works as a back button
+                        class MissionAreaLabel : A3A_Button_Left
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_main_mission_area_button;
+                            onButtonClick = "[""update""] call A3A_GUI_fnc_commanderTab;";
+                            x = 0;
+                            y = 0;
+                            w = 54 * GRID_W;
+                            h = 6 * GRID_H;
+                        };
+
+                        class MissionAreaBackground : A3A_Background
+                        {
+                            idc = -1;
+                            x = 0;
+                            y = 6 * GRID_H;
+                            w = 54 * GRID_W;
+                            h = 62 * GRID_H;
+                        };
+
+                        class MissionAreaCentreLabel : A3A_SectionLabelRight
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_main_mission_area_centre_label;
+                            x = 2 * GRID_W;
+                            y = 8 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class MissionAreaPositionLabel : A3A_Text
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_main_mission_area_position_label;
+                            x = 2 * GRID_W;
+                            y = 13 * GRID_H;
+                            w = 20 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class MissionAreaPositionEditbox : A3A_Edit
+                        {
+                            idc = A3A_IDC_MISSIONAREAPOSEDITBOX;
+                            text = "";
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            style = ST_RIGHT + ST_NO_RECT;
+                            onLoad = "_this#0 ctrlEnable false";
+                            colorDisabled[] = A3A_COLOR_TEXT;
+                            colorBackground[] = A3A_COLOR_BLACK;
+                            x = 22 * GRID_W;
+                            y = 13 * GRID_H;
+                            w = 30 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class MissionAreaHintText : A3A_TextMulti
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_main_mission_area_hint;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            x = 2 * GRID_W;
+                            y = 18 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class MissionAreaRadiusLabel : A3A_SectionLabelRight
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_main_mission_area_radius_label;
+                            x = 2 * GRID_W;
+                            y = 27 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class MissionAreaRadius2Button : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREARADIUS2BUTTON;
+                            text = "2 km";
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [2000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 2 * GRID_W;
+                            y = 32 * GRID_H;
+                            w = 10 * GRID_W;
+                            h = 6 * GRID_H;
+
+                            // Radio buttons, the active one is disabled. See the fire mission type buttons
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                            colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                        };
+
+                        class MissionAreaRadius4Button : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREARADIUS4BUTTON;
+                            text = "4 km";
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [4000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 12 * GRID_W;
+                            y = 32 * GRID_H;
+                            w = 10 * GRID_W;
+                            h = 6 * GRID_H;
+
+                            // Radio buttons, the active one is disabled. See the fire mission type buttons
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                            colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                        };
+
+                        class MissionAreaRadius6Button : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREARADIUS6BUTTON;
+                            text = "6 km";
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [6000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 22 * GRID_W;
+                            y = 32 * GRID_H;
+                            w = 10 * GRID_W;
+                            h = 6 * GRID_H;
+
+                            // Radio buttons, the active one is disabled. See the fire mission type buttons
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                            colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                        };
+
+                        class MissionAreaRadius8Button : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREARADIUS8BUTTON;
+                            text = "8 km";
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [8000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 32 * GRID_W;
+                            y = 32 * GRID_H;
+                            w = 10 * GRID_W;
+                            h = 6 * GRID_H;
+
+                            // Radio buttons, the active one is disabled. See the fire mission type buttons
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                            colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                        };
+
+                        class MissionAreaRadius10Button : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREARADIUS10BUTTON;
+                            text = "10 km";
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [10000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 42 * GRID_W;
+                            y = 32 * GRID_H;
+                            w = 10 * GRID_W;
+                            h = 6 * GRID_H;
+
+                            // Radio buttons, the active one is disabled. See the fire mission type buttons
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                            colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                        };
+
+                        class MissionAreaCurrentLabel : A3A_SectionLabelRight
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_main_mission_area_current_label;
+                            x = 2 * GRID_W;
+                            y = 40 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class MissionAreaCurrentText : A3A_Text
+                        {
+                            idc = A3A_IDC_MISSIONAREACURRENTTEXT;
+                            text = "";
+                            x = 2 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class MissionAreaAcceptButton : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREAACCEPTBUTTON;
+                            text = $STR_antistasi_dialogs_main_mission_area_accept;
+                            onButtonClick = "[""missionAreaAcceptClicked""] call A3A_GUI_fnc_commanderTab;";
+                            x = 2 * GRID_W;
+                            y = 56 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class MissionAreaResetButton : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREARESETBUTTON;
+                            text = $STR_antistasi_dialogs_main_mission_area_reset;
+                            tooltip = $STR_antistasi_dialogs_main_mission_area_reset_tooltip;
+                            onButtonClick = "[""missionAreaResetClicked""] call A3A_GUI_fnc_commanderTab;";
+                            x = 28 * GRID_W;
+                            y = 56 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+                    };
+                };
+
                 class NoRadioControlsGroup : A3A_ControlsGroupNoScrollbars
                 {
                     idc = A3A_IDC_NORADIOCONTROLSGROUP;
@@ -1645,6 +1860,20 @@ class A3A_MainDialog : A3A_TabbedDialog
                             onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_SubCommandersDialog""};";
                             x = 28 * GRID_W;
                             y = 56 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        // Mission area. Commander only, hidden for sub-commanders by the commander tab update.
+                        // First slot of a sixth row, reached by scrolling the group
+                        class MissionAreaButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_MISSIONAREABUTTON;
+                            text = $STR_antistasi_dialogs_main_mission_area_button;
+                            tooltip = $STR_antistasi_dialogs_main_mission_area_tooltip;
+                            onButtonClick = "[""showMissionAreaView""] call A3A_GUI_fnc_commanderTab;";
+                            x = 2 * GRID_W;
+                            y = 70 * GRID_H;
                             w = 24 * GRID_W;
                             h = 12 * GRID_H;
                         };

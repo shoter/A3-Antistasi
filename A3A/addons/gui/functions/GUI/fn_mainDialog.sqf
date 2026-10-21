@@ -109,6 +109,9 @@ switch (_mode) do
         // Fire mission markers
         private _fireMissionEH = _commanderMap ctrlAddEventHandler ["Draw","call A3A_GUI_fnc_fireMissionEH"];
         Debug_1("Adding Fire Mission Draw EH to commander map: %1", _fireMissionEH);
+        // Mission area, the commander map hides normal markers
+        private _missionAreaEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_missionAreaEH"];
+        Debug_1("Adding mission area Draw EH to commander map: %1", _missionAreaEH);
         // Select marker
         private _commanderHcSelectEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawSelectEH"];
         Debug_1("Adding HC group selection Draw EH to commander map: %1", _commanderHcSelectEH);

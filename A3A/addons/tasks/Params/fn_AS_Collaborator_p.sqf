@@ -17,10 +17,10 @@ Public: No
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _hqPos = markerPos "Synd_HQ";
+(call FUNC(getMissionArea)) params ["_areaPos", "_areaRad"];
 private _players = allPlayers - entities "HeadlessClient_F";
 
-private _cities = (citiesX inAreaArray [_hqPos, distanceMission, distanceMission]) - destroyedSites;
+private _cities = (citiesX inAreaArray [_areaPos, _areaRad, _areaRad]) - destroyedSites;
 _cities = _cities select { sidesX getVariable _x in [Occupants, Invaders] } select { spawner getVariable _x != 0 };
 
 private _place = [];

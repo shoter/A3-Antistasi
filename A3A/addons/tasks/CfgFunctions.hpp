@@ -17,11 +17,14 @@ class CfgFunctions {
             class requestTask {};
             class runTask {};
             class selectCityTask {};
+            class setMissionArea {};
         };
         class Helpers { // task helper functions  |  Common functionality used by tasks or the params getters
             file = QPATHTOFOLDER(Helpers);
+            class getMissionArea {};
             class hintNear {};
             class minutesFromNow {};
+            class missionAreaMarker {};
             class nearFriendlyMarkers {};
             class nearHostileMarkers {};
             class rewardPlayers {};
