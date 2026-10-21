@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - More ammo for rebel statics and AA vehicles
+
+### Changed
+- Rebel statics, AA vehicles and other armed vehicles you buy or recruit with a squad now spawn with up to **twice as much ammo** as before. Many of them now start fully loaded. Enemy vehicles are unchanged.
+
 ## 2026-10-21 - Squad composer and custom squads
 
 ### Added
