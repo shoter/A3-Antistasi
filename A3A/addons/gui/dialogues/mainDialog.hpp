@@ -1519,15 +1519,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 4 * GRID_H;
                         };
 
-                        class MissionAreaRadius3Button : A3A_Button
+                        class MissionAreaRadius1Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS3BUTTON;
-                            text = "3 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS1BUTTON;
+                            text = "1 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [3000]] call A3A_GUI_fnc_commanderTab;";
-                            x = 2 * GRID_W;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [1000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 3 * GRID_W;
                             y = 32 * GRID_H;
-                            w = 10 * GRID_W;
+                            w = 8 * GRID_W;
                             h = 6 * GRID_H;
 
                             // Radio buttons, the active one is disabled. See the fire mission type buttons
@@ -1535,15 +1535,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius5Button : A3A_Button
+                        class MissionAreaRadius2Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS5BUTTON;
-                            text = "5 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS2BUTTON;
+                            text = "2 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [5000]] call A3A_GUI_fnc_commanderTab;";
-                            x = 12 * GRID_W;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [2000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 11 * GRID_W;
                             y = 32 * GRID_H;
-                            w = 10 * GRID_W;
+                            w = 8 * GRID_W;
                             h = 6 * GRID_H;
 
                             // Radio buttons, the active one is disabled. See the fire mission type buttons
@@ -1551,15 +1551,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius7Button : A3A_Button
+                        class MissionAreaRadius4Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS7BUTTON;
-                            text = "7 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS4BUTTON;
+                            text = "4 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [7000]] call A3A_GUI_fnc_commanderTab;";
-                            x = 22 * GRID_W;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [4000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 19 * GRID_W;
                             y = 32 * GRID_H;
-                            w = 10 * GRID_W;
+                            w = 8 * GRID_W;
                             h = 6 * GRID_H;
 
                             // Radio buttons, the active one is disabled. See the fire mission type buttons
@@ -1567,15 +1567,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius9Button : A3A_Button
+                        class MissionAreaRadius6Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS9BUTTON;
-                            text = "9 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS6BUTTON;
+                            text = "6 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [9000]] call A3A_GUI_fnc_commanderTab;";
-                            x = 32 * GRID_W;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [6000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 27 * GRID_W;
                             y = 32 * GRID_H;
-                            w = 10 * GRID_W;
+                            w = 8 * GRID_W;
                             h = 6 * GRID_H;
 
                             // Radio buttons, the active one is disabled. See the fire mission type buttons
@@ -1583,15 +1583,31 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius11Button : A3A_Button
+                        class MissionAreaRadius8Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS11BUTTON;
-                            text = "11 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS8BUTTON;
+                            text = "8 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [11000]] call A3A_GUI_fnc_commanderTab;";
-                            x = 42 * GRID_W;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [8000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 35 * GRID_W;
                             y = 32 * GRID_H;
-                            w = 10 * GRID_W;
+                            w = 8 * GRID_W;
+                            h = 6 * GRID_H;
+
+                            // Radio buttons, the active one is disabled. See the fire mission type buttons
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                            colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                        };
+
+                        class MissionAreaRadius10Button : A3A_Button
+                        {
+                            idc = A3A_IDC_MISSIONAREARADIUS10BUTTON;
+                            text = "10 km";
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""missionAreaRadiusClicked"", [10000]] call A3A_GUI_fnc_commanderTab;";
+                            x = 43 * GRID_W;
+                            y = 32 * GRID_H;
+                            w = 8 * GRID_W;
                             h = 6 * GRID_H;
 
                             // Radio buttons, the active one is disabled. See the fire mission type buttons

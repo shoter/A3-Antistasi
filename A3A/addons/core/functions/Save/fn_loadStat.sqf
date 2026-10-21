@@ -111,9 +111,9 @@ if (_varName in _specialVarLoads) then {
         A3A_missionArea = [];
         if (_varValue isEqualType [] && {count _varValue == 2}) then {
             _varValue params [["_pos", [], [[]]], ["_radius", 0, [0]]];
-            // Saves from before the presets grew by 1 km hold 2, 4, 6, 8 or 10 km, those move up to the new preset
-            if (_radius in [2000, 4000, 6000, 8000, 10000]) then { _radius = _radius + 1000 };
-            if (count _pos >= 2 && {_radius in [3000, 5000, 7000, 9000, 11000]}) then { A3A_missionArea = [[_pos # 0, _pos # 1, 0], _radius] };
+            // The 3, 5, 7, 9 and 11 km presets of 2026-10-21 were replaced the same day, those saves move down 1 km
+            if (_radius in [3000, 5000, 7000, 9000, 11000]) then { _radius = _radius - 1000 };
+            if (count _pos >= 2 && {_radius in [1000, 2000, 4000, 6000, 8000, 10000]}) then { A3A_missionArea = [[_pos # 0, _pos # 1, 0], _radius] };
         };
         publicVariable "A3A_missionArea";
         call A3A_tasks_fnc_missionAreaMarker;
