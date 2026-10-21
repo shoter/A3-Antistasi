@@ -1519,12 +1519,12 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 4 * GRID_H;
                         };
 
-                        class MissionAreaRadius2Button : A3A_Button
+                        class MissionAreaRadius3Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS2BUTTON;
-                            text = "2 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS3BUTTON;
+                            text = "3 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [2000]] call A3A_GUI_fnc_commanderTab;";
+                            onButtonClick = "[""missionAreaRadiusClicked"", [3000]] call A3A_GUI_fnc_commanderTab;";
                             x = 2 * GRID_W;
                             y = 32 * GRID_H;
                             w = 10 * GRID_W;
@@ -1535,12 +1535,12 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius4Button : A3A_Button
+                        class MissionAreaRadius5Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS4BUTTON;
-                            text = "4 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS5BUTTON;
+                            text = "5 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [4000]] call A3A_GUI_fnc_commanderTab;";
+                            onButtonClick = "[""missionAreaRadiusClicked"", [5000]] call A3A_GUI_fnc_commanderTab;";
                             x = 12 * GRID_W;
                             y = 32 * GRID_H;
                             w = 10 * GRID_W;
@@ -1551,12 +1551,12 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius6Button : A3A_Button
+                        class MissionAreaRadius7Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS6BUTTON;
-                            text = "6 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS7BUTTON;
+                            text = "7 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [6000]] call A3A_GUI_fnc_commanderTab;";
+                            onButtonClick = "[""missionAreaRadiusClicked"", [7000]] call A3A_GUI_fnc_commanderTab;";
                             x = 22 * GRID_W;
                             y = 32 * GRID_H;
                             w = 10 * GRID_W;
@@ -1567,12 +1567,12 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius8Button : A3A_Button
+                        class MissionAreaRadius9Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS8BUTTON;
-                            text = "8 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS9BUTTON;
+                            text = "9 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [8000]] call A3A_GUI_fnc_commanderTab;";
+                            onButtonClick = "[""missionAreaRadiusClicked"", [9000]] call A3A_GUI_fnc_commanderTab;";
                             x = 32 * GRID_W;
                             y = 32 * GRID_H;
                             w = 10 * GRID_W;
@@ -1583,12 +1583,12 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                         };
 
-                        class MissionAreaRadius10Button : A3A_Button
+                        class MissionAreaRadius11Button : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONAREARADIUS10BUTTON;
-                            text = "10 km";
+                            idc = A3A_IDC_MISSIONAREARADIUS11BUTTON;
+                            text = "11 km";
                             sizeEx = GUI_TEXT_SIZE_SMALL;
-                            onButtonClick = "[""missionAreaRadiusClicked"", [10000]] call A3A_GUI_fnc_commanderTab;";
+                            onButtonClick = "[""missionAreaRadiusClicked"", [11000]] call A3A_GUI_fnc_commanderTab;";
                             x = 42 * GRID_W;
                             y = 32 * GRID_H;
                             w = 10 * GRID_W;

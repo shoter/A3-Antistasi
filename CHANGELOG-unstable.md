@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Bigger mission area presets
+
+### Changed
+- The **Mission Area** radius choices on the Commander tab of the Battle Menu (`Y`) are now **3, 5, 7, 9 and 11 km** (were 2, 4, 6, 8 and 10 km). A mission area saved before this update grows by 1 km when the save loads.
+
 ## 2026-10-21 - Fewer helicopter QRFs, steadier enemy vehicle mix
 
 ### Changed

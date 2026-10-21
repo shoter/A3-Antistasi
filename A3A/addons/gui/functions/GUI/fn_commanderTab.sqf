@@ -29,7 +29,7 @@ License: APL-ND
 FIX_LINE_NUMBERS()
 
 // Mission area radius presets, the server accepts only these (A3A_tasks_fnc_setMissionArea)
-#define MISSION_AREA_RADII [2000, 4000, 6000, 8000, 10000]
+#define MISSION_AREA_RADII [3000, 5000, 7000, 9000, 11000]
 
 params[["_mode","update"], ["_params",[]]];
 
@@ -1134,7 +1134,7 @@ switch (_mode) do
     case ("updateMissionAreaView"):
     {
         private _newPos = _missionAreaControlsGroup getVariable ["areaPos", []];
-        private _newRad = _missionAreaControlsGroup getVariable ["areaRadius", 4000];
+        private _newRad = _missionAreaControlsGroup getVariable ["areaRadius", 5000];
         (call A3A_tasks_fnc_getMissionArea) params ["_areaPos", "_areaRad", "_areaSet"];
 
         private _posEditBox = _display displayCtrl A3A_IDC_MISSIONAREAPOSEDITBOX;
@@ -1145,11 +1145,11 @@ switch (_mode) do
             _x params ["_idc", "_radius"];
             (_display displayCtrl _idc) ctrlEnable (_radius != _newRad);
         } forEach [
-            [A3A_IDC_MISSIONAREARADIUS2BUTTON, 2000],
-            [A3A_IDC_MISSIONAREARADIUS4BUTTON, 4000],
-            [A3A_IDC_MISSIONAREARADIUS6BUTTON, 6000],
-            [A3A_IDC_MISSIONAREARADIUS8BUTTON, 8000],
-            [A3A_IDC_MISSIONAREARADIUS10BUTTON, 10000]
+            [A3A_IDC_MISSIONAREARADIUS3BUTTON, 3000],
+            [A3A_IDC_MISSIONAREARADIUS5BUTTON, 5000],
+            [A3A_IDC_MISSIONAREARADIUS7BUTTON, 7000],
+            [A3A_IDC_MISSIONAREARADIUS9BUTTON, 9000],
+            [A3A_IDC_MISSIONAREARADIUS11BUTTON, 11000]
         ];
 
         private _currentText = _display displayCtrl A3A_IDC_MISSIONAREACURRENTTEXT;
@@ -1175,7 +1175,7 @@ switch (_mode) do
 
     case ("missionAreaRadiusClicked"):
     {
-        _params params [["_radius", 4000, [0]]];
+        _params params [["_radius", 5000, [0]]];
         _missionAreaControlsGroup setVariable ["areaRadius", _radius];
         ["updateMissionAreaView"] call FUNC(commanderTab);
     };
@@ -1183,7 +1183,7 @@ switch (_mode) do
     case ("missionAreaAcceptClicked"):
     {
         private _newPos = _missionAreaControlsGroup getVariable ["areaPos", []];
-        private _newRad = _missionAreaControlsGroup getVariable ["areaRadius", 4000];
+        private _newRad = _missionAreaControlsGroup getVariable ["areaRadius", 5000];
         if (_newPos isEqualTo []) exitWith {};
         Trace_2("Commander setting the mission area to %1, radius %2", _newPos, _newRad);
         [player, _newPos, _newRad] remoteExecCall ["A3A_tasks_fnc_setMissionArea", 2];

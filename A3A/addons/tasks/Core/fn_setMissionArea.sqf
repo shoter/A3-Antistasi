@@ -9,7 +9,7 @@ Maintainer: Shoter
 Arguments:
     <OBJECT> Player requesting the change, has to be the commander
     <ARRAY> Centre position, or [] to go back to the HQ
-    <NUMBER> Radius in metres: 2000, 4000, 6000, 8000 or 10000. Ignored when clearing [DEFAULT = 0]
+    <NUMBER> Radius in metres: 3000, 5000, 7000, 9000 or 11000. Ignored when clearing [DEFAULT = 0]
 
 Return Value:
     <BOOL> True if the area changed
@@ -21,13 +21,13 @@ Dependencies:
     A3A_missionArea, A3A_tasks_fnc_missionAreaMarker, A3A_tasks_fnc_boardUpdate
 
 Example:
-    [player, _pos, 6000] remoteExecCall ["A3A_tasks_fnc_setMissionArea", 2];
+    [player, _pos, 7000] remoteExecCall ["A3A_tasks_fnc_setMissionArea", 2];
     [player, []] remoteExecCall ["A3A_tasks_fnc_setMissionArea", 2];       // back to the HQ
 */
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define AREA_RADII [2000, 4000, 6000, 8000, 10000]
+#define AREA_RADII [3000, 5000, 7000, 9000, 11000]
 #define BOARD_START_PER_CATEGORY 2
 
 if (!isServer) exitWith { Error("Server-only function miscalled"); false };
