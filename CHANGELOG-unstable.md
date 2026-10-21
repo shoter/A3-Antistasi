@@ -4,6 +4,15 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Commander sets the mission area
+
+### Added
+- New **Mission Area** button on the Commander tab (scroll down the buttons). The commander clicks a point on the map, picks a radius of **2, 4, 6, 8 or 10 km**, sees the circle and presses **Accept**.
+- Missions on the mission board now come from inside that circle instead of from around the HQ. Missions outside it leave the board and new ones are posted inside it right away. Missions already under way are not affected.
+- While an area is set, town missions (taxi, repair, hostage and the others) only appear in towns inside it.
+- Everyone sees the area as a circle on the map and gets a message when it changes. **Reset to HQ** goes back to the old behaviour: missions around the HQ, up to the mission distance set in the lobby.
+- **Saves**: the area is saved with the campaign and stays when the HQ moves. Older saves start without one, so nothing changes until the commander sets it.
+
 ## 2026-10-21 - Smaller respawn penalty for poor players
 
 ### Changed
