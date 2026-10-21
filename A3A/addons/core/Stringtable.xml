@@ -6396,6 +6396,10 @@
         <Czech>Máte příliš mnoho aktivních družstev vrchního velení. Rozpustěte je nebo umístěte některé z nich do posádky, abyste mohli rekrutovat další.</Czech>
         <Chinesesimp>你手下的高等指挥小组数量过多. 解散或者命令他们作为驻军后才能雇佣更多.</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_reinf_addSqdHC_custom_no_vehicle">
+        <Original>This squad has more soldiers than the vehicle has seats. It is recruited on foot.</Original>
+        <Polish>Ten oddział ma więcej żołnierzy niż pojazd ma miejsc. Zostanie zrekrutowany bez pojazdu.</Polish>
+      </Key>
       <Key ID="STR_A3A_fn_reinf_addSqdHC_no_modset">
         <Original>Your current modset doesn't support packing/unpacking static weapons.</Original>
         <Italian>Il modset attuale non supporta il carico/scarico di armi statiche.</Italian>

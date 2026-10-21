@@ -25,4 +25,5 @@ Maintainer: DoomMetal
 #include "deployedFlagDialog.hpp"
 #include "lootDeliveryDialog.hpp"
 #include "subCommandersDialog.hpp"
+#include "squadComposerDialog.hpp"
 #include "buyIntelDialog.hpp"

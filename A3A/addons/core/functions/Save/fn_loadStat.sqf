@@ -36,7 +36,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits", "rewardShares", "campaignLog", "subCommanders", "missionArea"
+    "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits", "rewardShares", "campaignLog", "subCommanders", "missionArea", "customSquads"
 ];
 
 private _varName = _this select 0;
@@ -115,6 +115,17 @@ if (_varName in _specialVarLoads) then {
         };
         publicVariable "A3A_missionArea";
         call A3A_tasks_fnc_missionAreaMarker;
+    };
+    if (_varName == 'customSquads') then {
+        // Custom squads 1 and 2 as [abbreviation, [[unit key, count], ...]], cleaned the same way as an edit from the squad composer
+        if (_varValue isEqualType []) then {
+            {
+                if !(_x isEqualType []) then { continue };
+                _x params [["_abbr", "", [""]], ["_counts", [], [[]]]];
+                A3A_customSquads set [_forEachIndex, [_abbr, _counts, A3A_customSquads # _forEachIndex # 0] call A3A_fnc_customSquadSanitize];
+            } forEach (_varValue select [0, 2]);
+        };
+        publicVariable "A3A_customSquads";
     };
     if (_varName == 'campaignLog') then {
         A3A_campaignLog = +_varValue;

@@ -1723,6 +1723,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
+                        // Commander only. For sub-commanders this slot is taken by SquadComposerButton, moved here by the commander tab update
                         class PersistentSaveButton : A3A_ShortcutButton
                         {
                             idc = A3A_IDC_PERSISTENTSAVECMDBUTTON;
@@ -1873,6 +1874,21 @@ class A3A_MainDialog : A3A_TabbedDialog
                             tooltip = $STR_antistasi_dialogs_main_mission_area_tooltip;
                             onButtonClick = "[""showMissionAreaView""] call A3A_GUI_fnc_commanderTab;";
                             x = 2 * GRID_W;
+                            y = 70 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        // Squad composer for the custom squads of the Recruit Squad dialog. Command staff: second slot of the sixth row
+                        // for the commander. For sub-commanders the commander tab update moves it next to Recruit Squad into the slot
+                        // of PersistentSaveButton, which is hidden for them
+                        class SquadComposerButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_SQUADCOMPOSERBUTTON;
+                            text = $STR_antistasi_dialogs_main_squad_composer_button;
+                            tooltip = $STR_antistasi_dialogs_main_squad_composer_tooltip;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_SquadComposerDialog""};";
+                            x = 28 * GRID_W;
                             y = 70 * GRID_H;
                             w = 24 * GRID_W;
                             h = 12 * GRID_H;

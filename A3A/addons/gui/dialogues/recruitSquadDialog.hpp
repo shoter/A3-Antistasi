@@ -61,72 +61,72 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITENGSQUADICON;
           text = A3A_Icon_Eng_Squad;
-          y = 23 * GRID_H;
+          y = 20 * GRID_H;
         };
         class EngSquadPriceText : InfSquadPriceText
         {
           idc = A3A_IDC_RECRUITENGSQUADPRICE;
-          y = 31 * GRID_H;
+          y = 28 * GRID_H;
         };
         class EngSquadButton : InfSquadButton
         {
           idc = A3A_IDC_RECRUITENGSQUADBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_eng_squad;
-          y = 23 * GRID_H;
+          y = 20 * GRID_H;
         };
 
         class InfTeamIcon : InfSquadIcon
         {
           idc = A3A_IDC_RECRUITINFTEAMICON;
           text = A3A_Icon_Inf_Team;
-          y = 40 * GRID_H;
+          y = 34 * GRID_H;
         };
         class InfTeamPriceText : InfSquadPriceText
         {
           idc = A3A_IDC_RECRUITINFTEAMPRICE;
-          y = 48 * GRID_H;
+          y = 42 * GRID_H;
         };
         class InfTeamButton : InfSquadButton
         {
           idc = A3A_IDC_RECRUITINFTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_inf_team;
-          y = 40 * GRID_H;
+          y = 34 * GRID_H;
         };
 
         class AtTeamIcon : InfSquadIcon
         {
           idc = A3A_IDC_RECRUITATTEAMICON;
           text = A3A_Icon_AT_Team;
-          y = 57 * GRID_H;
+          y = 48 * GRID_H;
         };
         class AtTeamPriceText : InfSquadPriceText
         {
           idc = A3A_IDC_RECRUITATTEAMPRICE;
-          y = 65 * GRID_H;
+          y = 56 * GRID_H;
         };
         class AtTeamButton : InfSquadButton
         {
           idc = A3A_IDC_RECRUITATTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_at_team;
-          y = 57 * GRID_H;
+          y = 48 * GRID_H;
         };
 
         class SniperTeamIcon : InfSquadIcon
         {
           idc = A3A_IDC_RECRUITSNIPERTEAMICON;
           text = A3A_Icon_Sniper_Team;
-          y = 74 * GRID_H;
+          y = 62 * GRID_H;
         };
         class SniperTeamPriceText : InfSquadPriceText
         {
           idc = A3A_IDC_RECRUITSNIPERTEAMPRICE;
-          y = 82 * GRID_H;
+          y = 70 * GRID_H;
         };
         class SniperTeamButton : InfSquadButton
         {
           idc = A3A_IDC_RECRUITSNIPERTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_sniper_team;
-          y = 74 * GRID_H;
+          y = 62 * GRID_H;
         };
 
         // Right hand squads
@@ -156,72 +156,111 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITMORTARTEAMICON;
           text = A3A_Icon_Mortar_Team;
-          y = 23 * GRID_H;
+          y = 20 * GRID_H;
         };
         class MortarTeamPriceText : MGTeamPriceText
         {
           idc = A3A_IDC_RECRUITMORTARTEAMPRICE;
-          y = 31 * GRID_H;
+          y = 28 * GRID_H;
         };
         class MortarTeamButton : MgTeamButton
         {
           idc = A3A_IDC_RECRUITMORTARTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_mortar_team;
-          y = 23 * GRID_H;
+          y = 20 * GRID_H;
         };
 
         class MgCarIcon : MgTeamIcon
         {
           idc = A3A_IDC_RECRUITMGCARICON;
           text = A3A_Icon_MG_Car;
-          y = 40 * GRID_H;
+          y = 34 * GRID_H;
         };
         class MgCarPriceText : MgTeamPriceText
         {
           idc = A3A_IDC_RECRUITMGCARPRICE;
-          y = 48 * GRID_H;
+          y = 42 * GRID_H;
         };
         class MgCarButton : MgTeamButton
         {
           idc = A3A_IDC_RECRUITMGCARBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_mg_car;
-          y = 40 * GRID_H;
+          y = 34 * GRID_H;
         };
 
         class AtCarIcon : MgTeamIcon
         {
           idc = A3A_IDC_RECRUITATCARICON;
           text = A3A_Icon_AT_Car;
-          y = 57 * GRID_H;
+          y = 48 * GRID_H;
         };
         class AtCarPriceText : MgTeamPriceText
         {
           idc = A3A_IDC_RECRUITATCARPRICE;
-          y = 65 * GRID_H;
+          y = 56 * GRID_H;
         };
         class AtCarButton : MgTeamButton
         {
           idc = A3A_IDC_RECRUITATCARBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_at_car;
-          y = 57 * GRID_H;
+          y = 48 * GRID_H;
         };
 
         class AaTruckIcon : MgTeamIcon
         {
           idc = A3A_IDC_RECRUITAATRUCKICON;
           text = A3A_Icon_AA_Truck;
-          y = 74 * GRID_H;
+          y = 62 * GRID_H;
         };
         class AaTruckPriceText : MgTeamPriceText
         {
           idc = A3A_IDC_RECRUITAATRUCKPRICE;
-          y = 82 * GRID_H;
+          y = 70 * GRID_H;
         };
         class AaTruckButton : MgTeamButton
         {
           idc = A3A_IDC_RECRUITAATRUCKBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_aa_truck;
-          y = 74 * GRID_H;
+          y = 62 * GRID_H;
+        };
+
+        // Custom squads from the squad composer, sixth row of each column. Text, tooltip and price are set by
+        // A3A_GUI_fnc_recruitSquadDialog "update" from A3A_customSquads
+
+        class Custom1Icon : InfSquadIcon
+        {
+          idc = A3A_IDC_RECRUITCUSTOM1ICON;
+          text = A3A_Icon_Inf_Squad;
+          y = 76 * GRID_H;
+        };
+        class Custom1PriceText : InfSquadPriceText
+        {
+          idc = A3A_IDC_RECRUITCUSTOM1PRICE;
+          y = 84 * GRID_H;
+        };
+        class Custom1Button : InfSquadButton
+        {
+          idc = A3A_IDC_RECRUITCUSTOM1BUTTON;
+          text = $STR_antistasi_dialogs_squad_composer_custom1;
+          y = 76 * GRID_H;
+        };
+
+        class Custom2Icon : MgTeamIcon
+        {
+          idc = A3A_IDC_RECRUITCUSTOM2ICON;
+          text = A3A_Icon_Inf_Squad;
+          y = 76 * GRID_H;
+        };
+        class Custom2PriceText : MgTeamPriceText
+        {
+          idc = A3A_IDC_RECRUITCUSTOM2PRICE;
+          y = 84 * GRID_H;
+        };
+        class Custom2Button : MgTeamButton
+        {
+          idc = A3A_IDC_RECRUITCUSTOM2BUTTON;
+          text = $STR_antistasi_dialogs_squad_composer_custom2;
+          y = 76 * GRID_H;
         };
 
         class IncludeVehicleLabel : A3A_Text

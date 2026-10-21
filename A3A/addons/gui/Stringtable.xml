@@ -2228,6 +2228,14 @@
         <Original>Choose where on the map the faction's missions take place, and how far around it.</Original>
         <Polish>Wybierz, w której części mapy frakcja prowadzi misje i jak daleko wokół.</Polish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_squad_composer_button">
+        <Original>Squad Composer</Original>
+        <Polish>Kompozytor oddziałów</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_squad_composer_tooltip">
+        <Original>Choose the soldiers and the high command abbreviation of Custom 1 and Custom 2 in Recruit Squad.</Original>
+        <Polish>Wybierz żołnierzy i skrót w wysokim dowodzeniu dla oddziałów Własny 1 i Własny 2 w rekrutacji oddziałów.</Polish>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_mission_area_centre_label">
         <Original>Centre</Original>
         <Polish>Środek</Polish>
@@ -4971,6 +4979,18 @@
         <Turkish>AA Kamyonu</Turkish>
         <Chinesesimp>防空卡车</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_squad_custom">
+        <Original>Custom %1 (%2)</Original>
+        <Polish>Własny %1 (%2)</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_squad_custom_tooltip">
+        <Original>%1: %2</Original>
+        <Polish>%1: %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_squad_custom_on_foot">
+        <Original>Too many soldiers for a vehicle, the squad goes on foot.</Original>
+        <Polish>Za dużo żołnierzy na pojazd, oddział pójdzie pieszo.</Polish>
+      </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_at_car">
         <Original>AT Car</Original>
         <German>Panzerabwehrwagen</German>
@@ -7146,6 +7166,100 @@
       <Key ID="STR_antistasi_dialogs_subcommanders_count">
         <Original>Sub-commanders: %1</Original>
         <Polish>Poddowódcy: %1</Polish>
+      </Key>
+    </Container>
+    <Container name="dialog_squad_composer">
+      <Key ID="STR_antistasi_dialogs_squad_composer_titlebar">
+        <Original>Squad Composer</Original>
+        <Polish>Kompozytor oddziałów</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_custom1">
+        <Original>Custom 1</Original>
+        <Polish>Własny 1</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_custom2">
+        <Original>Custom 2</Original>
+        <Polish>Własny 2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_info">
+        <Original>Every custom squad has one squad leader. Add up to 49 more soldiers from the units that can be garrisoned. Saved squads are shared by the whole faction and apply to squads recruited afterwards.</Original>
+        <Polish>Każdy własny oddział ma jednego dowódcę drużyny. Dodaj do 49 żołnierzy spośród jednostek, które mogą stacjonować w garnizonie. Zapisane oddziały są wspólne dla całej frakcji i dotyczą oddziałów rekrutowanych później.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_abbreviation_label">
+        <Original>HC abbreviation</Original>
+        <Polish>Skrót w HC</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_abbreviation_tooltip">
+        <Original>1 to 5 letters or digits. The squad shows in the high command bar as this abbreviation followed by a number.</Original>
+        <Polish>Od 1 do 5 liter lub cyfr. Oddział jest widoczny na pasku wysokiego dowodzenia jako ten skrót z numerem.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_abbreviation_preview">
+        <Original>High command name: %1-12</Original>
+        <Polish>Nazwa w wysokim dowodzeniu: %1-12</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_abbreviation_empty">
+        <Original>Enter 1 to 5 letters or digits</Original>
+        <Polish>Wpisz od 1 do 5 liter lub cyfr</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_soldier_label">
+        <Original>Soldier</Original>
+        <Polish>Żołnierz</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_price_label">
+        <Original>Price</Original>
+        <Polish>Cena</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_count_label">
+        <Original>Count</Original>
+        <Polish>Liczba</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_leader_tooltip">
+        <Original>Every custom squad has exactly one squad leader, who leads the group.</Original>
+        <Polish>Każdy własny oddział ma dokładnie jednego dowódcę drużyny, który prowadzi grupę.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_size">
+        <Original>Soldiers: %1 / %2</Original>
+        <Polish>Żołnierze: %1 / %2</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_cost">
+        <Original>Total cost: %1 € %2 HR</Original>
+        <Polish>Koszt całkowity: %1 € %2 HR</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_vehicle">
+        <Original>With 'Include vehicle': %1, +%2 €</Original>
+        <Polish>Z opcją 'Dołącz pojazd': %1, +%2 €</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_no_vehicle">
+        <Original>Too many soldiers for a vehicle (%1 seats): the squad goes on foot even with 'Include vehicle'.</Original>
+        <Polish>Za dużo żołnierzy na pojazd (%1 miejsc): oddział pójdzie pieszo nawet z opcją 'Dołącz pojazd'.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_unsaved">
+        <Original>Unsaved changes</Original>
+        <Polish>Niezapisane zmiany</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_saved">
+        <Original>Saved</Original>
+        <Polish>Zapisano</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_revert_button">
+        <Original>Revert</Original>
+        <Polish>Cofnij</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_revert_tooltip">
+        <Original>Drop the unsaved changes of this squad.</Original>
+        <Polish>Odrzuć niezapisane zmiany tego oddziału.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_save_button">
+        <Original>Save</Original>
+        <Polish>Zapisz</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_save_tooltip">
+        <Original>Save this squad for the whole faction. Squads already in the field keep their soldiers.</Original>
+        <Polish>Zapisz ten oddział dla całej frakcji. Oddziały już w polu zachowują swoich żołnierzy.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_squad_composer_staff_only">
+        <Original>Only the commander and sub-commanders can change custom squads.</Original>
+        <Polish>Tylko dowódca i poddowódcy mogą zmieniać własne oddziały.</Polish>
       </Key>
     </Container>
     <Container name="dialog_deployed_flag">

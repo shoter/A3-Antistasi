@@ -101,6 +101,46 @@ switch (_mode) do
             [A3A_IDC_RECRUITAATRUCKICON, A3A_IDC_RECRUITAATRUCKPRICE, A3A_IDC_RECRUITAATRUCKBUTTON, FactionGet(reb,"vehiclesAA")]
         ];
         // Readability improvement? Yeah, probably...
+
+        // Custom squads from the squad composer. They go on foot when the vehicle cannot seat the whole squad
+        private _names = createHashMapFromArray A3A_CUSTOM_SQUAD_UNIT_NAMES;
+        {
+            _x params ["_index", "_iconIDC", "_priceIDC", "_buttonIDC"];
+            private _icon = _display displayCtrl _iconIDC;
+            private _priceText = _display displayCtrl _priceIDC;
+            private _button = _display displayCtrl _buttonIDC;
+            (A3A_customSquads param [_index, ["", []]]) params ["_abbreviation", "_counts"];
+            private _group = [_index] call A3A_fnc_customSquadUnits;
+
+            private _vehicle = "";
+            private _fits = true;
+            if (_includeVehicle) then {
+                _vehicle = [_group] call A3A_fnc_getHCSquadVehicleType;
+                if (isNil "_vehicle") then { _vehicle = "" };
+                if (_vehicle != "" && {count _group > ([_vehicle, true] call BIS_fnc_crewCount)}) then { _vehicle = ""; _fits = false };
+            };
+
+            private _composition = [format ["%1 x1", localize (_names get "unitSL")]];
+            { _composition pushBack format ["%1 x%2", localize (_names getOrDefault [_x # 0, ""]), _x # 1] } forEach _counts;
+            private _tooltip = format [localize "STR_antistasi_dialogs_recruit_squad_custom_tooltip", _abbreviation, _composition joinString ", "];
+            if !(_fits) then { _tooltip = _tooltip + " " + localize "STR_antistasi_dialogs_recruit_squad_custom_on_foot" };
+
+            _button ctrlSetText format [localize "STR_antistasi_dialogs_recruit_squad_custom", _index + 1, _abbreviation];
+            _button ctrlSetTooltip _tooltip;
+            _button setVariable ["squadType", _group];
+            _button setVariable ["vehicle", _vehicle];
+            _button setVariable ["idPrefix", _abbreviation];
+            ([_group, _vehicle] call A3A_fnc_getHCSquadPrice) params ["_reqMoney", "_reqHR"];
+            _priceText ctrlSetText (format ["%1 € %2 HR", _reqMoney, _reqHR]);
+            private _canAfford = _money >= _reqMoney && _hr >= _reqHR;
+            _button ctrlEnable _canAfford;
+            _icon ctrlSetTextColor ([[A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray), [A3A_COLOR_TEXT_DARKER] call FUNC(configColorToArray)] select _canAfford);
+            if !(_canAfford) then { _button ctrlSetTooltip localize "STR_antistasi_recruit_squad_error" };
+        } forEach [
+            // Custom squad index, Icon IDC, Price IDC, Button IDC
+            [0, A3A_IDC_RECRUITCUSTOM1ICON, A3A_IDC_RECRUITCUSTOM1PRICE, A3A_IDC_RECRUITCUSTOM1BUTTON],
+            [1, A3A_IDC_RECRUITCUSTOM2ICON, A3A_IDC_RECRUITCUSTOM2PRICE, A3A_IDC_RECRUITCUSTOM2BUTTON]
+        ];
     };
 
     case ("buySquad"):
@@ -113,10 +153,13 @@ switch (_mode) do
         private _includeVehicleCheckbox = _display displayCtrl A3A_IDC_SQUADINCLUDEVEHICLECHECKBOX;
         private _includeVehicle = cbChecked _includeVehicleCheckbox;
 
+        // Custom squads carry the abbreviation chosen in the squad composer
+        private _idPrefix = _button getVariable ["idPrefix", ""];
+
         closeDialog 1;
         // Previous format, to be changed back to this
         // [_squadType, _vehicle] spawn A3A_fnc_addFIAsquadHC;
-        [_squadType, "", _includeVehicle] spawn A3A_fnc_addFIAsquadHC;
+        [_squadType, "", _includeVehicle, _idPrefix] spawn A3A_fnc_addFIAsquadHC;
     };
 
     default {

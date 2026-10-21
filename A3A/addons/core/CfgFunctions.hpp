@@ -750,6 +750,9 @@ class CfgFunctions
             class controlHCsquad {};
             class controlunit {};
             class convertToSquad {};
+            class customSquadSanitize {};
+            class customSquadSet {};
+            class customSquadUnits {};
             class dismissPlayerGroup {};
             class dismissSquad {};
             class enemyNearCheck {};

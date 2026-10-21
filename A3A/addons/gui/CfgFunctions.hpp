@@ -48,6 +48,7 @@ class CfgFunctions {
             class recruitSquadDialog {};
             class requestMissionDialog {};
             class setUpPlacerHints {};
+            class squadComposerDialog {};
             class subCommandersDialog {};
             class teamLeaderRTSPlacerDialog {};
             class townsTab {};

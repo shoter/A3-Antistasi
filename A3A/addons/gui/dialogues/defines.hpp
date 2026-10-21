@@ -238,3 +238,11 @@ Maintainer: DoomMetal
 
 #define A3A_GUI_TEXTURE_PATH_OF(Filename) x\A3A\addons\GUI\dialogues\textures\##Filename
 #define A3A_GUI_QTEXTURE_PATH_OF(Filename) QUOTE(A3A_GUI_TEXTURE_PATH_OF(Filename))
+
+///////////////////
+// CUSTOM SQUADS //
+///////////////////
+
+// Unit key of a custom squad from the squad composer -> stringtable key of its name, squad leader first.
+// Used by A3A_GUI_fnc_squadComposerDialog and A3A_GUI_fnc_recruitSquadDialog
+#define A3A_CUSTOM_SQUAD_UNIT_NAMES [["unitSL", "STR_antistasi_dialogs_hq_garrisons_squad_leader"], ["unitRifle", "STR_antistasi_dialogs_hq_garrisons_rifleman"], ["unitMG", "STR_antistasi_dialogs_hq_garrisons_autorifleman"], ["unitGL", "STR_antistasi_dialogs_hq_garrisons_grenadier"], ["unitMedic", "STR_antistasi_dialogs_hq_garrisons_medic"], ["unitSniper", "STR_antistasi_dialogs_hq_garrisons_marksman"], ["unitLAT", "STR_antistasi_dialogs_hq_garrisons_at"], ["unitAT", "STR_antistasi_dialogs_hq_garrisons_atMissile"], ["unitAA", "STR_antistasi_hq_garrisons_aaMissile"]]

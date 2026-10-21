@@ -2,7 +2,7 @@
 FIX_LINE_NUMBERS()
 private _titleStr = localize "STR_A3A_fn_reinf_addSqdHC_title";
 
-params ["_typeGroup", ["_withBackpck", ""], ["_spawnVeh", ""]];
+params ["_typeGroup", ["_withBackpck", ""], ["_spawnVeh", ""], ["_idPrefix", ""]];
 
 // Sub-commanders recruit their own squads, paid from the faction funds like the commander's
 if !([player] call A3A_fnc_isCommandStaff) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_commander"] call A3A_fnc_customHint;};
@@ -89,6 +89,14 @@ private _idFormat = switch true do {
         };
     };
 };
+// Custom squads from the squad composer carry their own abbreviation, and go on foot when the vehicle cannot seat them all
+if (_idPrefix != "") then {
+    _idFormat = _idPrefix + "-";
+    if (count _formatX > ([_vehType, true] call BIS_fnc_crewCount)) then {
+        if (_spawnVeh isEqualTo true) then { [_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_custom_no_vehicle"] call A3A_fnc_customHint };
+        _spawnVeh = false;
+    };
+};
 private _special = if (_isInfantry) then {
     if (_typeGroup isEqualType []) then { _withBackpck } else {"staticAutoT"};
 } else {
@@ -108,6 +116,7 @@ private _fnc_placed = {
 private _vehiclePlacementMethod = if (getMarkerPos respawnTeamPlayer distance player > 50) then { { _this spawn A3A_fnc_spawnHCVeh } } else { HR_GRG_fnc_confirmPlacement };
 
 if (!_isInfantry) exitWith { [_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod };
+if (_idPrefix != "" && {_spawnVeh isEqualTo false}) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup };
 
 private _vehCost = [_vehType] call A3A_fnc_vehiclePrice;
 if (_isInfantry and (_costs + _vehCost) > server getVariable "resourcesFIA") exitWith {
