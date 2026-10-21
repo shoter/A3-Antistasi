@@ -4,6 +4,18 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-21 - Squad composer and custom squads
+
+### Added
+- **Recruit Squad** has two new squads, **Custom 1** and **Custom 2**. Their tooltip lists who is in them, and in the high command bar they show up under their own abbreviation (for example `ABC-12`).
+- New **Squad Composer** button on the Commander tab of the Battle Menu (`Y`), for the commander and sub-commanders. Choose the soldiers of each custom squad from the units that can be garrisoned: every squad has exactly one squad leader plus up to 49 more soldiers (50 in total). The composer shows the squad's size and total cost, and which vehicle **Include vehicle** would add.
+- Each custom squad gets a high command abbreviation of 1 to 5 letters or digits.
+- Custom squads too big for their transport are recruited on foot, even with **Include vehicle** ticked.
+
+### Changed
+- The squad buttons in Recruit Squad sit closer together to make room for the custom squads.
+- **Saves**: custom squads are saved with the campaign. Older saves start with both custom squads holding only the squad leader.
+
 ## 2026-10-21 - Town upgrade kit labels, stronger market and recruitment office
 
 ### Added
