@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-22 - Upstream merge: police station support fix
+
+### Fixed
+- Merged the latest official Antistasi changes. Rebel support gains in a town are now boosted by 50% only when its police station has been **destroyed**. Towns that never had a police station no longer get the boost. Saves are not affected.
+
 ## 2026-10-21 - Server startup fix
 
 ### Fixed
