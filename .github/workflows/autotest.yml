@@ -1,0 +1,93 @@
+# Runs Tools/AutoTest (launch_tests.ps1) on a Windows runner: downloads the Arma 3 dedicated server
+# with an anonymous SteamCMD login, builds @A3A and runs the SQF tests on the vanilla server (no mods).
+# The server (~5 GB) is cached and refreshed weekly; SteamCMD only downloads what changed.
+name: Automated tests
+
+on:
+  pull_request:
+    branches: [unstable]
+    paths:
+      - 'A3A/**'
+      - 'Tools/AutoTest/**'
+      - 'Tools/Builder/**'
+      - 'launch_tests.ps1'
+      - '.github/workflows/autotest.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: autotest-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  SERVER_DIR: C:\a3server
+  STEAMCMD_DIR: C:\steamcmd
+  MOD_OUTPUT: C:\a3mods
+
+jobs:
+  autotest:
+    name: Antistasi tests (vanilla server)
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache key for the server (weekly)
+        id: week
+        shell: pwsh
+        run: |
+          $week = [Globalization.ISOWeek]::GetWeekOfYear((Get-Date).ToUniversalTime())
+          "key=arma3server-win-$((Get-Date).Year)-w$week" >> $env:GITHUB_OUTPUT
+
+      - name: Restore Arma 3 server
+        uses: actions/cache@v4
+        with:
+          path: C:\a3server
+          key: ${{ steps.week.outputs.key }}
+          restore-keys: arma3server-win-
+
+      - name: Install or update Arma 3 server (SteamCMD, anonymous)
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path $env:STEAMCMD_DIR, $env:SERVER_DIR | Out-Null
+          $steamcmd = Join-Path $env:STEAMCMD_DIR 'steamcmd.exe'
+          if (-not (Test-Path $steamcmd)) {
+              $zip = Join-Path $env:RUNNER_TEMP 'steamcmd.zip'
+              Invoke-WebRequest 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip' -OutFile $zip
+              Expand-Archive $zip -DestinationPath $env:STEAMCMD_DIR -Force
+          }
+          # SteamCMD updates itself on the first start and sometimes exits early, so retry
+          $ok = $false
+          for ($i = 1; $i -le 3 -and -not $ok; $i++) {
+              & $steamcmd +force_install_dir $env:SERVER_DIR +login anonymous +app_update 233780 +quit
+              Write-Host "steamcmd attempt $i exit code $LASTEXITCODE"
+              $ok = $LASTEXITCODE -eq 0 -and (Test-Path (Join-Path $env:SERVER_DIR 'arma3server_x64.exe'))
+          }
+          if (-not $ok) { Write-Host '::error::SteamCMD could not install the Arma 3 server'; exit 1 }
+          "{0:N1} GB in $env:SERVER_DIR" -f ((Get-ChildItem $env:SERVER_DIR -Recurse -File | Measure-Object Length -Sum).Sum / 1GB)
+          exit 0
+
+      - name: Configure mod build
+        shell: pwsh
+        run: |
+          @{ OutputPath = $env:MOD_OUTPUT; ModFolderName = '@A3A'; Sign = $false; KeyName = 'a3a' } |
+              ConvertTo-Json | Set-Content Tools/Builder/buildConfig.json
+
+      - name: Run tests
+        shell: pwsh
+        run: |
+          ./Tools/AutoTest/launch_tests.ps1 -Vanilla -ServerDir $env:SERVER_DIR -SaveProfile '' -StartupTimeoutMinutes 20
+          exit $LASTEXITCODE
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autotest-results
+          path: |
+            Tools/AutoTest/work/results/
+            Tools/AutoTest/work/server/*.rpt
+          if-no-files-found: ignore
+          retention-days: 14

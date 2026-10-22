@@ -48,6 +48,10 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2
 
+# GitHub Actions: no progress bar, but a job summary and an error annotation per failed test
+$InCi = [bool]$env:GITHUB_ACTIONS
+if ($InCi) { $ProgressPreference = 'SilentlyContinue' }
+
 # ---------------------------------------------------------------- paths
 $Root      = $PSScriptRoot
 $RepoRoot  = (Resolve-Path (Join-Path $Root '..\..')).Path
@@ -192,7 +196,7 @@ function Initialize-ServerProfile {
     $users = Join-Path $ServerWork "Users\$ProfileName"
     if (Test-Path $users) { Remove-Item $users -Recurse -Force }
     New-Item -ItemType Directory -Force -Path $users | Out-Null
-    if (-not (Test-Path $SaveProfile)) { return $false }
+    if (-not $SaveProfile -or -not (Test-Path $SaveProfile)) { return $false }
 
     # Fresh copy every run: tests may save, the source profile is never touched
     $srcName = Split-Path $SaveProfile -Leaf
@@ -527,7 +531,7 @@ Write-Host ("  Server    $ServerExe, port $Port, loopback only")
 Write-Host ("  Results   $ResultDir")
 
 $customDifficulty = Initialize-ServerProfile
-if (-not $customDifficulty) { Write-Host "  Note      no server profile at $SaveProfile, using Regular difficulty and no saves" -ForegroundColor Yellow }
+if (-not $customDifficulty) { Write-Host "  Note      no server profile$(if ($SaveProfile) { " at $SaveProfile" }), using Regular difficulty and no saves" -ForegroundColor Yellow }
 
 $runs = @()
 try {
@@ -536,7 +540,11 @@ try {
         Write-Step 'Building @A3A with Tools\Builder\build.ps1'
         $buildLog = Join-Path $ResultDir 'build.log'
         try { & $BuildPs1 *> $buildLog }
-        catch { Write-Step "Build failed: $($_.Exception.Message) (log: $buildLog)" 'Red'; exit 2 }
+        catch {
+            Write-Step "Build failed: $($_.Exception.Message) (log: $buildLog)" 'Red'
+            if ($InCi) { Get-Content $buildLog | ForEach-Object { Write-Host "    $_" } }
+            exit 2
+        }
         Write-Step 'Build done' 'Green'
     }
 
@@ -585,5 +593,34 @@ Write-Host (' Script errors in the RPT: {0} total, {1} from Antistasi/test files
 Write-Host (' Antistasi Error log lines: {0}{1}' -f $logErrors.Count, $(if ($StrictLog) { '' } else { ' (not counted as failures, use -StrictLog)' })) -ForegroundColor DarkGray
 Write-Host " Details: $ResultDir (results.json, errors.txt, RPT copies)" -ForegroundColor DarkGray
 Write-Host ('=' * 74) -ForegroundColor Cyan
+
+if ($InCi) {
+    function ConvertTo-Annotation([string]$s) { $s.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A') }
+    foreach ($r in $failed) {
+        Write-Host ("::error title={0}::{1}" -f (ConvertTo-Annotation "$($r.Name) $($r.Status)"), (ConvertTo-Annotation "[$($r.Group)] $($r.Message)"))
+    }
+    if ($env:GITHUB_STEP_SUMMARY) {
+        function ConvertTo-Cell([string]$s) { $s.Replace('|', '\|').Replace("`r", ' ').Replace("`n", ' ') }
+        $icon = @{ PASS = ':white_check_mark:'; FAIL = ':x:'; ERROR = ':x:'; TIMEOUT = ':hourglass:'; 'NOT RUN' = ':warning:' }
+        $md = @(
+            "## Antistasi automated tests: $(if ($failed.Count) { 'FAILED' } else { 'all passed' })"
+            ''
+            "Passed **$passed / $($results.Count)**, failed **$($failed.Count)**, duration $duration."
+            ''
+            '| | Test | Server run | Status | Time | Message |'
+            '|---|---|---|---|---|---|'
+        )
+        foreach ($r in $results) {
+            $md += '| {0} | `{1}` | {2} | {3} | {4:0.0}s | {5} |' -f $icon[$r.Status], (ConvertTo-Cell $r.Name), (ConvertTo-Cell $r.Group), $r.Status, $r.Seconds, (ConvertTo-Cell $r.Message)
+        }
+        foreach ($run in @($runs | Where-Object { $_.Outcome -ne 'done' })) {
+            $md += ''
+            $md += ":warning: Server run **$($run.Label)** aborted: $(ConvertTo-Cell $run.Outcome)"
+        }
+        $md += ''
+        $md += "Script errors in the RPT: $($allScriptErrors.Count) total, $(@($allScriptErrors | Where-Object { $_.Relevant }).Count) from Antistasi/test files. Antistasi Error log lines: $($logErrors.Count). Full RPT and errors.txt are in the job artifact."
+        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value $md -Encoding UTF8
+    }
+}
 
 exit $(if ($failed.Count) { 1 } else { 0 })

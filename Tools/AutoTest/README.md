@@ -93,6 +93,19 @@ Statuses:
 
 Each server run also gets the check `[rpt] no Antistasi script errors during startup`. It fails when a script error from an Antistasi file appears in the RPT outside a test.
 
+## GitHub Actions
+
+`.github/workflows/autotest.yml` runs the tests on every pull request into `unstable` that touches `A3A/`, `Tools/AutoTest/`, `Tools/Builder/` or the workflow. You can also start it by hand from the Actions tab. It:
+
+- uses a `windows-latest` runner
+- installs the Arma 3 dedicated server (app 233780) with an anonymous SteamCMD login, cached weekly (about 5 GB)
+- builds `@A3A`
+- runs `launch_tests.ps1 -Vanilla -SaveProfile ''`: no mods, no server profile, Regular difficulty
+
+Failed tests show up as error annotations and in the job summary table. The `autotest-results` artifact holds `results.json`, `errors.txt` and the RPTs.
+
+There are no saves in CI, so tests with `@start: load` cannot pass there.
+
 ## Limits
 
 - Server side only: dialogs, client scripts and player actions are not covered.
