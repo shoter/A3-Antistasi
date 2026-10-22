@@ -25,18 +25,38 @@ Exit code: 0 when everything passed, 1 when a test failed, 2 when the build fail
 
 Results go to `work\results\<run id>`: `results.json`, `errors.txt` (script errors and Antistasi `Error` log lines, labelled with the test they happened in) and a copy of each RPT.
 
-## Defaults and where they come from
+## Settings: where the server and profiles are
 
-| Parameter | Default | Purpose |
+`launch_tests.ps1` and `install_server.ps1` read their paths from `autotest.settings.ps1` (committed defaults). After that they read `autotest.settings.local.ps1` next to it, which is git-ignored and holds your machine's values. A parameter on the command line wins over both.
+
+| Setting | Committed default | Purpose |
 |---|---|---|
-| `-ModsFile` | `C:\games\A3\configs\Antistasi Debug\mods.txt` | Mod list, same format as the server launcher. `@A3A` from `buildConfig.json` is added when missing. |
-| `-SaveProfile` | `C:\games\A3\configs\Antistasi Debug\Users\AntistasiServer` | Copied fresh into `work\server` before every server run: the difficulty settings and the saves for `@start: load`. The source is never written. |
-| `-ServerDir` | `C:\games\A3\Arma3\A3Master` | Dedicated server install. |
-| `-Port` | `2402` | Different from the normal server, so both can run at once (not with `-NoBuild` off: the build needs the PBOs free). |
-| `-StartupTimeoutMinutes` | `30` | From server launch until the first test starts. |
-| `-StrictLog` | off | Also fail a test when Antistasi logs an `Error` line during it. |
+| `ServerDir` | `work\arma3server` | Arma 3 dedicated server install. Point it at a server you already have, so there is only one copy. |
+| `SteamCmdDir` | `work\steamcmd` | SteamCMD used by `install_server.ps1`. It is downloaded when missing. |
+| `SteamUser` | empty | Steam account that owns Arma 3. Steam refuses anonymous downloads of the server (app 233780, 'No subscription'). `STEAM_USERNAME` in the environment wins. |
+| `ModsFile` | empty (vanilla) | Mod list in the launcher format. `@A3A` from `buildConfig.json` is added when missing. |
+| `WorkshopDir` | empty | Workshop content folder for the IDs in `ModsFile`. |
+| `SaveProfile` | empty (no saves) | Server profile folder whose saves are copied fresh into `work\server` before every server run, for `@start: load` tests. The source is never written. |
+| `Port` | `2402` | Test server port, different from your normal server. |
 
-`work\` is git-ignored. Everything copied from the Steam or server install, and everything the server writes, stays there.
+Example `autotest.settings.local.ps1` that reuses the install under `C:\games\A3`:
+
+```powershell
+$Settings.ServerDir   = 'C:\games\A3\Arma3\A3Master'
+$Settings.SteamCmdDir = 'C:\games\A3\Steam'
+$Settings.SteamUser   = 'mysteamname'
+$Settings.ModsFile    = 'C:\games\A3\configs\Antistasi Debug\mods.txt'
+$Settings.WorkshopDir = 'C:\games\A3\Steam\steamapps\workshop\content\107410'
+$Settings.SaveProfile = 'C:\games\A3\configs\Antistasi Debug\Users\AntistasiServer'
+```
+
+`install_server.ps1` installs or updates the server in `ServerDir` with SteamCMD. It keeps the installed branch, for example `creatordlc`. Locally SteamCMD uses its cached login, or asks for the password once.
+
+The difficulty settings are committed in `server\A3ATest.Arma3Profile`, so local runs and CI play on the same difficulty.
+
+Other parameters: `-StartupTimeoutMinutes` (default 30, from server launch to the first test) and `-StrictLog` (also fail a test when Antistasi logs an `Error` line during it).
+
+`work\` is git-ignored: the server when `ServerDir` is left at its default, the profile and save copies, RPTs and packed PBOs.
 
 ## Writing a test
 
@@ -98,13 +118,14 @@ Each server run also gets the check `[rpt] no Antistasi script errors during sta
 `.github/workflows/autotest.yml` runs the tests on every pull request into `unstable` that touches `A3A/`, `Tools/AutoTest/`, `Tools/Builder/` or the workflow. You can also start it by hand from the Actions tab. It:
 
 - uses a `windows-latest` runner
-- installs the Arma 3 dedicated server (app 233780) with an anonymous SteamCMD login, cached weekly (about 5 GB)
+- installs the Arma 3 dedicated server into the default `ServerDir` with `install_server.ps1`, cached weekly (about 5 GB)
+- logs SteamCMD in with the cached session in the `STEAM_USERNAME` and `STEAM_CONFIG_VDF` secrets, the same ones the Workshop publish workflow uses (anonymous login is refused)
 - builds `@A3A`
-- runs `launch_tests.ps1 -Vanilla -SaveProfile ''`: no mods, no server profile, Regular difficulty
+- runs `launch_tests.ps1` with the committed settings: vanilla, no saves, the committed difficulty
 
 Failed tests show up as error annotations and in the job summary table. The `autotest-results` artifact holds `results.json`, `errors.txt` and the RPTs.
 
-There are no saves in CI, so tests with `@start: load` cannot pass there.
+There are no saves in CI, so tests with `@start: load` cannot pass there. GitHub does not give secrets to pull requests from forks, so the workflow only works for branches of this repository. When `STEAM_CONFIG_VDF` expires, regenerate it as described in `publishBranchToSteam.yml`.
 
 ## Limits
 

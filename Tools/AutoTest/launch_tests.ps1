@@ -11,7 +11,12 @@
     4. Prints a summary with every failed test and the script errors attributed to it.
        Results, the RPT and the error list are kept in Tools\AutoTest\work\results\<run id>.
 
-    Test files live in Tools\AutoTest\tests\*.sqf (files starting with _ are skipped). Header lines:
+    Paths (server, SteamCMD, mods file, save profile, port) come from autotest.settings.ps1 and the git-ignored
+    autotest.settings.local.ps1 next to this script; parameters given on the command line win.
+    Install or update the server with install_server.ps1.
+
+    Test files live in Tools\AutoTest\tests\*.sqf (files starting with _ run only when a -Test pattern starting
+    with _ selects them). Header lines:
         // @description: what the test checks
         // @timeout: 120                 seconds, default 120
         // @start: new                   or: load <gameID>   (save taken from -SaveProfile)
@@ -19,7 +24,9 @@
         // @factions: occ,inv,reb,civ    template names, empty entries = setup dialog defaults
         // @param: name=value            mission param override, repeatable
 
-    Everything under Tools\AutoTest\work is git-ignored: the copied server profile and saves, RPTs, packed PBOs.
+    Everything under Tools\AutoTest\work is git-ignored: the server profile and save copies, RPTs, packed PBOs,
+    and the server itself when ServerDir is left at its default. The difficulty settings are committed in
+    Tools\AutoTest\server\A3ATest.Arma3Profile.
 
 .EXAMPLE
     .\Tools\AutoTest\launch_tests.ps1
@@ -36,11 +43,11 @@ param(
     [switch]$KeepServer,                            # leave the last server running after the tests
     [switch]$ShowInfo,                              # print INFO lines from tests while running
     [switch]$StrictLog,                             # also fail on Antistasi 'Error' log lines, not only script errors
-    [string]$ServerDir   = 'C:\games\A3\Arma3\A3Master',
-    [string]$ModsFile    = 'C:\games\A3\configs\Antistasi Debug\mods.txt',
-    [string]$WorkshopDir = 'C:\games\A3\Steam\steamapps\workshop\content\107410',
-    [string]$SaveProfile = 'C:\games\A3\configs\Antistasi Debug\Users\AntistasiServer',  # copied, never written
-    [int]$Port = 2402,
+    [string]$ServerDir,                             # these five default to autotest.settings(.local).ps1
+    [string]$ModsFile,                              # empty = vanilla
+    [string]$WorkshopDir,
+    [string]$SaveProfile,                           # saves for '@start: load' tests, copied, never written
+    [int]$Port,
     [int]$StartupTimeoutMinutes = 30,               # server launch until the first test starts
     [int]$SettleSeconds = 15                        # wait after server init before the first test
 )
@@ -51,6 +58,16 @@ Set-StrictMode -Version 2
 # GitHub Actions: no progress bar, but a job summary and an error annotation per failed test
 $InCi = [bool]$env:GITHUB_ACTIONS
 if ($InCi) { $ProgressPreference = 'SilentlyContinue' }
+
+# ---------------------------------------------------------------- settings (command line > local file > defaults)
+$Settings = @{}
+. (Join-Path $PSScriptRoot 'autotest.settings.ps1')
+$LocalSettings = Join-Path $PSScriptRoot 'autotest.settings.local.ps1'
+if (Test-Path $LocalSettings) { . $LocalSettings }
+foreach ($name in 'ServerDir', 'ModsFile', 'WorkshopDir', 'SaveProfile', 'Port') {
+    if (-not $PSBoundParameters.ContainsKey($name)) { Set-Variable -Name $name -Value $Settings[$name] }
+}
+if (-not $ModsFile) { $Vanilla = [switch]$true }
 
 # ---------------------------------------------------------------- paths
 $Root      = $PSScriptRoot
@@ -65,6 +82,7 @@ $Hemtt     = Join-Path $RepoRoot 'Tools\Builder\hemtt.exe'
 $BuildPs1  = Join-Path $RepoRoot 'Tools\Builder\build.ps1'
 $ServerExe = Join-Path $ServerDir 'arma3server_x64.exe'
 $ProfileName = 'A3ATest'
+$ProfileTemplate = Join-Path $Root "server\$ProfileName.Arma3Profile"   # committed difficulty settings
 $PidFile   = Join-Path $WorkDir 'server.pid'
 
 $RunId     = Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -177,7 +195,7 @@ function Get-ModPaths {
     }
     if ($Vanilla) { return @($a3a) }
 
-    if (-not (Test-Path $ModsFile)) { throw "Mods file not found: $ModsFile (use -ModsFile or -Vanilla)" }
+    if (-not (Test-Path $ModsFile)) { throw "Mods file not found: $ModsFile (set ModsFile in autotest.settings.local.ps1, or use -Vanilla)" }
     $paths = @(); $missing = @()
     foreach ($line in Get-Content $ModsFile) {
         $line = $line.Trim()
@@ -196,20 +214,23 @@ function Initialize-ServerProfile {
     $users = Join-Path $ServerWork "Users\$ProfileName"
     if (Test-Path $users) { Remove-Item $users -Recurse -Force }
     New-Item -ItemType Directory -Force -Path $users | Out-Null
+    Copy-Item $ProfileTemplate (Join-Path $users "$ProfileName.Arma3Profile") -Force
     if (-not $SaveProfile -or -not (Test-Path $SaveProfile)) { return $false }
 
-    # Fresh copy every run: tests may save, the source profile is never touched
+    # Fresh copy of the saves every run: tests may save, the source profile is never touched.
+    # The source's own difficulty profile is skipped, the committed one above is used everywhere.
     $srcName = Split-Path $SaveProfile -Leaf
     Get-ChildItem $SaveProfile -Recurse -File | ForEach-Object {
         $rel = $_.FullName.Substring($SaveProfile.Length).TrimStart('\')
         $leaf = Split-Path $rel -Leaf
         $parent = Split-Path $rel -Parent
+        if (-not $parent -and $leaf -ieq "$srcName.Arma3Profile") { return }
         if ($leaf.StartsWith("$srcName.")) { $leaf = $ProfileName + $leaf.Substring($srcName.Length) }
         $dest = if ($parent) { Join-Path (Join-Path $users $parent) $leaf } else { Join-Path $users $leaf }
         New-Item -ItemType Directory -Force -Path (Split-Path $dest -Parent) | Out-Null
         Copy-Item $_.FullName $dest -Force
     }
-    return (Test-Path (Join-Path $users "$ProfileName.Arma3Profile"))
+    return $true
 }
 
 function Write-ServerConfig([string]$World, [bool]$CustomDifficulty) {
@@ -510,7 +531,7 @@ if ($List) {
     return
 }
 if (-not $selected) { throw "No tests match: $($Test -join ', ')" }
-if (-not (Test-Path $ServerExe)) { throw "Server executable not found: $ServerExe" }
+if (-not (Test-Path $ServerExe)) { throw "Server executable not found: $ServerExe. Install it with Tools\AutoTest\install_server.ps1, or set ServerDir in $LocalSettings" }
 if (-not (Test-Path $Hemtt)) { throw "hemtt.exe not found: $Hemtt" }
 
 # Stop a test server left behind by an aborted run
@@ -530,8 +551,9 @@ Write-Host ("  Modset    {0} ({1} mod folder(s))" -f $(if ($Vanilla) { 'vanilla 
 Write-Host ("  Server    $ServerExe, port $Port, loopback only")
 Write-Host ("  Results   $ResultDir")
 
-$customDifficulty = Initialize-ServerProfile
-if (-not $customDifficulty) { Write-Host "  Note      no server profile$(if ($SaveProfile) { " at $SaveProfile" }), using Regular difficulty and no saves" -ForegroundColor Yellow }
+$customDifficulty = $true                         # difficulty from the committed server\A3ATest.Arma3Profile
+$hasSaves = Initialize-ServerProfile
+Write-Host ("  Saves     {0}" -f $(if ($hasSaves) { "copied from $SaveProfile" } else { "none (SaveProfile not set), '@start: load' tests cannot run" }))
 
 $runs = @()
 try {
