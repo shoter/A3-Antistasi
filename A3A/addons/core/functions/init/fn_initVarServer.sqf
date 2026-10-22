@@ -110,9 +110,8 @@ DECLARE_SERVER_VAR(A3A_missionArea, []);
 
 // Custom squads 1 and 2 of the Recruit Squad dialog, composed by command staff in the squad composer. Saved, see A3A_fnc_customSquadSet
 // Each is [HC abbreviation, [[unit key, count], ...]] on top of the one squad leader every custom squad has
-// Plain calls, not DECLARE_SERVER_VAR: the preprocessor splits macro arguments on the commas inside the arrays
-["A3A_customSquads", [["CS1", []], ["CS2", []]]] call _declareServerVariable;
-["A3A_customSquadKeys", ["unitRifle", "unitMG", "unitGL", "unitMedic", "unitSniper", "unitLAT", "unitAT", "unitAA"]] call _declareServerVariable;  // garrison unit types, squad leader excluded
+DECLARE_SERVER_VAR(A3A_customSquads, [["CS1", []], ["CS2", []]]);
+DECLARE_SERVER_VAR(A3A_customSquadKeys, ["unitRifle", "unitMG", "unitGL", "unitMedic", "unitSniper", "unitLAT", "unitAT", "unitAA"]);  // garrison unit types, squad leader excluded
 DECLARE_SERVER_VAR(A3A_customSquadMaxSize, 50);          // soldiers per custom squad, squad leader included
 
 // Chronicle: sequence number of the newest campaign log entry, clients fetch the delta when they open the tab
