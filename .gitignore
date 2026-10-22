@@ -30,3 +30,6 @@ Map-Templates/Antistasi-TEST-**
 #Ignore Python bytecode files and bytecode-cache folder
 __pycache__/
 *.py[cod]
+
+# Automated tests: server profile and save copies, RPTs, packed PBOs and results (Tools/AutoTest/launch_tests.ps1)
+Tools/AutoTest/work/
