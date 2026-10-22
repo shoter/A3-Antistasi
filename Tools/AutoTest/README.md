@@ -123,6 +123,8 @@ Each server run also gets the check `[rpt] no Antistasi script errors during sta
 - builds `@A3A`
 - runs `launch_tests.ps1` with the committed settings: vanilla, no saves, the committed difficulty
 
+The same workflow gates the Steam Workshop publish: `publishBranchToSteam.yml` calls it as a `test` job on every push to `unstable`, and builds and uploads only when it passes. A failing test means that push is not published.
+
 Failed tests show up as error annotations and in the job summary table. The `autotest-results` artifact holds `results.json`, `errors.txt` and the RPTs.
 
 There are no saves in CI, so tests with `@start: load` cannot pass there. GitHub does not give secrets to pull requests from forks, so the workflow only works for branches of this repository. When `STEAM_CONFIG_VDF` expires, regenerate it as described in `publishBranchToSteam.yml`.

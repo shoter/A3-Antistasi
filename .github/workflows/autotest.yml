@@ -5,6 +5,9 @@
 # the cached session from the STEAM_USERNAME + STEAM_CONFIG_VDF secrets, the same ones publishBranchToSteam.yml uses.
 # Secrets are not given to pull requests from forks, so the job only works for branches of this repository.
 # The server (~5 GB) is cached and refreshed weekly; SteamCMD only downloads what changed.
+#
+# Also called by publishBranchToSteam.yml (workflow_call, secrets: inherit): a push to unstable is only
+# published to the Workshop when these tests pass.
 name: Automated tests
 
 on:
@@ -17,10 +20,13 @@ on:
       - 'launch_tests.ps1'
       - '.github/workflows/autotest.yml'
   workflow_dispatch:
+  workflow_call:
 
+# A new push to a PR cancels its older test run; runs gating a Steam publish are never cancelled.
+# (In a called workflow github.workflow is the caller's name, so the groups do not mix.)
 concurrency:
-  group: autotest-${{ github.ref }}
-  cancel-in-progress: true
+  group: autotest-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read

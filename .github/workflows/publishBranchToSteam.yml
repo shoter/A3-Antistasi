@@ -9,7 +9,14 @@ on:
 
 jobs:
 
+  # Tools/AutoTest on a vanilla server: nothing is built or published when a test fails
+  test:
+    name: Automated tests
+    uses: ./.github/workflows/autotest.yml
+    secrets: inherit
+
   build:
+    needs: [test]
     runs-on: windows-latest
     timeout-minutes: 5
     outputs:
