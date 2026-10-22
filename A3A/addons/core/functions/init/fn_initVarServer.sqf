@@ -75,7 +75,8 @@ DECLARE_SERVER_VAR(A3A_deployedFlag, objNull);
 DECLARE_SERVER_VAR(A3A_junkyardStock, []);
 DECLARE_SERVER_VAR(A3A_junkyardNextRefresh, -1);
 DECLARE_SERVER_VAR(A3A_junkyardRefreshInterval, 60*60);
-DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // plus one wildcard vehicle from all loaded vehicle classes
+DECLARE_SERVER_VAR(A3A_junkyardPoolCount, 9);            // vehicles drawn from the conflict pools
+DECLARE_SERVER_VAR(A3A_junkyardWildcardCount, 3);        // plus this many wildcard vehicles from all loaded vehicle classes
 DECLARE_SERVER_VAR(A3A_junkyardJunkDuration, 10*60*60);  // seconds of campaign uptime a bought wreck stays "junk" (no free repairs)
 DECLARE_SERVER_VAR(A3A_junkyardClockOffset, 0);          // campaign clock = offset + serverTime, restored from save
 // Junkyard repair shop: scrapped wrecks get repaired and sold. [[id, class, price, queued at, ready at, removed at], ...] on the campaign clock

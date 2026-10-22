@@ -2,7 +2,7 @@
 Maintainer: Shoter
     Replaces the junkyard stock with a fresh random selection and schedules the next delivery.
     Stock is A3A_junkyardPoolCount vehicles drawn from the civilian, rebel, occupant and invader pools,
-    plus one wildcard vehicle drawn from every drivable vehicle class currently loaded.
+    plus A3A_junkyardWildcardCount wildcard vehicles drawn from every drivable vehicle class currently loaded.
     Statics, blacklisted garage classes and vehicles from disabled DLC are excluded.
 
 Arguments:
@@ -77,7 +77,7 @@ for "_i" from 1 to A3A_junkyardPoolCount do {
     _stock pushBack [_class, [_class] call A3A_fnc_junkyardPrice];
 };
 
-// Wildcard: one vehicle from everything drivable that is loaded, outside the conflict pools. Scan cached per session.
+// Wildcards: A3A_junkyardWildcardCount vehicles from everything drivable that is loaded, outside the conflict pools. Scan cached per session.
 if (isNil "A3A_junkyardWildcardPool") then {
     private _candidates = "getNumber (_x >> 'scope') == 2
         and {toLower getText (_x >> 'simulation') in ['carx', 'tankx', 'helicopterrtd', 'helicopterx', 'airplanex', 'shipx', 'submarinex']}
@@ -86,8 +86,9 @@ if (isNil "A3A_junkyardWildcardPool") then {
     Info_1("Junkyard wildcard pool built with %1 classes", count A3A_junkyardWildcardPool);
 };
 private _wildcards = A3A_junkyardWildcardPool - _allPoolClasses - (_stock apply { _x#0 });
-if (_wildcards isNotEqualTo []) then {
-    private _class = selectRandom _wildcards;
+for "_i" from 1 to A3A_junkyardWildcardCount do {
+    if (_wildcards isEqualTo []) exitWith {};
+    private _class = _wildcards deleteAt (floor random count _wildcards);
     _stock pushBack [_class, [_class] call A3A_fnc_junkyardPrice];
 };
 
