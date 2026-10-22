@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-10-22 - More junkyard wildcards
+
+### Changed
+- Each junkyard delivery now includes **3 wildcard vehicles** (vehicles from outside the factions in play) instead of 1, so it offers 12 vehicles in total. Stock already on offer stays until the next hourly delivery. Server admins can change the number with `A3A_junkyardWildcardCount`.
+
 ## 2026-10-22 - Upstream merge: police station support fix
 
 ### Fixed
