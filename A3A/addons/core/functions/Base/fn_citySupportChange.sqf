@@ -43,8 +43,9 @@ if (_change > 0) then {
 		[1, 2] select (_antSide == teamPlayer);
 	};
 	if ("radio" in _upgrades) then { _mult = (A3A_townUpgradeHM get "radio") # 4 };		// rebel radio relay counts as a friendly antenna
-	private _stationPos = A3A_garrison get _city getOrDefault ["policeStation", false];
-	if !(_stationPos isEqualType []) then { _mult = _mult * 1.5 };						// no police station
+	// policeStation: position = intact, false = destroyed, missing = town never had one
+	private _stationPos = A3A_garrison get _city getOrDefault ["policeStation", 0];
+	if (_stationPos isEqualTo false) then { _mult = _mult * 1.5 };
 	_change = _change * (_mult min 3);
 };
 
