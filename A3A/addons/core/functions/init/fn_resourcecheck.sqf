@@ -83,18 +83,12 @@ while {true} do
 		private _arsenalTab = _class call jn_fnc_arsenal_itemType;
 		[_arsenalTab, _class, _count] call jn_fnc_arsenal_addItem;
 	} forEach (A3A_faction_reb get "initialRebelEquipment");
-    private _textX = format ["<t size='0.6' color='#C1C0BB'>" + (localize "STR_A3A_fn_init_resourceCheck_income"), _hrAdd toFixed 1, ceil _resAdd];
-	if (_upgradeRes > 0 or _upgradeHR > 0) then {
-		_textX = format ["%1<br/>" + localize "STR_A3A_fn_townUpgrades_income", _textX, ceil _upgradeRes, _upgradeHR toFixed 1];
-	};
 	// Reward tax already went into the faction fund as missions completed, report the total since the last tick
 	private _taxCollected = missionNamespace getVariable ["A3A_rewardTaxCollected", 0];
-	if (_taxCollected > 0 || (missionNamespace getVariable ["A3A_rewardTaxPercent", 0]) > 0) then {
-		_textX = format ["%1<br/>" + localize "STR_A3A_fn_init_resourceCheck_tax", _textX, round _taxCollected];
-	};
+	private _showTax = (missionNamespace getVariable ["A3A_rewardTaxPercent", 0]) > 0;
 	A3A_rewardTaxCollected = 0;
 	private _textArsenal = [] call A3A_fnc_arsenalManage;
-	if (_textArsenal != "") then {_textX = format ["%1<br/>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>%2", _textX, _textArsenal]};
+	private _textX = [_hrAdd, _resAdd, _upgradeRes, _upgradeHR, _taxCollected, _showTax, _textArsenal] call A3A_fnc_incomeReportText;
 	[petros, "taxRep", _textX] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
 
 	[] call A3A_fnc_generateRebelGear;

@@ -440,6 +440,7 @@ class CfgFunctions
             class initVarServer {};
             class initVehClassToCrew {};
             class initZones {};
+            class incomeReportText {};
             class initZeusLogging {};
             class installClientEH {};
             class modBlacklist {};
