@@ -319,7 +319,33 @@ switch (_mode) do
             Error("Attempted to access tab without permission : %1", _selectedTab);
         };
 
-        if (_selectedTab in MAIN_TABS) then { profileNamespace setVariable [LAST_TAB_PROFILE_VAR, _selectedTab] };
+        if (_selectedTab in MAIN_TABS) then {
+            profileNamespace setVariable [LAST_TAB_PROFILE_VAR, _selectedTab];
+
+            // The selected tab button keeps the hover colour (the player's GUI colour, A3A_COLOR_BUTTON_ACTIVE), the rest
+            // go back to the normal background; hovering any of them still highlights it. Sub tabs keep their parent lit.
+            // Read like the A3A_ShortcutButton mouse-over code, the config colour is a set of expressions
+            private _activeColor = [
+                profileNamespace getVariable ["GUI_BCG_RGB_R", 0.13],
+                profileNamespace getVariable ["GUI_BCG_RGB_G", 0.54],
+                profileNamespace getVariable ["GUI_BCG_RGB_B", 0.21],
+                profileNamespace getVariable ["GUI_BCG_RGB_A", 0.8]
+            ];
+            private _normalColor = [A3A_COLOR_BUTTON_BACKGROUND] call FUNC(configColorToArray);
+            {
+                _x params ["_tab", "_idc"];
+                (_display displayCtrl _idc) ctrlSetBackgroundColor ([_normalColor, _activeColor] select (_tab == _selectedTab));
+            } forEach [
+                ["player", A3A_IDC_PLAYERTABBUTTON],
+                ["commander", A3A_IDC_COMMANDERTABBUTTON],
+                ["admin", A3A_IDC_ADMINTABBUTTON],
+                ["towns", A3A_IDC_TOWNSTABBUTTON],
+                ["garrisons", A3A_IDC_GARRISONSTABBUTTON],
+                ["chronicle", A3A_IDC_CHRONICLETABBUTTON],
+                ["playerstats", A3A_IDC_PLAYERSTATSTABBUTTON],
+                ["factiondebug", A3A_IDC_FACTIONDEBUGTABBUTTON]
+            ];
+        };
 
         // Array of IDCs for all the tabs, including subtabs (like AI & player management)
         // Commander and fast travel maps are also hidden here, and shown again in updateCommanderTab

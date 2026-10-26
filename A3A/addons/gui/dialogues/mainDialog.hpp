@@ -250,13 +250,13 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                     class controls
                     {
-                        // Undercover
+                        // Undercover, second row (below Fast Travel)
                         class UndercoverIcon : A3A_Picture
                         {
                             idc = A3A_IDC_UNDERCOVERICON;
                             text = A3A_Icon_Undercover;
                             x = 1 * GRID_W;
-                            y = 1 * GRID_H;
+                            y = 12 * GRID_H;
                             w = 6 * GRID_W;
                             h = 6 * GRID_H;
                         };
@@ -270,18 +270,18 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorText[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
                             colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
                             x = 12 * GRID_W;
-                            y = 0;
+                            y = 11 * GRID_H;
                             w = 36 * GRID_W;
                             h = 8 * GRID_H;
                         };
 
-                        // Fast Travel
+                        // Fast Travel, first row
                         class FastTravelIcon : A3A_Picture
                         {
                             idc = A3A_IDC_FASTTRAVELICON;
                             text = A3A_Icon_FastTravel;
                             x = 1 * GRID_W;
-                            y = 12 * GRID_H;
+                            y = 1 * GRID_H;
                             w = 6 * GRID_W;
                             h = 6 * GRID_H;
                         };
@@ -296,7 +296,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             colorText[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
                             colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
                             x = 12 * GRID_W;
-                            y = 11 * GRID_H;
+                            y = 0;
                             w = 36 * GRID_W;
                             h = 8 * GRID_H;
                         };
