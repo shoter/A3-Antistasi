@@ -161,6 +161,14 @@ class Params
         texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min};
         default = 5;
     };
+    // Seconds from death to respawn, applied on every client with setPlayerRespawnTime. 15 is the respawnDelay of the mission description
+    class A3A_respawnTime
+    {
+        title = $STR_A3A_Params_respawnTime_title;
+        values[] = {5,10,15,30};
+        texts[] = {$STR_A3A_Params_reviveTime_5s, $STR_A3A_Params_reviveTime_10s, $STR_A3A_Params_reviveTime_15s, $STR_A3A_Params_respawnTime_30s};
+        default = 15;
+    };
 
     class SpacerMembership
     {

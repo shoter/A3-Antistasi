@@ -60,6 +60,47 @@ class A3A_DummyDialog
     };
 };
 
+// Commander tab action buttons: 8 high, small text on one line. A shortcut button draws its text from
+// TextPos top instead of centring it, so top = (8 - 3.2) / 2 centres one line of GUI_TEXT_SIZE_SMALL
+class A3A_CommanderShortcutButton : A3A_ShortcutButton
+{
+    size = GUI_TEXT_SIZE_SMALL;
+    sizeEx = GUI_TEXT_SIZE_SMALL;
+
+    class TextPos
+    {
+        left = 1 * GRID_W;
+        right = 1 * GRID_W;
+        top = 2.4 * GRID_H;
+        bottom = 0;
+    };
+};
+
+// For labels that wrap onto two lines (in English): top = (8 - 2 * 3.2) / 2 centres both lines
+class A3A_CommanderShortcutButton2Lines : A3A_CommanderShortcutButton
+{
+    class TextPos : TextPos
+    {
+        top = 0.8 * GRID_H;
+    };
+};
+
+// Admin tab action buttons: 12 high, labels on two lines set by the admin tab update.
+// Text size 3.6 (between SMALL and MEDIUM); top = (12 - 2 * 3.6) / 2 centres the two lines
+class A3A_AdminShortcutButton : A3A_ShortcutButton
+{
+    size = GRID_H * 3.6;
+    sizeEx = GRID_H * 3.6;
+
+    class TextPos
+    {
+        left = 1 * GRID_W;
+        right = 1 * GRID_W;
+        top = 2.4 * GRID_H;
+        bottom = 0;
+    };
+};
+
 // Tab strip: the tab buttons share the dialog width equally. Bump the count when adding a tab.
 #define TAB_BUTTON_COUNT 8
 #define TAB_BUTTON_W (DIALOG_W / TAB_BUTTON_COUNT)
@@ -197,26 +238,27 @@ class A3A_MainDialog : A3A_TabbedDialog
             class Controls
             {
                 // Left side button column
-                // Scrollable so more buttons fit vertically than the tab is tall
-                class PlayerButtonsGroup : A3A_ControlsGroupNoHScrollbars
+                // Not scrollable: buttons are 8 high on an 11 pitch, icons 6x6 centred on their button.
+                // 7 buttons end at 74; the tab has room for 87 below y = 11.
+                class PlayerButtonsGroup : A3A_ControlsGroupNoScrollbars
                 {
                     idc = A3A_IDC_PLAYERBUTTONSGROUP;
                     x = 8 * GRID_W;
                     y = 11 * GRID_H;
                     w = 60 * GRID_W;
-                    h = 87 * GRID_H;
+                    h = 74 * GRID_H;
 
                     class controls
                     {
-                        // Undercover
+                        // Undercover, second row (below Fast Travel)
                         class UndercoverIcon : A3A_Picture
                         {
                             idc = A3A_IDC_UNDERCOVERICON;
                             text = A3A_Icon_Undercover;
-                            x = 0;
-                            y = 2 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 8 * GRID_H;
+                            x = 1 * GRID_W;
+                            y = 12 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 6 * GRID_H;
                         };
 
                         class UndercoverButton : A3A_Button
@@ -225,21 +267,23 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_undercover;
                             // onButtonClick = "[] call A3A_fnc_goUndercover; closeDialog 0";
                             sizeEx = GUI_TEXT_SIZE_LARGE;
+                            colorText[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
                             x = 12 * GRID_W;
-                            y = 0;
+                            y = 11 * GRID_H;
                             w = 36 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
-                        // Fast Travel
+                        // Fast Travel, first row
                         class FastTravelIcon : A3A_Picture
                         {
                             idc = A3A_IDC_FASTTRAVELICON;
                             text = A3A_Icon_FastTravel;
-                            x = 0;
-                            y = 23 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 8 * GRID_H;
+                            x = 1 * GRID_W;
+                            y = 1 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 6 * GRID_H;
                         };
 
                         class FastTravelButton : A3A_Button
@@ -249,10 +293,12 @@ class A3A_MainDialog : A3A_TabbedDialog
                             tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
                             onButtonClick = "[""setHcMode"", [false]] call A3A_GUI_fnc_fastTravelTab; [""switchTab"", [""fasttravel""]] call A3A_GUI_fnc_mainDialog";
                             sizeEx = GUI_TEXT_SIZE_LARGE;
+                            colorText[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
                             x = 12 * GRID_W;
-                            y = 21 * GRID_H;
+                            y = 0;
                             w = 36 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
                         // Air Taxi
@@ -260,10 +306,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_AIRTAXIICON;
                             text = A3A_Icon_AirTaxi;
-                            x = 0;
-                            y = 44 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 8 * GRID_H;
+                            x = 1 * GRID_W;
+                            y = 23 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 6 * GRID_H;
                         };
 
                         class AirTaxiButton : A3A_Button
@@ -274,9 +320,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             onButtonClick = "[""switchTab"", [""airtaxi""]] call A3A_GUI_fnc_mainDialog;";
                             sizeEx = GUI_TEXT_SIZE_LARGE;
                             x = 12 * GRID_W;
-                            y = 42 * GRID_H;
+                            y = 22 * GRID_H;
                             w = 36 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
                         // Construct
@@ -284,10 +330,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_CONSTRUCTICON;
                             text = A3A_Icon_Construct;
-                            x = 0;
-                            y = 65 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 8 * GRID_H;
+                            x = 1 * GRID_W;
+                            y = 34 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 6 * GRID_H;
                         };
 
                         class ConstructButton : A3A_Button
@@ -298,9 +344,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             onButtonClick = "[""switchTab"", [""warstatus""]] call A3A_GUI_fnc_mainDialog;";
                             sizeEx = GUI_TEXT_SIZE_LARGE;
                             x = 12 * GRID_W;
-                            y = 63 * GRID_H;
+                            y = 33 * GRID_H;
                             w = 36 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
                         // AI Management
@@ -308,10 +354,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_AIMANAGEMENTICON;
                             text = A3A_Icon_AI_Management;
-                            x = 0;
-                            y = 86 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 8 * GRID_H;
+                            x = 1 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 6 * GRID_H;
                         };
 
                         class AIManagementButton : A3A_Button
@@ -321,9 +367,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             onButtonClick = "[""switchTab"", [""aimanagement""]] call A3A_GUI_fnc_mainDialog;";
                             sizeEx = GUI_TEXT_SIZE_LARGE;
                             x = 12 * GRID_W;
-                            y = 84 * GRID_H;
+                            y = 44 * GRID_H;
                             w = 36 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
                         // Loot crate delivery
@@ -331,10 +377,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_LOOTCRATEICON;
                             text = A3A_Icon_LootCrate;
-                            x = 0;
-                            y = 107 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 8 * GRID_H;
+                            x = 1 * GRID_W;
+                            y = 56 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 6 * GRID_H;
                         };
 
                         class LootCrateButton : A3A_Button
@@ -345,9 +391,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_LootDeliveryDialog""};";
                             sizeEx = GUI_TEXT_SIZE_LARGE;
                             x = 12 * GRID_W;
-                            y = 105 * GRID_H;
+                            y = 55 * GRID_H;
                             w = 36 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
                         // Deliver Vehicle
@@ -355,10 +401,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_DELIVERVEHICLEICON;
                             text = A3A_Icon_DeliverVehicle;
-                            x = 0;
-                            y = 128 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 8 * GRID_H;
+                            x = 1 * GRID_W;
+                            y = 67 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 6 * GRID_H;
                         };
 
                         class DeliverVehicleButton : A3A_Button
@@ -369,9 +415,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             onButtonClick = "[""switchTab"", [""delivervehicle""]] call A3A_GUI_fnc_mainDialog;";
                             sizeEx = GUI_TEXT_SIZE_LARGE;
                             x = 12 * GRID_W;
-                            y = 126 * GRID_H;
+                            y = 66 * GRID_H;
                             w = 36 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
                     };
                 };
@@ -1714,124 +1760,170 @@ class A3A_MainDialog : A3A_TabbedDialog
                     x = 10 * GRID_W;
                     y = 8 * GRID_H;
                     w = 50 * GRID_W;
-                    h = 24 * GRID_H;
+                    h = 14 * GRID_H;
                 };
 
-                // Commander actions. More rows than fit under the HC squads button, so they scroll.
-                class CommanderButtonsGroup : A3A_ControlsGroupNoHScrollbars
+                // Commander actions: two columns (x = 2 and 28) of six rows, 8 high on a 10 pitch (y = 0, 10, 20, 30, 40, 50).
+                // Not scrollable, all rows fit. Rows, left | right:
+                //   Deploy Rally Flag | Air Support        white
+                //   Recruit Squad     | Garrisons          green
+                //   Squad Composer    | Customize Loadouts green
+                //   Garbage Clean     | Persistent Save    yellow (Clean all / Clean HQ swap in over this row)
+                //   Mission Board     | Mission Area       yellow
+                //   Arsenal Limits    | Sub-commanders     white
+                // Sub-commanders only see Recruit Squad and Squad Composer, which the commander tab update moves to row 1.
+                class CommanderButtonsGroup : A3A_ControlsGroupNoScrollbars
                 {
                     idc = A3A_IDC_COMMANDERBUTTONSGROUP;
                     x = 8 * GRID_W;
-                    y = 38 * GRID_H;
+                    y = 24 * GRID_H;
                     w = 58 * GRID_W;
                     h = 58 * GRID_H;
 
                     class controls
                     {
-                        class AccessGarrisonsButton : A3A_Button
+                        // Row 1 (white)
+
+                        // Rally flag. Enabled by the commander tab update only while the commander is on foot.
+                        class DeployFlagButton : A3A_CommanderShortcutButton2Lines
                         {
-                            idc = A3A_IDC_ACCESSGARRISONSBUTTON;
-                            text = $STR_antistasi_dialogs_main_garrisons_button;
-                            onButtonClick = "[""garrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
+                            idc = A3A_IDC_DEPLOYFLAGBUTTON;
+                            text = $STR_antistasi_dialogs_main_deploy_flag_button;
+                            tooltip = $STR_antistasi_dialogs_main_deploy_flag_tooltip;
+                            onButtonClick = "[""deployFlagButtonClicked""] call A3A_GUI_fnc_commanderTab;";
                             x = 2 * GRID_W;
                             y = 0 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
-                        // Commander only. For sub-commanders this slot is taken by SquadComposerButton, moved here by the commander tab update
-                        class PersistentSaveButton : A3A_ShortcutButton
+                        class AirSupportButton : A3A_Button
                         {
-                            idc = A3A_IDC_PERSISTENTSAVECMDBUTTON;
-                            text = $STR_antistasi_dialogs_main_persistent_save_button;
-                            onButtonClick = "[""persistentSaveButtonClicked""] call A3A_GUI_fnc_commanderTab;";
+                            idc = A3A_IDC_AIRSUPPORTBUTTON;
+                            text = $STR_antistasi_dialogs_main_air_support_button;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""switchTab"", [""airsupport""]] call A3A_GUI_fnc_mainDialog;";
                             x = 28 * GRID_W;
                             y = 0 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
 
-                        class RecruitSquadButton : A3A_ShortcutButton
+                        // Row 2 (green)
+
+                        // Commander position. For sub-commanders the commander tab update moves it to row 1, left
+                        class RecruitSquadButton : A3A_CommanderShortcutButton
                         {
                             idc = A3A_IDC_RECRUITSQUADCMDBUTTON;
                             text = $STR_antistasi_dialogs_main_recruit_squad_button;
                             onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RecruitSquadDialog""};";
                             x = 2 * GRID_W;
-                            y = 14 * GRID_H;
+                            y = 10 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
+                            color[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            color2[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            colorFocused[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_GREEN_DISABLED;
                         };
 
-                        class MissionRequestButton : A3A_ShortcutButton
+                        class AccessGarrisonsButton : A3A_Button
                         {
-                            idc = A3A_IDC_MISSIONREQUESTBUTTON;
-                            text = $STR_antistasi_dialogs_mission_board_button;
-                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RequestMissionDialog""};";
+                            idc = A3A_IDC_ACCESSGARRISONSBUTTON;
+                            text = $STR_antistasi_dialogs_main_garrisons_button;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            onButtonClick = "[""garrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
                             x = 28 * GRID_W;
-                            y = 14 * GRID_H;
+                            y = 10 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
+                            colorText[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_GREEN_DISABLED;
                         };
 
-                        class CustomizeLoadoutsButton : A3A_ShortcutButton
+                        // Row 3 (green)
+
+                        // Squad composer for the custom squads of the Recruit Squad dialog. Commander position.
+                        // For sub-commanders the commander tab update moves it to row 1, right, next to Recruit Squad
+                        class SquadComposerButton : A3A_CommanderShortcutButton
+                        {
+                            idc = A3A_IDC_SQUADCOMPOSERBUTTON;
+                            text = $STR_antistasi_dialogs_main_squad_composer_button;
+                            tooltip = $STR_antistasi_dialogs_main_squad_composer_tooltip;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_SquadComposerDialog""};";
+                            x = 2 * GRID_W;
+                            y = 20 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 8 * GRID_H;
+                            color[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            color2[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            colorFocused[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_GREEN_DISABLED;
+                        };
+
+                        class CustomizeLoadoutsButton : A3A_CommanderShortcutButton2Lines
                         {
                             idc = A3A_IDC_CUSTOMIZELOADOUTSBUTTON;
                             text = $STR_antistasi_dialogs_main_customize_loadouts_button;
                             onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_customLoadoutsDialog""};";
-                            x = 2 * GRID_W;
-                            y = 28 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 12 * GRID_H;
-                        };
-
-                        class ArsenalLimitsButton : A3A_ShortcutButton
-                        {
-                            idc = A3A_IDC_ARSENALLIMITSBUTTON;
-                            text = $STR_antistasi_dialogs_main_arsenal_limits_button;
-                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_ArsenalLimitsDialog""};";
                             x = 28 * GRID_W;
-                            y = 28 * GRID_H;
+                            y = 20 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
+                            color[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            color2[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            colorFocused[] = A3A_COLOR_BUTTON_TEXT_GREEN;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_GREEN_DISABLED;
                         };
 
-                        // Air Support and Garbage Clean share their row with GarbageCleanControlsGroup, swapped by
+                        // Row 4 (yellow)
+
+                        // Garbage Clean and Persistent Save share their row with GarbageCleanControlsGroup, swapped by
                         // the showGarbageCleanOptions and update modes of fn_commanderTab
-                        class AirSupportButton : A3A_Button
-                        {
-                            idc = A3A_IDC_AIRSUPPORTBUTTON;
-                            text = $STR_antistasi_dialogs_main_air_support_button;
-                            onButtonClick = "[""switchTab"", [""airsupport""]] call A3A_GUI_fnc_mainDialog;";
-                            x = 2 * GRID_W;
-                            y = 42 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 12 * GRID_H;
-                        };
-
-                        class GarbageCleanButton : A3A_ShortcutButton
+                        class GarbageCleanButton : A3A_CommanderShortcutButton
                         {
                             idc = A3A_IDC_GARBAGECLEANBUTTON;
                             text = $STR_antistasi_dialogs_main_garbage_clean_button;
                             onButtonclick = "[""showGarbageCleanOptions""] call A3A_GUI_fnc_commanderTab";
-                            x = 28 * GRID_W;
-                            y = 42 * GRID_H;
+                            x = 2 * GRID_W;
+                            y = 30 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
+                            color[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            color2[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorFocused[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
                         };
 
-                        // Covers AirSupportButton and GarbageCleanButton. Hidden by fn_commanderTab update after
+                        // Commander only. Shares its row with GarbageCleanControlsGroup, see GarbageCleanButton
+                        class PersistentSaveButton : A3A_CommanderShortcutButton
+                        {
+                            idc = A3A_IDC_PERSISTENTSAVECMDBUTTON;
+                            text = $STR_antistasi_dialogs_main_persistent_save_button;
+                            onButtonClick = "[""persistentSaveButtonClicked""] call A3A_GUI_fnc_commanderTab;";
+                            x = 28 * GRID_W;
+                            y = 30 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 8 * GRID_H;
+                            color[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            color2[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorFocused[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
+                        };
+
+                        // Covers GarbageCleanButton and PersistentSaveButton. Hidden by fn_commanderTab update after
                         // CommanderButtonsGroup is shown, because showing the parent shows this group too
                         class GarbageCleanControlsGroup : A3A_ControlsGroupNoScrollbars
                         {
                             idc = A3A_IDC_GARBAGECLEANCONTROLSGROUP;
                             x = 2 * GRID_W;
-                            y = 42 * GRID_H;
+                            y = 30 * GRID_H;
                             w = 50 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
 
                             class controls
                             {
-                                class GarbageCleanMapButton : A3A_ShortcutButton
+                                class GarbageCleanMapButton : A3A_CommanderShortcutButton
                                 {
                                     idc = -1;
                                     text = $STR_antistasi_dialogs_main_garbage_clean_all;
@@ -1839,10 +1931,14 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     x = 0 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 24 * GRID_W;
-                                    h = 12 * GRID_H;
+                                    h = 8 * GRID_H;
+                                    color[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                                    color2[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                                    colorFocused[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                                    colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
                                 };
 
-                                class GarbageCleanHQButton : A3A_ShortcutButton
+                                class GarbageCleanHQButton : A3A_CommanderShortcutButton
                                 {
                                     idc = -1;
                                     text = $STR_antistasi_dialogs_main_garbage_clean_hq;
@@ -1850,64 +1946,73 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     x = 26 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 24 * GRID_W;
-                                    h = 12 * GRID_H;
+                                    h = 8 * GRID_H;
+                                    color[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                                    color2[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                                    colorFocused[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                                    colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
                                 };
                             };
                         };
 
-                        // Rally flag. Enabled by the commander tab update only while the commander is on foot.
-                        class DeployFlagButton : A3A_ShortcutButton
+                        // Row 5 (yellow)
+
+                        class MissionRequestButton : A3A_CommanderShortcutButton
                         {
-                            idc = A3A_IDC_DEPLOYFLAGBUTTON;
-                            text = $STR_antistasi_dialogs_main_deploy_flag_button;
-                            tooltip = $STR_antistasi_dialogs_main_deploy_flag_tooltip;
-                            onButtonClick = "[""deployFlagButtonClicked""] call A3A_GUI_fnc_commanderTab;";
+                            idc = A3A_IDC_MISSIONREQUESTBUTTON;
+                            text = $STR_antistasi_dialogs_mission_board_button;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RequestMissionDialog""};";
                             x = 2 * GRID_W;
-                            y = 56 * GRID_H;
+                            y = 40 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
+                            color[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            color2[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorFocused[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
+                        };
+
+                        // Mission area. Commander only, hidden for sub-commanders by the commander tab update.
+                        class MissionAreaButton : A3A_CommanderShortcutButton
+                        {
+                            idc = A3A_IDC_MISSIONAREABUTTON;
+                            text = $STR_antistasi_dialogs_main_mission_area_button;
+                            tooltip = $STR_antistasi_dialogs_main_mission_area_tooltip;
+                            onButtonClick = "[""showMissionAreaView""] call A3A_GUI_fnc_commanderTab;";
+                            x = 28 * GRID_W;
+                            y = 40 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 8 * GRID_H;
+                            color[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            color2[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorFocused[] = A3A_COLOR_BUTTON_TEXT_YELLOW;
+                            colorDisabled[] = A3A_COLOR_BUTTON_TEXT_YELLOW_DISABLED;
+                        };
+
+                        // Row 6 (white)
+
+                        class ArsenalLimitsButton : A3A_CommanderShortcutButton
+                        {
+                            idc = A3A_IDC_ARSENALLIMITSBUTTON;
+                            text = $STR_antistasi_dialogs_main_arsenal_limits_button;
+                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_ArsenalLimitsDialog""};";
+                            x = 2 * GRID_W;
+                            y = 50 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 8 * GRID_H;
                         };
 
                         // Sub-commanders. Commander only, hidden for sub-commanders by the commander tab update.
-                        class SubCommandersButton : A3A_ShortcutButton
+                        class SubCommandersButton : A3A_CommanderShortcutButton
                         {
                             idc = A3A_IDC_SUBCOMMANDERSBUTTON;
                             text = $STR_antistasi_dialogs_main_subcommanders_button;
                             tooltip = $STR_antistasi_dialogs_main_subcommanders_tooltip;
                             onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_SubCommandersDialog""};";
                             x = 28 * GRID_W;
-                            y = 56 * GRID_H;
+                            y = 50 * GRID_H;
                             w = 24 * GRID_W;
-                            h = 12 * GRID_H;
-                        };
-
-                        // Mission area. Commander only, hidden for sub-commanders by the commander tab update.
-                        // First slot of a sixth row, reached by scrolling the group
-                        class MissionAreaButton : A3A_ShortcutButton
-                        {
-                            idc = A3A_IDC_MISSIONAREABUTTON;
-                            text = $STR_antistasi_dialogs_main_mission_area_button;
-                            tooltip = $STR_antistasi_dialogs_main_mission_area_tooltip;
-                            onButtonClick = "[""showMissionAreaView""] call A3A_GUI_fnc_commanderTab;";
-                            x = 2 * GRID_W;
-                            y = 70 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 12 * GRID_H;
-                        };
-
-                        // Squad composer for the custom squads of the Recruit Squad dialog. Command staff: second slot of the sixth row
-                        // for the commander. For sub-commanders the commander tab update moves it next to Recruit Squad into the slot
-                        // of PersistentSaveButton, which is hidden for them
-                        class SquadComposerButton : A3A_ShortcutButton
-                        {
-                            idc = A3A_IDC_SQUADCOMPOSERBUTTON;
-                            text = $STR_antistasi_dialogs_main_squad_composer_button;
-                            tooltip = $STR_antistasi_dialogs_main_squad_composer_tooltip;
-                            onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_SquadComposerDialog""};";
-                            x = 28 * GRID_W;
-                            y = 70 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 8 * GRID_H;
                         };
                     };
                 };
@@ -1942,38 +2047,48 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 44 * GRID_H;
                 };
 
-                class PlayerManagementButton : A3A_ShortcutButton
+                // Admin action buttons: two columns (x = 8 and 32) of two rows (y = 64 and 80), 12 high.
+                //   Player Management | Take Command     white
+                //   Garbage Clean     | Persistent Save  yellow (Clean all / Clean HQ swap in over this row)
+                // The admin tab update sets every label as two lines of structured text with its colour,
+                // because a shortcut button neither breaks a two word label reliably nor centres it vertically
+                class PlayerManagementButton : A3A_AdminShortcutButton
                 {
                     idc = A3A_IDC_PLAYERMANAGEMENTBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_player_management_button;
                     onButtonClick = "[""switchTab"", [""playermanagement""]] call A3A_GUI_fnc_mainDialog;";
                     x = 8 * GRID_W;
                     y = 64 * GRID_H;
-                    w = 46 * GRID_W;
+                    w = 22 * GRID_W;
                     h = 12 * GRID_H;
-                    size = GUI_TEXT_SIZE_LARGE;
-
-                    class TextPos
-                    {
-                        left = 2 * GRID_W;
-                        right = 2 * GRID_H;
-                        top = 3 * GRID_W;
-                        bottom = 3 * GRID_H;
-                    };
                 };
 
-                class TakeCommandButton : A3A_ShortcutButton
+                class TakeCommandButton : A3A_AdminShortcutButton
                 {
                     idc = A3A_IDC_TAKECMD;
                     text = $STR_antistasi_dialogs_main_admin_take_command_button;
-                    x = 8 * GRID_W;
-                    y = 80 * GRID_H;
+                    x = 32 * GRID_W;
+                    y = 64 * GRID_H;
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                     onMouseButtonClick = "[""takeCommand""] spawn A3A_GUI_fnc_adminTab";
                 };
 
-                class PersistentSaveButton : A3A_ShortcutButton
+                // Garbage Clean and Persistent Save share their row with AdminGarbageCleanControlsGroup, swapped by
+                // the showGarbageCleanOptions and update modes of fn_adminTab
+                class AdminGarbageCleanButton : A3A_AdminShortcutButton
+                {
+                    idc = A3A_IDC_ADMINGARBAGECLEANBUTTON;
+                    text = $STR_antistasi_dialogs_main_garbage_clean_button;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 22 * GRID_W;
+                    h = 12 * GRID_H;
+                    onButtonClick = "[""showGarbageCleanOptions""] call A3A_GUI_fnc_adminTab";
+                };
+
+                // Shares its row with AdminGarbageCleanControlsGroup, see AdminGarbageCleanButton
+                class PersistentSaveButton : A3A_AdminShortcutButton
                 {
                     idc = A3A_IDC_PERSISTENTSAVEADMIN;
                     text = $STR_antistasi_dialogs_main_persistent_save_button;
@@ -1982,6 +2097,42 @@ class A3A_MainDialog : A3A_TabbedDialog
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                     onButtonClick = "[""persistentSave""] spawn A3A_GUI_fnc_adminTab";
+                };
+
+                // Covers AdminGarbageCleanButton and PersistentSaveButton. Hidden by fn_adminTab update, which runs
+                // after the admin tab is shown, because showing the tab shows this group too
+                class AdminGarbageCleanControlsGroup : A3A_ControlsGroupNoScrollbars
+                {
+                    idc = A3A_IDC_ADMINGARBAGECLEANCONTROLSGROUP;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 46 * GRID_W;
+                    h = 12 * GRID_H;
+
+                    class controls
+                    {
+                        class AdminGarbageCleanMapButton : A3A_AdminShortcutButton
+                        {
+                            idc = A3A_IDC_ADMINGARBAGECLEANMAPBUTTON;
+                            text = $STR_antistasi_dialogs_main_garbage_clean_all;
+                            onButtonClick = "[""garbageCleanMapButtonClicked""] call A3A_GUI_fnc_adminTab";
+                            x = 0 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class AdminGarbageCleanHQButton : A3A_AdminShortcutButton
+                        {
+                            idc = A3A_IDC_ADMINGARBAGECLEANHQBUTTON;
+                            text = $STR_antistasi_dialogs_main_garbage_clean_hq;
+                            onButtonClick = "[""garbageCleanHqButtonClicked""] call A3A_GUI_fnc_adminTab";
+                            x = 24 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+                    };
                 };
 
                 class AiSectionLabel : A3A_SectionLabelRight
@@ -3706,22 +3857,22 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = -1;
                     x = 8 * GRID_W;
                     y = 12 * GRID_H;
-                    w = 106 * GRID_W;
+                    w = 124 * GRID_W;
                     h = 82 * GRID_H;
                 };
 
                 // Column headers, clicking one sorts the table by that column.
-                // X positions follow the column fractions of TownsList below (8 + fraction * 106).
+                // X positions follow the column fractions of TownsList below (8 + fraction * 124), each as wide as its column without the gap before the next one.
                 class NameHeader : A3A_Button
                 {
                     idc = A3A_IDC_TOWNSHEADER_NAME;
                     text = $STR_antistasi_dialogs_main_towns_name_label;
                     tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
                     onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_townsTab;";
-                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = (GRID_H * 2.5);
                     x = 8 * GRID_W;
                     y = 7 * GRID_H;
-                    w = 25 * GRID_W;
+                    w = 29.5 * GRID_W;
                     h = 4 * GRID_H;
                 };
 
@@ -3730,8 +3881,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_OWNER;
                     text = $STR_antistasi_dialogs_main_towns_owner_label;
                     onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_townsTab;";
-                    x = 33 * GRID_W;
-                    w = 15 * GRID_W;
+                    x = 38.2 * GRID_W;
+                    w = 21.1 * GRID_W;
                 };
 
                 class SupportHeader : NameHeader
@@ -3739,8 +3890,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_SUPPORT;
                     text = $STR_antistasi_dialogs_main_towns_support_label;
                     onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_townsTab;";
-                    x = 49 * GRID_W;
-                    w = 10 * GRID_W;
+                    x = 60 * GRID_W;
+                    w = 9.9 * GRID_W;
                 };
 
                 class PopulationHeader : NameHeader
@@ -3748,8 +3899,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_POPULATION;
                     text = $STR_antistasi_dialogs_main_towns_population_label;
                     onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_townsTab;";
-                    x = 60 * GRID_W;
-                    w = 13 * GRID_W;
+                    x = 70.6 * GRID_W;
+                    w = 15.1 * GRID_W;
                 };
 
                 class GarrisonHeader : NameHeader
@@ -3757,8 +3908,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_GARRISON;
                     text = $STR_antistasi_dialogs_main_towns_garrison_label;
                     onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_townsTab;";
-                    x = 74 * GRID_W;
-                    w = 10 * GRID_W;
+                    x = 86.4 * GRID_W;
+                    w = 14 * GRID_W;
                 };
 
                 class UpgradesHeader : NameHeader
@@ -3766,8 +3917,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_UPGRADES;
                     text = $STR_antistasi_dialogs_main_towns_upgrades_label;
                     onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_townsTab;";
-                    x = 84 * GRID_W;
-                    w = 15 * GRID_W;
+                    x = 101.1 * GRID_W;
+                    w = 15.7 * GRID_W;
                 };
 
                 class GridHeader : NameHeader
@@ -3775,8 +3926,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_GRID;
                     text = $STR_antistasi_dialogs_main_towns_grid_label;
                     onButtonClick = "[""sortBy"", [6]] call A3A_GUI_fnc_townsTab;";
-                    x = 100 * GRID_W;
-                    w = 14 * GRID_W;
+                    x = 117.5 * GRID_W;
+                    w = 14.5 * GRID_W;
                 };
 
                 class TownsList : A3A_ListNBox
@@ -3784,14 +3935,14 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSLIST;
                     x = 8 * GRID_W;
                     y = 12 * GRID_H;
-                    w = 106 * GRID_W;
+                    w = 124 * GRID_W;
                     h = 82 * GRID_H;
                     onLBDblClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
                     onLBSelChanged = "[""selectionChanged""] call A3A_GUI_fnc_townsTab";
 
                     sizeEx = GUI_TEXT_SIZE_MEDIUM;
                     rowHeight = 4 * GRID_H;
-                    columns[] = {0, 0.24, 0.39, 0.49, 0.62, 0.72, 0.87}; // Name, Owner, Support, Population, Garrison, Upgrades, Grid
+                    columns[] = {0, 0.243, 0.419, 0.505, 0.632, 0.751, 0.883}; // Name, Owner, Support, Population, Garrison, Upgrades, Grid
                 };
 
                 class ShowOnMapButton : A3A_ShortcutButton
@@ -3799,10 +3950,22 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSSHOWONMAPBUTTON;
                     text = $STR_antistasi_dialogs_main_towns_show_on_map_button;
                     onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
-                    x = 120 * GRID_W;
-                    y = 12 * GRID_H;
-                    w = 32 * GRID_W;
-                    h = 12 * GRID_H;
+                    x = 134 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 24 * GRID_W;
+                    h = 8 * GRID_H;
+                    size = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+
+                    // Label set on two lines by the towns tab update (A3A_GUI_fnc_setTwoLineLabel).
+                    // top = (8 - 2 * 3.2) / 2 centres two lines of GUI_TEXT_SIZE_SMALL
+                    class TextPos
+                    {
+                        left = 1 * GRID_W;
+                        right = 1 * GRID_W;
+                        top = 0.8 * GRID_H;
+                        bottom = 0;
+                    };
                 };
 
                 // Upgrades of the selected town, or the code legend when nothing is selected
@@ -3810,10 +3973,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_TOWNSUPGRADESTEXT;
                     text = "";
-                    x = 120 * GRID_W;
-                    y = 27 * GRID_H;
-                    w = 32 * GRID_W;
-                    h = 67 * GRID_H;
+                    x = 134 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 24 * GRID_W;
+                    h = 72 * GRID_H;
                 };
             };
         };
@@ -3843,7 +4006,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     text = $STR_antistasi_dialogs_main_towns_name_label;
                     tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
                     onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_garrisonsTab;";
-                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_TINY;
                     x = 8 * GRID_W;
                     y = 7 * GRID_H;
                     w = 31 * GRID_W;
@@ -3995,7 +4158,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 82 * GRID_H;
                 };
 
-                // Category filters, A3A_GUI_fnc_chronicleTab draws the active one in brighter text
+                // Category filters, A3A_GUI_fnc_chronicleTab draws the active one in yellow and keeps it in the player's profile
                 class AllFilter : A3A_Button
                 {
                     idc = A3A_IDC_CHRONICLEFILTER_ALL;

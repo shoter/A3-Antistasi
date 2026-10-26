@@ -71,6 +71,7 @@ class CfgFunctions {
             file = QPATHTOFOLDER(functions\controlsHelpers);
             class directChildCtrls {};
             class emplaceControl {};
+            class setTwoLineLabel {};
             class sortCGList {};
         };
 

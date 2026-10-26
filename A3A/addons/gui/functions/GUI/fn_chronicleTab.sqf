@@ -59,6 +59,14 @@ private _filters = [
     ["campaign", A3A_IDC_CHRONICLEFILTER_CAMPAIGN]
 ];
 
+// The chosen filter is kept in the player's profile, so it survives closing the menu and restarting the game.
+// A stored id that is not a filter any more falls back to "all". The page is not kept, it starts at the newest entries.
+#define FILTER_PROFILE_VAR "A3A_GUI_chronicleTabFilter"
+private _fnc_getFilter = {
+    private _filter = profileNamespace getVariable [FILTER_PROFILE_VAR, "all"];
+    if (_filter isEqualType "" && {_filters findIf { (_x # 0) == _filter } != -1}) then { _filter } else { "all" };
+};
+
 // Event type -> [filter, tone, kinds of the extra params]
 // Kinds: "text" as is, "marker" localized site name, "rank" rank display name, "aggro" aggression level name, "item" config display name
 // Tones: "good" rebel gain, "bad" rebel loss, "warning" incoming attack, "neutral", "enemy" enemy-vs-enemy
@@ -134,7 +142,7 @@ switch (_mode) do
         _params params [["_loading", false, [false]]];
         if (isNull _display) exitWith {};
 
-        private _filter = _tab getVariable ["filter", "all"];
+        private _filter = call _fnc_getFilter;
         private _entries = call _fnc_entries;
         private _now = call A3A_fnc_junkyardClock;
         // Entries carry the server's local clock, so "now" is our UTC clock moved to the server's offset
@@ -230,10 +238,10 @@ switch (_mode) do
             _listBox lnbSetColor [[_index, 1], A3A_COLOR_TEXT_DARKER_SQF];
         };
 
-        // The active filter is drawn in bright text, the rest darker
+        // The active filter is drawn in yellow, like the sort column of the other tables, the rest darker
         {
             _x params ["_id", "_idc"];
-            (_display displayCtrl _idc) ctrlSetTextColor ([A3A_COLOR_TEXT_DARKER_SQF, [1, 1, 1, 1]] select (_id == _filter));
+            (_display displayCtrl _idc) ctrlSetTextColor ([A3A_COLOR_TEXT_DARKER_SQF, A3A_COLOR_BUTTON_TEXT_YELLOW_SQF] select (_id == _filter));
         } forEach _filters;
 
         (_display displayCtrl A3A_IDC_CHRONICLENEWERPAGEBUTTON) ctrlEnable (_page > 0);
@@ -245,7 +253,7 @@ switch (_mode) do
     {
         // Takes 1 parameter: <STRING> filter id, one of the ids in _filters. Starts again from the newest entries.
         _params params [["_filter", "all", [""]]];
-        _tab setVariable ["filter", _filter];
+        profileNamespace setVariable [FILTER_PROFILE_VAR, _filter];
         _tab setVariable ["page", 0];
         ["render"] call FUNC(chronicleTab);
     };

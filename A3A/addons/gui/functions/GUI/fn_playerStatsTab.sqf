@@ -62,6 +62,15 @@ private _columns = [
     [A3A_IDC_PLAYERSTATSHEADER_TIME, "STR_antistasi_dialogs_main_playerstats_time_online_label"]
 ];
 
+// The sort choice [column, ascending] is kept in the player's profile, so it survives closing the menu and
+// restarting the game. A stored value that no longer fits the columns falls back to kills, highest first.
+#define SORT_PROFILE_VAR "A3A_GUI_playerStatsTabSort"
+#define SORT_DEFAULT [1, false]
+private _fnc_getSort = {
+    private _sort = profileNamespace getVariable [SORT_PROFILE_VAR, SORT_DEFAULT];
+    if (_sort isEqualTypeArray [0, true] && {(_sort # 0) >= 0 && {(_sort # 0) < count _columns && {floor (_sort # 0) == (_sort # 0)}}}) then { _sort } else { SORT_DEFAULT };
+};
+
 private _fnc_formatTime = {
     params ["_seconds"];
     if (_seconds < 60) exitWith { "0" + localize "STR_antistasi_timeSpan_minutes_abbr" };
@@ -134,8 +143,7 @@ switch (_mode) do
     {
         if (isNull _display) exitWith {};
         private _rows = _tab getVariable ["playerRows", []];
-        private _sortColumn = _tab getVariable ["sortColumn", 1];
-        private _sortAscending = _tab getVariable ["sortAscending", false];
+        (call _fnc_getSort) params ["_sortColumn", "_sortAscending"];
         private _filter = toLower ctrlText (_display displayCtrl A3A_IDC_PLAYERSTATSFILTEREDIT);
 
         // [sortKey, lower-cased name, uid, row]; the UID is unique so the row arrays are never compared
@@ -203,6 +211,8 @@ switch (_mode) do
             private _caption = localize _key;
             if (_forEachIndex == _sortColumn) then { _caption = _caption + " " + _arrow };
             (_display displayCtrl _idc) ctrlSetText _caption;
+            // The column the table is sorted by is drawn in yellow
+            (_display displayCtrl _idc) ctrlSetTextColor ([[1, 1, 1, 1], A3A_COLOR_BUTTON_TEXT_YELLOW_SQF] select (_forEachIndex == _sortColumn));
         } forEach _columns;
     };
 
@@ -211,13 +221,10 @@ switch (_mode) do
         // Takes 1 parameter: <NUMBER> column index to sort by. Clicking the active column flips the direction.
         _params params [["_column", 0, [0]]];
 
-        if (_column == (_tab getVariable ["sortColumn", 1])) then {
-            _tab setVariable ["sortAscending", !(_tab getVariable ["sortAscending", false])];
-        } else {
-            _tab setVariable ["sortColumn", _column];
-            // Names read best A-Z, numbers highest first
-            _tab setVariable ["sortAscending", _column == 0];
-        };
+        (call _fnc_getSort) params ["_sortColumn", "_sortAscending"];
+        // Clicking the active column flips the direction. A new column starts with names A-Z, numbers highest first
+        private _ascending = if (_column == _sortColumn) then { !_sortAscending } else { _column == 0 };
+        profileNamespace setVariable [SORT_PROFILE_VAR, [_column, _ascending]];
 
         ["render"] call FUNC(playerStatsTab);
     };

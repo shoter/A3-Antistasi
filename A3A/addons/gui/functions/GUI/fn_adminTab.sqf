@@ -66,6 +66,26 @@ switch (_mode) do
             _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_admin_take_command_self";
         };
 
+        // Action button labels on two lines in the button's colour (after Take Command is disabled above, so it fades)
+        {
+            _x params ["_idc", "_stringName", "_rgb"];
+            [_display displayCtrl _idc, _stringName, _rgb] call FUNC(setTwoLineLabel);
+        } forEach [
+            [A3A_IDC_PLAYERMANAGEMENTBUTTON, "STR_antistasi_dialogs_main_admin_player_management_button", "FFFFFF"],
+            [A3A_IDC_TAKECMD, "STR_antistasi_dialogs_main_admin_take_command_button", "FFFFFF"],
+            [A3A_IDC_ADMINGARBAGECLEANBUTTON, "STR_antistasi_dialogs_main_garbage_clean_button", "FFD933"],   // A3A_COLOR_BUTTON_TEXT_YELLOW
+            [A3A_IDC_PERSISTENTSAVEADMIN, "STR_antistasi_dialogs_main_persistent_save_button", "FFD933"],
+            // Clean all / Clean HQ replace the Garbage Clean / Persistent Save row, so they share its colour
+            [A3A_IDC_ADMINGARBAGECLEANMAPBUTTON, "STR_antistasi_dialogs_main_garbage_clean_all", "FFD933"],
+            [A3A_IDC_ADMINGARBAGECLEANHQBUTTON, "STR_antistasi_dialogs_main_garbage_clean_hq", "FFD933"]
+        ];
+
+        // Showing the tab shows all its children, so the garbage clean options (which share the
+        // Garbage Clean / Persistent Save row) are hidden here, after the tab is shown
+        (_display displayCtrl A3A_IDC_ADMINGARBAGECLEANBUTTON) ctrlShow true;
+        (_display displayCtrl A3A_IDC_PERSISTENTSAVEADMIN) ctrlShow true;
+        (_display displayCtrl A3A_IDC_ADMINGARBAGECLEANCONTROLSGROUP) ctrlShow false;
+
         // _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
         // _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
         // _aiLimiterSlider sliderSetSpeed [10, 10];
@@ -253,6 +273,27 @@ switch (_mode) do
     case ("persistentSave"): {
         ServerDebug("Admin attempted persistent save");
         [] remoteExecCall ["A3A_fnc_saveLoop", 2];
+    };
+
+    // Garbage clean, as on the commander tab but without the commander check: the admin tab is admin only
+    case ("showGarbageCleanOptions"): {
+        Trace("Showing admin garbage clean options");
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        (_display displayCtrl A3A_IDC_ADMINGARBAGECLEANBUTTON) ctrlShow false;
+        (_display displayCtrl A3A_IDC_PERSISTENTSAVEADMIN) ctrlShow false;
+        (_display displayCtrl A3A_IDC_ADMINGARBAGECLEANCONTROLSGROUP) ctrlShow true;
+    };
+
+    case ("garbageCleanMapButtonClicked"): {
+        ServerInfo("Admin started a garbage clean of the whole map");
+        closeDialog 1;
+        [] remoteExec ["A3A_fnc_garbageCleaner", 2];
+    };
+
+    case ("garbageCleanHqButtonClicked"): {
+        ServerInfo("Admin started a garbage clean at HQ");
+        closeDialog 1;
+        [] remoteExec ["A3A_fnc_HQgarbageClean", 2];
     };
 
     case ("tpPetrosToAdmin"): {

@@ -51,6 +51,14 @@ private _columns = [
     [A3A_IDC_TOWNSHEADER_GRID, "STR_antistasi_dialogs_main_towns_grid_label"]
 ];
 
+// The sort choice [column, ascending] is kept in the player's profile, so it survives closing the menu and
+// restarting the game. A stored value that no longer fits the columns falls back to name, ascending.
+#define SORT_PROFILE_VAR "A3A_GUI_townsTabSort"
+private _fnc_getSort = {
+    private _sort = profileNamespace getVariable [SORT_PROFILE_VAR, [0, true]];
+    if (_sort isEqualTypeArray [0, true] && {(_sort # 0) >= 0 && {(_sort # 0) < count _columns && {floor (_sort # 0) == (_sort # 0)}}}) then { _sort } else { [0, true] };
+};
+
 private _upgradesReady = !isNil "A3A_townUpgradeHM" && !isNil "A3A_cityInvest";
 
 // Installed upgrade ids of a town in display order
@@ -68,8 +76,7 @@ switch (_mode) do
         Trace("Updating Towns tab");
         if (isNull _display) exitWith {};
 
-        private _sortColumn = _tab getVariable ["sortColumn", 0];
-        private _sortAscending = _tab getVariable ["sortAscending", true];
+        (call _fnc_getSort) params ["_sortColumn", "_sortAscending"];
 
         // Side colours, same source as the map marker drawing
         private _sideColorHM = createHashMapFromArray [
@@ -144,7 +151,11 @@ switch (_mode) do
             private _caption = localize _key;
             if (_forEachIndex == _sortColumn) then { _caption = _caption + " " + _arrow };
             (_display displayCtrl _idc) ctrlSetText _caption;
+            // The column the table is sorted by is drawn in yellow
+            (_display displayCtrl _idc) ctrlSetTextColor ([[1, 1, 1, 1], A3A_COLOR_BUTTON_TEXT_YELLOW_SQF] select (_forEachIndex == _sortColumn));
         } forEach _columns;
+
+        [_display displayCtrl A3A_IDC_TOWNSSHOWONMAPBUTTON, "STR_antistasi_dialogs_main_towns_show_on_map_button"] call FUNC(setTwoLineLabel);
 
         // Selection is gone after the rebuild, show the legend
         ["selectionChanged"] call FUNC(townsTab);
@@ -155,12 +166,8 @@ switch (_mode) do
         // Takes 1 parameter: <NUMBER> column index to sort by. Clicking the active column flips the direction.
         _params params [["_column", 0, [0]]];
 
-        if (_column == (_tab getVariable ["sortColumn", 0])) then {
-            _tab setVariable ["sortAscending", !(_tab getVariable ["sortAscending", true])];
-        } else {
-            _tab setVariable ["sortColumn", _column];
-            _tab setVariable ["sortAscending", true];
-        };
+        (call _fnc_getSort) params ["_sortColumn", "_sortAscending"];
+        profileNamespace setVariable [SORT_PROFILE_VAR, [_column, [true, !_sortAscending] select (_column == _sortColumn)]];
 
         ["update"] call FUNC(townsTab);
     };

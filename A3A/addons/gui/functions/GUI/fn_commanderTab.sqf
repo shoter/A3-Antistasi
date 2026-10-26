@@ -82,16 +82,17 @@ switch (_mode) do
         // Show base buttons
         {_x ctrlShow true} forEach _baseButtons;
         // Showing CommanderButtonsGroup shows all its children too, so the garbage clean options
-        // (which share the Air Support / Garbage Clean slot) must be hidden after it, not before
+        // (which share the Garbage Clean / Persistent Save row) must be hidden after it, not before
         _garbageCleanControlsGroup ctrlShow false;
 
         // Sub-commanders only get their high command squads, squad recruiting and the squad composer, the rest of the tab is the commander's
         private _isBoss = player isEqualTo theBoss;
         {_x ctrlShow _isBoss} forEach [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_deployFlagButton,_subCommandersButton,_missionAreaButton];
-        // Recruit squad moves into the first slot of the then empty button group, the squad composer next to it
-        _recruitSquadButton ctrlSetPosition [2 * GRID_W, ([0, 14] select _isBoss) * GRID_H];
+        // Commander: recruit squad in row 2, squad composer below it in row 3 (see CommanderButtonsGroup).
+        // Sub-commander: both move into the first row of the then empty button group, side by side
+        _recruitSquadButton ctrlSetPosition [2 * GRID_W, ([0, 10] select _isBoss) * GRID_H];
         _recruitSquadButton ctrlCommit 0;
-        _squadComposerButton ctrlSetPosition [28 * GRID_W, ([0, 70] select _isBoss) * GRID_H];
+        _squadComposerButton ctrlSetPosition [([28, 2] select _isBoss) * GRID_W, ([0, 20] select _isBoss) * GRID_H];
         _squadComposerButton ctrlCommit 0;
 
         // The rally flag can only be planted on foot, by a commander in control of their own unit
@@ -1227,11 +1228,11 @@ switch (_mode) do
         Trace("Showing garbage clean options");
         private _display = findDisplay A3A_IDD_MAINDIALOG;
 
-        // Hide overlapping buttons
-        private _airSupportButton = _display displayCtrl A3A_IDC_AIRSUPPORTBUTTON;
+        // Hide the buttons of the row the options cover
         private _garbageCleanButton = _display displayCtrl A3A_IDC_GARBAGECLEANBUTTON;
-        _airSupportButton ctrlShow false;
+        private _persistentSaveButton = _display displayCtrl A3A_IDC_PERSISTENTSAVECMDBUTTON;
         _garbageCleanButton ctrlShow false;
+        _persistentSaveButton ctrlShow false;
         // Show garbage clean controlsGroup
         private _garbageCleanControlsGroup = _display displayCtrl A3A_IDC_GARBAGECLEANCONTROLSGROUP;
         _garbageCleanControlsGroup ctrlShow true;
