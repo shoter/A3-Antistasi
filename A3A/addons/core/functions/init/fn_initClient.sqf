@@ -116,6 +116,10 @@ if (!isServer and !hasInterface) exitWith {
 
 waitUntil {local player};
 
+// Respawn countdown from the A3A_respawnTime param (published by the server before serverInitDone).
+// Set again on every respawn in A3A_fnc_onPlayerRespawn
+setPlayerRespawnTime (missionNamespace getVariable ["A3A_respawnTime", 15]);
+
 [] spawn A3A_fnc_briefing;
 
 // Placeholders, should get replaced globally by the server

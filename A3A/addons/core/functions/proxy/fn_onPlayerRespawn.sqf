@@ -1,6 +1,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 if (isDedicated) exitWith {};
+// Keep the respawn countdown of the A3A_respawnTime param for the next death, see A3A_fnc_initClient
+setPlayerRespawnTime (missionNamespace getVariable ["A3A_respawnTime", 15]);
 private ["_newUnit","_oldUnit"];
 _newUnit = _this select 0;
 _oldUnit = _this select 1;

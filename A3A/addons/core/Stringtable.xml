@@ -9912,6 +9912,12 @@
         <Original>Disable the "Restore nearby units" option on the vehicle box.</Original>
         <Russian>Отключить опцию "Восстановить близлежащие объекты".</Russian>
       </Key>
+      <Key ID="STR_A3A_Params_respawnTime_30s">
+        <Original>30 seconds</Original>
+      </Key>
+      <Key ID="STR_A3A_Params_respawnTime_title">
+        <Original>Player respawn time</Original>
+      </Key>
       <Key ID="STR_A3A_Params_reviveTime_10s">
         <Original>10 seconds</Original>
         <Italian>10 Secondi</Italian>
