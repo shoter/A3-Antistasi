@@ -3862,17 +3862,17 @@ class A3A_MainDialog : A3A_TabbedDialog
                 };
 
                 // Column headers, clicking one sorts the table by that column.
-                // X positions follow the column fractions of TownsList below (8 + fraction * 124).
+                // X positions follow the column fractions of TownsList below (8 + fraction * 124), each as wide as its column without the gap before the next one.
                 class NameHeader : A3A_Button
                 {
                     idc = A3A_IDC_TOWNSHEADER_NAME;
                     text = $STR_antistasi_dialogs_main_towns_name_label;
                     tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
                     onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_townsTab;";
-                    sizeEx = GUI_TEXT_SIZE_TINY;
+                    sizeEx = (GRID_H * 2.5);
                     x = 8 * GRID_W;
                     y = 7 * GRID_H;
-                    w = 29 * GRID_W;
+                    w = 29.5 * GRID_W;
                     h = 4 * GRID_H;
                 };
 
@@ -3881,8 +3881,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_OWNER;
                     text = $STR_antistasi_dialogs_main_towns_owner_label;
                     onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_townsTab;";
-                    x = 38 * GRID_W;
-                    w = 18 * GRID_W;
+                    x = 38.2 * GRID_W;
+                    w = 21.1 * GRID_W;
                 };
 
                 class SupportHeader : NameHeader
@@ -3890,8 +3890,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_SUPPORT;
                     text = $STR_antistasi_dialogs_main_towns_support_label;
                     onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_townsTab;";
-                    x = 56 * GRID_W;
-                    w = 10 * GRID_W;
+                    x = 60 * GRID_W;
+                    w = 9.9 * GRID_W;
                 };
 
                 class PopulationHeader : NameHeader
@@ -3899,8 +3899,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_POPULATION;
                     text = $STR_antistasi_dialogs_main_towns_population_label;
                     onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_townsTab;";
-                    x = 67 * GRID_W;
-                    w = 17 * GRID_W;
+                    x = 70.6 * GRID_W;
+                    w = 15.1 * GRID_W;
                 };
 
                 class GarrisonHeader : NameHeader
@@ -3908,8 +3908,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_GARRISON;
                     text = $STR_antistasi_dialogs_main_towns_garrison_label;
                     onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_townsTab;";
-                    x = 85 * GRID_W;
-                    w = 12 * GRID_W;
+                    x = 86.4 * GRID_W;
+                    w = 14 * GRID_W;
                 };
 
                 class UpgradesHeader : NameHeader
@@ -3917,8 +3917,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_UPGRADES;
                     text = $STR_antistasi_dialogs_main_towns_upgrades_label;
                     onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_townsTab;";
-                    x = 97 * GRID_W;
-                    w = 18 * GRID_W;
+                    x = 101.1 * GRID_W;
+                    w = 15.7 * GRID_W;
                 };
 
                 class GridHeader : NameHeader
@@ -3926,8 +3926,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_GRID;
                     text = $STR_antistasi_dialogs_main_towns_grid_label;
                     onButtonClick = "[""sortBy"", [6]] call A3A_GUI_fnc_townsTab;";
-                    x = 116 * GRID_W;
-                    w = 16 * GRID_W;
+                    x = 117.5 * GRID_W;
+                    w = 14.5 * GRID_W;
                 };
 
                 class TownsList : A3A_ListNBox
@@ -3942,7 +3942,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                     sizeEx = GUI_TEXT_SIZE_MEDIUM;
                     rowHeight = 4 * GRID_H;
-                    columns[] = {0, 0.24, 0.39, 0.47, 0.62, 0.72, 0.87}; // Name, Owner, Support, Population, Garrison, Upgrades, Grid
+                    columns[] = {0, 0.243, 0.419, 0.505, 0.632, 0.751, 0.883}; // Name, Owner, Support, Population, Garrison, Upgrades, Grid
                 };
 
                 class ShowOnMapButton : A3A_ShortcutButton

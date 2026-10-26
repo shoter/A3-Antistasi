@@ -30,6 +30,11 @@ License: APL-ND
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+// Tabs of the tab strip. The last one shown is kept in the player's profile and the dialog opens on it again,
+// sub tabs (fast travel, AI management, ...) are not kept: closing the dialog from one reopens its parent tab.
+#define MAIN_TABS ["player", "commander", "admin", "towns", "garrisons", "chronicle", "playerstats", "factiondebug"]
+#define LAST_TAB_PROFILE_VAR "A3A_GUI_mainDialogLastTab"
+
 params[
     ["_mode","onLoad"],
     ["_params", []]
@@ -137,9 +142,17 @@ switch (_mode) do
         private _commanderUserMarkersEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
         Debug_1("Adding user markers Draw EH to Fast Travel map: %1", _commanderUserMarkersEH);
 
-        // Show player tab content
+        // Open on the tab shown last, unless a high command selection asks for the commander tab.
+        // A remembered tab the player may no longer use (lost command or admin) falls back to the player tab.
         if !(_doAutoSwitch || (_autoSwitchGroups#1)) then {
-            ["switchTab", ["player"]] call FUNC(mainDialog);
+            private _lastTab = profileNamespace getVariable [LAST_TAB_PROFILE_VAR, "player"];
+            private _allowed = call {
+                if !(_lastTab isEqualType "" && {_lastTab in MAIN_TABS}) exitWith { false };
+                if (_lastTab == "commander") exitWith { [player] call FUNCMAIN(isCommandStaff) };
+                if (_lastTab in ["admin", "factiondebug"]) exitWith { [] call FUNCMAIN(isLocalAdmin) };
+                true
+            };
+            ["switchTab", [["player", _lastTab] select _allowed]] call FUNC(mainDialog);
         } else {
             ["switchTab", ["commander"]] call FUNC(mainDialog);
         };
@@ -305,6 +318,8 @@ switch (_mode) do
         if (_selectedTabIDC == -1) exitWith {
             Error("Attempted to access tab without permission : %1", _selectedTab);
         };
+
+        if (_selectedTab in MAIN_TABS) then { profileNamespace setVariable [LAST_TAB_PROFILE_VAR, _selectedTab] };
 
         // Array of IDCs for all the tabs, including subtabs (like AI & player management)
         // Commander and fast travel maps are also hidden here, and shown again in updateCommanderTab

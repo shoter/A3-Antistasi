@@ -1,7 +1,34 @@
+// The HQ dialog is 10% wider than the default dialog (176 instead of DIALOG_W 160), same height.
+// DIALOG_X/DIALOG_W are expanded into A3A_DefaultDialog and A3A_DefaultControlsGroup where those are defined,
+// so the frame and every tab group set their own x/w from these.
+#define HQ_DIALOG_W 176
+#define HQ_DIALOG_X CENTER_X(HQ_DIALOG_W)
+
 class A3A_HqDialog : A3A_DefaultDialog
 {
     idd = A3A_IDD_HQDIALOG;
     onLoad = "[""onLoad""] spawn A3A_GUI_fnc_hqDialog";
+
+    class ControlsBackground
+    {
+        class TitleBarBackground : A3A_Background
+        {
+            moving = true;
+            colorBackground[] = A3A_COLOR_TITLEBAR_BACKGROUND;
+            x = HQ_DIALOG_X;
+            y = DIALOG_Y - 5 * GRID_H;
+            w = HQ_DIALOG_W * GRID_W;
+            h = 5 * GRID_H;
+        };
+
+        class Background : A3A_Background
+        {
+            x = HQ_DIALOG_X;
+            y = DIALOG_Y;
+            w = HQ_DIALOG_W * GRID_W;
+            h = DIALOG_H * GRID_H;
+        };
+    };
 
     class Controls
     {
@@ -9,16 +36,19 @@ class A3A_HqDialog : A3A_DefaultDialog
         {
             idc = A3A_IDC_HQDIALOGTITLEBAR;
             text = $STR_antistasi_dialogs_hq_titlebar;
-            x = DIALOG_X;
+            x = HQ_DIALOG_X;
             y = DIALOG_Y - 5 * GRID_H;
-            w = DIALOG_W * GRID_W;
+            w = HQ_DIALOG_W * GRID_W;
             h = 5 * GRID_H;
         };
 
-        // Main content
+        // Main content: four buttons on the left (x 8..56), the status, resources and rest sections on the right.
+        // The right sections are 82 wide (their widest row) and centred in the space right of the buttons: x 75..157, y 2..95
         class MainTab : A3A_DefaultControlsGroup
         {
             idc = A3A_IDC_HQDIALOGMAINTAB;
+            x = HQ_DIALOG_X;
+            w = HQ_DIALOG_W * GRID_W;
 
             class controls
             {
@@ -116,9 +146,9 @@ class A3A_HqDialog : A3A_DefaultDialog
                 class CampaignStatusControlsGroup : A3A_ControlsGroupNoScrollbars
                 {
                     idc = -1;
-                    x = 70 * GRID_W;
-                    y = 7 * GRID_H;
-                    w = 90 * GRID_W;
+                    x = 75 * GRID_W;
+                    y = 2 * GRID_H;
+                    w = 82 * GRID_W;
                     h = 23 * GRID_H;
 
                     class controls
@@ -129,7 +159,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = $STR_antistasi_dialogs_hq_campaign_status;
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
-                            w = 90 * GRID_W;
+                            w = 82 * GRID_W;
                             h = 4 * GRID_H;
                         };
 
@@ -464,9 +494,9 @@ class A3A_HqDialog : A3A_DefaultDialog
                 class FactionResourcesControlsGroup : A3A_ControlsGroupNoScrollbars
                 {
                     idc = -1;
-                    x = 70 * GRID_W;
-                    y = 33 * GRID_H;
-                    w = 90 * GRID_W;
+                    x = 75 * GRID_W;
+                    y = 28 * GRID_H;
+                    w = 82 * GRID_W;
                     h = 38 * GRID_H;
 
                     class controls
@@ -477,7 +507,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = $STR_antistasi_dialogs_hq_faction_resources;
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
-                            w = 90 * GRID_W;
+                            w = 82 * GRID_W;
                             h = 4 * GRID_H;
                         };
 
@@ -681,9 +711,9 @@ class A3A_HqDialog : A3A_DefaultDialog
                 class RestSectionControlsGroup : A3A_ControlsGroupNoScrollbars
                 {
                     idc = -1;
-                    x = 70 * GRID_W;
-                    y = 74 * GRID_H;
-                    w = 90 * GRID_W;
+                    x = 75 * GRID_W;
+                    y = 69 * GRID_H;
+                    w = 82 * GRID_W;
                     h = 26 * GRID_H;
 
                     class controls
@@ -694,7 +724,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = $STR_antistasi_dialogs_hq_rest_environment;
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
-                            w = 90 * GRID_W;
+                            w = 82 * GRID_W;
                             h = 4 * GRID_H;
                         };
 
@@ -765,9 +795,9 @@ class A3A_HqDialog : A3A_DefaultDialog
         {
             idc = A3A_IDC_GARRISONMAP;
             onMouseButtonClick = "[""garrisonMapClicked"", [[_this select 2, _this select 3]]] call A3A_GUI_fnc_hqDialog";
-            x = CENTER_X(DIALOG_W) + 68 * GRID_W;
+            x = HQ_DIALOG_X + 68 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
-            w = 84 * GRID_W;
+            w = 100 * GRID_W; // to 8 short of the right edge of the wider HQ dialog
             h = 84 * GRID_H;
 
             // Hide map markers
@@ -787,6 +817,7 @@ class A3A_HqDialog : A3A_DefaultDialog
         class GarrisonTab : A3A_DefaultControlsGroup
         {
             idc = A3A_IDC_HQDIALOGGARRISONTAB;
+            x = HQ_DIALOG_X;
             // Width set to smaller than usual to avoid an issue where
             // pressing anything other than the map would (invisibly) cover up the
             // map control, making it unclickable
@@ -1539,6 +1570,9 @@ class A3A_HqDialog : A3A_DefaultDialog
         class MinefieldsTab : A3A_DefaultControlsGroup
         {
             idc = A3A_IDC_HQDIALOGMINEFIELDSTAB;
+            x = HQ_DIALOG_X;
+            w = HQ_DIALOG_W * GRID_W;
+            // Contents centred on x 88, the middle of the HQ dialog
 
             class controls
             {
@@ -1548,7 +1582,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     style = ST_CENTER;
                     text = $STR_antistasi_dialogs_hq_minefields_deploy_minefields_label;
                     sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 50 * GRID_W;
+                    x = 58 * GRID_W;
                     y = 16 * GRID_H;
                     w = 60 * GRID_W;
                     h = 6 * GRID_H;
@@ -1558,7 +1592,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                 {
                     idc = -1;
                     text = A3A_Icon_AP_Minefield;
-                    x = 42 * GRID_W;
+                    x = 50 * GRID_W;
                     y = 24 * GRID_H;
                     w = 28 * GRID_W;
                     h = 28 * GRID_H;
@@ -1570,7 +1604,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_minefields_apers_mines_button;
                     onButtonClick = "closeDialog 0;[""APERSMine""] spawn A3A_fnc_mineDialog";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 36 * GRID_W;
+                    x = 44 * GRID_W;
                     y = 54 * GRID_H;
                     w = 40 * GRID_W;
                     h = 12 * GRID_H;
@@ -1580,7 +1614,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                 {
                     idc = -1;
                     text = A3A_Icon_AT_Minefield;
-                    x = 90 * GRID_W;
+                    x = 98 * GRID_W;
                     y = 24 * GRID_H;
                     w = 28 * GRID_W;
                     h = 28 * GRID_H;
@@ -1593,7 +1627,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_minefields_at_mines_button;
                     onButtonClick = "closeDialog 0; [""ATMine""] spawn A3A_fnc_mineDialog";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 84 * GRID_W;
+                    x = 92 * GRID_W;
                     y = 54 * GRID_H;
                     w = 40 * GRID_W;
                     h = 12 * GRID_H;
@@ -1605,7 +1639,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_minefields_remove_minefield_button;
                     onButtonClick = "closeDialog 0; [""delete""] spawn A3A_fnc_mineDialog;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
-                    x = 52 * GRID_W;
+                    x = 60 * GRID_W;
                     y = 80 * GRID_H;
                     w = 56 * GRID_W;
                     h = 12 * GRID_H;
@@ -1617,14 +1651,14 @@ class A3A_HqDialog : A3A_DefaultDialog
         class BackButton : A3A_BackButton
         {
             idc = A3A_IDC_HQDIALOGBACKBUTTON;
-            x = DIALOG_X + DIALOG_W * GRID_W - 12 * GRID_W;
+            x = HQ_DIALOG_X + HQ_DIALOG_W * GRID_W - 12 * GRID_W;
             y = DIALOG_Y - 5 * GRID_H;
         };
 
         class CloseButton : A3A_CloseButton
         {
             idc = -1;
-            x = DIALOG_X + DIALOG_W * GRID_W - 5 * GRID_W;
+            x = HQ_DIALOG_X + HQ_DIALOG_W * GRID_W - 5 * GRID_W;
             y = DIALOG_Y - 5 * GRID_H;
         };
     };
