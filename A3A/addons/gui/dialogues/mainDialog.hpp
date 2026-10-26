@@ -85,6 +85,22 @@ class A3A_CommanderShortcutButton2Lines : A3A_CommanderShortcutButton
     };
 };
 
+// Admin tab action buttons: 12 high, labels on two lines set by the admin tab update.
+// Text size 3.6 (between SMALL and MEDIUM); top = (12 - 2 * 3.6) / 2 centres the two lines
+class A3A_AdminShortcutButton : A3A_ShortcutButton
+{
+    size = GRID_H * 3.6;
+    sizeEx = GRID_H * 3.6;
+
+    class TextPos
+    {
+        left = 1 * GRID_W;
+        right = 1 * GRID_W;
+        top = 2.4 * GRID_H;
+        bottom = 0;
+    };
+};
+
 // Tab strip: the tab buttons share the dialog width equally. Bump the count when adding a tab.
 #define TAB_BUTTON_COUNT 8
 #define TAB_BUTTON_W (DIALOG_W / TAB_BUTTON_COUNT)
@@ -2031,38 +2047,48 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 44 * GRID_H;
                 };
 
-                class PlayerManagementButton : A3A_ShortcutButton
+                // Admin action buttons: two columns (x = 8 and 32) of two rows (y = 64 and 80), 12 high.
+                //   Player Management | Take Command     white
+                //   Garbage Clean     | Persistent Save  yellow (Clean all / Clean HQ swap in over this row)
+                // The admin tab update sets every label as two lines of structured text with its colour,
+                // because a shortcut button neither breaks a two word label reliably nor centres it vertically
+                class PlayerManagementButton : A3A_AdminShortcutButton
                 {
                     idc = A3A_IDC_PLAYERMANAGEMENTBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_player_management_button;
                     onButtonClick = "[""switchTab"", [""playermanagement""]] call A3A_GUI_fnc_mainDialog;";
                     x = 8 * GRID_W;
                     y = 64 * GRID_H;
-                    w = 46 * GRID_W;
+                    w = 22 * GRID_W;
                     h = 12 * GRID_H;
-                    size = GUI_TEXT_SIZE_LARGE;
-
-                    class TextPos
-                    {
-                        left = 2 * GRID_W;
-                        right = 2 * GRID_H;
-                        top = 3 * GRID_W;
-                        bottom = 3 * GRID_H;
-                    };
                 };
 
-                class TakeCommandButton : A3A_ShortcutButton
+                class TakeCommandButton : A3A_AdminShortcutButton
                 {
                     idc = A3A_IDC_TAKECMD;
                     text = $STR_antistasi_dialogs_main_admin_take_command_button;
-                    x = 8 * GRID_W;
-                    y = 80 * GRID_H;
+                    x = 32 * GRID_W;
+                    y = 64 * GRID_H;
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                     onMouseButtonClick = "[""takeCommand""] spawn A3A_GUI_fnc_adminTab";
                 };
 
-                class PersistentSaveButton : A3A_ShortcutButton
+                // Garbage Clean and Persistent Save share their row with AdminGarbageCleanControlsGroup, swapped by
+                // the showGarbageCleanOptions and update modes of fn_adminTab
+                class AdminGarbageCleanButton : A3A_AdminShortcutButton
+                {
+                    idc = A3A_IDC_ADMINGARBAGECLEANBUTTON;
+                    text = $STR_antistasi_dialogs_main_garbage_clean_button;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 22 * GRID_W;
+                    h = 12 * GRID_H;
+                    onButtonClick = "[""showGarbageCleanOptions""] call A3A_GUI_fnc_adminTab";
+                };
+
+                // Shares its row with AdminGarbageCleanControlsGroup, see AdminGarbageCleanButton
+                class PersistentSaveButton : A3A_AdminShortcutButton
                 {
                     idc = A3A_IDC_PERSISTENTSAVEADMIN;
                     text = $STR_antistasi_dialogs_main_persistent_save_button;
@@ -2071,6 +2097,42 @@ class A3A_MainDialog : A3A_TabbedDialog
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                     onButtonClick = "[""persistentSave""] spawn A3A_GUI_fnc_adminTab";
+                };
+
+                // Covers AdminGarbageCleanButton and PersistentSaveButton. Hidden by fn_adminTab update, which runs
+                // after the admin tab is shown, because showing the tab shows this group too
+                class AdminGarbageCleanControlsGroup : A3A_ControlsGroupNoScrollbars
+                {
+                    idc = A3A_IDC_ADMINGARBAGECLEANCONTROLSGROUP;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 46 * GRID_W;
+                    h = 12 * GRID_H;
+
+                    class controls
+                    {
+                        class AdminGarbageCleanMapButton : A3A_AdminShortcutButton
+                        {
+                            idc = A3A_IDC_ADMINGARBAGECLEANMAPBUTTON;
+                            text = $STR_antistasi_dialogs_main_garbage_clean_all;
+                            onButtonClick = "[""garbageCleanMapButtonClicked""] call A3A_GUI_fnc_adminTab";
+                            x = 0 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class AdminGarbageCleanHQButton : A3A_AdminShortcutButton
+                        {
+                            idc = A3A_IDC_ADMINGARBAGECLEANHQBUTTON;
+                            text = $STR_antistasi_dialogs_main_garbage_clean_hq;
+                            onButtonClick = "[""garbageCleanHqButtonClicked""] call A3A_GUI_fnc_adminTab";
+                            x = 24 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+                    };
                 };
 
                 class AiSectionLabel : A3A_SectionLabelRight
@@ -3795,22 +3857,22 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = -1;
                     x = 8 * GRID_W;
                     y = 12 * GRID_H;
-                    w = 106 * GRID_W;
+                    w = 124 * GRID_W;
                     h = 82 * GRID_H;
                 };
 
                 // Column headers, clicking one sorts the table by that column.
-                // X positions follow the column fractions of TownsList below (8 + fraction * 106).
+                // X positions follow the column fractions of TownsList below (8 + fraction * 124).
                 class NameHeader : A3A_Button
                 {
                     idc = A3A_IDC_TOWNSHEADER_NAME;
                     text = $STR_antistasi_dialogs_main_towns_name_label;
                     tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
                     onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_townsTab;";
-                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_TINY;
                     x = 8 * GRID_W;
                     y = 7 * GRID_H;
-                    w = 25 * GRID_W;
+                    w = 29 * GRID_W;
                     h = 4 * GRID_H;
                 };
 
@@ -3819,8 +3881,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_OWNER;
                     text = $STR_antistasi_dialogs_main_towns_owner_label;
                     onButtonClick = "[""sortBy"", [1]] call A3A_GUI_fnc_townsTab;";
-                    x = 33 * GRID_W;
-                    w = 15 * GRID_W;
+                    x = 38 * GRID_W;
+                    w = 18 * GRID_W;
                 };
 
                 class SupportHeader : NameHeader
@@ -3828,7 +3890,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_SUPPORT;
                     text = $STR_antistasi_dialogs_main_towns_support_label;
                     onButtonClick = "[""sortBy"", [2]] call A3A_GUI_fnc_townsTab;";
-                    x = 49 * GRID_W;
+                    x = 56 * GRID_W;
                     w = 10 * GRID_W;
                 };
 
@@ -3837,8 +3899,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_POPULATION;
                     text = $STR_antistasi_dialogs_main_towns_population_label;
                     onButtonClick = "[""sortBy"", [3]] call A3A_GUI_fnc_townsTab;";
-                    x = 60 * GRID_W;
-                    w = 13 * GRID_W;
+                    x = 67 * GRID_W;
+                    w = 17 * GRID_W;
                 };
 
                 class GarrisonHeader : NameHeader
@@ -3846,8 +3908,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_GARRISON;
                     text = $STR_antistasi_dialogs_main_towns_garrison_label;
                     onButtonClick = "[""sortBy"", [4]] call A3A_GUI_fnc_townsTab;";
-                    x = 74 * GRID_W;
-                    w = 10 * GRID_W;
+                    x = 85 * GRID_W;
+                    w = 12 * GRID_W;
                 };
 
                 class UpgradesHeader : NameHeader
@@ -3855,8 +3917,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_UPGRADES;
                     text = $STR_antistasi_dialogs_main_towns_upgrades_label;
                     onButtonClick = "[""sortBy"", [5]] call A3A_GUI_fnc_townsTab;";
-                    x = 84 * GRID_W;
-                    w = 15 * GRID_W;
+                    x = 97 * GRID_W;
+                    w = 18 * GRID_W;
                 };
 
                 class GridHeader : NameHeader
@@ -3864,8 +3926,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSHEADER_GRID;
                     text = $STR_antistasi_dialogs_main_towns_grid_label;
                     onButtonClick = "[""sortBy"", [6]] call A3A_GUI_fnc_townsTab;";
-                    x = 100 * GRID_W;
-                    w = 14 * GRID_W;
+                    x = 116 * GRID_W;
+                    w = 16 * GRID_W;
                 };
 
                 class TownsList : A3A_ListNBox
@@ -3873,14 +3935,14 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSLIST;
                     x = 8 * GRID_W;
                     y = 12 * GRID_H;
-                    w = 106 * GRID_W;
+                    w = 124 * GRID_W;
                     h = 82 * GRID_H;
                     onLBDblClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
                     onLBSelChanged = "[""selectionChanged""] call A3A_GUI_fnc_townsTab";
 
                     sizeEx = GUI_TEXT_SIZE_MEDIUM;
                     rowHeight = 4 * GRID_H;
-                    columns[] = {0, 0.24, 0.39, 0.49, 0.62, 0.72, 0.87}; // Name, Owner, Support, Population, Garrison, Upgrades, Grid
+                    columns[] = {0, 0.24, 0.39, 0.47, 0.62, 0.72, 0.87}; // Name, Owner, Support, Population, Garrison, Upgrades, Grid
                 };
 
                 class ShowOnMapButton : A3A_ShortcutButton
@@ -3888,10 +3950,22 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TOWNSSHOWONMAPBUTTON;
                     text = $STR_antistasi_dialogs_main_towns_show_on_map_button;
                     onButtonClick = "[""showOnMap""] call A3A_GUI_fnc_townsTab";
-                    x = 120 * GRID_W;
-                    y = 12 * GRID_H;
-                    w = 32 * GRID_W;
-                    h = 12 * GRID_H;
+                    x = 134 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 24 * GRID_W;
+                    h = 8 * GRID_H;
+                    size = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_SMALL;
+
+                    // Label set on two lines by the towns tab update (A3A_GUI_fnc_setTwoLineLabel).
+                    // top = (8 - 2 * 3.2) / 2 centres two lines of GUI_TEXT_SIZE_SMALL
+                    class TextPos
+                    {
+                        left = 1 * GRID_W;
+                        right = 1 * GRID_W;
+                        top = 0.8 * GRID_H;
+                        bottom = 0;
+                    };
                 };
 
                 // Upgrades of the selected town, or the code legend when nothing is selected
@@ -3899,10 +3973,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_TOWNSUPGRADESTEXT;
                     text = "";
-                    x = 120 * GRID_W;
-                    y = 27 * GRID_H;
-                    w = 32 * GRID_W;
-                    h = 67 * GRID_H;
+                    x = 134 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 24 * GRID_W;
+                    h = 72 * GRID_H;
                 };
             };
         };
@@ -3932,7 +4006,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     text = $STR_antistasi_dialogs_main_towns_name_label;
                     tooltip = $STR_antistasi_dialogs_main_towns_sort_tooltip;
                     onButtonClick = "[""sortBy"", [0]] call A3A_GUI_fnc_garrisonsTab;";
-                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                    sizeEx = GUI_TEXT_SIZE_TINY;
                     x = 8 * GRID_W;
                     y = 7 * GRID_H;
                     w = 31 * GRID_W;
@@ -4084,7 +4158,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 82 * GRID_H;
                 };
 
-                // Category filters, A3A_GUI_fnc_chronicleTab draws the active one in brighter text
+                // Category filters, A3A_GUI_fnc_chronicleTab draws the active one in yellow and keeps it in the player's profile
                 class AllFilter : A3A_Button
                 {
                     idc = A3A_IDC_CHRONICLEFILTER_ALL;
