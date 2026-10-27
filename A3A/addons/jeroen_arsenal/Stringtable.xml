@@ -422,6 +422,30 @@
         <Turkish>Araç envanteri</Turkish>
         <Chinesesimp>载具库存</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_JNA_vehicle_preset_for">
+        <Original>Cargo presets for %1</Original>
+        <Polish>Presety ładunku dla %1</Polish>
+      </Key>
+      <Key ID="STR_A3A_JNA_vehicle_preset_load_tooltip">
+        <Original>Load a cargo preset saved for this vehicle type</Original>
+        <Polish>Wczytaj preset ładunku zapisany dla tego typu pojazdu</Polish>
+      </Key>
+      <Key ID="STR_A3A_JNA_vehicle_preset_loaded">
+        <Original>Preset '%1' loaded</Original>
+        <Polish>Wczytano preset '%1'</Polish>
+      </Key>
+      <Key ID="STR_A3A_JNA_vehicle_preset_partial">
+        <Original>Preset '%1' loaded partially. Not enough stock or space for: %2</Original>
+        <Polish>Preset '%1' wczytany częściowo. Za mało w arsenale lub miejsca na: %2</Polish>
+      </Key>
+      <Key ID="STR_A3A_JNA_vehicle_preset_save_tooltip">
+        <Original>Save the current cargo as a preset for this vehicle type</Original>
+        <Polish>Zapisz obecny ładunek jako preset dla tego typu pojazdu</Polish>
+      </Key>
+      <Key ID="STR_A3A_JNA_vehicle_preset_saved">
+        <Original>Preset '%1' saved</Original>
+        <Polish>Zapisano preset '%1'</Polish>
+      </Key>
       <Key ID="STR_A3A_JNA_weapon_low">
         <Original>We are low on this item, only members may use it</Original>
         <German>Dieser Gegenstand ist knapp, nur Mitglieder können ihn verwenden.</German>
