@@ -24,3 +24,7 @@
 #define SNAP_SURFACE_MODE 23
 #define AVAILABLE_MONEY 24
 #define CURSOR_OBJECT 25
+
+// Building budget a construction kit gives per euro of its purchase price.
+// Refunds and the kit's resale value divide by it again, so the extra budget can't be cashed out.
+#define BUILD_BUDGET_MULTIPLIER 2

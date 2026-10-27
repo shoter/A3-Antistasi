@@ -42,6 +42,7 @@ class vn_khe_sanh {
 		"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F","Land_vn_b_prop_fueldrum_01","Land_vn_usaf_fueltank_75_01","Land_vn_fuelstation_feed_f","Land_vn_fuelstation_01_pump_f","Land_vn_fuelstation_02_pump_f"
 	};
 	climate = "tropical";
+	extraBuildObjects = 0;      // era-specific objects only, no modern vanilla extras
 	buildObjects[] = {
 		// Standalone bunkers
 		{"Land_vn_bunker_small_01", 60}, {"Land_vn_pillboxbunker_01_hex_f", 200}, {"Land_vn_pillboxbunker_01_rectangle_f", 300},

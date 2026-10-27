@@ -17,7 +17,7 @@ isNil {
         if (time <= _object getVariable ["A3A_build_timeout", 0]) then { continue };
 
         // refund? Arguable
-        private _price = _object getVariable ["A3A_build_price", 0];
+        private _price = _object getVariable ["A3A_build_refund", 0];
         if (_price >= 0) then { [0, _price] spawn A3A_fnc_resourcesFIA; };
 
         // remove the object from the list

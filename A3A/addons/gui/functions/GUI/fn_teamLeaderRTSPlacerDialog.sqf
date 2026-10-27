@@ -41,6 +41,46 @@ switch (_mode) do
 
 		_moneyCtrl ctrlSetText format ["%1 €", A3A_building_EHDB # AVAILABLE_MONEY];
 	};
+	case ("filter"):
+	{
+		// Lay out the tiles whose name or classname contains the filter text, hide the rest
+		private _display = findDisplay A3A_IDD_TEAMLEADERDIALOG;
+		private _tiles = _display getVariable "A3A_buildTiles";
+		if (isNil "_tiles") exitWith {};			// onLoad still creating the tiles, it filters when done
+
+		private _filter = toLower ctrlText (_display displayCtrl A3A_IDC_TEAMLEADERBUILDERFILTER);
+		private _layout = _display getVariable "A3A_buildTileLayout";
+		_layout params ["_itemsPerRow", "_itemWidth"];
+
+		private _shown = 0;
+		{
+			_x params ["_itemControlsGroup", "_searchText"];
+			if (_filter != "" && { _searchText find _filter == -1 }) then {
+				_itemControlsGroup ctrlSetPosition [0, 0];			// parked at the origin so it doesn't stretch the scroll area
+				_itemControlsGroup ctrlCommit 0;
+				_itemControlsGroup ctrlShow false;
+				continue;
+			};
+			private _itemXpos = (4 + (4 + _itemWidth) * (_shown % _itemsPerRow)) * GRID_W;
+			private _itemYpos = (floor (_shown / _itemsPerRow)) * (34 * GRID_H);
+			_itemControlsGroup ctrlSetPosition [_itemXpos, _itemYpos];
+			_itemControlsGroup ctrlCommit 0;
+			_itemControlsGroup ctrlShow true;
+			_shown = _shown + 1;
+		} forEach _tiles;
+
+		// Back to the top, the old scroll position may be past the end of the shorter list
+		private _buildControlsGroup = (_display displayCtrl A3A_IDC_TEAMLEADERBUILDERMAIN) controlsGroupCtrl A3A_IDC_TEAMLEADERBUILDINGGROUP;
+		_buildControlsGroup ctrlSetScrollValues [0, -1];
+	};
+	case ("releaseFilterFocus"):
+	{
+		// Move keyboard focus off the filter so the placer keys (Space, E, R, C...) work again
+		private _display = findDisplay A3A_IDD_TEAMLEADERDIALOG;
+		private _lastButton = _display getVariable ["A3A_lastBuildButton", controlNull];
+		if (!isNull _lastButton && { ctrlShown ctrlParentControlsGroup _lastButton }) exitWith { ctrlSetFocus _lastButton };
+		ctrlSetFocus ((_display displayCtrl A3A_IDC_TEAMLEADERBUILDERMAIN) controlsGroupCtrl A3A_IDC_TEAMLEADERBUILDINGGROUP);
+	};
 	case ("onLoad"):
     {
 		private _display = findDisplay A3A_IDD_TEAMLEADERDIALOG;
@@ -58,6 +98,7 @@ switch (_mode) do
 
 		//diag_log format ["Builder: boxWidth %1, itemsPerRow %2, itemWidth %3", _boxWidth, _itemsPerRow, _itemWidth];
 
+		private _tiles = [];
 		{
 			_x params [
 				["_className", "Land_Tyres_F"],
@@ -97,6 +138,7 @@ switch (_mode) do
 			_button setVariable ["className", _className];
 			_button setVariable ["model", _model];
 			_button setVariable ["price", _price];
+			_button ctrlSetTooltip format ["%1\n%2", _displayName, _className];
 			_button ctrlCommit 0;
 			if (_ability isEqualTo "helipad" && {((((["Synd_HQ"] + outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}) apply {getMarkerPos _x}) inAreaArray [getPosATL player, 75, 75]) isEqualTo []}) then {
 				_button ctrlEnable false;
@@ -110,6 +152,8 @@ switch (_mode) do
 					// how the fuck did you do this? No databases?
 					call A3A_initBuildingDB;
 				};
+
+				ctrlParent _control setVariable ["A3A_lastBuildButton", _control];		// focus target when leaving the filter
 
 				private _object = (A3A_building_EHDB # BUILD_OBJECT_TEMP_OBJECT);
 				private _className = _control getVariable ["className", "Land_Tyres_F"];
@@ -151,19 +195,44 @@ switch (_mode) do
 			_itemControlsGroup ctrlSetFade 0;
             _itemControlsGroup ctrlCommit 0.1;
 
+			_tiles pushBack [_itemControlsGroup, toLower (_displayName + " " + _className)];
 		} forEach _buildableObjects;
 
-		// EH to block camera zoom while mouse is over the selection dialog
+		_display setVariable ["A3A_buildTileLayout", [_itemsPerRow, _itemWidth]];
+		_display setVariable ["A3A_buildTiles", _tiles];
+		["filter"] call A3A_GUI_fnc_teamLeaderRTSPlacerDialog;			// in case something was typed while the tiles were created
+
+		// Filter field: stop the camera from moving while typing, the camera keys would otherwise pan it
+		private _filterCtrl = _display displayCtrl A3A_IDC_TEAMLEADERBUILDERFILTER;
+		_filterCtrl ctrlAddEventHandler ["SetFocus", { A3A_cam camCommand "manual off" }];
+
+		// Panel area includes the title bar with the filter field
+		_display setVariable ["A3A_isMouseOverPanel", {
+			params ["_display"];
+			private _titleHeight = ctrlPosition (_display displayCtrl A3A_IDC_TEAMLEADERBUILDERMONEY) # 3;
+			ctrlPosition (_display displayCtrl A3A_IDC_TEAMLEADERBUILDERMAIN) params ["_xpos", "_ypos", "_width", "_height"];
+			_ypos = _ypos - _titleHeight;
+			_height = _height + _titleHeight;
+			getMousePosition inArea [[_xpos + _width/2, _ypos + _height/2], _width/2, _height/2, 0, true];
+		}];
+
+		// Clicking into the world while typing hands the keyboard back to the placer
+		_display displayAddEventHandler ["MouseButtonDown", {
+			params ["_display"];
+			if (focusedCtrl _display != _display displayCtrl A3A_IDC_TEAMLEADERBUILDERFILTER) exitWith {};
+			if ([_display] call (_display getVariable "A3A_isMouseOverPanel")) exitWith {};
+			["releaseFilterFocus"] call A3A_GUI_fnc_teamLeaderRTSPlacerDialog;
+		}];
+
+		// EH to block camera zoom while mouse is over the selection dialog or the filter is being typed in
 		_display displayAddEventHandler ["MouseMoving", {
 
 			params[ "_display" ];
 
-			private _scrollArea = _display displayCtrl A3A_IDC_TEAMLEADERBUILDERMAIN;
-			ctrlPosition _scrollArea params ["_xpos", "_ypos", "_width", "_height"];
+			private _isMouseInArea = [_display] call (_display getVariable "A3A_isMouseOverPanel");
+			private _isTyping = focusedCtrl _display == _display displayCtrl A3A_IDC_TEAMLEADERBUILDERFILTER;
 
-			private _isMouseInArea = getMousePosition inArea [[_xpos + _width/2, _ypos + _height/2], _width/2, _height/2, 0, true];
-
-			if (_isMouseInArea) then {
+			if (_isMouseInArea || _isTyping) then {
 				A3A_cam camCommand "manual off";
 			} else {
 				A3A_cam camCommand "manual on";

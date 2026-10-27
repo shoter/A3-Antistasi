@@ -53,6 +53,13 @@ call (A3A_building_EHDB # UPDATE_BB);
 private _downKeyEH = _emptyDisplay displayAddEventHandler ["KeyDown", {
     params["_displayOrControl","_key"];
 
+    // Typing in the building filter: only Escape and Enter mean something to the placer
+    if (focusedCtrl _displayOrControl == _displayOrControl displayCtrl A3A_IDC_TEAMLEADERBUILDERFILTER) exitWith {
+        if (_key == DIK_ESCAPE) then { call (A3A_building_EHDB # END_BUILD_FUNC) };
+        if (_key in [DIK_RETURN, DIK_NUMPADENTER]) then { ["releaseFilterFocus"] call A3A_GUI_fnc_teamLeaderRTSPlacerDialog };
+        false;
+    };
+
     if (_key in [DIK_ESCAPE, DIK_Y]) then {
         call (A3A_building_EHDB # END_BUILD_FUNC);
     };
@@ -70,6 +77,10 @@ A3A_building_EHDB set [KEY_DOWN_EH, _downKeyEH];
 
 private _upKeyEH = _emptyDisplay displayAddEventHandler ["KeyUp", {
     params ["_displayOrControl", "_key"];
+
+    // Typing in the building filter: ignore placer keys, but let held rotation keys stop
+    private _isTyping = focusedCtrl _displayOrControl == _displayOrControl displayCtrl A3A_IDC_TEAMLEADERBUILDERFILTER;
+    if (_isTyping && !(_key in [DIK_E, DIK_R])) exitWith { false };
 
     // Place object
     if (_key isEqualTo DIK_SPACE) then {

@@ -1,3 +1,4 @@
+#include "placerDefines.hpp"
 /*
     Create plank objects from array in the format, ["_className", "_repairObj", "_position", "_direction", "_holdTime", "_price"]
     Add actions to clients for construct & cancel.
@@ -34,6 +35,7 @@ private _constructionObjects = [
     private _planks = createVehicle [_plankClass, [0,0,0], [], 0, "CAN_COLLIDE"];
     _planks setVariable ["A3A_build_timeout", time + 1200];
     _planks setVariable ["A3A_build_price", _price];
+    _planks setVariable ["A3A_build_refund", floor (_price / BUILD_BUDGET_MULTIPLIER)];      // budget is worth less than money
  
     // Most stuff only needs to be server visible
     private _buildName = getText (configFile / "CfgVehicles" / _className / "displayName");
