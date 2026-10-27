@@ -33,7 +33,9 @@ private _constructionObjects = [
     private _plankIndex = _constructionObjects findIf { _price <= _x#1 };
     private _plankClass = _constructionObjects # _plankIndex # 0;
     private _planks = createVehicle [_plankClass, [0,0,0], [], 0, "CAN_COLLIDE"];
-    _planks setVariable ["A3A_build_timeout", time + 1200];
+    // Nobody built it by then: it builds itself
+    private _autoBuildTime = AUTO_BUILD_TIME_MIN + (AUTO_BUILD_TIME_MAX - AUTO_BUILD_TIME_MIN) * ((_price min AUTO_BUILD_PRICE_CAP) / AUTO_BUILD_PRICE_CAP);
+    _planks setVariable ["A3A_build_timeout", time + _autoBuildTime];
     _planks setVariable ["A3A_build_price", _price];
     _planks setVariable ["A3A_build_refund", floor (_price / BUILD_BUDGET_MULTIPLIER)];      // budget is worth less than money
  
