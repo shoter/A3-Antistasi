@@ -393,6 +393,10 @@ switch _mode do {
 				IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON,
 				IDC_RSCDISPLAYARSENAL_TAB_HANDGUN
 			];
+			// and for the weapons the player carries, like the infantry arsenal
+			{
+				_usableMagazines append ((compatibleMagazines _x) apply {toLower _x});
+			} forEach (weapons player - ["Throw","Put"]);
 			_usableMagazines =_usableMagazines arrayIntersect _usableMagazines;
 
 			// Add compatible vehicle magazines for 3CB-style ammunition systems
