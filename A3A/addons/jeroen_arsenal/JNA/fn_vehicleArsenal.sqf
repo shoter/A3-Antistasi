@@ -156,9 +156,12 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "getMass":{
 		_massTotal = 0;
-		_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+		// Optional loadout argument, defaults to the real vehicle cargo
+		_loadout = if (_this isEqualTo []) then {(vehicle player) call jn_fnc_arsenal_cargoToArray} else {_this select 0};
 		{
 			_index = _forEachIndex;
+			// CARGOMAG only mirrors CARGOMAGALL, don't count it twice
+			if (_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG) then {continue};
 			{
 				_item = _x select 0;
 				_amount = _x select 1;
@@ -262,8 +265,8 @@ switch _mode do {
 		//Keys
 		_display displayRemoveAllEventHandlers "keydown";
 		_display displayRemoveAllEventHandlers "keyup";
-		_display displayAddEventHandler ["keydown",{['KeyDown',_this] call jn_fnc_arsenal;}];
-		_display displayAddEventHandler ["keyup",{['KeyUp',_this] call jn_fnc_arsenal;}];
+		_display displayAddEventHandler ["keydown",{['KeyDown',_this] call jn_fnc_vehicleArsenal;}];
+		_display displayAddEventHandler ["keyup",{['KeyUp',_this] call jn_fnc_vehicleArsenal;}];
 
 		//--- UI event handlers
 		_ctrlButtonRandom = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONRANDOM;
@@ -290,13 +293,28 @@ switch _mode do {
 
 		_ctrlButtonLoad = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONLOAD;
 		_ctrlButtonLoad ctrlRemoveAllEventHandlers "buttonclick";
-		_ctrlButtonLoad ctrlSetTextColor [1,0,0,1];
-		//_ctrlButtonLoad ctrladdeventhandler ["buttonclick",{["buttonLoad",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
+		_ctrlButtonLoad ctrladdeventhandler ["buttonclick",{["buttonLoad",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
+		_ctrlButtonLoad ctrlSetTooltip localize "STR_A3A_JNA_vehicle_preset_load_tooltip";
 
 		_ctrlButtonSave = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONSAVE;
 		_ctrlButtonSave ctrlRemoveAllEventHandlers "buttonclick";
-		_ctrlButtonSave ctrlSetTextColor [1,0,0,1];
-		//_ctrlButtonSave ctrladdeventhandler ["buttonclick",{["buttonSave",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
+		_ctrlButtonSave ctrladdeventhandler ["buttonclick",{["buttonSave",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
+		_ctrlButtonSave ctrlSetTooltip localize "STR_A3A_JNA_vehicle_preset_save_tooltip";
+
+		//preset window, replaces the BIS template handlers
+		_ctrlTemplateButtonOK = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_BUTTONOK;
+		_ctrlTemplateButtonOK ctrlRemoveAllEventHandlers "buttonclick";
+		_ctrlTemplateButtonOK ctrladdeventhandler ["buttonclick",{["buttonTemplateOK",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
+
+		_ctrlTemplateButtonDelete = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_BUTTONDELETE;
+		_ctrlTemplateButtonDelete ctrlRemoveAllEventHandlers "buttonclick";
+		_ctrlTemplateButtonDelete ctrladdeventhandler ["buttonclick",{["buttonTemplateDelete",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
+
+		_ctrlTemplateValue = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_VALUENAME;
+		_ctrlTemplateValue ctrlRemoveAllEventHandlers "lbdblclick";
+		_ctrlTemplateValue ctrlRemoveAllEventHandlers "lbselchanged";
+		_ctrlTemplateValue ctrladdeventhandler ["lbdblclick",{["buttonTemplateOK",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
+		_ctrlTemplateValue ctrladdeventhandler ["lbselchanged",{["templateSelChanged",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
 
 		//disable annoying deselecting of tabs when you misclick
 		_ctrlMouseArea = _display displayctrl IDC_RSCDISPLAYARSENAL_MOUSEAREA;
@@ -375,6 +393,10 @@ switch _mode do {
 				IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON,
 				IDC_RSCDISPLAYARSENAL_TAB_HANDGUN
 			];
+			// and for the weapons the player carries, like the infantry arsenal
+			{
+				_usableMagazines append ((compatibleMagazines _x) apply {toLower _x});
+			} forEach (weapons player - ["Throw","Put"]);
 			_usableMagazines =_usableMagazines arrayIntersect _usableMagazines;
 
 			// Add compatible vehicle magazines for 3CB-style ammunition systems
@@ -727,11 +749,7 @@ switch _mode do {
 			case (_key in [DIK_RETURN,DIK_NUMPADENTER]): {
 				_ctrlTemplate = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_TEMPLATE;
 				if (ctrlfade _ctrlTemplate == 0) then {
-					if (BIS_fnc_arsenal_type == 0) then {
-						//["buttonTemplateOK",[_display]] spawn jn_fnc_arsenal;
-					} else {
-						//["buttonTemplateOK",[_display]] spawn jn_fnc_arsenal;
-					};
+					["buttonTemplateOK",[_display]] spawn jn_fnc_vehicleArsenal;
 					_return = true;
 				};
 			};
@@ -767,11 +785,11 @@ switch _mode do {
 
 			//--- Save
 			case (_key == DIK_S): {
-				//if (_ctrl) then {['buttonSave',[_display]] call jn_fnc_arsenal;};
+				if (_ctrl && !_inTemplate) then {['buttonSave',[_display]] call jn_fnc_vehicleArsenal;};
 			};
 			//--- Open
 			case (_key == DIK_O): {
-				//if (_ctrl) then {['buttonLoad',[_display]] call jn_fnc_arsenal;};
+				if (_ctrl && !_inTemplate) then {['buttonLoad',[_display]] call jn_fnc_vehicleArsenal;};
 			};
 
 			//--- Vision mode
@@ -833,6 +851,8 @@ switch _mode do {
 		_display = _this select 0;
 
 		jnva_loadout_mass = 0;
+		// CARGOMAG only mirrors magazines already in CARGOMAGALL, returning both would duplicate them
+		jnva_loadout set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, []];
 		diag_log jnva_loadout;
         jnva_loadout remoteExecCall ["jn_fnc_arsenal_addItem",2];
        	jnva_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
@@ -843,6 +863,297 @@ switch _mode do {
        		["TabSelect",[_display, _list]] call jn_fnc_vehicleArsenal;
        	};
        	["ColorTabs",[_display]] call jn_fnc_vehicleArsenal;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// PRESETS
+	// Stored in the player's profile, per vehicle class:
+	// A3A_vehicleArsenalPresets = [[vehicleClass, [[presetName, [[tabIndex, item, amount], ...]], ...]], ...]
+	case "getPresets":{
+		private _class = typeOf vehicle player;
+		private _all = profileNamespace getVariable ["A3A_vehicleArsenalPresets", []];
+		private _entry = _all findIf {(_x select 0) == _class};
+		if (_entry == -1) then {[]} else {+(_all select _entry select 1)};
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "setPresets":{
+		private _presets = _this select 0;
+		private _class = typeOf vehicle player;
+		private _all = profileNamespace getVariable ["A3A_vehicleArsenalPresets", []];
+		private _entry = _all findIf {(_x select 0) == _class};
+		if (_entry == -1) then {
+			if (_presets isNotEqualTo []) then {_all pushBack [_class, _presets]};
+		} else {
+			if (_presets isEqualTo []) then {_all deleteAt _entry} else {_all set [_entry, [_class, _presets]]};
+		};
+		profileNamespace setVariable ["A3A_vehicleArsenalPresets", _all];
+		saveProfileNamespace;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "buttonLoad": {
+		_display = _this select 0;
+		['showTemplates',[_display]] call jn_fnc_vehicleArsenal;
+
+		_ctrlTemplate = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_TEMPLATE;
+		_ctrlTemplate ctrlsetfade 0;
+		_ctrlTemplate ctrlcommit 0;
+		_ctrlTemplate ctrlenable true;
+
+		_ctrlMouseBlock = _display displayctrl IDC_RSCDISPLAYARSENAL_MOUSEBLOCK;
+		_ctrlMouseBlock ctrlenable true;
+
+		{
+			(_display displayctrl _x) ctrlsettext localize "str_disp_int_load";
+		} foreach [IDC_RSCDISPLAYARSENAL_TEMPLATE_TITLE,IDC_RSCDISPLAYARSENAL_TEMPLATE_BUTTONOK];
+		{
+			_ctrl = _display displayctrl _x;
+			_ctrl ctrlshow false;
+			_ctrl ctrlenable false;
+		} foreach [IDC_RSCDISPLAYARSENAL_TEMPLATE_TEXTNAME,IDC_RSCDISPLAYARSENAL_TEMPLATE_EDITNAME];
+		_ctrlTemplateValue = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_VALUENAME;
+		if (lnbcurselrow _ctrlTemplateValue < 0) then {_ctrlTemplateValue lnbsetcurselrow 0;};
+		ctrlsetfocus _ctrlTemplateValue;
+		["templateSelChanged",[_display]] call jn_fnc_vehicleArsenal;
+
+		['showMessage',[_display,format [localize "STR_A3A_JNA_vehicle_preset_for", getText (configFile >> "CfgVehicles" >> typeOf vehicle player >> "displayName")]]] call jn_fnc_arsenal;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "buttonSave": {
+		_display = _this select 0;
+		['showTemplates',[_display]] call jn_fnc_vehicleArsenal;
+
+		_ctrlTemplate = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_TEMPLATE;
+		_ctrlTemplate ctrlsetfade 0;
+		_ctrlTemplate ctrlcommit 0;
+		_ctrlTemplate ctrlenable true;
+
+		_ctrlMouseBlock = _display displayctrl IDC_RSCDISPLAYARSENAL_MOUSEBLOCK;
+		_ctrlMouseBlock ctrlenable true;
+
+		{
+			(_display displayctrl _x) ctrlsettext localize "str_disp_int_save";
+		} foreach [IDC_RSCDISPLAYARSENAL_TEMPLATE_TITLE,IDC_RSCDISPLAYARSENAL_TEMPLATE_BUTTONOK];
+		{
+			_ctrl = _display displayctrl _x;
+			_ctrl ctrlshow true;
+			_ctrl ctrlenable true;
+		} foreach [IDC_RSCDISPLAYARSENAL_TEMPLATE_TEXTNAME,IDC_RSCDISPLAYARSENAL_TEMPLATE_EDITNAME];
+
+		_ctrlTemplateName = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_EDITNAME;
+		ctrlsetfocus _ctrlTemplateName;
+		["templateSelChanged",[_display]] call jn_fnc_vehicleArsenal;
+
+		['showMessage',[_display,format [localize "STR_A3A_JNA_vehicle_preset_for", getText (configFile >> "CfgVehicles" >> typeOf vehicle player >> "displayName")]]] call jn_fnc_arsenal;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "showTemplates": {
+		_display = _this select 0;
+
+		_ctrlTemplateValue = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_VALUENAME;
+		lnbclear _ctrlTemplateValue;
+		{
+			_x params ["_name", "_items"];
+			_lbAdd = _ctrlTemplateValue lnbaddrow [_name];
+			// Show the first weapons of the preset, like the infantry templates do
+			_weapons = (_items select {(_x select 0) in [IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON,IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON,IDC_RSCDISPLAYARSENAL_TAB_HANDGUN]}) apply {_x select 1};
+			{
+				if (_forEachIndex > 7) exitWith {};
+				_ctrlTemplateValue lnbsetpicture [[_lbAdd,_forEachIndex + 1],gettext (configfile >> "cfgweapons" >> _x >> "picture")];
+			} forEach _weapons;
+		} forEach (["getPresets"] call jn_fnc_vehicleArsenal);
+		_ctrlTemplateValue lnbsort [0,false];
+
+		["templateSelChanged",[_display]] call jn_fnc_vehicleArsenal;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "templateSelChanged": {
+		_display = _this select 0;
+		_ctrlTemplateValue = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_VALUENAME;
+		_ctrlTemplateName = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_EDITNAME;
+		_cursel = lnbcurselrow _ctrlTemplateValue;
+		_hasSelection = _cursel >= 0 && {_cursel < (lnbsize _ctrlTemplateValue select 0)};
+
+		if (_hasSelection) then {_ctrlTemplateName ctrlsettext (_ctrlTemplateValue lnbtext [_cursel,0])};
+
+		// Saving only needs a name, loading needs a selected preset
+		_ctrlTemplateButtonOK = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_BUTTONOK;
+		_ctrlTemplateButtonOK ctrlenable (ctrlenabled _ctrlTemplateName || _hasSelection);
+
+		_ctrlTemplateButtonDelete = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_BUTTONDELETE;
+		_ctrlTemplateButtonDelete ctrlenable _hasSelection;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "buttonTemplateOK": {
+		_display = _this select 0;
+		_hideTemplate = true;
+
+		_ctrlTemplateName = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_EDITNAME;
+		_ctrlTemplateValue = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_VALUENAME;
+		if (ctrlenabled _ctrlTemplateName) then {
+			//--- Save
+			_name = ctrltext _ctrlTemplateName;
+			if (_name isEqualTo "") exitWith {_hideTemplate = false};
+			["savePreset",[_name]] call jn_fnc_vehicleArsenal;
+			['showMessage',[_display,format [localize "STR_A3A_JNA_vehicle_preset_saved", _name]]] call jn_fnc_arsenal;
+		} else {
+			//--- Load
+			_cursel = lnbcurselrow _ctrlTemplateValue;
+			if (_cursel < 0 || {_cursel >= (lnbsize _ctrlTemplateValue select 0)}) exitWith {_hideTemplate = false};
+			["loadPreset",[_display, _ctrlTemplateValue lnbtext [_cursel,0]]] call jn_fnc_vehicleArsenal;
+		};
+		if (_hideTemplate) then {
+			_ctrlTemplate = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_TEMPLATE;
+			_ctrlTemplate ctrlsetfade 1;
+			_ctrlTemplate ctrlcommit 0;
+			_ctrlTemplate ctrlenable false;
+
+			_ctrlMouseBlock = _display displayctrl IDC_RSCDISPLAYARSENAL_MOUSEBLOCK;
+			_ctrlMouseBlock ctrlenable false;
+		};
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "buttonTemplateDelete": {
+		_display = _this select 0;
+		_ctrlTemplateValue = _display displayctrl IDC_RSCDISPLAYARSENAL_TEMPLATE_VALUENAME;
+		_cursel = lnbcurselrow _ctrlTemplateValue;
+		if (_cursel < 0 || {_cursel >= (lnbsize _ctrlTemplateValue select 0)}) exitWith {};
+		_name = _ctrlTemplateValue lnbtext [_cursel,0];
+
+		_presets = ["getPresets"] call jn_fnc_vehicleArsenal;
+		_presets = _presets select {(_x select 0) != _name};
+		["setPresets",[_presets]] call jn_fnc_vehicleArsenal;
+
+		['showTemplates',[_display]] call jn_fnc_vehicleArsenal;
+		_ctrlTemplateValue lnbsetcurselrow (_cursel min ((lnbsize _ctrlTemplateValue select 0) - 1));
+		["templateSelChanged",[_display]] call jn_fnc_vehicleArsenal;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "savePreset": {
+		private _name = _this select 0;
+		private _items = [];
+		{
+			private _index = _forEachIndex;
+			// CARGOMAG only mirrors CARGOMAGALL
+			if (_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG) then {continue};
+			{
+				_x params ["_item", "_amount"];
+				if (_amount > 0) then {_items pushBack [_index, _item, _amount]};
+			} forEach _x;
+		} forEach jnva_loadout;
+
+		// Same name overwrites the old preset
+		private _presets = ["getPresets"] call jn_fnc_vehicleArsenal;
+		_presets = _presets select {(_x select 0) != _name};
+		_presets pushBack [_name, _items];
+		["setPresets",[_presets]] call jn_fnc_vehicleArsenal;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Makes the vehicle cargo match the preset as far as the arsenal stock, member limits and
+	// vehicle capacity allow. Only the difference moves between the vehicle and the arsenal.
+	case "loadPreset": {
+		params ["_display", "_name"];
+
+		private _presets = ["getPresets"] call jn_fnc_vehicleArsenal;
+		private _presetIndex = _presets findIf {(_x select 0) == _name};
+		if (_presetIndex == -1) exitWith {};
+		private _presetItems = _presets select _presetIndex select 1;
+
+		private _veh = vehicle player;
+		private _max = getNumber (configfile >> "CfgVehicles" >> (typeOf _veh) >> "maximumLoad");
+		private _isMember = [player] call A3A_fnc_isMember;
+		private _emptyLoadout = {[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]};
+		private _countIn = {
+			params ["_list", "_item"];
+			private _i = _list findIf {(_x select 0) == _item};
+			if (_i == -1) then {0} else {_list select _i select 1};
+		};
+
+		// CARGOMAG only mirrors CARGOMAGALL, TabSelect rebuilds it
+		jnva_loadout set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, []];
+
+		private _wanted = call _emptyLoadout;
+		{
+			_x params ["_index", "_item", "_amount"];
+			_wanted set [_index, [_wanted select _index, [_item, _amount]] call jn_fnc_arsenal_addToArray];
+		} forEach _presetItems;
+
+		//--- Return everything the preset doesn't want
+		private _return = call _emptyLoadout;
+		{
+			private _index = _forEachIndex;
+			{
+				_x params ["_item", "_amount"];
+				private _excess = _amount - ([_wanted select _index, _item] call _countIn);
+				if (_excess > 0) then {(_return select _index) pushBack [_item, _excess]};
+			} forEach _x;
+		} forEach jnva_loadout;
+		{
+			private _index = _forEachIndex;
+			if (_x isNotEqualTo []) then {jnva_loadout set [_index, [jnva_loadout select _index, _x] call jn_fnc_arsenal_removeFromArray]};
+		} forEach _return;
+		if (_return findIf {_x isNotEqualTo []} != -1) then {_return call jn_fnc_arsenal_addItem};
+		jnva_loadout_mass = ["getMass",[jnva_loadout]] call jn_fnc_vehicleArsenal;
+
+		//--- Take what is missing from the arsenal
+		private _missing = [];
+		{
+			private _index = _forEachIndex;
+			{
+				_x params ["_item", "_want"];
+				private _need = _want - ([jnva_loadout select _index, _item] call _countIn);
+				if (_need <= 0) then {continue};
+				private _wantedNow = _need;
+
+				// Arsenal stock, minus what non-members have to leave behind
+				private _available = [jna_dataList select _index, _item] call _countIn;
+				if (_available != -1) then {
+					if (!_isMember) then {_available = _available - (([_index, _item] call _minItemsMember) max 0)};
+					_need = _need min (_available max 0);
+				};
+
+				// Vehicle capacity. Magazines are counted in rounds and weigh per magazine
+				private _isMag = _index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL,IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW,IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT];
+				private _unitSize = if (_isMag) then {getNumber (configfile >> "CfgMagazines" >> _item >> "count") max 1} else {1};
+				private _unitMass = ["getMassItem",[_item,_unitSize,_index]] call jn_fnc_vehicleArsenal;
+				if (_unitMass > 0) then {
+					_need = _need min ((floor ((_max - jnva_loadout_mass) / _unitMass) max 0) * _unitSize);
+				};
+
+				if (_need > 0) then {
+					jnva_loadout set [_index, [jnva_loadout select _index, [_item, _need]] call jn_fnc_arsenal_addToArray];
+					jnva_loadout_mass = jnva_loadout_mass + (["getMassItem",[_item,_need,_index]] call jn_fnc_vehicleArsenal);
+					[_index, _item, _need] call jn_fnc_arsenal_removeItem;
+				};
+				if (_need < _wantedNow) then {_missing pushBackUnique _item};
+			} forEach _x;
+		} forEach _wanted;
+
+		//--- Refresh the open tab
+		private _list = missionnamespace getVariable ["jnca_tab_selected",-1];
+		if (_list != -1) then {
+			["TabSelect",[_display, _list]] call jn_fnc_vehicleArsenal;
+		};
+		["ColorTabs",[_display]] call jn_fnc_vehicleArsenal;
+
+		private _message = if (_missing isEqualTo []) then {
+			format [localize "STR_A3A_JNA_vehicle_preset_loaded", _name]
+		} else {
+			private _names = _missing apply {
+				private _cfg = [configFile >> "CfgWeapons" >> _x, configFile >> "CfgMagazines" >> _x, configFile >> "CfgVehicles" >> _x, configFile >> "CfgGlasses" >> _x] select {isClass _x};
+				if (_cfg isEqualTo []) then {_x} else {getText (_cfg select 0 >> "displayName")};
+			};
+			format [localize "STR_A3A_JNA_vehicle_preset_partial", _name, _names joinString ", "]
+		};
+		['showMessage',[_display,_message]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
