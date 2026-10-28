@@ -17,6 +17,7 @@ class gm_weferlingen_winter {
 		"Land_Fuelstation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_03_pump_F","Land_FuelStation_02_pump_F","land_gm_euro_fuelpump_01_e","land_gm_euro_fuelpump_02_e","land_gm_euro_fuelpump_02_w","land_gm_euro_fuelpump_01_w"
 	};
 	climate = "arctic";
+	extraBuildObjects = 0;      // era-specific objects only, no modern vanilla extras
 	buildObjects[] = {
 		//barbed wire
 		{"land_gm_barbedwire_01", 5},{"land_gm_barbedwire_02", 5},

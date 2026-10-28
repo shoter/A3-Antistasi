@@ -20,6 +20,7 @@ class SPE_Mortain {
 		"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F","SPE_Fuel_Barrel_German_01","SPE_Fuel_Barrel_US_01"
 	};
 	climate = "arid";
+	extraBuildObjects = 0;      // era-specific objects only, no modern vanilla extras
 	buildObjects[] = {
 		// Pillbox bunkers
 		{"Land_PillboxBunker_01_hex_F", 200}, {"Land_PillboxBunker_01_rectangle_F", 300},

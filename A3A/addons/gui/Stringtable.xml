@@ -198,6 +198,12 @@
         <Czech>Velitel týmu Stavitel</Czech>
         <Chinesesimp>小组组长建造器</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_teamleader_placer_filter">
+        <Original>Filter:</Original>
+      </Key>
+      <Key ID="STR_antistasi_teamleader_placer_filter_tooltip">
+        <Original>Type part of a building name to show only matching buildings. Press Enter to go back to placing.</Original>
+      </Key>
     </Container>
     <Container name="dialog_buy_vehicle">
       <Key ID="STR_antistasi_dialogs_buy_item_custom_hint_commander_only">

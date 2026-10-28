@@ -43,8 +43,29 @@ class A3A_teamLeaderBuilder
             text = $STR_antistasi_teamleader_placer_title;
             x = safeZoneX;
             y = SCREEN_BOTTOM - PX_H(41);
-            w = safeZoneW - PX_W(80);
+            w = safeZoneW - PX_W(158);
             h = PX_H(5);
+        };
+        // Title bar, right to left: RemMoneyText, FilterEdit, FilterLabel
+        class FilterLabel: A3A_TitlebarText
+        {
+            idc = -1;
+            text = $STR_antistasi_teamleader_placer_filter;
+            x = SCREEN_RIGHT - PX_W(158);
+            y = SCREEN_BOTTOM - PX_H(41);
+            w = PX_W(16);
+            h = PX_H(5);
+            style = ST_RIGHT;
+        };
+        class FilterEdit: A3A_Edit
+        {
+            idc = A3A_IDC_TEAMLEADERBUILDERFILTER;
+            tooltip = $STR_antistasi_teamleader_placer_filter_tooltip;
+            x = SCREEN_RIGHT - PX_W(141);
+            y = SCREEN_BOTTOM - PX_H(40.5);
+            w = PX_W(60);
+            h = PX_H(4);
+            onKeyUp = "[""filter""] call A3A_GUI_fnc_teamLeaderRTSPlacerDialog; false";
         };
         class RemMoneyText: A3A_TitlebarText
         {

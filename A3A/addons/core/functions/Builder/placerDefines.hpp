@@ -24,3 +24,12 @@
 #define SNAP_SURFACE_MODE 23
 #define AVAILABLE_MONEY 24
 #define CURSOR_OBJECT 25
+
+// Building budget a construction kit gives per euro of its purchase price.
+// Refunds and the kit's resale value divide by it again, so the extra budget can't be cashed out.
+#define BUILD_BUDGET_MULTIPLIER 6
+
+// Unbuilt constructions build themselves after this long, scaled linearly by price up to AUTO_BUILD_PRICE_CAP
+#define AUTO_BUILD_TIME_MIN 300
+#define AUTO_BUILD_TIME_MAX 1800
+#define AUTO_BUILD_PRICE_CAP 3000

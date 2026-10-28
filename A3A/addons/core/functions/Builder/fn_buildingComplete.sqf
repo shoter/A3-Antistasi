@@ -14,11 +14,12 @@ params ["_target", ["_finished", true]];
 A3A_unbuiltObjects deleteAt (A3A_unbuiltObjects find _target);
 publicVariable "A3A_unbuiltObjects";
 if (isNull _target) exitWith {};            // Possible if two engineers attempted to construct the same object, or a zeus delete
+private _className = _target getVariable "A3A_build_class";
 deleteVehicle _target;
 
 // Cancel case
 if (!_finished) exitWith {
-    private _price = _target getVariable ["A3A_build_price", 10];
+    private _price = _target getVariable ["A3A_build_refund", 10];
     if (_price > 0) then { [0, _price] spawn A3A_fnc_resourcesFIA };
 };
 
@@ -29,7 +30,7 @@ if (!isNil "_repairObj") exitWith {
 };
 
 // Construction case, spawn the building
-private _building = createVehicle [_target getVariable "A3A_build_class", [0,0,0], [], 0, "CAN_COLLIDE"];
+private _building = createVehicle [_className, [0,0,0], [], 0, "CAN_COLLIDE"];
 _building setPosWorld (_target getVariable "A3A_build_pos");
 _building setVectorDirAndUp (_target getVariable "A3A_build_dir");
 _building setVariable ["A3A_building", true, true];            // Used to identify removable buildings
