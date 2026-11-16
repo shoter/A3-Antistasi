@@ -133,7 +133,8 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class Controls
             {
-                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle, Players, Factions (admin only)
+                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle, Players, Factions (admin only).
+                // For non-admins Admin and Factions are hidden and fn_mainDialog "onLoad" moves Towns..Players one slot left.
                 class PlayerTabButton : A3A_Button
                 {
                     idc = A3A_IDC_PLAYERTABBUTTON;

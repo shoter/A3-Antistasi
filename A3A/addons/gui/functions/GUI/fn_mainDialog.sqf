@@ -69,6 +69,16 @@ switch (_mode) do
             private _factionDebugTabButton = _display displayCtrl A3A_IDC_FACTIONDEBUGTABBUTTON;
             _factionDebugTabButton ctrlEnable false;
             _factionDebugTabButton ctrlShow false;
+
+            // Close the gap of the hidden Admin button: every tab button after it moves one slot left, into the
+            // position of the button before it. Positions are relative to the TabButtons controls group.
+            // Factions is the last slot and is hidden too, so nothing has to move into it.
+            private _shiftedButtons = [A3A_IDC_ADMINTABBUTTON, A3A_IDC_TOWNSTABBUTTON, A3A_IDC_GARRISONSTABBUTTON, A3A_IDC_CHRONICLETABBUTTON, A3A_IDC_PLAYERSTATSTABBUTTON] apply { _display displayCtrl _x };
+            private _slots = _shiftedButtons apply { ctrlPosition _x };
+            for "_i" from 1 to (count _shiftedButtons - 1) do {
+                (_shiftedButtons # _i) ctrlSetPosition (_slots # (_i - 1));
+                (_shiftedButtons # _i) ctrlCommit 0;
+            };
         };
 
         // Hide HC group icons to stop them from interfering with map controls
