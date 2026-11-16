@@ -245,6 +245,14 @@ switch (_mode) do
                 _selectedTabIDC = A3A_IDC_DELIVERVEHICLETAB;
             };
 
+            case ("admintakeover"):
+            {
+                // Sub tab of the Admin tab. The server checks again before it changes a site
+                if ([] call FUNCMAIN(isLocalAdmin)) then {
+                    _selectedTabIDC = A3A_IDC_ADMINTAKEOVERTAB;
+                };
+            };
+
             case ("construct"):
             {
                 _selectedTabIDC = A3A_IDC_CONSTRUCTTAB;
@@ -369,6 +377,7 @@ switch (_mode) do
             A3A_IDC_PLAYERSTATSDETAILSTAB,
             A3A_IDC_AIRTAXITAB,
             A3A_IDC_DELIVERVEHICLETAB,
+            A3A_IDC_ADMINTAKEOVERTAB,
             A3A_IDC_FACTIONDEBUGTAB
         ];
 
@@ -435,6 +444,12 @@ switch (_mode) do
             {
                 ["clearSelectedLocation"] call FUNC(deliverVehicleTab);
                 ["update"] call FUNC(deliverVehicleTab);
+            };
+
+            case ("admintakeover"):
+            {
+                ["clearSelectedLocation"] call FUNC(adminTakeOverTab);
+                ["update"] call FUNC(adminTakeOverTab);
             };
 
             case ("construct"):

@@ -3185,6 +3185,33 @@
       <Key ID="STR_antistasi_dialogs_main_deliver_vehicle_locked_tooltip">
         <Original>This vehicle is locked by another player.</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_button">
+        <Original>Take over location</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_title">
+        <Original>Take Over Location</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_select">
+        <Original>Select an enemy location on the map: airbase, outpost, seaport, factory, resources or town.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_site">
+        <Original>Location: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_owner">
+        <Original>Held by: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_effect">
+        <Original>It becomes rebel at once. Its troops, vehicles, statics and buildings are removed and the garrison starts empty.&lt;br/&gt;&lt;br/&gt;No notifications and no aggression change. Income and HR of all sides follow the new owner from their next tick.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_already_rebel">
+        <Original>This location is already rebel.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_commit">
+        <Original>Take Over</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_over_refused">
+        <Original>Take over refused: %1</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_player">
       <Key ID="STR_antistasi_dialogs_main_loot_crate">

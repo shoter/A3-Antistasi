@@ -5,6 +5,7 @@ class CfgFunctions {
             file = QPATHTOFOLDER(functions\GUI);
             class adminCopyUIDDialog {};
             class adminTab {};
+            class adminTakeOverTab {};
             class aiManagementTab {};
             class airSupportTab {};
             class airTaxiTab {};
