@@ -77,7 +77,8 @@ switch (_mode) do
             [A3A_IDC_PERSISTENTSAVEADMIN, "STR_antistasi_dialogs_main_persistent_save_button", "FFD933"],
             // Clean all / Clean HQ replace the Garbage Clean / Persistent Save row, so they share its colour
             [A3A_IDC_ADMINGARBAGECLEANMAPBUTTON, "STR_antistasi_dialogs_main_garbage_clean_all", "FFD933"],
-            [A3A_IDC_ADMINGARBAGECLEANHQBUTTON, "STR_antistasi_dialogs_main_garbage_clean_hq", "FFD933"]
+            [A3A_IDC_ADMINGARBAGECLEANHQBUTTON, "STR_antistasi_dialogs_main_garbage_clean_hq", "FFD933"],
+            [A3A_IDC_ADMINTAKEOVERBUTTON, "STR_antistasi_dialogs_main_admin_take_over_button", "FFD933"]
         ];
 
         // Showing the tab shows all its children, so the garbage clean options (which share the

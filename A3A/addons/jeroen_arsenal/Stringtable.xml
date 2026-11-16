@@ -408,6 +408,9 @@
         <Turkish>Yükle</Turkish>
         <Chinesesimp>装载</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_JNA_vehicle_in_use">
+        <Original>Another player is using the arsenal of this vehicle</Original>
+      </Key>
       <Key ID="STR_A3A_JNA_vehicle_title">
         <Original>Vehicle inventory</Original>
         <German>Fahrzeug Inventar</German>

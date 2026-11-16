@@ -85,8 +85,8 @@ class A3A_CommanderShortcutButton2Lines : A3A_CommanderShortcutButton
     };
 };
 
-// Admin tab action buttons: 12 high, labels on two lines set by the admin tab update.
-// Text size 3.6 (between SMALL and MEDIUM); top = (12 - 2 * 3.6) / 2 centres the two lines
+// Admin tab action buttons: 10 high, labels on two lines set by the admin tab update.
+// Text size 3.6 (between SMALL and MEDIUM); top = (10 - 2 * 3.6) / 2 centres the two lines
 class A3A_AdminShortcutButton : A3A_ShortcutButton
 {
     size = GRID_H * 3.6;
@@ -96,7 +96,7 @@ class A3A_AdminShortcutButton : A3A_ShortcutButton
     {
         left = 1 * GRID_W;
         right = 1 * GRID_W;
-        top = 2.4 * GRID_H;
+        top = 1.4 * GRID_H;
         bottom = 0;
     };
 };
@@ -133,7 +133,8 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class Controls
             {
-                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle, Players, Factions (admin only)
+                // Slots left to right: Player, Commander, Admin, Towns, Garrisons, Chronicle, Players, Factions (admin only).
+                // For non-admins Admin and Factions are hidden and fn_mainDialog "onLoad" moves Towns..Players one slot left.
                 class PlayerTabButton : A3A_Button
                 {
                     idc = A3A_IDC_PLAYERTABBUTTON;
@@ -685,7 +686,12 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 8 * GRID_H;
                         };
 
-                        class ContextActionSingle1 : A3A_Button
+                        // Single1 + Single2 share the first row with ContextActionHoriz1, Single3 + Single4 the second row
+                        // with ContextActionHoriz2. fn_buildContextMenu shows either the two halves or the full-width button of
+                        // a row: vehicles use Single1 (Garage) + Single2 (Vehicle Arsenal), construction and HQ use Horiz1/Horiz2.
+                        // Shortcut buttons so the label can take two lines: fn_buildContextMenu sets it with
+                        // ctrlSetStructuredText and a <br /> in the string, like the air support bomb buttons
+                        class ContextActionSingle1 : A3A_ShortcutButton
                         {
                             idc = A3A_IDC_CONTEXTSINGLE1BUTTON;
                             x = 32 * GRID_W;
@@ -694,7 +700,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
-                        class ContextActionSingle2 : A3A_Button
+                        class ContextActionSingle2 : A3A_ShortcutButton
                         {
                             idc = A3A_IDC_CONTEXTSINGLE2BUTTON;
                             x = 56 * GRID_W;
@@ -721,6 +727,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
+                        // Overlaps ContextActionSingle1 + Single2, and Horiz2 overlaps Single3 + Single4: see the comment above Single1
                         class ContextActionHoriz1 : A3A_Button
                         {
                             idc = A3A_IDC_CONTEXTHORIZ1BUTTON;
@@ -2044,12 +2051,16 @@ class A3A_MainDialog : A3A_TabbedDialog
                     x = 8 * GRID_W;
                     y = 12 * GRID_H;
                     w = 46 * GRID_W;
-                    h = 44 * GRID_H;
+                    // 12 lines of 0.8 x MEDIUM (3.36 high) need 40.3, keep at least 41
+                    h = 42 * GRID_H;
                 };
 
-                // Admin action buttons: two columns (x = 8 and 32) of two rows (y = 64 and 80), 12 high.
+                // Admin action buttons: three rows (y = 58, 70 and 82, 10 high, 2 apart) ending at 92 like the
+                // right column. The first two rows have two columns (x = 8 and 32, 22 wide), the third one button
+                // across both columns (46 wide).
                 //   Player Management | Take Command     white
                 //   Garbage Clean     | Persistent Save  yellow (Clean all / Clean HQ swap in over this row)
+                //   Take Over Location                   yellow
                 // The admin tab update sets every label as two lines of structured text with its colour,
                 // because a shortcut button neither breaks a two word label reliably nor centres it vertically
                 class PlayerManagementButton : A3A_AdminShortcutButton
@@ -2058,9 +2069,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     text = $STR_antistasi_dialogs_main_admin_player_management_button;
                     onButtonClick = "[""switchTab"", [""playermanagement""]] call A3A_GUI_fnc_mainDialog;";
                     x = 8 * GRID_W;
-                    y = 64 * GRID_H;
+                    y = 58 * GRID_H;
                     w = 22 * GRID_W;
-                    h = 12 * GRID_H;
+                    h = 10 * GRID_H;
                 };
 
                 class TakeCommandButton : A3A_AdminShortcutButton
@@ -2068,9 +2079,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_TAKECMD;
                     text = $STR_antistasi_dialogs_main_admin_take_command_button;
                     x = 32 * GRID_W;
-                    y = 64 * GRID_H;
+                    y = 58 * GRID_H;
                     w = 22 * GRID_W;
-                    h = 12 * GRID_H;
+                    h = 10 * GRID_H;
                     onMouseButtonClick = "[""takeCommand""] spawn A3A_GUI_fnc_adminTab";
                 };
 
@@ -2081,9 +2092,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_ADMINGARBAGECLEANBUTTON;
                     text = $STR_antistasi_dialogs_main_garbage_clean_button;
                     x = 8 * GRID_W;
-                    y = 80 * GRID_H;
+                    y = 70 * GRID_H;
                     w = 22 * GRID_W;
-                    h = 12 * GRID_H;
+                    h = 10 * GRID_H;
                     onButtonClick = "[""showGarbageCleanOptions""] call A3A_GUI_fnc_adminTab";
                 };
 
@@ -2093,9 +2104,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_PERSISTENTSAVEADMIN;
                     text = $STR_antistasi_dialogs_main_persistent_save_button;
                     x = 32 * GRID_W;
-                    y = 80 * GRID_H;
+                    y = 70 * GRID_H;
                     w = 22 * GRID_W;
-                    h = 12 * GRID_H;
+                    h = 10 * GRID_H;
                     onButtonClick = "[""persistentSave""] spawn A3A_GUI_fnc_adminTab";
                 };
 
@@ -2105,9 +2116,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_ADMINGARBAGECLEANCONTROLSGROUP;
                     x = 8 * GRID_W;
-                    y = 80 * GRID_H;
+                    y = 70 * GRID_H;
                     w = 46 * GRID_W;
-                    h = 12 * GRID_H;
+                    h = 10 * GRID_H;
 
                     class controls
                     {
@@ -2119,7 +2130,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 22 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 10 * GRID_H;
                         };
 
                         class AdminGarbageCleanHQButton : A3A_AdminShortcutButton
@@ -2130,9 +2141,21 @@ class A3A_MainDialog : A3A_TabbedDialog
                             x = 24 * GRID_W;
                             y = 0 * GRID_H;
                             w = 22 * GRID_W;
-                            h = 12 * GRID_H;
+                            h = 10 * GRID_H;
                         };
                     };
+                };
+
+                // Opens the Take Over subtab: pick an enemy site on the map and hand it to the rebels, emptied
+                class AdminTakeOverButton : A3A_AdminShortcutButton
+                {
+                    idc = A3A_IDC_ADMINTAKEOVERBUTTON;
+                    text = $STR_antistasi_dialogs_main_admin_take_over_button;
+                    onButtonClick = "[""switchTab"", [""admintakeover""]] call A3A_GUI_fnc_mainDialog;";
+                    x = 8 * GRID_W;
+                    y = 82 * GRID_H;
+                    w = 46 * GRID_W;
+                    h = 10 * GRID_H;
                 };
 
                 class AiSectionLabel : A3A_SectionLabelRight
@@ -2386,9 +2409,9 @@ class A3A_MainDialog : A3A_TabbedDialog
         class FastTravelMap : A3A_MapControl
         {
             idc = A3A_IDC_FASTTRAVELMAP;
-            // Shared by the Fast Travel, Air Taxi and Deliver Vehicle subtabs, dispatch on the one that is shown
-            // (7580 = A3A_IDC_AIRTAXITAB, 7590 = A3A_IDC_DELIVERVEHICLETAB, neither shown = Fast Travel)
-            onMouseButtonClick = "private _shown = [7580, 7590] findIf { ctrlShown ((ctrlParent (_this select 0)) displayCtrl _x) }; [""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab, A3A_GUI_fnc_deliverVehicleTab] select (_shown + 1))";
+            // Shared by the Fast Travel, Air Taxi, Deliver Vehicle and admin Take Over subtabs, dispatch on the one that is shown
+            // (7580 = A3A_IDC_AIRTAXITAB, 7590 = A3A_IDC_DELIVERVEHICLETAB, 7620 = A3A_IDC_ADMINTAKEOVERTAB, none shown = Fast Travel)
+            onMouseButtonClick = "private _shown = [7580, 7590, 7620] findIf { ctrlShown ((ctrlParent (_this select 0)) displayCtrl _x) }; [""mapClicked"", [[_this select 2, _this select 3]]] call ([A3A_GUI_fnc_fastTravelTab, A3A_GUI_fnc_airTaxiTab, A3A_GUI_fnc_deliverVehicleTab, A3A_GUI_fnc_adminTakeOverTab] select (_shown + 1))";
             x = CENTER_X(DIALOG_W) + 48 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
             w = 104 * GRID_W;
@@ -2631,6 +2654,70 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_DELIVERVEHICLECOMMITBUTTON;
                     text = $STR_antistasi_dialogs_main_deliver_vehicle_request_button;
                     onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_deliverVehicleTab;";
+                    sizeEx = GUI_TEXT_SIZE_LARGE;
+                    x = 8 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 12 * GRID_H;
+                };
+            };
+        };
+
+        // Admin: take over a site. Same layout as FastTravelTab, on the shared FastTravelMap
+        class AdminTakeOverTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_ADMINTAKEOVERTAB;
+            // Narrow for the same reason as FastTravelTab: it must not cover the shared map control
+            w = 44 * GRID_W;
+            show = false;
+
+            class controls
+            {
+                class AdminTakeOverLabel : A3A_SectionLabelRight
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_main_admin_take_over_title;
+                    x = 8 * GRID_W;
+                    y = 8 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class AdminTakeOverBackground : A3A_Background
+                {
+                    idc = -1;
+                    x = 8 * GRID_W;
+                    y = 12 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 68 * GRID_H;
+                };
+
+                // Shares its place with AdminTakeOverInfoText: the update mode of fn_adminTakeOverTab shows
+                // this one while no site is selected and the info text once one is
+                class AdminTakeOverSelectText : A3A_TextMulti
+                {
+                    idc = A3A_IDC_ADMINTAKEOVERSELECTTEXT;
+                    x = 8 * GRID_W;
+                    y = 14 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 16 * GRID_H;
+                };
+
+                // Shares its place with AdminTakeOverSelectText, see there
+                class AdminTakeOverInfoText : A3A_StructuredText
+                {
+                    idc = A3A_IDC_ADMINTAKEOVERINFOTEXT;
+                    x = 8 * GRID_W;
+                    y = 14 * GRID_H;
+                    w = 36 * GRID_W;
+                    h = 64 * GRID_H;
+                };
+
+                class AdminTakeOverCommitButton : A3A_Button
+                {
+                    idc = A3A_IDC_ADMINTAKEOVERCOMMITBUTTON;
+                    text = $STR_antistasi_dialogs_main_admin_take_over_commit;
+                    onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_adminTakeOverTab;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 8 * GRID_W;
                     y = 80 * GRID_H;

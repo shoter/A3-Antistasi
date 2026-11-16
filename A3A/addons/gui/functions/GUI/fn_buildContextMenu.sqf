@@ -56,7 +56,7 @@ private _disableAll = [_contextSingle1Button, _contextSingle2Button, _contextSin
 // buttons: showing the group shows all its children too
 _contextGroup ctrlShow true;
 _vehicleNameBackground ctrlShow true;
-{_x ctrlShow false; _x ctrlEnable false;} forEach _disableAll;
+{_x ctrlShow false; _x ctrlEnable false; _x ctrlSetTooltip ""; _x ctrlRemoveAllEventHandlers "ButtonClick";} forEach _disableAll;
 
 private _vehType = if ( !isClass (configFile >> "CfgVehicles" >> typeOf _vehicle) ) then { -1 } else {[typeOf _vehicle] call HR_GRG_fnc_getCatIndex};
 private _containerTitle = "";
@@ -86,32 +86,37 @@ switch (true) do {
         private _garageContextOptions = switch (true) do {
             case (_vehType in [3,4]): {
                 _containerTitle = localize "STR_antistasi_dialogs_main_context_title_aircraft";
-                [["garage", _contextHoriz1Button], ["RRR", _contextSingle3Button], ["airSupport", _contextSingle4Button]];
+                [["garage", _contextSingle1Button], ["vehArsenal", _contextSingle2Button], ["RRR", _contextSingle3Button], ["airSupport", _contextSingle4Button]];
             };
             _containerTitle = localize "STR_antistasi_dialogs_main_context_title_vehicle";
             case ((_vehType != 7) && {(_vehicle isNil "markerX")}): {
-                [["garage", _contextHoriz1Button], ["RRR", _contextSingle3Button], ["addToGarrison", _contextSingle4Button]];
+                [["garage", _contextSingle1Button], ["vehArsenal", _contextSingle2Button], ["RRR", _contextSingle3Button], ["addToGarrison", _contextSingle4Button]];
             };
             case ((_vehType == 7) || {!(_vehicle isNil "markerX")}): {
-                [["garage", _contextHoriz1Button], ["RRR", _contextSingle3Button], ["toggleAI", _contextSingle4Button]];
+                [["garage", _contextSingle1Button], ["vehArsenal", _contextSingle2Button], ["RRR", _contextSingle3Button], ["toggleAI", _contextSingle4Button]];
             };
             default {
-                [["garage", _contextHoriz1Button], ["RRR", _contextHoriz2Button]];
+                [["garage", _contextSingle1Button], ["vehArsenal", _contextSingle2Button], ["RRR", _contextHoriz2Button]];
             };
         };
+
+        // Why the garage button is greyed out, "" when it is not. Read by "vehArsenal", which comes after "garage" in every list.
+        private _garageBlocker = "";
 
         {
             _x params ["_action", "_button"];
             _button ctrlShow true;
             switch (_action) do {
                 case ("garage"): {
-                    _button ctrlSetText localize "STR_antistasi_dialogs_main_context_button_garage";
+                    // Two-line label, the button is a shortcut button (see ContextActionSingle1 in mainDialog.hpp)
+                    _button ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_context_button_garage_twoLines";
                     // Garage check
                     private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
                     private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
                     if !(_inArea > -1) exitWith {
                         _button ctrlEnable false;
-                        _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_away";
+                        _garageBlocker = "STR_antistasi_dialogs_main_context_garage_away";
+                        _button ctrlSetTooltip localize _garageBlocker;
                     };
                     private _inArea = true;
                     if (_vehType in HR_GRG_BLOCKAIRINDEX) then {
@@ -121,17 +126,44 @@ switch (true) do {
                     };
                     if !(_inArea) exitWith {
                         _button ctrlEnable false;
-                        if (_vehType == (HR_GRG_HELIPADACCESSIBLE)#0) then {
-                            _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_airbase_helipad";
-                        } else {
-                            _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_airbase";
-                        };
+                        _garageBlocker = ["STR_antistasi_dialogs_main_context_garage_airbase", "STR_antistasi_dialogs_main_context_garage_airbase_helipad"] select (_vehType == (HR_GRG_HELIPADACCESSIBLE)#0);
+                        _button ctrlSetTooltip localize _garageBlocker;
                     };
                     if (_vehicle getVariable ['A3A_canGarage', false]) then {
                         _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_utility";
                     };
                     _button setVariable ["vehicle", _vehicle];
                     _button ctrlAddEventHandler ["ButtonClick", {closeDialog 0; [(_this#0) getVariable "vehicle", clientOwner, call HR_GRG_dLock, player] remoteExecCall ['HR_GRG_fnc_addVehicle',2];}];
+                    _button ctrlEnable true;
+                };
+                case ("vehArsenal"): {
+                    // Replaces the old "Vehicle Arsenal" scroll action of the HQ garage (vehicleBox). Same rules as the garage
+                    // button, but only in the HQ area where the garage stands: never at outposts, airbases or other rebel flags.
+                    _button ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_context_button_vehArsenal_twoLines";
+                    if (_garageBlocker isNotEqualTo "") exitWith {
+                        _button ctrlSetTooltip localize _garageBlocker;
+                    };
+                    if (count ([player, _vehicle] inAreaArray "Synd_HQ") < 2) exitWith {
+                        _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_vehArsenal_hqOnly";
+                    };
+                    if (getNumber (_configClass >> "maximumLoad") <= 0) exitWith {
+                        _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_vehArsenal_noCargo";
+                    };
+                    // Set while another player has this vehicle's cargo open in the arsenal, see fn_vehicleArsenal "CustomInit"
+                    private _user = _vehicle getVariable ["jnva_user", objNull];
+                    if (!isNull _user && {_user != player} && {alive _user} && {isPlayer _user}) exitWith {
+                        _button ctrlSetTooltip localize "STR_A3A_JNA_vehicle_in_use";
+                    };
+                    _button setVariable ["vehicle", _vehicle];
+                    _button ctrlAddEventHandler ["ButtonClick", {
+                        private _veh = (_this#0) getVariable "vehicle";
+                        closeDialog 0;
+                        if !(missionNamespace getVariable ["arsenalInit", false]) exitWith {};
+                        // The arsenalOpened handler in fn_arsenal_init picks this up and opens the vehicle arsenal for _veh
+                        jnva_requestedVehicle = [_veh, diag_tickTime];
+                        call JN_fnc_arsenal_handleAction;
+                    }];
+                    _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_vehArsenal_tooltip";
                     _button ctrlEnable true;
                 };
                 case ("RRR"): {

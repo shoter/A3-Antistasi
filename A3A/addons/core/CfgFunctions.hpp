@@ -124,6 +124,7 @@ class CfgFunctions
             class addHC {};
             class addRecentDamage {};
             class addTimeForIdle {};
+            class adminTakeOverSite {};
             class aggressionUpdateLoop {};
             class AILoadInfo {};
             class airspaceControl {};

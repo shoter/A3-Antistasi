@@ -69,6 +69,16 @@ switch (_mode) do
             private _factionDebugTabButton = _display displayCtrl A3A_IDC_FACTIONDEBUGTABBUTTON;
             _factionDebugTabButton ctrlEnable false;
             _factionDebugTabButton ctrlShow false;
+
+            // Close the gap of the hidden Admin button: every tab button after it moves one slot left, into the
+            // position of the button before it. Positions are relative to the TabButtons controls group.
+            // Factions is the last slot and is hidden too, so nothing has to move into it.
+            private _shiftedButtons = [A3A_IDC_ADMINTABBUTTON, A3A_IDC_TOWNSTABBUTTON, A3A_IDC_GARRISONSTABBUTTON, A3A_IDC_CHRONICLETABBUTTON, A3A_IDC_PLAYERSTATSTABBUTTON] apply { _display displayCtrl _x };
+            private _slots = _shiftedButtons apply { ctrlPosition _x };
+            for "_i" from 1 to (count _shiftedButtons - 1) do {
+                (_shiftedButtons # _i) ctrlSetPosition (_slots # (_i - 1));
+                (_shiftedButtons # _i) ctrlCommit 0;
+            };
         };
 
         // Hide HC group icons to stop them from interfering with map controls
@@ -143,9 +153,12 @@ switch (_mode) do
         Debug_1("Adding user markers Draw EH to Fast Travel map: %1", _commanderUserMarkersEH);
 
         // Open on the tab shown last, unless a high command selection asks for the commander tab.
-        // A remembered tab the player may no longer use (lost command or admin) falls back to the player tab.
-        if !(_doAutoSwitch || (_autoSwitchGroups#1)) then {
-            private _lastTab = profileNamespace getVariable [LAST_TAB_PROFILE_VAR, "player"];
+        // A tab requested by whoever opened the dialog (A3A_mainDialogOpenTab, set by the HQ dialog back button) wins over both.
+        // A remembered or requested tab the player may no longer use (lost command or admin) falls back to the player tab.
+        private _requestedTab = player getVariable ["A3A_mainDialogOpenTab", ""];
+        player setVariable ["A3A_mainDialogOpenTab", nil];
+        if (_requestedTab isNotEqualTo "" || {!(_doAutoSwitch || (_autoSwitchGroups#1))}) then {
+            private _lastTab = [_requestedTab, profileNamespace getVariable [LAST_TAB_PROFILE_VAR, "player"]] select (_requestedTab isEqualTo "");
             private _allowed = call {
                 if !(_lastTab isEqualType "" && {_lastTab in MAIN_TABS}) exitWith { false };
                 if (_lastTab == "commander") exitWith { [player] call FUNCMAIN(isCommandStaff) };
@@ -243,6 +256,14 @@ switch (_mode) do
             case ("delivervehicle"):
             {
                 _selectedTabIDC = A3A_IDC_DELIVERVEHICLETAB;
+            };
+
+            case ("admintakeover"):
+            {
+                // Sub tab of the Admin tab. The server checks again before it changes a site
+                if ([] call FUNCMAIN(isLocalAdmin)) then {
+                    _selectedTabIDC = A3A_IDC_ADMINTAKEOVERTAB;
+                };
             };
 
             case ("construct"):
@@ -369,6 +390,7 @@ switch (_mode) do
             A3A_IDC_PLAYERSTATSDETAILSTAB,
             A3A_IDC_AIRTAXITAB,
             A3A_IDC_DELIVERVEHICLETAB,
+            A3A_IDC_ADMINTAKEOVERTAB,
             A3A_IDC_FACTIONDEBUGTAB
         ];
 
@@ -435,6 +457,12 @@ switch (_mode) do
             {
                 ["clearSelectedLocation"] call FUNC(deliverVehicleTab);
                 ["update"] call FUNC(deliverVehicleTab);
+            };
+
+            case ("admintakeover"):
+            {
+                ["clearSelectedLocation"] call FUNC(adminTakeOverTab);
+                ["update"] call FUNC(adminTakeOverTab);
             };
 
             case ("construct"):

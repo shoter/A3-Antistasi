@@ -133,12 +133,16 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "CustomInit":{
 		_display = _this select 0;
-		_veh = vehicle player;
+		// jnva_vehicle is set by the arsenalOpened handler in fn_arsenal_init: the vehicle picked in the Battle Menu
+		// or the one the player drives. The player does not have to sit in it.
+		_veh = jnva_vehicle;
+		// Mark the vehicle as in use, its cargo now lives in jnva_loadout until "Close" puts it back
+		_veh setVariable ["jnva_user", player, true];
 
 		diag_log ["CustomInit VehicleArsenal",_display];
 
 		//save crap in array
-		jnva_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+		jnva_loadout = (jnva_vehicle call jn_fnc_arsenal_cargoToArray);
 		jnva_loadout_mass = ["getMass"] call jn_fnc_vehicleArsenal;
        	clearMagazineCargoGlobal _veh;
         clearItemCargoGlobal _veh;
@@ -157,7 +161,7 @@ switch _mode do {
 	case "getMass":{
 		_massTotal = 0;
 		// Optional loadout argument, defaults to the real vehicle cargo
-		_loadout = if (_this isEqualTo []) then {(vehicle player) call jn_fnc_arsenal_cargoToArray} else {_this select 0};
+		_loadout = if (_this isEqualTo []) then {jnva_vehicle call jn_fnc_arsenal_cargoToArray} else {_this select 0};
 		{
 			_index = _forEachIndex;
 			// CARGOMAG only mirrors CARGOMAGALL, don't count it twice
@@ -373,7 +377,7 @@ switch _mode do {
 		_index = _this select 1;
 		_ctrlList = ctrlnull;
 		jnca_tab_selected = _index;
-		_veh  = vehicle player;
+		_veh  = jnva_vehicle;
 		_isSelectedLeft = _index in [IDCS_LEFT];
 		_listSelected = [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG,IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL] select _isSelectedLeft;
 
@@ -546,7 +550,7 @@ switch _mode do {
 		_index = _this select 2;
 		_center = (missionnamespace getvariable ["BIS_fnc_arsenal_center",player]);
 		_type = (ctrltype _ctrlList == 102);
-		_veh = vehicle player;
+		_veh = jnva_vehicle;
 
 
 		_maximumLoad = getNumber(configfile >> "CfgVehicles" >> (typeOf _veh) >> "maximumLoad");
@@ -616,7 +620,7 @@ switch _mode do {
 		_display = _this select 0;
 		_add = _this select 1;
 
-		_veh = vehicle player;
+		_veh = jnva_vehicle;
 		_index = jnca_tab_selected;
 
 		if(_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG)then{_index = IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL};
@@ -634,7 +638,7 @@ switch _mode do {
 		_load = 0;
 		_items = [];
 
-		_container = vehicle player;
+		_container = jnva_vehicle;
 
 		_ctrlLoadCargo = _display displayctrl IDC_RSCDISPLAYARSENAL_LOADCARGO;
 		//save old weight
@@ -855,7 +859,7 @@ switch _mode do {
 		jnva_loadout set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, []];
 		diag_log jnva_loadout;
         jnva_loadout remoteExecCall ["jn_fnc_arsenal_addItem",2];
-       	jnva_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+       	jnva_loadout = (jnva_vehicle call jn_fnc_arsenal_cargoToArray);
        	diag_log jnva_loadout;
 
        	_list = missionnamespace getVariable ["jnca_tab_selected",-1];
@@ -870,7 +874,7 @@ switch _mode do {
 	// Stored in the player's profile, per vehicle class:
 	// A3A_vehicleArsenalPresets = [[vehicleClass, [[presetName, [[tabIndex, item, amount], ...]], ...]], ...]
 	case "getPresets":{
-		private _class = typeOf vehicle player;
+		private _class = typeOf jnva_vehicle;
 		private _all = profileNamespace getVariable ["A3A_vehicleArsenalPresets", []];
 		private _entry = _all findIf {(_x select 0) == _class};
 		if (_entry == -1) then {[]} else {+(_all select _entry select 1)};
@@ -879,7 +883,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "setPresets":{
 		private _presets = _this select 0;
-		private _class = typeOf vehicle player;
+		private _class = typeOf jnva_vehicle;
 		private _all = profileNamespace getVariable ["A3A_vehicleArsenalPresets", []];
 		private _entry = _all findIf {(_x select 0) == _class};
 		if (_entry == -1) then {
@@ -917,7 +921,7 @@ switch _mode do {
 		ctrlsetfocus _ctrlTemplateValue;
 		["templateSelChanged",[_display]] call jn_fnc_vehicleArsenal;
 
-		['showMessage',[_display,format [localize "STR_A3A_JNA_vehicle_preset_for", getText (configFile >> "CfgVehicles" >> typeOf vehicle player >> "displayName")]]] call jn_fnc_arsenal;
+		['showMessage',[_display,format [localize "STR_A3A_JNA_vehicle_preset_for", getText (configFile >> "CfgVehicles" >> typeOf jnva_vehicle >> "displayName")]]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -946,7 +950,7 @@ switch _mode do {
 		ctrlsetfocus _ctrlTemplateName;
 		["templateSelChanged",[_display]] call jn_fnc_vehicleArsenal;
 
-		['showMessage',[_display,format [localize "STR_A3A_JNA_vehicle_preset_for", getText (configFile >> "CfgVehicles" >> typeOf vehicle player >> "displayName")]]] call jn_fnc_arsenal;
+		['showMessage',[_display,format [localize "STR_A3A_JNA_vehicle_preset_for", getText (configFile >> "CfgVehicles" >> typeOf jnva_vehicle >> "displayName")]]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -1067,7 +1071,7 @@ switch _mode do {
 		if (_presetIndex == -1) exitWith {};
 		private _presetItems = _presets select _presetIndex select 1;
 
-		private _veh = vehicle player;
+		private _veh = jnva_vehicle;
 		private _max = getNumber (configfile >> "CfgVehicles" >> (typeOf _veh) >> "maximumLoad");
 		private _isMember = [player] call A3A_fnc_isMember;
 		private _emptyLoadout = {[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]};
@@ -1159,7 +1163,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Close": {
 		jnva_loadout_mass = nil;
-		_veh = vehicle player;
+		_veh = jnva_vehicle;
 		jnca_tab_selected = nil;
 		//weapons
 		{
@@ -1235,6 +1239,8 @@ switch _mode do {
 
 
 		jnva_loadout = nil;
+		_veh setVariable ["jnva_user", nil, true];
+		jnva_vehicle = nil;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////

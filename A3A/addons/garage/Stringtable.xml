@@ -90,6 +90,9 @@
         <Turkish>Bu nesne yalnızca komutan tarafından garaja alınabilir</Turkish>
         <Chinesesimp>任何油料来源只能由指挥官存放</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_inArsenal">
+        <Original>You can't garage a vehicle while another player has it open in the vehicle arsenal</Original>
+      </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_Crewed">
         <Original>You can't garage a vehicle with crew inside</Original>
         <German>Du kannst kein Fahrzeug mit Insassen einparken</German>
