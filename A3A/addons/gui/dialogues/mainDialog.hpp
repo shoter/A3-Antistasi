@@ -685,6 +685,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 8 * GRID_H;
                         };
 
+                        // Single1 + Single2 share the first row with ContextActionHoriz1, Single3 + Single4 the second row
+                        // with ContextActionHoriz2. fn_buildContextMenu shows either the two halves or the full-width button of
+                        // a row: vehicles use Single1 (Garage) + Single2 (Vehicle Arsenal), construction and HQ use Horiz1/Horiz2.
                         class ContextActionSingle1 : A3A_Button
                         {
                             idc = A3A_IDC_CONTEXTSINGLE1BUTTON;
@@ -721,6 +724,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
+                        // Overlaps ContextActionSingle1 + Single2, and Horiz2 overlaps Single3 + Single4: see the comment above Single1
                         class ContextActionHoriz1 : A3A_Button
                         {
                             idc = A3A_IDC_CONTEXTHORIZ1BUTTON;

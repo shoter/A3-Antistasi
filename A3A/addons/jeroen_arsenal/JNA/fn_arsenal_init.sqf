@@ -93,8 +93,30 @@ if(hasInterface)then{
 
             _type = UINamespace getVariable ["jn_type",""];
             if(_type isEqualTo "arsenal")then{
+                // Vehicle arsenal target: the vehicle picked with the Battle Menu "Vehicle Arsenal" button
+                // (jnva_requestedVehicle = [vehicle, diag_tickTime], see fn_buildContextMenu), else the vehicle the player drives.
+                // An old or far away request is ignored so it cannot turn a later personal arsenal into a vehicle arsenal.
+                (missionNamespace getVariable ["jnva_requestedVehicle", [objNull, -1]]) params ["_requestedVeh", "_requestTime"];
+                jnva_requestedVehicle = nil;
                 _veh = vehicle player;
-                if((_veh != player) && driver _veh == player)then{
+                if (alive _requestedVeh && {diag_tickTime - _requestTime < 20} && {_requestedVeh distance player < 30}) then {
+                    _veh = _requestedVeh;
+                } else {
+                    if !((_veh != player) && driver _veh == player) then { _veh = objNull };
+                };
+
+                // Only one player at a time may hold a vehicle's cargo in the vehicle arsenal, a second one would duplicate it
+                private _user = if (isNull _veh) then { objNull } else { _veh getVariable ["jnva_user", objNull] };
+                private _inUse = !isNull _user && {_user != player} && {alive _user} && {isPlayer _user};
+
+                if (!isNull _veh && _inUse) exitWith {
+                    ["jn_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
+                    (uiNamespace getVariable "arsanalDisplay") closeDisplay 2;
+                    titleText [localize "STR_A3A_JNA_vehicle_in_use", "PLAIN"];
+                };
+
+                if (!isNull _veh) then {
+                    jnva_vehicle = _veh;
                     ["CustomInit", [uiNamespace getVariable "arsanalDisplay"]] call jn_fnc_vehicleArsenal;
                     UINamespace setVariable ["jn_type","vehicleArsenal"];
                 }else{
