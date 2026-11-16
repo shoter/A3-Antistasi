@@ -6,8 +6,8 @@ Maintainer: Shoter
     What happens:
     - A spawned site is despawned first, which deletes its troops, vehicles, statics, buildings, flag and loot crate.
     - The garrison data is wiped: no troops, no vehicles, no statics, no buildings, no support vehicles.
-    - The site turns rebel and its map marker is redrawn. Towns get at least 80 support, as after a won town battle,
-      so they do not flip back on the next small support loss.
+    - The site turns rebel and its map marker is redrawn. Towns get full (100) rebel support,
+      so the next support losses do not flip them back.
     - War tier is recalculated silently.
 
     What does not happen, unlike a normal capture (A3A_fnc_markerChange, A3A_fnc_citySideChange):
@@ -78,10 +78,10 @@ _garrison set ["vehicles", []];
 _garrison set ["buildings", []];
 _garrison set ["supportVehicles", createHashMap];
 
-// 4. Towns: keep the support high enough not to flip back (citySupportChange flips a rebel town below 40)
+// 4. Towns: full rebel support, the cap in citySupportChange (which flips a rebel town below 40)
 if (_marker in citiesX) then {
     private _cityData = A3A_cityData getVariable _marker;
-    _cityData set [1, (_cityData # 1) max 80];
+    _cityData set [1, 100];
     A3A_cityData setVariable [_marker, _cityData, true];
 };
 

@@ -688,7 +688,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                         // Single1 + Single2 share the first row with ContextActionHoriz1, Single3 + Single4 the second row
                         // with ContextActionHoriz2. fn_buildContextMenu shows either the two halves or the full-width button of
                         // a row: vehicles use Single1 (Garage) + Single2 (Vehicle Arsenal), construction and HQ use Horiz1/Horiz2.
-                        class ContextActionSingle1 : A3A_Button
+                        // Shortcut buttons so the label can take two lines: fn_buildContextMenu sets it with
+                        // ctrlSetStructuredText and a <br /> in the string, like the air support bomb buttons
+                        class ContextActionSingle1 : A3A_ShortcutButton
                         {
                             idc = A3A_IDC_CONTEXTSINGLE1BUTTON;
                             x = 32 * GRID_W;
@@ -697,7 +699,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
-                        class ContextActionSingle2 : A3A_Button
+                        class ContextActionSingle2 : A3A_ShortcutButton
                         {
                             idc = A3A_IDC_CONTEXTSINGLE2BUTTON;
                             x = 56 * GRID_W;

@@ -108,7 +108,8 @@ switch (true) do {
             _button ctrlShow true;
             switch (_action) do {
                 case ("garage"): {
-                    _button ctrlSetText localize "STR_antistasi_dialogs_main_context_button_garage";
+                    // Two-line label, the button is a shortcut button (see ContextActionSingle1 in mainDialog.hpp)
+                    _button ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_context_button_garage_twoLines";
                     // Garage check
                     private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
                     private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
@@ -138,7 +139,7 @@ switch (true) do {
                 case ("vehArsenal"): {
                     // Replaces the old "Vehicle Arsenal" scroll action of the HQ garage (vehicleBox). Same rules as the garage
                     // button, but only in the HQ area where the garage stands: never at outposts, airbases or other rebel flags.
-                    _button ctrlSetText localize "STR_antistasi_dialogs_main_context_HQ_vehArsenal";
+                    _button ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_context_button_vehArsenal_twoLines";
                     if (_garageBlocker isNotEqualTo "") exitWith {
                         _button ctrlSetTooltip localize _garageBlocker;
                     };

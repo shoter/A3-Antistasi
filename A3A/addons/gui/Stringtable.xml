@@ -3731,6 +3731,16 @@
         <Czech>Musíte být řidič vozidla na upravení jeho inventáře</Czech>
         <Spanish>Debe ser conductor de un vehículo para modificar su inventario</Spanish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_garage_twoLines">
+        <Original>GARAGE&lt;br /&gt;VEHICLE</Original>
+        <Czech>PŘIDAT VOZIDLO&lt;br /&gt;DO GARÁŽE</Czech>
+        <Spanish>ALMACENAR&lt;br /&gt;VEHÍCULO</Spanish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_vehArsenal_twoLines">
+        <Original>VEHICLE&lt;br /&gt;ARSENAL</Original>
+        <Czech>VOZIDLOVÁ&lt;br /&gt;ZBROJNICE</Czech>
+        <Spanish>ARSENAL DE&lt;br /&gt;VEHÍCULO</Spanish>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_context_vehArsenal_tooltip">
         <Original>Change the cargo of this vehicle in the arsenal</Original>
       </Key>
