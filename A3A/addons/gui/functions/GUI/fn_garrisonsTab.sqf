@@ -380,15 +380,18 @@ switch (_mode) do
         // The garrison is about to change, drop the cached counts so the next visit fetches fresh ones
         missionNamespace setVariable ["A3A_GUI_garrisonCountsTime", nil];
 
-        // Same flow as the Commander tab garrisons button, the HQ dialog picks the marker up on load
+        // Same flow as the Commander tab garrisons button, the HQ dialog picks the marker up on load.
+        // A3A_garrisonMenuReturnTab makes the HQ dialog show its back button, which reopens this tab.
         closeDialog 0;
         player setVariable ["A3A_showGarrisonMenu", true];
         player setVariable ["A3A_garrisonMenuMarker", _marker];
+        player setVariable ["A3A_garrisonMenuReturnTab", "garrisons"];
         0 spawn {
             createDialog "A3A_HqDialog";
             uiSleep 1;
             player setVariable ["A3A_showGarrisonMenu", nil];
             player setVariable ["A3A_garrisonMenuMarker", nil];
+            player setVariable ["A3A_garrisonMenuReturnTab", nil];
         };
     };
 

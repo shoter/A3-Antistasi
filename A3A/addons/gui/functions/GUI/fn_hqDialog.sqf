@@ -47,6 +47,11 @@ switch (_mode) do
         setGroupIconsVisible [false, false];
         setGroupIconsSelectable false;
 
+        // Battle Menu tab to go back to from the garrison view, set by the Garrisons tab "Manage" button.
+        // Kept on the display because the player variable is cleared a second after the dialog opens.
+        _display setVariable ["A3A_garrisonMenuReturnTab", player getVariable ["A3A_garrisonMenuReturnTab", ""]];
+        player setVariable ["A3A_garrisonMenuReturnTab", nil];
+
         // Show main tab content
         private _shownTab = ["garrison", "main"] select (player isNil "A3A_showGarrisonMenu");
         ["switchTab", [_shownTab]] call FUNC(hqDialog);
@@ -392,6 +397,21 @@ switch (_mode) do
             _backButton ctrlShow true;
         } else {
             _display setVariable ["A3A_showGarrisonMenu", true];
+
+            // Opened from the Battle Menu Garrisons tab: the back button closes this dialog and reopens that tab
+            private _returnTab = _display getVariable ["A3A_garrisonMenuReturnTab", ""];
+            if (_returnTab isNotEqualTo "") then {
+                private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
+                _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
+                _backButton ctrlAddEventHandler ["MouseButtonClick", {
+                    private _returnTab = (ctrlParent (_this select 0)) getVariable ["A3A_garrisonMenuReturnTab", ""];
+                    closeDialog 0;
+                    // The Battle Menu reads and clears this on load, see "onLoad" in fn_mainDialog
+                    player setVariable ["A3A_mainDialogOpenTab", _returnTab];
+                    0 spawn { createDialog "A3A_MainDialog" };
+                }];
+                _backButton ctrlShow true;
+            };
         };
 
         // Show map if not already visible

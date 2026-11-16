@@ -143,9 +143,12 @@ switch (_mode) do
         Debug_1("Adding user markers Draw EH to Fast Travel map: %1", _commanderUserMarkersEH);
 
         // Open on the tab shown last, unless a high command selection asks for the commander tab.
-        // A remembered tab the player may no longer use (lost command or admin) falls back to the player tab.
-        if !(_doAutoSwitch || (_autoSwitchGroups#1)) then {
-            private _lastTab = profileNamespace getVariable [LAST_TAB_PROFILE_VAR, "player"];
+        // A tab requested by whoever opened the dialog (A3A_mainDialogOpenTab, set by the HQ dialog back button) wins over both.
+        // A remembered or requested tab the player may no longer use (lost command or admin) falls back to the player tab.
+        private _requestedTab = player getVariable ["A3A_mainDialogOpenTab", ""];
+        player setVariable ["A3A_mainDialogOpenTab", nil];
+        if (_requestedTab isNotEqualTo "" || {!(_doAutoSwitch || (_autoSwitchGroups#1))}) then {
+            private _lastTab = [_requestedTab, profileNamespace getVariable [LAST_TAB_PROFILE_VAR, "player"]] select (_requestedTab isEqualTo "");
             private _allowed = call {
                 if !(_lastTab isEqualType "" && {_lastTab in MAIN_TABS}) exitWith { false };
                 if (_lastTab == "commander") exitWith { [player] call FUNCMAIN(isCommandStaff) };
