@@ -61,7 +61,8 @@ if (_supportReb < 0) then {
 	_supportReb = 0;
 };
 
-A3A_cityData setVariable [_city, [_numCiv, _supportReb, _accumHR, _taskDelay]];
+// Publish, so the Battle Menu towns and war status tabs show current support on dedicated servers
+A3A_cityData setVariable [_city, [_numCiv, _supportReb, _accumHR, _taskDelay], true];
 
 // Flip logic...
 private _citySide = sidesX getVariable _city;
