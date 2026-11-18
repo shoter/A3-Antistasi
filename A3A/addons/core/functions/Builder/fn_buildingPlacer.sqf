@@ -64,11 +64,13 @@ private _downKeyEH = _emptyDisplay displayAddEventHandler ["KeyDown", {
         call (A3A_building_EHDB # END_BUILD_FUNC);
     };
 
-    if (_key isEqualTo DIK_E) then {
+    // Turn left / Turn right Antistasi keybinds (Q and E by default): left is counter-clockwise
+    private _turn = [_key] call A3A_fnc_turnKeyDir;
+    if (_turn == -1) then {
         A3A_building_EHDB set [ROTATION_MODE_CCW, true];
     };
 
-    if (_key isEqualTo DIK_R) then {
+    if (_turn == 1) then {
         A3A_building_EHDB set [ROTATION_MODE_CW, true];
     };
 }];
@@ -80,7 +82,8 @@ private _upKeyEH = _emptyDisplay displayAddEventHandler ["KeyUp", {
 
     // Typing in the building filter: ignore placer keys, but let held rotation keys stop
     private _isTyping = focusedCtrl _displayOrControl == _displayOrControl displayCtrl A3A_IDC_TEAMLEADERBUILDERFILTER;
-    if (_isTyping && !(_key in [DIK_E, DIK_R])) exitWith { false };
+    private _turn = [_key] call A3A_fnc_turnKeyDir;
+    if (_isTyping && _turn == 0) exitWith { false };
 
     // Place object
     if (_key isEqualTo DIK_SPACE) then {
@@ -175,11 +178,11 @@ private _upKeyEH = _emptyDisplay displayAddEventHandler ["KeyUp", {
         if (A3A_building_EHDB # SNAP_SURFACE_MODE) then {_altText ctrlSetTextColor [1, 0, 0, 1];} else {_altText ctrlSetTextColor [1, 1, 1, 1];}
     };
 
-    if (_key isEqualTo DIK_E) then {
+    if (_turn == -1) then {
         A3A_building_EHDB set [ROTATION_MODE_CCW, false];
     };
 
-    if (_key isEqualTo DIK_R) then {
+    if (_turn == 1) then {
         A3A_building_EHDB set [ROTATION_MODE_CW, false];
     };
 

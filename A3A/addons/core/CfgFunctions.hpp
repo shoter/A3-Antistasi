@@ -470,6 +470,8 @@ class CfgFunctions
         class keybinds {
             file = QPATHTOFOLDER(keybinds);
             class keyActions {};
+            class turnKeyDir {};
+            class turnKeyNames {};
         };
 
         class LTC {

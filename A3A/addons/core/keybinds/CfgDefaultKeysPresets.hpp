@@ -9,6 +9,9 @@ class CfgDefaultKeysPresets {
             GVAR(infoBar)[] = {0x1D130058}; //combo Left Ctrl + F12 (no double tap)
             GVAR(earPlugs)[] = {DIK_END};
             GVAR(customHintDismiss)[] = {};
+            // Rotating an object while placing it, see A3A_fnc_turnKeyDir
+            GVAR(turnLeft)[] = {DIK_Q};
+            GVAR(turnRight)[] = {DIK_E};
         };
     };
 };

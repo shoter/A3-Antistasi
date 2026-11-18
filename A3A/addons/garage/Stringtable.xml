@@ -302,18 +302,18 @@
         <Chinesesimp>%1 已经被存放</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_CallbackFailed">
-        <Original>&lt;t size='0.6'&gt;Something is blocking placement &lt;br/&gt; Rotate Left: Q &lt;br/&gt;Rotate Right: E &lt;br/&gt;Cancel: Enter/ESC &lt;/t&gt;</Original>
-        <German>&lt;t size='0.6'&gt;Etwas Blockiert das spawnen &lt;br/&gt; Links Drehen: Q &lt;br/&gt;Rechts Drehen: E &lt;br/&gt;Abbrechen: Enter/ESC &lt;/t&gt;</German>
-        <Italian>&lt;t size='0.6'&gt;Qualcosa sta bloccando il piazzamento &lt;br/&gt; Rotea a Sinistra: Q &lt;br/&gt;Rotea a Destra: E &lt;br/&gt;Cancella: Invio/ESC &lt;/t&gt;</Italian>
-        <Spanish>&lt;t size='0.6'&gt;Algo está bloqueando el sitio&lt;br/&gt; Rotar Izq: Q &lt;br/&gt;Rotar Der: E &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Spanish>
-        <French>&lt;t size='0.6'&gt;Quelque chose bloque l'emplacement &lt;br/&gt; Tourner à gauche : Q &lt;br/&gt;Tourner à droite : E &lt;br/&gt;Annuler : Entrer/ESC &lt;/t&gt;</French>
-        <Korean>&lt;t size='0.6'&gt;무언가가 배치를 막고 있습니다.&lt;br/&gt; 좌회전: Q &lt;br/&gt;우회전: E &lt;br/&gt;취소: Enter/ESC &lt;/t&gt;</Korean>
-        <Russian>&lt;t size='0.6'&gt;Что-то мешает размещению &lt;br/&gt; Поворот влево: Q &lt;br/&gt;Поворот вправо: E &lt;br/&gt;Отменить: Enter/ESC &lt;/t&gt;</Russian>
-        <Polish>&lt;t size='0.6'&gt;Coś blokuje umieszczenie &lt;br/&gt; Obróć w Lewo: Q &lt;br/&gt;Obróć w Prawo: E &lt;br/&gt;Anuluj: Enter / ESC &lt;/t&gt;</Polish>
-        <Czech>&lt;t size = '0,6'&gt; Něco blokuje umístění &lt;br/&gt; Otočit doleva: Q &lt;br/&gt; Otočit vpravo: E &lt;br/&gt; Zrušit: Enter/Esc &lt;/t&gt;</Czech>
-        <Portuguese>&lt;t size='0.6'&gt;Algo está a bloquear a colocação &lt;br/&gt; Rodar esquerda: Q &lt;br/&gt;Rodar direita: E &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Portuguese>
-        <Turkish>&lt;t size='0.6'&gt;Bir şey yerleşimi engelliyor &lt;br/&gt; Sola Döndür: Q &lt;br/&gt;Sağa Döndür: E &lt;br/&gt;İptal: Enter/ESC &lt;/t&gt;</Turkish>
-        <Chinesesimp>&lt;t size='0.6'&gt;有物体遮挡了放置位置 &lt;br/&gt; 向左旋转: Q &lt;br/&gt;向右旋转: E &lt;br/&gt;取消: 回车/ESC &lt;/t&gt;</Chinesesimp>
+        <Original>&lt;t size='0.6'&gt;Something is blocking placement &lt;br/&gt; Rotate Left: %1 &lt;br/&gt;Rotate Right: %2 &lt;br/&gt;Cancel: Enter/ESC &lt;/t&gt;</Original>
+        <German>&lt;t size='0.6'&gt;Etwas Blockiert das spawnen &lt;br/&gt; Links Drehen: %1 &lt;br/&gt;Rechts Drehen: %2 &lt;br/&gt;Abbrechen: Enter/ESC &lt;/t&gt;</German>
+        <Italian>&lt;t size='0.6'&gt;Qualcosa sta bloccando il piazzamento &lt;br/&gt; Rotea a Sinistra: %1 &lt;br/&gt;Rotea a Destra: %2 &lt;br/&gt;Cancella: Invio/ESC &lt;/t&gt;</Italian>
+        <Spanish>&lt;t size='0.6'&gt;Algo está bloqueando el sitio&lt;br/&gt; Rotar Izq: %1 &lt;br/&gt;Rotar Der: %2 &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Spanish>
+        <French>&lt;t size='0.6'&gt;Quelque chose bloque l'emplacement &lt;br/&gt; Tourner à gauche : %1 &lt;br/&gt;Tourner à droite : %2 &lt;br/&gt;Annuler : Entrer/ESC &lt;/t&gt;</French>
+        <Korean>&lt;t size='0.6'&gt;무언가가 배치를 막고 있습니다.&lt;br/&gt; 좌회전: %1 &lt;br/&gt;우회전: %2 &lt;br/&gt;취소: Enter/ESC &lt;/t&gt;</Korean>
+        <Russian>&lt;t size='0.6'&gt;Что-то мешает размещению &lt;br/&gt; Поворот влево: %1 &lt;br/&gt;Поворот вправо: %2 &lt;br/&gt;Отменить: Enter/ESC &lt;/t&gt;</Russian>
+        <Polish>&lt;t size='0.6'&gt;Coś blokuje umieszczenie &lt;br/&gt; Obróć w Lewo: %1 &lt;br/&gt;Obróć w Prawo: %2 &lt;br/&gt;Anuluj: Enter / ESC &lt;/t&gt;</Polish>
+        <Czech>&lt;t size = '0,6'&gt; Něco blokuje umístění &lt;br/&gt; Otočit doleva: %1 &lt;br/&gt; Otočit vpravo: %2 &lt;br/&gt; Zrušit: Enter/Esc &lt;/t&gt;</Czech>
+        <Portuguese>&lt;t size='0.6'&gt;Algo está a bloquear a colocação &lt;br/&gt; Rodar esquerda: %1 &lt;br/&gt;Rodar direita: %2 &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t size='0.6'&gt;Bir şey yerleşimi engelliyor &lt;br/&gt; Sola Döndür: %1 &lt;br/&gt;Sağa Döndür: %2 &lt;br/&gt;İptal: Enter/ESC &lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t size='0.6'&gt;有物体遮挡了放置位置 &lt;br/&gt; 向左旋转: %1 &lt;br/&gt;向右旋转: %2 &lt;br/&gt;取消: 回车/ESC &lt;/t&gt;</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_Cam_Controls">
         <Original>Camera controls</Original>
@@ -386,32 +386,32 @@
         <Chinesesimp>没有选择任何载具</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_CP_Blocked">
-        <Original>&lt;t size='0.6'&gt;Something is blocking placement &lt;br/&gt; Rotate Left: Q &lt;br/&gt;Rotate Right: E &lt;br/&gt;Cancel: Enter/ESC &lt;/t&gt;</Original>
-        <German>&lt;t size='0.6'&gt;Etwas Blockiert das spawnen &lt;br/&gt; Links Drehen: Q &lt;br/&gt;Rechts Drehen: E &lt;br/&gt;Abbrechen: Enter/ESC &lt;/t&gt;</German>
-        <Italian>&lt;t size='0.6'&gt;Qualcosa sta bloccando il piazzamento &lt;br/&gt; Rotea a Sinistra: Q &lt;br/&gt;Rotea a Destra: E &lt;br/&gt;Cancella: Invio/ESC &lt;/t&gt;</Italian>
-        <Spanish>&lt;t size='0.6'&gt;Algo está bloqueando el sitio &lt;br/&gt; Rotar Izq: Q &lt;br/&gt;Rotar Der: E &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Spanish>
-        <French>&lt;t size='0.6'&gt;Quelque chose bloque l'emplacement &lt;br/&gt; Tourner à gauche : Q &lt;br/&gt;Tourner à droite : E &lt;br/&gt;Annuler : Entrer/ESC &lt;/t&gt;</French>
-        <Korean>&lt;t size='0.6'&gt;무언가가 배치를 막고 있습니다.&lt;br/&gt; 좌회전: Q &lt;br/&gt;우회전: E &lt;br/&gt;취소: Enter/ESC &lt;/t&gt;</Korean>
-        <Russian>&lt;t size='0.6'&gt;Что-то мешает размещению &lt;br/&gt; Поворот влево: Q &lt;br/&gt;Поворот вправо: E &lt;br/&gt;Отменить: Enter/ESC &lt;/t&gt;</Russian>
-        <Polish>&lt;t size='0.6'&gt;Coś blokuje umieszczenie &lt;br/&gt; Obróć w Lewo: Q &lt;br/&gt;Obróć w Prawo: E &lt;br/&gt;Anuluj: Enter / ESC &lt;/t&gt;</Polish>
-        <Czech>&lt;t size = '0,6'&gt; Něco blokuje umístění &lt;br/&gt; otočit doleva: Q &lt;br/&gt; Otočení vpravo: E &lt;br/&gt; Zrušit: Enter/Esc &lt;/t&gt;</Czech>
-        <Portuguese>&lt;t size='0.6'&gt;Algo está a bloquear a colocação &lt;br/&gt; Rodar esquerda: Q &lt;br/&gt;Rodar direita: E &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Portuguese>
-        <Turkish>&lt;t size='0.6'&gt;Bir şey yerleşimi engelliyor &lt;br/&gt; Sola Döndür: Q &lt;br/&gt;Sağa Döndür: E &lt;br/&gt;İptal: Enter/ESC &lt;/t&gt;</Turkish>
-        <Chinesesimp>&lt;t size='0.6'&gt;有物体遮挡了放置位置 &lt;br/&gt; 向左旋转: Q &lt;br/&gt;向右旋转: E &lt;br/&gt;取消: 回车/ESC &lt;/t&gt;</Chinesesimp>
+        <Original>&lt;t size='0.6'&gt;Something is blocking placement &lt;br/&gt; Rotate Left: %1 &lt;br/&gt;Rotate Right: %2 &lt;br/&gt;Cancel: Enter/ESC &lt;/t&gt;</Original>
+        <German>&lt;t size='0.6'&gt;Etwas Blockiert das spawnen &lt;br/&gt; Links Drehen: %1 &lt;br/&gt;Rechts Drehen: %2 &lt;br/&gt;Abbrechen: Enter/ESC &lt;/t&gt;</German>
+        <Italian>&lt;t size='0.6'&gt;Qualcosa sta bloccando il piazzamento &lt;br/&gt; Rotea a Sinistra: %1 &lt;br/&gt;Rotea a Destra: %2 &lt;br/&gt;Cancella: Invio/ESC &lt;/t&gt;</Italian>
+        <Spanish>&lt;t size='0.6'&gt;Algo está bloqueando el sitio &lt;br/&gt; Rotar Izq: %1 &lt;br/&gt;Rotar Der: %2 &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Spanish>
+        <French>&lt;t size='0.6'&gt;Quelque chose bloque l'emplacement &lt;br/&gt; Tourner à gauche : %1 &lt;br/&gt;Tourner à droite : %2 &lt;br/&gt;Annuler : Entrer/ESC &lt;/t&gt;</French>
+        <Korean>&lt;t size='0.6'&gt;무언가가 배치를 막고 있습니다.&lt;br/&gt; 좌회전: %1 &lt;br/&gt;우회전: %2 &lt;br/&gt;취소: Enter/ESC &lt;/t&gt;</Korean>
+        <Russian>&lt;t size='0.6'&gt;Что-то мешает размещению &lt;br/&gt; Поворот влево: %1 &lt;br/&gt;Поворот вправо: %2 &lt;br/&gt;Отменить: Enter/ESC &lt;/t&gt;</Russian>
+        <Polish>&lt;t size='0.6'&gt;Coś blokuje umieszczenie &lt;br/&gt; Obróć w Lewo: %1 &lt;br/&gt;Obróć w Prawo: %2 &lt;br/&gt;Anuluj: Enter / ESC &lt;/t&gt;</Polish>
+        <Czech>&lt;t size = '0,6'&gt; Něco blokuje umístění &lt;br/&gt; otočit doleva: %1 &lt;br/&gt; Otočení vpravo: %2 &lt;br/&gt; Zrušit: Enter/Esc &lt;/t&gt;</Czech>
+        <Portuguese>&lt;t size='0.6'&gt;Algo está a bloquear a colocação &lt;br/&gt; Rodar esquerda: %1 &lt;br/&gt;Rodar direita: %2 &lt;br/&gt;Cancelar: Enter/ESC &lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t size='0.6'&gt;Bir şey yerleşimi engelliyor &lt;br/&gt; Sola Döndür: %1 &lt;br/&gt;Sağa Döndür: %2 &lt;br/&gt;İptal: Enter/ESC &lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t size='0.6'&gt;有物体遮挡了放置位置 &lt;br/&gt; 向左旋转: %1 &lt;br/&gt;向右旋转: %2 &lt;br/&gt;取消: 回车/ESC &lt;/t&gt;</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_CP_Rotation">
-        <Original>&lt;t size='0.6'&gt;Rotate Left: Q &lt;br/&gt;Rotate Right: E &lt;br/&gt;Cancel: Enter/ESC &lt;br/&gt;Place: Space&lt;/t&gt;</Original>
-        <German>&lt;t size='0.6'&gt;Links Drehen: Q &lt;br/&gt;Rechts Drehen: E &lt;br/&gt;Abbrechen: Enter/ESC &lt;br/&gt;Platzieren: Leertaste&lt;/t&gt;</German>
-        <Italian>&lt;t size='0.6'&gt;Rotea a Sinistra: Q &lt;br/&gt;Rotea a Destra: E &lt;br/&gt;Cancella: Invio/ESC &lt;br/&gt;Piazza: Spazio&lt;/t&gt;</Italian>
-        <Spanish>&lt;t size='0.6'&gt;Rotar Izq: Q &lt;br/&gt;Rotar Der: E &lt;br/&gt;Cancelar: Enter/ESC &lt;br/&gt;Confirmar: Espacio&lt;/t&gt;</Spanish>
-        <French>&lt;t size='0.6'&gt;Tourner à gauche : Q &lt;br/&gt;Tourner à droite : E &lt;br/&gt;Annuler : Entrer/ESC &lt;br/&gt;Placer : Espace&lt;/t&gt;</French>
-        <Korean>&lt;t size='0.6'&gt;좌회전: Q &lt;br/&gt;우회전: E &lt;br/&gt;취소: Enter/ESC &lt;br/&gt;배치: Space&lt;/t&gt;</Korean>
-        <Russian>&lt;t size='0.6'&gt;Поворот влево: Q &lt;br/&gt;Поворот вправо: E &lt;br/&gt;Отменить: Enter/ESC &lt;br/&gt;Поставить: Space&lt;/t&gt;</Russian>
-        <Polish>&lt;t size='0.6'&gt;Obróć w Lewo: Q &lt;br/&gt;Obróć w Prawo: E &lt;br/&gt;Anuluj: Enter / ESC &lt;br/&gt;Postaw: Spacja&lt;/t&gt;</Polish>
-        <Czech>&lt;t size = '0,6'&gt; otočit doleva: Q &lt;br/&gt; Otočení vpravo: E &lt;br/&gt; Zrušit: Enter/Esc &lt;br/&gt; Místo: Space &lt;/t&gt;</Czech>
-        <Portuguese>&lt;t size='0.6'&gt;Rodar esquerda: Q &lt;br/&gt;Rodar direitat: E &lt;br/&gt;Cancelar: Enter/ESC &lt;br/&gt;Colocar: Espaco&lt;/t&gt;</Portuguese>
-        <Turkish>&lt;t size='0.6'&gt;Sola Döndür: Q &lt;br/&gt;Sağa Döndür: E &lt;br/&gt;İptal: Enter/ESC &lt;br/&gt;Yerleştir: Space&lt;/t&gt;</Turkish>
-        <Chinesesimp>&lt;t size='0.6'&gt;向左旋转: Q &lt;br/&gt;向右旋转: E &lt;br/&gt;取消: 回车/ESC &lt;br/&gt;放置: 空格&lt;/t&gt;</Chinesesimp>
+        <Original>&lt;t size='0.6'&gt;Rotate Left: %1 &lt;br/&gt;Rotate Right: %2 &lt;br/&gt;Cancel: Enter/ESC &lt;br/&gt;Place: Space&lt;/t&gt;</Original>
+        <German>&lt;t size='0.6'&gt;Links Drehen: %1 &lt;br/&gt;Rechts Drehen: %2 &lt;br/&gt;Abbrechen: Enter/ESC &lt;br/&gt;Platzieren: Leertaste&lt;/t&gt;</German>
+        <Italian>&lt;t size='0.6'&gt;Rotea a Sinistra: %1 &lt;br/&gt;Rotea a Destra: %2 &lt;br/&gt;Cancella: Invio/ESC &lt;br/&gt;Piazza: Spazio&lt;/t&gt;</Italian>
+        <Spanish>&lt;t size='0.6'&gt;Rotar Izq: %1 &lt;br/&gt;Rotar Der: %2 &lt;br/&gt;Cancelar: Enter/ESC &lt;br/&gt;Confirmar: Espacio&lt;/t&gt;</Spanish>
+        <French>&lt;t size='0.6'&gt;Tourner à gauche : %1 &lt;br/&gt;Tourner à droite : %2 &lt;br/&gt;Annuler : Entrer/ESC &lt;br/&gt;Placer : Espace&lt;/t&gt;</French>
+        <Korean>&lt;t size='0.6'&gt;좌회전: %1 &lt;br/&gt;우회전: %2 &lt;br/&gt;취소: Enter/ESC &lt;br/&gt;배치: Space&lt;/t&gt;</Korean>
+        <Russian>&lt;t size='0.6'&gt;Поворот влево: %1 &lt;br/&gt;Поворот вправо: %2 &lt;br/&gt;Отменить: Enter/ESC &lt;br/&gt;Поставить: Space&lt;/t&gt;</Russian>
+        <Polish>&lt;t size='0.6'&gt;Obróć w Lewo: %1 &lt;br/&gt;Obróć w Prawo: %2 &lt;br/&gt;Anuluj: Enter / ESC &lt;br/&gt;Postaw: Spacja&lt;/t&gt;</Polish>
+        <Czech>&lt;t size = '0,6'&gt; otočit doleva: %1 &lt;br/&gt; Otočení vpravo: %2 &lt;br/&gt; Zrušit: Enter/Esc &lt;br/&gt; Místo: Space &lt;/t&gt;</Czech>
+        <Portuguese>&lt;t size='0.6'&gt;Rodar esquerda: %1 &lt;br/&gt;Rodar direitat: %2 &lt;br/&gt;Cancelar: Enter/ESC &lt;br/&gt;Colocar: Espaco&lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t size='0.6'&gt;Sola Döndür: %1 &lt;br/&gt;Sağa Döndür: %2 &lt;br/&gt;İptal: Enter/ESC &lt;br/&gt;Yerleştir: Space&lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t size='0.6'&gt;向左旋转: %1 &lt;br/&gt;向右旋转: %2 &lt;br/&gt;取消: 回车/ESC &lt;br/&gt;放置: 空格&lt;/t&gt;</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_CP_TooFar">
         <Original>&lt;t size='0.6'&gt;Can't place vehicle that far away &lt;br/&gt;Cancel: Enter/ESC &lt;/t&gt;</Original>
