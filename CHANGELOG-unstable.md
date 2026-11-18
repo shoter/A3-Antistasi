@@ -1,5 +1,13 @@
 # Unstable changelog
 
+## 2026-11-18 - Live town support in the Battle Menu
+
+### Fixed
+- On dedicated servers the **Towns** and **War Status** tabs of the Battle Menu (`Y`) now show a town's current support. Before, they only updated when the town changed sides, so support could look stuck at 0 while the map info showed the real value.
+
+### Internal
+- Steam Workshop uploads have failed since 2026-11-16, when GitHub moved the runners to Ubuntu 26.04. The upload job now runs on Ubuntu 24.04, where uploads last worked.
+
 ## 2026-11-15 - Training money fix
 - Admin can convert to rebel any location.
 - No Admin tab gap when player is non-admin.

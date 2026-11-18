@@ -45,7 +45,9 @@ jobs:
         path: build\A3A
 
   upload:
-    runs-on: ubuntu-latest
+    # Pinned: on ubuntu-26.04 steamcmd inside the deploy action's container cannot reach Steam
+    # ('Steamcmd needs to be online to update'), which failed every upload from 2026-11-16.
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     needs: [build]
     steps:
