@@ -2,7 +2,8 @@
 FIX_LINE_NUMBERS()
 private _titleStr = localize "STR_A3A_fn_reinf_addSqdHC_title";
 
-params ["_typeGroup", ["_withBackpck", ""], ["_spawnVeh", ""], ["_idPrefix", ""]];
+// _onPlacementEnd: called with [<BOOL> squad bought] after the vehicle was placed by hand at HQ (see _fnc_placeVehicle)
+params ["_typeGroup", ["_withBackpck", ""], ["_spawnVeh", ""], ["_idPrefix", ""], ["_onPlacementEnd", {}, [{}]]];
 
 // Sub-commanders recruit their own squads, paid from the faction funds like the commander's
 if !([player] call A3A_fnc_isCommandStaff) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_commander"] call A3A_fnc_customHint;};
@@ -113,14 +114,29 @@ private _fnc_placed = {
     [_formatX, _idFormat, _special, _vehicle] spawn A3A_fnc_spawnHCGroup;
 };
 
-private _vehiclePlacementMethod = if (getMarkerPos respawnTeamPlayer distance player > 50) then { { _this spawn A3A_fnc_spawnHCVeh } } else { HR_GRG_fnc_confirmPlacement };
-// The Recruit Squad dialog stays open between purchases, but placing a vehicle by hand needs the world view
-private _fnc_closeForPlacement = { if (dialog) then { closeDialog 0 } };
-
-if (!_isInfantry) exitWith {
-    if (_vehiclePlacementMethod isEqualTo HR_GRG_fnc_confirmPlacement) then { call _fnc_closeForPlacement };
-    [_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod;
+// Placed by hand: also notes the purchase in the shared _bought array. Cancelling still recruits the squad, without the vehicle.
+private _fnc_placedByHand = {
+    params ["_vehicle", "_formatX", "_idFormat", "_special", "_bought"];
+    _bought pushBack true;
+    [_formatX, _idFormat, _special, _vehicle] spawn A3A_fnc_spawnHCGroup;
 };
+
+private _vehiclePlacementMethod = if (getMarkerPos respawnTeamPlayer distance player > 50) then { { _this spawn A3A_fnc_spawnHCVeh } } else { HR_GRG_fnc_confirmPlacement };
+
+// Far from HQ the vehicle spawns by itself. At HQ it is placed by hand, which needs the world view: the Recruit Squad
+// dialog is closed, and _onPlacementEnd runs once placing is over, however it ended, so the dialog can come back.
+private _fnc_placeVehicle = {
+    if !(_vehiclePlacementMethod isEqualTo HR_GRG_fnc_confirmPlacement) exitWith {
+        [_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod;
+    };
+    if (dialog) then { closeDialog 0 };
+    private _bought = [];
+    [_vehType, _fnc_placedByHand, _fnc_placeCheck, [_formatX, _idFormat, _special, _bought], _mounts] call HR_GRG_fnc_confirmPlacement;
+    waitUntil { sleep 0.1; !(missionNamespace getVariable ["HR_GRG_placing", false]) };
+    [_bought isNotEqualTo []] call _onPlacementEnd;
+};
+
+if (!_isInfantry) exitWith { call _fnc_placeVehicle };
 if (_idPrefix != "" && {_spawnVeh isEqualTo false}) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup };
 
 private _vehCost = [_vehType] call A3A_fnc_vehiclePrice;
@@ -154,5 +170,4 @@ if (_spawnVeh isEqualType "") then {
 };
 if !(_spawnVeh) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup };
 
-if (_vehiclePlacementMethod isEqualTo HR_GRG_fnc_confirmPlacement) then { call _fnc_closeForPlacement };
-[_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod;
+call _fnc_placeVehicle;

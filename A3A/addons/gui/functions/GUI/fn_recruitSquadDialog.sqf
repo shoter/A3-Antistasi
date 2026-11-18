@@ -5,10 +5,10 @@ Maintainer: Caleb Serafin, DoomMetal
     The dialog stays open after a purchase so more squads can be recruited. The buy buttons stay disabled
     until the money is taken (or a few seconds pass when the purchase was refused), and prices and
     affordability follow the faction money while the dialog is open. A3A_fnc_addFIAsquadHC closes the
-    dialog only when the vehicle has to be placed by hand.
+    dialog only when the vehicle has to be placed by hand, and reopens it ("reopen") when placing is over.
 
 Arguments:
-    <STRING> Mode: "onLoad", "update" or "buySquad"
+    <STRING> Mode: "onLoad", "update", "buySquad" or "reopen"
     <ARRAY<ANY>> Array of params for the mode when applicable. Params for specific modes are documented in the modes.
 
 Return Value:
@@ -186,9 +186,29 @@ switch (_mode) do
         _display setVariable ["buyPendingUntil", time + 5];
         ["update"] call FUNC(recruitSquadDialog);
 
+        // Placing the vehicle by hand at HQ closes the dialog; bring it back afterwards with the same checkbox state
+        private _onPlacementEnd = compile format ["['reopen', [_this # 0, %1]] call A3A_GUI_fnc_recruitSquadDialog", _includeVehicle];
+
         // Previous format, to be changed back to this
         // [_squadType, _vehicle] spawn A3A_fnc_addFIAsquadHC;
-        [_squadType, "", _includeVehicle, _idPrefix] spawn A3A_fnc_addFIAsquadHC;
+        [_squadType, "", _includeVehicle, _idPrefix, _onPlacementEnd] spawn A3A_fnc_addFIAsquadHC;
+    };
+
+    // Called by A3A_fnc_addFIAsquadHC once the squad's vehicle has been placed by hand, or placing was cancelled.
+    // Params: [<BOOL> squad bought, <BOOL> include vehicle checkbox state]. Scheduled.
+    case ("reopen"):
+    {
+        _params params [["_bought", false], ["_includeVehicle", false]];
+        // Not when placing ended with another dialog opening (the Battle Menu key ends it) or the player can't recruit any more
+        if (dialog || !alive player || !([player] call A3A_fnc_isCommandStaff)) exitWith {};
+        if !(createDialog "A3A_RecruitSquadDialog") exitWith {};
+
+        private _display = findDisplay A3A_IDD_RECRUITSQUADDIALOG;
+        (_display displayCtrl A3A_IDC_SQUADINCLUDEVEHICLECHECKBOX) cbSetChecked _includeVehicle;
+        // The cost of the squad may not be taken yet: keep the buttons locked like after a purchase in the open dialog
+        if (_bought) then { _display setVariable ["buyPendingUntil", time + 5] };
+        // onLoad fills the dialog when it runs; this covers the case where it already has, before the lines above
+        ["update"] call FUNC(recruitSquadDialog);
     };
 
     default {
