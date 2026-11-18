@@ -114,8 +114,13 @@ private _fnc_placed = {
 };
 
 private _vehiclePlacementMethod = if (getMarkerPos respawnTeamPlayer distance player > 50) then { { _this spawn A3A_fnc_spawnHCVeh } } else { HR_GRG_fnc_confirmPlacement };
+// The Recruit Squad dialog stays open between purchases, but placing a vehicle by hand needs the world view
+private _fnc_closeForPlacement = { if (dialog) then { closeDialog 0 } };
 
-if (!_isInfantry) exitWith { [_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod };
+if (!_isInfantry) exitWith {
+    if (_vehiclePlacementMethod isEqualTo HR_GRG_fnc_confirmPlacement) then { call _fnc_closeForPlacement };
+    [_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod;
+};
 if (_idPrefix != "" && {_spawnVeh isEqualTo false}) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup };
 
 private _vehCost = [_vehType] call A3A_fnc_vehiclePrice;
@@ -124,24 +129,30 @@ if (_isInfantry and (_costs + _vehCost) > server getVariable "resourcesFIA") exi
     [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup;
 };
 
+// The old recruit menus leave the vehicle choice open and ask with veh_query. The Recruit Squad dialog passes it as a boolean.
+if (_spawnVeh isEqualType "") then {
 #ifdef UseDoomGUI
-    ERROR("Disabled due to UseDoomGUI Switch.")
+    ERROR("Disabled due to UseDoomGUI Switch.");
+    _spawnVeh = false;
 #else
-     if (_spawnVeh isEqualType "") then {_spawnVeh = false; createDialog "veh_query"};
+    createDialog "veh_query";
+    sleep 1;
+    disableSerialization;
+    private _display = findDisplay 100;
+
+    if (str (_display) != "no display") then {
+        private _ChildControl = _display displayCtrl 104;
+        _ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_reinf_addSqdHC_buyveh", _vehCost];
+        _ChildControl = _display displayCtrl 105;
+        _ChildControl  ctrlSetTooltip "Barefoot Infantry";
+    };
+
+    waitUntil {(!dialog) or (!isNil "vehQuery")};
+    _spawnVeh = !isNil "vehQuery";
+    vehQuery = nil;
 #endif
-sleep 1;
-disableSerialization;
-private _display = findDisplay 100;
-
-if (str (_display) != "no display") then {
-	private _ChildControl = _display displayCtrl 104;
-	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_reinf_addSqdHC_buyveh", _vehCost];
-	_ChildControl = _display displayCtrl 105;
-	_ChildControl  ctrlSetTooltip "Barefoot Infantry";
 };
+if !(_spawnVeh) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup };
 
-waitUntil {(!dialog) or (!isNil "vehQuery")};
-if ((!dialog) and (isNil "vehQuery") and !(_spawnVeh)) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup }; //spawn group call here
-
-vehQuery = nil;
+if (_vehiclePlacementMethod isEqualTo HR_GRG_fnc_confirmPlacement) then { call _fnc_closeForPlacement };
 [_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod;

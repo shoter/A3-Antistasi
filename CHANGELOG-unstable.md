@@ -1,5 +1,12 @@
 # Unstable changelog
 
+## 2026-11-18 - Mission Board and Squad Recruitment stay open
+
+### Changed
+- The **Mission Board** stays open after you take a mission. The mission leaves the list and starts, so you can take the next one right away. If Petros refuses it (too many missions under way, one of that type already running, the target is gone), the mission comes back to the list and the reason is shown under it.
+- The **Squad Recruitment** window stays open after you recruit a squad, so you can recruit another one without reopening the Battle Menu. The buttons pause for a moment until the cost is paid, and prices and affordable squads update as the faction money changes.
+- The window still closes when the squad's vehicle has to be placed by hand, that is, when you are within 50 m of HQ.
+
 ## 2026-11-18 - Live town support in the Battle Menu
 
 ### Fixed

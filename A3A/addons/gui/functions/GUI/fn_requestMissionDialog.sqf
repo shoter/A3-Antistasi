@@ -4,9 +4,12 @@ Maintainer: Shoter
     The server keeps the board and publishes it as A3A_missionBoardView (see A3A_tasks_fnc_boardPublish);
     this fills the table from it, shows details and the reward of the selected mission, and sends the pick
     to the server. While the dialog is open it refreshes itself when the board changes.
+    The dialog stays open after a pick: the picked mission is hidden at once and comes back if the server
+    refuses it (see "acceptFailed").
 
 Arguments:
-    <STRING> Mode: "onLoad", "fillList", "selectionChanged" or "accept"
+    <STRING> Mode: "onLoad", "fillList", "selectionChanged", "accept" or "acceptFailed"
+    <ARRAY> Params of the mode: "acceptFailed" takes [<NUMBER> board entry id, <STRING> reason stringtable key or "", <ARRAY> format arguments of the reason]
 
 Return Value:
     <nil>
@@ -99,6 +102,12 @@ switch (_mode) do
         private _board = missionNamespace getVariable ["A3A_missionBoardView", []];
         _display setVariable ["shownBoard", _board];
 
+        // Missions picked here and still waiting for the server. Once the server takes one off the board it is done.
+        private _boardIds = _board apply { _x # 0 };
+        private _pending = (_display getVariable ["pendingIds", []]) select { _x in _boardIds };
+        _display setVariable ["pendingIds", _pending];
+        _board = _board select { !((_x # 0) in _pending) };
+
         // Keep the selected mission selected across refreshes
         private _selectedId = -1;
         if (lnbCurSelRow _list >= 0) then { _selectedId = _list lnbValue [lnbCurSelRow _list, 0] };
@@ -166,9 +175,22 @@ switch (_mode) do
             closeDialog 2;
         };
 
+        // Keep the board open for the next pick and hide this mission until the server answers
         private _id = _list lnbValue [_rowIndex, 0];
-        closeDialog 1;
+        _display setVariable ["pendingIds", (_display getVariable ["pendingIds", []]) + [_id]];
+        _list lnbSetCurSelRow -1;
+        ["fillList"] call FUNC(requestMissionDialog);
         [_id, player, clientOwner] remoteExec ["A3A_tasks_fnc_boardAccept", 2];
+    };
+
+    // Sent by A3A_tasks_fnc_boardAccept when it did not start the mission. Shows it again with the reason,
+    // which Petros also says in chat.
+    case ("acceptFailed"):
+    {
+        _params params [["_id", -1], ["_reasonKey", ""], ["_reasonArgs", []]];
+        _display setVariable ["pendingIds", (_display getVariable ["pendingIds", []]) - [_id]];
+        ["fillList"] call FUNC(requestMissionDialog);
+        if (_reasonKey != "") then { _details ctrlSetStructuredText parseText format ([localize _reasonKey] + _reasonArgs) };
     };
 
     default
