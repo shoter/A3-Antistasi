@@ -1,5 +1,17 @@
 # Unstable changelog
 
+## 2026-11-18 - Windows stay open, rotation keys, junkyard repair cancel
+
+### Added
+- **Cancel** button next to **Buy** in the junkyard's **Vehicle repair** tab. It takes the vehicle off the repair list for good, nothing is refunded. Only the commander and sub-commanders can use it, and it asks for a second click to confirm.
+- **Turn left** and **Turn right** in the Antistasi section of the key bindings (Q and E by default). They rotate whatever you are placing: HQ buildings, vehicles, junkyard and upgrade kit crates, utility items, and objects in the team leader builder. The on-screen hints show the keys you bound. Single keys only, key combinations are not supported.
+
+### Changed
+- The team leader builder used E and R to rotate. With the default bindings it now uses Q and E like the other placement modes.
+- The **Mission Board** stays open after you take a mission. The mission leaves the list and starts, so you can take the next one right away. If Petros refuses it (too many missions under way, one of that type already running, the target is gone), the mission comes back to the list and the reason is shown under it.
+- The **Squad Recruitment** window stays open after you recruit a squad, so you can recruit another one without reopening the Battle Menu. The buttons pause for a moment until the cost is paid, and prices and affordable squads update as the faction money changes.
+- When the squad's vehicle has to be placed by hand (within 50 m of HQ), the window steps aside for placing and comes back once the vehicle is placed or placing is cancelled.
+
 ## 2026-11-18 - Live town support in the Battle Menu
 
 ### Fixed

@@ -4,6 +4,8 @@ Maintainer: Shoter
     Members or the commander only. Any number of missions of the same category can run, but at most
     BOARD_MAX_ACTIVE missions taken from the board at once. Missions that share global state run one at a time.
     Started missions are kept in A3A_missionBoardActive as [key, task, script handle] until their script ends.
+    The mission board dialog stays open after a pick and hides the mission. When the mission does not start,
+    the requester's dialog is told (A3A_GUI_fnc_requestMissionDialog "acceptFailed") so it shows the mission again.
 
 Arguments:
     <NUMBER> Board entry id, from A3A_missionBoardView
@@ -31,14 +33,20 @@ if (!isServer) exitWith { Error("Server-only function miscalled") };
 
 params ["_id", "_player", "_requester"];
 
-if (A3A_petrosMoving) exitWith {};
-
 private _fnc_reply = {
     [petros, "globalChat", localize _this] remoteExec ["A3A_fnc_commsMP", _requester];
 };
+// The mission was not started: Petros says why (unless the key is empty) and the requester's board shows the mission again
+private _fnc_refuse = {
+    params ["_key", ["_args", []]];
+    if (_key != "") then { [petros, "globalChat", format ([localize _key] + _args)] remoteExec ["A3A_fnc_commsMP", _requester] };
+    ["acceptFailed", [_id, _key, _args]] remoteExecCall ["A3A_GUI_fnc_requestMissionDialog", _requester];
+};
+
+if (A3A_petrosMoving) exitWith { [""] call _fnc_refuse };
 
 if !([_player] call A3A_fnc_isMember or { _player == theBoss }) exitWith {
-    "STR_antistasi_dialogs_mission_request_noCommander" call _fnc_reply;
+    ["STR_antistasi_dialogs_mission_request_noCommander"] call _fnc_refuse;
 };
 
 // Check and take the lock unscheduled, so two scripts can't both take it
@@ -50,18 +58,18 @@ waitUntil {
 
 private _index = A3A_missionBoard findIf { (_x get "id") == _id };
 if (_index == -1) exitWith {
-    "STR_A3A_Tasks_board_gone" call _fnc_reply;
+    ["STR_A3A_Tasks_board_gone"] call _fnc_refuse;
     A3A_taskRequestInProgress = nil;
 };
 private _entry = A3A_missionBoard # _index;
 
 A3A_missionBoardActive = A3A_missionBoardActive select { !scriptDone (_x # 2) };
 if (count A3A_missionBoardActive >= BOARD_MAX_ACTIVE) exitWith {
-    [petros, "globalChat", format [localize "STR_A3A_Tasks_board_full", BOARD_MAX_ACTIVE]] remoteExec ["A3A_fnc_commsMP", _requester];
+    ["STR_A3A_Tasks_board_full", [BOARD_MAX_ACTIVE]] call _fnc_refuse;
     A3A_taskRequestInProgress = nil;
 };
 if ((_entry get "task") in BOARD_SINGLE_TASKS and { A3A_missionBoardActive findIf { _x # 1 == _entry get "task" } != -1 }) exitWith {
-    "STR_A3A_Tasks_board_running" call _fnc_reply;
+    ["STR_A3A_Tasks_board_running"] call _fnc_refuse;
     A3A_taskRequestInProgress = nil;
 };
 
@@ -69,11 +77,11 @@ private _problem = [_entry, true] call FUNC(boardValidate);
 if (_problem == "gone") exitWith {
     A3A_missionBoard deleteAt _index;
     call FUNC(boardPublish);
-    "STR_A3A_Tasks_board_gone" call _fnc_reply;
+    ["STR_A3A_Tasks_board_gone"] call _fnc_refuse;
     A3A_taskRequestInProgress = nil;
 };
 if (_problem == "busy") exitWith {
-    "STR_A3A_Tasks_board_busy" call _fnc_reply;
+    ["STR_A3A_Tasks_board_busy"] call _fnc_refuse;
     A3A_taskRequestInProgress = nil;
 };
 

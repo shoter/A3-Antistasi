@@ -41,7 +41,8 @@ class A3A_PlacerHints {
             sizeEx = 2.25 * GRID_H;
         };
 
-        // ROTATION_MODEs
+        // ROTATION_MODEs: E row is Turn left, R row is Turn right (Antistasi keybinds). A3A_GUI_fnc_setUpPlacerHints
+        // puts the bound key in the text and hides an icon when there is no picture of the bound key.
         class IconEKEY: IconALT {
             idc = IDC_PLACERHINT_E;
             text = A3A_Icon_key_e;

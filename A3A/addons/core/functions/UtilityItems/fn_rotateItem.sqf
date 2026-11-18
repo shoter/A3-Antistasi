@@ -20,6 +20,7 @@ Note:
 #include "\a3\ui_f\hpp\definedikcodes.inc"
 params[["_object", objNull, [objNull]]];
 
+// Turn right / Turn left keybinds, named after their default keys
 #define E_PRESSED 0
 #define Q_PRESSED 1
 #define WAIT_TIME 2
@@ -48,13 +49,15 @@ private _keyDownEH = findDisplay 46 displayAddEventHandler ["KeyDown", {
     params["","_key"];
     private _return = false;
 
-    if (_key isEqualTo DIK_E && (A3A_objectRotate_EHDB # WAIT_TIME) < time) then {
+    // Turn left / Turn right Antistasi keybinds, Q and E by default
+    private _turn = [_key] call A3A_fnc_turnKeyDir;
+    if (_turn == 1 && (A3A_objectRotate_EHDB # WAIT_TIME) < time) then {
         _return = true;
         A3A_objectRotate_EHDB set [E_PRESSED, true];
         A3A_objectRotate_EHDB set [ WAIT_TIME , (A3A_objectRotate_EHDB # WAIT_TIME ) + 0.01];
     };
 
-    if (_key isEqualTo DIK_Q && (A3A_objectRotate_EHDB # WAIT_TIME) < time) then {
+    if (_turn == -1 && (A3A_objectRotate_EHDB # WAIT_TIME) < time) then {
         _return = true;
         A3A_objectRotate_EHDB set [Q_PRESSED, true];
         A3A_objectRotate_EHDB set [WAIT_TIME , (A3A_objectRotate_EHDB # WAIT_TIME ) + 0.01];
@@ -93,7 +96,7 @@ private _eachFrameEH  = addMissionEventHandler ["EachFrame", {
     if ((player distance (A3A_objectRotate_EHDB # OBJ)) > 5) then {
         A3A_objectRotate_EHDB set [INFO_TEXT, localize "STR_A3A_Utility_Items_Feedback_Far"];
     }else {
-        A3A_objectRotate_EHDB set [INFO_TEXT, localize "STR_A3A_Utility_Items_Feedback_Normal"];
+        A3A_objectRotate_EHDB set [INFO_TEXT, format ([localize "STR_A3A_Utility_Items_Feedback_Normal"] + (call A3A_fnc_turnKeyNames))];
     };
 
     private _control_Hint = [A3A_objectRotate_EHDB # INFO_TEXT , 0, 0.9, 0.2, 0, 0, 17001] spawn BIS_fnc_dynamicText;

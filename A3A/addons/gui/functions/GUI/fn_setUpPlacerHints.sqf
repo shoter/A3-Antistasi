@@ -43,8 +43,21 @@ switch (_mode) do
         private _shiftText = (_displayOrControl displayCtrl IDC_PLACERHINT_SHIFT_TEXT);
         private _spaceText = (_displayOrControl displayCtrl IDC_PLACERHINT_SPACE_TEXT);
         _altText ctrlSetText format ["%1 %2", localize "STR_antistasi_teamleader_placer_alt_key", localize "str_3den_display3den_entitymenu_movesurface_text"];
-        _eText ctrlSetText localize "STR_antistasi_teamleader_placer_e_key";
-        _rText ctrlSetText localize "STR_antistasi_teamleader_placer_r_key";
+        // Rotation rows (E row: Turn left, R row: Turn right). The text names the bound key; the key icon stays only
+        // when there is a picture of that key, otherwise it is hidden and the text alone tells the key.
+        (call A3A_fnc_turnKeyNames) params ["_leftKey", "_rightKey"];
+        private _keyIcons = createHashMapFromArray [["E", A3A_Icon_key_e], ["R", A3A_Icon_key_r], ["C", A3A_Icon_key_c], ["T", A3A_Icon_key_t]];
+        {
+            _x params ["_icon", "_keyName"];
+            private _picture = _keyIcons getOrDefault [toUpper _keyName, ""];
+            _icon ctrlShow (_picture != "");
+            if (_picture != "") then { _icon ctrlSetText _picture };
+        } forEach [
+            [_displayOrControl displayCtrl IDC_PLACERHINT_E, _leftKey],
+            [_displayOrControl displayCtrl IDC_PLACERHINT_R, _rightKey]
+        ];
+        _eText ctrlSetText format [localize "STR_antistasi_teamleader_placer_e_key", _leftKey];
+        _rText ctrlSetText format [localize "STR_antistasi_teamleader_placer_r_key", _rightKey];
         _shiftText ctrlSetText localize "STR_antistasi_teamleader_placer_shift_key";
         _spaceText ctrlSetText localize "STR_antistasi_teamleader_placer_space_key";
         uiNamespace setVariable ["A3A_placerHint_display", _displayOrControl];

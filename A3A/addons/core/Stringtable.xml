@@ -8786,6 +8786,22 @@
         <Korean>귀마개를 토글합니다(ACE 사용 시 효과 없음).</Korean>
         <Russian>Беруши (при использовании ACE эффекта нет).</Russian>
       </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_turnLeft_DN">
+        <Original>Turn left</Original>
+        <Polish>Obróć w lewo</Polish>
+      </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_turnLeft_tip">
+        <Original>Turns the object you are placing to the left: vehicles, buildings and items. Single keys only, key combinations are not supported.</Original>
+        <Polish>Obraca w lewo stawiany obiekt: pojazd, budynek lub przedmiot. Tylko pojedynczy klawisz, kombinacje klawiszy nie działają.</Polish>
+      </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_turnRight_DN">
+        <Original>Turn right</Original>
+        <Polish>Obróć w prawo</Polish>
+      </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_turnRight_tip">
+        <Original>Turns the object you are placing to the right: vehicles, buildings and items. Single keys only, key combinations are not supported.</Original>
+        <Polish>Obraca w prawo stawiany obiekt: pojazd, budynek lub przedmiot. Tylko pojedynczy klawisz, kombinacje klawiszy nie działają.</Polish>
+      </Key>
       <Key ID="STR_A3A_keybinds_CfgUserAct_infoBar_DN">
         <Original>Toggle info bar</Original>
         <Italian>Interruttore barra delle info</Italian>
@@ -16488,16 +16504,16 @@
         <Chinesesimp>距离太远</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_Utility_Items_Feedback_Normal">
-        <Original>Q/E to rotate - Space/Enter to stop.</Original>
-        <Italian>Q/E per girare - Spazio/Invio per fermare.</Italian>
-        <Spanish>Q/E para rotar - Espacio/Enter salir</Spanish>
-        <French>A/E pour tourner- Espace/Entrée pour arrêter.</French>
-        <Korean>Q/E로 회전 - Space/Enter로 멈춤.</Korean>
-        <Russian>Q/E для вращения - Space/Enter чтобы закончить</Russian>
-        <Polish>Q/E, aby obrócić - Spacja/Enter, aby zatrzymać.</Polish>
-        <Czech>Q/E pro otáčení - Space/Enter k zastavení.</Czech>
-        <Turkish>Q/E Döndür - Space/Enter Durdur.</Turkish>
-        <Chinesesimp>Q/E 旋转-空格/回车 停止</Chinesesimp>
+        <Original>%1/%2 to rotate - Space/Enter to stop.</Original>
+        <Italian>%1/%2 per girare - Spazio/Invio per fermare.</Italian>
+        <Spanish>%1/%2 para rotar - Espacio/Enter salir</Spanish>
+        <French>%1/%2 pour tourner- Espace/Entrée pour arrêter.</French>
+        <Korean>%1/%2로 회전 - Space/Enter로 멈춤.</Korean>
+        <Russian>%1/%2 для вращения - Space/Enter чтобы закончить</Russian>
+        <Polish>%1/%2, aby obrócić - Spacja/Enter, aby zatrzymać.</Polish>
+        <Czech>%1/%2 pro otáčení - Space/Enter k zastavení.</Czech>
+        <Turkish>%1/%2 Döndür - Space/Enter Durdur.</Turkish>
+        <Chinesesimp>%1/%2 旋转-空格/回车 停止</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_Utility_Items_Feedback_Title">
         <Original>Utility items</Original>
@@ -16968,6 +16984,14 @@
       </Key>
       <Key ID="STR_A3A_fn_junkyard_repair_notReady">
         <Original>That vehicle is still being repaired.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_cancelled">
+        <Original>%1 was taken off the repair list. Nothing is refunded.</Original>
+        <Polish>%1 usunięto z listy naprawianych. Nic nie zostało zwrócone.</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_cancelNoRights">
+        <Original>Only the commander and sub-commanders can cancel a repair.</Original>
+        <Polish>Tylko commander i sub-commanderzy mogą przerwać naprawę.</Polish>
       </Key>
       <Key ID="STR_A3A_fn_junkyard_repair_noMoney">
         <Original>Not enough money. This vehicle costs %1 €.</Original>

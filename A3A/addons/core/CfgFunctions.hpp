@@ -470,6 +470,8 @@ class CfgFunctions
         class keybinds {
             file = QPATHTOFOLDER(keybinds);
             class keyActions {};
+            class turnKeyDir {};
+            class turnKeyNames {};
         };
 
         class LTC {
@@ -545,6 +547,7 @@ class CfgFunctions
             class junkyardRepairAdd {};
             class junkyardRepairAdminFinish {};
             class junkyardRepairBuy {};
+            class junkyardRepairCancel {};
             class junkyardRepairPurchase {};
             class junkyardRepairUpdate {};
             class scrapActionMonitor {};

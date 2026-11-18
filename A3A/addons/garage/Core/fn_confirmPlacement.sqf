@@ -47,8 +47,9 @@ HR_GRG_placing = true;
 //define global variables
 HR_GRG_pos = screenToWorld [0.5,0.5];
 HR_GRG_dir = 0;
-HR_GRG_keyQ = false;
-HR_GRG_keyE = false;
+HR_GRG_turnLeft = false;
+HR_GRG_turnRight = false;
+HR_GRG_turnKeyNames = call A3A_fnc_turnKeyNames;      // for the hints; keybinds can't change while placing
 HR_GRG_validPlacement = 0;
 HR_GRG_CP_mounts = _mounts;
 HR_GRG_CP_pylons = _pylons;
@@ -78,8 +79,9 @@ HR_GRG_cleanUp = {
     HR_GRG_pos = nil;
     HR_GRG_dir = nil;
     HR_GRG_bb = nil;
-    HR_GRG_keyQ = nil;
-    HR_GRG_keyE = nil;
+    HR_GRG_turnLeft = nil;
+    HR_GRG_turnRight = nil;
+    HR_GRG_turnKeyNames = nil;
     HR_GRG_EH_EF = nil;
     HR_GRG_EH_keyDown = nil;
     HR_GRG_keyHint = nil;
@@ -221,12 +223,14 @@ HR_GRG_dispSquare = [_adjustment, _diff apply {_x + 0.6}, (_bb#2)]; //square off
 HR_GRG_EH_KeyUp = findDisplay 46 displayAddEventHandler ["KeyUp", {
     params ["", "_key"];
 
-    if (_key isEqualTo DIK_Q) then {
-        HR_GRG_keyQ = false;
+    // Turn left / Turn right Antistasi keybinds, Q and E by default
+    private _turn = [_key] call A3A_fnc_turnKeyDir;
+    if (_turn == -1) then {
+        HR_GRG_turnLeft = false;
     };
 
-    if (_key isEqualTo DIK_E) then {
-        HR_GRG_keyE = false;
+    if (_turn == 1) then {
+        HR_GRG_turnRight = false;
     };
 }];
 
@@ -234,15 +238,16 @@ HR_GRG_EH_keyDown = findDisplay 46 displayAddEventHandler ["KeyDown", {
     params ["", "_key"];
     private _return = false;
 
-    //rotate vehicle
-    if (_key isEqualTo DIK_Q) then {
+    //rotate vehicle, with the Turn left / Turn right Antistasi keybinds (Q and E by default). Blocks the key's normal action.
+    private _turn = [_key] call A3A_fnc_turnKeyDir;
+    if (_turn == -1) then {
         _return = true;
-        HR_GRG_keyQ = true;
+        HR_GRG_turnLeft = true;
     };
 
-    if (_key isEqualTo DIK_E) then {
+    if (_turn == 1) then {
         _return = true;
-        HR_GRG_keyE = true;
+        HR_GRG_turnRight = true;
     };
 
     if (HR_GRG_validPlacement > 0) exitWith { // 0 is valid placement, 1 too far away, 2 colision
@@ -324,12 +329,12 @@ HR_GRG_EH_EF = addMissionEventHandler ["EachFrame", {
         _updateState = true;
     };
 
-    if (HR_GRG_keyQ) then {
+    if (HR_GRG_turnLeft) then {
         HR_GRG_dir = HR_GRG_dir - diag_deltaTime * 120;     // full rotation in three seconds
         _updateState = true;
     };
 
-    if (HR_GRG_keyE) then {
+    if (HR_GRG_turnRight) then {
         HR_GRG_dir = HR_GRG_dir + diag_deltaTime * 120;
         _updateState = true;
     };
@@ -386,17 +391,20 @@ HR_GRG_EH_EF = addMissionEventHandler ["EachFrame", {
     };
 
     //render keybind hint
+    // The hints name the keys bound to Turn left / Turn right
+    HR_GRG_turnKeyNames params ["_leftKey", "_rightKey"];
     private _text = switch HR_GRG_validPlacement do {
         case 0: {
+            private _rotation = format [localize "STR_HR_GRG_Feedback_CP_Rotation", _leftKey, _rightKey];
             [
-                localize "STR_HR_GRG_Feedback_CP_Rotation",
-                format ["%1<br/>%2", HR_GRG_CP_extraText, localize "STR_HR_GRG_Feedback_CP_Rotation"]
+                _rotation,
+                format ["%1<br/>%2", HR_GRG_CP_extraText, _rotation]
             ] select (HR_GRG_CP_extraText isNotEqualTo "");
         };
         case 1: {localize "STR_HR_GRG_Feedback_CP_TooFar"};
-        case 2: {localize "STR_HR_GRG_Feedback_CP_Blocked"};
+        case 2: {format [localize "STR_HR_GRG_Feedback_CP_Blocked", _leftKey, _rightKey]};
         case 3: { HR_GRG_callBackFeedback };
-        default {localize "STR_HR_GRG_Feedback_CallbackFailed"};
+        default {format [localize "STR_HR_GRG_Feedback_CallbackFailed", _leftKey, _rightKey]};
     };
 
     HR_GRG_keyHint = [

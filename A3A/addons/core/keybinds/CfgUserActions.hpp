@@ -43,5 +43,17 @@ class CfgUserActions {
         tooltip = $STR_A3A_keybinds_CfgUserAct_cusHintDiss_tip;
         onActivate = ACTION(customHintDismiss);
     };
+
+    // No onActivate: the placement modes read these keys in their own KeyDown/KeyUp handlers (A3A_fnc_turnKeyDir),
+    // so they can block the key (lean by default) and rotate while it is held
+    class GVAR(turnLeft) {
+        displayName = $STR_A3A_keybinds_CfgUserAct_turnLeft_DN;
+        tooltip = $STR_A3A_keybinds_CfgUserAct_turnLeft_tip;
+    };
+
+    class GVAR(turnRight) {
+        displayName = $STR_A3A_keybinds_CfgUserAct_turnRight_DN;
+        tooltip = $STR_A3A_keybinds_CfgUserAct_turnRight_tip;
+    };
 };
 #undef ACTION

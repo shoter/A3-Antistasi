@@ -7,7 +7,9 @@ class UserActionsConflictsGroups {
             QGVAR(selfRevive),
             QGVAR(infoBar),
             QGVAR(earPlugs),
-            QGVAR(customHintDismiss)
+            QGVAR(customHintDismiss),
+            QGVAR(turnLeft),
+            QGVAR(turnRight)
         };
     };
 
