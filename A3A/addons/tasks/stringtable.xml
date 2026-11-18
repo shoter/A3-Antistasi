@@ -591,6 +591,82 @@
         <Original>The enemy has called off the mortar attack.</Original>
         <Polish>Wróg odwołał ostrzał moździerzowy.</Polish>
       </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_title_riot">
+        <Original>Unrest in %1</Original>
+        <Polish>Niepokoje: %1</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_title_plague">
+        <Original>Disease in %1</Original>
+        <Polish>Choroba: %1</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_title_poverty">
+        <Original>Poverty in %1</Original>
+        <Polish>Bieda: %1</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_marker_riot">
+        <Original>Riot threat</Original>
+        <Polish>Groźba zamieszek</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_marker_plague">
+        <Original>Plague threat</Original>
+        <Polish>Groźba zarazy</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_marker_poverty">
+        <Original>Poverty threat</Original>
+        <Polish>Groźba biedy</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_desc_riot">
+        <Original>Tempers are running high in %1, and the town has no %2 to keep order. Build a %2 in %1 by %3. If it is not standing by then, the townspeople take up arms and riot for 5 minutes, shooting at anyone in the town, us and the enemy alike. Nobody sends troops, it is the locals alone. Afterwards the town loses 30 support. Once the riot starts nothing can stop it.</Original>
+        <Polish>W miejscowości %1 narasta napięcie, a nie ma tam obiektu, który utrzymałby porządek (%2). Zbuduj w miejscowości %1 obiekt: %2 do godziny %3. Jeśli nie zdążysz, mieszkańcy chwycą za broń i przez 5 minut będą strzelać do każdego w mieście, do nas i do wroga. Nikt nie przyśle wojska, to tylko miejscowi. Potem miasto straci 30 punktów poparcia. Zamieszek nie da się przerwać, gdy już wybuchną.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_desc_plague">
+        <Original>A disease is spreading in %1, and the town has no %2. Build a %2 in %1 by %3. If it is not standing by then, a plague breaks out for 5 minutes: 30% of the people die, and anyone inside the town has hurt arms and legs and no breath left. Out of the town they recover the normal way. Once the plague starts nothing can stop it.</Original>
+        <Polish>W miejscowości %1 szerzy się choroba, a nie ma tam obiektu: %2. Zbuduj go w miejscowości %1 do godziny %3. Jeśli nie zdążysz, przez 5 minut będzie szaleć zaraza: umrze 30% mieszkańców, a każdy w obrębie miasta będzie miał ranne ręce i nogi i zupełnie straci oddech. Poza miastem można dojść do siebie w zwykły sposób. Zarazy nie da się powstrzymać, gdy już wybuchnie.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_desc_poverty">
+        <Original>People in %1 are out of work, and the town has no %2. Build a %2 in %1 by %3. If it is not standing by then, poverty hits the town for 5 minutes: it loses 15% of its people and 15 support, and every player inside the town loses 2 € a second. Once it starts nothing can stop it.</Original>
+        <Polish>Ludzie w miejscowości %1 nie mają pracy, a nie ma tam obiektu: %2. Zbuduj go w miejscowości %1 do godziny %3. Jeśli nie zdążysz, przez 5 minut miasto dotknie bieda: straci 15% mieszkańców i 15 punktów poparcia, a każdy gracz w obrębie miasta będzie tracił 2 € na sekundę. Biedy nie da się powstrzymać, gdy już nadejdzie.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_started_riot">
+        <Original>Riot in %1! For 5 minutes armed townspeople shoot at anyone in the town. Afterwards the town loses 30 support.</Original>
+        <Polish>Zamieszki w miejscowości %1! Przez 5 minut uzbrojeni mieszkańcy strzelają do każdego w mieście. Potem miasto straci 30 punktów poparcia.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_started_plague">
+        <Original>Plague in %1! For 5 minutes the people are dying, and anyone inside the town is hurt and out of breath. Leave the town to recover.</Original>
+        <Polish>Zaraza w miejscowości %1! Przez 5 minut mieszkańcy umierają, a każdy w obrębie miasta jest ranny i bez tchu. Opuść miasto, żeby dojść do siebie.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_started_poverty">
+        <Original>Poverty in %1! For 5 minutes the town loses people and support, and players inside it lose 2 € a second.</Original>
+        <Polish>Bieda w miejscowości %1! Przez 5 minut miasto traci mieszkańców i poparcie, a gracze w jego obrębie tracą 2 € na sekundę.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_ended_riot">
+        <Original>The riot in %1 is over. The town lost %3 support.</Original>
+        <Polish>Zamieszki w miejscowości %1 dobiegły końca. Miasto straciło %3 punktów poparcia.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_ended_plague">
+        <Original>The plague in %1 has passed. %2 people died.</Original>
+        <Polish>Zaraza w miejscowości %1 minęła. Zmarło %2 mieszkańców.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_ended_poverty">
+        <Original>The worst of the poverty in %1 is over. The town lost %2 people and %3 support.</Original>
+        <Polish>Najgorsza bieda w miejscowości %1 minęła. Miasto straciło %2 mieszkańców i %3 punktów poparcia.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_inside_plague">
+        <Original>You are inside the plague in %1: your arms and legs are hurt and you cannot catch your breath. Leave the town to recover.</Original>
+        <Polish>Jesteś w obrębie zarazy (%1): masz ranne ręce i nogi i nie możesz złapać tchu. Opuść miasto, żeby dojść do siebie.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_inside_poverty">
+        <Original>You are in %1, hit by poverty: you lose 2 € a second while you stay in the town.</Original>
+        <Polish>Jesteś w miejscowości %1, którą dotknęła bieda: tracisz 2 € na sekundę, dopóki zostajesz w mieście.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_success">
+        <Original>The %2 in %1 was built in time. The crisis there is over.</Original>
+        <Polish>Obiekt %2 w miejscowości %1 zbudowano na czas. Kryzys zażegnany.</Polish>
+      </Key>
+      <Key ID="STR_A3A_Tasks_EVT_TownCrisis_cancelled">
+        <Original>%1 is no longer ours. The crisis there is not our problem any more.</Original>
+        <Polish>%1 nie należy już do nas. Tamtejszy kryzys przestał być naszym problemem.</Polish>
+      </Key>
       <Key ID="STR_A3A_Tasks_missionArea_title">
         <Original>Mission Area</Original>
         <Polish>Obszar misji</Polish>

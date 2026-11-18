@@ -63,6 +63,7 @@ class CfgFunctions {
             class RES_Refugees_p {};
             class SUP_Elderly_p {};
             class EVT_Mortar_p {};
+            class EVT_TownCrisis_p {};
             class SUP_PoliceStation_p {};
             class SUP_Supplies_p {};
         };
@@ -85,6 +86,8 @@ class CfgFunctions {
             class DES_Camp {};
             class SUP_Elderly {};
             class EVT_Mortar {};
+            class EVT_TownCrisis {};
+            class EVT_TownCrisis_sicken {};
         };
     };
 };

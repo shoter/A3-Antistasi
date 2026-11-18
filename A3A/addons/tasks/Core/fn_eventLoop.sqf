@@ -1,10 +1,11 @@
 /*
 Maintainer: Shoter
     World event loop. Event missions are not posted on the mission board: they show up by themselves and are
-    on the map at once, like an enemy mortar team getting ready to shell a rebel place.
+    on the map at once, like an enemy mortar team getting ready to shell a rebel place, or a riot, plague or
+    poverty coming to a rebel town that lacks a town upgrade.
     Every 30 minutes, with at least one player on the server, there is a 20% chance that one event starts.
     The event is picked by weight from the classes in configFile >> "A3A" >> "EventTasks" whose params getter
-    finds valid parameters; each getter also decides whether its event may run again (one mortar at a time).
+    finds valid parameters; each getter also decides whether its event may run again (one of each at a time).
     Events are not saved, and the timer starts over after a server restart.
 
 Arguments:
