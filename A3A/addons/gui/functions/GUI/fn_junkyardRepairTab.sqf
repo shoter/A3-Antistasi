@@ -3,7 +3,8 @@ Maintainer: Shoter
     Fills the Vehicle repair tab of the Junkyard dialog and keeps it current while the dialog is open.
     One compact row per vehicle in A3A_junkyardRepairs: repaired vehicles first (soonest to leave on top), then the
     repair queue (soonest ready on top). Each row has a preview, name and weapons, a countdown with a progress bar,
-    the price and a buy button that only works once the repair is done. Rows sit in a scrolling group, so the list
+    the price, a buy button that only works once the repair is done and a cancel button (commander and sub-commanders,
+    see A3A_fnc_junkyardRepairCancel) that takes the vehicle off the list. Rows sit in a scrolling group, so the list
     can be long. Every 2 seconds the countdowns are updated; when the shop changes or a vehicle finishes or leaves,
     the list is rebuilt, keeping the scroll position.
 
@@ -17,7 +18,7 @@ Scope: Clients, Local Arguments, Local Effect
 Environment: Scheduled
 Public: No
 Dependencies:
-    A3A_junkyardRepairs, A3A_junkyardRepairBuyWindow, A3A_fnc_junkyardClock, A3A_fnc_getVehicleWeapons, A3A_fnc_junkyardRepairBuy
+    A3A_junkyardRepairs, A3A_junkyardRepairBuyWindow, A3A_fnc_junkyardClock, A3A_fnc_getVehicleWeapons, A3A_fnc_junkyardRepairBuy, A3A_fnc_junkyardRepairCancel
 
 Example:
     ["onLoad"] spawn A3A_GUI_fnc_junkyardRepairTab;
@@ -44,6 +45,15 @@ private _infoText = _display displayCtrl A3A_IDC_JUNKYARDREPAIRINFOTEXT;
 #define ROW_H 10
 #define ROW_GAP 1
 #define HEADER_H 5
+// Columns inside a row: status and progress bar, price, Buy, Cancel (the row ends at ROW_W)
+#define STATUS_X 72
+#define STATUS_W 35
+#define BAR_W 33
+#define PRICE_X 108
+#define PRICE_W 13
+#define BUY_X 122
+#define CANCEL_X 136
+#define BUTTON_W 13
 
 private _colorRepair = [0.9, 0.7, 0.2, 1];
 private _colorReady = [0.3, 0.75, 0.3, 1];
@@ -75,7 +85,7 @@ private _fnc_updateRow = {
         _status ctrlSetText format [localize "STR_antistasi_dialogs_junkyard_repair_queue_status", (_readyAt - _now) call _fnc_timeText];
         (_now - _queuedAt) / ((_readyAt - _queuedAt) max 1)
     };
-    _fill ctrlSetPositionW (38 * GRID_W * ((_fraction max 0) min 1));
+    _fill ctrlSetPositionW (BAR_W * GRID_W * ((_fraction max 0) min 1));
     _fill ctrlCommit 0;
 };
 
@@ -126,26 +136,26 @@ private _fnc_row = {
     _nameText ctrlCommit 0;
 
     private _status = _display ctrlCreate ["A3A_InfoTextLeft", -1, _row];
-    _status ctrlSetPosition [72 * GRID_W, 1 * GRID_H, 40 * GRID_W, 4 * GRID_H];
+    _status ctrlSetPosition [STATUS_X * GRID_W, 1 * GRID_H, STATUS_W * GRID_W, 4 * GRID_H];
     _status ctrlCommit 0;
 
     private _barBackground = _display ctrlCreate ["A3A_Background", -1, _row];
-    _barBackground ctrlSetPosition [72 * GRID_W, 6 * GRID_H, 38 * GRID_W, 1.5 * GRID_H];
+    _barBackground ctrlSetPosition [STATUS_X * GRID_W, 6 * GRID_H, BAR_W * GRID_W, 1.5 * GRID_H];
     _barBackground ctrlSetBackgroundColor [0, 0, 0, 0.6];
     _barBackground ctrlCommit 0;
 
     private _fill = _display ctrlCreate ["A3A_Background", -1, _row];
-    _fill ctrlSetPosition [72 * GRID_W, 6 * GRID_H, 0, 1.5 * GRID_H];
+    _fill ctrlSetPosition [STATUS_X * GRID_W, 6 * GRID_H, 0, 1.5 * GRID_H];
     _fill ctrlSetBackgroundColor ([_colorRepair, _colorReady] select _ready);
     _fill ctrlCommit 0;
 
     private _priceText = _display ctrlCreate ["A3A_InfoTextRight", -1, _row];
-    _priceText ctrlSetPosition [112 * GRID_W, 3 * GRID_H, 17 * GRID_W, 4 * GRID_H];
+    _priceText ctrlSetPosition [PRICE_X * GRID_W, 3 * GRID_H, PRICE_W * GRID_W, 4 * GRID_H];
     _priceText ctrlSetText format ["%1 €", _price];
     _priceText ctrlCommit 0;
 
-    private _button = _display ctrlCreate ["A3A_Button", -1, _row];
-    _button ctrlSetPosition [131 * GRID_W, 1.5 * GRID_H, 18 * GRID_W, 7 * GRID_H];
+    private _button = _display ctrlCreate ["A3A_Button_Small", -1, _row];
+    _button ctrlSetPosition [BUY_X * GRID_W, 1.5 * GRID_H, BUTTON_W * GRID_W, 7 * GRID_H];
     _button ctrlSetText localize "STR_antistasi_dialogs_junkyard_repair_buy";
     _button ctrlEnable _ready;
     _button ctrlSetTooltip (if (_ready) then {
@@ -163,6 +173,36 @@ private _fnc_row = {
         [_id, _useFactionFunds] spawn A3A_fnc_junkyardRepairBuy;
     }];
     _button ctrlCommit 0;
+
+    // Cancel: takes the vehicle off the list for good, no refund. Commander and sub-commanders only (checked again
+    // on the server). The first click asks, a second one within 3 seconds cancels; the list rebuilds once it is gone.
+    private _canCancel = [player] call A3A_fnc_isCommandStaff;
+    private _cancelButton = _display ctrlCreate ["A3A_Button_Small", -1, _row];
+    _cancelButton ctrlSetPosition [CANCEL_X * GRID_W, 1.5 * GRID_H, BUTTON_W * GRID_W, 7 * GRID_H];
+    _cancelButton ctrlSetText localize "STR_antistasi_dialogs_junkyard_repair_cancel";
+    _cancelButton ctrlEnable _canCancel;
+    _cancelButton ctrlSetTooltip (if (_canCancel) then {
+        format [localize "STR_antistasi_dialogs_junkyard_repair_cancel_tooltip", _displayName]
+    } else {
+        localize "STR_antistasi_dialogs_junkyard_repair_cancel_noRights"
+    });
+    _cancelButton setVariable ["entryId", _id];
+    _cancelButton ctrlAddEventHandler ["ButtonClick", {
+        params ["_control"];
+        if (diag_tickTime < (_control getVariable ["confirmUntil", -1])) exitWith {
+            _control ctrlEnable false;
+            [player, _control getVariable "entryId"] remoteExecCall ["A3A_fnc_junkyardRepairCancel", 2];
+        };
+        _control setVariable ["confirmUntil", diag_tickTime + 3];
+        _control ctrlSetText localize "STR_antistasi_dialogs_junkyard_repair_cancel_confirm";
+        _control spawn {
+            disableSerialization;
+            uiSleep 3;
+            if (isNull _this || {!ctrlEnabled _this}) exitWith {};
+            _this ctrlSetText localize "STR_antistasi_dialogs_junkyard_repair_cancel";
+        };
+    }];
+    _cancelButton ctrlCommit 0;
 
     private _record = [_entry, _status, _fill, _ready];
     _record call _fnc_updateRow;

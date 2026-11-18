@@ -7091,6 +7091,22 @@
       <Key ID="STR_antistasi_dialogs_junkyard_repair_wait_tooltip">
         <Original>Still in repair. It will cost %1 € once done.</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_cancel">
+        <Original>Cancel</Original>
+        <Polish>Anuluj</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_cancel_confirm">
+        <Original>Sure?</Original>
+        <Polish>Usunąć?</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_cancel_tooltip">
+        <Original>Take %1 off the repair list for good. Nothing is refunded. Click twice to confirm.</Original>
+        <Polish>Usuń %1 z listy naprawianych na stałe. Nic nie zostanie zwrócone. Kliknij dwa razy, aby potwierdzić.</Polish>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_junkyard_repair_cancel_noRights">
+        <Original>Only the commander and sub-commanders can cancel a repair.</Original>
+        <Polish>Tylko commander i sub-commanderzy mogą przerwać naprawę.</Polish>
+      </Key>
       <Key ID="STR_antistasi_dialogs_junkyard_repair_finish">
         <Original>Finish repairs (admin)</Original>
       </Key>

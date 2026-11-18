@@ -16985,6 +16985,14 @@
       <Key ID="STR_A3A_fn_junkyard_repair_notReady">
         <Original>That vehicle is still being repaired.</Original>
       </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_cancelled">
+        <Original>%1 was taken off the repair list. Nothing is refunded.</Original>
+        <Polish>%1 usunięto z listy naprawianych. Nic nie zostało zwrócone.</Polish>
+      </Key>
+      <Key ID="STR_A3A_fn_junkyard_repair_cancelNoRights">
+        <Original>Only the commander and sub-commanders can cancel a repair.</Original>
+        <Polish>Tylko commander i sub-commanderzy mogą przerwać naprawę.</Polish>
+      </Key>
       <Key ID="STR_A3A_fn_junkyard_repair_noMoney">
         <Original>Not enough money. This vehicle costs %1 €.</Original>
       </Key>

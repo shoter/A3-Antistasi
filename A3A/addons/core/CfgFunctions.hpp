@@ -547,6 +547,7 @@ class CfgFunctions
             class junkyardRepairAdd {};
             class junkyardRepairAdminFinish {};
             class junkyardRepairBuy {};
+            class junkyardRepairCancel {};
             class junkyardRepairPurchase {};
             class junkyardRepairUpdate {};
             class scrapActionMonitor {};

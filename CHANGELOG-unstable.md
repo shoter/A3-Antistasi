@@ -1,8 +1,9 @@
 # Unstable changelog
 
-## 2026-11-18 - Windows stay open, rotation keys
+## 2026-11-18 - Windows stay open, rotation keys, junkyard repair cancel
 
 ### Added
+- **Cancel** button next to **Buy** in the junkyard's **Vehicle repair** tab. It takes the vehicle off the repair list for good, nothing is refunded. Only the commander and sub-commanders can use it, and it asks for a second click to confirm.
 - **Turn left** and **Turn right** in the Antistasi section of the key bindings (Q and E by default). They rotate whatever you are placing: HQ buildings, vehicles, junkyard and upgrade kit crates, utility items, and objects in the team leader builder. The on-screen hints show the keys you bound. Single keys only, key combinations are not supported.
 
 ### Changed
