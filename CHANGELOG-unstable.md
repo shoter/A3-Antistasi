@@ -3,7 +3,7 @@
 ## 2026-11-18 - Town crises
 
 ### Added
-- New random world event, **town crisis**. It joins the enemy mortar fire event in the event pool. From war level 4 on, it hits a random rebel town that is missing a **Militia post**, **Clinic** or **City office**, whatever the town's support. You get 10 minutes to build the missing upgrade there. If it is built in time, nothing happens. If not, the crisis runs for 5 minutes and nothing can stop it:
+- New random world event, **town crisis**. It joins the enemy mortar fire event in the event pool. From war level 4 on, it hits a random rebel town that is missing a **Militia post**, **Clinic** or **City office**, whatever the town's support. You get a random 20 to 30 minutes to build the missing upgrade there. If it is built in time, nothing happens. If not, the crisis runs for 5 minutes and nothing can stop it:
   - **Riot** (no Militia post): armed townspeople fight anyone in the town, rebels and enemy alike. No enemy troops are sent. Afterwards the town loses 30 support.
   - **Plague** (no Clinic): the town loses 30% of its population over the 5 minutes. Anyone inside the town has hurt arms and legs and no stamina. Leave the town to heal and get your breath back.
   - **Poverty** (no City office): the town loses 15% of its population and 15 support over the 5 minutes, and every player inside the town loses 2 € a second.

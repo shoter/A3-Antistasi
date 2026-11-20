@@ -3,7 +3,7 @@ Maintainer: Shoter
     Town crisis event. Not posted on the mission board: A3A_tasks_fnc_eventLoop starts it at random.
     From war level 4 on. A rebel town (any support, any population) lacks one of the town upgrades, and trouble is
     coming because of it.
-    The players have 10 minutes to build that upgrade in the town. If it stands by then the task succeeds and
+    The players have 20 to 30 minutes (random, whole minutes) to build that upgrade in the town. If it stands by then the task succeeds and
     nothing happens. Otherwise the task fails and the crisis runs for 5 minutes, and nothing can stop it:
         militia post missing - riot: armed townspeople, hostile to every side, fight anyone in the town. Nobody
                                sends troops, it is the locals alone. When it is over the town loses 30 support.
@@ -33,7 +33,8 @@ Public: No
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define DEADLINE 600
+#define DEADLINE_MIN 20
+#define DEADLINE_MAX 30
 #define CRISIS_TIME 300
 #define RIOT_SUPPORT_LOSS 30
 #define PLAGUE_POP_LOSS 0.3
@@ -62,7 +63,8 @@ _task set ["_crisis", _crisis];
 _task set ["_cityName", [_city] call A3A_fnc_localizar];
 _task set ["_upgradeName", localize format ["STR_A3A_fn_townUpgrades_name_%1", _upgrade]];
 _task set ["_hintTitle", format [localize format ["STR_A3A_Tasks_EVT_TownCrisis_title_%1", _crisis], _task get "_cityName"]];
-_task set ["_deadline", time + DEADLINE];
+private _deadlineMin = DEADLINE_MIN + floor random (DEADLINE_MAX - DEADLINE_MIN + 1);
+_task set ["_deadline", time + 60 * _deadlineMin];
 _task set ["_crisisStart", 0];
 _task set ["_lastTick", 0];
 _task set ["_pop0", 0];
@@ -96,11 +98,11 @@ private _taskIcon = switch (_crisis) do {
     case "plague": {"heal"};
     default {"documents"};
 };
-private _taskDesc = format [localize format ["STR_A3A_Tasks_EVT_TownCrisis_desc_%1", _crisis], _task get "_cityName", _task get "_upgradeName", [DEADLINE / 60] call FUNC(minutesFromNow)];
+private _taskDesc = format [localize format ["STR_A3A_Tasks_EVT_TownCrisis_desc_%1", _crisis], _task get "_cityName", _task get "_upgradeName", [_deadlineMin] call FUNC(minutesFromNow)];
 [[teamPlayer, civilian], _taskId, [_taskDesc, _task get "_hintTitle", _areaMrk], markerPos _city, false, 0, true, _taskIcon, true] call BIS_fnc_taskCreate;
 [_taskId, "TOWNCRISIS", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 _task set ["_taskId", _taskId];
-// Ten minutes is short, everybody gets the full briefing at once
+// Everybody gets the full briefing at once
 [_task get "_hintTitle", _taskDesc] remoteExecCall ["A3A_fnc_customHint", call A3A_fnc_playableUnits];
 
 _task set ["state", "s_wait"];
@@ -285,7 +287,7 @@ _task set ["_fnc_poverty", {
 // State functions //
 /////////////////////
 
-// Ten minutes for the players to build the missing upgrade
+// 20-30 minutes for the players to build the missing upgrade
 _task set ["s_wait", {
     private _city = _this get "_city";
     if ([_city, _this get "_upgrade"] call A3A_fnc_townUpgradeHas) exitWith {
