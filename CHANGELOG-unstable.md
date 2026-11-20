@@ -1,5 +1,22 @@
 # Unstable changelog
 
+## 2026-11-18 - Town crises
+
+### Added
+- New random world event, **town crisis**. It joins the enemy mortar fire event in the event pool. From war level 4 on, it hits a random rebel town that is missing a **Militia post**, **Clinic** or **City office**, whatever the town's support. You get a random 20 to 30 minutes to build the missing upgrade there. If it is built in time, nothing happens. If not, the crisis runs for 5 minutes and nothing can stop it:
+  - **Riot** (no Militia post): armed townspeople fight anyone in the town, rebels and enemy alike. No enemy troops are sent. Afterwards the town loses 30 support.
+  - **Plague** (no Clinic): the town loses 30% of its population over the 5 minutes. Anyone inside the town has hurt arms and legs and no stamina. Leave the town to heal and get your breath back.
+  - **Poverty** (no City office): the town loses 15% of its population and 15 support over the 5 minutes, and every player inside the town loses 2 € a second.
+- Towns with all three upgrades are safe. Support and money never drop below 0, but a rebel town that falls below 40 support is lost as usual. The population and support losses are saved.
+- The event appears on the map as a hatched area over the town, with a task and a hint for all players at the start, and another hint when the crisis breaks out and when it ends. Players who walk into a plague or poverty town are warned once.
+- Building the upgrade in time completes the task and the crisis is cancelled. If the town stops being rebel before the deadline, the event is called off with no penalty. There is no reward.
+- Only one town crisis runs at a time. Like the mortar event, it is not saved: a server restart drops it.
+- Riots only spawn armed townspeople while the town is active around players. Elsewhere the riot happens on paper and the 30 support is still lost. Rioters do not hurt each other, drop their weapons when the riot ends, and are removed once nobody is near the town.
+- With ACE medical, the plague breaks arms and legs (splints treat them) and empties ACE fatigue instead of the vanilla leg and arm damage.
+
+### Internal
+- New task files `EVT_TownCrisis`, `EVT_TownCrisis_p` and `EVT_TownCrisis_sicken`, registered in `EventTasks`, with English and Polish strings. Not yet tested in game.
+
 ## 2026-11-18 - Windows stay open, rotation keys, junkyard repair cancel
 
 ### Added

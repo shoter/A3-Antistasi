@@ -257,6 +257,11 @@ class EventTasks {
         params = QFUNC(EVT_Mortar_p);       // Parameters function, returns false or [weight, params]
         weight = 1;
     };
+    class EVT_TownCrisis {                  // Riot, plague or poverty in a rebel town that lacks an upgrade
+        func = QFUNC(EVT_TownCrisis);
+        params = QFUNC(EVT_TownCrisis_p);
+        weight = 1;
+    };
 };
 
 class CityTasks {
